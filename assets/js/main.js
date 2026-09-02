@@ -21,11 +21,11 @@ document.querySelectorAll('.tilt').forEach(card => {
   });
 });
 
-// Highlight active nav link
+// Highlight active nav link (strict match)
 const path = location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.navbar__links a').forEach(a => {
   const href = a.getAttribute('href') || '';
-  if (href && path.includes(href.replace('.html', ''))) a.classList.add('active');
+  if (href && path === href) a.classList.add('active');
 });
 
 // Docs sidebar toggle (mobile)

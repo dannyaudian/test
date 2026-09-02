@@ -90,7 +90,7 @@ function adminContent(page) {
   switch (page) {
     case 'Dashboard': return `
       <div class="widget-grid">
-        <div class="widget"><div class="widget__label">Dokumen Pending</div><div class="widget__value">15</div><div class="widget__sub down">↑ 3 masuk hari ini</div></div>
+        <div class="widget"><div class="widget__label">Dokumen Pending</div><div class="widget__value">15</div><div class="widget__sub down">↓ 3 masuk hari ini</div></div>
         <div class="widget"><div class="widget__label">STNK Selesai</div><div class="widget__value">28</div><div class="widget__sub up">↑ 4 hari ini</div></div>
         <div class="widget"><div class="widget__label">BPKB Pending</div><div class="widget__value">7</div><div class="widget__sub">Target selesai hari ini</div></div>
         <div class="widget"><div class="widget__label">SPK Diproses</div><div class="widget__value">34</div><div class="widget__sub up">Sesuai target</div></div>

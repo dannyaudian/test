@@ -126,20 +126,6 @@
 .docs-table tr:hover td { background: var(--c-surface); }
 
 /* Mobile sidebar toggle */
-.sidebar-toggle {
-  display: none;
-  position: fixed;
-  bottom: 1.5rem; right: 1.5rem;
-  z-index: 200;
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  background: var(--c-accent);
-  color: #fff;
-  align-items: center; justify-content: center;
-  box-shadow: var(--shadow);
-  font-size: 1.2rem;
-}
-
 @media (max-width: 768px) {
   .docs-layout { grid-template-columns: 1fr; }
   .docs-sidebar {
@@ -152,6 +138,5 @@
     height: calc(100vh - 60px);
   }
   .docs-sidebar.open { transform: translateX(0); }
-  .sidebar-toggle { display: flex; }
   .docs-content { padding: 2rem 1rem; }
 }
