@@ -6,7 +6,7 @@
   };
   function pdfEscape(s){ return String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)'); }
   function receiptPdf(r){
-    var lines=['AUTO2000 — E-KUITANSI PEMBAYARAN',r.no,'Status: '+r.status+' · '+r.type,'Customer: '+r.customer,'Unit: '+r.unit,'Tanggal: '+r.date,'Metode: '+r.method,'Payment reference: '+r.ref,'Nomor SPK: '+r.spk,'Nomor SO: '+r.so,'Nomor billing: '+r.billing,'Nominal diterima: '+r.amount,'Kode verifikasi: '+r.verify,'Dokumen ini adalah e-kuitansi hasil pembayaran terverifikasi.'];
+    var lines=['FAST — E-KUITANSI PEMBAYARAN',r.no,'Status: '+r.status+' · '+r.type,'Customer: '+r.customer,'Unit: '+r.unit,'Tanggal: '+r.date,'Metode: '+r.method,'Payment reference: '+r.ref,'Nomor SPK: '+r.spk,'Nomor SO: '+r.so,'Nomor billing: '+r.billing,'Nominal diterima: '+r.amount,'Kode verifikasi: '+r.verify,'Dokumen ini adalah e-kuitansi hasil pembayaran terverifikasi.'];
     var stream='BT\n/F1 12 Tf\n';
     lines.forEach(function(line,i){ stream += '1 0 0 1 50 '+(780-i*22)+' Tm ('+pdfEscape(line)+') Tj\n'; });
     stream += 'ET';
@@ -42,7 +42,7 @@
       if(b.dataset.go===id && b.closest('[data-rail]').hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
-    document.querySelector('.urlbar').textContent='sam.auto2000.co.id/fast/'+id;
+    document.querySelector('.urlbar').textContent='sam.fast.id/fast/'+id;
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); return; }
