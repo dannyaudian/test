@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup Interaktif – FAST Workspace</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/mockup.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <a class="navbar__brand" href="index.html">FAST Workspace</a>
+    <div class="navbar__links">
+      <a href="index.html">Beranda</a>
+      <a href="docs.html">Dokumentasi</a>
+      <a href="mockup.html" class="active">Mockup</a>
+    </div>
+  </nav>
+
+  <div class="mockup-layout">
+    <!-- Role Sidebar -->
+    <aside class="role-sidebar" id="roleSidebar">
+      <!-- Populated by mockup.js -->
+    </aside>
+
+    <!-- Workspace -->
+    <div class="mockup-workspace">
+      <!-- Top bar -->
+      <div class="mockup-topbar">
+        <div id="roleLabel"></div>
+        <div class="page-tabs" id="pageTabs"></div>
+      </div>
+
+      <!-- Screen -->
+      <div class="mockup-screen" id="mockupScreen"></div>
+    </div>
+  </div>
+
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">☰</button>
+
+  <script src="assets/js/mockup.js"></script>
+</body>
+</html>
