@@ -1,6 +1,6 @@
 /* ===== Home Page ===== */
 .home {
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,7 +76,6 @@
   transition: opacity var(--transition);
 }
 .card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--shadow), var(--shadow-glow);
   border-color: rgba(92,110,245,0.3);
 }

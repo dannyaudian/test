@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dokumentasi – FAST Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/docs.css" />
 </head>
@@ -20,7 +23,7 @@
 
   <div class="docs-layout">
     <!-- Sidebar -->
-    <aside class="docs-sidebar">
+    <aside class="docs-sidebar" id="docsSidebar">
       <p class="docs-sidebar__title">Dokumentasi</p>
       <ul class="docs-nav">
         <li><a href="#overview">Gambaran Umum</a></li>
@@ -339,8 +342,8 @@
     </main>
   </div>
 
-  <!-- Mobile sidebar toggle -->
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Buka navigasi dokumentasi" aria-controls="docsSidebar" aria-expanded="false">☰</button>
 
   <script src="assets/js/main.js"></script>
 </body>

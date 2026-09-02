@@ -86,28 +86,6 @@
 }
 .metric-card .metric-label { font-size: 0.8rem; }
 
-/* Phase timeline */
-.timeline { position: relative; padding-left: 1.5rem; margin: 1rem 0; }
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 8px; bottom: 8px;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--c-accent), var(--c-accent-2));
-  border-radius: 2px;
-}
-.timeline-item { position: relative; margin-bottom: 1.5rem; }
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -1.5rem; top: 6px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--c-accent);
-  box-shadow: 0 0 0 3px rgba(92,110,245,0.2);
-}
-.timeline-item h3 { margin: 0 0 0.35rem; }
-
 /* Table */
 .docs-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
 .docs-table th {
