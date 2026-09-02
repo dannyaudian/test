@@ -4,13 +4,13 @@
 #mockup button{font:inherit;cursor:pointer}
 /* page framing */
 #mockup .pagehead{padding:30px clamp(16px,4vw,44px) 20px;max-width:1500px;margin:0 auto}
-#mockup .pagehead h1{font-size:clamp(22px,3vw,30px);letter-spacing:-.025em;margin:0 0 6px;font-weight:700}
-#mockup .pagehead p{margin:0;color:var(--ink-soft);font-family:var(--serif);font-size:16px;max-width:62ch}
-#mockup .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:6px;align-items:center}
+#mockup .pagehead h1{font-size:clamp(26px,3vw,36px);letter-spacing:-.04em;margin:0 0 8px;font-weight:800}
+#mockup .pagehead p{margin:0;color:var(--ink-soft);font-size:16px;max-width:62ch}
+#mockup .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;padding:12px 16px;background:rgba(255,255,255,.8);border:1px solid var(--rule);border-radius:16px;align-items:center;backdrop-filter:blur(10px)}
 #mockup .legend b{font-size:12px;font-weight:600;color:var(--ink-soft)}
 #mockup .legend span{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-soft)}
 /* ownership badges */
-#mockup .own{width:19px;height:19px;border-radius:4px;display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:#fff;flex:none}
+#mockup .own{width:20px;height:20px;border-radius:7px;display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:#fff;flex:none}
 #mockup .own.f{background:var(--signal)}
 #mockup .own.a{background:var(--gate)}
 #mockup .own.s{background:var(--flow)}
@@ -18,15 +18,16 @@
 /* app window */
 #mockup .app{
   max-width:1500px;margin:0 auto 60px;background:var(--surface);border:1px solid var(--rule);
-  border-radius:10px;overflow:hidden;box-shadow:0 18px 44px -28px rgba(16,26,36,.5);
+  border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(15,23,42,.12);
 }
-#mockup .chrome{display:flex;align-items:center;gap:10px;background:var(--ink);padding:9px 14px}
+#mockup .chrome{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,#0f172a,#1e1b4b);padding:10px 14px}
 #mockup .dots{display:flex;gap:6px}
 #mockup .dots i{width:10px;height:10px;border-radius:50%;background:#33485C;display:block}
-#mockup .urlbar{flex:1;background:#1B2A38;color:#8FB4D6;font-size:12px;padding:5px 12px;border-radius:5px;max-width:420px}
+#mockup .urlbar{flex:1;background:rgba(255,255,255,.08);color:#c7d2fe;font-size:12px;padding:6px 12px;border-radius:999px;max-width:420px}
 #mockup .chrome .who{margin-left:auto;display:flex;gap:6px}
-#mockup .roletab{background:transparent;border:1px solid #33485C;color:#A8C4DC;font-size:12px;font-weight:500;padding:5px 11px;border-radius:5px}
-#mockup .roletab[aria-pressed="true"]{background:#EAF1F8;color:var(--ink);border-color:#EAF1F8}
+#mockup .roletab{background:transparent;border:1px solid rgba(255,255,255,.14);color:#cbd5e1;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;transition:background .2s var(--ease),color .2s var(--ease)}
+#mockup .roletab:hover{background:rgba(255,255,255,.08)}
+#mockup .roletab[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
 #mockup .layout{display:grid;grid-template-columns:212px minmax(0,1fr)}
 #mockup .rail{background:var(--surface-2);border-right:1px solid var(--rule);padding:16px 12px;min-height:620px}
 #mockup .rail .brand{display:flex;align-items:baseline;gap:7px;padding:0 8px 14px}
@@ -35,31 +36,34 @@
 #mockup .rail .grouplabel{font-size:11px;color:var(--ink-soft);padding:14px 8px 6px;font-weight:600}
 #mockup .rail button{
   display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:none;border:0;
-  padding:8px 10px;border-radius:6px;font-size:13.5px;color:var(--ink);
+  padding:8px 10px;border-radius:12px;font-size:13.5px;color:var(--ink);font-weight:600;
 }
-#mockup .rail button:hover{background:#E7ECF1}
-#mockup .rail button[aria-current="true"]{background:var(--ink);color:#fff}
+#mockup .rail button:hover{background:var(--signal-tint);color:var(--signal)}
+#mockup .rail button[aria-current="true"]{background:linear-gradient(135deg,#4f46e5,#06b6d4);color:#fff}
 #mockup .rail .pill{margin-left:auto;font-size:11px;font-weight:600;background:var(--stop-tint);color:var(--stop);padding:1px 7px;border-radius:20px}
 #mockup .rail button[aria-current="true"] .pill{background:#33485C;color:#fff}
 #mockup .screen{padding:22px clamp(14px,2.4vw,28px) 34px;display:none}
-#mockup .screen.on{display:block}
+#mockup .screen.on{display:block;animation:screenIn .32s var(--ease)}
+@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 #mockup .screenhead{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:18px}
 #mockup .screenhead h2{margin:0;font-size:21px;letter-spacing:-.02em}
 #mockup .screenhead p{margin:3px 0 0;color:var(--ink-soft);font-size:13px}
 #mockup .screenhead .actions{margin-left:auto;display:flex;gap:8px}
-#mockup .btn{background:var(--signal);color:#fff;border:0;padding:9px 15px;border-radius:6px;font-size:13px;font-weight:600}
-#mockup .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--rule)}
-#mockup .btn:disabled{background:#E4E9EE;color:#93A2B0;cursor:not-allowed}
+#mockup .btn{background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff;border:0;padding:9px 15px;border-radius:11px;font-size:13px;font-weight:700;box-shadow:0 8px 18px rgba(79,70,229,.22);transition:transform .18s var(--ease)}
+#mockup .btn:hover{transform:translateY(-1px)}
+#mockup .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--rule);box-shadow:none}
+#mockup .btn:disabled{background:#E4E9EE;color:#93A2B0;cursor:not-allowed;box-shadow:none;transform:none}
 /* cards & grid */
 #mockup .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:12px;margin-bottom:20px}
-#mockup .card{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+#mockup .card{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:14px 16px;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+#mockup .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.06)}
 #mockup .card .k{font-size:12px;color:var(--ink-soft)}
 #mockup .card .v{font-size:26px;font-weight:700;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
 #mockup .card .n{font-size:12px;color:var(--ink-soft);margin-top:2px}
 #mockup .card.alert{border-color:#E7C9C9;background:var(--stop-tint)}
 #mockup .card.alert .v{color:var(--stop)}
 #mockup .split{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(280px,1fr);gap:16px;align-items:start}
-#mockup .box{background:var(--surface);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:16px}
+#mockup .box{background:var(--surface);border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-bottom:16px}
 #mockup .box>h3{margin:0;font-size:13.5px;font-weight:600;padding:12px 16px;border-bottom:1px solid var(--rule-2);background:var(--surface-2);display:flex;align-items:center;gap:8px}
 #mockup .box>h3 .side{margin-left:auto;font-size:11.5px;font-weight:500;color:var(--ink-soft)}
 #mockup .box .pad{padding:14px 16px}
@@ -174,7 +178,7 @@
 #mockup .sla.late{color:var(--stop)}
 /* customer phone */
 #mockup .phonewrap{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:start}
-#mockup .phone{border:10px solid var(--ink);border-radius:30px;background:#E9EDF1;padding:12px 10px;box-shadow:0 20px 40px -26px rgba(16,26,36,.6)}
+#mockup .phone{border:10px solid var(--ink);border-radius:32px;background:#E9EDF1;padding:12px 10px;box-shadow:0 24px 50px rgba(15,23,42,.18)}
 #mockup .phone .bar2{height:5px;width:80px;background:#33485C;border-radius:4px;margin:0 auto 12px}
 #mockup .wa{background:#fff;border-radius:12px;padding:13px 14px;font-size:13px}
 #mockup .wa .from{font-size:11.5px;color:var(--ink-soft);margin-bottom:6px}
@@ -192,7 +196,7 @@
 #mockup .milestones li.now .m{background:var(--signal);box-shadow:0 0 0 4px var(--signal-tint)}
 #mockup .milestones li.now>div{font-weight:600;color:var(--signal)}
 #mockup .milestones .t{font-size:11.5px;color:var(--ink-soft)}
-#mockup .note{font-family:var(--serif);font-size:14.5px;color:var(--ink-soft);background:var(--gate-tint);border-left:3px solid var(--gate);padding:12px 16px;border-radius:0 6px 6px 0;margin:0 0 16px}
+#mockup .note{font-size:14.5px;color:var(--ink-soft);background:var(--gate-tint);border-left:4px solid var(--gate);padding:12px 16px;border-radius:0 12px 12px 0;margin:0 0 16px}
 @media (max-width:900px){#mockup .layout{grid-template-columns:1fr}
 #mockup .chrome{flex-wrap:wrap}
 #mockup .chrome .who{width:100%;margin-left:0;overflow-x:auto;padding-bottom:2px}

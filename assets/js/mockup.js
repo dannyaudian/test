@@ -36,21 +36,47 @@
   var screens=document.querySelectorAll('.screen');
   var navBtns=document.querySelectorAll('.rail button[data-go]');
   var goBtns=document.querySelectorAll('[data-go]');
+  var toastEl=document.getElementById('toast');
+  var toastTimer=null;
+  function toast(msg){
+    if(!toastEl) return;
+    toastEl.textContent=msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){ toastEl.classList.remove('show'); }, 2800);
+  }
   function show(id){
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
     navBtns.forEach(function(b){
-      if(b.dataset.go===id && b.closest('[data-rail]').hidden!==true) b.setAttribute('aria-current','true');
+      var rail=b.closest('[data-rail]');
+      if(b.dataset.go===id && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
-    document.querySelector('.urlbar').textContent='sam.fast.id/fast/'+id;
+    var bar=document.querySelector('.urlbar');
+    if(bar) bar.textContent='sam.fast.id/fast/'+id;
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
-    if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); return; }
+    if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
     show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
-    if(!isDownloadAction(b) || b.hasAttribute('data-go')) return;
-    b.addEventListener('click',function(){ downloadReceipt(receiptNoFrom(b)); });
+    if(isDownloadAction(b) && !b.hasAttribute('data-go')){
+      b.addEventListener('click',function(){ downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); });
+      return;
+    }
+    if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
+    var label=(b.textContent||'').replace(/\s+/g,' ').trim();
+    if(/^Bayar Rp/.test(label)){
+      b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
+    } else if(/Kirim instruksi pembayaran|Kirim tagihan|Kirim pengingat/.test(label)){
+      b.addEventListener('click',function(){ toast('Instruksi terkirim ke customer.'); });
+    } else if(/Setujui/.test(label)){
+      b.addEventListener('click',function(){ toast('Keputusan exception tercatat. Gate dievaluasi ulang.'); });
+    } else if(/Buat SPK baru/.test(label)){
+      b.addEventListener('click',function(){ toast('Draft SPK dibuat. Lengkapi data customer sekali di sumber.'); });
+    } else if(/Cari transaksi/.test(label)){
+      b.addEventListener('click',function(){ toast('Filter transaksi berdasarkan tahap tertahan.'); });
+    }
   });
   var seg=document.getElementById('jenisSeg');
   if(seg){ seg.querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
@@ -63,6 +89,7 @@
       document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x===t?'true':'false');});
       document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==t.dataset.role; });
       show(first[t.dataset.role]);
+      toast('Peran: '+t.textContent.trim());
     });
   });
 })();
