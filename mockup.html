@@ -1,45 +1,920 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mockup Interaktif – FAST Workspace</title>
-  <link rel="stylesheet" href="assets/css/base.css" />
-  <link rel="stylesheet" href="assets/css/mockup.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup Interaktif — FAST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/mockup.css">
 </head>
 <body>
+<a class="skip" href="#mockup">Lewati ke mockup</a>
+<nav class="site-nav" aria-label="Navigasi situs">
+  <a class="brand" href="index.html"><b>FAST</b><span>Outline Project</span></a>
+  <div class="links">
+    <a href="index.html">Beranda</a>
+    <a href="docs.html">Dokumentasi</a>
+    <a href="mockup.html" class="active">Mockup</a>
+  </div>
+</nav>
 
-  <nav class="navbar">
-    <a class="navbar__brand" href="index.html">FAST Workspace</a>
-    <div class="navbar__links">
-      <a href="index.html">Beranda</a>
-      <a href="docs.html">Dokumentasi</a>
-      <a href="mockup.html" class="active">Mockup</a>
+<div id="mockup">
+    <!-- ================= MOCKUP ================= -->
+    <div class="pagehead">
+      <h1>Mockup tampilan</h1>
+      <p>Simulasi antarmuka SAM sebagai satu working tool. Gunakan tombol peran di kanan atas jendela untuk berpindah antara Frontman, Administrasi, Management, dan Customer. Seluruh nama, nominal, waktu, dan angka pada mockup merupakan data ilustratif—bukan KPI, target, atau data aktual.</p>
     </div>
-  </nav>
+<div class="legend">
+    <b>Kepemilikan data</b>
+    <span><i class="own f">F</i> Diinput Frontman</span>
+    <span><i class="own a">A</i> Diverifikasi Administrasi</span>
+    <span><i class="own s">S</i> Dihasilkan sistem</span>
+    <span><i class="own p">P</i> Keputusan Compliance Exception Approver</span>
+  </div>
 
-  <div class="mockup-layout">
-    <!-- Role Sidebar -->
-    <aside class="role-sidebar" id="roleSidebar">
-      <!-- Populated by mockup.js -->
-    </aside>
-
-    <!-- Workspace -->
-    <div class="mockup-workspace">
-      <!-- Top bar -->
-      <div class="mockup-topbar">
-        <div id="roleLabel"></div>
-        <div class="page-tabs" id="pageTabs"></div>
-      </div>
-
-      <!-- Screen -->
-      <div class="mockup-screen" id="mockupScreen"></div>
+<div class="app">
+  <div class="chrome">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="urlbar">sam.fast.id/fast/transaksi</div>
+    <div class="who">
+      <button class="roletab" data-role="frontman" aria-pressed="true">Frontman</button>
+      <button class="roletab" data-role="admin" aria-pressed="false">Administrasi</button>
+      <button class="roletab" data-role="mgmt" aria-pressed="false">Management</button>
+      <button class="roletab" data-role="cust" aria-pressed="false">Customer</button>
     </div>
   </div>
 
-  <!-- Mobile sidebar toggle -->
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">☰</button>
+  <div class="layout">
+    <aside class="rail">
+      <div class="brand"><b>FAST</b><span>SAM · Cilandak</span></div>
 
-  <script src="assets/js/mockup.js"></script>
+      <div data-rail="frontman">
+        <p class="grouplabel">Frontman · Rina Pratiwi</p>
+        <button data-go="beranda" aria-current="true">Beranda</button>
+        <button data-go="transaksi">Detail transaksi</button>
+        <button data-go="bayar">Pembayaran</button>
+        <button data-go="request">Buat permintaan bayar</button>
+        <button data-go="dokumen">Dokumen<span class="pill">2</span></button>
+        <button data-go="eskalasi">Compliance exception<span class="pill">2</span></button>
+      </div>
+
+      <div data-rail="admin" hidden>
+        <p class="grouplabel">Administrasi · Dewi Kusuma</p>
+        <button data-go="verifikasi" aria-current="true">Antrean verifikasi<span class="pill">7</span></button>
+        <button data-go="eskalasi">Compliance exception<span class="pill">5</span></button>
+        <button data-go="transaksi">Detail transaksi</button>
+      </div>
+
+      <div data-rail="mgmt" hidden>
+        <p class="grouplabel">Management · Kepala Cabang</p>
+        <button data-go="dashboard" aria-current="true">Dashboard cabang</button>
+      </div>
+
+      <div data-rail="cust" hidden>
+        <p class="grouplabel">Customer · Budi Santoso</p>
+        <button data-go="customer" aria-current="true">Beranda &amp; status</button>
+        <button data-go="tagihan_customer">Tagihan terbuka<span class="pill">1</span></button>
+        <button data-go="e_kuitansi">E-Kuitansi<span class="pill">2</span></button>
+      </div>
+    </aside>
+
+    <div>
+      <!-- ============ BERANDA FRONTMAN ============ -->
+      <section class="screen on" id="beranda">
+        <div class="screenhead">
+          <div>
+            <h2>Beranda</h2>
+            <p>Rabu, 2 September 2026 · FAST Outlet Cilandak</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost">Cari transaksi</button>
+            <button class="btn">Buat SPK baru</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">SPK aktif</p><p class="v">18</p><p class="n">3 dibuat minggu ini</p></div>
+          <div class="card"><p class="k">Menunggu booking fee</p><p class="v">4</p><p class="n">Sales Order belum terbuka</p></div>
+          <div class="card"><p class="k">Outstanding balance</p><p class="v">1,24<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">Dari 9 Sales Order</p></div>
+          <div class="card alert"><p class="k">Butuh tindakan Anda</p><p class="v">3</p><p class="n">Dokumen dan konfirmasi customer</p></div>
+        </div>
+
+        <div class="box">
+          <h3>Transaksi saya <span class="side">Diurutkan berdasarkan proses tertahan</span></h3>
+          <div class="scroll">
+          <table>
+            <thead><tr><th>SPK &amp; customer</th><th>Unit</th><th>Stage</th><th>Status</th><th class="num">AR Open</th><th>Aging</th><th>Aksi</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso</span></td>
+                <td>Innova Zenix 2.0 G HV<span class="sub">Putih Mutiara</span></td>
+                <td>Billing</td>
+                <td><span class="tag hold">Menunggu pelunasan</span></td>
+                <td class="num">Rp 181.750.000</td>
+                <td>2 hari</td>
+                <td><button class="btn" data-go="request">Tambah request</button></td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura Utama</span></td>
+                <td>Hiace Premio · 3 unit<span class="sub">Silver</span></td>
+                <td>Compliance</td>
+                <td><span class="tag wait">Surat Kuasa belum sesuai</span></td>
+                <td class="num">Rp 1.045.000.000</td>
+                <td>1 hari</td>
+                <td><button class="btn ghost" data-go="transaksi">Lihat</button></td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00423</b><span class="sub">Sarah Wijaya</span></td>
+                <td>Raize 1.0 T GR Sport<span class="sub">Merah</span></td>
+                <td>SPK</td>
+                <td><span class="tag stop">NPWP belum diunggah</span></td>
+                <td class="num">—</td>
+                <td>3 hari</td>
+                <td><button class="btn ghost" data-go="dokumen">Lengkapi</button></td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00425</b><span class="sub">Agus Hermawan</span></td>
+                <td>Avanza 1.5 G CVT<span class="sub">Hitam</span></td>
+                <td>Delivery</td>
+                <td><span class="tag ok">Siap kirim 4 Sep</span></td>
+                <td class="num">Rp 0</td>
+                <td>—</td>
+                <td><button class="btn ghost" data-go="transaksi">Lihat</button></td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00409</b><span class="sub">Maria Sitompul</span></td>
+                <td>Fortuner 2.8 VRZ<span class="sub">Abu Metalik</span></td>
+                <td>STNK</td>
+                <td><span class="tag hold">STNK proses hari ke-19</span></td>
+                <td class="num">Rp 0</td>
+                <td>19 hari</td>
+                <td><button class="btn ghost" data-go="transaksi">Lihat</button></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DETAIL TRANSAKSI ============ -->
+      <section class="screen" id="transaksi">
+        <div class="screenhead">
+          <div>
+            <h2>SPK/26/CLD/00418 · Budi Santoso</h2>
+            <p>Innova Zenix 2.0 G HV CVT · Putih Mutiara · Frontman Rina Pratiwi</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost">Kirim pengingat ke customer</button>
+            <button class="btn" disabled>Ajukan delivery</button>
+          </div>
+        </div>
+
+        <div class="chain"><span>SPK/26/CLD/00418</span><i>→</i><span>SO 4500091238</span><i>→</i><span>Billing: belum terbit</span></div>
+
+        <div class="box">
+          <div class="stages">
+            <div class="st done"><span class="dot"></span><b>SPK</b><em>28 Agu</em></div>
+            <div class="st done"><span class="dot"></span><b>Booking fee</b><em>28 Agu</em></div>
+            <div class="st done"><span class="dot"></span><b>Sales Order</b><em>29 Agu</em></div>
+            <div class="st now"><span class="dot"></span><b>Settlement</b><em>Sebagian dibayar</em></div>
+            <div class="st locked"><span class="dot"></span><b>Billing</b><em>Terkunci</em></div>
+            <div class="st locked"><span class="dot"></span><b>AFI/DO</b><em>Belum</em></div>
+            <div class="st locked"><span class="dot"></span><b>Delivery</b><em>Belum</em></div>
+            <div class="st locked"><span class="dot"></span><b>Good Issue</b><em>Belum</em></div>
+            <div class="st locked"><span class="dot"></span><b>STNK/BPKB</b><em>Belum</em></div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="box">
+              <h3>Referensi transaksi <span class="side">Satu lineage dari SPK sampai billing</span></h3>
+              <div class="fields">
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Dokumen asal</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val">4500091238</span><span class="src">Referensi SPK/26/CLD/00418</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Menunggu settlement gate</span></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Data customer <span class="side">Diinput sekali pada SPK, dipakai sampai BPKB</span></h3>
+              <div class="fields">
+                <div class="frow"><i class="own f">F</i><span class="lab">Nama customer</span><span class="val">Budi Santoso</span><span class="src">Sumber: SPK</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">NIK</span><span class="val">3174••••••••0007</span><span class="src">Diverifikasi 28 Agu</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Budi Santoso</span><span class="src">Dipakai AFI, STNK, BPKB</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Alamat</span><span class="val">Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</span><span class="src">Dipakai AFI, DO</span></div>
+                <div class="frow"><i class="own s">S</i><span class="lab">Customer ID</span><span class="val">CST-0090412</span><span class="src">Repeat order ke-2</span></div>
+                <div class="frow"><i class="own a">A</i><span class="lab">Klasifikasi</span><span class="val">Retail · Personal</span><span class="src">Ditambahkan Administrasi</span></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Unit &amp; nilai transaksi <span class="side">Nilai ditarik dari source system</span></h3>
+              <div class="fields">
+                <div class="frow locked"><i class="own s">S</i><span class="lab">VIN</span><span class="val">MHKA6GJ••••41827</span><span class="src">Dari alokasi unit</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Status PDI</span><span class="val">Selesai · 30 Agu</span><span class="src">Dari sistem logistik</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Harga setelah program</span><span class="val">Rp 486.750.000</span><span class="src">Dihitung sistem</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Document compliance</span><span class="val">6 dari 6 persyaratan valid</span><span class="src">Document Gate</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Exception aktif</span><span class="val">Tidak ada</span><span class="src">Seluruh rule lolos</span></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Riwayat perubahan</h3>
+              <ul class="audit">
+                <li><i class="own s">S</i><div>Pembayaran Rp 300.000.000 dialokasikan ke SO 4500091238 dan kuitansi KWT/26/CLD/009115 diterbitkan <time>1 Sep 2026, 14:08 · Banking API</time></div></li>
+                <li><i class="own a">A</i><div>Alamat customer dikoreksi pada sumber data SPK, perubahan diteruskan ke AFI dan DO <time>31 Agu 2026, 09:15 · Dewi Kusuma</time></div></li>
+                <li><i class="own s">S</i><div>Document Gate dinyatakan lengkap, tidak diperlukan compliance exception <time>29 Agu 2026, 10:42 · Rules Engine</time></div></li>
+                <li><i class="own s">S</i><div>Booking fee terverifikasi, kuitansi KWT/26/CLD/008731 diterbitkan, dan permintaan Sales Order dibuka <time>28 Agu 2026, 16:30</time></div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Posisi keuangan</h3>
+              <div class="money">
+                <div class="row"><span>Nilai transaksi</span><span>Rp 486.750.000</span></div>
+                <div class="row"><span>Booking fee (terverifikasi)</span><span>Rp 5.000.000</span></div>
+                <div class="row"><span>Kuitansi booking fee</span><span>KWT/26/CLD/008731</span></div>
+                <div class="row"><span>Pelunasan tahap 1</span><span>Rp 300.000.000</span></div>
+                <div class="row"><span>Kuitansi tahap 1</span><span>KWT/26/CLD/009115</span></div>
+                <div class="bar"><i style="width:62.7%"></i></div>
+                <p class="hint">62,7% terbayar · 2 kuitansi aktif memotong AR</p>
+                <div class="row"><span>Payment request aktif</span><span>Rp 100.000.000</span></div>
+                <div class="row total"><span>AR Open</span><span>Rp 181.750.000</span></div>
+                <div class="row"><span>Tersedia untuk request baru</span><span>Rp 81.750.000</span></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Compliance gate</h3>
+              <ul class="gates">
+                <li><span class="mark ok">✓</span><div>Data gate<span class="why">Identitas, nama STNK, struktur transaksi valid</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Document gate<span class="why">6 dari 6 dokumen wajib valid</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Booking fee gate<span class="why">Terverifikasi Banking API 28 Agu</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark no">!</span><div>Settlement gate<span class="why">Outstanding Rp 181.750.000 belum nihil</span></div><span class="tag stop">Tertahan</span></li>
+                <li><span class="mark idle">•</span><div>Billing gate<span class="why">Menunggu settlement gate</span></div><span class="tag mute">Menunggu</span></li>
+                <li><span class="mark idle">•</span><div>Delivery gate<span class="why">Menunggu billing dan AFI/DO</span></div><span class="tag mute">Menunggu</span></li>
+              </ul>
+            </div>
+
+            <div class="box">
+              <h3>Tindakan berikutnya</h3>
+              <div class="pad">
+                <p style="margin:0 0 12px;font-size:13px;color:var(--ink-soft)">Delivery terbuka otomatis setelah pelunasan terverifikasi atau compliance exception yang eligible disetujui. Tidak ada data yang perlu diinput ulang.</p>
+                <button class="btn" style="width:100%;margin-bottom:8px" data-go="request">Kirim tagihan pelunasan</button>
+                <button class="btn ghost" style="width:100%" data-go="eskalasi">Ajukan exception delivery</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PEMBAYARAN ============ -->
+      <section class="screen" id="bayar">
+        <div class="screenhead">
+          <div>
+            <h2>Pembayaran · SPK/26/CLD/00418</h2>
+            <p>Setiap pembayaran terverifikasi dicatat sekali, menghasilkan satu kuitansi, dialokasikan otomatis, dan tetap terhubung dengan nomor SPK, SO, serta billing.</p>
+          </div>
+          <div class="actions"><button class="btn" data-go="request">Buat permintaan pembayaran</button></div>
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="box">
+              <h3>Riwayat &amp; alokasi</h3>
+              <div class="scroll">
+              <table>
+                <thead><tr><th>Tanggal</th><th>Payment reference</th><th>Kuitansi</th><th>Jenis</th><th>Alokasi</th><th class="num">Nominal</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>28 Agu 2026</td><td>VA 8801 0418 0001<span class="sub">BCA</span></td><td>KWT/26/CLD/008731<span class="sub">Unduh PDF</span></td><td>Booking fee</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238 terhubung otomatis</span></td><td class="num">Rp 5.000.000</td><td><span class="tag ok">Terverifikasi</span></td></tr>
+                  <tr><td>1 Sep 2026</td><td>VA 8801 0418 0002<span class="sub">BCA</span></td><td>KWT/26/CLD/009115<span class="sub">Unduh PDF</span></td><td>Pelunasan tahap 1</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 300.000.000</td><td><span class="tag ok">Teralokasi</span></td></tr>
+                  <tr><td>2 Sep 2026</td><td>VA 8801 0418 0003<span class="sub">Menunggu transfer</span></td><td>—<span class="sub">Belum terbit</span></td><td>Pelunasan tahap 2</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 100.000.000</td><td><span class="tag wait">Request aktif</span></td></tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Pembayaran belum cocok <span class="side">Ditangani Administrasi</span></h3>
+              <div class="pad">
+                <p style="margin:0;font-size:13px;color:var(--ink-soft)">Tidak ada pembayaran unmatched untuk transaksi ini. Setiap transfer tanpa referensi valid akan otomatis masuk antrean exception Administrasi, bukan ke transaksi ini.</p>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Konsekuensi pembatalan kuitansi</h3>
+              <ul class="gates">
+                <li><span class="mark no">1</span><div>Kuitansi menjadi Cancelled<span class="why">Dokumen asli tetap tersimpan pada audit trail</span></div><span class="tag stop">Reversal</span></li>
+                <li><span class="mark idle">2</span><div>Nominal dikembalikan ke AR Open<span class="why">Outstanding unit dihitung ulang</span></div><span class="tag hold">Recalculate</span></li>
+                <li><span class="mark idle">3</span><div>Payment request terkait diperbarui<span class="why">Menjadi Cancelled atau Requires Follow-up</span></div><span class="tag hold">Follow-up</span></li>
+                <li><span class="mark idle">4</span><div>Billing dan delivery gate dievaluasi ulang<span class="why">Gate kembali terkunci apabila financial requirement tidak lagi terpenuhi</span></div><span class="tag mute">Recheck</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Kontrol permintaan pelunasan</h3>
+              <div class="pad">
+                <div class="frow" style="padding-left:0;padding-right:0"><i class="own s">S</i><span class="lab">AR Open</span><span class="val">Rp 181.750.000</span><span class="src"></span></div>
+                <div class="frow" style="padding-left:0;padding-right:0"><i class="own s">S</i><span class="lab">Request aktif</span><span class="val">Rp 100.000.000</span><span class="src"></span></div>
+                <div class="frow" style="padding-left:0;padding-right:0;border-bottom:0"><i class="own s">S</i><span class="lab">Tersedia untuk request baru</span><span class="val">Rp 81.750.000</span><span class="src"></span></div>
+                <button class="btn" style="width:100%;margin-top:12px" data-go="request">Buat request Rp 81.750.000</button>
+              </div>
+            </div>
+            <p class="note">No verified booking fee, no Sales Order. No verified payment, no receipt. No full payment or approved exception, no delivery release.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FORM PERMINTAAN PEMBAYARAN ============ -->
+      <section class="screen" id="request">
+        <div class="screenhead">
+          <div>
+            <h2>Buat permintaan pembayaran</h2>
+            <p>SPK/26/CLD/00418 · Budi Santoso · SO 4500091238. Data transaksi ditarik otomatis, Frontman hanya menentukan nominal dan kanal.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="bayar">Batal</button></div>
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="box">
+              <h3>1 · Jenis pembayaran</h3>
+              <div class="form">
+                <div class="seg" id="jenisSeg">
+                  <button aria-pressed="false">Booking fee/DP</button>
+                  <button aria-pressed="true">Pelunasan</button>
+                </div>
+                <p class="hint" style="margin:0">Booking fee dan pelunasan tahap 1 telah memiliki kuitansi aktif. Terdapat request pelunasan tahap 2 sebesar Rp 100.000.000 yang belum dibayar. Permintaan baru hanya dapat dibuat sebesar sisa kapasitas Rp 81.750.000.</p>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>2 · Data yang terisi otomatis <span class="side">Tidak dapat diketik ulang di layar ini</span></h3>
+              <div class="form">
+                <div class="fgrid">
+                  <div class="field"><label><i class="own s">S</i> Customer</label><input value="Budi Santoso · CST-0090412" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Nomor SPK</label><input value="SPK/26/CLD/00418" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Sales Order</label><input value="4500091238" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Nomor billing</label><input value="Belum terbit · menunggu settlement gate" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Unit</label><input value="Innova Zenix 2.0 G HV · VIN ••41827" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Nilai transaksi</label><input value="Rp 486.750.000" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Total kuitansi aktif</label><input value="Rp 305.000.000" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> AR Open</label><input value="Rp 181.750.000" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Request aktif</label><input value="Rp 100.000.000" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Available Request Amount</label><input value="Rp 81.750.000" readonly></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>3 · Diisi Frontman</h3>
+              <div class="form">
+                <div class="fgrid">
+                  <div class="field">
+                    <label><i class="own f">F</i> Nominal diminta</label>
+                    <input value="Rp 81.750.000">
+                    <span class="help">Maksimal sebesar AR Open dikurangi seluruh request aktif. Nilai divalidasi ulang saat dikirim dan saat customer membukanya.</span>
+                  </div>
+                  <div class="field">
+                    <label><i class="own f">F</i> Alokasi</label>
+                    <select><option>SO 4500091238 · 1 unit</option><option>Bagi per unit (multi-unit)</option></select>
+                    <span class="help">Alokasi menentukan unit mana yang lolos delivery gate.</span>
+                  </div>
+                  <div class="field">
+                    <label><i class="own f">F</i> Berlaku sampai</label>
+                    <input value="5 September 2026, 23:59">
+                  </div>
+                  <div class="field">
+                    <label><i class="own f">F</i> Kanal pengiriman</label>
+                    <select><option>WhatsApp · 0812••••4471</option><option>Digiroom</option><option>WhatsApp dan Digiroom</option></select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label><i class="own f">F</i> Catatan untuk customer</label>
+                  <textarea>Unit sudah lolos PDI. Setelah pelunasan diterima, jadwal serah terima dapat langsung kami konfirmasi.</textarea>
+                </div>
+              </div>
+              <div class="formfoot">
+                <span class="hint">Referensi dan Virtual Account dibuat sistem setelah permintaan dikirim.</span>
+                <button class="btn ghost">Simpan draft</button>
+                <button class="btn">Kirim instruksi pembayaran</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Validasi sistem</h3>
+              <ul class="gates">
+                <li><span class="mark ok">✓</span><div>AR Open tervalidasi<span class="why">Rp 181.750.000 setelah dikurangi 2 kuitansi aktif</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Request aktif diperhitungkan<span class="why">Rp 100.000.000 masih menunggu pembayaran</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Nominal tidak melebihi Available Request Amount<span class="why">Rp 81.750.000 dari Rp 81.750.000</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Minimum booking fee terpenuhi<span class="why">Syarat Sales Order sudah lolos 28 Agu</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Referensi pembayaran unik<span class="why">Belum pernah dipakai transaksi lain</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Rekening penerima sesuai cabang<span class="why">BCA · FAST Outlet Cilandak</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark idle">•</span><div>Verifikasi Banking API<span class="why">Berjalan otomatis setelah transfer masuk</span></div><span class="tag mute">Menunggu</span></li>
+              </ul>
+            </div>
+
+            <div class="box">
+              <h3>Pratinjau pesan customer</h3>
+              <div class="pad">
+                <div class="wa" style="border:1px solid var(--rule)">
+                  <p class="from">FAST · terverifikasi</p>
+                  <p>Halo Pak Budi, berikut rincian pelunasan Innova Zenix Anda.</p>
+                  <p class="amt">Rp 81.750.000</p>
+                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Virtual Account BCA</span><b>Dibuat setelah request dikirim</b></div>
+                  <p style="font-size:12px;color:var(--ink-soft);margin:0">Berlaku sampai 5 Sep 2026, 23:59. Status pembayaran diperbarui otomatis.</p>
+                </div>
+              </div>
+            </div>
+            <p class="note">Setelah dana masuk, sistem mencocokkan referensi, mengalokasikan ke SO, menghitung ulang outstanding, lalu membuka billing dan delivery gate. Administrasi tidak memasukkan ulang data pembayaran.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COMPLIANCE EXCEPTION APPROVAL ============ -->
+      <section class="screen" id="eskalasi">
+        <div class="screenhead">
+          <div>
+            <h2>Compliance Exception Approval</h2>
+            <p>Approval Engine hanya aktif ketika compliance gate gagal dan rule tersebut dinyatakan waivable oleh policy.</p>
+          </div>
+          <div class="actions"><button class="btn ghost">Riwayat keputusan</button></div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">Eligible exception</p><p class="v">3</p><p class="n">2 di cabang, 1 di regional</p></div>
+          <div class="card"><p class="k">Non-waivable block</p><p class="v">2</p><p class="n">Harus dilengkapi, tidak dapat di-approve</p></div>
+          <div class="card alert"><p class="k">Lewat SLA</p><p class="v">1</p><p class="n">Naik otomatis ke regional</p></div>
+          <div class="card"><p class="k">Rata-rata keputusan</p><p class="v">5,2<span style="font-size:14px;font-weight:500"> jam</span></p><p class="n">Target 4 jam</p></div>
+        </div>
+
+        <div class="box">
+          <h3>Daftar failed compliance gate</h3>
+          <div class="scroll">
+          <table>
+            <thead><tr><th>Nomor &amp; transaksi</th><th>Kategori</th><th>Gate penahan</th><th>Pemilik keputusan</th><th>SLA</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><b>E-26-0418-01</b><span class="sub">SPK/26/CLD/00418 · Budi Santoso</span></td>
+                <td>Financial requirement belum terpenuhi</td>
+                <td>Settlement / Delivery Gate</td>
+                <td>Finance &amp; Administration Head<span class="sub">Joint decision sesuai policy</span></td>
+                <td><span class="sla">sisa 3j 20m</span></td>
+                <td><span class="tag wait">Menunggu keputusan</span></td>
+              </tr>
+              <tr>
+                <td><b>E-26-0421-02</b><span class="sub">SPK/26/CLD/00421 · PT Danapura</span></td>
+                <td>Original Surat Kuasa belum tersedia</td>
+                <td>Document / Delivery Gate</td>
+                <td>Kepala Administrasi<span class="sub">Digital copy telah diverifikasi</span></td>
+                <td><span class="sla late">lewat 2j 10m</span></td>
+                <td><span class="tag stop">Dieskalasi otomatis</span></td>
+              </tr>
+              <tr>
+                <td><b>E-26-0431-01</b><span class="sub">SPK/26/CLD/00431 · Hendra Gunawan</span></td>
+                <td>NIK mismatch dan terdaftar di dua SPK</td>
+                <td>Data gate</td>
+                <td>Tidak tersedia<span class="sub">Non-waivable</span></td>
+                <td><span class="sla">harus diperbaiki</span></td>
+                <td><span class="tag stop">Approval tidak tersedia</span></td>
+              </tr>
+              <tr>
+                <td><b>E-26-TRS-077</b><span class="sub">Transfer Rp 25.000.000 · 1 Sep</span></td>
+                <td>Pembayaran tanpa referensi</td>
+                <td>Settlement gate</td>
+                <td>Treasury<span class="sub">Level 1</span></td>
+                <td><span class="sla">sisa 6j</span></td>
+                <td><span class="tag hold">Pencocokan manual</span></td>
+              </tr>
+              <tr>
+                <td><b>E-26-0409-03</b><span class="sub">SPK/26/CLD/00409 · Maria Sitompul</span></td>
+                <td>Aging STNK melewati 15 hari</td>
+                <td>Document gate</td>
+                <td>Kepala Cabang<span class="sub">Eskalasi otomatis</span></td>
+                <td><span class="sla late">hari ke-19</span></td>
+                <td><span class="tag stop">Perlu tindak lanjut</span></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="box">
+            <h3>E-26-0418-01 · jalur compliance exception</h3>
+            <ul class="route">
+              <li class="done"><span class="lv">F</span><div><b>Diajukan Frontman</b><span class="t">Rina Pratiwi · 2 Sep 09:12 · Failed rule dan seluruh data transaksi ditarik otomatis.</span></div></li>
+              <li class="done"><span class="lv">S</span><div><b>Delivery Gate menahan proses</b><span class="t">AR Open Rp 181.750.000. Rule diklasifikasikan waivable hanya dengan joint decision dan komitmen maksimal 7 hari.</span></div></li>
+              <li class="done"><span class="lv">1</span><div><b>Kepala Administrasi memverifikasi evidence</b><span class="t">Komitmen pembayaran dan identitas customer lengkap · diteruskan 09:40.</span></div></li>
+              <li class="active"><span class="lv">2</span><div><b>Finance &amp; Administration Head</b><span class="t">Menunggu compliance exception decision · SLA 4 jam, sisa 3j 20m.</span></div></li>
+              <li class="next"><span class="lv">3</span><div><b>Finance Region</b><span class="t">Naik otomatis apabila SLA decision owner terlewat.</span></div></li>
+            </ul>
+            <div class="formfoot">
+              <span class="hint">Approver hanya memutus failed compliance rule <i class="own p" style="vertical-align:-4px">P</i> — data transaksi dan klasifikasi waivability tidak dapat diubah dari layar ini.</span>
+              <button class="btn ghost">Kembalikan untuk dilengkapi</button>
+              <button class="btn">Setujui dengan syarat</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Dampak bila disetujui dengan syarat</h3>
+              <ul class="gates">
+                <li><span class="mark ok">✓</span><div>Delivery gate terbuka untuk 1 unit<span class="why">Hanya SO 4500091238</span></div><span class="tag ok">Terbatas</span></li>
+                <li><span class="mark no">!</span><div>AR tercatat Rp 181.750.000<span class="why">Jatuh tempo 5 Sep 2026</span></div><span class="tag stop">Eksposur</span></li>
+                <li><span class="mark idle">•</span><div>Pengingat otomatis ke customer<span class="why">H-1 dan H jatuh tempo</span></div><span class="tag mute">Terjadwal</span></li>
+              </ul>
+            </div>
+            <p class="note">Keputusan menyimpan failed rule, evidence, alasan, conditions, scope, validity period, decision owner, dan timestamp. Setelah masa berlaku habis atau kondisi gagal, gate terkunci kembali otomatis.</p>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>Waivability, routing, dan SLA</h3>
+          <div class="scroll">
+          <table>
+            <thead><tr><th>Failed compliance rule</th><th>Waivability</th><th>Pemilik keputusan</th><th>SLA</th><th>Control</th></tr></thead>
+            <tbody>
+              <tr><td>Delivery sebelum financial requirement terpenuhi</td><td>Waivable sesuai policy dan risk limit</td><td>FAH + Finance Region</td><td>4 jam</td><td>Conditional release, maksimal 7 hari</td></tr>
+              <tr><td>Original Surat Kuasa belum tersedia, digital copy valid</td><td>Waivable dengan evidence</td><td>Kepala Administrasi</td><td>4 jam</td><td>Original wajib diterima sebelum expiry</td></tr>
+              <tr><td>Mandatory customer identity / NIK mismatch</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Data wajib dikoreksi pada sumber</td></tr>
+              <tr><td>PPATK atau regulatory screening gagal</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Transaksi tetap terkunci</td></tr>
+              <tr><td>Pembayaran tanpa referensi</td><td>Bukan approval; resolution workflow</td><td>Treasury</td><td>1 hari kerja</td><td>Match, return, atau investigate</td></tr>
+              <tr><td>Aging STNK/BPKB melewati SLA</td><td>Bukan approval; escalation workflow</td><td>Kepala Administrasi</td><td>otomatis</td><td>Escalate sampai selesai</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DOKUMEN ============ -->
+      <section class="screen" id="dokumen">
+        <div class="screenhead">
+          <div>
+            <h2>Dokumen · SPK/26/CLD/00418</h2>
+            <p>Diunggah sekali, divalidasi, lalu dipakai ulang oleh AFI/DO, delivery, STNK, dan BPKB.</p>
+          </div>
+          <div class="actions"><button class="btn ghost">Unggah dokumen</button></div>
+        </div>
+
+        <div class="box">
+          <h3>Document Vault <span class="side">4 dokumen dipakai ulang dari transaksi sebelumnya</span></h3>
+          <div class="docs">
+            <div class="doc"><b>KTP</b><p class="meta">Diunggah 28 Agu · 1,2 MB</p><span class="tag ok">Valid</span><span class="reuse">Dipakai ulang dari CST-0090412</span></div>
+            <div class="doc"><b>NPWP</b><p class="meta">Diunggah 28 Agu · 0,8 MB</p><span class="tag ok">Valid</span><span class="reuse">Dipakai ulang dari CST-0090412</span></div>
+            <div class="doc"><b>Kartu Keluarga</b><p class="meta">Diunggah 28 Agu · 1,6 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>Surat Kuasa</b><p class="meta">Belum diperlukan</p><span class="tag mute">Menyusul saat delivery</span></div>
+            <div class="doc miss"><b>Bukti alamat</b><p class="meta">Masa berlaku habis 14 Agu 2026</p><span class="tag hold">Perlu pembaruan</span><span class="reuse" style="color:var(--gate)">Tindakan: Frontman</span></div>
+            <div class="doc"><b>BSTKB</b><p class="meta">Terbit otomatis saat Good Issue</p><span class="tag mute">Dihasilkan sistem</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VERIFIKASI ADMIN ============ -->
+      <section class="screen" id="verifikasi">
+        <div class="screenhead">
+          <div>
+            <h2>Antrean verifikasi</h2>
+            <p>Administrasi memverifikasi dan melengkapi. Tidak ada kolom untuk mengetik ulang data Frontman.</p>
+          </div>
+          <div class="actions"><button class="btn ghost">Filter cabang</button></div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">Perlu verifikasi</p><p class="v">7</p><p class="n">SLA 4 jam</p></div>
+          <div class="card"><p class="k">Exception pembayaran</p><p class="v">2</p><p class="n">Transfer tanpa referensi</p></div>
+          <div class="card"><p class="k">Peringatan duplikat</p><p class="v">1</p><p class="n">NIK terdaftar di 2 SPK</p></div>
+          <div class="card"><p class="k">Menunggu compliance decision</p><p class="v">3</p><p class="n">Hanya eligible exception</p></div>
+        </div>
+
+        <div class="box">
+          <h3>Perlu tindakan Administrasi</h3>
+          <div class="scroll">
+          <table>
+            <thead><tr><th>Transaksi</th><th>Jenis</th><th>Temuan sistem</th><th>Tindakan</th><th>Aging</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><b>SPK/26/CLD/00423</b><span class="sub">Sarah Wijaya</span></td>
+                <td>Verifikasi dokumen</td>
+                <td>NPWP belum diunggah <span class="sub">Pemilik input: Frontman</span></td>
+                <td><span class="tag hold">Kembalikan ke Frontman</span></td>
+                <td>3 hari</td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00431</b><span class="sub">Hendra Gunawan</span></td>
+                <td>Peringatan duplikat</td>
+                <td>NIK sama dengan SPK/26/BSD/00187 <span class="sub">Deteksi otomatis</span></td>
+                <td><span class="tag stop">Perlu keputusan</span></td>
+                <td>5 jam</td>
+              </tr>
+              <tr>
+                <td><b>Transfer Rp 25.000.000</b><span class="sub">BCA · 1 Sep 15:22</span></td>
+                <td>Exception pembayaran</td>
+                <td>Referensi tidak dikenali <span class="sub">Belum teralokasi</span></td>
+                <td><span class="tag stop">Cocokkan manual</span></td>
+                <td>1 hari</td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura Utama</span></td>
+                <td>Data internal</td>
+                <td>Klasifikasi fleet belum diisi <span class="sub">Hanya bisa diisi Administrasi</span></td>
+                <td><span class="tag wait">Lengkapi</span></td>
+                <td>4 jam</td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00409</b><span class="sub">Maria Sitompul</span></td>
+                <td>Dokumen kendaraan</td>
+                <td>STNK melewati 15 hari <span class="sub">Eskalasi otomatis</span></td>
+                <td><span class="tag hold">Tindak lanjut biro jasa</span></td>
+                <td>19 hari</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <p class="note">Saat Administrasi mengoreksi data, koreksi dilakukan pada sumber data asal dan sistem menampilkan proses mana saja yang terdampak sebelum perubahan disimpan.</p>
+      </section>
+
+      <!-- ============ DASHBOARD MANAGEMENT ============ -->
+      <section class="screen" id="dashboard">
+        <div class="screenhead">
+          <div>
+            <h2>Dashboard cabang · Cilandak</h2>
+            <p>Volume transaksi per stage, penyebab transaksi tertahan, dan mutu data.</p>
+          </div>
+          <div class="actions"><button class="btn ghost">September 2026</button></div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">Transaksi berjalan</p><p class="v">142</p><p class="n">+11 dari pekan lalu</p></div>
+          <div class="card"><p class="k">SPK ke Sales Order</p><p class="v">1,4<span style="font-size:14px;font-weight:500"> hari</span></p><p class="n">Sebelumnya 3,2 hari</p></div>
+          <div class="card"><p class="k">Outstanding cabang</p><p class="v">18,6<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">Dari 41 Sales Order</p></div>
+          <div class="card alert"><p class="k">Transaksi tertahan</p><p class="v">23</p><p class="n">Terbanyak di settlement</p></div>
+        </div>
+
+        <div class="split">
+          <div class="box">
+            <h3>Volume per stage</h3>
+            <div class="funnel">
+              <div class="frow2"><span>SPK</span><span class="track"><i style="width:100%"></i></span><span class="n">142</span></div>
+              <div class="frow2"><span>Booking fee/DP</span><span class="track"><i style="width:88%"></i></span><span class="n">125</span></div>
+              <div class="frow2"><span>Sales Order</span><span class="track"><i style="width:80%"></i></span><span class="n">114</span></div>
+              <div class="frow2"><span>Settlement</span><span class="track"><i class="warn" style="width:66%"></i></span><span class="n">94</span></div>
+              <div class="frow2"><span>Billing</span><span class="track"><i style="width:52%"></i></span><span class="n">74</span></div>
+              <div class="frow2"><span>AFI/DO</span><span class="track"><i style="width:45%"></i></span><span class="n">64</span></div>
+              <div class="frow2"><span>Delivery</span><span class="track"><i style="width:38%"></i></span><span class="n">54</span></div>
+              <div class="frow2"><span>Good Issue</span><span class="track"><i style="width:35%"></i></span><span class="n">50</span></div>
+              <div class="frow2"><span>STNK/BPKB</span><span class="track"><i class="warn" style="width:28%"></i></span><span class="n">40</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Penyebab transaksi tertahan</h3>
+              <ul class="gates">
+                <li><span class="mark no">9</span><div>Outstanding belum nihil<span class="why">Settlement gate</span></div><span class="tag stop">39%</span></li>
+                <li><span class="mark no">6</span><div>Dokumen kurang atau kedaluwarsa<span class="why">Document gate</span></div><span class="tag hold">26%</span></li>
+                <li><span class="mark no">4</span><div>Compliance exception menunggu<span class="why">Waivable failed gate</span></div><span class="tag hold">17%</span></li>
+                <li><span class="mark no">3</span><div>Mismatch data unit dan AFI<span class="why">Delivery gate</span></div><span class="tag hold">13%</span></li>
+                <li><span class="mark no">1</span><div>Pembayaran belum cocok<span class="why">Exception Administrasi</span></div><span class="tag mute">5%</span></li>
+              </ul>
+            </div>
+            <div class="box">
+              <h3>Mutu data</h3>
+              <div class="money">
+                <div class="row"><span>Field yang masih diinput ulang</span><span>12</span></div>
+                <div class="row"><span>Koreksi di sumber data</span><span>31</span></div>
+                <div class="row"><span>Intervensi manual</span><span>18</span></div>
+                <div class="row"><span>Peringatan duplikat</span><span>4</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CUSTOMER ============ -->
+      <section class="screen" id="customer">
+        <div class="screenhead">
+          <div>
+            <h2>Beranda customer</h2>
+            <p>Ringkasan tagihan, status unit, tindakan berikutnya, dan journey pesanan dari satu transaksi yang sama.</p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">Pesanan aktif</p><p class="v">1</p><p class="n">Innova Zenix · SO 4500091238</p></div>
+          <div class="card alert"><p class="k">AR Open</p><p class="v">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Tagihan unit masih terbuka</p></div>
+          <div class="card"><p class="k">Status pesanan</p><p class="v" style="font-size:18px">Menunggu pelunasan</p><p class="n">Pembayaran sebagian diterima</p></div>
+          <div class="card"><p class="k">Status unit</p><p class="v" style="font-size:18px">PDI selesai</p><p class="n">VIN sudah dialokasikan</p></div>
+          <div class="card"><p class="k">E-Kuitansi tersedia</p><p class="v">2</p><p class="n"><button class="btn ghost" data-go="e_kuitansi">Lihat &amp; download</button></p></div>
+        </div>
+
+        <div class="box">
+          <h3>Tagihan unit yang masih open <span class="side">Diperbarui dari AR dan kuitansi aktif</span></h3>
+          <div class="scroll">
+            <table>
+              <thead><tr><th>Unit &amp; pesanan</th><th>Referensi</th><th>Status</th><th>Request aktif</th><th class="num">AR Open</th><th>Tindakan</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><b>Innova Zenix 2.0 G HV</b><span class="sub">Putih Mutiara · VIN ••41827</span></td>
+                  <td>SPK/26/CLD/00418<span class="sub">SO 4500091238 · Billing belum terbit</span></td>
+                  <td><span class="tag hold">Menunggu pelunasan</span><span class="sub">PDI selesai</span></td>
+                  <td>Rp 100.000.000<span class="sub">Berlaku sampai 5 Sep</span></td>
+                  <td class="num">Rp 181.750.000</td>
+                  <td><button class="btn" data-go="tagihan_customer">Buka tagihan</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid g3" style="margin-bottom:16px">
+          <div class="box"><h3>Status saat ini</h3><div class="pad"><p><span class="tag hold">Menunggu pelunasan</span></p><p class="hint">Dua kuitansi aktif telah mengurangi AR menjadi Rp181.750.000.</p></div></div>
+          <div class="box"><h3>Tindakan berikutnya</h3><div class="pad"><p><b>Buka tagihan dan selesaikan pembayaran.</b></p><p class="hint">Setelah AR nihil, billing dan penjadwalan delivery diproses sesuai gate.</p></div></div>
+          <div class="box"><h3>Yang masih menahan proses</h3><div class="pad"><p><b>Settlement Gate</b></p><p class="hint">AR Open Rp181.750.000. Dokumen customer dan PDI sudah lengkap.</p></div></div>
+        </div>
+
+        <div class="phonewrap">
+          <div class="phone">
+            <div class="bar2"></div>
+            <div class="wa">
+              <p class="from">FAST · terverifikasi</p>
+              <p>Halo Pak Budi, pembayaran tahap 1 sudah kami terima. Kuitansi KWT/26/CLD/009115 dapat diunduh di Digiroom. Terdapat permintaan pelunasan aktif:</p>
+              <p class="amt">Rp 100.000.000</p>
+              <p style="margin-top:10px">Sisa pelunasan Innova Zenix Anda:</p>
+              <p class="amt" style="color:var(--stop)">Rp 181.750.000</p>
+              <div class="va">
+                <span style="font-size:11.5px;color:var(--ink-soft)">Virtual Account BCA</span>
+                <b>8801 0418 0003</b>
+              </div>
+              <button class="btn ghost" data-go="e_kuitansi" style="width:100%;margin:0 0 10px">Download e-Kuitansi terakhir</button>
+              <p style="font-size:12px;color:var(--ink-soft);margin:0">Unit sudah lolos PDI dan siap dijadwalkan setelah pelunasan diterima. Lihat status lengkap di Digiroom.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>Status pesanan · Digiroom</h3>
+            <div class="pad">
+              <ul class="milestones">
+                <li class="done"><span class="m">✓</span><div>SPK diterima<span class="t">28 Agu 2026</span></div></li>
+                <li class="done"><span class="m">✓</span><div>Booking fee terverifikasi<span class="t">28 Agu 2026</span></div></li>
+                <li class="done"><span class="m">✓</span><div>Sales Order terbentuk<span class="t">29 Agu 2026</span></div></li>
+                <li class="done"><span class="m">✓</span><div>Unit dialokasikan · VIN terbit<span class="t">30 Agu 2026</span></div></li>
+                <li class="now"><span class="m">•</span><div>Pelunasan<span class="t">Current stage · AR Open Rp 181.750.000</span></div></li>
+                <li><span class="m">•</span><div>Billing<span class="t">Terbuka setelah pelunasan</span></div></li>
+                <li><span class="m">•</span><div>AFI/DO<span class="t">Menunggu Billing Gate</span></div></li>
+                <li><span class="m">•</span><div>Delivery<span class="t">Dijadwalkan bersama Anda</span></div></li>
+                <li><span class="m">•</span><div>Serah terima unit<span class="t">—</span></div></li>
+                <li><span class="m">•</span><div>STNK<span class="t">Dipantau setelah serah terima</span></div></li>
+                <li><span class="m">•</span><div>BPKB<span class="t">Dipantau sampai selesai</span></div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAGIHAN CUSTOMER ============ -->
+      <section class="screen" id="tagihan_customer">
+        <div class="screenhead">
+          <div>
+            <h2>Tagihan unit · Innova Zenix</h2>
+            <p>Outstanding ditarik langsung dari AR dan dihitung berdasarkan kuitansi yang masih aktif.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer">Kembali ke beranda</button></div>
+        </div>
+
+        <div class="cards">
+          <div class="card alert"><p class="k">AR Open</p><p class="v">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Nilai tagihan dikurangi kuitansi aktif</p></div>
+          <div class="card"><p class="k">Total kuitansi aktif</p><p class="v">305<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">2 kuitansi</p></div>
+          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Belum mengurangi AR</p></div>
+          <div class="card"><p class="k">Belum masuk request</p><p class="v">81,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Masih tersedia</p></div>
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="box">
+              <h3>Rincian AR unit <span class="side">Real-time</span></h3>
+              <div class="money">
+                <div class="row"><span>Nilai transaksi</span><span>Rp 486.750.000</span></div>
+                <div class="row"><span>Kuitansi booking fee · KWT/26/CLD/008731</span><span>− Rp 5.000.000</span></div>
+                <div class="row"><span>Kuitansi pelunasan 1 · KWT/26/CLD/009115</span><span>− Rp 300.000.000</span></div>
+                <div class="row total"><span>AR Open</span><span>Rp 181.750.000</span></div>
+                <div class="row"><span>Payment request aktif</span><span>Rp 100.000.000</span></div>
+                <div class="row"><span>Sisa belum masuk request</span><span>Rp 81.750.000</span></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Pilih pembayaran</h3>
+              <div class="pad">
+                <p><b>Bayar sesuai request aktif</b></p>
+                <p class="hint">VA 8801 0418 0003 · Rp 100.000.000 · berlaku sampai 5 Sep 2026.</p>
+                <button class="btn" style="width:100%;margin:8px 0 16px">Bayar Rp 100.000.000</button>
+                <p><b>Bayar seluruh AR Open</b></p>
+                <p class="hint">Sistem memvalidasi ulang AR sebelum pembayaran dan menutup atau menyesuaikan request yang tumpang tindih.</p>
+                <button class="btn ghost" style="width:100%">Bayar Rp 181.750.000</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Referensi pesanan</h3>
+              <div class="fields">
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Aktif</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SO</span><span class="val">4500091238</span><span class="src">Terhubung</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Menunggu settlement</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Innova Zenix · VIN ••41827</span><span class="src">PDI selesai</span></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <h3>Kuitansi pembayaran</h3>
+              <div class="docs">
+                <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking fee · Rp 5.000.000</p><span class="tag ok">Aktif</span><button class="btn ghost" data-go="e_kuitansi" style="width:100%;margin-top:10px">Download PDF</button></div>
+                <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan tahap 1 · Rp 300.000.000</p><span class="tag ok">Aktif</span><button class="btn ghost" data-go="e_kuitansi" style="width:100%;margin-top:10px">Download PDF</button></div>
+              </div>
+            </div>
+
+            <p class="note">Jika kuitansi dibatalkan, nominalnya kembali menjadi AR Open. Payment request terkait berubah menjadi Cancelled atau Requires Follow-up, dan kelayakan billing serta delivery dihitung ulang.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ E-KUITANSI CUSTOMER ============ -->
+      <section class="screen" id="e_kuitansi">
+        <div class="screenhead">
+          <div>
+            <h2>E-Kuitansi saya</h2>
+            <p>Setiap pembayaran terverifikasi menghasilkan e-kuitansi yang dapat dilihat, diverifikasi, dan diunduh dalam format PDF.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer">Kembali ke beranda</button></div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">E-kuitansi aktif</p><p class="v">2</p><p class="n">Tersedia untuk download</p></div>
+          <div class="card"><p class="k">Total pembayaran</p><p class="v">305<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Mengurangi AR Open</p></div>
+          <div class="card"><p class="k">Pesanan terkait</p><p class="v">1</p><p class="n">SO 4500091238</p></div>
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="box">
+              <h3>Riwayat e-kuitansi</h3>
+              <div class="scroll">
+                <table>
+                  <thead><tr><th>Nomor e-kuitansi</th><th>Pembayaran</th><th>Referensi pesanan</th><th>Tanggal</th><th class="num">Nominal</th><th>Status</th><th>File</th></tr></thead>
+                  <tbody>
+                    <tr><td><b>KWT/26/CLD/009115</b><span class="sub">Payment ref. VA 8801 0418 0002</span></td><td>Pelunasan tahap 1<span class="sub">BCA Virtual Account</span></td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td>1 Sep 2026<span class="sub">14:08 WIB</span></td><td class="num">Rp 300.000.000</td><td><span class="tag ok">Active</span></td><td><button class="btn">Download PDF</button></td></tr>
+                    <tr><td><b>KWT/26/CLD/008731</b><span class="sub">Payment ref. VA 8801 0418 0001</span></td><td>Booking fee<span class="sub">BCA Virtual Account</span></td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238 terhubung otomatis</span></td><td>28 Agu 2026<span class="sub">16:30 WIB</span></td><td class="num">Rp 5.000.000</td><td><span class="tag ok">Issued</span></td><td><button class="btn">Download PDF</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Pratinjau e-kuitansi</h3>
+              <div class="pad">
+                <p class="eyebrow">FAST · E-KUITANSI PEMBAYARAN</p>
+                <h2 style="font-size:19px;margin:6px 0 16px">KWT/26/CLD/009115</h2>
+                <div class="money">
+                  <div class="row"><span>Status</span><span class="tag ok">Aktif</span></div>
+                  <div class="row"><span>Customer</span><span>Budi Santoso</span></div>
+                  <div class="row"><span>Unit</span><span>Innova Zenix · VIN ••41827</span></div>
+                  <div class="row"><span>Tanggal pembayaran</span><span>1 Sep 2026, 14:08</span></div>
+                  <div class="row"><span>Metode pembayaran</span><span>BCA Virtual Account</span></div>
+                  <div class="row"><span>Payment reference</span><span>VA 8801 0418 0002</span></div>
+                  <div class="row"><span>Nomor SPK</span><span>SPK/26/CLD/00418</span></div>
+                  <div class="row"><span>Nomor SO</span><span>4500091238</span></div>
+                  <div class="row"><span>Nomor billing</span><span>Belum terbit</span></div>
+                  <div class="row total"><span>Nominal diterima</span><span>Rp 300.000.000</span></div>
+                </div>
+                <div class="va" style="margin:12px 0"><span style="font-size:11.5px;color:var(--ink-soft)">Kode verifikasi</span><b>VFY-CLD-009115-A7K2</b></div>
+                <button class="btn" style="width:100%">Download e-Kuitansi PDF</button>
+              </div>
+            </div>
+            <p class="note">E-kuitansi berstatus Cancelled tetap muncul dalam histori dengan penanda pembatalan, tetapi tidak diperhitungkan sebagai pembayaran aktif dan tidak mengurangi AR.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/mockup.js"></script>
 </body>
 </html>

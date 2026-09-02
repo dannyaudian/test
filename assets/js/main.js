@@ -1,68 +1,46 @@
-/* ===== Shared JS: Reveal animations, tilt effect, sidebar toggle ===== */
+(function () {
+  var toggle = document.getElementById('navToggle');
+  var side = document.getElementById('sidenav');
+  if (toggle && side) {
+    toggle.addEventListener('click', function () {
+      var open = document.body.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    side.addEventListener('click', function (e) {
+      if (e.target.closest('a')) {
+        document.body.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
-// Reveal on scroll
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(
-  (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } }),
-  { threshold: 0.12 }
-);
-revealEls.forEach(el => observer.observe(el));
+  var progress = document.querySelector('.read-progress i');
+  function updateProgress() {
+    if (!progress) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    progress.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 
-// 3-D tilt on cards
-document.querySelectorAll('.tilt').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -14;
-    card.style.transform = `perspective(600px) rotateX(${y}deg) rotateY(${x}deg) translateY(-4px)`;
+  var toc = document.querySelector('#sidenav nav');
+  if (!toc) return;
+  var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+  var map = {};
+  links.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    if (id) map[id] = a;
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
-
-// Highlight active nav link (strict match)
-const path = location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.navbar__links a').forEach(a => {
-  const href = a.getAttribute('href') || '';
-  if (href && path === href) a.classList.add('active');
-});
-
-// Docs sidebar toggle (mobile)
-const sidebarToggle = document.getElementById('sidebarToggle');
-const docsSidebar = document.querySelector('.docs-sidebar');
-if (sidebarToggle && docsSidebar) {
-  sidebarToggle.addEventListener('click', () => {
-    docsSidebar.classList.toggle('open');
-  });
-  // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (docsSidebar.classList.contains('open') &&
-        !docsSidebar.contains(e.target) &&
-        e.target !== sidebarToggle) {
-      docsSidebar.classList.remove('open');
-    }
-  });
-}
-
-// Docs: Highlight active section in sidebar on scroll
-const docsNav = document.querySelectorAll('.docs-nav a');
-if (docsNav.length) {
-  const sections = Array.from(docsNav)
-    .map(a => document.querySelector(a.getAttribute('href')))
-    .filter(Boolean);
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          docsNav.forEach(a => a.classList.remove('active'));
-          const link = document.querySelector(`.docs-nav a[href="#${e.target.id}"]`);
-          if (link) link.classList.add('active');
-        }
-      });
-    },
-    { rootMargin: '-20% 0px -70% 0px' }
-  );
-  sections.forEach(s => sectionObserver.observe(s));
-}
+  var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  function setCurrent() {
+    var current = null;
+    targets.forEach(function (t) {
+      if (t.getBoundingClientRect().top <= 150) current = t.id;
+    });
+    links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    if (current && map[current]) map[current].setAttribute('aria-current', 'true');
+  }
+  window.addEventListener('scroll', setCurrent, { passive: true });
+  setCurrent();
+})();
