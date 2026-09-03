@@ -74,9 +74,10 @@
 
       <div data-rail="admin" hidden>
         <p class="grouplabel">Administrasi · Dewi Kusuma</p>
-        <button data-go="verifikasi" aria-current="true">Antrean verifikasi<span class="pill">7</span></button>
+        <button data-go="admin_tx" aria-current="true">Transaksi</button>
+        <button data-go="admin_pay">Pembayaran</button>
+        <button data-go="verifikasi">Perlu saya<span class="pill">7</span></button>
         <button data-go="eskalasi">Pengecualian<span class="pill" data-exc-pill>1</span></button>
-        <button data-go="transaksi">Detail transaksi</button>
       </div>
 
       <div data-rail="mgmt" hidden>
@@ -1744,15 +1745,297 @@
         </div>
       </section>
 
+      <!-- ============ BUKU TRANSAKSI ADMIN ============ -->
+      <section class="screen" id="admin_tx">
+        <div class="screenhead">
+          <div>
+            <h2>Semua transaksi · Cilandak</h2>
+            <p>Buku cabang yang sama dengan Frontman. Buka kartu untuk verifikasi atau lengkapi — bukan mengetik ulang.</p>
+          </div>
+        </div>
+        <nav class="worktabs" aria-label="Buku cabang">
+          <button type="button" data-go="admin_tx">Transaksi</button>
+          <button type="button" data-go="admin_pay">Pembayaran</button>
+          <button type="button" data-go="verifikasi">Perlu saya <span class="n">7</span></button>
+        </nav>
+        <div class="integ">
+          <p style="margin:0;font-size:13.5px"><b>Open kitchen.</b> SPK, SO, AFI, billing, kirim, dan STNK satu lineage. Tindakan Anda muncul di kartu Frontman yang sama.</p>
+        </div>
+        <p class="queue-line"><b>10 transaksi cabang</b> · 7 perlu Administrasi · 2 pengecualian · Dewi &amp; Budi di transaksi yang sama dengan Frontman</p>
+        <label class="order-search" for="adminTxSearch">
+          <span class="sr-only">Cari transaksi cabang</span>
+          <input id="adminTxSearch" type="search" placeholder="Cari nama, SPK, SO, atau unit…" autocomplete="off">
+        </label>
+        <div class="order-filters" role="tablist" aria-label="Filter transaksi cabang">
+          <button type="button" data-admin-tx-filter="all" aria-pressed="true">Semua</button>
+          <button type="button" data-admin-tx-filter="action" aria-pressed="false">Perlu admin</button>
+          <button type="button" data-admin-tx-filter="exc" aria-pressed="false">Pengecualian</button>
+          <button type="button" data-admin-tx-filter="ready" aria-pressed="false">Siap kirim</button>
+          <button type="button" data-admin-tx-filter="gi" aria-pressed="false">Good Issue</button>
+        </div>
+        <div class="order-list" id="adminTxList">
+          <button type="button" class="order-card featured" data-dewi-card data-admin-tx-status="docs" data-admin-tx-action="1" data-go="spk">
+            <div class="thumb">YARIS</div>
+            <div class="meta">
+              <p class="oid" data-dewi-oid>SPK/26/CLD/00426 · baru tersimpan</p>
+              <strong class="oname">Dewi Lestari · Yaris</strong>
+              <p class="spec" data-dewi-spec>Verifikasi data SPK · booking fee dari master unit</p>
+              <div class="row2">
+                <span class="tag wait" data-dewi-tag>Belum bayar</span>
+                <span class="amt" data-dewi-amt>OTR Depok</span>
+              </div>
+              <p class="cta" data-dewi-cta>Buka SPK →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="docs" data-go="so2">
+            <div class="thumb">AGYA</div>
+            <div class="meta">
+              <p class="oid">SO 4500091428 · quotation yang sama</p>
+              <strong class="oname">Dewi Lestari · Agya</strong>
+              <p class="spec">1 quotation → banyak SO. Revisi quotation menarik semua SO terkait.</p>
+              <div class="row2">
+                <span class="tag wait">Unit ke-2</span>
+                <span class="amt">OTR Depok</span>
+              </div>
+              <p class="cta">Buka SO Agya →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="hold" data-admin-tx-action="1" data-go="transaksi">
+            <div class="thumb">ZENIX</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00418 · tunai</p>
+              <strong class="oname">Budi Santoso · Innova Zenix</strong>
+              <p class="spec">Lineage SPK–SO–kuitansi. Pelunasan dan exception di transaksi yang sama.</p>
+              <div class="row2">
+                <span class="tag hold">Belum lunas</span>
+                <span class="amt" data-live="ar">Rp 181.750.000</span>
+              </div>
+              <p class="cta">Buka transaksi →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card featured" data-admin-tx-status="docs" data-admin-tx-action="1" data-go="afi">
+            <div class="thumb">AFI</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00418 · sebelum billing</p>
+              <strong class="oname">Budi Santoso · AFI STNK/BPKB</strong>
+              <p class="spec" data-afi-spec>Data STNK dari SPK. Verifikasi pengajuan berpasangan dengan billing.</p>
+              <div class="row2">
+                <span class="tag wait" data-afi-tag>Berpasangan</span>
+                <span class="amt">Wajib lengkap</span>
+              </div>
+              <p class="cta">Billing &amp; AFI →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="exc" data-admin-tx-action="1" data-go="exc_alamat">
+            <div class="thumb">ALAMAT</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00418 · document gate</p>
+              <strong class="oname">Budi Santoso · bukti alamat kedaluwarsa</strong>
+              <p class="spec" data-exc-alamat-spec>Cek bukti, teruskan ke Kepala Administrasi. Bukan waiver lunas.</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-alamat-tag>Approval Engine</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Buka pengajuan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="hold" data-admin-tx-action="1" data-go="tx_hiace">
+            <div class="thumb">HIACE</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00421 · leasing</p>
+              <strong class="oname">PT Danapura · Hiace × 3</strong>
+              <p class="spec">Lengkapi klasifikasi fleet. Kontrak TTD dari B2B — non-waivable.</p>
+              <div class="row2">
+                <span class="tag wait">Klasifikasi belum</span>
+                <span class="amt">Rp 1.045.000.000</span>
+              </div>
+              <p class="cta">Lengkapi data internal →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="docs" data-admin-tx-action="1" data-go="tx_raize">
+            <div class="thumb">RAIZE</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00423 · SPK baru</p>
+              <strong class="oname">Sarah Wijaya · Raize</strong>
+              <p class="spec">NPWP kosong di sumber. Kembalikan ke Frontman — bukan diisi Administrasi.</p>
+              <div class="row2">
+                <span class="tag stop">NPWP kosong</span>
+                <span class="amt">—</span>
+              </div>
+              <p class="cta">Kembalikan ke Frontman →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="ready" data-go="delivery">
+            <div class="thumb done">AVANZA</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00425 · lunas</p>
+              <strong class="oname">Agus Hermawan · Avanza</strong>
+              <p class="spec" data-del-spec>Cash lunas. Pantau pengajuan kirim Frontman.</p>
+              <div class="row2">
+                <span class="tag ok" data-del-tag>Siap kirim</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Buka delivery →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="gi" data-admin-tx-action="1" data-go="gi">
+            <div class="thumb">RUSH</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00424 · terkirim 2 Sep</p>
+              <strong class="oname">Fajar Nugroho · Rush</strong>
+              <p class="spec" data-gi-spec>Setujui foto serah terima + scan BSTKB. Bukan Approval Engine.</p>
+              <div class="row2">
+                <span class="tag wait" data-gi-tag>Good Issue</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Setujui GI →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-admin-tx-status="exc" data-go="exc_stnk">
+            <div class="thumb">FORT</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00409 · delivered</p>
+              <strong class="oname">Maria Sitompul · Fortuner</strong>
+              <p class="spec">STNK hari ke-19. Eskalasi otomatis — bukan waiver pelunasan.</p>
+              <div class="row2">
+                <span class="tag hold">Bukan waiver</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Tindak lanjut biro jasa →</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ============ BUKU PEMBAYARAN ADMIN ============ -->
+      <section class="screen" id="admin_pay">
+        <div class="screenhead">
+          <div>
+            <h2>Semua pembayaran · Cilandak</h2>
+            <p>Kuitansi, request, pending, dan unmatched dalam satu buku. Klik baris untuk lineage SPK/SO yang sama.</p>
+          </div>
+        </div>
+        <nav class="worktabs" aria-label="Buku cabang">
+          <button type="button" data-go="admin_tx">Transaksi</button>
+          <button type="button" data-go="admin_pay">Pembayaran</button>
+          <button type="button" data-go="verifikasi">Perlu saya <span class="n">7</span></button>
+        </nav>
+        <div class="cards">
+          <div class="card"><p class="k">Posted hari ini</p><p class="v">4</p><p class="n">Kuitansi aktif</p></div>
+          <div class="card"><p class="k">Request menunggu</p><p class="v">2</p><p class="n">Belum mengurangi AR</p></div>
+          <div class="card alert"><p class="k">Unmatched</p><p class="v">1</p><p class="n">Transfer tanpa referensi</p></div>
+          <div class="card"><p class="k">Nominal posted</p><p class="v" style="font-size:22px">Rp 533,6 jt</p><p class="n">Dialokasikan ke SO</p></div>
+        </div>
+        <label class="order-search" for="adminPaySearch">
+          <span class="sr-only">Cari pembayaran cabang</span>
+          <input id="adminPaySearch" type="search" placeholder="Cari kuitansi, SPK, nama, atau referensi…" autocomplete="off">
+        </label>
+        <div class="order-filters" role="tablist" aria-label="Filter pembayaran cabang">
+          <button type="button" data-admin-pay-filter="all" aria-pressed="true">Semua</button>
+          <button type="button" data-admin-pay-filter="posted" aria-pressed="false">Posted</button>
+          <button type="button" data-admin-pay-filter="request" aria-pressed="false">Request</button>
+          <button type="button" data-admin-pay-filter="pending" aria-pressed="false">Pending</button>
+          <button type="button" data-admin-pay-filter="unmatched" aria-pressed="false">Unmatched</button>
+        </div>
+        <div class="box">
+          <h3>Arus kas cabang <span class="side">Satu kuitansi per pembayaran terverifikasi</span></h3>
+          <div class="scroll">
+          <table id="adminPayTable">
+            <thead><tr><th>Waktu</th><th>Referensi</th><th>Kuitansi</th><th>Jenis</th><th>Transaksi</th><th class="num">Nominal</th><th>Status</th></tr></thead>
+            <tbody id="adminPayList">
+              <tr data-go="so" data-admin-pay-status="posted">
+                <td>3 Sep 10:12<span class="sub">QRIS</span></td>
+                <td>PAY-CLD-00426-1<span class="sub">Banking API</span></td>
+                <td><b>KWT/26/CLD/009301</b><span class="sub">Aktif</span></td>
+                <td>Booking fee</td>
+                <td>Dewi Lestari · Yaris<span class="sub">SPK/26/CLD/00426 · SO 4500091426</span></td>
+                <td class="num">Rp 3.000.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="delivery" data-admin-pay-status="posted">
+                <td>2 Sep 16:40<span class="sub">VA BCA</span></td>
+                <td>VA 8801 0425 0002<span class="sub">Banking API</span></td>
+                <td><b>KWT/26/CLD/009280</b><span class="sub">Aktif</span></td>
+                <td>Pelunasan</td>
+                <td>Agus Hermawan · Avanza<span class="sub">SPK/26/CLD/00425 · lunas</span></td>
+                <td class="num">Rp 225.400.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="cashless" data-pay-job="lunas" data-admin-pay-status="request">
+                <td>2 Sep 09:05<span class="sub">Request Frontman</span></td>
+                <td>VA 8801 0418 0003<span class="sub">Menunggu transfer</span></td>
+                <td>—<span class="sub">Belum terbit</span></td>
+                <td>Pelunasan tahap 2</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418 · SO 4500091238</span></td>
+                <td class="num">Rp 100.000.000</td>
+                <td><span class="tag wait">Request</span></td>
+              </tr>
+              <tr data-go="cashless" data-pay-job="dewi" data-admin-pay-status="pending">
+                <td>2 Sep 08:20<span class="sub">Cashless</span></td>
+                <td>PAY-CLD-00426-2<span class="sub">Belum masuk</span></td>
+                <td>—<span class="sub">Belum terbit</span></td>
+                <td>Pelunasan Yaris</td>
+                <td>Dewi Lestari · Yaris<span class="sub">SO 4500091426 · AR terbuka</span></td>
+                <td class="num">Sisa AR</td>
+                <td><span class="tag wait">Pending</span></td>
+              </tr>
+              <tr data-go="bayar" data-admin-pay-status="posted">
+                <td>1 Sep 14:08<span class="sub">VA BCA</span></td>
+                <td>VA 8801 0418 0002<span class="sub">Banking API</span></td>
+                <td><b>KWT/26/CLD/009115</b><span class="sub">Aktif</span></td>
+                <td>Pelunasan tahap 1</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418 · SO 4500091238</span></td>
+                <td class="num">Rp 300.000.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="verifikasi" data-admin-pay-status="unmatched">
+                <td>1 Sep 15:22<span class="sub">BCA transfer</span></td>
+                <td>Tidak dikenali<span class="sub">Tanpa payment reference</span></td>
+                <td>—<span class="sub">Tidak terbit</span></td>
+                <td>Exception pembayaran</td>
+                <td>Belum dialokasi<span class="sub">Resolution, bukan approval</span></td>
+                <td class="num">Rp 25.000.000</td>
+                <td><span class="tag stop">Unmatched</span></td>
+              </tr>
+              <tr data-go="bayar" data-admin-pay-status="posted">
+                <td>28 Agu 16:30<span class="sub">VA BCA</span></td>
+                <td>VA 8801 0418 0001<span class="sub">Banking API</span></td>
+                <td><b>KWT/26/CLD/008731</b><span class="sub">Aktif</span></td>
+                <td>Booking fee</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418 · SO terhubung otomatis</span></td>
+                <td class="num">Rp 5.000.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-admin-pay-status="request">
+                <td>27 Agu 11:10<span class="sub">B2B invoice</span></td>
+                <td>INV-DNP-2026-081<span class="sub">Menunggu DP leasing</span></td>
+                <td>—<span class="sub">Setelah full DP</span></td>
+                <td>DP leasing</td>
+                <td>PT Danapura · Hiace × 3<span class="sub">SPK/26/CLD/00421</span></td>
+                <td class="num">Full DP</td>
+                <td><span class="tag wait">Request</span></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <p class="note">Unmatched tidak menempel ke SPK sampai Administrasi mencocokkan referensi. Request aktif mengurangi kapasitas request baru, belum mengurangi AR Open.</p>
+      </section>
+
       <!-- ============ VERIFIKASI ADMIN ============ -->
       <section class="screen" id="verifikasi">
         <div class="screenhead">
           <div>
-            <h2>Antrean verifikasi</h2>
-            <p>Administrasi memverifikasi dan melengkapi. Tidak ada kolom untuk mengetik ulang data Frontman.</p>
+            <h2>Perlu saya · verifikasi</h2>
+            <p>Antrean tindakan. Buku lengkap ada di Transaksi dan Pembayaran. Tidak ada kolom untuk mengetik ulang data Frontman.</p>
           </div>
-          <div class="actions"><button class="btn ghost">Filter cabang</button></div>
+          <div class="actions"><button class="btn ghost" data-go="admin_tx">← Buku transaksi</button></div>
         </div>
+        <nav class="worktabs" aria-label="Buku cabang">
+          <button type="button" data-go="admin_tx">Transaksi</button>
+          <button type="button" data-go="admin_pay">Pembayaran</button>
+          <button type="button" data-go="verifikasi">Perlu saya <span class="n">7</span></button>
+        </nav>
 
         <div class="cards">
           <div class="card"><p class="k">Good Issue menunggu</p><p class="v">1</p><p class="n">Foto + scan BSTKB</p></div>
@@ -1781,6 +2064,7 @@
                 <td><span class="tag wait">Tercatat</span></td>
                 <td>—</td>
               </tr>
+              <tr data-go="exc_alamat">
                 <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · bukti alamat</span></td>
                 <td>Exception dokumen</td>
                 <td>Bukti alamat kedaluwarsa <span class="sub">Waivable · Approval Engine</span></td>
@@ -1801,7 +2085,7 @@
                 <td><span class="tag stop">Koreksi di sumber</span></td>
                 <td>5 jam</td>
               </tr>
-              <tr>
+              <tr data-go="admin_pay">
                 <td><b>Transfer Rp 25.000.000</b><span class="sub">BCA · 1 Sep 15:22</span></td>
                 <td>Exception pembayaran</td>
                 <td>Referensi tidak dikenali <span class="sub">Resolution, bukan approval</span></td>
