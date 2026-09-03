@@ -51,7 +51,8 @@
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
       tagihan_customer:'customer',e_kuitansi:'customer',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
-      tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda'
+      tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
+      exc_alamat:'eskalasi',exc_stnk:'eskalasi'
     })[id]||id;
     if((id==='cashless'||id==='bayar') && currentRole==='cust') railId='customer';
     navBtns.forEach(function(b){
@@ -66,7 +67,7 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id.indexOf('exc_')===0))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
@@ -83,6 +84,8 @@
     document.querySelectorAll('#cashless .worktabs, #cashless [data-go="transaksi"]').forEach(function(el){
       el.hidden=currentRole==='cust';
     });
+    syncRoleChrome();
+    applyExcAlamat();
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
@@ -95,6 +98,7 @@
       return;
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
+    if(b.hasAttribute('data-exc-submit') || b.hasAttribute('data-exc-verify') || b.hasAttribute('data-exc-approve') || b.hasAttribute('data-exc-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
@@ -102,8 +106,6 @@
       b.addEventListener('click',function(){ toast('Instruksi terkirim ke customer.'); });
     } else if(/Ajukan billing/.test(label)){
       b.addEventListener('click',function(){ toast('Billing gate cash lolos (≥30%). Permintaan billing dikirim.'); });
-    } else if(/Setujui/.test(label)){
-      b.addEventListener('click',function(){ toast('Keputusan exception tercatat. Gate dievaluasi ulang.'); });
     } else if(/Buat SPK baru/.test(label)){
       b.addEventListener('click',function(){ toast('Draft SPK dibuat. Lengkapi data customer sekali di sumber.'); });
     } else if(/Cari transaksi/.test(label)){
@@ -120,11 +122,17 @@
 
   var currentRole='frontman';
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  function syncRoleChrome(){
+    document.querySelectorAll('[data-for]').forEach(function(el){
+      el.hidden = el.getAttribute('data-for') !== currentRole;
+    });
+  }
   function applyRole(role){
     currentRole=role;
     document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
     document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
+    syncRoleChrome();
   }
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
@@ -135,7 +143,7 @@
   });
   var hash=(location.hash||'').replace('#','');
   if(hash && document.getElementById(hash)){
-    applyRole(screenRole[hash]||'frontman');
+    if(screenRole[hash]) applyRole(screenRole[hash]);
     show(hash);
   }
 
@@ -185,6 +193,135 @@
   var search=document.getElementById('txSearch');
   if(search) search.addEventListener('input', filterTx);
 
+  var excFilter='all';
+  function filterExc(){
+    document.querySelectorAll('#excList .order-card').forEach(function(card){
+      var kind=card.getAttribute('data-exc-kind');
+      var match=excFilter==='all'||kind===excFilter;
+      card.classList.toggle('is-hidden', !match);
+    });
+  }
+  document.querySelectorAll('[data-exc-filter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      excFilter=b.getAttribute('data-exc-filter');
+      document.querySelectorAll('[data-exc-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x===b?'true':'false');
+      });
+      show('eskalasi');
+      filterExc();
+    });
+  });
+
+  function excAlamatState(){
+    var s=window.FAST && FAST.load ? FAST.load() : null;
+    return (s && s.excAlamat) || 'draft';
+  }
+  function applyExcAlamat(){
+    var st=excAlamatState();
+    var notes={
+      draft:'Belum diajukan. Frontman kirim alasan dan bukti pengganti. SLA 4 jam mulai saat pengajuan masuk.',
+      submitted:'Pengajuan masuk. Admin Cilandak cek bukti, lalu teruskan ke Kepala Administrasi.',
+      verified:'Admin sudah cek. Kepala Administrasi memutuskan dengan syarat: alamat asli sebelum DO.',
+      approved:'Disetujui dengan syarat. Document gate lolos bersyarat. Pelunasan cash tetap wajib sebelum delivery.',
+      returned:'Dikembalikan ke Frontman. Lengkapi bukti, lalu kirim ulang.'
+    };
+    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui bersyarat',returned:'Dikembalikan'};
+    var specs={
+      draft:'Waivable · Frontman ajukan → Admin cek → Kepala Administrasi',
+      submitted:'Waivable · Admin sedang cek bukti',
+      verified:'Waivable · Kepala Administrasi memutuskan',
+      approved:'Syarat: alamat asli sebelum DO · pelunasan tetap wajib',
+      returned:'Lengkapi bukti, kirim ulang'
+    };
+    var note=document.querySelector('[data-exc-note]');
+    if(note){
+      note.textContent=notes[st]||notes.draft;
+      note.classList.toggle('warn', st!=='approved');
+      note.classList.toggle('ok', st==='approved');
+    }
+    var order=['draft','submitted','verified','approved'];
+    var idx=order.indexOf(st==='returned'?'draft':st);
+    document.querySelectorAll('[data-exc-path] [data-step]').forEach(function(el){
+      var step=el.getAttribute('data-step');
+      var si=order.indexOf(step);
+      el.classList.remove('on','ok');
+      if(st==='approved' && si<=3) el.classList.add('ok');
+      else if(si<idx) el.classList.add('ok');
+      else if(si===idx) el.classList.add('on');
+    });
+    document.querySelectorAll('[data-exc-alamat-tag]').forEach(function(el){
+      el.textContent=tags[st]||tags.draft;
+      el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
+    });
+    document.querySelectorAll('[data-exc-alamat-spec]').forEach(function(el){ el.textContent=specs[st]||specs.draft; });
+    var vault=document.getElementById('docAlamat');
+    if(vault){
+      var tag=vault.querySelector('.tag');
+      var reuse=vault.querySelector('.reuse');
+      var btn=vault.querySelector('[data-go="exc_alamat"]');
+      if(st==='approved'){
+        vault.classList.remove('miss');
+        if(tag){ tag.className='tag ok'; tag.textContent='Lolos bersyarat'; }
+        if(reuse) reuse.textContent='Syarat: alamat asli sebelum DO';
+        if(btn) btn.textContent='Lihat keputusan';
+      } else {
+        vault.classList.add('miss');
+        if(tag){ tag.className='tag hold'; tag.textContent='Perlu pembaruan'; }
+        if(reuse) reuse.textContent='Waivable · Frontman';
+        if(btn) btn.textContent='Ajukan exception';
+      }
+    }
+    document.querySelectorAll('[data-exc-doc-gate]').forEach(function(li){
+      var mark=li.querySelector('.mark');
+      var why=li.querySelector('.why');
+      var tag=li.querySelector('.tag');
+      if(st==='approved'){
+        if(mark){ mark.className='mark ok'; mark.textContent='✓'; }
+        if(why) why.textContent='Exception disetujui · alamat asli sebelum DO';
+        if(tag){ tag.className='tag ok'; tag.textContent='Bersyarat'; }
+      } else {
+        if(mark){ mark.className='mark no'; mark.textContent='!'; }
+        if(why) why.textContent='5 dari 6 valid · bukti alamat kedaluwarsa · waivable';
+        if(tag){ tag.className='tag hold'; tag.textContent='Exception'; }
+      }
+    });
+    document.querySelectorAll('[data-exc-pill]').forEach(function(el){ el.textContent=st==='approved'?'0':'1'; });
+  }
+  function setExcAlamat(next, msg){
+    if(window.FAST && FAST.save) FAST.save({excAlamat:next});
+    applyExcAlamat();
+    toast(msg);
+  }
+  document.querySelectorAll('[data-exc-submit]').forEach(function(b){
+    b.addEventListener('click',function(){
+      setExcAlamat('submitted','Pengajuan terkirim. Admin Cilandak akan cek bukti.');
+    });
+  });
+  document.querySelectorAll('[data-exc-verify]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(excAlamatState()==='draft' || excAlamatState()==='returned'){
+        toast('Frontman belum mengajukan. Minta pengajuan dulu.');
+        return;
+      }
+      setExcAlamat('verified','Bukti dicek. Siap diputuskan Kepala Administrasi.');
+    });
+  });
+  document.querySelectorAll('[data-exc-approve]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var st=excAlamatState();
+      if(st==='draft'||st==='returned'){
+        toast('Belum ada pengajuan. Approval Engine tidak melewati pelunasan.');
+        return;
+      }
+      setExcAlamat('approved','Disetujui dengan syarat. Document gate lolos. Delivery cash tetap menunggu lunas.');
+    });
+  });
+  document.querySelectorAll('[data-exc-reject]').forEach(function(b){
+    b.addEventListener('click',function(){
+      setExcAlamat('returned','Dikembalikan ke Frontman. Lengkapi bukti alamat.');
+    });
+  });
+
   function applyLive(){
     if(!window.FAST || !FAST.load) return;
     var s=FAST.load();
@@ -205,7 +342,9 @@
     if(barFill) barFill.style.width=s.ar===0?'100%':'83.2%';
   }
   applyLive();
-  window.addEventListener('fast-session', applyLive);
+  applyExcAlamat();
+  syncRoleChrome();
+  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); });
 
   var channelMeta={
     qris:{title:'QRIS dinamis',hint:'Customer scan. Jumlah sudah terisi dari SPK.'},
