@@ -70,6 +70,8 @@
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
     } else if(/Kirim instruksi pembayaran|Kirim tagihan|Kirim pengingat/.test(label)){
       b.addEventListener('click',function(){ toast('Instruksi terkirim ke customer.'); });
+    } else if(/Ajukan billing/.test(label)){
+      b.addEventListener('click',function(){ toast('Billing gate cash lolos (≥30%). Permintaan billing dikirim.'); });
     } else if(/Setujui/.test(label)){
       b.addEventListener('click',function(){ toast('Keputusan exception tercatat. Gate dievaluasi ulang.'); });
     } else if(/Buat SPK baru/.test(label)){
@@ -84,12 +86,21 @@
   }); }); }
 
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  function applyRole(role){
+    document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
+    document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
+  }
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
-      document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x===t?'true':'false');});
-      document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==t.dataset.role; });
+      applyRole(t.dataset.role);
       show(first[t.dataset.role]);
       toast('Peran: '+t.textContent.trim());
     });
   });
+  var hash=(location.hash||'').replace('#','');
+  if(hash && document.getElementById(hash)){
+    applyRole(screenRole[hash]||'frontman');
+    show(hash);
+  }
 })();

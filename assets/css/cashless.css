@@ -1,0 +1,7 @@
+/* Deliverable 2 page extras; chrome/layout comes from mockup.css */
+#mockup .pagehead .dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+}

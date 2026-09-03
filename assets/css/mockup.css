@@ -223,7 +223,47 @@
 #mockup table{margin:0;background:transparent}
 #mockup td:first-child{font-family:inherit;font-size:13px;font-weight:400;white-space:normal}
 #mockup td.num{white-space:nowrap}
-#mockup .legend{margin:0 0 22px}
+#mockup a.btn{color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+#mockup a.btn.ghost{color:var(--ink)}
 #mockup .app{margin-bottom:0}
 #mockup .field label{margin-bottom:5px}
 #mockup .route li::before{top:26px}
+
+#mockup .handoff{
+  display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;
+  margin:0 0 18px;padding:14px 16px;border-radius:16px;
+  background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid var(--rule);
+}
+#mockup .handoff p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+#mockup .handoff b{color:var(--ink)}
+#mockup .handoff .links{display:flex;gap:8px;flex-wrap:wrap}
+#mockup .channels{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+#mockup .channel{
+  text-align:left;background:#fff;border:1px solid var(--rule);border-radius:16px;padding:14px;
+  cursor:pointer;font:inherit;color:inherit;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);
+}
+#mockup .channel:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.06)}
+#mockup .channel[aria-pressed="true"]{border-color:var(--signal);box-shadow:0 0 0 4px var(--signal-tint)}
+#mockup .channel .n{font-size:11px;font-weight:700;color:var(--signal);letter-spacing:.06em;text-transform:uppercase}
+#mockup .channel b{display:block;margin:6px 0 4px;font-size:14px}
+#mockup .channel span{display:block;font-size:12px;color:var(--ink-soft)}
+#mockup .qrbox{
+  width:180px;height:180px;margin:8px auto;border-radius:16px;padding:12px;
+  background:
+    linear-gradient(#0f172a,#0f172a) 0 0/28px 28px no-repeat,
+    linear-gradient(#0f172a,#0f172a) 100% 0/28px 28px no-repeat,
+    linear-gradient(#0f172a,#0f172a) 0 100%/28px 28px no-repeat,
+    repeating-conic-gradient(#0f172a 0 25%, #fff 0 50%) 50%/18px 18px;
+  border:1px solid var(--rule);
+}
+#mockup .kiosk{
+  background:#0f172a;color:#e2e8f0;border-radius:24px;padding:18px;max-width:320px;margin:0 auto;
+}
+#mockup .kiosk .slot{height:10px;background:#334155;border-radius:8px;margin:12px 0}
+#mockup .edc{
+  background:#111827;color:#fff;border-radius:20px;padding:16px;max-width:260px;
+}
+#mockup .edc .edc-screen{display:block;background:#ecfeff;color:#0f172a;border-radius:10px;padding:12px;margin:10px 0}
+#mockup .paid-flash{animation:paidPulse .6s var(--ease)}
+@keyframes paidPulse{0%{transform:scale(.98)}50%{transform:scale(1.02)}100%{transform:none}}
+#mockup .live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:6px;box-shadow:0 0 0 4px rgba(34,197,94,.2)}

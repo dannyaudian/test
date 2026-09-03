@@ -76,8 +76,8 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(79, 70, 229, 0.16), transparent 70%);
 }
-.card:nth-child(2)::after {
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.18), transparent 70%);
+.card:nth-child(3)::after {
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.2), transparent 70%);
 }
 .card:hover {
   transform: translateY(-6px);
