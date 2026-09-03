@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <p class="queue-line"><b>4 perlu Anda</b> · 1 exception waivable · 1 siap kirim · 1 eskalasi STNK</p>
+        <p class="queue-line"><b>5 perlu Anda</b> · 1 booking fee setelah SPK · 1 exception waivable · 1 siap kirim · 1 eskalasi STNK</p>
 
         <label class="order-search" for="txSearch">
           <span class="sr-only">Cari transaksi</span>
@@ -116,7 +116,20 @@
         </div>
 
         <div class="order-list" id="txList">
-          <button type="button" class="order-card featured" data-tx-status="hold" data-tx-action="1" data-go="transaksi">
+          <button type="button" class="order-card featured" data-tx-status="docs" data-tx-action="1" data-go="booking" data-bf-hide-paid>
+            <div class="thumb">YARIS</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00426 · baru tersimpan</p>
+              <strong class="oname">Dewi Lestari · Yaris</strong>
+              <p class="spec">Tindakan: tagih booking fee ke customer</p>
+              <div class="row2">
+                <span class="tag wait">Setelah SPK</span>
+                <span class="amt">Rp 3.000.000</span>
+              </div>
+              <p class="cta">QRIS · tautan · EDC →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-go="transaksi">
             <div class="thumb">ZENIX</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00418 · tunai</p>
@@ -134,9 +147,9 @@
             <div class="meta">
               <p class="oid">SPK/26/CLD/00418 · document gate</p>
               <strong class="oname">Budi Santoso · bukti alamat kedaluwarsa</strong>
-              <p class="spec">Tindakan: ajukan exception (waivable)</p>
+              <p class="spec" data-exc-alamat-spec>Tindakan: ajukan exception (waivable)</p>
               <div class="row2">
-                <span class="tag hold">Approval Engine</span>
+                <span class="tag hold" data-exc-alamat-tag>Approval Engine</span>
                 <span class="amt">SLA 4 jam</span>
               </div>
               <p class="cta">Buka pengajuan →</p>
@@ -348,7 +361,130 @@
           <div class="card alert"><p class="k">Data gate</p><p class="v" style="font-size:18px">NPWP kosong</p><p class="n">Lengkapi di SPK, bukan di SO</p></div>
           <div class="card"><p class="k">Booking fee</p><p class="v" style="font-size:18px">Belum ditagih</p><p class="n">Setelah identitas valid</p></div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Unggah NPWP pada data customer SPK. Bukan jalur Approval Engine.</p><p><button class="btn" data-go="dokumen">Buka vault</button></p></div></div>
+        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Unggah NPWP pada data customer SPK. Bukan jalur Approval Engine. Booking fee baru ditagih setelah identitas valid.</p><p><button class="btn" data-go="dokumen">Buka vault</button></p></div></div>
+      </section>
+
+      <section class="screen" id="booking">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Setelah SPK · SPK/26/CLD/00426</p>
+            <h2>Tagih booking fee · Dewi Lestari</h2>
+            <p>Yaris 1.5 G. Nominal dari master unit — Frontman tidak mengetik ulang. SO terbuka setelah kuitansi booking fee aktif.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="beranda">← Daftar</button></div>
+        </div>
+        <div class="cards">
+          <div class="card"><p class="k">Booking fee unit</p><p class="v" style="font-size:22px">Rp 3.000.000</p><p class="n">Master Yaris</p></div>
+          <div class="card" data-bf-hide-paid><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Menunggu kuitansi booking fee</p></div>
+          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">Terbuka</p><p class="n">KWT/26/CLD/009301</p></div>
+        </div>
+        <div class="box" data-bf-hide-paid>
+          <h3>Cara terima di cabang</h3>
+          <div class="pad">
+            <div class="channels" id="bfSeg">
+              <button type="button" class="channel" data-bf="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode di layar Frontman</span></button>
+              <button type="button" class="channel" data-bf="link" aria-pressed="false"><span class="n">2</span><b>Tautan bayar</b><span>Langsung ke beranda Digiroom</span></button>
+              <button type="button" class="channel" data-bf="edc" aria-pressed="false"><span class="n">3</span><b>Debit EDC</b><span>Pilih perangkat tujuan</span></button>
+            </div>
+            <div class="bf-panels">
+              <div data-bf-panel="qris" class="on">
+                <p class="hint">Tunjukkan layar ini ke customer. Jumlah sudah terisi. Jangan minta customer ketik nominal.</p>
+                <div class="qrbox lg" role="img" aria-label="QRIS booking fee Yaris Rp 3.000.000"></div>
+                <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 3.000.000</p>
+                <button type="button" class="btn" style="width:100%" data-bf-pay="qris">Simulasi ter-scan</button>
+              </div>
+              <div data-bf-panel="link">
+                <p class="hint">Tautan membuka beranda Digiroom. Di sana customer pilih BRILink, VA bank, atau buka aplikasi.</p>
+                <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
+                  <p class="from">FAST · tautan Digiroom</p>
+                  <p>Halo Bu Dewi, SPK Yaris Anda sudah tersimpan. Booking fee Rp 3.000.000.</p>
+                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/beranda</b></div>
+                </div>
+                <button type="button" class="btn" style="width:100%" data-bf-link>Kirim tautan ke Digiroom</button>
+              </div>
+              <div data-bf-panel="edc">
+                <p class="hint">Pilih EDC yang dituju. Nominal didorong host-to-host — kasir tidak ketik di mesin.</p>
+                <div class="device-list" id="edcDevices">
+                  <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Kasir 1</b><span>Meja penerimaan · Cilandak</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Kasir 2</b><span>Meja SPK</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-03" aria-pressed="false"><b>EDC-03 · Outdoor</b><span>Pos serah terima</span></button>
+                </div>
+                <p class="hint" id="edcHint" style="margin:12px 0">Siap dorong ke EDC-01 · Kasir 1</p>
+                <button type="button" class="btn" style="width:100%" data-bf-pay="edc">Kirim Rp 3.000.000 ke perangkat</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box" data-bf-show-paid hidden>
+          <h3>Booking fee terverifikasi</h3>
+          <div class="pad">
+            <p>Kuitansi KWT/26/CLD/009301 aktif. Sales Order dapat dibentuk. Pelunasan menyusul di transaksi yang sama.</p>
+            <button type="button" class="btn" data-go="beranda">Kembali ke antrean</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="digiroom">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Tautan pembayaran</p>
+            <h2>Beranda Digiroom</h2>
+            <p>Customer membuka tautan dari Frontman. Pilih cara bayar — nominal sudah dari SPK.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="booking" data-role="frontman">← Frontman</button></div>
+        </div>
+        <div class="dg-shell">
+          <div class="dg-top">
+            <div><b>Digiroom</b><span> · pay.fast.id</span></div>
+            <span>Dewi Lestari</span>
+          </div>
+          <div class="dg-body">
+            <p class="eyebrow" style="margin:0;font-size:12px;color:var(--ink-soft)">SPK/26/CLD/00426 · Yaris 1.5 G</p>
+            <p style="margin:4px 0 4px;font-size:13px">Booking fee</p>
+            <p style="margin:0 0 16px;font-size:28px;font-weight:800;letter-spacing:-.03em">Rp 3.000.000</p>
+            <div data-dg-home>
+              <div class="dg-group">
+                <h3>BRILink</h3>
+                <button type="button" class="channel" data-dg="brilink" style="width:100%"><span class="n">Kode bayar</span><b>BRILink</b><span>Tunjukkan kode ke agen resmi</span></button>
+              </div>
+              <div class="dg-group">
+                <h3>Virtual Account</h3>
+                <div class="channels">
+                  <button type="button" class="channel" data-dg="va" data-bank="BCA"><span class="n">VA</span><b>BCA</b><span>Transfer VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="BRI"><span class="n">VA</span><b>BRI</b><span>Transfer VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="Mandiri"><span class="n">VA</span><b>Mandiri</b><span>Transfer VA</span></button>
+                </div>
+              </div>
+              <div class="dg-group">
+                <h3>Buka aplikasi</h3>
+                <div class="dg-apps">
+                  <button type="button" class="dg-app" data-dg="app" data-app="MyBCA"><b>myBCA</b><span>Deeplink</span></button>
+                  <button type="button" class="dg-app" data-dg="app" data-app="BRImo"><b>BRImo</b><span>Deeplink</span></button>
+                  <button type="button" class="dg-app" data-dg="app" data-app="Livin"><b>Livin by Mandiri</b><span>Deeplink</span></button>
+                  <button type="button" class="dg-app" data-dg="app" data-app="AstraPay"><b>AstraPay</b><span>Deeplink</span></button>
+                </div>
+              </div>
+            </div>
+            <div data-dg-panel="brilink" hidden>
+              <p class="hint">Kode bayar BRILink. Customer sebutkan di agen — jangan ketik nominal sendiri.</p>
+              <div class="dg-code">8810 0426 3000</div>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="brilink">Simulasi bayar di agen</button>
+              <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
+            </div>
+            <div data-dg-panel="va" hidden>
+              <p class="hint" id="dgVaHint">Transfer ke VA BCA. Jumlah sudah terikat SPK.</p>
+              <div class="dg-code" id="dgVaNo">8801 0426 0001</div>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="va">Simulasi transfer masuk</button>
+              <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
+            </div>
+            <div data-dg-panel="app" hidden>
+              <p class="hint" id="dgAppHint">Membuka myBCA dengan tagihan Yaris sudah terisi.</p>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="app">Simulasi bayar di aplikasi</button>
+              <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
+            </div>
+            <p class="hint" data-bf-show-paid hidden style="margin-top:12px">Pembayaran masuk. Kuitansi KWT/26/CLD/009301 terbit. SO dapat dibuka.</p>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="tx_avanza">
@@ -476,10 +612,10 @@
               <h3>1 · Jenis pembayaran</h3>
               <div class="form">
                 <div class="seg" id="jenisSeg">
-                  <button aria-pressed="false">Booking fee/DP</button>
-                  <button aria-pressed="true">Pelunasan</button>
+                  <button type="button" data-go="booking" aria-pressed="false">Booking fee/DP</button>
+                  <button type="button" aria-pressed="true">Pelunasan</button>
                 </div>
-                <p class="hint" style="margin:0">Booking fee Innova Zenix Rp 5.000.000 ditagihkan otomatis setelah SPK dan sudah punya kuitansi. Pelunasan tahap 1 aktif. Request tahap 2 Rp 100.000.000 menunggu bayar. Kapasitas request baru Rp 81.750.000.</p>
+                <p class="hint" style="margin:0">Booking fee unit ditagih setelah SPK lewat QRIS di layar Frontman, tautan Digiroom, atau debit EDC. Untuk Innova Zenix, booking fee sudah ada kuitansi. Pelunasan tahap 2 menunggu bayar.</p>
               </div>
             </div>
 
