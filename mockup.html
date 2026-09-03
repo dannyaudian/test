@@ -604,6 +604,14 @@
           </div>
         </div>
         <nav class="proc" data-proc="quot" aria-label="Proses transaksi"></nav>
+        <div class="box">
+          <h3>Aturan dokumen</h3>
+          <ul class="gates">
+            <li><span class="mark ok">1</span><div>1 SPK → 1 quotation<span class="why">SPK/26/CLD/00426 hanya punya QT/26/CLD/00426. Tidak pecah quotation per unit.</span></div><span class="tag ok">Tetap</span></li>
+            <li><span class="mark ok">n</span><div>1 quotation → banyak SO<span class="why">Pembelian &gt; 1 unit: satu baris quotation = satu SO. Yaris dan Agya tidak digabung.</span></div><span class="tag ok">Per unit</span></li>
+            <li><span class="mark no">↻</span><div>Quotation berubah → SO berubah<span class="why">Semua SO terkait (terbit atau belum) wajib ikut rev quotation. Bukan Approval Engine.</span></div><span class="tag hold">Wajib</span></li>
+          </ul>
+        </div>
         <div class="cards">
           <div class="card"><p class="k">SPK</p><p class="v" style="font-size:18px">1</p><p class="n">SPK/26/CLD/00426</p></div>
           <div class="card"><p class="k">Quotation</p><p class="v" style="font-size:18px">1</p><p class="n">Tidak dipecah per unit</p></div>
@@ -615,7 +623,7 @@
           <div class="soline">
             <div>
               <p><b>1 · Yaris 1.5 G CVT · Putih Metalik</b></p>
-              <p class="meta">OTR Depok Rp 296.800.000 + aksesoris Rp 5.350.000 · booking fee Rp 3.000.000</p>
+              <p class="meta">OTR Depok <span data-qt-otr="yaris">Rp 296.800.000</span> + aksesoris Rp 5.350.000 · booking fee Rp 3.000.000 · SO rev <span data-so-rev>1</span></p>
             </div>
             <span class="tag ok" data-bf-show-paid hidden>SO 4500091426</span>
             <span class="tag wait" data-bf-hide-paid>SO tertahan</span>
@@ -623,11 +631,15 @@
           <div class="soline">
             <div>
               <p><b>2 · Agya 1.2 G CVT · Hitam</b></p>
-              <p class="meta">OTR Depok Rp 175.900.000 · booking fee Rp 2.000.000 · SO sendiri</p>
+              <p class="meta">OTR Depok <span data-qt-otr="agya">Rp 175.900.000</span> · booking fee Rp 2.000.000 · SO sendiri 4500091428</p>
             </div>
-            <span class="tag mute">Booking belum · SO 4500091428 tertahan</span>
+            <span class="tag mute" data-so2-tag>Booking belum · SO tertahan</span>
           </div>
-          <p class="hint" style="padding:12px 16px 14px">Baris 2 tidak menimpa SO Yaris. Tambah unit = baris baru = SO baru. Revisi harga di quotation ini memaksa SO yang sudah terbit ikut versi baru.</p>
+          <p class="hint" style="padding:12px 16px 14px">Baris 2 tidak menimpa SO Yaris. Tambah unit = baris baru = SO baru. Ubah OTR di quotation ini: kedua baris (SO terbit dan SO tertahan) harus ikut harga baru.</p>
+          <div class="pad" style="padding-top:0">
+            <button class="btn ghost" data-go="so">Buka SO Yaris</button>
+            <button class="btn ghost" data-go="so2">Buka SO Agya</button>
+          </div>
           <div class="paystrip">
             <b>Cashless booking</b>
             <span class="hint" style="margin:0">QRIS · CDM · tautan · EDC Frontman · per baris</span>
@@ -637,10 +649,10 @@
         <div class="box">
           <h3>Revisi quotation</h3>
           <div class="pad">
-            <p data-qt-fresh>Versi <span data-qt-rev>1</span> aktif. SO mengikuti quotation ini.</p>
-            <p data-qt-stale hidden>Quotation naik ke rev <span data-qt-rev>1</span>. SO 4500091426 kedaluwarsa sampai di-refresh dari quotation ini.</p>
-            <button class="btn ghost" style="margin-right:8px" data-qt-revise>Simulasi ubah OTR</button>
-            <button class="btn" data-qt-push data-bf-show-paid hidden>Terapkan ke SO terkait</button>
+            <p data-qt-fresh>Quotation rev <span data-qt-rev>1</span> = versi SO. Harga di kedua baris sama dengan SO.</p>
+            <p data-qt-stale hidden>Quotation naik ke rev <span data-qt-rev>1</span>. SO 4500091426 (Yaris, sudah terbit) dan SO 4500091428 (Agya, belum terbit) kedaluwarsa sampai diterapkan.</p>
+            <button class="btn ghost" style="margin-right:8px" data-qt-revise>Ubah harga quotation</button>
+            <button class="btn" data-qt-push hidden>Terapkan ke semua SO terkait</button>
           </div>
         </div>
       </section>
@@ -736,8 +748,8 @@
         <div class="box" data-so-stale hidden>
           <h3>SO tertahan revisi quotation</h3>
           <div class="pad">
-            <p>Quotation sudah naik versi. Jangan proses AFI/DO/billing dari SO ini sampai quotation diterapkan ke SO.</p>
-            <button class="btn" data-go="quot">Buka quotation</button>
+            <p>Quotation sudah naik versi. SO ini dan SO Agya 4500091428 harus ikut. AFI/DO/billing dikunci sampai quotation diterapkan.</p>
+            <button class="btn" data-go="quot">Terapkan dari quotation</button>
           </div>
         </div>
         <div data-so-block hidden>
@@ -774,7 +786,7 @@
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Dewi Lestari · Jl. Cipete Raya No. 88, Cilandak, Jakarta Selatan</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Andi Pratama</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val">Jl. Raya Sawangan No. 17, Pancoran Mas, Kota Depok</span><span class="src">SPK</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO / OTR</span><span class="val">Depok · Rp 296.800.000</span><span class="src">Dari kota STNK</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO / OTR</span><span class="val">Depok · <span data-qt-otr="yaris">Rp 296.800.000</span></span><span class="src">Dari quotation rev <span data-so-rev>1</span></span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Unit</span><span class="val">Yaris 1.5 G CVT · Putih Metalik</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Aksesoris</span><span class="val">Kaca film + karpet · Rp 5.350.000</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Tunai</span><span class="src">SPK</span></div>
@@ -823,6 +835,37 @@
         </div>
       </section>
 
+      <section class="screen" id="so2">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Baris quotation 2 · QT/26/CLD/00426</p>
+            <h2>SO 4500091428 · Agya</h2>
+            <p>SO terpisah karena unit kedua di quotation yang sama. Harga mengikuti quotation; kalau QT berubah, SO ini ikut.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="quot">← Quotation</button></div>
+        </div>
+        <nav class="proc" data-proc="so" aria-label="Proses transaksi"></nav>
+        <div class="cards">
+          <div class="card"><p class="k">SPK / QT</p><p class="v" style="font-size:18px">1 / 1</p><p class="n">Sama dengan Yaris</p></div>
+          <div class="card"><p class="k">OTR Agya</p><p class="v" style="font-size:18px" data-qt-otr="agya">Rp 175.900.000</p><p class="n">Dari quotation rev <span data-qt-rev>1</span></p></div>
+          <div class="card alert"><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Booking fee Rp 2.000.000 belum meet</p></div>
+        </div>
+        <div class="box" data-qt-stale hidden>
+          <h3>Harga quotation sudah berubah</h3>
+          <div class="pad">
+            <p>Meski SO Agya belum terbit, baris ini sudah tidak boleh di-booking dengan OTR lama. Terapkan quotation dulu, lalu tagih booking fee.</p>
+            <button class="btn" data-go="quot">Ke quotation</button>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Kenapa SO sendiri?</h3>
+          <div class="pad">
+            <p>Satu quotation, dua pembelian unit → dua SO. AFI, DO, billing, dan pelunasan Agya tidak tercampur dengan SO Yaris 4500091426.</p>
+            <button class="btn ghost" data-go="so">Buka SO Yaris (baris 1)</button>
+          </div>
+        </div>
+      </section>
+
       <section class="screen" id="proses">
         <div class="screenhead">
           <div>
@@ -836,7 +879,7 @@
           <h3>Urutan</h3>
           <ul class="gates">
             <li><span class="mark ok">1</span><div>SPK<span class="why">Pemesan, STNK, unit, dokumen. Satu SPK.</span></div><button class="btn ghost" data-go="spk">Buka</button></li>
-            <li><span class="mark ok">2</span><div>Quotation<span class="why">Satu QT. Beberapa baris = beberapa SO. Ubah QT = SO ikut.</span></div><button class="btn ghost" data-go="quot">Buka</button></li>
+            <li><span class="mark ok">2</span><div>Quotation<span class="why">1 SPK = 1 QT. Banyak unit = banyak SO. Ubah QT = semua SO berubah.</span></div><button class="btn ghost" data-go="quot">Buka</button></li>
             <li><span class="mark idle">3</span><div>Cashless booking<span class="why">QRIS / CDM / tautan / EDC Frontman. Meet → SO baris itu.</span></div><button class="btn ghost" data-go="booking">Bayar</button></li>
             <li><span class="mark idle">4</span><div>Sales Order<span class="why">Per unit. Data dari SPK + harga quotation.</span></div><button class="btn ghost" data-go="so">Buka</button></li>
             <li><span class="mark idle">5</span><div>AFI<span class="why">Nama/alamat STNK dari SPK. Setelah SO.</span></div><button class="btn ghost" data-go="afi_d">Buka</button></li>
@@ -863,7 +906,7 @@
         <nav class="proc" data-proc="afi_d" aria-label="Proses transaksi"></nav>
         <div class="box" data-afi-d-wait>
           <h3>SO dulu</h3>
-          <div class="pad"><p>AFI menunggu Sales Order baris Yaris. Booking fee belum meet.</p><button class="btn" data-go="quot">Ke quotation</button></div>
+          <div class="pad"><p data-afi-need-so>AFI menunggu Sales Order baris Yaris. Booking fee belum meet.</p><p data-afi-need-qt hidden>Quotation berubah. Terapkan ke SO dulu, baru AFI.</p><button class="btn" data-go="quot">Ke quotation</button></div>
         </div>
         <div data-afi-d-open hidden>
           <div class="cards">

@@ -160,7 +160,7 @@
       tagihan_customer:'customer',e_kuitansi:'customer',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
-      booking:'beranda',spk:'beranda',quot:'beranda',so:'beranda',proses:'beranda',
+      booking:'beranda',spk:'beranda',quot:'beranda',so:'beranda',so2:'beranda',proses:'beranda',
       afi_d:'beranda',do:'beranda',bill_d:'beranda',kirim_d:'beranda',stnk_d:'beranda',
       delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
       exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
@@ -178,8 +178,8 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
-        ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+        ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='digiroom'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
@@ -250,7 +250,7 @@
 
   var currentRole='frontman';
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function syncRoleChrome(){
     document.querySelectorAll('[data-for]').forEach(function(el){
       el.hidden = el.getAttribute('data-for') !== currentRole;
@@ -545,19 +545,35 @@
     var paid=bfPaid();
     var q=qtData();
     var rev=q.rev||1;
+    var soRev=q.soRev||1;
+    var stale=!!q.stale;
+    var y=q.otrYaris||296800000;
+    var a=q.otrAgya||175900000;
     document.querySelectorAll('[data-qt-rev]').forEach(function(el){ el.textContent=String(rev); });
-    document.querySelectorAll('[data-qt-fresh]').forEach(function(el){ el.hidden=!!q.stale; });
-    document.querySelectorAll('[data-qt-stale]').forEach(function(el){ el.hidden=!q.stale; });
-    document.querySelectorAll('[data-so-stale]').forEach(function(el){ el.hidden=!(paid && q.stale); });
+    document.querySelectorAll('[data-so-rev]').forEach(function(el){ el.textContent=String(soRev); });
+    document.querySelectorAll('[data-qt-otr="yaris"]').forEach(function(el){ el.textContent=formatRp(y); });
+    document.querySelectorAll('[data-qt-otr="agya"]').forEach(function(el){ el.textContent=formatRp(a); });
+    document.querySelectorAll('[data-qt-fresh]').forEach(function(el){ el.hidden=stale; });
+    document.querySelectorAll('[data-qt-stale]').forEach(function(el){ el.hidden=!stale; });
+    document.querySelectorAll('[data-so-stale]').forEach(function(el){ el.hidden=!(paid && stale); });
+    var ready=document.querySelector('[data-so-ready]');
+    if(ready) ready.hidden=!paid || stale;
     var qtPush=document.querySelector('[data-qt-push]');
-    if(qtPush) qtPush.hidden=!(paid && q.stale);
-    document.querySelectorAll('[data-afi-d-wait]').forEach(function(el){ el.hidden=paid; });
-    document.querySelectorAll('[data-afi-d-open]').forEach(function(el){ el.hidden=!paid || !!q.afi; });
-    document.querySelectorAll('[data-afi-d-sent]').forEach(function(el){ el.hidden=!q.afi; });
-    document.querySelectorAll('[data-dewi-afi-done]').forEach(function(el){ el.hidden=!q.afi; });
-    document.querySelectorAll('[data-do-wait]').forEach(function(el){ el.hidden=!!q.afi; });
-    document.querySelectorAll('[data-do-open]').forEach(function(el){ el.hidden=!q.afi || !!q.dof; });
-    document.querySelectorAll('[data-do-sent]').forEach(function(el){ el.hidden=!q.dof; });
+    if(qtPush) qtPush.hidden=!stale;
+    var so2tag=document.querySelector('[data-so2-tag]');
+    if(so2tag){
+      so2tag.textContent=stale?'QT berubah · SO Agya harus ikut harga baru':'Booking belum · SO tertahan';
+      so2tag.className='tag '+(stale?'hold':'mute');
+    }
+    document.querySelectorAll('[data-afi-d-wait]').forEach(function(el){ el.hidden=paid && !stale; });
+    document.querySelectorAll('[data-afi-need-so]').forEach(function(el){ el.hidden=paid; });
+    document.querySelectorAll('[data-afi-need-qt]').forEach(function(el){ el.hidden=!paid || !stale; });
+    document.querySelectorAll('[data-afi-d-open]').forEach(function(el){ el.hidden=!paid || stale || !!q.afi; });
+    document.querySelectorAll('[data-afi-d-sent]').forEach(function(el){ el.hidden=!q.afi || stale; });
+    document.querySelectorAll('[data-dewi-afi-done]').forEach(function(el){ el.hidden=!q.afi || stale; });
+    document.querySelectorAll('[data-do-wait]').forEach(function(el){ el.hidden=!!q.afi && !stale; });
+    document.querySelectorAll('[data-do-open]').forEach(function(el){ el.hidden=!q.afi || stale || !!q.dof; });
+    document.querySelectorAll('[data-do-sent]').forEach(function(el){ el.hidden=!q.dof || stale; });
     document.querySelectorAll('[data-bill-need-do]').forEach(function(el){ el.hidden=!!q.dof; });
     document.querySelectorAll('[data-bill-has-do]').forEach(function(el){ el.hidden=!q.dof; });
     var billDo=document.querySelector('[data-bill-do]');
@@ -572,6 +588,7 @@
       var cur=nav.getAttribute('data-proc');
       if(cur==='booking') cur='quot';
       if(cur==='proses') cur='spk';
+      if(cur==='so2') cur='so';
       nav.innerHTML='';
       procSteps().forEach(function(step){
         var b=document.createElement('button');
@@ -588,16 +605,22 @@
   document.querySelectorAll('[data-qt-revise]').forEach(function(b){
     b.addEventListener('click',function(){
       var q=qtData();
-      if(window.FAST && FAST.save) FAST.save({rev:(q.rev||1)+1,stale:true}, FAST.QT_KEY);
+      if(window.FAST && FAST.save) FAST.save({
+        rev:(q.rev||1)+1,
+        stale:true,
+        otrYaris:298400000,
+        otrAgya:177200000
+      }, FAST.QT_KEY);
       applyDewiProc();
-      toast('Quotation berubah. Semua SO terkait harus ikut revisi.');
+      toast('Quotation berubah. SO Yaris dan SO Agya harus ikut harga baru.');
     });
   });
   document.querySelectorAll('[data-qt-push]').forEach(function(b){
     b.addEventListener('click',function(){
-      if(window.FAST && FAST.save) FAST.save({stale:false}, FAST.QT_KEY);
+      var q=qtData();
+      if(window.FAST && FAST.save) FAST.save({stale:false, soRev:q.rev||1}, FAST.QT_KEY);
       applyDewiProc();
-      toast('SO 4500091426 mengikuti quotation terbaru. Baris Agya tetap SO terpisah.');
+      toast('Semua SO terkait mengikuti quotation rev '+(q.rev||1)+'. SO Yaris diperbarui. SO Agya memakai OTR baru saat booking meet.');
     });
   });
   document.querySelectorAll('[data-dewi-afi]').forEach(function(b){
@@ -1192,7 +1215,7 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
-      else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='quot'||id==='so'||id==='proses'||id==='booking') applyRole('frontman');
+      else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='booking') applyRole('frontman');
       show(id);
     });
   });
