@@ -68,8 +68,8 @@
           <li class="on"><a href="mockup.html#booking"><span class="node"></span><b>Booking Fee</b><em>Dewi · Yaris</em></a></li>
           <li class="on"><a href="mockup.html#transaksi"><span class="node"></span><b>Sales Order</b><em>Budi · Zenix</em></a></li>
           <li><a href="mockup.html#cashless"><span class="node"></span><b>Settlement</b><em>QRIS / VA</em></a></li>
-          <li><a href="mockup.html#afi"><span class="node"></span><b>AFI</b><em>Nama &amp; alamat STNK</em></a></li>
-          <li><a href="mockup.html#transaksi"><span class="node"></span><b>Billing</b><em>Setelah AFI</em></a></li>
+          <li><a href="mockup.html#afi"><span class="node"></span><b>AFI</b><em>Data STNK dari SPK</em></a></li>
+          <li><a href="mockup.html#afi"><span class="node"></span><b>Billing</b><em>Berpasangan</em></a></li>
           <li><a href="mockup.html#delivery"><span class="node"></span><b>Delivery</b><em>Agus · Avanza</em></a></li>
           <li><a href="mockup.html#gi"><span class="node"></span><b>Good Issue</b><em>Fajar · Rush</em></a></li>
           <li><a href="mockup.html#exc_stnk"><span class="node"></span><b>STNK/BPKB</b><em>Maria · aging</em></a></li>
@@ -117,9 +117,9 @@
           <div class="thumb afi">AFI</div>
           <div class="body">
             <p class="who">Budi Santoso · Frontman</p>
-            <h3>AFI sebelum billing</h3>
-            <p>Nama STNK, alamat STNK, pengajuan khusus: standar, pilih nomor, ganjil, atau genap. Billing tertahan sampai AFI masuk.</p>
-            <span class="go">Buka pengajuan AFI →</span>
+            <h3>AFI + billing berpasangan</h3>
+            <p>Data STNK sudah di SPK. Jalur normal: ajukan billing dan AFI bersama. AFI dulu atau billing tanpa AFI butuh Approval Engine.</p>
+            <span class="go">Buka billing &amp; AFI →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#customer_detail">
@@ -549,7 +549,7 @@
             <h4>Expected outputs</h4>
             <ul><li>One integrated process.</li><li>One-time data capture.</li><li>Connected SPK, Sales Order, and billing references.</li><li>Frontman-driven request flow.</li><li>No redundant administrative re-entry.</li><li>Automated data population.</li><li>Automated completeness checking.</li><li>Structured compliance exception escalation.</li><li>Complete audit trail.</li></ul>
             <p><a class="btn solid" href="mockup.html#beranda">Buka antrean FAST</a>
-            <a class="textlink" href="mockup.html#afi">AFI sebelum billing →</a></p>
+            <a class="textlink" href="mockup.html#exc_afi">Exception pecah urutan →</a></p>
           </div>
         </div>
         <div class="see-row">
@@ -616,7 +616,7 @@
           </div>
         </div>
         <div class="see-row">
-          <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>Nama &amp; alamat STNK</b><span>Pilih nomor, ganjil, atau genap · sebelum billing</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>Data STNK dari SPK</b><span>Billing + AFI bersama. Pecah urutan = exception</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#dokumen"><span class="see-k">Vault</span><b>Dokumen Budi</b><span>KTP, NPWP, KK · bukti alamat waivable</span><em>Lihat →</em></a>
         </div>
       </div>
@@ -843,8 +843,7 @@
             <tr><td>Booking Fee Gate</td><td>SPK tersimpan, tagihan booking fee ke customer, nominal minimum sesuai unit, payment reference, verification, receipt, dan SPK linkage</td><td class="gate-note">Sales Order linked to SPK</td></tr>
             <tr><td>Settlement Gate</td><td>Payment allocation, active receipt completeness, AR Open, active-request exposure, receipt reversal, dan Available Request Amount</td><td class="gate-note">AR and request control</td></tr>
             <tr><td>Compliance Exception Gate</td><td>Failed rule, waivability, evidence, risk, decision authority, conditions, scope, dan validity period</td><td class="gate-note">Conditional release or remain locked</td></tr>
-            <tr><td>AFI Gate</td><td>Nama STNK, alamat STNK, pengajuan khusus (standar / pilih nomor / ganjil / genap). Pengajuan sebelum billing.</td><td class="gate-note">Billing request</td></tr>
-            <tr><td>Billing Gate</td><td>AFI sudah diajukan. Cash: uang masuk ≥30% nilai transaksi. Leasing: full DP dari B2B leasing. Plus SPK–SO integrity.</td><td class="gate-note">Billing number linked to SPK/SO</td></tr>
+            <tr><td>AFI + Billing</td><td>Data STNK (nama, alamat) lengkap di SPK. AFI dan billing diajukan bersama. AFI dulu atau billing tanpa AFI hanya lewat Approval Engine.</td><td class="gate-note">Billing number + pengajuan AFI</td></tr>
             <tr><td>Delivery Gate</td><td>Cash: lunas. Leasing: kontrak sudah TTD customer; status dari B2B leasing. Plus AFI/DO, VIN, PDI, dan handover.</td><td class="gate-note">Unit release</td></tr>
           </tbody>
         </table>
@@ -867,8 +866,9 @@
         <div class="panel">
           <h4>Billing Gate</h4>
           <ul>
-            <li>AFI (nama &amp; alamat STNK, pengajuan khusus) harus diajukan dulu.</li>
-            <li>Cash: uang masuk minimal 30% dari nilai transaksi.</li>
+            <li>Data STNK (nama, alamat) sudah lengkap di SPK sebelum billing.</li>
+            <li>Billing dan AFI diajukan bersama. AFI sebelum billing, atau billing tanpa AFI, hanya lewat Approval Engine.</li>
+            <li>Cash: uang masuk minimal 30% dari nilai transaksi (non-waivable).</li>
             <li>Leasing: full DP sudah diterima. Angka full DP ditarik dari B2B leasing, bukan diinput ulang di FAST.</li>
             <li>Billing tidak menunggu lunas untuk cash, dan tidak memakai persentase 30% untuk leasing.</li>
             <li>Rule ini non-waivable.</li>

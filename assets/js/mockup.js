@@ -153,7 +153,7 @@
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
       booking:'beranda',delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
-      exc_alamat:'eskalasi',exc_stnk:'eskalasi'
+      exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
     if((id==='gi'||id==='delivery') && currentRole==='admin') railId='verifikasi';
     navBtns.forEach(function(b){
@@ -202,6 +202,7 @@
       setPayJob(b.dataset.payJob);
       if(b.dataset.go==='digiroom') toast(fromFrontman?'Tautan terkirim. Customer masuk ke beranda Digiroom.':'Pilih QRIS atau VA di Digiroom.');
     }
+    if(b.dataset.afiExc) setAfiExcView(b.dataset.afiExc);
     show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
@@ -211,7 +212,7 @@
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
-    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill')) return;
+    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
@@ -486,6 +487,7 @@
     document.querySelectorAll('[data-del-tag]').forEach(function(el){ el.textContent=sent?'Request terkirim':'Siap kirim'; el.className='tag '+(sent?'wait':'ok'); });
   }
   var afiKind='none';
+  var afiExcKind='early';
   var afiKindLabel={none:'Standar · tanpa pilih nomor',pilih:'Pilih nomor',ganjil:'Plat ganjil',genap:'Plat genap'};
   function afiKindText(s){
     var k=(s&&s.kind)||'none';
@@ -493,70 +495,170 @@
     if(k==='pilih' && s && s.plate) label='Pilih nomor · '+s.plate;
     return label;
   }
+  function afiData(){ return (window.FAST && FAST.load ? FAST.load(FAST.AFI_KEY) : null) || {}; }
+  function afiExcSt(kind){
+    var s=afiData();
+    return (kind==='nobill' ? s.excNobill : s.excEarly) || 'draft';
+  }
+  function setAfiExcView(kind){
+    afiExcKind=kind==='nobill'?'nobill':'early';
+    document.querySelectorAll('#exc_afi [data-afi-exc]').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-afi-exc')===afiExcKind);
+    });
+    document.querySelectorAll('[data-afi-exc-panel]').forEach(function(p){
+      p.hidden = p.getAttribute('data-afi-exc-panel')!==afiExcKind;
+    });
+    var title=document.querySelector('[data-afi-exc-title]');
+    var lead=document.querySelector('[data-afi-exc-lead]');
+    var reason=document.getElementById('excAfiReason');
+    if(title) title.textContent=afiExcKind==='nobill'?'Billing tanpa AFI':'AFI sebelum billing';
+    if(lead) lead.textContent=afiExcKind==='nobill'
+      ?'Budi Santoso · SPK/26/CLD/00418. Billing tanpa AFI. Data STNK tetap lengkap di SPK. Bukan waiver 30%.'
+      :'Budi Santoso · SPK/26/CLD/00418. AFI dulu, billing menyusul. Data STNK dari SPK. Bukan waiver 30%.';
+    if(reason && !reason.dataset.locked){
+      reason.value=afiExcKind==='nobill'
+        ?'Billing perlu terbit minggu ini untuk closing cabang. AFI menyusul. Nama dan alamat STNK sudah lengkap di SPK. Bukan melewati 30%.'
+        :'Unit perlu proses STNK lebih dulu karena jadwal Samsat cabang. Billing tetap diajukan minggu ini. Bukan melewati 30%.';
+    }
+    applyAfiExcPath();
+  }
+  function applyAfiExcPath(){
+    var st=afiExcSt(afiExcKind);
+    var notes={
+      draft:'Belum diajukan. Jelaskan kenapa urutan billing dan AFI harus dipecah.',
+      submitted:'Pengajuan masuk. Admin Cilandak cek alasan, lalu teruskan ke Kepala Administrasi.',
+      verified:'Admin sudah cek. Kepala Administrasi memutuskan pecah urutan.',
+      approved:afiExcKind==='nobill'?'Disetujui. Billing boleh tanpa AFI. AFI tetap wajib menyusul. 30% tidak di-waive.':'Disetujui. AFI boleh sebelum billing. Billing tetap wajib. 30% tidak di-waive.',
+      returned:'Dikembalikan ke Frontman. Lengkapi alasan, atau pakai jalur billing + AFI bersama.'
+    };
+    var note=document.querySelector('[data-exc-afi-note]');
+    if(note){
+      note.textContent=notes[st]||notes.draft;
+      note.classList.toggle('warn', st!=='approved');
+      note.classList.toggle('ok', st==='approved');
+    }
+    var order=['draft','submitted','verified','approved'];
+    var idx=order.indexOf(st==='returned'?'draft':st);
+    document.querySelectorAll('[data-exc-afi-path] [data-step]').forEach(function(el){
+      var si=order.indexOf(el.getAttribute('data-step'));
+      el.classList.remove('on','ok');
+      if(st==='approved' && si<=3) el.classList.add('ok');
+      else if(si<idx) el.classList.add('ok');
+      else if(si===idx) el.classList.add('on');
+    });
+    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui',returned:'Dikembalikan'};
+    var sel=afiExcKind==='nobill'?'[data-afi-nobill-tag]':'[data-afi-early-tag]';
+    document.querySelectorAll(sel).forEach(function(el){
+      el.textContent=tags[st]||tags.draft;
+      el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
+    });
+  }
   function applyAfi(){
-    var s=window.FAST && FAST.load ? FAST.load(FAST.AFI_KEY) : null;
-    var sent=!!(s && s.submitted);
-    document.querySelectorAll('[data-afi-open]').forEach(function(el){ el.hidden=sent; });
-    document.querySelectorAll('[data-afi-sent]').forEach(function(el){ el.hidden=!sent; });
-    document.querySelectorAll('[data-afi-need]').forEach(function(el){ el.hidden=sent; });
-    document.querySelectorAll('[data-afi-bill]').forEach(function(el){ el.hidden=!sent; });
-    document.querySelectorAll('[data-afi-admin]').forEach(function(el){ el.hidden=!sent; });
-    document.querySelectorAll('[data-afi-cust-wait]').forEach(function(el){ el.hidden=sent; });
-    document.querySelectorAll('[data-afi-cust-sent]').forEach(function(el){ el.hidden=!sent; });
-    document.querySelectorAll('[data-afi-spec]').forEach(function(el){
-      el.textContent=sent?'AFI diajukan · billing dapat dibuka':'Tindakan: isi nama, alamat STNK, pengajuan khusus';
-    });
-    document.querySelectorAll('[data-afi-tag]').forEach(function(el){
-      el.textContent=sent?'Diajukan':'Belum diajukan';
-      el.className='tag '+(sent?'ok':'wait');
-    });
-    document.querySelectorAll('[data-afi-status]').forEach(function(el){ el.textContent=sent?'Masuk':'Belum'; });
-    document.querySelectorAll('[data-afi-bill-card]').forEach(function(el){ el.textContent=sent?'Siap':'Tertahan'; });
-    document.querySelectorAll('[data-afi-billing-src]').forEach(function(el){
-      el.textContent=sent?'AFI masuk · gate cash ≥30% lolos':'Menunggu pengajuan AFI';
-    });
-    document.querySelectorAll('[data-afi-bill-rule]').forEach(function(el){
-      el.textContent=sent?'AFI masuk · ≥30% terpenuhi 62,7%':'AFI dulu, lalu ≥30%';
-    });
-    document.querySelectorAll('[data-afi-money-hint]').forEach(function(el){
-      el.textContent=sent?'62,7% terbayar · AFI masuk · billing dapat diajukan · delivery menunggu lunas':'62,7% terbayar · isi AFI sebelum ajukan billing · delivery menunggu lunas';
-    });
-    var name=(s&&s.name)||'Budi Santoso';
-    var addr=(s&&s.addr)||'Jl. Kemang Selatan VIII No. 12, Jakarta Selatan';
-    document.querySelectorAll('[data-afi-name]').forEach(function(el){ el.textContent=name; });
-    document.querySelectorAll('[data-afi-addr]').forEach(function(el){ el.textContent=addr; });
+    var s=afiData();
+    var pair=!!s.pair;
+    var afi=!!s.afi;
+    var bill=!!s.bill;
+    var done=pair||(afi&&bill);
+    var early=afiExcSt('early');
+    var nobill=afiExcSt('nobill');
+    var canAfiOnly=!afi && !pair && (early==='approved' || bill);
+    var canBillOnly=!bill && !pair && (nobill==='approved' || afi);
+    document.querySelectorAll('[data-afi-open]').forEach(function(el){ el.hidden=done||afi; });
+    document.querySelectorAll('[data-afi-sent]').forEach(function(el){ el.hidden=!done && !afi && !bill; });
+    document.querySelectorAll('[data-afi-submit]').forEach(function(el){ el.hidden=!canAfiOnly; });
+    document.querySelectorAll('[data-afi-bill]').forEach(function(el){ el.hidden=!canBillOnly; });
+    document.querySelectorAll('[data-afi-pair]').forEach(function(el){ el.hidden=done||afi||bill; });
+    document.querySelectorAll('[data-afi-admin]').forEach(function(el){ el.hidden=!afi && !pair; });
+    document.querySelectorAll('[data-afi-cust-wait]').forEach(function(el){ el.hidden=afi||pair; });
+    document.querySelectorAll('[data-afi-cust-sent]').forEach(function(el){ el.hidden=!(afi||pair); });
+    var spec='Tindakan: ajukan billing + AFI bersama · data STNK dari SPK';
+    var tag='Berpasangan';
+    var tagCls='wait';
+    var status='Berpasangan';
+    var sentCopy='Billing dan AFI masuk berpasangan. Proses terbit STNK menyusul.';
+    var billSrc='Diajukan bersama AFI';
+    var billRule='Bersama AFI · data STNK SPK lengkap · ≥30%';
+    var money='62,7% terbayar · data STNK lengkap di SPK · ajukan billing + AFI bersama';
+    var hint='Belum ada exception. Pakai jalur berpasangan.';
+    if(done||(afi&&bill)||pair){
+      spec='Billing + AFI sudah diajukan';
+      tag='Selesai'; tagCls='ok'; status='Masuk';
+      billSrc='Billing diajukan · AFI memakai data SPK';
+      billRule='AFI & billing masuk · ≥30% terpenuhi';
+      money='Billing dan AFI sudah diajukan · delivery menunggu lunas';
+    } else if(afi && !bill){
+      spec='AFI masuk (exception) · billing menyusul';
+      tag='AFI dulu'; tagCls='wait'; status='AFI dulu';
+      sentCopy='AFI diajukan lebih dulu (exception). Billing belum.';
+      billSrc='AFI masuk · billing belum';
+      money='AFI sudah (exception) · billing masih menunggu';
+    } else if(bill && !afi){
+      spec='Billing masuk (exception) · AFI menyusul';
+      tag='Billing dulu'; tagCls='wait'; status='Billing dulu';
+      sentCopy='Billing diajukan tanpa AFI (exception). AFI belum.';
+      billSrc='Billing diajukan · AFI belum';
+      money='Billing sudah (exception) · AFI masih menunggu';
+    }
+    if(canAfiOnly) hint=bill?'Billing sudah (exception). Lanjutkan AFI.':'Exception AFI dulu disetujui. Tombol AFI saja terbuka.';
+    if(canBillOnly) hint=afi?'AFI sudah (exception). Lanjutkan billing.':'Exception billing tanpa AFI disetujui. Tombol billing saja terbuka.';
+    if(early==='submitted'||early==='verified') hint='Exception AFI dulu sedang diputuskan.';
+    if(nobill==='submitted'||nobill==='verified') hint='Exception billing tanpa AFI sedang diputuskan.';
+    document.querySelectorAll('[data-afi-spec]').forEach(function(el){ el.textContent=spec; });
+    document.querySelectorAll('[data-afi-tag]').forEach(function(el){ el.textContent=tag; el.className='tag '+tagCls; });
+    document.querySelectorAll('[data-afi-status]').forEach(function(el){ el.textContent=status; });
+    document.querySelectorAll('[data-afi-sent-copy]').forEach(function(el){ el.textContent=sentCopy; });
+    document.querySelectorAll('[data-afi-billing-src]').forEach(function(el){ el.textContent=billSrc; });
+    document.querySelectorAll('[data-afi-bill-rule]').forEach(function(el){ el.textContent=billRule; });
+    document.querySelectorAll('[data-afi-money-hint]').forEach(function(el){ el.textContent=money; });
+    document.querySelectorAll('[data-afi-exc-hint]').forEach(function(el){ el.textContent=hint; });
     document.querySelectorAll('[data-afi-kind-out]').forEach(function(el){ el.textContent=afiKindText(s); });
-    document.querySelectorAll('[data-afi-gate]').forEach(function(li){
+    document.querySelectorAll('[data-afi-pair-gate]').forEach(function(li){
       var mark=li.querySelector('.mark');
       var why=li.querySelector('.why');
-      var tag=li.querySelector('.tag');
-      if(mark){ mark.className='mark '+(sent?'ok':'no'); mark.textContent=sent?'✓':'!'; }
-      if(why) why.textContent=sent?('Diajukan · '+name+' · '+afiKindText(s)):('Nama, alamat STNK, dan pengajuan khusus belum diajukan · sebelum billing');
-      if(tag){ tag.textContent=sent?'Masuk':'Wajib'; tag.className='tag '+(sent?'ok':'hold'); }
+      var tg=li.querySelector('.tag');
+      if(done||pair){
+        if(mark){ mark.className='mark ok'; mark.textContent='✓'; }
+        if(why) why.textContent='Billing dan AFI diajukan berpasangan · data STNK dari SPK';
+        if(tg){ tg.textContent='Masuk'; tg.className='tag ok'; }
+      } else if(afi && !bill){
+        if(mark){ mark.className='mark ok'; mark.textContent='✓'; }
+        if(why) why.textContent='Exception: AFI sebelum billing · billing menyusul';
+        if(tg){ tg.textContent='AFI dulu'; tg.className='tag wait'; }
+      } else if(bill && !afi){
+        if(mark){ mark.className='mark ok'; mark.textContent='✓'; }
+        if(why) why.textContent='Exception: billing tanpa AFI · AFI menyusul';
+        if(tg){ tg.textContent='Billing dulu'; tg.className='tag wait'; }
+      } else {
+        if(mark){ mark.className='mark idle'; mark.textContent='•'; }
+        if(why) why.textContent='Diajukan berpasangan. AFI dulu atau billing tanpa AFI = Approval Engine';
+        if(tg){ tg.textContent='Berpasangan'; tg.className='tag mute'; }
+      }
     });
-    document.querySelectorAll('[data-afi-bill-gate]').forEach(function(li){
-      var mark=li.querySelector('.mark');
-      var why=li.querySelector('.why');
-      var tag=li.querySelector('.tag');
-      if(mark){ mark.className='mark '+(sent?'ok':'idle'); mark.textContent=sent?'✓':'•'; }
-      if(why) why.textContent=sent?'Uang masuk 62,7% ≥ 30% · AFI sudah masuk':'Uang masuk 62,7% ≥ 30% · tertahan sampai AFI masuk';
-      if(tag){ tag.textContent=sent?'Lolos':'Menunggu AFI'; tag.className='tag '+(sent?'ok':'mute'); }
-    });
-    document.querySelectorAll('[data-afi-step="afi"]').forEach(function(el){
-      el.classList.toggle('now', !sent);
-      el.classList.toggle('done', sent);
-    });
-    document.querySelectorAll('[data-afi-step="bill"]').forEach(function(el){
-      el.classList.toggle('now', sent);
-      el.classList.toggle('done', false);
+    document.querySelectorAll('[data-afi-step="pair"]').forEach(function(el){
+      el.classList.toggle('now', !done);
+      el.classList.toggle('done', done);
     });
     var mile=document.querySelector('[data-afi-mile]');
     if(mile){
-      mile.classList.toggle('now', sent);
-      mile.classList.toggle('done', sent);
+      mile.classList.toggle('done', afi||pair);
       var m=mile.querySelector('.m');
-      if(m) m.textContent=sent?'✓':'•';
+      if(m) m.textContent=(afi||pair)?'✓':'•';
     }
+    document.querySelectorAll('[data-afi-early-tag]').forEach(function(el){
+      var st=early;
+      el.textContent=st==='approved'?'Disetujui':st==='returned'?'Dikembalikan':st==='draft'?'Menunggu pengajuan':'Dalam proses';
+      el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
+    });
+    document.querySelectorAll('[data-afi-nobill-tag]').forEach(function(el){
+      var st=nobill;
+      el.textContent=st==='approved'?'Disetujui':st==='returned'?'Dikembalikan':st==='draft'?'Menunggu pengajuan':'Dalam proses';
+      el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
+    });
+    applyAfiExcPath();
+  }
+  function plateVal(){
+    var plateEl=document.getElementById('afiPlate');
+    return (plateEl&&plateEl.value||'').trim();
   }
   function setAfiKind(kind){
     afiKind=kind||'none';
@@ -576,26 +678,59 @@
   document.querySelectorAll('[data-afi-kind]').forEach(function(b){
     b.addEventListener('click',function(){ setAfiKind(b.getAttribute('data-afi-kind')); });
   });
-  var afiBtn=document.querySelector('[data-afi-submit]');
-  if(afiBtn) afiBtn.addEventListener('click',function(){
-    var nameEl=document.getElementById('afiName');
-    var addrEl=document.getElementById('afiAddr');
-    var plateEl=document.getElementById('afiPlate');
-    var name=(nameEl&&nameEl.value||'').trim();
-    var addr=(addrEl&&addrEl.value||'').trim();
-    var plate=(plateEl&&plateEl.value||'').trim();
-    if(!name || !addr){ toast('Isi nama dan alamat STNK dulu.'); return; }
-    if(afiKind==='pilih' && !plate){ toast('Isi nomor yang diminta, atau pilih ganjil/genap/standar.'); return; }
-    if(window.FAST && FAST.save) FAST.save({submitted:true,spk:'SPK/26/CLD/00418',name:name,addr:addr,kind:afiKind,plate:plate}, FAST.AFI_KEY);
+  document.querySelectorAll('#exc_afi [data-afi-exc]').forEach(function(b){
+    b.addEventListener('click',function(){ setAfiExcView(b.getAttribute('data-afi-exc')); });
+  });
+  function saveAfi(extra){
+    var payload=Object.assign({spk:'SPK/26/CLD/00418',kind:afiKind,plate:plateVal(),name:'Budi Santoso',addr:'Jl. Kemang Selatan VIII No. 12, Jakarta Selatan'}, extra);
+    if(window.FAST && FAST.save) FAST.save(payload, FAST.AFI_KEY);
     applyAfi();
-    toast('Pengajuan AFI masuk. Billing dapat diajukan. Proses terbit STNK menyusul.');
+  }
+  document.querySelectorAll('[data-afi-pair]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(afiKind==='pilih' && !plateVal()){ toast('Isi nomor yang diminta, atau pilih ganjil/genap/standar.'); return; }
+      saveAfi({pair:true,afi:true,bill:true});
+      toast('Billing dan AFI diajukan bersama. Data STNK dari SPK.');
+    });
+  });
+  document.querySelectorAll('[data-afi-submit]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(afiExcSt('early')!=='approved' && !afiData().bill){ toast('AFI dulu butuh Approval Engine.'); show('exc_afi'); setAfiExcView('early'); return; }
+      if(afiKind==='pilih' && !plateVal()){ toast('Isi nomor yang diminta dulu.'); return; }
+      saveAfi({afi:true});
+      toast('AFI diajukan sebelum billing (exception).');
+    });
   });
   document.querySelectorAll('[data-afi-bill]').forEach(function(b){
     b.addEventListener('click',function(){
-      var s=window.FAST && FAST.load ? FAST.load(FAST.AFI_KEY) : null;
-      if(!(s && s.submitted)){ toast('Isi pengajuan AFI dulu.'); show('afi'); return; }
-      toast('Billing gate cash lolos (≥30%). Permintaan billing dikirim.');
+      if(afiExcSt('nobill')!=='approved' && !afiData().afi){ toast('Billing tanpa AFI butuh Approval Engine.'); show('exc_afi'); setAfiExcView('nobill'); return; }
+      saveAfi({bill:true});
+      toast('Billing diajukan tanpa AFI (exception). AFI menyusul.');
     });
+  });
+  function setAfiExc(next, msg){
+    var patch=afiExcKind==='nobill'?{excNobill:next}:{excEarly:next};
+    saveAfi(patch);
+    toast(msg);
+  }
+  document.querySelectorAll('[data-exc-afi-submit]').forEach(function(b){
+    b.addEventListener('click',function(){ setAfiExc('submitted','Pengajuan pecah urutan terkirim. Admin akan cek.'); });
+  });
+  document.querySelectorAll('[data-exc-afi-verify]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(afiExcSt(afiExcKind)==='draft'||afiExcSt(afiExcKind)==='returned'){ toast('Frontman belum mengajukan.'); return; }
+      setAfiExc('verified','Alasan dicek. Siap diputuskan Kepala Administrasi.');
+    });
+  });
+  document.querySelectorAll('[data-exc-afi-approve]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var st=afiExcSt(afiExcKind);
+      if(st==='draft'||st==='returned'){ toast('Belum ada pengajuan.'); return; }
+      setAfiExc('approved', afiExcKind==='nobill'?'Disetujui: billing tanpa AFI. 30% tidak di-waive.':'Disetujui: AFI sebelum billing. 30% tidak di-waive.');
+    });
+  });
+  document.querySelectorAll('[data-exc-afi-reject]').forEach(function(b){
+    b.addEventListener('click',function(){ setAfiExc('returned','Dikembalikan. Pakai jalur berpasangan, atau ajukan ulang.'); });
   });
   function applyGi(){
     var s=window.FAST && FAST.load ? FAST.load(FAST.GI_KEY) : null;
