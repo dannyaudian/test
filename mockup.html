@@ -26,7 +26,7 @@
     <!-- ================= MOCKUP ================= -->
     <div class="pagehead">
       <h1>FAST</h1>
-      <p>Satu cara bayar dari booking fee sampai pelunasan: QRIS, CDM (kode bayar), tautan Digiroom, atau EDC — di transaksi yang sama.</p>
+      <p>Satu cara bayar dari booking fee sampai pelunasan: QRIS, CDM, tautan Digiroom. Debit EDC hanya Frontman yang pilih perangkatnya.</p>
     </div>
   <nav class="journey wrap-pad" aria-label="Di dalam aplikasi">
     <a class="on" href="#beranda">Transaksi</a>
@@ -866,7 +866,7 @@
                   <button type="button" data-go="booking" aria-pressed="false">Booking fee/DP</button>
                   <button type="button" aria-pressed="true">Pelunasan</button>
                 </div>
-                <p class="hint" style="margin:0">Satu model bayar dari booking fee sampai pelunasan: QRIS di layar Frontman, kode CDM, tautan Digiroom, atau debit EDC. Innova Zenix: booking fee sudah kuitansi; pelunasan tahap 2 menunggu.</p>
+                <p class="hint" style="margin:0">Satu model bayar: QRIS di layar Frontman, kode CDM, tautan Digiroom. Debit EDC hanya Frontman yang pilih mesinnya. Innova Zenix: booking fee sudah kuitansi; pelunasan tahap 2 menunggu.</p>
               </div>
             </div>
 
@@ -1480,7 +1480,7 @@
           <div class="nextbar">
             <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar sesuai request</button>
             <button class="btn ghost" data-go="digiroom" data-pay-job="open" data-role="cust">Isi nominal sendiri · QRIS / VA</button>
-            <button class="btn ghost" data-go="cashless">Di cabang</button>
+            <button class="btn ghost" data-go="cashless">Di cabang · QRIS / CDM</button>
           </div>
         </div>
         <div class="box">
@@ -1699,13 +1699,14 @@
           <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">QRIS &amp; VA terkunci ke request ini</p></div>
         </div>
         <div class="box">
-          <h3>Terima di cabang atau kirim tautan</h3>
+          <h3 data-cash-title>Terima di cabang atau kirim tautan</h3>
           <div class="pad">
+            <p class="hint" data-cash-cust-note hidden>Debit EDC tidak ada di layar customer. Frontman yang pilih mesin dan dorong nominal host-to-host.</p>
             <div class="channels" id="cashSeg">
               <button type="button" class="channel" data-cash="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode di layar Frontman</span></button>
               <button type="button" class="channel" data-cash="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Kode bayar di mesin setor</span></button>
               <button type="button" class="channel" data-cash="link" aria-pressed="false"><span class="n">3</span><b>Tautan bayar</b><span>Beranda Digiroom</span></button>
-              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Pilih perangkat</span></button>
+              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Frontman pilih perangkat</span></button>
             </div>
             <div class="bf-panels">
               <div data-cash-panel="qris" class="on">
@@ -1753,7 +1754,7 @@
                 <button type="button" class="btn" style="width:100%" data-go="digiroom" data-pay-job="lunas" data-role="cust">Kirim tautan ke Digiroom</button>
               </div>
               <div data-cash-panel="edc">
-                <p class="hint">Pilih EDC. Nominal didorong host-to-host.</p>
+                <p class="hint">Pilih EDC di kasir. Customer tidak memilih perangkat. Nominal didorong host-to-host.</p>
                 <div class="device-list">
                   <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Kasir 1</b><span>Meja penerimaan · Cilandak</span></button>
                   <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Kasir 2</b><span>Meja SPK</span></button>

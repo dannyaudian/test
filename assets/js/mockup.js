@@ -185,6 +185,7 @@
     document.querySelectorAll('#cashless .worktabs, #cashless [data-go="transaksi"]').forEach(function(el){
       el.hidden=currentRole==='cust';
     });
+    applyCashlessEdc();
     if(id==='booking') setPayJob('booking');
     if(id==='cashless'){ setPayJob('lunas'); setCashQrisMode('request'); }
     syncRoleChrome();
@@ -247,6 +248,7 @@
     document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
     document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
     syncRoleChrome();
+    applyCashlessEdc();
   }
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
@@ -446,12 +448,29 @@
     });
   }
   function showCashPanel(mode){
+    if(currentRole==='cust' && mode==='edc') mode='qris';
     document.querySelectorAll('#cashSeg [data-cash]').forEach(function(b){
       b.setAttribute('aria-pressed', b.getAttribute('data-cash')===mode?'true':'false');
     });
     document.querySelectorAll('[data-cash-panel]').forEach(function(p){
       p.classList.toggle('on', p.getAttribute('data-cash-panel')===mode);
     });
+  }
+  function applyCashlessEdc(){
+    var cust=currentRole==='cust';
+    document.querySelectorAll('#cashless [data-cash="edc"], #cashless [data-cash-panel="edc"]').forEach(function(el){
+      el.hidden=cust;
+    });
+    var note=document.querySelector('[data-cash-cust-note]');
+    if(note) note.hidden=!cust;
+    var title=document.querySelector('[data-cash-title]');
+    if(title) title.textContent=cust
+      ? 'Bayar di cabang: QRIS atau CDM'
+      : 'Terima di cabang atau kirim tautan';
+    if(cust){
+      var edcOn=document.querySelector('#cashSeg [data-cash="edc"][aria-pressed="true"]');
+      if(edcOn) showCashPanel('qris');
+    }
   }
   document.querySelectorAll('#bfSeg [data-bf]').forEach(function(b){
     b.addEventListener('click',function(){ showBfPanel(b.getAttribute('data-bf')); });
@@ -971,7 +990,10 @@
     var cash=document.getElementById('cashless');
     var book=document.getElementById('booking');
     var order=['qris','cdm','link','edc'];
-    if(cash && cash.classList.contains('on') && n>=1 && n<=4) showCashPanel(order[n-1]);
+    if(cash && cash.classList.contains('on') && n>=1 && n<=4){
+      if(currentRole==='cust' && order[n-1]==='edc') return;
+      showCashPanel(order[n-1]);
+    }
     if(book && book.classList.contains('on') && n>=1 && n<=4) showBfPanel(order[n-1]);
   });
   function settle(channel, amount){
@@ -1016,7 +1038,9 @@
   }
   document.querySelectorAll('[data-pay]').forEach(function(b){
     b.addEventListener('click',function(){
-      runPayflow(b.getAttribute('data-pay'), Number(b.getAttribute('data-amount')||100000000));
+      var ch=b.getAttribute('data-pay');
+      if(ch==='edc' && currentRole==='cust') return;
+      runPayflow(ch, Number(b.getAttribute('data-amount')||100000000));
     });
   });
   document.querySelectorAll('.journey a').forEach(function(a){
