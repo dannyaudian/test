@@ -47,7 +47,10 @@
   }
   function show(id){
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
-    var railId=({customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer'})[id]||id;
+    var railId=({
+      customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
+      tx_hiace:'transaksi',tx_raize:'transaksi',tx_avanza:'transaksi',tx_fortuner:'transaksi'
+    })[id]||id;
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
       if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
@@ -58,6 +61,7 @@
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
+    if(b.dataset.role) applyRole(b.dataset.role);
     show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
@@ -90,7 +94,7 @@
   }); }); }
 
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function applyRole(role){
     document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
     document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
@@ -130,15 +134,29 @@
   var orderSearch=document.getElementById('orderSearch');
   if(orderSearch) orderSearch.addEventListener('input', filterOrders);
 
-  var search=document.getElementById('txSearch');
-  if(search){
-    search.addEventListener('input',function(){
-      var q=search.value.toLowerCase();
-      document.querySelectorAll('#beranda tbody tr').forEach(function(tr){
-        tr.style.display = tr.textContent.toLowerCase().indexOf(q)>-1 ? '' : 'none';
-      });
+  var txFilter='all';
+  function filterTx(){
+    var q=((document.getElementById('txSearch')||{}).value||'').toLowerCase();
+    document.querySelectorAll('#txList .order-card').forEach(function(card){
+      var st=card.getAttribute('data-tx-status');
+      var act=card.getAttribute('data-tx-action')==='1';
+      var match=txFilter==='all'||(txFilter==='action'&&act)||st===txFilter;
+      var matchQ=!q||card.textContent.toLowerCase().indexOf(q)>-1;
+      card.classList.toggle('is-hidden', !(match&&matchQ));
     });
   }
+  document.querySelectorAll('[data-tx-filter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      txFilter=b.getAttribute('data-tx-filter');
+      document.querySelectorAll('.order-filters [data-tx-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x.getAttribute('data-tx-filter')===txFilter?'true':'false');
+      });
+      show('beranda');
+      filterTx();
+    });
+  });
+  var search=document.getElementById('txSearch');
+  if(search) search.addEventListener('input', filterTx);
 
   function applyLive(){
     if(!window.FAST || !FAST.load) return;
