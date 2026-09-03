@@ -86,6 +86,8 @@
     document.querySelectorAll('#cashless .worktabs, #cashless [data-go="transaksi"]').forEach(function(el){
       el.hidden=currentRole==='cust';
     });
+    if(id==='booking') setPayJob('booking');
+    if(id==='cashless') setPayJob('lunas');
     syncRoleChrome();
     applyExcAlamat();
     applyBooking();
@@ -93,6 +95,7 @@
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
     if(b.dataset.role) applyRole(b.dataset.role);
+    if(b.dataset.payJob) setPayJob(b.dataset.payJob);
     show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
@@ -101,7 +104,7 @@
       return;
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
-    if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-bf-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-edc-device')) return;
+    if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
@@ -326,6 +329,37 @@
   });
 
   var edcDevice='EDC-01';
+  var payJobId='booking';
+  var payJobs={
+    booking:{
+      name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Yaris 1.5 G',kind:'Booking fee',amount:'Rp 3.000.000',
+      cdm:'0426 3000 01',brilink:'8810 0426 3000',
+      va:{BCA:'8801 0426 0001',BRI:'0026 0426 0001',Mandiri:'8881 0426 0001'},
+      back:'booking'
+    },
+    lunas:{
+      name:'Budi Santoso',spk:'SPK/26/CLD/00418',unit:'Innova Zenix',kind:'Pelunasan tahap 2',amount:'Rp 100.000.000',
+      cdm:'0418 1000 03',brilink:'8810 0418 0003',
+      va:{BCA:'8801 0418 0003',BRI:'0026 0418 0003',Mandiri:'8881 0418 0003'},
+      back:'cashless'
+    }
+  };
+  function setPayJob(id){
+    payJobId=payJobs[id]?id:'booking';
+    var j=payJobs[payJobId];
+    document.querySelectorAll('[data-pay-name]').forEach(function(el){ el.textContent=j.name; });
+    document.querySelectorAll('[data-pay-spk]').forEach(function(el){ el.textContent=j.spk; });
+    document.querySelectorAll('[data-pay-unit]').forEach(function(el){ el.textContent=j.unit; });
+    document.querySelectorAll('[data-pay-kind]').forEach(function(el){ el.textContent=j.kind; });
+    document.querySelectorAll('[data-pay-amount]').forEach(function(el){ el.textContent=j.amount; });
+    document.querySelectorAll('[data-pay-cdm]').forEach(function(el){ el.textContent=j.cdm; });
+    document.querySelectorAll('[data-pay-brilink]').forEach(function(el){ el.textContent=j.brilink; });
+    var back=document.querySelector('[data-dg-back]');
+    if(back) back.setAttribute('data-go', j.back);
+    var no=document.getElementById('dgVaNo');
+    if(no) no.textContent=j.va.BCA;
+    showDg('home');
+  }
   function showBfPanel(mode){
     document.querySelectorAll('#bfSeg [data-bf]').forEach(function(b){
       b.setAttribute('aria-pressed', b.getAttribute('data-bf')===mode?'true':'false');
@@ -334,16 +368,31 @@
       p.classList.toggle('on', p.getAttribute('data-bf-panel')===mode);
     });
   }
+  function showCashPanel(mode){
+    document.querySelectorAll('#cashSeg [data-cash]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-cash')===mode?'true':'false');
+    });
+    document.querySelectorAll('[data-cash-panel]').forEach(function(p){
+      var on=p.getAttribute('data-cash-panel')===mode;
+      p.classList.toggle('on', on);
+      p.hidden=!on;
+    });
+  }
   document.querySelectorAll('#bfSeg [data-bf]').forEach(function(b){
     b.addEventListener('click',function(){ showBfPanel(b.getAttribute('data-bf')); });
+  });
+  document.querySelectorAll('#cashSeg [data-cash]').forEach(function(b){
+    b.addEventListener('click',function(){ showCashPanel(b.getAttribute('data-cash')); });
   });
   document.querySelectorAll('[data-edc-device]').forEach(function(b){
     b.addEventListener('click',function(){
       edcDevice=b.getAttribute('data-edc-device');
-      document.querySelectorAll('[data-edc-device]').forEach(function(x){
+      var list=b.parentElement;
+      list.querySelectorAll('[data-edc-device]').forEach(function(x){
         x.setAttribute('aria-pressed', x===b?'true':'false');
       });
-      var hint=document.getElementById('edcHint');
+      var panel=b.closest('[data-bf-panel], [data-cash-panel]');
+      var hint=panel?panel.querySelector('.edc-hint'):null;
       var name=b.querySelector('b');
       if(hint) hint.textContent='Siap dorong ke '+(name?name.textContent:edcDevice);
     });
@@ -364,11 +413,13 @@
   document.querySelectorAll('[data-bf-pay]').forEach(function(b){
     b.addEventListener('click',function(){ settleBooking(b.getAttribute('data-bf-pay')); });
   });
-  var bfLink=document.querySelector('[data-bf-link]');
-  if(bfLink) bfLink.addEventListener('click',function(){
-    toast('Tautan terkirim. Customer masuk ke beranda Digiroom.');
-    applyRole('cust');
-    show('digiroom');
+  document.querySelectorAll('[data-pay-link]').forEach(function(b){
+    b.addEventListener('click',function(){
+      setPayJob(b.getAttribute('data-pay-link'));
+      toast('Tautan terkirim. Customer masuk ke beranda Digiroom.');
+      applyRole('cust');
+      show('digiroom');
+    });
   });
   function showDg(panel, meta){
     var home=document.querySelector('[data-dg-home]');
@@ -376,22 +427,29 @@
     document.querySelectorAll('[data-dg-panel]').forEach(function(p){
       p.hidden = p.getAttribute('data-dg-panel')!==panel;
     });
+    var j=payJobs[payJobId]||payJobs.booking;
     if(panel==='va'){
       var bank=meta||'BCA';
-      var nos={BCA:'8801 0426 0001',BRI:'0026 0426 0001',Mandiri:'8881 0426 0001'};
       var hint=document.getElementById('dgVaHint');
       var no=document.getElementById('dgVaNo');
       if(hint) hint.textContent='Transfer ke VA '+bank+'. Jumlah sudah terikat SPK.';
-      if(no) no.textContent=nos[bank]||nos.BCA;
+      if(no) no.textContent=(j.va&&j.va[bank])||j.va.BCA;
     }
     if(panel==='app'){
       var hint=document.getElementById('dgAppHint');
-      if(hint) hint.textContent='Membuka '+(meta||'myBCA')+' dengan tagihan Yaris sudah terisi.';
+      if(hint) hint.textContent='Membuka '+(meta||'myBCA')+' · '+j.kind+' '+j.amount+' sudah terisi.';
     }
   }
   document.querySelectorAll('[data-dg]').forEach(function(b){
     b.addEventListener('click',function(){
       showDg(b.getAttribute('data-dg'), b.getAttribute('data-bank')||b.getAttribute('data-app'));
+    });
+  });
+  document.querySelectorAll('[data-dg-pay]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var ch=b.getAttribute('data-dg-pay');
+      if(payJobId==='lunas') runPayflow(ch, 100000000);
+      else settleBooking(ch);
     });
   });
 
@@ -421,38 +479,23 @@
   window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); });
 
   var channelMeta={
-    qris:{title:'QRIS dinamis',hint:'Customer scan. Jumlah sudah terisi dari SPK.'},
-    cdm:{title:'CDM cabang',hint:'Setor tunai. Kode bayar dari SPK, bukan ketik nominal.'},
-    edc:{title:'EDC host-to-host',hint:'Kartu di mesin. Nominal didorong sistem.'},
-    bank:{title:'Aplikasi bank',hint:'Biller resmi FAST. VA sudah terisi.'},
-    brilink:{title:'Agen BRILink',hint:'Menu resmi di EDC agen.'},
-    wa:{title:'WhatsApp checkout',hint:'Kirim satu link. Customer pilih metode.'},
-    portal:{title:'Portal SPK',hint:'URL yang sama dari booking sampai lunas.'}
+    qris:{title:'QRIS'},
+    cdm:{title:'CDM cabang'},
+    edc:{title:'Debit EDC'},
+    brilink:{title:'BRILink'},
+    va:{title:'Virtual Account'},
+    app:{title:'Aplikasi bank'},
+    link:{title:'Digiroom'}
   };
-  var channelOrder=['qris','cdm','edc','bank','brilink','wa','portal'];
-  function selectChannel(ch){
-    document.querySelectorAll('.channel').forEach(function(c){
-      c.setAttribute('aria-pressed', c.getAttribute('data-channel')===ch?'true':'false');
-    });
-    var meta=channelMeta[ch]||channelMeta.qris;
-    var title=document.getElementById('cashPrevTitle');
-    var hint=document.getElementById('cashPrevHint');
-    var qr=document.getElementById('cashQr');
-    var btn=document.getElementById('cashPayBtn');
-    if(title) title.textContent=meta.title;
-    if(hint) hint.textContent=meta.hint;
-    if(qr) qr.style.display=ch==='qris'?'':'none';
-    if(btn){ btn.setAttribute('data-pay', ch); }
-  }
-  document.querySelectorAll('.channel[data-channel]').forEach(function(b){
-    b.addEventListener('click',function(){ selectChannel(b.getAttribute('data-channel')); });
-  });
   document.addEventListener('keydown',function(e){
     if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
-    var cash=document.getElementById('cashless');
-    if(!cash || !cash.classList.contains('on')) return;
     var n=parseInt(e.key,10);
-    if(n>=1 && n<=7) selectChannel(channelOrder[n-1]);
+    if(!n) return;
+    var cash=document.getElementById('cashless');
+    var book=document.getElementById('booking');
+    var order=['qris','cdm','link','edc'];
+    if(cash && cash.classList.contains('on') && n>=1 && n<=4) showCashPanel(order[n-1]);
+    if(book && book.classList.contains('on') && n>=1 && n<=4) showBfPanel(order[n-1]);
   });
   function settle(channel, amount){
     var ar=amount>=181750000?0:81750000;

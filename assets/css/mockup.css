@@ -385,4 +385,10 @@
   font-size:22px;font-weight:800;letter-spacing:.08em;font-variant-numeric:tabular-nums;
   background:var(--surface-2);border:1px dashed var(--rule);border-radius:12px;padding:14px;text-align:center;margin:10px 0;
 }
-#mockup .bf-paid [data-bf-hide-paid]{display:none}
+#mockup .pay-code{
+  margin:10px 0 0;padding:14px 12px;border-radius:12px;text-align:center;
+  font-size:26px;font-weight:800;letter-spacing:.1em;font-variant-numeric:tabular-nums;
+  background:#ecfeff;color:#0f172a;
+}
+#mockup .bf-panels [data-cash-panel]{display:none}
+#mockup .bf-panels [data-cash-panel].on{display:block}

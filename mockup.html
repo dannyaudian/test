@@ -26,7 +26,7 @@
     <!-- ================= MOCKUP ================= -->
     <div class="pagehead">
       <h1>FAST</h1>
-      <p>Satu beranda untuk semua peran. Cashless adalah cara bayar di transaksi yang sama — bukan aplikasi terpisah.</p>
+      <p>Satu cara bayar dari booking fee sampai pelunasan: QRIS, CDM (kode bayar), tautan Digiroom, atau EDC — di transaksi yang sama.</p>
     </div>
   <nav class="journey wrap-pad" aria-label="Di dalam aplikasi">
     <a class="on" href="#beranda">Transaksi</a>
@@ -126,7 +126,7 @@
                 <span class="tag wait">Setelah SPK</span>
                 <span class="amt">Rp 3.000.000</span>
               </div>
-              <p class="cta">QRIS · tautan · EDC →</p>
+              <p class="cta">QRIS · CDM · tautan · EDC →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-go="transaksi">
@@ -267,7 +267,7 @@
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Metode pembelian</span><span class="val">Cash</span><span class="src">Dari SPK</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Minimum booking fee unit</span><span class="val">Rp 5.000.000 · Innova Zenix</span><span class="src">Master kendaraan</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Harga setelah program</span><span class="val">Rp 486.750.000</span><span class="src">Dihitung sistem</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Document compliance</span><span class="val">6 dari 6 persyaratan valid</span><span class="src">Document Gate</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Document compliance</span><span class="val">5 dari 6 valid · bukti alamat</span><span class="src">Document Gate</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Exception aktif</span><span class="val">Tidak ada</span><span class="src">Seluruh rule lolos</span></div>
               </div>
             </div>
@@ -383,8 +383,9 @@
           <div class="pad">
             <div class="channels" id="bfSeg">
               <button type="button" class="channel" data-bf="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode di layar Frontman</span></button>
-              <button type="button" class="channel" data-bf="link" aria-pressed="false"><span class="n">2</span><b>Tautan bayar</b><span>Langsung ke beranda Digiroom</span></button>
-              <button type="button" class="channel" data-bf="edc" aria-pressed="false"><span class="n">3</span><b>Debit EDC</b><span>Pilih perangkat tujuan</span></button>
+              <button type="button" class="channel" data-bf="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Kode bayar di mesin setor</span></button>
+              <button type="button" class="channel" data-bf="link" aria-pressed="false"><span class="n">3</span><b>Tautan bayar</b><span>Beranda Digiroom</span></button>
+              <button type="button" class="channel" data-bf="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Pilih perangkat</span></button>
             </div>
             <div class="bf-panels">
               <div data-bf-panel="qris" class="on">
@@ -393,23 +394,33 @@
                 <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 3.000.000</p>
                 <button type="button" class="btn" style="width:100%" data-bf-pay="qris">Simulasi ter-scan</button>
               </div>
+              <div data-bf-panel="cdm">
+                <p class="hint">Customer setor tunai di CDM cabang. Masukkan kode ini di mesin — nominal terikat SPK, jangan diketik ulang.</p>
+                <div class="kiosk" style="max-width:360px">
+                  <p style="margin:0;font-size:12px;opacity:.7">CDM · FAST Outlet Cilandak</p>
+                  <p style="margin:8px 0 0;font-size:13px">Kode bayar</p>
+                  <p class="pay-code">0426 3000 01</p>
+                  <p style="margin:8px 0 0;font-size:12px;opacity:.7">Booking fee · Rp 3.000.000</p>
+                </div>
+                <button type="button" class="btn" style="width:100%;margin-top:12px" data-bf-pay="cdm">Simulasi setor CDM</button>
+              </div>
               <div data-bf-panel="link">
-                <p class="hint">Tautan membuka beranda Digiroom. Di sana customer pilih BRILink, VA bank, atau buka aplikasi.</p>
+                <p class="hint">Tautan membuka beranda Digiroom. Di HP, customer pilih BRILink, VA, aplikasi, atau lihat kode CDM yang sama.</p>
                 <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
                   <p class="from">FAST · tautan Digiroom</p>
                   <p>Halo Bu Dewi, SPK Yaris Anda sudah tersimpan. Booking fee Rp 3.000.000.</p>
                   <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/beranda</b></div>
                 </div>
-                <button type="button" class="btn" style="width:100%" data-bf-link>Kirim tautan ke Digiroom</button>
+                <button type="button" class="btn" style="width:100%" data-pay-link="booking">Kirim tautan ke Digiroom</button>
               </div>
               <div data-bf-panel="edc">
                 <p class="hint">Pilih EDC yang dituju. Nominal didorong host-to-host — kasir tidak ketik di mesin.</p>
-                <div class="device-list" id="edcDevices">
+                <div class="device-list">
                   <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Kasir 1</b><span>Meja penerimaan · Cilandak</span></button>
                   <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Kasir 2</b><span>Meja SPK</span></button>
                   <button type="button" class="device" data-edc-device="EDC-03" aria-pressed="false"><b>EDC-03 · Outdoor</b><span>Pos serah terima</span></button>
                 </div>
-                <p class="hint" id="edcHint" style="margin:12px 0">Siap dorong ke EDC-01 · Kasir 1</p>
+                <p class="hint edc-hint" style="margin:12px 0">Siap dorong ke EDC-01 · Kasir 1</p>
                 <button type="button" class="btn" style="width:100%" data-bf-pay="edc">Kirim Rp 3.000.000 ke perangkat</button>
               </div>
             </div>
@@ -431,18 +442,22 @@
             <h2>Beranda Digiroom</h2>
             <p>Customer membuka tautan dari Frontman. Pilih cara bayar — nominal sudah dari SPK.</p>
           </div>
-          <div class="actions"><button class="btn ghost" data-go="booking" data-role="frontman">← Frontman</button></div>
+          <div class="actions"><button class="btn ghost" data-dg-back data-go="booking" data-role="frontman">← Frontman</button></div>
         </div>
         <div class="dg-shell">
           <div class="dg-top">
             <div><b>Digiroom</b><span> · pay.fast.id</span></div>
-            <span>Dewi Lestari</span>
+            <span data-pay-name>Dewi Lestari</span>
           </div>
           <div class="dg-body">
-            <p class="eyebrow" style="margin:0;font-size:12px;color:var(--ink-soft)">SPK/26/CLD/00426 · Yaris 1.5 G</p>
-            <p style="margin:4px 0 4px;font-size:13px">Booking fee</p>
-            <p style="margin:0 0 16px;font-size:28px;font-weight:800;letter-spacing:-.03em">Rp 3.000.000</p>
+            <p class="eyebrow" style="margin:0;font-size:12px;color:var(--ink-soft)"><span data-pay-spk>SPK/26/CLD/00426</span> · <span data-pay-unit>Yaris 1.5 G</span></p>
+            <p style="margin:4px 0 4px;font-size:13px" data-pay-kind>Booking fee</p>
+            <p style="margin:0 0 16px;font-size:28px;font-weight:800;letter-spacing:-.03em" data-pay-amount>Rp 3.000.000</p>
             <div data-dg-home>
+              <div class="dg-group">
+                <h3>CDM cabang</h3>
+                <button type="button" class="channel" data-dg="cdm" style="width:100%"><span class="n">Kode bayar</span><b>CDM</b><span>Setor tunai di mesin cabang</span></button>
+              </div>
               <div class="dg-group">
                 <h3>BRILink</h3>
                 <button type="button" class="channel" data-dg="brilink" style="width:100%"><span class="n">Kode bayar</span><b>BRILink</b><span>Tunjukkan kode ke agen resmi</span></button>
@@ -465,21 +480,27 @@
                 </div>
               </div>
             </div>
+            <div data-dg-panel="cdm" hidden>
+              <p class="hint">Kode yang sama dengan yang tampil di Frontman. Masukkan di CDM cabang — jangan ketik nominal.</p>
+              <div class="dg-code" data-pay-cdm>0426 3000 01</div>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="cdm">Simulasi setor CDM</button>
+              <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
+            </div>
             <div data-dg-panel="brilink" hidden>
               <p class="hint">Kode bayar BRILink. Customer sebutkan di agen — jangan ketik nominal sendiri.</p>
-              <div class="dg-code">8810 0426 3000</div>
-              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="brilink">Simulasi bayar di agen</button>
+              <div class="dg-code" data-pay-brilink>8810 0426 3000</div>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="brilink">Simulasi bayar di agen</button>
               <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
             </div>
             <div data-dg-panel="va" hidden>
               <p class="hint" id="dgVaHint">Transfer ke VA BCA. Jumlah sudah terikat SPK.</p>
               <div class="dg-code" id="dgVaNo">8801 0426 0001</div>
-              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="va">Simulasi transfer masuk</button>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="va">Simulasi transfer masuk</button>
               <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
             </div>
             <div data-dg-panel="app" hidden>
-              <p class="hint" id="dgAppHint">Membuka myBCA dengan tagihan Yaris sudah terisi.</p>
-              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="app">Simulasi bayar di aplikasi</button>
+              <p class="hint" id="dgAppHint">Membuka myBCA dengan tagihan sudah terisi.</p>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="app">Simulasi bayar di aplikasi</button>
               <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
             </div>
             <p class="hint" data-bf-show-paid hidden style="margin-top:12px">Pembayaran masuk. Kuitansi KWT/26/CLD/009301 terbit. SO dapat dibuka.</p>
@@ -615,7 +636,7 @@
                   <button type="button" data-go="booking" aria-pressed="false">Booking fee/DP</button>
                   <button type="button" aria-pressed="true">Pelunasan</button>
                 </div>
-                <p class="hint" style="margin:0">Booking fee unit ditagih setelah SPK lewat QRIS di layar Frontman, tautan Digiroom, atau debit EDC. Untuk Innova Zenix, booking fee sudah ada kuitansi. Pelunasan tahap 2 menunggu bayar.</p>
+                <p class="hint" style="margin:0">Satu model bayar dari booking fee sampai pelunasan: QRIS di layar Frontman, kode CDM, tautan Digiroom, atau debit EDC. Innova Zenix: booking fee sudah kuitansi; pelunasan tahap 2 menunggu.</p>
               </div>
             </div>
 
@@ -667,9 +688,9 @@
                 </div>
               </div>
               <div class="formfoot">
-                <span class="hint">Referensi dan Virtual Account dibuat sistem setelah permintaan dikirim.</span>
+                <span class="hint">Tautan membuka beranda Digiroom. Kode CDM dan VA dibuat sistem dari SPK.</span>
                 <button class="btn ghost">Simpan draft</button>
-                <button class="btn">Kirim instruksi pembayaran</button>
+                <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Kirim tautan Digiroom</button>
               </div>
             </div>
           </div>
@@ -1122,8 +1143,8 @@
           <p class="v" data-live="ar">Rp 181.750.000</p>
           <p class="n">Atau bayar request aktif Rp 100.000.000 dulu.</p>
           <div class="nextbar">
-            <button class="btn" data-go="tagihan_customer">Bayar Rp 100.000.000</button>
-            <button class="btn ghost" data-go="cashless">Bayar di kasir / QR</button>
+            <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar di Digiroom</button>
+            <button class="btn ghost" data-go="cashless">Di cabang: QRIS / CDM / EDC</button>
           </div>
         </div>
         <div class="box">
@@ -1220,7 +1241,7 @@
               <div class="pad">
                 <p><b>Bayar sesuai request aktif</b></p>
                 <p class="hint">VA 8801 0418 0003 · Rp 100.000.000 · berlaku sampai 5 Sep 2026.</p>
-                <button class="btn" style="width:100%;margin:8px 0 16px">Bayar Rp 100.000.000</button>
+                <button class="btn" style="width:100%;margin:8px 0 16px" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar Rp 100.000.000 di Digiroom</button>
                 <p><b>Bayar seluruh AR Open</b></p>
                 <p class="hint">Sistem memvalidasi ulang AR sebelum pembayaran dan menutup atau menyesuaikan request yang tumpang tindih.</p>
                 <button class="btn ghost" style="width:100%">Bayar Rp 181.750.000</button>
@@ -1315,7 +1336,7 @@
         <div class="screenhead">
           <div>
             <h2>Bayar · Innova Zenix</h2>
-            <p>Tujuh kanal, satu tagihan. Nominal dari SPK — tidak ketik ulang.</p>
+            <p>Cara yang sama dengan booking fee: QRIS, CDM, tautan Digiroom, atau EDC. Nominal dari SPK.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-back data-go="beranda">← Daftar</button>
@@ -1330,41 +1351,64 @@
         </nav>
         <div class="cards">
           <div class="card alert"><p class="k">Sisa tagihan</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Sama di Frontman dan customer</p></div>
-          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">VA 8801 0418 0003</p></div>
+          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">CDM / VA terikat SPK</p></div>
         </div>
         <div class="box">
-          <h3>Pilih kanal</h3>
+          <h3>Terima di cabang atau kirim tautan</h3>
           <div class="pad">
-            <div class="channels">
-              <button type="button" class="channel" data-channel="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Scan di HP</span></button>
-              <button type="button" class="channel" data-channel="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Setor di cabang</span></button>
-              <button type="button" class="channel" data-channel="edc" aria-pressed="false"><span class="n">3</span><b>EDC</b><span>Kartu di meja</span></button>
-              <button type="button" class="channel" data-channel="bank" aria-pressed="false"><span class="n">4</span><b>Bank app</b><span>Biller FAST</span></button>
-              <button type="button" class="channel" data-channel="brilink" aria-pressed="false"><span class="n">5</span><b>BRILink</b><span>Agen resmi</span></button>
-              <button type="button" class="channel" data-channel="wa" aria-pressed="false"><span class="n">6</span><b>WhatsApp</b><span>Link checkout</span></button>
-              <button type="button" class="channel" data-channel="portal" aria-pressed="false"><span class="n">7</span><b>Portal SPK</b><span>Link yang sama</span></button>
+            <div class="channels" id="cashSeg">
+              <button type="button" class="channel" data-cash="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode di layar Frontman</span></button>
+              <button type="button" class="channel" data-cash="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Kode bayar di mesin setor</span></button>
+              <button type="button" class="channel" data-cash="link" aria-pressed="false"><span class="n">3</span><b>Tautan bayar</b><span>Beranda Digiroom</span></button>
+              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Pilih perangkat</span></button>
+            </div>
+            <div class="bf-panels">
+              <div data-cash-panel="qris" class="on">
+                <p class="hint">Tunjukkan layar ini. Pelunasan tahap 2 Rp 100.000.000 sudah terisi.</p>
+                <div class="qrbox lg" role="img" aria-label="QRIS pelunasan Innova"></div>
+                <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 100.000.000</p>
+                <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000">Simulasi ter-scan</button>
+              </div>
+              <div data-cash-panel="cdm" hidden>
+                <p class="hint">Setor tunai di CDM cabang. Kode dari SPK — jangan ketik nominal di mesin.</p>
+                <div class="kiosk" style="max-width:360px">
+                  <p style="margin:0;font-size:12px;opacity:.7">CDM · FAST Outlet Cilandak</p>
+                  <p style="margin:8px 0 0;font-size:13px">Kode bayar</p>
+                  <p class="pay-code">0418 1000 03</p>
+                  <p style="margin:8px 0 0;font-size:12px;opacity:.7">Pelunasan · Rp 100.000.000</p>
+                </div>
+                <button type="button" class="btn" style="width:100%;margin-top:12px" data-pay="cdm" data-amount="100000000">Simulasi setor CDM</button>
+              </div>
+              <div data-cash-panel="link" hidden>
+                <p class="hint">Customer membuka beranda Digiroom yang sama: BRILink, VA, aplikasi, atau kode CDM.</p>
+                <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
+                  <p class="from">FAST · tautan Digiroom</p>
+                  <p>Halo Pak Budi, pelunasan Innova Zenix Rp 100.000.000 siap dibayar.</p>
+                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/beranda</b></div>
+                </div>
+                <button type="button" class="btn" style="width:100%" data-pay-link="lunas">Kirim tautan ke Digiroom</button>
+              </div>
+              <div data-cash-panel="edc" hidden>
+                <p class="hint">Pilih EDC. Nominal didorong host-to-host.</p>
+                <div class="device-list">
+                  <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Kasir 1</b><span>Meja penerimaan · Cilandak</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Kasir 2</b><span>Meja SPK</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-03" aria-pressed="false"><b>EDC-03 · Outdoor</b><span>Pos serah terima</span></button>
+                </div>
+                <p class="hint edc-hint" style="margin:12px 0">Siap dorong ke EDC-01 · Kasir 1</p>
+                <button type="button" class="btn" style="width:100%" data-pay="edc" data-amount="100000000">Kirim Rp 100.000.000 ke perangkat</button>
+              </div>
             </div>
           </div>
         </div>
-        <div class="split">
-          <div class="box">
-            <h3 id="cashPrevTitle">QRIS dinamis</h3>
-            <div class="pad" style="text-align:center">
-              <p class="hint" id="cashPrevHint">Customer scan. Jumlah Rp 100.000.000 sudah terisi.</p>
-              <div class="qrbox" id="cashQr" role="img" aria-label="QRIS"></div>
-              <p class="amt" style="font-size:24px;font-weight:800;margin:8px 0">Rp 100.000.000</p>
-              <button class="btn" id="cashPayBtn" data-pay="qris" data-amount="100000000" style="width:100%">Simulasi bayar</button>
-            </div>
+        <div class="box">
+          <h3>Kuitansi di transaksi ini</h3>
+          <div class="docs">
+            <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan 1 · Rp 300.000.000</p><span class="tag ok">Aktif</span></div>
+            <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking · Rp 5.000.000</p><span class="tag ok">Aktif</span></div>
+            <div class="doc miss" id="newReceiptSlot"><b>Kuitansi berikutnya</b><p class="meta">Terbit setelah bayar</p><span class="tag mute">Menunggu</span></div>
           </div>
-          <div class="box">
-            <h3>Kuitansi di transaksi ini</h3>
-            <div class="docs">
-              <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan 1 · Rp 300.000.000</p><span class="tag ok">Aktif</span></div>
-              <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking · Rp 5.000.000</p><span class="tag ok">Aktif</span></div>
-              <div class="doc miss" id="newReceiptSlot"><b>Kuitansi berikutnya</b><p class="meta">Terbit setelah simulasi bayar</p><span class="tag mute">Menunggu</span></div>
-            </div>
-            <div class="pad"><button class="btn ghost" data-go="bayar" style="width:100%">Riwayat alokasi</button></div>
-          </div>
+          <div class="pad"><button class="btn ghost" data-go="bayar" style="width:100%">Riwayat alokasi</button></div>
         </div>
       </section>
     </div>
