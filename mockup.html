@@ -95,7 +95,7 @@
 
       <div data-rail="cust" hidden>
         <p class="grouplabel">Customer · Budi Santoso</p>
-        <button data-go="customer" aria-current="true">Beranda &amp; status</button>
+        <button data-go="customer" aria-current="true">Pesanan saya</button>
         <button data-go="tagihan_customer">Tagihan terbuka<span class="pill">1</span></button>
         <button data-go="e_kuitansi">E-Kuitansi<span class="pill">2</span></button>
       </div>
@@ -743,36 +743,89 @@
       <section class="screen" id="customer">
         <div class="screenhead">
           <div>
-            <h2>Beranda customer</h2>
-            <p>Ringkasan tagihan, status unit, tindakan berikutnya, dan journey pesanan dari satu transaksi yang sama.</p>
+            <h2>Pesanan saya</h2>
+            <p>Halo, Budi Santoso. Pilih pesanan untuk melihat status, tagihan, dan e-kuitansi — seperti daftar pesanan di toko daring.</p>
           </div>
         </div>
 
         <div class="cards">
-          <div class="card"><p class="k">Pesanan aktif</p><p class="v">1</p><p class="n">Innova Zenix · SO 4500091238</p></div>
+          <div class="card"><p class="k">Pesanan di akun</p><p class="v">3</p><p class="n">1 berlangsung · 2 selesai</p></div>
+          <div class="card alert"><p class="k">Tagihan terbuka</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">1 unit masih outstanding</p></div>
+          <div class="card"><p class="k">E-Kuitansi</p><p class="v">2</p><p class="n"><button class="btn ghost" data-go="e_kuitansi">Lihat &amp; download</button></p></div>
+        </div>
+
+        <label class="order-search" for="orderSearch">
+          <span class="sr-only">Cari pesanan</span>
+          <input id="orderSearch" type="search" placeholder="Cari unit, SPK, atau nomor SO…" autocomplete="off">
+        </label>
+        <div class="order-filters" role="tablist" aria-label="Filter pesanan">
+          <button type="button" data-order-filter="all" aria-pressed="true">Semua</button>
+          <button type="button" data-order-filter="ongoing" aria-pressed="false">Berlangsung</button>
+          <button type="button" data-order-filter="done" aria-pressed="false">Selesai</button>
+        </div>
+
+        <div class="order-list" id="orderList">
+          <button type="button" class="order-card" data-order-status="ongoing" data-go="customer_detail">
+            <div class="thumb">ZENIX</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00418 · 28 Agu 2026</p>
+              <strong class="oname">Toyota Innova Zenix 2.0 G HV</strong>
+              <p class="spec">Putih Mutiara · VIN ••41827 · tunai</p>
+              <div class="row2">
+                <span class="tag hold">Berlangsung · menunggu lunas</span>
+                <span class="amt" data-live="ar">Rp 181.750.000</span>
+              </div>
+              <p class="cta">Lihat detail pesanan</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-order-status="done" data-go="order_aksesoris">
+            <div class="thumb done">PAKET</div>
+            <div class="meta">
+              <p class="oid">SO/26/CLD/88102 · 12 Des 2025</p>
+              <strong class="oname">Paket aksesoris &amp; coating</strong>
+              <p class="spec">Karpet, coating, kaca film · FAST Outlet Cilandak</p>
+              <div class="row2">
+                <span class="tag ok">Selesai · lunas</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Lihat detail pesanan</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-order-status="done" data-go="order_calya">
+            <div class="thumb done">CALYA</div>
+            <div class="meta">
+              <p class="oid">SPK/24/CLD/01990 · 18 Nov 2024</p>
+              <strong class="oname">Toyota Calya G AT</strong>
+              <p class="spec">Delivered 02 Des 2024 · STNK &amp; BPKB selesai</p>
+              <div class="row2">
+                <span class="tag ok">Selesai · delivered</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Lihat detail pesanan</p>
+            </div>
+          </button>
+        </div>
+        <p class="note">Klik kartu untuk membuka detail. Tagihan terbuka dan pembayaran cashless hanya pada pesanan yang masih berjalan.</p>
+      </section>
+
+      <section class="screen" id="customer_detail">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Pesanan · SPK/26/CLD/00418</p>
+            <h2>Innova Zenix 2.0 G HV</h2>
+            <p>Putih Mutiara · VIN ••41827 · SO 4500091238. Status, jejak, dan pembayaran dari transaksi yang sama.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="customer">← Pesanan saya</button>
+            <button class="btn" data-go="tagihan_customer">Bayar tagihan</button>
+          </div>
+        </div>
+
+        <div class="cards">
           <div class="card alert"><p class="k">AR Open</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Tagihan unit masih terbuka</p></div>
           <div class="card"><p class="k">Status pesanan</p><p class="v" style="font-size:18px">Menunggu pelunasan</p><p class="n">Billing cash sudah memenuhi 30%</p></div>
           <div class="card"><p class="k">Status unit</p><p class="v" style="font-size:18px">PDI selesai</p><p class="n">VIN sudah dialokasikan</p></div>
-          <div class="card"><p class="k">E-Kuitansi tersedia</p><p class="v">2</p><p class="n"><button class="btn ghost" data-go="e_kuitansi">Lihat &amp; download</button></p></div>
-        </div>
-
-        <div class="box">
-          <h3>Tagihan unit yang masih open <span class="side">Diperbarui dari AR dan kuitansi aktif</span></h3>
-          <div class="scroll">
-            <table>
-              <thead><tr><th>Unit &amp; pesanan</th><th>Referensi</th><th>Status</th><th>Request aktif</th><th class="num">AR Open</th><th>Tindakan</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td><b>Innova Zenix 2.0 G HV</b><span class="sub">Putih Mutiara · VIN ••41827</span></td>
-                  <td>SPK/26/CLD/00418<span class="sub">SO 4500091238 · Cash · billing siap</span></td>
-                  <td><span class="tag hold">Menunggu lunas untuk delivery</span><span class="sub">PDI selesai</span></td>
-                  <td>Rp 100.000.000<span class="sub">Berlaku sampai 5 Sep</span></td>
-                  <td class="num">Rp 181.750.000</td>
-                  <td><button class="btn" data-go="tagihan_customer">Buka tagihan</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div class="card"><p class="k">E-Kuitansi</p><p class="v">2</p><p class="n"><button class="btn ghost" data-go="e_kuitansi">Lihat &amp; download</button></p></div>
         </div>
 
         <div class="grid g3" style="margin-bottom:16px">
@@ -786,7 +839,7 @@
             <div class="bar2"></div>
             <div class="wa">
               <p class="from">FAST · terverifikasi</p>
-              <p>Halo Pak Budi, pembayaran tahap 1 sudah kami terima. Kuitansi KWT/26/CLD/009115 dapat diunduh di Digiroom. Terdapat permintaan pelunasan aktif:</p>
+              <p>Halo Pak Budi, pembayaran tahap 1 sudah kami terima. Kuitansi KWT/26/CLD/009115 dapat diunduh di Customer Home. Terdapat permintaan pelunasan aktif:</p>
               <p class="amt">Rp 100.000.000</p>
               <p style="margin-top:10px">Sisa pelunasan Innova Zenix Anda:</p>
               <p class="amt" style="color:var(--stop)">Rp 181.750.000</p>
@@ -795,12 +848,12 @@
                 <b>8801 0418 0003</b>
               </div>
               <button class="btn ghost" data-go="e_kuitansi" style="width:100%;margin:0 0 10px">Download e-Kuitansi terakhir</button>
-              <p style="font-size:12px;color:var(--ink-soft);margin:0">Billing sudah memenuhi syarat 30%. Unit dijadwalkan setelah pelunasan lunas. Lihat status lengkap di Digiroom.</p>
+              <p style="font-size:12px;color:var(--ink-soft);margin:0">Billing sudah memenuhi syarat 30%. Unit dijadwalkan setelah pelunasan lunas.</p>
             </div>
           </div>
 
           <div class="box">
-            <h3>Status pesanan · Digiroom</h3>
+            <h3>Jejak pesanan</h3>
             <div class="pad">
               <ul class="milestones">
                 <li class="done"><span class="m">✓</span><div>SPK diterima<span class="t">28 Agu 2026</span></div></li>
@@ -820,6 +873,49 @@
         </div>
       </section>
 
+      <section class="screen" id="order_aksesoris">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Pesanan · SO/26/CLD/88102</p>
+            <h2>Paket aksesoris &amp; coating</h2>
+            <p>Dipasang 14 Des 2025 · lunas. Tidak ada tagihan terbuka.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer">← Pesanan saya</button></div>
+        </div>
+        <div class="cards">
+          <div class="card"><p class="k">Status</p><p class="v" style="font-size:18px">Selesai</p><p class="n">Lunas 12 Des 2025</p></div>
+          <div class="card"><p class="k">Sisa tagihan</p><p class="v">Rp 0</p><p class="n">Tidak ada AR Open</p></div>
+        </div>
+        <div class="box">
+          <h3>Isi paket</h3>
+          <div class="pad">
+            <p>Karpet, coating, dan kaca film. Pembayaran via QRIS 12 Des 2025. E-kuitansi tersedia di riwayat unduhan bila diterbitkan untuk paket ini.</p>
+            <p><button class="btn ghost" data-go="e_kuitansi">Lihat e-kuitansi</button></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="order_calya">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Pesanan · SPK/24/CLD/01990</p>
+            <h2>Toyota Calya G AT</h2>
+            <p>Delivered 02 Des 2024 · lunas. Unit lama di akun yang sama.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer">← Pesanan saya</button></div>
+        </div>
+        <div class="cards">
+          <div class="card"><p class="k">Status</p><p class="v" style="font-size:18px">Delivered</p><p class="n">STNK &amp; BPKB selesai</p></div>
+          <div class="card"><p class="k">Sisa tagihan</p><p class="v">Rp 0</p><p class="n">Tidak ada AR Open</p></div>
+        </div>
+        <div class="box">
+          <h3>Riwayat</h3>
+          <div class="pad">
+            <p>Tidak ada tagihan terbuka. Dokumen kendaraan sudah serah terima. Pesanan baru (Innova Zenix) ada di daftar pesanan saya.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- ============ TAGIHAN CUSTOMER ============ -->
       <section class="screen" id="tagihan_customer">
         <div class="screenhead">
@@ -827,7 +923,10 @@
             <h2>Tagihan unit · Innova Zenix</h2>
             <p>Outstanding ditarik langsung dari AR dan dihitung berdasarkan kuitansi yang masih aktif.</p>
           </div>
-          <div class="actions"><button class="btn ghost" data-go="customer">Kembali ke beranda</button></div>
+          <div class="actions">
+            <button class="btn ghost" data-go="customer">← Pesanan saya</button>
+            <button class="btn ghost" data-go="customer_detail">Detail unit</button>
+          </div>
         </div>
 
         <div class="cards">
@@ -895,7 +994,7 @@
             <h2>E-Kuitansi saya</h2>
             <p>Setiap pembayaran terverifikasi menghasilkan e-kuitansi yang dapat dilihat, diverifikasi, dan diunduh dalam format PDF.</p>
           </div>
-          <div class="actions"><button class="btn ghost" data-go="customer">Kembali ke beranda</button></div>
+          <div class="actions"><button class="btn ghost" data-go="customer">← Pesanan saya</button></div>
         </div>
 
         <div class="cards">

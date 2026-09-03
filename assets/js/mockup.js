@@ -47,9 +47,10 @@
   }
   function show(id){
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
+    var railId=({customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer'})[id]||id;
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
-      if(b.dataset.go===id && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
+      if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
     var bar=document.querySelector('.urlbar');
@@ -89,7 +90,7 @@
   }); }); }
 
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function applyRole(role){
     document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
     document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
@@ -106,6 +107,28 @@
     applyRole(screenRole[hash]||'frontman');
     show(hash);
   }
+
+  var orderFilter='all';
+  function filterOrders(){
+    var q=((document.getElementById('orderSearch')||{}).value||'').toLowerCase();
+    document.querySelectorAll('#orderList .order-card').forEach(function(card){
+      var st=card.getAttribute('data-order-status');
+      var matchFilter=orderFilter==='all'||st===orderFilter;
+      var matchQ=!q||card.textContent.toLowerCase().indexOf(q)>-1;
+      card.classList.toggle('is-hidden', !(matchFilter&&matchQ));
+    });
+  }
+  document.querySelectorAll('[data-order-filter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      orderFilter=b.getAttribute('data-order-filter');
+      document.querySelectorAll('[data-order-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x===b?'true':'false');
+      });
+      filterOrders();
+    });
+  });
+  var orderSearch=document.getElementById('orderSearch');
+  if(orderSearch) orderSearch.addEventListener('input', filterOrders);
 
   var search=document.getElementById('txSearch');
   if(search){
