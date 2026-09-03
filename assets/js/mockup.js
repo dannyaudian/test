@@ -47,9 +47,13 @@
   }
   function show(id){
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
+    var railId=({
+      customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
+      tx_hiace:'transaksi',tx_raize:'transaksi',tx_avanza:'transaksi',tx_fortuner:'transaksi'
+    })[id]||id;
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
-      if(b.dataset.go===id && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
+      if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
     var bar=document.querySelector('.urlbar');
@@ -57,6 +61,7 @@
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
+    if(b.dataset.role) applyRole(b.dataset.role);
     show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
@@ -77,7 +82,10 @@
     } else if(/Buat SPK baru/.test(label)){
       b.addEventListener('click',function(){ toast('Draft SPK dibuat. Lengkapi data customer sekali di sumber.'); });
     } else if(/Cari transaksi/.test(label)){
-      b.addEventListener('click',function(){ toast('Filter transaksi berdasarkan tahap tertahan.'); });
+      b.addEventListener('click',function(){
+        var q=document.getElementById('txSearch');
+        if(q){ q.focus(); show('beranda'); }
+      });
     }
   });
   var seg=document.getElementById('jenisSeg');
@@ -86,7 +94,7 @@
   }); }); }
 
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function applyRole(role){
     document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
     document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
@@ -103,4 +111,72 @@
     applyRole(screenRole[hash]||'frontman');
     show(hash);
   }
+
+  var orderFilter='all';
+  function filterOrders(){
+    var q=((document.getElementById('orderSearch')||{}).value||'').toLowerCase();
+    document.querySelectorAll('#orderList .order-card').forEach(function(card){
+      var st=card.getAttribute('data-order-status');
+      var matchFilter=orderFilter==='all'||st===orderFilter;
+      var matchQ=!q||card.textContent.toLowerCase().indexOf(q)>-1;
+      card.classList.toggle('is-hidden', !(matchFilter&&matchQ));
+    });
+  }
+  document.querySelectorAll('[data-order-filter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      orderFilter=b.getAttribute('data-order-filter');
+      document.querySelectorAll('[data-order-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x===b?'true':'false');
+      });
+      filterOrders();
+    });
+  });
+  var orderSearch=document.getElementById('orderSearch');
+  if(orderSearch) orderSearch.addEventListener('input', filterOrders);
+
+  var txFilter='all';
+  function filterTx(){
+    var q=((document.getElementById('txSearch')||{}).value||'').toLowerCase();
+    document.querySelectorAll('#txList .order-card').forEach(function(card){
+      var st=card.getAttribute('data-tx-status');
+      var act=card.getAttribute('data-tx-action')==='1';
+      var match=txFilter==='all'||(txFilter==='action'&&act)||st===txFilter;
+      var matchQ=!q||card.textContent.toLowerCase().indexOf(q)>-1;
+      card.classList.toggle('is-hidden', !(match&&matchQ));
+    });
+  }
+  document.querySelectorAll('[data-tx-filter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      txFilter=b.getAttribute('data-tx-filter');
+      document.querySelectorAll('.order-filters [data-tx-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x.getAttribute('data-tx-filter')===txFilter?'true':'false');
+      });
+      show('beranda');
+      filterTx();
+    });
+  });
+  var search=document.getElementById('txSearch');
+  if(search) search.addEventListener('input', filterTx);
+
+  function applyLive(){
+    if(!window.FAST || !FAST.load) return;
+    var s=FAST.load();
+    if(!s || !s.paid) return;
+    var bar=document.getElementById('liveSync');
+    var msg=document.getElementById('syncMsg');
+    if(bar) bar.hidden=false;
+    if(msg) msg.textContent=(s.channel||'Cashless')+' · '+(s.receipt||'KWT/26/CLD/009220')+' · AR Open '+(s.arLabel||'Rp 81.750.000')+'. Delivery '+(s.ar===0?'terbuka':'masih menunggu lunas')+'.';
+    document.querySelectorAll('[data-live="ar"]').forEach(function(el){ el.textContent=s.arLabel||'Rp 81.750.000'; });
+    document.querySelectorAll('[data-live="ar-short"]').forEach(function(el){
+      el.innerHTML=(s.ar===0?'0':'81,75')+'<span style="font-size:14px;font-weight:500"> Jt</span>';
+    });
+    document.querySelectorAll('[data-live="avail"]').forEach(function(el){ el.textContent=s.ar===0?'Rp 0':'Rp 81.750.000'; });
+    document.querySelectorAll('[data-live="payhint"]').forEach(function(el){
+      el.textContent=s.ar===0?'100% terbayar · delivery cash terbuka':'83,2% terbayar · tersinkron dari Cashless D2';
+    });
+    var barFill=document.querySelector('#transaksi .bar i');
+    if(barFill) barFill.style.width=s.ar===0?'100%':'83.2%';
+  }
+  applyLive();
+  window.addEventListener('fast-session', applyLive);
 })();

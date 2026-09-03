@@ -27,8 +27,17 @@
   <div class="pagehead">
     <p class="dl"><span class="badge">Deliverable 2</span><span class="badge ok">Terhubung ke D1</span></p>
     <h1>Integrated Cashless Payment and E-Receipt</h1>
-    <p>Tujuh kanal pembayaran masuk ke satu ledger real-time. Tidak ada input manual di lapangan. Setiap pembayaran terverifikasi menerbitkan satu e-kuitansi dan memperbarui AR Open, Available Request Amount, serta gate billing/delivery di alur Frontman (Deliverable 1). Angka bersifat ilustratif.</p>
+    <p>Tujuh kanal pembayaran masuk ke satu ledger real-time. Tidak ada input manual di lapangan. Setiap pembayaran terverifikasi menerbitkan satu e-kuitansi dan memperbarui AR Open di Deliverable 1. Angka bersifat ilustratif.</p>
   </div>
+
+  <nav class="journey" aria-label="Alur seamless D1 ke D2" style="margin-left:clamp(16px,4vw,44px);margin-right:clamp(16px,4vw,44px);max-width:1500px">
+    <a href="mockup.html#beranda">SPK</a>
+    <a href="mockup.html#bayar">Booking fee</a>
+    <a href="mockup.html#transaksi">SO</a>
+    <a class="on pay" href="mockup-cashless.html">Cashless D2</a>
+    <a href="mockup.html#transaksi">Billing</a>
+    <a href="mockup.html#transaksi">Delivery</a>
+  </nav>
 
   <div class="handoff">
     <p><b>Handoff dari Deliverable 1.</b> SPK/26/CLD/00418 · Budi Santoso · Innova Zenix · SO 4500091238 · Cash · AR Open Rp 181.750.000 · 2 e-kuitansi aktif · booking fee unit sudah lolos.</p>
@@ -91,10 +100,11 @@
         <section class="screen on" id="overview">
           <div class="screenhead">
             <div>
-              <h2><span class="live-dot"></span>Ledger real-time</h2>
-              <p>Semua kanal menulis ke satu payment reference. Status PAID masuk ke SAM D1 tanpa re-entry.</p>
-            </div>
+            <h2><span class="live-dot"></span>Ledger real-time</h2>
+            <p>Semua kanal menulis ke satu payment reference. Tekan 1–7 untuk pindah kanal. Status PAID masuk ke SAM D1 tanpa re-entry.</p>
+          </div>
             <div class="actions">
+              <a class="btn ghost" href="mockup.html#beranda">Beranda Frontman</a>
               <a class="btn ghost" href="mockup.html#transaksi">Sinkron ke D1</a>
             </div>
           </div>
@@ -384,7 +394,22 @@
     </div>
   </div>
 </div>
+</div>
+<div class="overlay" id="payflow" hidden>
+  <div class="overlay-card">
+    <p class="eyebrow" style="margin:0 0 8px">Seamless settlement</p>
+    <h3 style="margin:0 0 12px">Memproses pembayaran</h3>
+    <ol>
+      <li data-step="1">Ambil request &amp; AR dari Deliverable 1</li>
+      <li data-step="2">Verifikasi Banking API</li>
+      <li data-step="3">Terbitkan e-kuitansi</li>
+      <li data-step="4">Sinkronkan AR &amp; gate ke SAM D1</li>
+    </ol>
+    <p class="pf-status" id="pfStatus">Menyiapkan kanal…</p>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/session.js"></script>
 <script src="assets/js/cashless.js"></script>
 </body>
 </html>
