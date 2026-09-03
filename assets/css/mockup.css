@@ -33,6 +33,23 @@
 #mockup .payhero .v{margin:4px 0 6px;font-size:28px;font-weight:800;letter-spacing:-.03em}
 #mockup .payhero .n{margin:0 0 12px;font-size:13px;color:var(--ink-soft)}
 #mockup .nextbar{display:flex;flex-wrap:wrap;gap:8px}
+#mockup .amtchips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+#mockup .amtchips .chip{
+  font:inherit;font-size:12.5px;font-weight:700;padding:8px 12px;border-radius:999px;
+  border:1px solid var(--rule);background:#fff;color:var(--ink);
+}
+#mockup .amtchips .chip.on{border-color:var(--signal);background:var(--signal-tint);color:var(--signal)}
+#mockup .amtfield{display:block;margin:0 0 12px}
+#mockup .amtfield > span{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+#mockup .amtfield input{
+  width:100%;font:inherit;font-size:22px;font-weight:800;letter-spacing:-.03em;
+  padding:10px 12px;border:1px solid var(--rule);border-radius:12px;background:#fff;
+}
+#mockup .amtfield input[readonly]{background:var(--surface-2);color:var(--ink-soft)}
+#mockup .locknote{
+  margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--signal-tint);
+  font-size:13px;color:var(--ink);
+}
 #mockup .more{margin:0 0 16px;border:1px solid var(--rule);border-radius:14px;padding:10px 14px;background:#fff}
 #mockup .more summary{cursor:pointer;font-weight:700;font-size:13px}
 #mockup .pagehead h1{font-size:clamp(26px,3vw,36px);letter-spacing:-.04em;margin:0 0 8px;font-weight:800}

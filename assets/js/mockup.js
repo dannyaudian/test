@@ -47,34 +47,103 @@
     toastTimer=setTimeout(function(){ toastEl.classList.remove('show'); }, 2800);
   }
   var payJobId='booking';
+  var dgVaBank='BCA';
+  var dgQrisReady=false;
+  var dgVaReady=false;
   var payJobs={
     booking:{
       name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Yaris 1.5 G',kind:'Booking fee',amount:'Rp 3.000.000',
+      amountNum:3000000,max:3000000,locked:true,
       cdm:'0426 3000 01',brilink:'8810 0426 3000',
       va:{BCA:'8801 0426 0001',BRI:'0026 0426 0001',Mandiri:'8881 0426 0001'},
-      back:'booking'
+      back:'booking',
+      lead:'Booking fee adalah payment request salesman. QRIS dan VA terkunci Rp 3.000.000.'
     },
     lunas:{
       name:'Budi Santoso',spk:'SPK/26/CLD/00418',unit:'Innova Zenix',kind:'Pelunasan tahap 2',amount:'Rp 100.000.000',
+      amountNum:100000000,max:100000000,locked:true,
       cdm:'0418 1000 03',brilink:'8810 0418 0003',
       va:{BCA:'8801 0418 0003',BRI:'0026 0418 0003',Mandiri:'8881 0418 0003'},
-      back:'cashless'
+      back:'cashless',
+      lead:'Ada payment request salesman. Nominal QRIS dan VA terkunci Rp 100.000.000.'
+    },
+    open:{
+      name:'Budi Santoso',spk:'SPK/26/CLD/00418',unit:'Innova Zenix',kind:'Pembayaran unit',amount:'Isi nominal',
+      amountNum:0,max:81750000,locked:false,
+      cdm:'0418 OPEN 01',brilink:'8810 0418 OPEN',
+      va:{BCA:'8801 0418 8100',BRI:'0026 0418 8100',Mandiri:'8881 0418 8100'},
+      back:'customer_detail',
+      lead:'Tidak ada request untuk sisa ini. Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.'
     }
   };
+  function formatRp(n){ return 'Rp '+Number(n||0).toLocaleString('id-ID'); }
+  function parseRp(s){ var d=String(s||'').replace(/\D/g,''); return d?parseInt(d,10):0; }
+  function currentJob(){ return payJobs[payJobId]||payJobs.booking; }
+  function currentDgAmount(){
+    var j=currentJob();
+    if(j.locked) return j.amountNum;
+    var inp=document.querySelector('#digiroom [data-pay-amount-input]');
+    var n=parseRp(inp&&inp.value);
+    if(j.max && n>j.max) n=j.max;
+    return n;
+  }
+  function syncPayAmount(){
+    var j=currentJob();
+    var n=currentDgAmount();
+    var label=j.locked?j.amount:(n?formatRp(n):'Isi nominal');
+    document.querySelectorAll('[data-pay-amount]').forEach(function(el){ el.textContent=label; });
+    document.querySelectorAll('[data-pay-amount-display]').forEach(function(el){ el.textContent=n?formatRp(n):'—'; });
+    var inp=document.querySelector('#digiroom [data-pay-amount-input]');
+    if(inp && j.locked) inp.value=String(j.amountNum);
+  }
+  function applyPayLockUI(){
+    var j=currentJob();
+    var locked=!!j.locked;
+    document.querySelectorAll('[data-pay-locked]').forEach(function(el){ el.hidden=!locked; });
+    document.querySelectorAll('[data-pay-open]').forEach(function(el){ el.hidden=locked; });
+    var inp=document.querySelector('#digiroom [data-pay-amount-input]');
+    if(inp){
+      inp.readOnly=locked;
+      inp.value=locked?String(j.amountNum):'';
+    }
+    document.querySelectorAll('[data-pay-max]').forEach(function(el){
+      el.textContent='Maksimum '+formatRp(j.max)+(locked?'':' · sisa di luar request aktif');
+    });
+    var lead=document.querySelector('[data-pay-lead]');
+    if(lead) lead.textContent=j.lead;
+    dgQrisReady=locked;
+    dgVaReady=locked;
+    syncPayAmount();
+    refreshDgInstruments();
+  }
+  function refreshDgInstruments(){
+    var n=currentDgAmount();
+    var qrisOn=dgQrisReady && n>0;
+    var vaOn=dgVaReady && n>0;
+    document.querySelectorAll('[data-qris-wait]').forEach(function(el){ el.hidden=qrisOn; });
+    document.querySelectorAll('[data-qris-ready]').forEach(function(el){ el.hidden=!qrisOn; });
+    document.querySelectorAll('[data-va-wait]').forEach(function(el){ el.hidden=vaOn; });
+    document.querySelectorAll('[data-va-ready]').forEach(function(el){ el.hidden=!vaOn; });
+  }
   function setPayJob(id){
     payJobId=payJobs[id]?id:'booking';
-    var j=payJobs[payJobId];
+    var j=currentJob();
     document.querySelectorAll('[data-pay-name]').forEach(function(el){ el.textContent=j.name; });
     document.querySelectorAll('[data-pay-spk]').forEach(function(el){ el.textContent=j.spk; });
     document.querySelectorAll('[data-pay-unit]').forEach(function(el){ el.textContent=j.unit; });
     document.querySelectorAll('[data-pay-kind]').forEach(function(el){ el.textContent=j.kind; });
-    document.querySelectorAll('[data-pay-amount]').forEach(function(el){ el.textContent=j.amount; });
     document.querySelectorAll('[data-pay-cdm]').forEach(function(el){ el.textContent=j.cdm; });
     document.querySelectorAll('[data-pay-brilink]').forEach(function(el){ el.textContent=j.brilink; });
     var back=document.querySelector('[data-dg-back]');
-    if(back) back.setAttribute('data-go', j.back);
+    if(back){
+      back.setAttribute('data-go', j.back);
+      back.setAttribute('data-role', j.back==='customer_detail'?'cust':'frontman');
+      back.textContent=j.back==='customer_detail'?'← Pesanan':'← Frontman';
+    }
     var no=document.getElementById('dgVaNo');
     if(no) no.textContent=j.va.BCA;
+    applyPayLockUI();
+    showDg('home');
   }
   function show(id){
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
@@ -117,7 +186,7 @@
       el.hidden=currentRole==='cust';
     });
     if(id==='booking') setPayJob('booking');
-    if(id==='cashless') setPayJob('lunas');
+    if(id==='cashless'){ setPayJob('lunas'); setCashQrisMode('request'); }
     syncRoleChrome();
     applyExcAlamat();
     applyBooking();
@@ -126,10 +195,11 @@
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
+    var fromFrontman=currentRole==='frontman';
     if(b.dataset.role) applyRole(b.dataset.role);
     if(b.dataset.payJob){
       setPayJob(b.dataset.payJob);
-      if(b.dataset.go==='digiroom') toast('Tautan terkirim. Customer masuk ke beranda Digiroom.');
+      if(b.dataset.go==='digiroom') toast(fromFrontman?'Tautan terkirim. Customer masuk ke beranda Digiroom.':'Pilih QRIS atau VA di Digiroom.');
     }
     show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
@@ -139,7 +209,7 @@
       return;
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
-    if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash')) return;
+    if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
     if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
@@ -505,17 +575,27 @@
     document.querySelectorAll('[data-dg-panel]').forEach(function(p){
       p.hidden = p.getAttribute('data-dg-panel')!==panel;
     });
-    var j=payJobs[payJobId]||payJobs.booking;
+    var j=currentJob();
+    var n=currentDgAmount();
+    var amt=n?formatRp(n):(j.locked?j.amount:'isi nominal dulu');
     if(panel==='va'){
-      var bank=meta||'BCA';
-      var hint=document.getElementById('dgVaHint');
+      dgVaBank=meta||dgVaBank||'BCA';
+      var wait=document.getElementById('dgVaHint');
+      var ready=document.getElementById('dgVaReadyHint');
       var no=document.getElementById('dgVaNo');
-      if(hint) hint.textContent='Transfer ke VA '+bank+'. Jumlah sudah terikat SPK.';
-      if(no) no.textContent=(j.va&&j.va[bank])||j.va.BCA;
+      if(wait) wait.textContent=j.locked
+        ? ('VA '+dgVaBank+' · request salesman '+j.amount+' sudah terkunci. Terbitkan nomor.')
+        : ('Isi nominal, lalu terbitkan VA '+dgVaBank+'. Ini transfer rekening virtual, bukan QRIS.');
+      if(ready) ready.textContent='Transfer ke VA '+dgVaBank+' · '+amt+'.';
+      if(no) no.textContent=(j.va&&j.va[dgVaBank])||j.va.BCA;
+      refreshDgInstruments();
+    }
+    if(panel==='qris'){
+      refreshDgInstruments();
     }
     if(panel==='app'){
       var hint=document.getElementById('dgAppHint');
-      if(hint) hint.textContent='Membuka '+(meta||'myBCA')+' · '+j.kind+' '+j.amount+' sudah terisi.';
+      if(hint) hint.textContent='Membuka '+(meta||'myBCA')+' · '+j.kind+' '+amt+'.';
     }
   }
   document.querySelectorAll('[data-dg]').forEach(function(b){
@@ -526,9 +606,75 @@
   document.querySelectorAll('[data-dg-pay]').forEach(function(b){
     b.addEventListener('click',function(){
       var ch=b.getAttribute('data-dg-pay');
-      if(payJobId==='lunas') runPayflow(ch, 100000000);
-      else settleBooking(ch);
+      var n=currentDgAmount();
+      if(!n){ toast('Isi nominal pembayaran dulu.'); return; }
+      if(payJobId==='booking') settleBooking(ch);
+      else runPayflow(ch, n);
     });
+  });
+  var amtInp=document.querySelector('#digiroom [data-pay-amount-input]');
+  if(amtInp){
+    amtInp.addEventListener('input',function(){
+      if(currentJob().locked) return;
+      dgQrisReady=false;
+      dgVaReady=false;
+      var j=currentJob();
+      var n=parseRp(amtInp.value);
+      if(j.max && n>j.max){
+        amtInp.value=String(j.max);
+        toast('Dibatasi '+formatRp(j.max)+'.');
+      }
+      syncPayAmount();
+      refreshDgInstruments();
+    });
+  }
+  document.querySelectorAll('[data-qris-show]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(b.getAttribute('data-qris-show')==='cash'){
+        var inp=document.getElementById('cashQrisAmt');
+        var n=parseRp(inp&&inp.value);
+        if(n>81750000) n=81750000;
+        if(!n){ toast('Isi nominal QRIS dulu.'); return; }
+        var label=document.getElementById('cashQrisLabel');
+        var pay=document.getElementById('cashQrisPay');
+        var box=document.querySelector('[data-cash-qris-ready]');
+        if(label) label.textContent=formatRp(n);
+        if(pay) pay.setAttribute('data-amount', String(n));
+        if(box) box.hidden=false;
+        return;
+      }
+      var n=currentDgAmount();
+      if(!n){ toast('Isi nominal pembayaran dulu.'); return; }
+      dgQrisReady=true;
+      refreshDgInstruments();
+    });
+  });
+  document.querySelectorAll('[data-va-issue]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var n=currentDgAmount();
+      if(!n){ toast('Isi nominal pembayaran dulu.'); return; }
+      dgVaReady=true;
+      var j=currentJob();
+      var no=document.getElementById('dgVaNo');
+      if(no) no.textContent=(j.va&&j.va[dgVaBank])||j.va.BCA;
+      var ready=document.getElementById('dgVaReadyHint');
+      if(ready) ready.textContent='Transfer ke VA '+dgVaBank+' · '+formatRp(n)+'.';
+      refreshDgInstruments();
+    });
+  });
+  function setCashQrisMode(mode){
+    document.querySelectorAll('[data-cash-amt]').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-cash-amt')===mode);
+    });
+    var req=document.querySelector('[data-cash-qris-request]');
+    var open=document.querySelector('[data-cash-qris-open]');
+    if(req) req.hidden = mode!=='request';
+    if(open) open.hidden = mode!=='open';
+    var ready=document.querySelector('[data-cash-qris-ready]');
+    if(ready && mode!=='open') ready.hidden=true;
+  }
+  document.querySelectorAll('[data-cash-amt]').forEach(function(b){
+    b.addEventListener('click',function(){ setCashQrisMode(b.getAttribute('data-cash-amt')); });
   });
 
   function applyLive(){
@@ -541,7 +687,9 @@
     if(msg) msg.textContent=(s.channel||'Cashless')+' · '+(s.receipt||'KWT/26/CLD/009220')+' · AR Open '+(s.arLabel||'Rp 81.750.000')+'. Delivery '+(s.ar===0?'terbuka':'masih menunggu lunas')+'.';
     document.querySelectorAll('[data-live="ar"]').forEach(function(el){ el.textContent=s.arLabel||'Rp 81.750.000'; });
     document.querySelectorAll('[data-live="ar-short"]').forEach(function(el){
-      el.innerHTML=(s.ar===0?'0':'81,75')+'<span style="font-size:14px;font-weight:500"> Jt</span>';
+      var ar=typeof s.ar==='number'?s.ar:81750000;
+      var jt=ar===0?'0':(ar/1000000).toLocaleString('id-ID',{maximumFractionDigits:2});
+      el.innerHTML=jt+'<span style="font-size:14px;font-weight:500"> Jt</span>';
     });
     document.querySelectorAll('[data-live="avail"]').forEach(function(el){ el.textContent=s.ar===0?'Rp 0':'Rp 81.750.000'; });
     document.querySelectorAll('[data-live="payhint"]').forEach(function(el){
@@ -578,19 +726,20 @@
     if(book && book.classList.contains('on') && n>=1 && n<=4) showBfPanel(order[n-1]);
   });
   function settle(channel, amount){
-    var ar=amount>=181750000?0:81750000;
-    var label=ar===0?'Rp 0':'Rp 81.750.000';
+    amount=Number(amount||0);
+    var ar=Math.max(0, 181750000-amount);
+    var label=formatRp(ar);
     var slot=document.getElementById('newReceiptSlot');
     if(slot){
       slot.className='doc';
-      slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Pelunasan 2 · '+(channelMeta[channel]?channelMeta[channel].title:'Cashless')+'</p><span class="tag ok">Aktif</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
+      slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Pembayaran · '+(channelMeta[channel]?channelMeta[channel].title:'Cashless')+' · '+formatRp(amount)+'</p><span class="tag ok">Aktif</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
       var db=slot.querySelector('button');
       if(db) db.addEventListener('click',function(){ downloadReceipt('KWT/26/CLD/009220'); toast('E-kuitansi PDF diunduh.'); });
     }
     if(window.FAST && FAST.save){
       FAST.save({paid:true,ar:ar,arLabel:label,receipt:'KWT/26/CLD/009220',channel:(channelMeta[channel]||{}).title||channel});
     }
-    toast(ar===0?'Lunas. E-kuitansi terbit. Delivery cash terbuka.':'Pembayaran masuk. Tagihan di beranda ikut berkurang.');
+    toast(ar===0?'Lunas. E-kuitansi terbit. Delivery cash terbuka.':'Pembayaran '+formatRp(amount)+' masuk. Tagihan di beranda ikut berkurang.');
     show(currentRole==='cust'?'customer_detail':'cashless');
   }
   function runPayflow(channel, amount){

@@ -419,7 +419,7 @@
                 <button type="button" class="btn" style="width:100%;margin-top:12px" data-bf-pay="cdm">Simulasi setor CDM</button>
               </div>
               <div data-bf-panel="link">
-                <p class="hint">Tautan membuka beranda Digiroom. Di HP, customer pilih BRILink, VA, aplikasi, atau lihat kode CDM yang sama.</p>
+                <p class="hint">Tautan membuka beranda Digiroom. Booking fee adalah request salesman — QRIS dan VA terkunci Rp 3.000.000.</p>
                 <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
                   <p class="from">FAST · tautan Digiroom</p>
                   <p>Halo Bu Dewi, SPK Yaris Anda sudah tersimpan. Booking fee Rp 3.000.000.</p>
@@ -454,7 +454,7 @@
           <div>
             <p class="eyebrow">Tautan pembayaran</p>
             <h2>Beranda Digiroom</h2>
-            <p>Customer membuka tautan dari Frontman. Pilih cara bayar — nominal sudah dari SPK.</p>
+            <p data-pay-lead>QRIS: isi nominal lalu scan. VA: isi nominal lalu nomor rekening terbit. Kalau salesman sudah kirim payment request, nominal terkunci.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-dg-back data-go="booking" data-role="frontman">← Frontman</button></div>
         </div>
@@ -466,8 +466,18 @@
           <div class="dg-body">
             <p class="eyebrow" style="margin:0;font-size:12px;color:var(--ink-soft)"><span data-pay-spk>SPK/26/CLD/00426</span> · <span data-pay-unit>Yaris 1.5 G</span></p>
             <p style="margin:4px 0 4px;font-size:13px" data-pay-kind>Booking fee</p>
-            <p style="margin:0 0 16px;font-size:28px;font-weight:800;letter-spacing:-.03em" data-pay-amount>Rp 3.000.000</p>
+            <p class="locknote" data-pay-locked>Payment request salesman · <span data-pay-amount>Rp 3.000.000</span> · tidak bisa diubah.</p>
+            <label class="amtfield" data-pay-open hidden>
+              <span>Nominal pembayaran</span>
+              <input data-pay-amount-input inputmode="numeric" autocomplete="off" placeholder="Contoh 50000000">
+              <span class="hint" data-pay-max>Maksimum sisa di luar request: Rp 81.750.000</span>
+            </label>
+            <p style="margin:0 0 16px;font-size:28px;font-weight:800;letter-spacing:-.03em" data-pay-amount-display data-pay-open hidden>—</p>
             <div data-dg-home>
+              <div class="dg-group">
+                <h3>QRIS</h3>
+                <button type="button" class="channel" data-dg="qris" style="width:100%"><span class="n">Scan</span><b>QRIS</b><span>Isi nominal, lalu tampilkan barcode</span></button>
+              </div>
               <div class="dg-group">
                 <h3>CDM cabang</h3>
                 <button type="button" class="channel" data-dg="cdm" style="width:100%"><span class="n">Kode bayar</span><b>CDM</b><span>Setor tunai di mesin cabang</span></button>
@@ -479,9 +489,9 @@
               <div class="dg-group">
                 <h3>Virtual Account</h3>
                 <div class="channels">
-                  <button type="button" class="channel" data-dg="va" data-bank="BCA"><span class="n">VA</span><b>BCA</b><span>Transfer VA</span></button>
-                  <button type="button" class="channel" data-dg="va" data-bank="BRI"><span class="n">VA</span><b>BRI</b><span>Transfer VA</span></button>
-                  <button type="button" class="channel" data-dg="va" data-bank="Mandiri"><span class="n">VA</span><b>Mandiri</b><span>Transfer VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="BCA"><span class="n">VA</span><b>BCA</b><span>Isi nominal, lalu terbitkan VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="BRI"><span class="n">VA</span><b>BRI</b><span>Isi nominal, lalu terbitkan VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="Mandiri"><span class="n">VA</span><b>Mandiri</b><span>Isi nominal, lalu terbitkan VA</span></button>
                 </div>
               </div>
               <div class="dg-group">
@@ -506,10 +516,26 @@
               <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="brilink">Simulasi bayar di agen</button>
               <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
             </div>
+            <div data-dg-panel="qris" hidden>
+              <p class="hint" data-qris-wait>Isi nominal di atas, lalu tampilkan QRIS. Bukan VA — customer scan barcode.</p>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-wait data-qris-show>Tampilkan QRIS</button>
+              <div data-qris-ready hidden>
+                <p class="hint">Scan barcode ini. Nominal <span data-pay-amount>Rp 3.000.000</span>.</p>
+                <div class="qrbox lg" role="img" aria-label="QRIS Digiroom"></div>
+                <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px" data-pay-amount>Rp 3.000.000</p>
+                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="qris">Simulasi ter-scan</button>
+              </div>
+              <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
+            </div>
             <div data-dg-panel="va" hidden>
-              <p class="hint" id="dgVaHint">Transfer ke VA BCA. Jumlah sudah terikat SPK.</p>
-              <div class="dg-code" id="dgVaNo">8801 0426 0001</div>
-              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="va">Simulasi transfer masuk</button>
+              <p class="hint" id="dgVaHint" data-va-wait>Isi nominal di atas, lalu terbitkan nomor VA. Bukan QRIS — transfer ke rekening virtual.</p>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-va-wait data-va-issue>Terbitkan VA</button>
+              <div data-va-ready hidden>
+                <p class="hint" id="dgVaReadyHint">Transfer ke VA BCA. Nominal sesuai yang diisi.</p>
+                <div class="dg-code" id="dgVaNo">8801 0426 0001</div>
+                <p style="text-align:center;font-weight:800;margin:0 0 12px" data-pay-amount>Rp 3.000.000</p>
+                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-dg-pay="va">Simulasi transfer masuk</button>
+              </div>
               <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke beranda Digiroom</button>
             </div>
             <div data-dg-panel="app" hidden>
@@ -798,7 +824,7 @@
                 </div>
               </div>
               <div class="formfoot">
-                <span class="hint">Tautan membuka beranda Digiroom. Kode CDM dan VA dibuat sistem dari SPK.</span>
+                <span class="hint">Request mengunci nominal di QRIS dan VA. Tanpa request, customer mengisi angka sendiri lalu QRIS tampil atau VA terbit.</span>
                 <button class="btn ghost">Simpan draft</button>
                 <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Kirim tautan Digiroom</button>
               </div>
@@ -1257,10 +1283,11 @@
         <div class="payhero">
           <p class="k">Sisa tagihan</p>
           <p class="v" data-live="ar">Rp 181.750.000</p>
-          <p class="n">Atau bayar request aktif Rp 100.000.000 dulu.</p>
+          <p class="n">Ada request salesman Rp 100.000.000. Atau isi nominal sendiri di QRIS / VA untuk sisa di luar request.</p>
           <div class="nextbar">
-            <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar di Digiroom</button>
-            <button class="btn ghost" data-go="cashless">Di cabang: QRIS / CDM / EDC</button>
+            <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar sesuai request</button>
+            <button class="btn ghost" data-go="digiroom" data-pay-job="open" data-role="cust">Isi nominal sendiri · QRIS / VA</button>
+            <button class="btn ghost" data-go="cashless">Di cabang</button>
           </div>
         </div>
         <div class="box">
@@ -1355,12 +1382,12 @@
             <div class="box">
               <h3>Pilih pembayaran</h3>
               <div class="pad">
-                <p><b>Bayar sesuai request aktif</b></p>
-                <p class="hint">VA 8801 0418 0003 · Rp 100.000.000 · berlaku sampai 5 Sep 2026.</p>
+                <p><b>Bayar sesuai request salesman</b></p>
+                <p class="hint">QRIS dan VA terkunci Rp 100.000.000 · berlaku sampai 5 Sep 2026.</p>
                 <button class="btn" style="width:100%;margin:8px 0 16px" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar Rp 100.000.000 di Digiroom</button>
-                <p><b>Bayar seluruh AR Open</b></p>
-                <p class="hint">Sistem memvalidasi ulang AR sebelum pembayaran dan menutup atau menyesuaikan request yang tumpang tindih.</p>
-                <button class="btn ghost" style="width:100%">Bayar Rp 181.750.000</button>
+                <p><b>Bayar nominal sendiri · QRIS atau VA</b></p>
+                <p class="hint">Tidak ada request untuk sisa Rp 81.750.000. Customer mengisi angka, lalu scan QRIS atau terbitkan VA.</p>
+                <button class="btn ghost" style="width:100%" data-go="digiroom" data-pay-job="open" data-role="cust">Isi nominal di Digiroom</button>
               </div>
             </div>
           </div>
@@ -1452,7 +1479,7 @@
         <div class="screenhead">
           <div>
             <h2>Bayar · Innova Zenix</h2>
-            <p>Cara yang sama dengan booking fee: QRIS, CDM, tautan Digiroom, atau EDC. Nominal dari SPK.</p>
+            <p>QRIS dan VA penjualan unit: customer bisa isi nominal, kecuali sudah ada payment request salesman.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-back data-go="beranda">← Daftar</button>
@@ -1467,7 +1494,7 @@
         </nav>
         <div class="cards">
           <div class="card alert"><p class="k">Sisa tagihan</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Sama di Frontman dan customer</p></div>
-          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">CDM / VA terikat SPK</p></div>
+          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">QRIS &amp; VA terkunci ke request ini</p></div>
         </div>
         <div class="box">
           <h3>Terima di cabang atau kirim tautan</h3>
@@ -1480,10 +1507,29 @@
             </div>
             <div class="bf-panels">
               <div data-cash-panel="qris" class="on">
-                <p class="hint">Tunjukkan layar ini. Pelunasan tahap 2 Rp 100.000.000 sudah terisi.</p>
-                <div class="qrbox lg" role="img" aria-label="QRIS pelunasan Innova"></div>
-                <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 100.000.000</p>
-                <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000">Simulasi ter-scan</button>
+                <div class="amtchips" role="group" aria-label="Nominal QRIS">
+                  <button type="button" class="chip on" data-cash-amt="request">Sesuai request · Rp 100.000.000</button>
+                  <button type="button" class="chip" data-cash-amt="open">Nominal lain</button>
+                </div>
+                <div data-cash-qris-request>
+                  <p class="hint">Payment request salesman. Tunjukkan barcode — customer tidak mengubah angka.</p>
+                  <div class="qrbox lg" role="img" aria-label="QRIS pelunasan Innova"></div>
+                  <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 100.000.000</p>
+                  <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000">Simulasi ter-scan</button>
+                </div>
+                <div data-cash-qris-open hidden>
+                  <p class="hint">Tidak memakai request. Isi nominal (maks. Rp 81.750.000), lalu tampilkan QRIS. Bukan VA.</p>
+                  <label class="amtfield">
+                    <span>Nominal QRIS</span>
+                    <input id="cashQrisAmt" inputmode="numeric" autocomplete="off" placeholder="Contoh 25000000">
+                  </label>
+                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-show="cash">Tampilkan QRIS</button>
+                  <div data-cash-qris-ready hidden>
+                    <div class="qrbox lg" role="img" aria-label="QRIS nominal lain"></div>
+                    <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px" id="cashQrisLabel">Rp 0</p>
+                    <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="0" id="cashQrisPay">Simulasi ter-scan</button>
+                  </div>
+                </div>
               </div>
               <div data-cash-panel="cdm">
                 <p class="hint">Setor tunai di CDM cabang. Kode dari SPK — jangan ketik nominal di mesin.</p>
@@ -1496,10 +1542,10 @@
                 <button type="button" class="btn" style="width:100%;margin-top:12px" data-pay="cdm" data-amount="100000000">Simulasi setor CDM</button>
               </div>
               <div data-cash-panel="link">
-                <p class="hint">Customer membuka beranda Digiroom yang sama: BRILink, VA, aplikasi, atau kode CDM.</p>
+                <p class="hint">Di Digiroom customer pilih QRIS (scan) atau VA (transfer). Request 100 juta mengunci nominal; tanpa request, mereka isi sendiri.</p>
                 <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
                   <p class="from">FAST · tautan Digiroom</p>
-                  <p>Halo Pak Budi, pelunasan Innova Zenix Rp 100.000.000 siap dibayar.</p>
+                  <p>Halo Pak Budi, ada request pelunasan Rp 100.000.000. Anda juga bisa bayar nominal lain lewat QRIS atau VA.</p>
                   <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/beranda</b></div>
                 </div>
                 <button type="button" class="btn" style="width:100%" data-go="digiroom" data-pay-job="lunas" data-role="cust">Kirim tautan ke Digiroom</button>
