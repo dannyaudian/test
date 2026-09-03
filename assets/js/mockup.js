@@ -63,6 +63,7 @@
     });
     var bar=document.querySelector('.urlbar');
     if(bar) bar.textContent='sam.fast.id/fast/'+id;
+    if(history.replaceState) try { history.replaceState(null,'','#'+id); } catch(err) {}
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
