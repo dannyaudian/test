@@ -64,15 +64,15 @@
 
       <div class="track" aria-label="Customer journey end to end">
         <ol>
-          <li class="on"><a href="mockup.html#beranda"><span class="node"></span><b>SPK</b><em>Frontman capture</em></a></li>
-          <li class="on"><a href="mockup.html#booking"><span class="node"></span><b>Booking Fee</b><em>Dewi · Yaris</em></a></li>
-          <li class="on"><a href="mockup.html#transaksi"><span class="node"></span><b>Sales Order</b><em>Budi · Zenix</em></a></li>
-          <li><a href="mockup.html#cashless"><span class="node"></span><b>Settlement</b><em>QRIS / VA</em></a></li>
-          <li><a href="mockup.html#afi"><span class="node"></span><b>AFI</b><em>Data STNK dari SPK</em></a></li>
-          <li><a href="mockup.html#afi"><span class="node"></span><b>Billing</b><em>Berpasangan</em></a></li>
-          <li><a href="mockup.html#delivery"><span class="node"></span><b>Delivery</b><em>Agus · Avanza</em></a></li>
-          <li><a href="mockup.html#gi"><span class="node"></span><b>Good Issue</b><em>Fajar · Rush</em></a></li>
-          <li><a href="mockup.html#exc_stnk"><span class="node"></span><b>STNK/BPKB</b><em>Maria · aging</em></a></li>
+          <li class="on"><a href="mockup.html#spk"><span class="node"></span><b>SPK</b><em>Data Dewi</em></a></li>
+          <li class="on"><a href="mockup.html#quot"><span class="node"></span><b>Quotation</b><em>1 SPK = 1 QT</em></a></li>
+          <li class="on"><a href="mockup.html#so"><span class="node"></span><b>Sales Order</b><em>Per unit</em></a></li>
+          <li class="on"><a href="mockup.html#afi_d"><span class="node"></span><b>AFI</b><em>Setelah SO</em></a></li>
+          <li><a href="mockup.html#do"><span class="node"></span><b>DO</b><em>Delivery Order</em></a></li>
+          <li><a href="mockup.html#bill_d"><span class="node"></span><b>Billing</b><em>Setelah DO</em></a></li>
+          <li><a href="mockup.html#kirim_d"><span class="node"></span><b>Delivery</b><em>Lunas</em></a></li>
+          <li><a href="mockup.html#stnk_d"><span class="node"></span><b>STNK/BPKB</b><em>Tracking</em></a></li>
+          <li><a href="mockup.html#cashless"><span class="node"></span><b>Cashless</b><em>QRIS / VA</em></a></li>
         </ol>
       </div>
     </header>
@@ -86,13 +86,40 @@
         </div>
       </div>
       <div class="cases">
+        <a class="case" href="mockup.html#proses">
+          <div class="thumb yaris">FLOW</div>
+          <div class="body">
+            <p class="who">Dewi Lestari · proses utuh</p>
+            <h3>SPK → QT → SO → AFI → DO → Billing → Delivery → STNK</h3>
+            <p>Satu SPK, satu quotation, SO per unit. Cashless di booking dan pelunasan. Billing setelah DO. Ubah quotation, SO wajib ikut.</p>
+            <span class="go">Buka proses →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#spk">
+          <div class="thumb yaris">YARIS</div>
+          <div class="body">
+            <p class="who">Dewi Lestari · Frontman</p>
+            <h3>Data SPK sebelum bayar</h3>
+            <p>Pemesan, nama &amp; alamat STNK, tipe/warna, aksesoris, tunai. OTR dari area PO Kota Depok. Dokumen entri dan STNK/BPKB sudah diunggah.</p>
+            <span class="go">Buka data SPK →</span>
+          </div>
+        </a>
         <a class="case" href="mockup.html#booking">
           <div class="thumb yaris">YARIS</div>
           <div class="body">
             <p class="who">Dewi Lestari · Frontman</p>
             <h3>Booking fee setelah SPK</h3>
-            <p>Yaris 1.5 G · Rp 3.000.000 dari master unit. QRIS, CDM, tautan Digiroom, atau EDC. SO terbuka setelah kuitansi.</p>
+            <p>Yaris 1.5 G · Rp 3.000.000 dari master unit. Setelah kuitansi meet, SPK dikonversi jadi Sales Order — bukan form baru.</p>
             <span class="go">Buka layar booking →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#so">
+          <div class="thumb yaris">SO</div>
+          <div class="body">
+            <p class="who">Dewi Lestari · Frontman</p>
+            <h3>SPK jadi Sales Order</h3>
+            <p>Setelah booking fee Yaris meet, data SPK dikonversi ke SO 4500091426. Pemesan, STNK, unit, harga area PO, dan dokumen tidak diketik ulang.</p>
+            <span class="go">Buka Sales Order →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#cashless">
@@ -553,7 +580,8 @@
           </div>
         </div>
         <div class="see-row">
-          <a class="see" href="mockup.html#booking"><span class="see-k">Booking</span><b>Dewi · Yaris Rp 3.000.000</b><span>QRIS / CDM / tautan / EDC setelah SPK</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#spk"><span class="see-k">SPK</span><b>Dewi · data sebelum bayar</b><span>OTR area PO dari kota STNK</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#so"><span class="see-k">SO</span><b>Dewi · 4500091426</b><span>Konversi SPK setelah booking fee meet</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#cashless"><span class="see-k">Pelunasan</span><b>Budi · request 100 jt</b><span>QRIS/CDM/tautan. EDC hanya Frontman</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#digiroom"><span class="see-k">Digiroom</span><b>pay.fast.id</b><span>QRIS scan vs VA terbit setelah nominal</span><em>Lihat →</em></a>
         </div>
@@ -741,12 +769,12 @@
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 1</span><h3>SPK</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Frontman inputs</h4><ul><li>Customer identity.</li><li>Customer contact.</li><li>Purchase method.</li><li>Transaction structure.</li><li>Unit request.</li><li>STNK name.</li><li>Customer documents.</li><li>Delivery preference when available.</li></ul></div>
+            <div class="facet"><h4>Frontman inputs</h4><ul><li>Customer identity.</li><li>Customer contact.</li><li>Alamat pemesan.</li><li>Nama dan alamat STNK, termasuk kabupaten/kota.</li><li>Purchase method (tunai atau leasing).</li><li>Unit type and colour.</li><li>Accessories.</li><li>Customer documents for SPK entry.</li><li>Documents for later STNK/BPKB filing.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Verify customer data.</li><li>Verify documents.</li><li>Identify missing or invalid requirements.</li><li>Add internal classification if required.</li></ul></div>
-            <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Minimum booking fee according to the selected unit.</li><li>Booking-fee payment request to the customer.</li></ul></div>
+            <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Area PO from kabupaten/kota on the STNK address.</li><li>OTR price from that PO area.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Minimum booking fee according to the selected unit.</li></ul></div>
             <div class="facet"><h4>Data carried forward</h4><p>Customer, transaction, unit, document, dan compliance data digunakan oleh booking fee/DP request, Sales Order, billing, AFI/DO, delivery, serta STNK/BPKB.</p></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Customer and transaction data captured at SPK must not be re-entered at subsequent stages.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Customer and transaction data captured at SPK must not be re-entered at subsequent stages. Unit OTR follows the PO area generated from kabupaten/kota on the STNK address. Booking fee is billed only after this SPK data is saved.</p></blockquote>
         </div>
 
         <div class="stage">
@@ -754,10 +782,10 @@
           <div class="grid g2">
             <div class="facet"><h4>Frontman action</h4><ul><li>Simpan SPK.</li><li>Monitor tagihan booking fee yang dikirim sistem ke customer.</li><li>Confirm payment instruction bila perlu dikirim ulang.</li><li>Submit Sales Order request setelah minimum booking fee unit terverifikasi.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Handle unmatched or exceptional payment only.</li><li>Tidak memasukkan ulang payment status.</li><li>Tidak menentukan nominal booking fee secara manual.</li></ul></div>
-            <div class="facet sys"><h4>System process</h4><ul><li>Ambil minimum booking fee dari master unit.</li><li>Tagihkan booking fee ke customer segera setelah SPK tersimpan.</li><li>Generate payment reference.</li><li>Verify payment.</li><li>Match payment.</li><li>Generate a unique receipt.</li><li>Link receipt to SPK.</li><li>Bandingkan nominal masuk dengan minimum unit.</li><li>Unlock Sales Order request hanya jika minimum terpenuhi.</li><li>Generate SO number with originating SPK reference.</li><li>Add SO reference automatically to receipt lineage.</li></ul></div>
+            <div class="facet sys"><h4>System process</h4><ul><li>Ambil minimum booking fee dari master unit.</li><li>Tagihkan booking fee ke customer segera setelah SPK tersimpan.</li><li>Generate payment reference.</li><li>Verify payment.</li><li>Match payment.</li><li>Generate a unique receipt.</li><li>Link receipt to SPK.</li><li>Bandingkan nominal masuk dengan minimum unit.</li><li>Convert the saved SPK into a Sales Order only when the booking fee meets the unit minimum.</li><li>Carry pemesan, STNK, unit, PO-area price, accessories, and documents without re-entry.</li><li>Generate SO number with originating SPK reference.</li><li>Add SO reference automatically to receipt lineage.</li></ul></div>
             <div class="facet"><h4>Data carried forward</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Sales Order number.</li><li>Unit data.</li><li>Transaction structure.</li><li>Booking fee/DP amount.</li><li>Payment reference.</li><li>Receipt number.</li><li>Payment verification.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Setelah SPK tersimpan, sistem menagih booking fee ke customer. Nominal minimum mengikuti unit yang dipilih. Tidak ada booking fee terverifikasi sesuai minimum unit, tidak ada Sales Order. Kuitansi booking fee terhubung ke SPK; setelah SO terbentuk, referensi SO ditambahkan otomatis pada receipt lineage.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Setelah SPK tersimpan, sistem menagih booking fee ke customer. Nominal minimum mengikuti unit yang dipilih. Tidak ada booking fee terverifikasi sesuai minimum unit, tidak ada Sales Order. Ketika booking fee meet, data SPK dikonversi menjadi Sales Order — bukan diisi ulang. Kuitansi tertaut ke SPK, lalu nomor SO ditambahkan pada lineage.</p></blockquote>
         </div>
 
         <div class="stage">

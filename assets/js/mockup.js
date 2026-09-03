@@ -74,6 +74,14 @@
       va:{BCA:'8801 0418 8100',BRI:'0026 0418 8100',Mandiri:'8881 0418 8100'},
       back:'customer_detail',
       lead:'Tidak ada request untuk sisa ini. Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.'
+    },
+    dewi:{
+      name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Yaris 1.5 G',kind:'Pelunasan Yaris',amount:'Isi nominal',
+      amountNum:0,max:299150000,locked:false,
+      cdm:'0426 OPEN 01',brilink:'8810 0426 OPEN',
+      va:{BCA:'8801 0426 8100',BRI:'0026 0426 8100',Mandiri:'8881 0426 8100'},
+      back:'so',
+      lead:'Pelunasan SO 4500091426. Isi nominal. QRIS tampil setelah angka; VA terbit setelah angka. EDC hanya Frontman di cabang.'
     }
   };
   function formatRp(n){ return 'Rp '+Number(n||0).toLocaleString('id-ID'); }
@@ -152,7 +160,9 @@
       tagihan_customer:'customer',e_kuitansi:'customer',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
-      booking:'beranda',delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
+      booking:'beranda',spk:'beranda',quot:'beranda',so:'beranda',so2:'beranda',proses:'beranda',
+      afi_d:'beranda',do:'beranda',bill_d:'beranda',kirim_d:'beranda',stnk_d:'beranda',
+      delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
       exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
     if((id==='gi'||id==='delivery') && currentRole==='admin') railId='verifikasi';
@@ -168,7 +178,8 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+        ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='digiroom'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
@@ -187,6 +198,7 @@
     });
     applyCashlessEdc();
     if(id==='booking') setPayJob('booking');
+    if(id==='so'||id==='bill_d'||id==='kirim_d') setPayJob('dewi');
     if(id==='cashless'){ setPayJob('lunas'); setCashQrisMode('request'); }
     syncRoleChrome();
     applyExcAlamat();
@@ -213,6 +225,7 @@
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
+    if(b.hasAttribute('data-qt-revise') || b.hasAttribute('data-qt-push') || b.hasAttribute('data-dewi-afi') || b.hasAttribute('data-dewi-do')) return;
     if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
@@ -237,7 +250,7 @@
 
   var currentRole='frontman';
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function syncRoleChrome(){
     document.querySelectorAll('[data-for]').forEach(function(el){
       el.hidden = el.getAttribute('data-for') !== currentRole;
@@ -496,7 +509,137 @@
     var paid=!!(s && s.paid);
     document.querySelectorAll('[data-bf-hide-paid]').forEach(function(el){ el.hidden=paid; });
     document.querySelectorAll('[data-bf-show-paid]').forEach(function(el){ el.hidden=!paid; });
+    var block=document.querySelector('[data-so-block]');
+    var ready=document.querySelector('[data-so-ready]');
+    if(block) block.hidden=paid;
+    if(ready) ready.hidden=!paid;
+    var card=document.querySelector('[data-dewi-card]');
+    if(card) card.setAttribute('data-go', paid?'so':'spk');
+    var oid=document.querySelector('[data-dewi-oid]');
+    if(oid) oid.textContent=paid?'SO 4500091426 · dari SPK/26/CLD/00426':'SPK/26/CLD/00426 · baru tersimpan';
+    var spec=document.querySelector('[data-dewi-spec]');
+    if(spec) spec.textContent=paid?'Tindakan: SO → AFI → DO → billing':'Tindakan: SPK → quotation → booking cashless';
+    var tag=document.querySelector('[data-dewi-tag]');
+    if(tag){ tag.textContent=paid?'SO terbuka':'Belum bayar'; tag.className='tag '+(paid?'ok':'wait'); }
+    var amt=document.querySelector('[data-dewi-amt]');
+    if(amt) amt.textContent=paid?'AR Rp 299,15 Jt':'OTR Depok';
+    var cta=document.querySelector('[data-dewi-cta]');
+    if(cta) cta.textContent=paid?'Sales Order →':'Data pemesan · STNK · unit →';
+    applyDewiProc();
   }
+  function procSteps(){
+    return [
+    {id:'spk',label:'SPK'},
+    {id:'quot',label:'Quotation'},
+    {id:'so',label:'SO'},
+    {id:'afi_d',label:'AFI'},
+    {id:'do',label:'DO'},
+    {id:'bill_d',label:'Billing'},
+    {id:'kirim_d',label:'Delivery'},
+    {id:'stnk_d',label:'STNK'}
+    ];
+  }
+  function qtData(){ return (window.FAST && FAST.load ? FAST.load(FAST.QT_KEY) : null) || {rev:1,stale:false,afi:false,dof:false}; }
+  function bfPaid(){ var s=window.FAST && FAST.load ? FAST.load(FAST.BF_KEY) : null; return !!(s && s.paid); }
+  function applyDewiProc(){
+    var paid=bfPaid();
+    var q=qtData();
+    var rev=q.rev||1;
+    var soRev=q.soRev||1;
+    var stale=!!q.stale;
+    var y=q.otrYaris||296800000;
+    var a=q.otrAgya||175900000;
+    document.querySelectorAll('[data-qt-rev]').forEach(function(el){ el.textContent=String(rev); });
+    document.querySelectorAll('[data-so-rev]').forEach(function(el){ el.textContent=String(soRev); });
+    document.querySelectorAll('[data-qt-otr="yaris"]').forEach(function(el){ el.textContent=formatRp(y); });
+    document.querySelectorAll('[data-qt-otr="agya"]').forEach(function(el){ el.textContent=formatRp(a); });
+    document.querySelectorAll('[data-qt-fresh]').forEach(function(el){ el.hidden=stale; });
+    document.querySelectorAll('[data-qt-stale]').forEach(function(el){ el.hidden=!stale; });
+    document.querySelectorAll('[data-so-stale]').forEach(function(el){ el.hidden=!(paid && stale); });
+    var ready=document.querySelector('[data-so-ready]');
+    if(ready) ready.hidden=!paid || stale;
+    var qtPush=document.querySelector('[data-qt-push]');
+    if(qtPush) qtPush.hidden=!stale;
+    var so2tag=document.querySelector('[data-so2-tag]');
+    if(so2tag){
+      so2tag.textContent=stale?'QT berubah · SO Agya harus ikut harga baru':'Booking belum · SO tertahan';
+      so2tag.className='tag '+(stale?'hold':'mute');
+    }
+    document.querySelectorAll('[data-afi-d-wait]').forEach(function(el){ el.hidden=paid && !stale; });
+    document.querySelectorAll('[data-afi-need-so]').forEach(function(el){ el.hidden=paid; });
+    document.querySelectorAll('[data-afi-need-qt]').forEach(function(el){ el.hidden=!paid || !stale; });
+    document.querySelectorAll('[data-afi-d-open]').forEach(function(el){ el.hidden=!paid || stale || !!q.afi; });
+    document.querySelectorAll('[data-afi-d-sent]').forEach(function(el){ el.hidden=!q.afi || stale; });
+    document.querySelectorAll('[data-dewi-afi-done]').forEach(function(el){ el.hidden=!q.afi || stale; });
+    document.querySelectorAll('[data-do-wait]').forEach(function(el){ el.hidden=!!q.afi && !stale; });
+    document.querySelectorAll('[data-do-open]').forEach(function(el){ el.hidden=!q.afi || stale || !!q.dof; });
+    document.querySelectorAll('[data-do-sent]').forEach(function(el){ el.hidden=!q.dof || stale; });
+    document.querySelectorAll('[data-bill-need-do]').forEach(function(el){ el.hidden=!!q.dof; });
+    document.querySelectorAll('[data-bill-has-do]').forEach(function(el){ el.hidden=!q.dof; });
+    var billDo=document.querySelector('[data-bill-do]');
+    if(billDo) billDo.textContent=q.dof?'Terbit':'Menunggu';
+    var stnkAfi=document.querySelector('[data-stnk-afi]');
+    if(stnkAfi){
+      stnkAfi.classList.toggle('done', !!q.afi);
+      var t=stnkAfi.querySelector('.t');
+      if(t) t.textContent=q.afi?'Pengajuan terkirim':'Menunggu SO / pengajuan';
+    }
+    document.querySelectorAll('[data-proc]').forEach(function(nav){
+      var cur=nav.getAttribute('data-proc');
+      if(cur==='booking') cur='quot';
+      if(cur==='proses') cur='spk';
+      if(cur==='so2') cur='so';
+      nav.innerHTML='';
+      procSteps().forEach(function(step){
+        var b=document.createElement('button');
+        b.type='button';
+        b.textContent=step.label;
+        var done=(step.id==='spk'||step.id==='quot') || (step.id==='so'&&paid) || (step.id==='afi_d'&&q.afi) || (step.id==='do'&&q.dof);
+        if(step.id===cur) b.className='on';
+        else if(done) b.className='done';
+        b.addEventListener('click',function(){ show(step.id); });
+        nav.appendChild(b);
+      });
+    });
+  }
+  document.querySelectorAll('[data-qt-revise]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var q=qtData();
+      if(window.FAST && FAST.save) FAST.save({
+        rev:(q.rev||1)+1,
+        stale:true,
+        otrYaris:298400000,
+        otrAgya:177200000
+      }, FAST.QT_KEY);
+      applyDewiProc();
+      toast('Quotation berubah. SO Yaris dan SO Agya harus ikut harga baru.');
+    });
+  });
+  document.querySelectorAll('[data-qt-push]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var q=qtData();
+      if(window.FAST && FAST.save) FAST.save({stale:false, soRev:q.rev||1}, FAST.QT_KEY);
+      applyDewiProc();
+      toast('Semua SO terkait mengikuti quotation rev '+(q.rev||1)+'. SO Yaris diperbarui. SO Agya memakai OTR baru saat booking meet.');
+    });
+  });
+  document.querySelectorAll('[data-dewi-afi]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(!bfPaid()){ toast('SO Yaris belum terbuka. Booking fee dulu.'); return; }
+      if(qtData().stale){ toast('Refresh SO dari quotation dulu.'); return; }
+      if(window.FAST && FAST.save) FAST.save({afi:true}, FAST.QT_KEY);
+      applyDewiProc();
+      toast('AFI terkirim. Data STNK dari SPK. Lanjut DO.');
+    });
+  });
+  document.querySelectorAll('[data-dewi-do]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(!qtData().afi){ toast('AFI dulu sebelum DO.'); return; }
+      if(window.FAST && FAST.save) FAST.save({dof:true}, FAST.QT_KEY);
+      applyDewiProc();
+      toast('DO/26/CLD/01426 terbit. Billing menunggu ≥30%.');
+    });
+  });
   function applyDelivery(){
     var s=window.FAST && FAST.load ? FAST.load(FAST.DEL_KEY) : null;
     var sent=!!(s && s.requested);
@@ -826,12 +969,35 @@
     toast('Dikembalikan ke salesman. Lengkapi bukti serah terima.');
   });
 
+  function runSoConvert(){
+    var overlay=document.getElementById('soflow');
+    var status=document.getElementById('soStatus');
+    var steps=overlay?overlay.querySelectorAll('[data-step]'):[];
+    if(!overlay){ show('so'); return; }
+    overlay.hidden=false;
+    steps.forEach(function(li){ li.className=''; });
+    var labels=['Membandingkan kuitansi dengan minimum Yaris…','Menyalin pemesan, STNK, unit, harga area PO…','Menerbitkan nomor Sales Order…','Menautkan kuitansi ke SPK dan SO…'];
+    var i=0;
+    function tick(){
+      if(i>0) steps[i-1].className='done';
+      if(i<steps.length){
+        steps[i].className='on';
+        if(status) status.textContent=labels[i];
+        i++;
+        setTimeout(tick, 380);
+      } else {
+        overlay.hidden=true;
+        toast('Booking fee meet. SPK dikonversi ke SO 4500091426.');
+        show('so');
+      }
+    }
+    tick();
+  }
   function settleBooking(channel){
-    if(window.FAST && FAST.save) FAST.save({paid:true,spk:'SPK/26/CLD/00426',channel:channel,receipt:'KWT/26/CLD/009301'}, FAST.BF_KEY);
+    if(window.FAST && FAST.save) FAST.save({paid:true,spk:'SPK/26/CLD/00426',so:'4500091426',channel:channel,receipt:'KWT/26/CLD/009301'}, FAST.BF_KEY);
     applyRole('frontman');
     applyBooking();
-    toast('Booking fee masuk. E-kuitansi KWT/26/CLD/009301. Sales Order dapat dibuka.');
-    show('booking');
+    runSoConvert();
   }
   document.querySelectorAll('[data-bf-pay]').forEach(function(b){
     b.addEventListener('click',function(){ settleBooking(b.getAttribute('data-bf-pay')); });
@@ -971,8 +1137,9 @@
   applyDelivery();
   applyGi();
   applyAfi();
+  applyDewiProc();
   syncRoleChrome();
-  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); applyDelivery(); applyGi(); applyAfi(); });
+  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); applyDelivery(); applyGi(); applyAfi(); applyDewiProc(); });
 
   var channelMeta={
     qris:{title:'QRIS'},
@@ -1049,7 +1216,7 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
-      else if(id==='beranda'||id==='transaksi'||id==='booking') applyRole('frontman');
+      else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='booking') applyRole('frontman');
       show(id);
     });
   });
