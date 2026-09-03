@@ -1,12 +1,15 @@
 window.FAST = window.FAST || {};
 FAST.KEY = 'fast.spk.00418';
-FAST.load = function () {
-  try { return JSON.parse(localStorage.getItem(FAST.KEY) || 'null'); }
+FAST.DEL_KEY = 'fast.spk.00425';
+FAST.GI_KEY = 'fast.spk.00424';
+FAST.load = function (key) {
+  try { return JSON.parse(localStorage.getItem(key || FAST.KEY) || 'null'); }
   catch (e) { return null; }
 };
-FAST.save = function (data) {
-  var next = Object.assign({ spk: 'SPK/26/CLD/00418', ts: Date.now() }, FAST.load() || {}, data);
-  localStorage.setItem(FAST.KEY, JSON.stringify(next));
+FAST.save = function (data, key) {
+  var k = key || FAST.KEY;
+  var next = Object.assign({ ts: Date.now() }, FAST.load(k) || {}, data);
+  localStorage.setItem(k, JSON.stringify(next));
   window.dispatchEvent(new CustomEvent('fast-session', { detail: next }));
   return next;
 };
