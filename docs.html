@@ -162,10 +162,10 @@
       <ol class="steps">
         <li>Menginput data customer dan transaksi.</li>
         <li>Mengunggah seluruh dokumen awal.</li>
-        <li>Mengirimkan payment request booking fee/DP.</li>
-        <li>Memonitor verifikasi booking fee/DP.</li>
+        <li>Mengirimkan atau memonitor payment request booking fee yang otomatis ditagihkan setelah SPK tersimpan; nominal mengikuti unit.</li>
+        <li>Memonitor verifikasi booking fee sebagai syarat pembentukan Sales Order.</li>
         <li>Melihat e-kuitansi yang terbit setelah pembayaran terverifikasi.</li>
-        <li>Mengajukan Sales Order setelah booking fee/DP memenuhi ketentuan.</li>
+        <li>Mengajukan Sales Order setelah minimum booking fee unit terverifikasi.</li>
         <li>Mengirimkan payment request pelunasan.</li>
         <li>Melihat AR Open per unit atau Sales Order.</li>
         <li>Melihat payment request yang masih aktif.</li>
@@ -323,13 +323,13 @@
       <h4>Data domains to be mapped</h4>
       <div class="grid g3">
         <div class="panel"><h4>1. Customer Data</h4><ul><li>Nama customer.</li><li>Customer ID.</li><li>NIK/KTP.</li><li>NPWP.</li><li>Alamat.</li><li>Nomor telepon.</li><li>Email.</li><li>Repeat-order status.</li><li>STNK name.</li><li>Customer classification.</li></ul></div>
-        <div class="panel"><h4>2. Transaction Data</h4><ul><li>Purchase method.</li><li>Transaction type.</li><li>SPK number.</li><li>Sales Order number.</li><li>Billing document number.</li><li>Parent-child document reference.</li><li>Unit quantity.</li><li>Branch.</li><li>Frontman.</li><li>Transaction structure.</li></ul></div>
+        <div class="panel"><h4>2. Transaction Data</h4><ul><li>Purchase method (cash atau leasing).</li><li>Transaction type.</li><li>SPK number.</li><li>Sales Order number.</li><li>Billing document number.</li><li>Parent-child document reference.</li><li>Unit quantity.</li><li>Branch.</li><li>Frontman.</li><li>Transaction structure.</li></ul></div>
         <div class="panel"><h4>3. Vehicle Data</h4><ul><li>Model.</li><li>Type.</li><li>Color.</li><li>VIN.</li><li>Engine number.</li><li>Allocation status.</li><li>PDI status.</li><li>AFI status.</li><li>DO status.</li></ul></div>
         <div class="panel"><h4>4. Transaction Value Data</h4><ul><li>Price.</li><li>Discount.</li><li>Program.</li><li>Cashback.</li><li>Subsidy.</li><li>OPO/OPK.</li><li>Final transaction value.</li><li>Leasing information.</li><li>Source-system reference.</li></ul><p>Data tersebut dibawa dari source system sebagai bagian transaksi dan bersifat read-only dalam FAST. Data tersebut bukan objek Compliance Exception Approval Engine.</p></div>
-        <div class="panel"><h4>5. Payment and E-Receipt Data</h4><ul><li>Booking fee/DP requirement.</li><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Payment amount.</li><li>Payment date.</li><li>Payment method.</li><li>Payment stage.</li><li>Payment allocation.</li><li>E-receipt number.</li><li>E-receipt issue date.</li><li>E-receipt status.</li><li>Linked SPK.</li><li>Linked Sales Order.</li><li>Linked billing document.</li><li>Verification code atau QR.</li><li>PDF document reference.</li><li>Customer download history.</li><li>Accumulated payment.</li><li>AR Open.</li><li>Active payment request amount.</li><li>Available Request Amount.</li><li>Settlement status.</li></ul></div>
+        <div class="panel"><h4>5. Payment and E-Receipt Data</h4><ul><li>Vehicle-specific booking fee requirement.</li><li>Booking fee billed after SPK.</li><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Payment amount.</li><li>Payment date.</li><li>Payment method.</li><li>Payment stage.</li><li>Payment allocation.</li><li>E-receipt number.</li><li>E-receipt issue date.</li><li>E-receipt status.</li><li>Linked SPK.</li><li>Linked Sales Order.</li><li>Linked billing document.</li><li>Verification code atau QR.</li><li>PDF document reference.</li><li>Customer download history.</li><li>Accumulated payment.</li><li>AR Open.</li><li>Active payment request amount.</li><li>Available Request Amount.</li><li>Settlement status.</li><li>Funds-in percentage for cash billing (≥30%).</li><li>Full DP amount from B2B leasing.</li><li>Leasing DP received versus required.</li><li>Leasing contract signed status from B2B leasing.</li></ul></div>
         <div class="panel"><h4>6. Administrative Documents</h4><ul><li>KTP.</li><li>NPWP.</li><li>KK.</li><li>PO.</li><li>NIB.</li><li>Akta.</li><li>Leasing documents.</li><li>STNK documents.</li><li>Tax documents.</li><li>Surat Kuasa.</li><li>BSTKB.</li><li>Electronic OKK.</li></ul></div>
         <div class="panel"><h4>7. Compliance Exception Data</h4><ul><li>Failed compliance gate.</li><li>Failed rule.</li><li>Waivable atau non-waivable classification.</li><li>Exception category.</li><li>Applicant.</li><li>Evidence.</li><li>Risk impact.</li><li>Authorized decision owner.</li><li>Decision.</li><li>Decision reason.</li><li>Conditions.</li><li>Validity period.</li><li>Scope of release.</li><li>Compliance-gate result.</li></ul></div>
-        <div class="panel"><h4>8. Delivery and Post-Delivery Data</h4><ul><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient.</li><li>BSTKB.</li><li>Timestamp.</li><li>Geotag.</li><li>Vehicle receipt photo.</li><li>Good Issue.</li><li>STNK status.</li><li>BPKB status.</li></ul></div>
+        <div class="panel"><h4>8. Delivery and Post-Delivery Data</h4><ul><li>Purchase-method delivery rule (cash lunas atau kontrak leasing TTD).</li><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient.</li><li>BSTKB.</li><li>Timestamp.</li><li>Geotag.</li><li>Vehicle receipt photo.</li><li>Good Issue.</li><li>STNK status.</li><li>BPKB status.</li></ul></div>
       </div>
 
       <h4>Data ownership principle</h4>
@@ -405,7 +405,7 @@
           <div class="facet">
             <h4>Frontman dapat</h4>
             <ol class="steps">
-              <li>Menginput data customer dan transaksi satu kali.</li><li>Mengunggah dokumen awal.</li><li>Mengirimkan payment request booking fee/DP.</li><li>Mengajukan Sales Order.</li><li>Mengirimkan payment request pelunasan.</li><li>Melihat AR Open.</li><li>Melihat payment request aktif.</li><li>Melihat Available Request Amount.</li><li>Memonitor payment dan e-kuitansi.</li><li>Mengajukan billing, AFI/DO, dan delivery request.</li><li>Melihat failed compliance rule.</li><li>Melengkapi persyaratan.</li><li>Mengajukan compliance exception apabila eligible.</li><li>Memonitor exception decision dan escalation.</li>
+              <li>Menginput data customer dan transaksi satu kali.</li><li>Mengunggah dokumen awal.</li><li>Mengirimkan atau memonitor payment request booking fee yang ditagihkan setelah SPK, dengan nominal sesuai unit.</li><li>Mengajukan Sales Order setelah minimum booking fee terverifikasi.</li><li>Mengirimkan payment request pelunasan.</li><li>Melihat AR Open.</li><li>Melihat payment request aktif.</li><li>Melihat Available Request Amount.</li><li>Memonitor payment dan e-kuitansi.</li><li>Mengajukan billing, AFI/DO, dan delivery request.</li><li>Melihat failed compliance rule.</li><li>Melengkapi persyaratan.</li><li>Mengajukan compliance exception apabila eligible.</li><li>Memonitor exception decision dan escalation.</li>
             </ol>
           </div>
           <div class="facet sys">
@@ -416,7 +416,7 @@
           </div>
           <div class="facet">
             <h4>Scope</h4>
-            <ul><li>Digital SPK.</li><li>Single Customer ID.</li><li>Input ownership.</li><li>Document upload.</li><li>Booking fee/DP request dan verification.</li><li>Sales Order request.</li><li>SPK–SO–Billing document linkage.</li><li>Settlement payment request.</li><li>Payment allocation.</li><li>Automated receipt generation.</li><li>Outstanding balance monitoring.</li><li>System Compliance Gates.</li><li>Waivable-rule classification.</li><li>Compliance exception workflow.</li><li>Billing readiness.</li><li>AFI/DO integration.</li><li>Delivery authorization.</li><li>Good Issue.</li><li>STNK/BPKB tracking.</li><li>Automated data carry-forward.</li><li>Exception escalation.</li></ul>
+            <ul><li>Digital SPK.</li><li>Single Customer ID.</li><li>Input ownership.</li><li>Document upload.</li><li>Vehicle-specific booking fee billed after SPK.</li><li>Sales Order request after minimum booking fee.</li><li>SPK–SO–Billing document linkage.</li><li>Settlement payment request.</li><li>Payment allocation.</li><li>Automated receipt generation.</li><li>Outstanding balance monitoring.</li><li>System Compliance Gates.</li><li>Waivable-rule classification.</li><li>Compliance exception workflow.</li><li>Billing readiness.</li><li>AFI/DO integration.</li><li>Delivery authorization.</li><li>Good Issue.</li><li>STNK/BPKB tracking.</li><li>Automated data carry-forward.</li><li>Exception escalation.</li></ul>
           </div>
           <div class="facet">
             <h4>Expected outputs</h4>
@@ -431,8 +431,8 @@
         <p>Mengubah payment request, payment confirmation, payment allocation, dan penerbitan kuitansi menjadi automated transaction flow yang mendukung booking fee/DP serta pelunasan satu kali maupun bertahap.</p>
         <div class="grid g2">
           <div class="facet">
-            <h4>Booking Fee/DP</h4>
-            <ul><li>Menjadi syarat pembentukan Sales Order.</li><li>Memiliki payment request dan reference tersendiri.</li><li>Diverifikasi melalui Banking API.</li><li>Menghasilkan kuitansi setelah terverifikasi.</li><li>Kuitansi terhubung terlebih dahulu ke SPK.</li><li>Setelah SO dan billing terbit, reference ditambahkan otomatis pada receipt lineage.</li></ul>
+            <h4>Booking Fee</h4>
+            <ul><li>Ditagihkan ke customer segera setelah Frontman menyimpan SPK.</li><li>Nominal minimum berbeda-beda menurut unit/mobil, ditarik dari master kendaraan.</li><li>Menjadi syarat non-waivable untuk pembentukan Sales Order.</li><li>Memiliki payment request dan reference tersendiri.</li><li>Diverifikasi melalui Banking API.</li><li>Menghasilkan kuitansi setelah terverifikasi.</li><li>Kuitansi terhubung terlebih dahulu ke SPK.</li><li>Setelah SO dan billing terbit, reference ditambahkan otomatis pada receipt lineage.</li></ul>
           </div>
           <div class="facet">
             <h4>Pelunasan</h4>
@@ -451,13 +451,14 @@
         </div>
         <blockquote class="rule">
           <span class="tag">Business rules</span>
-          <p>No verified booking fee/DP, no Sales Order.</p>
+          <p>No verified minimum booking fee for the selected unit, no Sales Order.</p>
           <p>No verified payment, no receipt.</p>
           <p>One verified payment, one traceable receipt.</p>
           <p>Pending payment requests do not reduce AR Open.</p>
           <p>Active receipts reduce AR Open.</p>
           <p>Cancelled receipts restore AR Open and trigger financial-gate recalculation.</p>
-          <p>No full payment or approved compliance exception, no delivery release.</p>
+          <p>Cash: billing opens at ≥30% funds in; delivery opens only when lunas.</p>
+          <p>Leasing: billing opens when full DP from B2B leasing is received; delivery opens when the customer-signed contract is confirmed from B2B leasing.</p>
         </blockquote>
       </div>
 
@@ -488,7 +489,7 @@
         <div class="grid g2">
           <div class="facet">
             <h4>Scope</h4>
-            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Full-payment validation.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
+            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Vehicle-specific booking-fee validation for Sales Order.</li><li>Cash 30% billing threshold.</li><li>Leasing full-DP validation from B2B leasing.</li><li>Cash lunas validation for delivery.</li><li>Leasing signed-contract validation from B2B leasing.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
           </div>
           <div class="facet">
             <h4>Expected Outputs</h4>
@@ -603,7 +604,7 @@
           <div class="grid g2">
             <div class="facet"><h4>Frontman inputs</h4><ul><li>Customer identity.</li><li>Customer contact.</li><li>Purchase method.</li><li>Transaction structure.</li><li>Unit request.</li><li>STNK name.</li><li>Customer documents.</li><li>Delivery preference when available.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Verify customer data.</li><li>Verify documents.</li><li>Identify missing or invalid requirements.</li><li>Add internal classification if required.</li></ul></div>
-            <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Booking fee/DP requirement.</li></ul></div>
+            <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Minimum booking fee according to the selected unit.</li><li>Booking-fee payment request to the customer.</li></ul></div>
             <div class="facet"><h4>Data carried forward</h4><p>Customer, transaction, unit, document, dan compliance data digunakan oleh booking fee/DP request, Sales Order, billing, AFI/DO, delivery, serta STNK/BPKB.</p></div>
           </div>
           <blockquote class="rule"><span class="tag">Business rule</span><p>Customer and transaction data captured at SPK must not be re-entered at subsequent stages.</p></blockquote>
@@ -612,12 +613,12 @@
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 2</span><h3>Booking Fee/DP and Sales Order</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Frontman action</h4><ul><li>Create payment request.</li><li>Send payment instruction.</li><li>Monitor payment.</li><li>Submit Sales Order request.</li></ul></div>
-            <div class="facet"><h4>Administration role</h4><ul><li>Handle unmatched or exceptional payment only.</li><li>Tidak memasukkan ulang payment status.</li></ul></div>
-            <div class="facet sys"><h4>System process</h4><ul><li>Generate payment reference.</li><li>Verify payment.</li><li>Match payment.</li><li>Generate a unique receipt.</li><li>Link receipt to SPK.</li><li>Calculate minimum requirement.</li><li>Update payment status.</li><li>Unlock Sales Order request.</li><li>Generate SO number with originating SPK reference.</li><li>Add SO reference automatically to receipt lineage.</li></ul></div>
+            <div class="facet"><h4>Frontman action</h4><ul><li>Simpan SPK.</li><li>Monitor tagihan booking fee yang dikirim sistem ke customer.</li><li>Confirm payment instruction bila perlu dikirim ulang.</li><li>Submit Sales Order request setelah minimum booking fee unit terverifikasi.</li></ul></div>
+            <div class="facet"><h4>Administration role</h4><ul><li>Handle unmatched or exceptional payment only.</li><li>Tidak memasukkan ulang payment status.</li><li>Tidak menentukan nominal booking fee secara manual.</li></ul></div>
+            <div class="facet sys"><h4>System process</h4><ul><li>Ambil minimum booking fee dari master unit.</li><li>Tagihkan booking fee ke customer segera setelah SPK tersimpan.</li><li>Generate payment reference.</li><li>Verify payment.</li><li>Match payment.</li><li>Generate a unique receipt.</li><li>Link receipt to SPK.</li><li>Bandingkan nominal masuk dengan minimum unit.</li><li>Unlock Sales Order request hanya jika minimum terpenuhi.</li><li>Generate SO number with originating SPK reference.</li><li>Add SO reference automatically to receipt lineage.</li></ul></div>
             <div class="facet"><h4>Data carried forward</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Sales Order number.</li><li>Unit data.</li><li>Transaction structure.</li><li>Booking fee/DP amount.</li><li>Payment reference.</li><li>Receipt number.</li><li>Payment verification.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>No verified booking fee/DP, no Sales Order. A verified booking fee/DP generates a receipt linked to the SPK; after the SO is created, the SO reference is appended automatically to the same receipt lineage.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Setelah SPK tersimpan, sistem menagih booking fee ke customer. Nominal minimum mengikuti unit yang dipilih. Tidak ada booking fee terverifikasi sesuai minimum unit, tidak ada Sales Order. Kuitansi booking fee terhubung ke SPK; setelah SO terbentuk, referensi SO ditambahkan otomatis pada receipt lineage.</p></blockquote>
         </div>
 
         <div class="stage">
@@ -636,10 +637,10 @@
           <div class="grid g2">
             <div class="facet"><h4>Frontman action</h4><ul><li>Submit billing-readiness request.</li><li>View every failed compliance rule.</li><li>Complete missing requirements.</li><li>Submit compliance exception only when the failed rule is marked waivable.</li></ul></div>
             <div class="facet"><h4>Administration and Finance role</h4><ul><li>Verify compliance evidence.</li><li>Confirm whether the failed requirement has been completed.</li><li>Review eligible compliance exception without changing transaction data.</li><li>Tidak memasukkan kembali customer, unit, payment, atau Sales Order data.</li></ul></div>
-            <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>SPK number.</li><li>Sales Order number.</li><li>Unit information.</li><li>Final transaction value from source system.</li><li>Booking fee/DP.</li><li>Payment and receipt history.</li><li>Settlement status.</li><li>Outstanding balance.</li><li>Document readiness.</li><li>Compliance-gate results.</li><li>Active exception decision, conditions, and expiry.</li></ul></div>
+            <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>SPK number.</li><li>Sales Order number.</li><li>Unit information.</li><li>Final transaction value from source system.</li><li>Purchase method.</li><li>Booking fee according to unit.</li><li>Payment and receipt history.</li><li>Funds-in percentage.</li><li>Full DP required and received from B2B leasing.</li><li>Settlement status.</li><li>Outstanding balance.</li><li>Document readiness.</li><li>Compliance-gate results.</li><li>Active exception decision, conditions, and expiry.</li></ul></div>
             <div class="facet sys"><h4>System generates</h4><ul><li>Billing readiness.</li><li>Billing Locked atau Billing Ready status.</li><li>Failed-rule and lock reason.</li><li>Exception eligibility and decision route when waivable.</li><li>Billing document number after the gate is passed or a valid exception permits conditional release.</li><li>Permanent linkage between billing number, Sales Order number, and originating SPK number.</li><li>Automatic enrichment of related receipt lineage with the billing number.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Billing uses validated upstream data and must not require transaction re-entry. A billing document cannot be posted unless its originating SO and SPK references are consistent and all non-waivable compliance rules pass. Approval Engine is used only for eligible compliance exceptions.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Billing uses validated upstream data and must not require transaction re-entry. Untuk cash, billing hanya terbuka apabila uang masuk sudah minimal 30% dari nilai transaksi. Untuk leasing, billing hanya terbuka apabila full DP sudah diterima; angka full DP ditarik dari B2B leasing. Referensi SPK dan SO harus konsisten. Syarat billing ini bersifat non-waivable.</p></blockquote>
         </div>
 
         <div class="stage">
@@ -657,10 +658,10 @@
           <div class="grid g2">
             <div class="facet"><h4>Frontman inputs</h4><ul><li>Delivery request.</li><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient information.</li><li>Customer confirmation.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Verify operational readiness.</li><li>Handle delivery exception.</li><li>Tidak memasukkan kembali financial status.</li></ul></div>
-            <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>Unit and VIN.</li><li>Billing status.</li><li>AFI/DO status.</li><li>Payment history.</li><li>Outstanding balance.</li><li>AR status.</li><li>PDI status.</li><li>Delivery authorization.</li></ul></div>
+            <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>Unit and VIN.</li><li>Billing status.</li><li>AFI/DO status.</li><li>Purchase method.</li><li>Payment history.</li><li>Outstanding balance / lunas status for cash.</li><li>Leasing contract signed status from B2B leasing.</li><li>AR status.</li><li>PDI status.</li><li>Delivery authorization.</li></ul></div>
             <div class="facet sys"><h4>System generates</h4><ul><li>Eligible for Delivery.</li><li>Locked for Delivery.</li><li>Hold reason.</li><li>Required action.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Delivery eligibility is determined using the same transaction, payment, document, and vehicle data captured upstream.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Delivery eligibility memakai data upstream yang sama. Untuk cash, delivery hanya terbuka setelah transaksi lunas. Untuk leasing, delivery hanya terbuka setelah kontrak sudah ditandatangani customer; status TTD ditarik dari B2B leasing. Syarat delivery ini bersifat non-waivable.</p></blockquote>
         </div>
 
         <div class="stage">
@@ -691,27 +692,66 @@
         <span class="num">6</span>
         <div>
           <h2>System Compliance Gates</h2>
-          <p class="deck">Tujuh gate yang menentukan kapan sebuah transaksi boleh bergerak ke proses berikutnya.</p>
+          <p class="deck">Tujuh gate yang menentukan kapan sebuah transaksi boleh bergerak ke proses berikutnya. Syarat SO, billing, dan delivery mengikuti metode pembelian cash atau leasing.</p>
         </div>
       </div>
       <div class="scroller">
         <table>
           <thead><tr><th>Gate</th><th>Validation scope</th><th>Process unlocked</th></tr></thead>
           <tbody>
-            <tr><td>Data Gate</td><td>Customer identity, STNK name, transaction structure, dan duplicate check</td><td class="gate-note">Valid SPK</td></tr>
-            <tr><td>Document Gate</td><td>Mandatory dan unit-specific documents</td><td class="gate-note">Booking fee/DP request</td></tr>
-            <tr><td>Booking Fee/DP Gate</td><td>Payment reference, amount, verification status, receipt number, dan SPK linkage</td><td class="gate-note">Sales Order linked to SPK</td></tr>
-            <tr><td>Settlement Gate</td><td>Payment allocation, active receipt completeness, AR Open, active-request exposure, receipt reversal, dan Available Request Amount</td><td class="gate-note">Financial readiness</td></tr>
+            <tr><td>Data Gate</td><td>Customer identity, STNK name, transaction structure, purchase method, dan duplicate check</td><td class="gate-note">Valid SPK</td></tr>
+            <tr><td>Document Gate</td><td>Mandatory dan unit-specific documents</td><td class="gate-note">Booking fee request</td></tr>
+            <tr><td>Booking Fee Gate</td><td>SPK tersimpan, tagihan booking fee ke customer, nominal minimum sesuai unit, payment reference, verification, receipt, dan SPK linkage</td><td class="gate-note">Sales Order linked to SPK</td></tr>
+            <tr><td>Settlement Gate</td><td>Payment allocation, active receipt completeness, AR Open, active-request exposure, receipt reversal, dan Available Request Amount</td><td class="gate-note">AR and request control</td></tr>
             <tr><td>Compliance Exception Gate</td><td>Failed rule, waivability, evidence, risk, decision authority, conditions, scope, dan validity period</td><td class="gate-note">Conditional release or remain locked</td></tr>
-            <tr><td>Billing Gate</td><td>SPK–SO reference integrity, transaction value, payment, receipt, document, dan compliance readiness</td><td class="gate-note">Billing number linked to SPK/SO</td></tr>
-            <tr><td>Delivery Gate</td><td>AR, payment, AFI/DO, VIN, PDI, authorization, dan handover requirements</td><td class="gate-note">Unit release</td></tr>
+            <tr><td>Billing Gate</td><td>Cash: uang masuk ≥30% nilai transaksi. Leasing: full DP sudah diterima; angka full DP dari B2B leasing. Plus SPK–SO integrity.</td><td class="gate-note">Billing number linked to SPK/SO</td></tr>
+            <tr><td>Delivery Gate</td><td>Cash: lunas. Leasing: kontrak sudah TTD customer; status dari B2B leasing. Plus AFI/DO, VIN, PDI, dan handover.</td><td class="gate-note">Unit release</td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="grid g2">
+        <div class="panel">
+          <h4>Sales Order — Booking Fee Gate</h4>
+          <ul>
+            <li>Setelah Frontman menginput dan menyimpan SPK, sistem menagih booking fee ke customer.</li>
+            <li>Nominal booking fee berbeda-beda tergantung mobil/unit, ditarik dari master kendaraan.</li>
+            <li>Sales Order hanya dapat dibuat setelah minimum booking fee unit tersebut terverifikasi.</li>
+            <li>Rule ini non-waivable. Approval Engine tidak dapat membuka SO tanpa booking fee.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Billing Gate</h4>
+          <ul>
+            <li>Cash: uang masuk minimal 30% dari nilai transaksi.</li>
+            <li>Leasing: full DP sudah diterima. Angka full DP ditarik dari B2B leasing, bukan diinput ulang di FAST.</li>
+            <li>Billing tidak menunggu lunas untuk cash, dan tidak memakai persentase 30% untuk leasing.</li>
+            <li>Rule ini non-waivable.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Delivery Gate</h4>
+          <ul>
+            <li>Cash: transaksi sudah lunas.</li>
+            <li>Leasing: kontrak sudah ditandatangani customer. Status TTD ditarik dari B2B leasing.</li>
+            <li>AFI/DO, VIN, dan PDI tetap dicek sebagai kesiapan operasional.</li>
+            <li>Rule lunas cash dan kontrak leasing bersifat non-waivable.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Sumber data kontrol</h4>
+          <ul>
+            <li>Minimum booking fee: master unit.</li>
+            <li>Persentase uang masuk cash: kuitansi aktif ÷ nilai transaksi.</li>
+            <li>Full DP leasing: B2B leasing.</li>
+            <li>Kontrak TTD leasing: B2B leasing.</li>
+          </ul>
+        </div>
       </div>
       <blockquote class="rule">
         <span class="tag">Central rules</span>
         <p>No transaction moves forward unless the system confirms that the required data is complete, sourced from the correct owner, validated, and ready to be reused by the next process.</p>
         <p>Approval Engine is activated only when a compliance rule fails and the policy classifies that rule as waivable.</p>
+        <p>Minimum booking fee untuk SO, ambang billing 30% cash / full DP leasing, serta syarat delivery lunas cash / kontrak leasing TTD bersifat non-waivable.</p>
         <p>Non-waivable legal, regulatory, and mandatory policy requirements cannot be overridden.</p>
       </blockquote>
     </section>
@@ -759,6 +799,10 @@
         <div class="panel">
           <h4>Document Vault</h4>
           <ul><li>Store documents once.</li><li>Validate document status.</li><li>Reuse valid documents.</li><li>Support AFI/DO, delivery, STNK, dan BPKB.</li><li>Prevent repeated document upload.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>B2B Leasing Integration</h4>
+          <ul><li>Full DP amount required per contract.</li><li>DP received versus DP required.</li><li>Customer-signed contract status.</li><li>Contract date and reference.</li><li>Read-only into FAST; bukan objek Approval Engine.</li></ul>
         </div>
         <div class="panel">
           <h4>E-Receipt Service</h4>
@@ -880,6 +924,9 @@
         <li>AR Open hanya dikurangi oleh kuitansi aktif.</li>
         <li>Payment request aktif mengurangi Available Request Amount, tetapi belum mengurangi AR.</li>
         <li>Pembatalan kuitansi mengembalikan nominal ke AR dan mengevaluasi ulang financial gate.</li>
+        <li>Sales Order membutuhkan minimum booking fee sesuai unit, yang ditagihkan setelah SPK.</li>
+        <li>Billing cash terbuka pada ≥30% dana masuk; billing leasing terbuka setelah full DP dari B2B leasing.</li>
+        <li>Delivery cash terbuka setelah lunas; delivery leasing terbuka setelah kontrak TTD dari B2B leasing.</li>
         <li>Customer dapat membuka seluruh tagihan unit yang masih open.</li>
         <li>Customer dapat melihat status, blocker, next action, dan journey pesanan.</li>
         <li>Approval Engine hanya menangani failed compliance gate yang waivable.</li>

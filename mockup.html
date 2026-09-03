@@ -25,7 +25,7 @@
     <!-- ================= MOCKUP ================= -->
     <div class="pagehead">
       <h1>Mockup tampilan</h1>
-      <p>Simulasi antarmuka SAM sebagai satu working tool. Gunakan tombol peran di kanan atas jendela untuk berpindah antara Frontman, Administrasi, Management, dan Customer. Seluruh nama, nominal, waktu, dan angka pada mockup merupakan data ilustratif—bukan KPI, target, atau data aktual.</p>
+      <p>Simulasi antarmuka SAM sebagai satu working tool. Gunakan tombol peran di kanan atas jendela untuk berpindah antara Frontman, Administrasi, Management, dan Customer. Gate: SO butuh booking fee minimum per unit (ditagih setelah SPK); billing cash ≥30% atau leasing full DP dari B2B; delivery cash lunas atau leasing kontrak TTD dari B2B. Seluruh nama, nominal, waktu, dan angka pada mockup merupakan data ilustratif—bukan KPI, target, atau data aktual.</p>
     </div>
 <div class="legend">
     <b>Kepemilikan data</b>
@@ -111,8 +111,8 @@
               <tr>
                 <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso</span></td>
                 <td>Innova Zenix 2.0 G HV<span class="sub">Putih Mutiara</span></td>
-                <td>Billing</td>
-                <td><span class="tag hold">Menunggu pelunasan</span></td>
+                <td>Delivery</td>
+                <td><span class="tag hold">Cash · belum lunas</span></td>
                 <td class="num">Rp 181.750.000</td>
                 <td>2 hari</td>
                 <td><button class="btn" data-go="request">Tambah request</button></td>
@@ -120,8 +120,8 @@
               <tr>
                 <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura Utama</span></td>
                 <td>Hiace Premio · 3 unit<span class="sub">Silver</span></td>
-                <td>Compliance</td>
-                <td><span class="tag wait">Surat Kuasa belum sesuai</span></td>
+                <td>Delivery</td>
+                <td><span class="tag wait">Leasing · kontrak belum TTD</span></td>
                 <td class="num">Rp 1.045.000.000</td>
                 <td>1 hari</td>
                 <td><button class="btn ghost" data-go="transaksi">Lihat</button></td>
@@ -168,21 +168,22 @@
           </div>
           <div class="actions">
             <button class="btn ghost">Kirim pengingat ke customer</button>
+            <button class="btn">Ajukan billing</button>
             <button class="btn" disabled>Ajukan delivery</button>
           </div>
         </div>
 
-        <div class="chain"><span>SPK/26/CLD/00418</span><i>→</i><span>SO 4500091238</span><i>→</i><span>Billing: belum terbit</span></div>
+        <div class="chain"><span>SPK/26/CLD/00418</span><i>→</i><span>SO 4500091238</span><i>→</i><span>Cash · billing siap ≥30%</span><i>→</i><span>Delivery: menunggu lunas</span></div>
 
         <div class="box">
           <div class="stages">
             <div class="st done"><span class="dot"></span><b>SPK</b><em>28 Agu</em></div>
             <div class="st done"><span class="dot"></span><b>Booking fee</b><em>28 Agu</em></div>
             <div class="st done"><span class="dot"></span><b>Sales Order</b><em>29 Agu</em></div>
-            <div class="st now"><span class="dot"></span><b>Settlement</b><em>Sebagian dibayar</em></div>
-            <div class="st locked"><span class="dot"></span><b>Billing</b><em>Terkunci</em></div>
-            <div class="st locked"><span class="dot"></span><b>AFI/DO</b><em>Belum</em></div>
-            <div class="st locked"><span class="dot"></span><b>Delivery</b><em>Belum</em></div>
+            <div class="st done"><span class="dot"></span><b>Settlement</b><em>62,7% masuk</em></div>
+            <div class="st now"><span class="dot"></span><b>Billing</b><em>Siap ≥30% cash</em></div>
+            <div class="st locked"><span class="dot"></span><b>AFI/DO</b><em>Menunggu billing</em></div>
+            <div class="st locked"><span class="dot"></span><b>Delivery</b><em>Menunggu lunas</em></div>
             <div class="st locked"><span class="dot"></span><b>Good Issue</b><em>Belum</em></div>
             <div class="st locked"><span class="dot"></span><b>STNK/BPKB</b><em>Belum</em></div>
           </div>
@@ -195,7 +196,7 @@
               <div class="fields">
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Dokumen asal</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val">4500091238</span><span class="src">Referensi SPK/26/CLD/00418</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Menunggu settlement gate</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Gate lolos · siap diajukan</span></div>
               </div>
             </div>
 
@@ -216,6 +217,8 @@
               <div class="fields">
                 <div class="frow locked"><i class="own s">S</i><span class="lab">VIN</span><span class="val">MHKA6GJ••••41827</span><span class="src">Dari alokasi unit</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Status PDI</span><span class="val">Selesai · 30 Agu</span><span class="src">Dari sistem logistik</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Metode pembelian</span><span class="val">Cash</span><span class="src">Dari SPK</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Minimum booking fee unit</span><span class="val">Rp 5.000.000 · Innova Zenix</span><span class="src">Master kendaraan</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Harga setelah program</span><span class="val">Rp 486.750.000</span><span class="src">Dihitung sistem</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Document compliance</span><span class="val">6 dari 6 persyaratan valid</span><span class="src">Document Gate</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Exception aktif</span><span class="val">Tidak ada</span><span class="src">Seluruh rule lolos</span></div>
@@ -228,7 +231,8 @@
                 <li><i class="own s">S</i><div>Pembayaran Rp 300.000.000 dialokasikan ke SO 4500091238 dan kuitansi KWT/26/CLD/009115 diterbitkan <time>1 Sep 2026, 14:08 · Banking API</time></div></li>
                 <li><i class="own a">A</i><div>Alamat customer dikoreksi pada sumber data SPK, perubahan diteruskan ke AFI dan DO <time>31 Agu 2026, 09:15 · Dewi Kusuma</time></div></li>
                 <li><i class="own s">S</i><div>Document Gate dinyatakan lengkap, tidak diperlukan compliance exception <time>29 Agu 2026, 10:42 · Rules Engine</time></div></li>
-                <li><i class="own s">S</i><div>Booking fee terverifikasi, kuitansi KWT/26/CLD/008731 diterbitkan, dan permintaan Sales Order dibuka <time>28 Agu 2026, 16:30</time></div></li>
+                <li><i class="own s">S</i><div>Booking fee terverifikasi sesuai minimum Innova Zenix, kuitansi KWT/26/CLD/008731 diterbitkan, dan Sales Order dibuka <time>28 Agu 2026, 16:30</time></div></li>
+                <li><i class="own s">S</i><div>Tagihan booking fee Rp 5.000.000 dikirim ke customer setelah SPK tersimpan <time>28 Agu 2026, 11:05 · Master unit</time></div></li>
               </ul>
             </div>
           </div>
@@ -238,12 +242,15 @@
               <h3>Posisi keuangan</h3>
               <div class="money">
                 <div class="row"><span>Nilai transaksi</span><span>Rp 486.750.000</span></div>
-                <div class="row"><span>Booking fee (terverifikasi)</span><span>Rp 5.000.000</span></div>
+                <div class="row"><span>Metode</span><span>Cash</span></div>
+                <div class="row"><span>Syarat billing</span><span>≥30% · terpenuhi 62,7%</span></div>
+                <div class="row"><span>Syarat delivery</span><span>Lunas · belum</span></div>
+                <div class="row"><span>Booking fee unit (terverifikasi)</span><span>Rp 5.000.000</span></div>
                 <div class="row"><span>Kuitansi booking fee</span><span>KWT/26/CLD/008731</span></div>
                 <div class="row"><span>Pelunasan tahap 1</span><span>Rp 300.000.000</span></div>
                 <div class="row"><span>Kuitansi tahap 1</span><span>KWT/26/CLD/009115</span></div>
                 <div class="bar"><i style="width:62.7%"></i></div>
-                <p class="hint">62,7% terbayar · 2 kuitansi aktif memotong AR</p>
+                <p class="hint">62,7% terbayar · billing cash terbuka · delivery menunggu lunas</p>
                 <div class="row"><span>Payment request aktif</span><span>Rp 100.000.000</span></div>
                 <div class="row total"><span>AR Open</span><span>Rp 181.750.000</span></div>
                 <div class="row"><span>Tersedia untuk request baru</span><span>Rp 81.750.000</span></div>
@@ -255,19 +262,19 @@
               <ul class="gates">
                 <li><span class="mark ok">✓</span><div>Data gate<span class="why">Identitas, nama STNK, struktur transaksi valid</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Document gate<span class="why">6 dari 6 dokumen wajib valid</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark ok">✓</span><div>Booking fee gate<span class="why">Terverifikasi Banking API 28 Agu</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark no">!</span><div>Settlement gate<span class="why">Outstanding Rp 181.750.000 belum nihil</span></div><span class="tag stop">Tertahan</span></li>
-                <li><span class="mark idle">•</span><div>Billing gate<span class="why">Menunggu settlement gate</span></div><span class="tag mute">Menunggu</span></li>
-                <li><span class="mark idle">•</span><div>Delivery gate<span class="why">Menunggu billing dan AFI/DO</span></div><span class="tag mute">Menunggu</span></li>
+                <li><span class="mark ok">✓</span><div>Booking fee gate<span class="why">Minimum Innova Zenix Rp 5.000.000 terverifikasi · ditagih setelah SPK</span></div><span class="tag ok">SO terbuka</span></li>
+                <li><span class="mark ok">✓</span><div>Billing gate · cash<span class="why">Uang masuk 62,7% ≥ 30%</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark no">!</span><div>Delivery gate · cash<span class="why">Belum lunas · AR Open Rp 181.750.000</span></div><span class="tag stop">Tertahan</span></li>
+                <li><span class="mark idle">•</span><div>AFI/DO<span class="why">Dapat diajukan setelah billing terbit</span></div><span class="tag mute">Menunggu</span></li>
               </ul>
             </div>
 
             <div class="box">
               <h3>Tindakan berikutnya</h3>
               <div class="pad">
-                <p style="margin:0 0 12px;font-size:13px;color:var(--ink-soft)">Delivery terbuka otomatis setelah pelunasan terverifikasi atau compliance exception yang eligible disetujui. Tidak ada data yang perlu diinput ulang.</p>
-                <button class="btn" style="width:100%;margin-bottom:8px" data-go="request">Kirim tagihan pelunasan</button>
-                <button class="btn ghost" style="width:100%" data-go="eskalasi">Ajukan exception delivery</button>
+                <p style="margin:0 0 12px;font-size:13px;color:var(--ink-soft)">Transaksi cash. Billing sudah boleh diajukan karena dana masuk ≥30%. Delivery hanya terbuka setelah lunas. Exception tidak dapat mengoverride syarat lunas.</p>
+                <button class="btn" style="width:100%;margin-bottom:8px" data-go="request">Kirim sisa pelunasan</button>
+                <button class="btn ghost" style="width:100%" disabled>Exception delivery tidak tersedia</button>
               </div>
             </div>
           </div>
@@ -313,7 +320,7 @@
                 <li><span class="mark no">1</span><div>Kuitansi menjadi Cancelled<span class="why">Dokumen asli tetap tersimpan pada audit trail</span></div><span class="tag stop">Reversal</span></li>
                 <li><span class="mark idle">2</span><div>Nominal dikembalikan ke AR Open<span class="why">Outstanding unit dihitung ulang</span></div><span class="tag hold">Recalculate</span></li>
                 <li><span class="mark idle">3</span><div>Payment request terkait diperbarui<span class="why">Menjadi Cancelled atau Requires Follow-up</span></div><span class="tag hold">Follow-up</span></li>
-                <li><span class="mark idle">4</span><div>Billing dan delivery gate dievaluasi ulang<span class="why">Gate kembali terkunci apabila financial requirement tidak lagi terpenuhi</span></div><span class="tag mute">Recheck</span></li>
+                <li><span class="mark idle">4</span><div>Billing dan delivery gate dievaluasi ulang<span class="why">Cash: cek ulang 30% dan lunas. Leasing: cek ulang full DP dan kontrak TTD</span></div><span class="tag mute">Recheck</span></li>
               </ul>
             </div>
           </div>
@@ -328,7 +335,7 @@
                 <button class="btn" style="width:100%;margin-top:12px" data-go="request">Buat request Rp 81.750.000</button>
               </div>
             </div>
-            <p class="note">No verified booking fee, no Sales Order. No verified payment, no receipt. No full payment or approved exception, no delivery release.</p>
+            <p class="note">Tidak ada booking fee minimum unit, tidak ada SO. Cash: billing pada ≥30%, delivery hanya setelah lunas. Leasing: billing setelah full DP B2B, delivery setelah kontrak TTD B2B.</p>
           </div>
         </div>
       </section>
@@ -352,7 +359,7 @@
                   <button aria-pressed="false">Booking fee/DP</button>
                   <button aria-pressed="true">Pelunasan</button>
                 </div>
-                <p class="hint" style="margin:0">Booking fee dan pelunasan tahap 1 telah memiliki kuitansi aktif. Terdapat request pelunasan tahap 2 sebesar Rp 100.000.000 yang belum dibayar. Permintaan baru hanya dapat dibuat sebesar sisa kapasitas Rp 81.750.000.</p>
+                <p class="hint" style="margin:0">Booking fee Innova Zenix Rp 5.000.000 ditagihkan otomatis setelah SPK dan sudah punya kuitansi. Pelunasan tahap 1 aktif. Request tahap 2 Rp 100.000.000 menunggu bayar. Kapasitas request baru Rp 81.750.000.</p>
               </div>
             </div>
 
@@ -363,8 +370,9 @@
                   <div class="field"><label><i class="own s">S</i> Customer</label><input value="Budi Santoso · CST-0090412" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Nomor SPK</label><input value="SPK/26/CLD/00418" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Sales Order</label><input value="4500091238" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Nomor billing</label><input value="Belum terbit · menunggu settlement gate" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Nomor billing</label><input value="Belum terbit · billing gate cash sudah lolos ≥30%" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Unit</label><input value="Innova Zenix 2.0 G HV · VIN ••41827" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Metode / syarat</label><input value="Cash · billing ≥30% lolos · delivery menunggu lunas" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Nilai transaksi</label><input value="Rp 486.750.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Total kuitansi aktif</label><input value="Rp 305.000.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> AR Open</label><input value="Rp 181.750.000" readonly></div>
@@ -386,7 +394,7 @@
                   <div class="field">
                     <label><i class="own f">F</i> Alokasi</label>
                     <select><option>SO 4500091238 · 1 unit</option><option>Bagi per unit (multi-unit)</option></select>
-                    <span class="help">Alokasi menentukan unit mana yang lolos delivery gate.</span>
+                    <span class="help">Untuk cash, delivery tetap menunggu lunas per unit. Billing sudah lolos karena ≥30%.</span>
                   </div>
                   <div class="field">
                     <label><i class="own f">F</i> Berlaku sampai</label>
@@ -399,7 +407,7 @@
                 </div>
                 <div class="field">
                   <label><i class="own f">F</i> Catatan untuk customer</label>
-                  <textarea>Unit sudah lolos PDI. Setelah pelunasan diterima, jadwal serah terima dapat langsung kami konfirmasi.</textarea>
+                  <textarea>Unit sudah lolos PDI. Billing cash sudah memenuhi 30%. Jadwal serah terima dapat dikonfirmasi setelah pelunasan lunas.</textarea>
                 </div>
               </div>
               <div class="formfoot">
@@ -417,7 +425,9 @@
                 <li><span class="mark ok">✓</span><div>AR Open tervalidasi<span class="why">Rp 181.750.000 setelah dikurangi 2 kuitansi aktif</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Request aktif diperhitungkan<span class="why">Rp 100.000.000 masih menunggu pembayaran</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Nominal tidak melebihi Available Request Amount<span class="why">Rp 81.750.000 dari Rp 81.750.000</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark ok">✓</span><div>Minimum booking fee terpenuhi<span class="why">Syarat Sales Order sudah lolos 28 Agu</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Minimum booking fee unit terpenuhi<span class="why">Innova Zenix Rp 5.000.000 · SO sudah terbuka</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Billing cash ≥30%<span class="why">62,7% dana masuk · billing dapat diajukan</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark no">!</span><div>Delivery cash belum lunas<span class="why">AR Open Rp 181.750.000 · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
                 <li><span class="mark ok">✓</span><div>Referensi pembayaran unik<span class="why">Belum pernah dipakai transaksi lain</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Rekening penerima sesuai cabang<span class="why">BCA · FAST Outlet Cilandak</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark idle">•</span><div>Verifikasi Banking API<span class="why">Berjalan otomatis setelah transfer masuk</span></div><span class="tag mute">Menunggu</span></li>
@@ -436,7 +446,7 @@
                 </div>
               </div>
             </div>
-            <p class="note">Setelah dana masuk, sistem mencocokkan referensi, mengalokasikan ke SO, menghitung ulang outstanding, lalu membuka billing dan delivery gate. Administrasi tidak memasukkan ulang data pembayaran.</p>
+            <p class="note">Setelah dana masuk, sistem mencocokkan referensi, mengalokasikan ke SO, menghitung ulang % dana masuk dan AR Open, lalu mengevaluasi billing (≥30% cash / full DP leasing) dan delivery (lunas cash / kontrak TTD leasing).</p>
           </div>
         </div>
       </section>
@@ -452,8 +462,8 @@
         </div>
 
         <div class="cards">
-          <div class="card"><p class="k">Eligible exception</p><p class="v">3</p><p class="n">2 di cabang, 1 di regional</p></div>
-          <div class="card"><p class="k">Non-waivable block</p><p class="v">2</p><p class="n">Harus dilengkapi, tidak dapat di-approve</p></div>
+          <div class="card"><p class="k">Eligible exception</p><p class="v">1</p><p class="n">Hanya rule waivable · dokumen</p></div>
+          <div class="card"><p class="k">Non-waivable block</p><p class="v">3</p><p class="n">Booking fee, billing 30%/DP, delivery lunas/kontrak</p></div>
           <div class="card alert"><p class="k">Lewat SLA</p><p class="v">1</p><p class="n">Naik otomatis ke regional</p></div>
           <div class="card"><p class="k">Rata-rata keputusan</p><p class="v">5,2<span style="font-size:14px;font-weight:500"> jam</span></p><p class="n">Target 4 jam</p></div>
         </div>
@@ -465,20 +475,20 @@
             <thead><tr><th>Nomor &amp; transaksi</th><th>Kategori</th><th>Gate penahan</th><th>Pemilik keputusan</th><th>SLA</th><th>Status</th></tr></thead>
             <tbody>
               <tr>
-                <td><b>E-26-0418-01</b><span class="sub">SPK/26/CLD/00418 · Budi Santoso</span></td>
-                <td>Financial requirement belum terpenuhi</td>
-                <td>Settlement / Delivery Gate</td>
-                <td>Finance &amp; Administration Head<span class="sub">Joint decision sesuai policy</span></td>
-                <td><span class="sla">sisa 3j 20m</span></td>
-                <td><span class="tag wait">Menunggu keputusan</span></td>
+                <td><b>E-26-0418-01</b><span class="sub">SPK/26/CLD/00418 · Budi Santoso · Cash</span></td>
+                <td>Delivery sebelum lunas</td>
+                <td>Delivery Gate</td>
+                <td>Tidak tersedia<span class="sub">Non-waivable</span></td>
+                <td><span class="sla">harus dilunasi</span></td>
+                <td><span class="tag stop">Approval tidak tersedia</span></td>
               </tr>
               <tr>
-                <td><b>E-26-0421-02</b><span class="sub">SPK/26/CLD/00421 · PT Danapura</span></td>
-                <td>Original Surat Kuasa belum tersedia</td>
-                <td>Document / Delivery Gate</td>
-                <td>Kepala Administrasi<span class="sub">Digital copy telah diverifikasi</span></td>
-                <td><span class="sla late">lewat 2j 10m</span></td>
-                <td><span class="tag stop">Dieskalasi otomatis</span></td>
+                <td><b>E-26-0421-02</b><span class="sub">SPK/26/CLD/00421 · PT Danapura · Leasing</span></td>
+                <td>Kontrak belum ditandatangani customer</td>
+                <td>Delivery Gate</td>
+                <td>Tidak tersedia<span class="sub">Status TTD dari B2B leasing</span></td>
+                <td><span class="sla">menunggu B2B</span></td>
+                <td><span class="tag wait">Menunggu kontrak</span></td>
               </tr>
               <tr>
                 <td><b>E-26-0431-01</b><span class="sub">SPK/26/CLD/00431 · Hendra Gunawan</span></td>
@@ -511,28 +521,26 @@
 
         <div class="split">
           <div class="box">
-            <h3>E-26-0418-01 · jalur compliance exception</h3>
+            <h3>E-26-0418-01 · Delivery cash belum lunas</h3>
             <ul class="route">
-              <li class="done"><span class="lv">F</span><div><b>Diajukan Frontman</b><span class="t">Rina Pratiwi · 2 Sep 09:12 · Failed rule dan seluruh data transaksi ditarik otomatis.</span></div></li>
-              <li class="done"><span class="lv">S</span><div><b>Delivery Gate menahan proses</b><span class="t">AR Open Rp 181.750.000. Rule diklasifikasikan waivable hanya dengan joint decision dan komitmen maksimal 7 hari.</span></div></li>
-              <li class="done"><span class="lv">1</span><div><b>Kepala Administrasi memverifikasi evidence</b><span class="t">Komitmen pembayaran dan identitas customer lengkap · diteruskan 09:40.</span></div></li>
-              <li class="active"><span class="lv">2</span><div><b>Finance &amp; Administration Head</b><span class="t">Menunggu compliance exception decision · SLA 4 jam, sisa 3j 20m.</span></div></li>
-              <li class="next"><span class="lv">3</span><div><b>Finance Region</b><span class="t">Naik otomatis apabila SLA decision owner terlewat.</span></div></li>
+              <li class="done"><span class="lv">F</span><div><b>Frontman mengajukan delivery</b><span class="t">Rina Pratiwi · 2 Sep 09:12 · Sistem menarik metode cash, % dana masuk, dan AR Open.</span></div></li>
+              <li class="active"><span class="lv">S</span><div><b>Delivery Gate menahan proses</b><span class="t">Cash belum lunas · AR Open Rp 181.750.000. Rule non-waivable; Approval Engine tidak dibuka.</span></div></li>
+              <li class="next"><span class="lv">—</span><div><b>Tidak ada jalur approval</b><span class="t">Delivery terbuka otomatis setelah kuitansi aktif menutup AR.</span></div></li>
             </ul>
             <div class="formfoot">
-              <span class="hint">Approver hanya memutus failed compliance rule <i class="own p" style="vertical-align:-4px">P</i> — data transaksi dan klasifikasi waivability tidak dapat diubah dari layar ini.</span>
-              <button class="btn ghost">Kembalikan untuk dilengkapi</button>
-              <button class="btn">Setujui dengan syarat</button>
+              <span class="hint">Syarat delivery cash adalah lunas. Syarat delivery leasing adalah kontrak TTD dari B2B leasing. Keduanya tidak dapat di-override.</span>
+              <button class="btn ghost" disabled>Kembalikan</button>
+              <button class="btn" disabled>Setujui dengan syarat</button>
             </div>
           </div>
 
           <div>
             <div class="box">
-              <h3>Dampak bila disetujui dengan syarat</h3>
+              <h3>Dampak bila syarat delivery terpenuhi</h3>
               <ul class="gates">
-                <li><span class="mark ok">✓</span><div>Delivery gate terbuka untuk 1 unit<span class="why">Hanya SO 4500091238</span></div><span class="tag ok">Terbatas</span></li>
-                <li><span class="mark no">!</span><div>AR tercatat Rp 181.750.000<span class="why">Jatuh tempo 5 Sep 2026</span></div><span class="tag stop">Eksposur</span></li>
-                <li><span class="mark idle">•</span><div>Pengingat otomatis ke customer<span class="why">H-1 dan H jatuh tempo</span></div><span class="tag mute">Terjadwal</span></li>
+                <li><span class="mark ok">✓</span><div>Cash: delivery terbuka setelah AR Open Rp 0<span class="why">Hanya SO 4500091238</span></div><span class="tag ok">Lunas</span></li>
+                <li><span class="mark ok">✓</span><div>Leasing: delivery terbuka setelah kontrak TTD<span class="why">Status dari B2B leasing</span></div><span class="tag ok">B2B</span></li>
+                <li><span class="mark idle">•</span><div>Approval tidak mengubah angka transaksi<span class="why">Syarat SO, billing, dan delivery di atas non-waivable</span></div><span class="tag mute">Policy</span></li>
               </ul>
             </div>
             <p class="note">Keputusan menyimpan failed rule, evidence, alasan, conditions, scope, validity period, decision owner, dan timestamp. Setelah masa berlaku habis atau kondisi gagal, gate terkunci kembali otomatis.</p>
@@ -545,7 +553,11 @@
           <table>
             <thead><tr><th>Failed compliance rule</th><th>Waivability</th><th>Pemilik keputusan</th><th>SLA</th><th>Control</th></tr></thead>
             <tbody>
-              <tr><td>Delivery sebelum financial requirement terpenuhi</td><td>Waivable sesuai policy dan risk limit</td><td>FAH + Finance Region</td><td>4 jam</td><td>Conditional release, maksimal 7 hari</td></tr>
+              <tr><td>SO tanpa minimum booking fee unit</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Tagihkan booking fee sesuai master unit setelah SPK</td></tr>
+              <tr><td>Billing cash sebelum uang masuk 30%</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Tunggu kuitansi aktif mencapai ≥30%</td></tr>
+              <tr><td>Billing leasing sebelum full DP</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Full DP ditarik dari B2B leasing</td></tr>
+              <tr><td>Delivery cash sebelum lunas</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Delivery terbuka otomatis saat AR Open = 0</td></tr>
+              <tr><td>Delivery leasing sebelum kontrak TTD</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Status TTD ditarik dari B2B leasing</td></tr>
               <tr><td>Original Surat Kuasa belum tersedia, digital copy valid</td><td>Waivable dengan evidence</td><td>Kepala Administrasi</td><td>4 jam</td><td>Original wajib diterima sebelum expiry</td></tr>
               <tr><td>Mandatory customer identity / NIK mismatch</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Data wajib dikoreksi pada sumber</td></tr>
               <tr><td>PPATK atau regulatory screening gagal</td><td>Non-waivable</td><td>Tidak tersedia</td><td>—</td><td>Transaksi tetap terkunci</td></tr>
@@ -660,7 +672,7 @@
           <div class="card"><p class="k">Transaksi berjalan</p><p class="v">142</p><p class="n">+11 dari pekan lalu</p></div>
           <div class="card"><p class="k">SPK ke Sales Order</p><p class="v">1,4<span style="font-size:14px;font-weight:500"> hari</span></p><p class="n">Sebelumnya 3,2 hari</p></div>
           <div class="card"><p class="k">Outstanding cabang</p><p class="v">18,6<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">Dari 41 Sales Order</p></div>
-          <div class="card alert"><p class="k">Transaksi tertahan</p><p class="v">23</p><p class="n">Terbanyak di settlement</p></div>
+          <div class="card alert"><p class="k">Transaksi tertahan</p><p class="v">23</p><p class="n">Terbanyak di delivery lunas/kontrak</p></div>
         </div>
 
         <div class="split">
@@ -668,7 +680,7 @@
             <h3>Volume per stage</h3>
             <div class="funnel">
               <div class="frow2"><span>SPK</span><span class="track"><i style="width:100%"></i></span><span class="n">142</span></div>
-              <div class="frow2"><span>Booking fee/DP</span><span class="track"><i style="width:88%"></i></span><span class="n">125</span></div>
+              <div class="frow2"><span>Booking fee</span><span class="track"><i style="width:88%"></i></span><span class="n">125</span></div>
               <div class="frow2"><span>Sales Order</span><span class="track"><i style="width:80%"></i></span><span class="n">114</span></div>
               <div class="frow2"><span>Settlement</span><span class="track"><i class="warn" style="width:66%"></i></span><span class="n">94</span></div>
               <div class="frow2"><span>Billing</span><span class="track"><i style="width:52%"></i></span><span class="n">74</span></div>
@@ -683,11 +695,11 @@
             <div class="box">
               <h3>Penyebab transaksi tertahan</h3>
               <ul class="gates">
-                <li><span class="mark no">9</span><div>Outstanding belum nihil<span class="why">Settlement gate</span></div><span class="tag stop">39%</span></li>
-                <li><span class="mark no">6</span><div>Dokumen kurang atau kedaluwarsa<span class="why">Document gate</span></div><span class="tag hold">26%</span></li>
-                <li><span class="mark no">4</span><div>Compliance exception menunggu<span class="why">Waivable failed gate</span></div><span class="tag hold">17%</span></li>
-                <li><span class="mark no">3</span><div>Mismatch data unit dan AFI<span class="why">Delivery gate</span></div><span class="tag hold">13%</span></li>
-                <li><span class="mark no">1</span><div>Pembayaran belum cocok<span class="why">Exception Administrasi</span></div><span class="tag mute">5%</span></li>
+                <li><span class="mark no">8</span><div>Cash belum lunas<span class="why">Delivery gate</span></div><span class="tag stop">35%</span></li>
+                <li><span class="mark no">5</span><div>Kontrak leasing belum TTD<span class="why">Delivery gate · B2B leasing</span></div><span class="tag hold">22%</span></li>
+                <li><span class="mark no">5</span><div>Dokumen kurang atau kedaluwarsa<span class="why">Document gate</span></div><span class="tag hold">22%</span></li>
+                <li><span class="mark no">3</span><div>Booking fee unit belum masuk<span class="why">SO gate</span></div><span class="tag hold">13%</span></li>
+                <li><span class="mark no">2</span><div>Cash belum 30% / DP leasing belum penuh<span class="why">Billing gate</span></div><span class="tag mute">9%</span></li>
               </ul>
             </div>
             <div class="box">
@@ -715,7 +727,7 @@
         <div class="cards">
           <div class="card"><p class="k">Pesanan aktif</p><p class="v">1</p><p class="n">Innova Zenix · SO 4500091238</p></div>
           <div class="card alert"><p class="k">AR Open</p><p class="v">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Tagihan unit masih terbuka</p></div>
-          <div class="card"><p class="k">Status pesanan</p><p class="v" style="font-size:18px">Menunggu pelunasan</p><p class="n">Pembayaran sebagian diterima</p></div>
+          <div class="card"><p class="k">Status pesanan</p><p class="v" style="font-size:18px">Menunggu pelunasan</p><p class="n">Billing cash sudah memenuhi 30%</p></div>
           <div class="card"><p class="k">Status unit</p><p class="v" style="font-size:18px">PDI selesai</p><p class="n">VIN sudah dialokasikan</p></div>
           <div class="card"><p class="k">E-Kuitansi tersedia</p><p class="v">2</p><p class="n"><button class="btn ghost" data-go="e_kuitansi">Lihat &amp; download</button></p></div>
         </div>
@@ -728,8 +740,8 @@
               <tbody>
                 <tr>
                   <td><b>Innova Zenix 2.0 G HV</b><span class="sub">Putih Mutiara · VIN ••41827</span></td>
-                  <td>SPK/26/CLD/00418<span class="sub">SO 4500091238 · Billing belum terbit</span></td>
-                  <td><span class="tag hold">Menunggu pelunasan</span><span class="sub">PDI selesai</span></td>
+                  <td>SPK/26/CLD/00418<span class="sub">SO 4500091238 · Cash · billing siap</span></td>
+                  <td><span class="tag hold">Menunggu lunas untuk delivery</span><span class="sub">PDI selesai</span></td>
                   <td>Rp 100.000.000<span class="sub">Berlaku sampai 5 Sep</span></td>
                   <td class="num">Rp 181.750.000</td>
                   <td><button class="btn" data-go="tagihan_customer">Buka tagihan</button></td>
@@ -740,9 +752,9 @@
         </div>
 
         <div class="grid g3" style="margin-bottom:16px">
-          <div class="box"><h3>Status saat ini</h3><div class="pad"><p><span class="tag hold">Menunggu pelunasan</span></p><p class="hint">Dua kuitansi aktif telah mengurangi AR menjadi Rp181.750.000.</p></div></div>
-          <div class="box"><h3>Tindakan berikutnya</h3><div class="pad"><p><b>Buka tagihan dan selesaikan pembayaran.</b></p><p class="hint">Setelah AR nihil, billing dan penjadwalan delivery diproses sesuai gate.</p></div></div>
-          <div class="box"><h3>Yang masih menahan proses</h3><div class="pad"><p><b>Settlement Gate</b></p><p class="hint">AR Open Rp181.750.000. Dokumen customer dan PDI sudah lengkap.</p></div></div>
+          <div class="box"><h3>Status saat ini</h3><div class="pad"><p><span class="tag hold">Menunggu lunas · cash</span></p><p class="hint">62,7% dana masuk. Billing gate sudah lolos (≥30%). Delivery menunggu AR Open Rp 0.</p></div></div>
+          <div class="box"><h3>Tindakan berikutnya</h3><div class="pad"><p><b>Selesaikan sisa pelunasan.</b></p><p class="hint">Setelah lunas, delivery cash terbuka. Untuk leasing, delivery menunggu kontrak TTD dari B2B.</p></div></div>
+          <div class="box"><h3>Yang masih menahan proses</h3><div class="pad"><p><b>Delivery Gate · cash belum lunas</b></p><p class="hint">AR Open Rp181.750.000. Booking fee unit dan billing 30% sudah lolos.</p></div></div>
         </div>
 
         <div class="phonewrap">
@@ -759,7 +771,7 @@
                 <b>8801 0418 0003</b>
               </div>
               <button class="btn ghost" data-go="e_kuitansi" style="width:100%;margin:0 0 10px">Download e-Kuitansi terakhir</button>
-              <p style="font-size:12px;color:var(--ink-soft);margin:0">Unit sudah lolos PDI dan siap dijadwalkan setelah pelunasan diterima. Lihat status lengkap di Digiroom.</p>
+              <p style="font-size:12px;color:var(--ink-soft);margin:0">Billing sudah memenuhi syarat 30%. Unit dijadwalkan setelah pelunasan lunas. Lihat status lengkap di Digiroom.</p>
             </div>
           </div>
 
@@ -771,10 +783,10 @@
                 <li class="done"><span class="m">✓</span><div>Booking fee terverifikasi<span class="t">28 Agu 2026</span></div></li>
                 <li class="done"><span class="m">✓</span><div>Sales Order terbentuk<span class="t">29 Agu 2026</span></div></li>
                 <li class="done"><span class="m">✓</span><div>Unit dialokasikan · VIN terbit<span class="t">30 Agu 2026</span></div></li>
-                <li class="now"><span class="m">•</span><div>Pelunasan<span class="t">Current stage · AR Open Rp 181.750.000</span></div></li>
-                <li><span class="m">•</span><div>Billing<span class="t">Terbuka setelah pelunasan</span></div></li>
-                <li><span class="m">•</span><div>AFI/DO<span class="t">Menunggu Billing Gate</span></div></li>
-                <li><span class="m">•</span><div>Delivery<span class="t">Dijadwalkan bersama Anda</span></div></li>
+                <li class="done"><span class="m">✓</span><div>Billing siap<span class="t">Cash 62,7% ≥ 30%</span></div></li>
+                <li class="now"><span class="m">•</span><div>Pelunasan<span class="t">Current stage · AR Open Rp 181.750.000 · delivery menunggu lunas</span></div></li>
+                <li><span class="m">•</span><div>AFI/DO<span class="t">Menunggu billing terbit</span></div></li>
+                <li><span class="m">•</span><div>Delivery<span class="t">Cash: setelah lunas</span></div></li>
                 <li><span class="m">•</span><div>Serah terima unit<span class="t">—</span></div></li>
                 <li><span class="m">•</span><div>STNK<span class="t">Dipantau setelah serah terima</span></div></li>
                 <li><span class="m">•</span><div>BPKB<span class="t">Dipantau sampai selesai</span></div></li>
@@ -834,7 +846,7 @@
               <div class="fields">
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Aktif</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SO</span><span class="val">4500091238</span><span class="src">Terhubung</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Menunggu settlement</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Gate cash ≥30% lolos</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Innova Zenix · VIN ••41827</span><span class="src">PDI selesai</span></div>
               </div>
             </div>

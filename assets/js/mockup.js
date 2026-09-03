@@ -70,6 +70,8 @@
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
     } else if(/Kirim instruksi pembayaran|Kirim tagihan|Kirim pengingat/.test(label)){
       b.addEventListener('click',function(){ toast('Instruksi terkirim ke customer.'); });
+    } else if(/Ajukan billing/.test(label)){
+      b.addEventListener('click',function(){ toast('Billing gate cash lolos (≥30%). Permintaan billing dikirim.'); });
     } else if(/Setujui/.test(label)){
       b.addEventListener('click',function(){ toast('Keputusan exception tercatat. Gate dievaluasi ulang.'); });
     } else if(/Buat SPK baru/.test(label)){
