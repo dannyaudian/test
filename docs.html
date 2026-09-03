@@ -64,7 +64,7 @@
 
       <div class="track" aria-label="Customer journey end to end">
         <ol>
-          <li class="on"><a href="mockup.html#beranda"><span class="node"></span><b>SPK</b><em>Frontman capture</em></a></li>
+          <li class="on"><a href="mockup.html#spk"><span class="node"></span><b>SPK</b><em>Data sebelum bayar</em></a></li>
           <li class="on"><a href="mockup.html#booking"><span class="node"></span><b>Booking Fee</b><em>Dewi · Yaris</em></a></li>
           <li class="on"><a href="mockup.html#transaksi"><span class="node"></span><b>Sales Order</b><em>Budi · Zenix</em></a></li>
           <li><a href="mockup.html#cashless"><span class="node"></span><b>Settlement</b><em>QRIS / VA</em></a></li>
@@ -86,6 +86,15 @@
         </div>
       </div>
       <div class="cases">
+        <a class="case" href="mockup.html#spk">
+          <div class="thumb yaris">YARIS</div>
+          <div class="body">
+            <p class="who">Dewi Lestari · Frontman</p>
+            <h3>Data SPK sebelum bayar</h3>
+            <p>Pemesan, nama &amp; alamat STNK, tipe/warna, aksesoris, tunai. OTR dari area PO Kota Depok. Dokumen entri dan STNK/BPKB sudah diunggah.</p>
+            <span class="go">Buka data SPK →</span>
+          </div>
+        </a>
         <a class="case" href="mockup.html#booking">
           <div class="thumb yaris">YARIS</div>
           <div class="body">
@@ -553,6 +562,7 @@
           </div>
         </div>
         <div class="see-row">
+          <a class="see" href="mockup.html#spk"><span class="see-k">SPK</span><b>Dewi · data sebelum bayar</b><span>OTR area PO dari kota STNK</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#booking"><span class="see-k">Booking</span><b>Dewi · Yaris Rp 3.000.000</b><span>QRIS / CDM / tautan / EDC setelah SPK</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#cashless"><span class="see-k">Pelunasan</span><b>Budi · request 100 jt</b><span>QRIS/CDM/tautan. EDC hanya Frontman</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#digiroom"><span class="see-k">Digiroom</span><b>pay.fast.id</b><span>QRIS scan vs VA terbit setelah nominal</span><em>Lihat →</em></a>
@@ -741,12 +751,12 @@
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 1</span><h3>SPK</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Frontman inputs</h4><ul><li>Customer identity.</li><li>Customer contact.</li><li>Purchase method.</li><li>Transaction structure.</li><li>Unit request.</li><li>STNK name.</li><li>Customer documents.</li><li>Delivery preference when available.</li></ul></div>
+            <div class="facet"><h4>Frontman inputs</h4><ul><li>Customer identity.</li><li>Customer contact.</li><li>Alamat pemesan.</li><li>Nama dan alamat STNK, termasuk kabupaten/kota.</li><li>Purchase method (tunai atau leasing).</li><li>Unit type and colour.</li><li>Accessories.</li><li>Customer documents for SPK entry.</li><li>Documents for later STNK/BPKB filing.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Verify customer data.</li><li>Verify documents.</li><li>Identify missing or invalid requirements.</li><li>Add internal classification if required.</li></ul></div>
-            <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Minimum booking fee according to the selected unit.</li><li>Booking-fee payment request to the customer.</li></ul></div>
+            <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Area PO from kabupaten/kota on the STNK address.</li><li>OTR price from that PO area.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Minimum booking fee according to the selected unit.</li></ul></div>
             <div class="facet"><h4>Data carried forward</h4><p>Customer, transaction, unit, document, dan compliance data digunakan oleh booking fee/DP request, Sales Order, billing, AFI/DO, delivery, serta STNK/BPKB.</p></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Customer and transaction data captured at SPK must not be re-entered at subsequent stages.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Customer and transaction data captured at SPK must not be re-entered at subsequent stages. Unit OTR follows the PO area generated from kabupaten/kota on the STNK address. Booking fee is billed only after this SPK data is saved.</p></blockquote>
         </div>
 
         <div class="stage">

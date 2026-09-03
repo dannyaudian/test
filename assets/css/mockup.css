@@ -187,6 +187,8 @@
 #mockup .doc.miss{border-style:dashed;background:var(--surface-2)}
 #mockup .doc b{display:block;font-size:13.5px}
 #mockup .doc .meta{font-size:11.5px;color:var(--ink-soft);margin:4px 0 9px}
+#spk .frow{align-items:start}
+#spk .frow .val{line-height:1.35}
 #mockup .reuse{font-size:11px;color:var(--flow);margin-top:8px;display:block}
 /* management bars */
 #mockup .funnel{padding:8px 16px 16px}

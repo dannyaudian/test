@@ -152,7 +152,7 @@
       tagihan_customer:'customer',e_kuitansi:'customer',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
-      booking:'beranda',delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
+      booking:'beranda',spk:'beranda',delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
       exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
     if((id==='gi'||id==='delivery') && currentRole==='admin') railId='verifikasi';
@@ -168,7 +168,7 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='digiroom'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
@@ -237,7 +237,7 @@
 
   var currentRole='frontman';
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function syncRoleChrome(){
     document.querySelectorAll('[data-for]').forEach(function(el){
       el.hidden = el.getAttribute('data-for') !== currentRole;
@@ -1049,7 +1049,7 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
-      else if(id==='beranda'||id==='transaksi'||id==='booking') applyRole('frontman');
+      else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='booking') applyRole('frontman');
       show(id);
     });
   });
