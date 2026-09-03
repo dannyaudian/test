@@ -1137,6 +1137,7 @@
   applyDelivery();
   applyGi();
   applyAfi();
+  applyDewiProc();
   syncRoleChrome();
   window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); applyDelivery(); applyGi(); applyAfi(); applyDewiProc(); });
 
