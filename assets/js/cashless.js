@@ -41,9 +41,10 @@
   }
   function show(id){
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
+    var railId=({qris:'overview',edc:'overview',portal:'overview',cdm:'portal',bank:'portal',brilink:'portal',ledger:'overview'})[id]||id;
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
-      if(b.dataset.go===id && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
+      if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
     document.querySelectorAll('.channel').forEach(function(c){

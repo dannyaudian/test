@@ -18,32 +18,29 @@
   <div class="links">
     <a href="index.html">Beranda</a>
     <a href="docs.html">Dokumentasi</a>
-    <a href="mockup.html">Mockup D1</a>
-    <a href="mockup-cashless.html" class="active">Cashless D2</a>
+    <a href="mockup.html">SAM</a>
+    <a href="mockup-cashless.html" class="active">Bayar</a>
   </div>
 </nav>
 
 <div id="mockup">
   <div class="pagehead">
-    <p class="dl"><span class="badge">Deliverable 2</span><span class="badge ok">Terhubung ke D1</span></p>
-    <h1>Integrated Cashless Payment and E-Receipt</h1>
-    <p>Tujuh kanal pembayaran masuk ke satu ledger real-time. Tidak ada input manual di lapangan. Setiap pembayaran terverifikasi menerbitkan satu e-kuitansi dan memperbarui AR Open di Deliverable 1. Angka bersifat ilustratif.</p>
+    <p class="dl"><span class="badge">Bayar</span><span class="badge ok">SPK yang sama</span></p>
+    <h1>Bayar pesanan</h1>
+    <p>Pilih kanal. Nominal sudah terisi. Kuitansi langsung masuk ke pesanan Budi.</p>
   </div>
 
-  <nav class="journey" aria-label="Alur seamless D1 ke D2" style="margin-left:clamp(16px,4vw,44px);margin-right:clamp(16px,4vw,44px);max-width:1500px">
-    <a href="mockup.html#beranda">SPK</a>
-    <a href="mockup.html#bayar">Booking fee</a>
-    <a href="mockup.html#transaksi">SO</a>
-    <a class="on pay" href="mockup-cashless.html">Cashless D2</a>
-    <a href="mockup.html#transaksi">Billing</a>
-    <a href="mockup.html#transaksi">Delivery</a>
+  <nav class="journey" aria-label="Tiga langkah">
+    <a href="mockup.html#beranda">1 Transaksi</a>
+    <a class="on pay" href="mockup-cashless.html">2 Bayar</a>
+    <a href="mockup.html#customer">3 Status customer</a>
   </nav>
 
   <div class="handoff">
-    <p><b>Handoff dari Deliverable 1.</b> SPK/26/CLD/00418 · Budi Santoso · Innova Zenix · SO 4500091238 · Cash · AR Open Rp 181.750.000 · 2 e-kuitansi aktif · booking fee unit sudah lolos.</p>
+    <p><b>Innova Zenix · Budi Santoso.</b> Bayar Rp 100.000.000 sekarang, atau lunas <span data-live="ar">Rp 181.750.000</span>.</p>
     <div class="links">
-      <a class="btn ghost" href="mockup.html#transaksi">Buka SAM D1</a>
-      <a class="btn" href="mockup.html#bayar">Lihat AR &amp; kuitansi D1</a>
+      <a class="btn ghost" href="mockup.html#beranda">Frontman</a>
+      <a class="btn" href="mockup.html#customer_detail">Pesanan customer</a>
     </div>
   </div>
 
@@ -74,25 +71,18 @@
         <div class="brand"><b>FAST</b><span>Cashless · Cilandak</span></div>
         <div data-rail="frontman">
           <p class="grouplabel">Frontman · Rina Pratiwi</p>
-          <button data-go="overview" aria-current="true">Ledger live</button>
-          <button data-go="qris">QRIS dinamis</button>
-          <button data-go="edc">EDC host-to-host</button>
-          <button data-go="wa">Kirim link WhatsApp</button>
-          <button data-go="portal">Portal SPK</button>
+          <button data-go="overview" aria-current="true">Pilih kanal</button>
+          <button data-go="wa">Kirim link bayar</button>
         </div>
         <div data-rail="cust" hidden>
           <p class="grouplabel">Customer · Budi Santoso</p>
-          <button data-go="portal" aria-current="true">Bayar dari link</button>
-          <button data-go="bank">Aplikasi bank</button>
-          <button data-go="cdm">CDM cabang</button>
-          <button data-go="brilink">Agen BRILink</button>
+          <button data-go="portal" aria-current="true">Bayar</button>
           <button data-go="receipt">E-kuitansi</button>
         </div>
         <div data-rail="finance" hidden>
           <p class="grouplabel">Finance · Treasury</p>
-          <button data-go="overview" aria-current="true">Cash visibility</button>
-          <button data-go="ledger">Rekonsiliasi otomatis</button>
-          <button data-go="receipt">E-kuitansi terbit</button>
+          <button data-go="overview" aria-current="true">Ledger</button>
+          <button data-go="receipt">E-kuitansi</button>
         </div>
       </aside>
 
@@ -100,12 +90,11 @@
         <section class="screen on" id="overview">
           <div class="screenhead">
             <div>
-            <h2><span class="live-dot"></span>Ledger real-time</h2>
-            <p>Semua kanal menulis ke satu payment reference. Tekan 1–7 untuk pindah kanal. Status PAID masuk ke SAM D1 tanpa re-entry.</p>
+            <h2><span class="live-dot"></span>Pilih cara bayar</h2>
+            <p>Ketuk kanal. Jumlah sudah dari SPK — tidak ketik ulang.</p>
           </div>
             <div class="actions">
-              <a class="btn ghost" href="mockup.html#beranda">Beranda Frontman</a>
-              <a class="btn ghost" href="mockup.html#transaksi">Sinkron ke D1</a>
+              <a class="btn ghost" href="mockup.html#customer_detail">Kembali ke pesanan</a>
             </div>
           </div>
           <div class="cards">

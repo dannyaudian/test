@@ -49,12 +49,17 @@
     screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
     var railId=({
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
-      tx_hiace:'transaksi',tx_raize:'transaksi',tx_avanza:'transaksi',tx_fortuner:'transaksi'
+      tagihan_customer:'customer',e_kuitansi:'customer',
+      transaksi:'beranda',bayar:'beranda',request:'beranda',dokumen:'beranda',
+      tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda'
     })[id]||id;
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
       if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
+    });
+    document.querySelectorAll('.worktabs [data-go]').forEach(function(b){
+      b.setAttribute('aria-current', b.dataset.go===id ? 'true' : 'false');
     });
     var bar=document.querySelector('.urlbar');
     if(bar) bar.textContent='sam.fast.id/fast/'+id;
