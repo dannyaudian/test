@@ -152,7 +152,7 @@
       tagihan_customer:'customer',e_kuitansi:'customer',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
-      booking:'beranda',spk:'beranda',delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
+      booking:'beranda',spk:'beranda',so:'beranda',delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
       exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
     if((id==='gi'||id==='delivery') && currentRole==='admin') railId='verifikasi';
@@ -168,7 +168,7 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='so'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='digiroom'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
@@ -237,7 +237,7 @@
 
   var currentRole='frontman';
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',so:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function syncRoleChrome(){
     document.querySelectorAll('[data-for]').forEach(function(el){
       el.hidden = el.getAttribute('data-for') !== currentRole;
@@ -496,6 +496,22 @@
     var paid=!!(s && s.paid);
     document.querySelectorAll('[data-bf-hide-paid]').forEach(function(el){ el.hidden=paid; });
     document.querySelectorAll('[data-bf-show-paid]').forEach(function(el){ el.hidden=!paid; });
+    var block=document.querySelector('[data-so-block]');
+    var ready=document.querySelector('[data-so-ready]');
+    if(block) block.hidden=paid;
+    if(ready) ready.hidden=!paid;
+    var card=document.querySelector('[data-dewi-card]');
+    if(card) card.setAttribute('data-go', paid?'so':'spk');
+    var oid=document.querySelector('[data-dewi-oid]');
+    if(oid) oid.textContent=paid?'SO 4500091426 · dari SPK/26/CLD/00426':'SPK/26/CLD/00426 · baru tersimpan';
+    var spec=document.querySelector('[data-dewi-spec]');
+    if(spec) spec.textContent=paid?'Tindakan: buka Sales Order · data dari SPK':'Tindakan: cek data SPK sebelum tagih booking fee';
+    var tag=document.querySelector('[data-dewi-tag]');
+    if(tag){ tag.textContent=paid?'SO terbuka':'Belum bayar'; tag.className='tag '+(paid?'ok':'wait'); }
+    var amt=document.querySelector('[data-dewi-amt]');
+    if(amt) amt.textContent=paid?'AR Rp 299,15 Jt':'OTR Depok';
+    var cta=document.querySelector('[data-dewi-cta]');
+    if(cta) cta.textContent=paid?'Sales Order →':'Data pemesan · STNK · unit →';
   }
   function applyDelivery(){
     var s=window.FAST && FAST.load ? FAST.load(FAST.DEL_KEY) : null;
@@ -826,12 +842,35 @@
     toast('Dikembalikan ke salesman. Lengkapi bukti serah terima.');
   });
 
+  function runSoConvert(){
+    var overlay=document.getElementById('soflow');
+    var status=document.getElementById('soStatus');
+    var steps=overlay?overlay.querySelectorAll('[data-step]'):[];
+    if(!overlay){ show('so'); return; }
+    overlay.hidden=false;
+    steps.forEach(function(li){ li.className=''; });
+    var labels=['Membandingkan kuitansi dengan minimum Yaris…','Menyalin pemesan, STNK, unit, harga area PO…','Menerbitkan nomor Sales Order…','Menautkan kuitansi ke SPK dan SO…'];
+    var i=0;
+    function tick(){
+      if(i>0) steps[i-1].className='done';
+      if(i<steps.length){
+        steps[i].className='on';
+        if(status) status.textContent=labels[i];
+        i++;
+        setTimeout(tick, 380);
+      } else {
+        overlay.hidden=true;
+        toast('Booking fee meet. SPK dikonversi ke SO 4500091426.');
+        show('so');
+      }
+    }
+    tick();
+  }
   function settleBooking(channel){
-    if(window.FAST && FAST.save) FAST.save({paid:true,spk:'SPK/26/CLD/00426',channel:channel,receipt:'KWT/26/CLD/009301'}, FAST.BF_KEY);
+    if(window.FAST && FAST.save) FAST.save({paid:true,spk:'SPK/26/CLD/00426',so:'4500091426',channel:channel,receipt:'KWT/26/CLD/009301'}, FAST.BF_KEY);
     applyRole('frontman');
     applyBooking();
-    toast('Booking fee masuk. E-kuitansi KWT/26/CLD/009301. Sales Order dapat dibuka.');
-    show('booking');
+    runSoConvert();
   }
   document.querySelectorAll('[data-bf-pay]').forEach(function(b){
     b.addEventListener('click',function(){ settleBooking(b.getAttribute('data-bf-pay')); });
@@ -1049,7 +1088,7 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
-      else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='booking') applyRole('frontman');
+      else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='so'||id==='booking') applyRole('frontman');
       show(id);
     });
   });

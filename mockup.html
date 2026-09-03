@@ -116,17 +116,17 @@
         </div>
 
         <div class="order-list" id="txList">
-          <button type="button" class="order-card featured" data-tx-status="docs" data-tx-action="1" data-go="spk">
+          <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-go="spk">
             <div class="thumb">YARIS</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00426 · baru tersimpan</p>
+              <p class="oid" data-dewi-oid>SPK/26/CLD/00426 · baru tersimpan</p>
               <strong class="oname">Dewi Lestari · Yaris</strong>
-              <p class="spec">Tindakan: cek data SPK sebelum tagih booking fee</p>
+              <p class="spec" data-dewi-spec>Tindakan: cek data SPK sebelum tagih booking fee</p>
               <div class="row2">
-                <span class="tag wait">Belum bayar</span>
-                <span class="amt">OTR Depok</span>
+                <span class="tag wait" data-dewi-tag>Belum bayar</span>
+                <span class="amt" data-dewi-amt>OTR Depok</span>
               </div>
-              <p class="cta">Data pemesan · STNK · unit →</p>
+              <p class="cta" data-dewi-cta>Data pemesan · STNK · unit →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-go="transaksi">
@@ -479,7 +479,8 @@
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← Daftar</button>
-            <button class="btn" data-go="booking">Tagih booking fee</button>
+            <button class="btn" data-go="booking" data-bf-hide-paid>Tagih booking fee</button>
+            <button class="btn" data-go="so" data-bf-show-paid hidden>Buka Sales Order</button>
           </div>
         </div>
         <ol class="path" aria-label="Status">
@@ -493,7 +494,8 @@
           <div class="card"><p class="k">Kabupaten/kota STNK</p><p class="v" style="font-size:18px">Kota Depok</p><p class="n">Diinput Frontman di alamat STNK</p></div>
           <div class="card"><p class="k">Area PO</p><p class="v" style="font-size:18px">Depok</p><p class="n">Dihasilkan sistem dari kota STNK</p></div>
           <div class="card"><p class="k">Harga OTR</p><p class="v" style="font-size:18px">Rp 296.800.000</p><p class="n">Mengikuti area PO Depok</p></div>
-          <div class="card alert"><p class="k">Pembayaran</p><p class="v" style="font-size:18px">Belum</p><p class="n">Booking fee Rp 3.000.000 menyusul</p></div>
+          <div class="card alert" data-bf-hide-paid><p class="k">Pembayaran</p><p class="v" style="font-size:18px">Belum</p><p class="n">Booking fee Rp 3.000.000 menyusul</p></div>
+          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">4500091426</p><p class="n">SPK dikonversi setelah booking fee</p></div>
         </div>
         <div class="split">
           <div>
@@ -553,15 +555,21 @@
                 <li><span class="mark ok">✓</span><div>Data pemesan<span class="why">Nama dan alamat lengkap</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Data STNK<span class="why">Nama, alamat, kota Depok · area PO Depok</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Dokumen entri &amp; STNK/BPKB<span class="why">Sudah diunggah di SPK</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark idle">•</span><div>Booking fee<span class="why">Belum ditagih · berikutnya di layar bayar</span></div><span class="tag wait">Menunggu</span></li>
-                <li><span class="mark idle">•</span><div>Sales Order<span class="why">Tertahan sampai kuitansi booking fee</span></div><span class="tag mute">Tertahan</span></li>
+                <li data-bf-hide-paid><span class="mark idle">•</span><div>Booking fee<span class="why">Belum ditagih · berikutnya di layar bayar</span></div><span class="tag wait">Menunggu</span></li>
+                <li data-bf-hide-paid><span class="mark idle">•</span><div>Sales Order<span class="why">Tertahan sampai kuitansi booking fee</span></div><span class="tag mute">Tertahan</span></li>
+                <li data-bf-show-paid hidden><span class="mark ok">✓</span><div>Booking fee<span class="why">Rp 3.000.000 terverifikasi · KWT/26/CLD/009301</span></div><span class="tag ok">Meet</span></li>
+                <li data-bf-show-paid hidden><span class="mark ok">✓</span><div>Sales Order<span class="why">4500091426 · data SPK dibawa utuh</span></div><span class="tag ok">Terbuka</span></li>
               </ul>
             </div>
             <div class="box">
               <h3>Tindakan</h3>
-              <div class="pad">
+              <div class="pad" data-bf-hide-paid>
                 <p>Data sudah di sumber. Jangan ketik ulang di SO atau AFI. Lanjut tagih booking fee ke customer.</p>
                 <button class="btn" style="width:100%" data-go="booking">Tagih booking fee Rp 3.000.000</button>
+              </div>
+              <div class="pad" data-bf-show-paid hidden>
+                <p>Booking fee sudah meet. Data SPK ini sudah menjadi Sales Order 4500091426 — tanpa ketik ulang.</p>
+                <button class="btn" style="width:100%" data-go="so">Buka Sales Order</button>
               </div>
             </div>
           </div>
@@ -600,7 +608,7 @@
         <div class="cards">
           <div class="card"><p class="k">Booking fee unit</p><p class="v" style="font-size:22px">Rp 3.000.000</p><p class="n">Master Yaris</p></div>
           <div class="card" data-bf-hide-paid><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Menunggu kuitansi booking fee</p></div>
-          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">Terbuka</p><p class="n">KWT/26/CLD/009301</p></div>
+          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">4500091426</p><p class="n">Dikonversi dari SPK</p></div>
         </div>
         <div class="box" data-bf-hide-paid>
           <h3>QRIS, CDM, tautan, atau EDC</h3>
@@ -651,10 +659,111 @@
           </div>
         </div>
         <div class="box" data-bf-show-paid hidden>
-          <h3>Booking fee terverifikasi</h3>
+          <h3>SPK dikonversi menjadi Sales Order</h3>
           <div class="pad">
-            <p>Kuitansi KWT/26/CLD/009301 aktif. Sales Order dapat dibentuk. Pelunasan menyusul di transaksi yang sama.</p>
-            <button type="button" class="btn" data-go="beranda">Kembali ke antrean</button>
+            <p>Kuitansi KWT/26/CLD/009301 aktif dan memenuhi minimum Yaris. Sistem membawa pemesan, STNK, unit, harga area PO, aksesoris, dan dokumen ke SO 4500091426. Tidak ada form SO baru.</p>
+            <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-go="so">Buka Sales Order</button>
+            <button type="button" class="btn ghost" style="width:100%" data-go="beranda">Kembali ke antrean</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="so">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Sales Order · dari SPK/26/CLD/00426</p>
+            <h2>SO 4500091426 · Dewi Lestari</h2>
+            <p>Data SPK dibawa utuh. Terbit hanya setelah booking fee Yaris Rp 3.000.000 terverifikasi.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="spk">← Sumber SPK</button>
+            <button class="btn ghost" data-go="beranda">Daftar</button>
+          </div>
+        </div>
+        <div data-so-block hidden>
+          <div class="box">
+            <h3>Sales Order belum terbuka</h3>
+            <div class="pad">
+              <p>Booking fee belum meet. Sistem tidak mengonversi SPK. Bukan jalur Approval Engine.</p>
+              <button class="btn" data-go="booking">Tagih booking fee dulu</button>
+            </div>
+          </div>
+        </div>
+        <div data-so-ready hidden>
+          <ol class="path" aria-label="Status">
+            <li class="done">SPK</li>
+            <li class="done">Booking</li>
+            <li class="now">Sales Order</li>
+            <li>Billing &amp; AFI</li>
+            <li>Kirim</li>
+          </ol>
+          <div class="cards">
+            <div class="card"><p class="k">Nomor SO</p><p class="v" style="font-size:18px">4500091426</p><p class="n">Dihasilkan sistem</p></div>
+            <div class="card"><p class="k">Asal</p><p class="v" style="font-size:18px">00426</p><p class="n">SPK/26/CLD/00426</p></div>
+            <div class="card"><p class="k">Kuitansi booking</p><p class="v" style="font-size:18px">009301</p><p class="n">Tertaut SPK lalu SO</p></div>
+            <div class="card"><p class="k">AR Open</p><p class="v" style="font-size:18px">299,15 Jt</p><p class="n">Nilai SPK − booking fee</p></div>
+          </div>
+          <div class="split">
+            <div>
+              <div class="box">
+                <h3>Lineage <span class="side">Satu transaksi</span></h3>
+                <div class="fields">
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00426</span><span class="src">Dokumen asal</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val">4500091426</span><span class="src">Konversi setelah booking fee</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Cash ≥30% + AFI berpasangan</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Kuitansi</span><span class="val">KWT/26/CLD/009301</span><span class="src">Booking fee · aktif</span></div>
+                </div>
+              </div>
+              <div class="box">
+                <h3>Dibawa dari SPK <span class="side">Tidak diketik ulang</span></h3>
+                <div class="fields">
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Dewi Lestari · Jl. Cipete Raya No. 88, Cilandak, Jakarta Selatan</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Andi Pratama</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val">Jl. Raya Sawangan No. 17, Pancoran Mas, Kota Depok</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO / OTR</span><span class="val">Depok · Rp 296.800.000</span><span class="src">Dari kota STNK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Unit</span><span class="val">Yaris 1.5 G CVT · Putih Metalik</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Aksesoris</span><span class="val">Kaca film + karpet · Rp 5.350.000</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Tunai</span><span class="src">SPK</span></div>
+                </div>
+              </div>
+              <div class="box">
+                <h3>Dokumen ikut SO</h3>
+                <div class="docs">
+                  <div class="doc"><b>Entri SPK</b><p class="meta">KTP · KK · NPWP · bukti alamat pemesan</p><span class="tag ok">Vault</span><span class="reuse">Dari SPK/26/CLD/00426</span></div>
+                  <div class="doc"><b>STNK / BPKB</b><p class="meta">KTP Andi · KK · bukti alamat Depok · pernyataan nama</p><span class="tag ok">Vault</span><span class="reuse">Siap AFI</span></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="box">
+                <h3>Posisi keuangan</h3>
+                <div class="money">
+                  <div class="row"><span>Nilai dari SPK</span><span>Rp 302.150.000</span></div>
+                  <div class="row"><span>Kuitansi booking fee</span><span>− Rp 3.000.000</span></div>
+                  <div class="row total"><span>AR Open</span><span>Rp 299.150.000</span></div>
+                  <div class="row"><span>Syarat billing cash</span><span>≥30% dana masuk</span></div>
+                  <div class="row"><span>Syarat delivery cash</span><span>Lunas · belum</span></div>
+                </div>
+                <p class="hint" style="padding:0 16px 14px">0,99% terbayar. Billing cash belum. Bukan waiver Approval Engine.</p>
+              </div>
+              <div class="box">
+                <h3>Gate SO</h3>
+                <ul class="gates">
+                  <li><span class="mark ok">✓</span><div>Booking fee meet<span class="why">Minimum Yaris Rp 3.000.000 · KWT/26/CLD/009301</span></div><span class="tag ok">Lolos</span></li>
+                  <li><span class="mark ok">✓</span><div>Data SPK utuh<span class="why">Pemesan, STNK, unit, harga area PO, dokumen</span></div><span class="tag ok">Lolos</span></li>
+                  <li><span class="mark idle">•</span><div>Billing + AFI<span class="why">Cash ≥30% belum · ajukan berpasangan nanti</span></div><span class="tag mute">Menunggu</span></li>
+                  <li><span class="mark no">!</span><div>Delivery cash<span class="why">AR Open Rp 299.150.000 · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3>Tindakan</h3>
+                <div class="pad">
+                  <p>SO sudah jadi sumber pelunasan. Pelunasan dan AFI memakai data ini, bukan form baru.</p>
+                  <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="spk">Lihat data SPK asal</button>
+                  <button class="btn" style="width:100%" data-go="beranda">Kembali ke antrean</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1909,6 +2018,19 @@
       <li data-step="4">Perbarui tagihan di beranda</li>
     </ol>
     <p class="pf-status" id="pfStatus">Menyiapkan kanal…</p>
+  </div>
+</div>
+<div class="overlay" id="soflow" hidden>
+  <div class="overlay-card">
+    <p class="eyebrow" style="margin:0 0 8px">Sales Order</p>
+    <h3 style="margin:0 0 12px">Mengonversi SPK setelah booking fee meet</h3>
+    <ol>
+      <li data-step="1">Cek kuitansi vs minimum unit</li>
+      <li data-step="2">Salin data SPK ke Sales Order</li>
+      <li data-step="3">Terbitkan nomor SO</li>
+      <li data-step="4">Tautkan kuitansi ke SPK dan SO</li>
+    </ol>
+    <p class="pf-status" id="soStatus">Menyiapkan konversi…</p>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
