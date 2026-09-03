@@ -155,8 +155,62 @@
     applyPayLockUI();
     showDg('home');
   }
+  var ADMIN_BOOK={
+    admin_spk:'spk',admin_qt:'qt',admin_so:'so',admin_do:'do',
+    admin_afi:'afi',admin_bill:'bill',admin_kwt:'kwt',admin_pay:'pay',
+    admin_tx:'spk'
+  };
+  var ADMIN_BOOK_META={
+    spk:{title:'List SPK · Cilandak',lead:'Semua SPK cabang. Buka baris ke data SPK yang sama dengan Frontman.'},
+    qt:{title:'List quotation · Cilandak',lead:'Satu SPK = satu quotation. Satu baris quotation = satu SO. Revisi menarik semua SO terkait.'},
+    so:{title:'List Sales Order · Cilandak',lead:'SO dikonversi dari SPK/quotation. Bukan form baru.'},
+    do:{title:'List Delivery Order · Cilandak',lead:'DO dari SO setelah AFI. Unit dan penerima dari SPK.'},
+    afi:{title:'List AFI · Cilandak',lead:'Nama dan alamat STNK dari SPK. Jalur normal berpasangan dengan billing.'},
+    bill:{title:'List billing · Cilandak',lead:'Cash ≥30% in dan leasing full DP dari B2B. Non-waivable.'},
+    kwt:{title:'List kuitansi · Cilandak',lead:'Satu nomor kuitansi per pembayaran terverifikasi, tertaut SPK/SO.'},
+    pay:{title:'List pembayaran · Cilandak',lead:'Posted, request, pending, dan unmatched. Unmatched dicocokkan di Perlu saya.'}
+  };
+  var ADMIN_RAIL_FROM={
+    spk:'admin_spk',tx_raize:'admin_spk',
+    quot:'admin_qt',booking:'admin_qt',
+    so:'admin_so',so2:'admin_so',transaksi:'admin_so',tx_hiace:'admin_so',
+    do:'admin_do',delivery:'admin_do',gi:'admin_do',
+    afi:'admin_afi',afi_d:'admin_afi',stnk_d:'admin_afi',tx_fortuner:'admin_afi',
+    bill_d:'admin_bill',
+    bayar:'admin_kwt',e_kuitansi:'admin_kwt',
+    cashless:'admin_pay',request:'admin_pay'
+  };
+  function activateAdminBook(key){
+    document.querySelectorAll('#admin_book [data-book-panel]').forEach(function(p){
+      p.hidden = p.getAttribute('data-book-panel')!==key;
+    });
+    var meta=ADMIN_BOOK_META[key]||ADMIN_BOOK_META.spk;
+    var t=document.querySelector('[data-book-title]');
+    var l=document.querySelector('[data-book-lead]');
+    if(t) t.textContent=meta.title;
+    if(l) l.textContent=meta.lead;
+    filterAdminBook();
+  }
+  function filterAdminBook(){
+    var q=((document.getElementById('adminBookSearch')||{}).value||'').toLowerCase();
+    var panel=document.querySelector('#admin_book [data-book-panel]:not([hidden])');
+    if(!panel) return;
+    var n=0,total=0;
+    panel.querySelectorAll('tbody tr').forEach(function(row){
+      total++;
+      var on=!q||row.textContent.toLowerCase().indexOf(q)>-1;
+      if(on) n++;
+      row.classList.toggle('is-hidden', !on);
+    });
+    var line=document.querySelector('[data-book-count]');
+    if(line) line.innerHTML='<b>'+n+' dari '+total+'</b> · klik baris ke dokumen yang sama';
+  }
   function show(id){
-    screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
+    if(id==='admin_tx') id='admin_spk';
+    var bookKey=ADMIN_BOOK[id];
+    var screenId=bookKey?'admin_book':id;
+    screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
+    if(bookKey) activateAdminBook(bookKey);
     var railId=({
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
       tagihan_customer:'customer',e_kuitansi:'customer',
@@ -168,11 +222,11 @@
       exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
     if(currentRole==='admin'){
-      if(id==='gi') railId='verifikasi';
-      else if(id==='verifikasi') railId='verifikasi';
-      else if(id==='admin_pay'||id==='bayar'||id==='cashless'||id==='request'||id==='e_kuitansi') railId='admin_pay';
+      if(id==='verifikasi') railId='verifikasi';
       else if(id==='eskalasi'||id.indexOf('exc_')===0) railId='eskalasi';
-      else if(id!=='dashboard') railId='admin_tx';
+      else if(ADMIN_BOOK[id]) railId=(id==='admin_tx'?'admin_spk':id);
+      else if(ADMIN_RAIL_FROM[id]) railId=ADMIN_RAIL_FROM[id];
+      else if(id!=='dashboard') railId='admin_spk';
     }
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
@@ -186,9 +240,9 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='admin_tx'||id==='admin_pay'||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='admin_book'||ADMIN_BOOK[id]||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
-        ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='digiroom'))
+        ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='admin_kwt'||id==='digiroom'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
       a.classList.toggle('pay', hid==='cashless');
@@ -199,7 +253,7 @@
     var cashBack=document.querySelector('#cashless [data-back]');
     if(cashBack){
       cashBack.setAttribute('data-go', currentRole==='cust'?'customer_detail':(currentRole==='admin'?'admin_pay':'beranda'));
-      cashBack.textContent=currentRole==='cust'?'← Pesanan':(currentRole==='admin'?'← Buku pembayaran':'← Daftar');
+      cashBack.textContent=currentRole==='cust'?'← Pesanan':(currentRole==='admin'?'← List pembayaran':'← Daftar');
     }
     syncHomeBack();
     document.querySelectorAll('#cashless .worktabs, #cashless [data-go="transaksi"]').forEach(function(el){
@@ -264,8 +318,8 @@
 
   var payJobSticky=false;
   var currentRole='frontman';
-  var first={frontman:'beranda',admin:'admin_tx',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_tx:'admin',admin_pay:'admin',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var first={frontman:'beranda',admin:'admin_spk',mgmt:'dashboard',cust:'customer'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   document.querySelectorAll('[data-go="beranda"]').forEach(function(b){
     if(b.closest('[data-rail]') || b.hasAttribute('data-back')) return;
     b.setAttribute('data-home', b.closest('#bayar, #request') ? 'pay' : 'tx');
@@ -274,9 +328,9 @@
     document.querySelectorAll('[data-home]').forEach(function(b){
       var kind=b.getAttribute('data-home');
       if(currentRole==='admin'){
-        b.setAttribute('data-go', kind==='pay'?'admin_pay':'admin_tx');
-        if(/Daftar|Transaksi saya|Buku|antrean/i.test(b.textContent||'')){
-          b.textContent=kind==='pay'?'← Buku pembayaran':'← Buku transaksi';
+        b.setAttribute('data-go', kind==='pay'?'admin_pay':'admin_spk');
+        if(/Daftar|Transaksi saya|Buku|antrean|List/i.test(b.textContent||'')){
+          b.textContent=kind==='pay'?'← List pembayaran':'← List SPK';
         }
       } else {
         b.setAttribute('data-go','beranda');
@@ -299,12 +353,13 @@
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
       applyRole(t.dataset.role);
-      show(t.dataset.role==='admin'?'admin_tx':first[t.dataset.role]);
+      show(t.dataset.role==='admin'?'admin_spk':first[t.dataset.role]);
       toast('Peran: '+t.textContent.trim());
     });
   });
   var hash=(location.hash||'').replace('#','');
-  if(hash && document.getElementById(hash)){
+  if(hash==='admin_tx') hash='admin_spk';
+  if(hash && (document.getElementById(hash) || ADMIN_BOOK[hash])){
     if(screenRole[hash]) applyRole(screenRole[hash]);
     show(hash);
   }
@@ -355,65 +410,11 @@
   var search=document.getElementById('txSearch');
   if(search) search.addEventListener('input', filterTx);
 
-  var adminTxFilter='all';
-  function filterAdminTx(){
-    var q=((document.getElementById('adminTxSearch')||{}).value||'').toLowerCase();
-    var n=0, total=0;
-    document.querySelectorAll('#adminTxList .order-card').forEach(function(card){
-      total++;
-      var st=card.getAttribute('data-admin-tx-status');
-      var act=card.getAttribute('data-admin-tx-action')==='1';
-      var match=adminTxFilter==='all'||(adminTxFilter==='action'&&act)||st===adminTxFilter;
-      var matchQ=!q||card.textContent.toLowerCase().indexOf(q)>-1;
-      var on=match&&matchQ;
-      if(on) n++;
-      card.classList.toggle('is-hidden', !on);
-    });
-    var line=document.querySelector('[data-admin-tx-count]');
-    if(line) line.innerHTML='<b>'+n+' dari '+total+' transaksi</b> · filter dan cari di buku cabang yang sama dengan Frontman';
-  }
-  document.addEventListener('click',function(e){
-    var b=e.target.closest('[data-admin-tx-filter]');
-    if(!b) return;
-    adminTxFilter=b.getAttribute('data-admin-tx-filter');
-    document.querySelectorAll('[data-admin-tx-filter]').forEach(function(x){
-      x.setAttribute('aria-pressed', x===b?'true':'false');
-    });
-    filterAdminTx();
-  });
   document.addEventListener('input',function(e){
-    if(e.target && e.target.id==='adminTxSearch') filterAdminTx();
-    if(e.target && e.target.id==='adminPaySearch') filterAdminPay();
+    if(e.target && e.target.id==='adminBookSearch') filterAdminBook();
   });
   document.addEventListener('keyup',function(e){
-    if(e.target && e.target.id==='adminTxSearch') filterAdminTx();
-    if(e.target && e.target.id==='adminPaySearch') filterAdminPay();
-  });
-
-  var adminPayFilter='all';
-  function filterAdminPay(){
-    var q=((document.getElementById('adminPaySearch')||{}).value||'').toLowerCase();
-    var n=0, total=0;
-    document.querySelectorAll('#adminPayList tr').forEach(function(row){
-      total++;
-      var st=row.getAttribute('data-admin-pay-status');
-      var match=adminPayFilter==='all'||st===adminPayFilter;
-      var matchQ=!q||row.textContent.toLowerCase().indexOf(q)>-1;
-      var on=match&&matchQ;
-      if(on) n++;
-      row.classList.toggle('is-hidden', !on);
-    });
-    var line=document.querySelector('[data-admin-pay-count]');
-    if(line) line.textContent=n+' dari '+total+' arus kas · satu kuitansi per pembayaran terverifikasi';
-  }
-  document.addEventListener('click',function(e){
-    var b=e.target.closest('[data-admin-pay-filter]');
-    if(!b) return;
-    adminPayFilter=b.getAttribute('data-admin-pay-filter');
-    document.querySelectorAll('[data-admin-pay-filter]').forEach(function(x){
-      x.setAttribute('aria-pressed', x===b?'true':'false');
-    });
-    filterAdminPay();
+    if(e.target && e.target.id==='adminBookSearch') filterAdminBook();
   });
 
   var excFilter='all';
@@ -1304,9 +1305,9 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
-      else if(currentRole==='admin' && id==='beranda') id='admin_tx';
+      else if(currentRole==='admin' && id==='beranda') id='admin_spk';
       else if(currentRole==='admin' && id==='cashless') id='admin_pay';
-      else if(id==='admin_tx'||id==='admin_pay'||id==='verifikasi') applyRole('admin');
+      else if(ADMIN_BOOK[id]||id==='verifikasi'||id==='admin_book') applyRole('admin');
       else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='booking') applyRole('frontman');
       show(id);
     });
