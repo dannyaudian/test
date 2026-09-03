@@ -63,8 +63,8 @@
           <li class="on"><span class="node"></span><b>Booking Fee/DP</b><em>Banking API</em></li>
           <li class="on"><span class="node"></span><b>Sales Order</b><em>System unlock</em></li>
           <li><span class="node"></span><b>Settlement</b><em>Allocation</em></li>
+          <li><span class="node"></span><b>AFI</b><em>Nama &amp; alamat STNK</em></li>
           <li><span class="node"></span><b>Billing</b><em>Readiness</em></li>
-          <li><span class="node"></span><b>AFI/DO</b><em>Auto-populate</em></li>
           <li><span class="node"></span><b>Delivery</b><em>Eligibility gate</em></li>
           <li><span class="node"></span><b>Good Issue</b><em>Evidence</em></li>
           <li><span class="node"></span><b>STNK/BPKB</b><em>Completion</em></li>
@@ -151,7 +151,7 @@
         <li>Dapat ditampilkan secara konsisten kepada Frontman, Administrasi, management, dan customer.</li>
       </ol>
       <h4>Target Data Flow</h4>
-      <div class="chain"><span>Frontman Input</span><i>→</i><span>SPK No.</span><i>→</i><span>Payment + E-Kuitansi</span><i>→</i><span>SO No.</span><i>→</i><span>Billing No.</span><i>→</i><span>AFI/DO</span><i>→</i><span>Delivery</span><i>→</i><span>Good Issue</span><i>→</i><span>STNK/BPKB</span></div>
+      <div class="chain"><span>Frontman Input</span><i>→</i><span>SPK No.</span><i>→</i><span>Payment + E-Kuitansi</span><i>→</i><span>SO No.</span><i>→</i><span>AFI</span><i>→</i><span>Billing No.</span><i>→</i><span>Delivery</span><i>→</i><span>Good Issue</span><i>→</i><span>STNK/BPKB</span></div>
       <div class="callout">
         <span class="tag">Core Principle</span>
         <p>Input once at the source, validate at the right control point, and reuse throughout the entire transaction lifecycle.</p>
@@ -173,8 +173,8 @@
         <li>Memonitor pembayaran satu kali atau bertahap.</li>
         <li>Melihat payment allocation dan outstanding balance.</li>
         <li>Mengajukan compliance exception apabila gate gagal dan rule dinyatakan waivable.</li>
+        <li>Mengajukan AFI (nama STNK, alamat STNK, pengajuan khusus) sebelum billing.</li>
         <li>Mengajukan billing-readiness request.</li>
-        <li>Mengajukan AFI/DO request.</li>
         <li>Mengajukan delivery request.</li>
         <li>Melengkapi bukti Good Issue.</li>
         <li>Memonitor STNK/BPKB.</li>

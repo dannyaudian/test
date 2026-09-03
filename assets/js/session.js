@@ -1,5 +1,6 @@
 window.FAST = window.FAST || {};
 FAST.KEY = 'fast.spk.00418';
+FAST.AFI_KEY = 'fast.spk.00418.afi';
 FAST.DEL_KEY = 'fast.spk.00425';
 FAST.GI_KEY = 'fast.spk.00424';
 FAST.load = function (key) {

@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <p class="queue-line"><b>7 perlu Anda</b> · 1 booking fee · 1 ajukan kirim · 1 Good Issue · 1 exception</p>
+        <p class="queue-line"><b>8 perlu Anda</b> · 1 AFI STNK · 1 booking fee · 1 ajukan kirim · 1 Good Issue · 1 exception</p>
 
         <label class="order-search" for="txSearch">
           <span class="sr-only">Cari transaksi</span>
@@ -140,6 +140,19 @@
                 <span class="amt" data-live="ar">Rp 181.750.000</span>
               </div>
               <p class="cta">Lanjutkan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card featured" data-tx-status="docs" data-tx-action="1" data-go="afi">
+            <div class="thumb">AFI</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00418 · sebelum billing</p>
+              <strong class="oname">Budi Santoso · AFI STNK/BPKB</strong>
+              <p class="spec" data-afi-spec>Tindakan: isi nama, alamat STNK, pengajuan khusus</p>
+              <div class="row2">
+                <span class="tag wait" data-afi-tag>Belum diajukan</span>
+                <span class="amt">Wajib</span>
+              </div>
+              <p class="cta">Ajukan AFI →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="exc" data-tx-action="1" data-go="exc_alamat">
@@ -238,13 +251,15 @@
           <button type="button" data-go="transaksi">Ringkasan</button>
           <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
         <ol class="path" aria-label="Status">
           <li class="done">SPK</li>
           <li class="done">Booking</li>
-          <li class="now">Bayar</li>
+          <li class="now" data-afi-step="afi">AFI</li>
+          <li data-afi-step="bill">Billing</li>
           <li>Kirim</li>
           <li>STNK</li>
         </ol>
@@ -256,7 +271,7 @@
               <div class="fields">
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Dokumen asal</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val">4500091238</span><span class="src">Referensi SPK/26/CLD/00418</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Gate lolos · siap diajukan</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val" data-afi-billing-no>Belum terbit</span><span class="src" data-afi-billing-src>Menunggu pengajuan AFI</span></div>
               </div>
             </div>
 
@@ -265,8 +280,8 @@
               <div class="fields">
                 <div class="frow"><i class="own f">F</i><span class="lab">Nama customer</span><span class="val">Budi Santoso</span><span class="src">Sumber: SPK</span></div>
                 <div class="frow"><i class="own f">F</i><span class="lab">NIK</span><span class="val">3174••••••••0007</span><span class="src">Diverifikasi 28 Agu</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Budi Santoso</span><span class="src">Dipakai AFI, STNK, BPKB</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Alamat</span><span class="val">Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</span><span class="src">Dipakai AFI, DO</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val" data-afi-name>Budi Santoso</span><span class="src">Diisi di pengajuan AFI</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val" data-afi-addr>Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</span><span class="src">Diisi di pengajuan AFI</span></div>
                 <div class="frow"><i class="own s">S</i><span class="lab">Customer ID</span><span class="val">CST-0090412</span><span class="src">Repeat order ke-2</span></div>
                 <div class="frow"><i class="own a">A</i><span class="lab">Klasifikasi</span><span class="val">Retail · Personal</span><span class="src">Ditambahkan Administrasi</span></div>
               </div>
@@ -303,14 +318,14 @@
               <div class="money">
                 <div class="row"><span>Nilai transaksi</span><span>Rp 486.750.000</span></div>
                 <div class="row"><span>Metode</span><span>Cash</span></div>
-                <div class="row"><span>Syarat billing</span><span>≥30% · terpenuhi 62,7%</span></div>
+                <div class="row"><span>Syarat billing</span><span data-afi-bill-rule>AFI dulu, lalu ≥30%</span></div>
                 <div class="row"><span>Syarat delivery</span><span>Lunas · belum</span></div>
                 <div class="row"><span>Booking fee unit (terverifikasi)</span><span>Rp 5.000.000</span></div>
                 <div class="row"><span>Kuitansi booking fee</span><span>KWT/26/CLD/008731</span></div>
                 <div class="row"><span>Pelunasan tahap 1</span><span>Rp 300.000.000</span></div>
                 <div class="row"><span>Kuitansi tahap 1</span><span>KWT/26/CLD/009115</span></div>
                 <div class="bar"><i style="width:62.7%"></i></div>
-                <p class="hint">62,7% terbayar · billing cash terbuka · delivery menunggu lunas</p>
+                <p class="hint" data-afi-money-hint>62,7% terbayar · isi AFI sebelum ajukan billing · delivery menunggu lunas</p>
                 <div class="row"><span>Payment request aktif</span><span>Rp 100.000.000</span></div>
                 <div class="row total"><span>AR Open</span><span data-live="ar">Rp 181.750.000</span></div>
                 <div class="row"><span>Tersedia untuk request baru</span><span data-live="avail">Rp 81.750.000</span></div>
@@ -323,26 +338,100 @@
                 <li><span class="mark ok">✓</span><div>Data gate<span class="why">Identitas, nama STNK, struktur transaksi valid</span></div><span class="tag ok">Lolos</span></li>
                 <li data-exc-doc-gate><span class="mark no">!</span><div>Document gate<span class="why">5 dari 6 valid · bukti alamat kedaluwarsa · waivable</span></div><span class="tag hold">Exception</span></li>
                 <li><span class="mark ok">✓</span><div>Booking fee gate<span class="why">Minimum Innova Zenix Rp 5.000.000 terverifikasi · ditagih setelah SPK</span></div><span class="tag ok">SO terbuka</span></li>
-                <li><span class="mark ok">✓</span><div>Billing gate · cash<span class="why">Uang masuk 62,7% ≥ 30%</span></div><span class="tag ok">Lolos</span></li>
+                <li data-afi-gate><span class="mark no">!</span><div>AFI STNK/BPKB<span class="why">Nama, alamat STNK, dan pengajuan khusus belum diajukan · sebelum billing</span></div><span class="tag hold">Wajib</span></li>
+                <li data-afi-bill-gate><span class="mark idle">•</span><div>Billing gate · cash<span class="why">Uang masuk 62,7% ≥ 30% · tertahan sampai AFI masuk</span></div><span class="tag mute">Menunggu AFI</span></li>
                 <li><span class="mark no">!</span><div>Delivery gate · cash<span class="why">Belum lunas · AR Open Rp 181.750.000</span></div><span class="tag stop">Tertahan</span></li>
-                <li><span class="mark idle">•</span><div>AFI/DO<span class="why">Dapat diajukan setelah billing terbit</span></div><span class="tag mute">Menunggu</span></li>
               </ul>
             </div>
 
             <div class="box">
               <h3>Kerjakan sekarang</h3>
               <div class="pad">
-                <p class="hint">Customer Budi melihat sisa yang sama. Delivery cash hanya setelah lunas — tidak bisa di-exception, bukan jalur Deliverable 3 dulu.</p>
-                <button class="btn" style="width:100%;margin-bottom:8px" data-go="cashless">Terima bayar</button>
+                <p class="hint">Customer Budi melihat sisa yang sama. AFI diisi dulu — baru billing. Delivery cash hanya setelah lunas.</p>
+                <button class="btn" style="width:100%;margin-bottom:8px" data-go="afi" data-afi-need>Isi pengajuan AFI</button>
+                <button class="btn" style="width:100%;margin-bottom:8px" data-afi-bill hidden>Ajukan billing (≥30% lolos)</button>
+                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="cashless">Terima bayar</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="cashless">Ajukan delivery — lunas dulu</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="exc_alamat">Ajukan exception dokumen</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="request">Kirim pengingat bayar</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="customer_detail" data-role="cust">Lihat seperti customer</button>
-                <button class="btn ghost" style="width:100%">Ajukan billing (≥30% lolos)</button>
               </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="screen" id="afi">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Pengajuan AFI · SPK/26/CLD/00418</p>
+            <h2>AFI STNK/BPKB · Budi Santoso</h2>
+            <p>Isi sebelum billing. Nama dan alamat STNK dari SPK, plus pengajuan khusus. Proses terbit STNK menyusul.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="beranda">← Daftar</button></div>
+        </div>
+        <nav class="worktabs" aria-label="Isi transaksi">
+          <button type="button" data-go="transaksi">Ringkasan</button>
+          <button type="button" data-go="cashless">Bayar</button>
+          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
+          <button type="button" data-go="dokumen">Dokumen</button>
+          <button type="button" data-go="exc_alamat">Pengecualian</button>
+        </nav>
+        <div class="cards">
+          <div class="card"><p class="k">Unit</p><p class="v" style="font-size:18px">Zenix</p><p class="n">VIN ••41827 · dari alokasi</p></div>
+          <div class="card"><p class="k">Billing</p><p class="v" style="font-size:18px" data-afi-bill-card>Tertahan</p><p class="n">Setelah AFI masuk</p></div>
+          <div class="card"><p class="k">Pengajuan</p><p class="v" style="font-size:18px" data-afi-status>Belum</p><p class="n">Hanya form ini</p></div>
+        </div>
+        <div class="box">
+          <h3>Urutan</h3>
+          <ul class="gates">
+            <li><span class="mark ok">✓</span><div>Sales Order<span class="why">Booking fee terverifikasi · 4500091238</span></div><span class="tag ok">Lolos</span></li>
+            <li data-afi-gate><span class="mark no">!</span><div>AFI<span class="why">Nama STNK, alamat STNK, pengajuan khusus</span></div><span class="tag hold">Isi dulu</span></li>
+            <li data-afi-bill-gate><span class="mark idle">•</span><div>Billing<span class="why">Cash ≥30% sudah terpenuhi · menunggu AFI</span></div><span class="tag mute">Berikutnya</span></li>
+          </ul>
+        </div>
+        <div class="box" data-afi-open>
+          <h3>Data STNK</h3>
+          <p class="hint">Dipakai ke STNK dan BPKB. Bukan alamat kirim unit. Frontman konfirmasi di sini sekali.</p>
+          <div class="form">
+            <div class="fgrid">
+              <div class="field"><label><i class="own f">F</i> Nama STNK</label><input id="afiName" value="Budi Santoso" autocomplete="name"></div>
+              <div class="field"><label><i class="own f">F</i> Alamat STNK</label><textarea id="afiAddr">Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</textarea></div>
+            </div>
+          </div>
+          <h3 style="margin-top:18px">Pengajuan khusus</h3>
+          <div class="pad" style="padding-top:0">
+            <div class="amtchips" role="group" aria-label="Pengajuan khusus nomor">
+              <button type="button" class="chip on" data-afi-kind="none">Standar</button>
+              <button type="button" class="chip" data-afi-kind="pilih">Pilih nomor</button>
+              <button type="button" class="chip" data-afi-kind="ganjil">Ganjil</button>
+              <button type="button" class="chip" data-afi-kind="genap">Genap</button>
+            </div>
+            <label class="amtfield" data-afi-plate-wrap hidden>
+              <span>Nomor yang diminta</span>
+              <input id="afiPlate" maxlength="12" placeholder="Contoh B 1234 XYZ" autocomplete="off">
+            </label>
+            <p class="hint" data-afi-kind-hint>Plat standar. Tidak memilih nomor, ganjil, atau genap.</p>
+          </div>
+          <div class="formfoot" data-for="frontman">
+            <span class="hint">Pengajuan saja. Alur Samsat dan terbit STNK/BPKB dikerjakan nanti.</span>
+            <button type="button" class="btn" data-afi-submit>Kirim pengajuan AFI</button>
+          </div>
+          <div class="formfoot" data-for="admin" hidden>
+            <span class="hint">Frontman yang mengajukan AFI. Anda tidak mengetik ulang nama atau alamat STNK. Proses terbit menyusul.</span>
+          </div>
+        </div>
+        <div class="box" data-afi-sent hidden>
+          <h3>Pengajuan masuk</h3>
+          <div class="pad">
+            <p><b data-afi-name>Budi Santoso</b> · <span data-afi-addr>Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</span></p>
+            <p class="hint" data-afi-kind-out>Pengajuan khusus: standar</p>
+            <p>Billing cash ≥30% sekarang bisa diajukan. Proses AFI setelah ini belum ada di layar ini.</p>
+            <button type="button" class="btn" data-afi-bill>Ajukan billing</button>
+          </div>
+        </div>
+        <p class="note">Tanpa AFI, tombol billing di ringkasan tidak dibuka. Bukan jalur Approval Engine.</p>
       </section>
 
       <section class="screen" id="tx_hiace">
@@ -691,6 +780,7 @@
           <button type="button" data-go="transaksi">Ringkasan</button>
           <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
@@ -759,6 +849,7 @@
           <button type="button" data-go="transaksi">Ringkasan</button>
           <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
@@ -783,9 +874,9 @@
                   <div class="field"><label><i class="own s">S</i> Customer</label><input value="Budi Santoso · CST-0090412" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Nomor SPK</label><input value="SPK/26/CLD/00418" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Sales Order</label><input value="4500091238" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Nomor billing</label><input value="Belum terbit · billing gate cash sudah lolos ≥30%" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Nomor billing</label><input value="Belum terbit · menunggu pengajuan AFI" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Unit</label><input value="Innova Zenix 2.0 G HV · VIN ••41827" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Metode / syarat</label><input value="Cash · billing ≥30% lolos · delivery menunggu lunas" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Metode / syarat</label><input value="Cash · AFI dulu, lalu billing ≥30% · delivery menunggu lunas" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Nilai transaksi</label><input value="Rp 486.750.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Total kuitansi aktif</label><input value="Rp 305.000.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> AR Open</label><input value="Rp 181.750.000" readonly></div>
@@ -839,7 +930,8 @@
                 <li><span class="mark ok">✓</span><div>Request aktif diperhitungkan<span class="why">Rp 100.000.000 masih menunggu pembayaran</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Nominal tidak melebihi Available Request Amount<span class="why">Rp 81.750.000 dari Rp 81.750.000</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Minimum booking fee unit terpenuhi<span class="why">Innova Zenix Rp 5.000.000 · SO sudah terbuka</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark ok">✓</span><div>Billing cash ≥30%<span class="why">62,7% dana masuk · billing dapat diajukan</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark idle">•</span><div>AFI STNK/BPKB<span class="why" data-afi-req-why>Pengajuan nama &amp; alamat STNK sebelum billing</span></div><span class="tag mute" data-afi-req-tag>Wajib dulu</span></li>
+                <li><span class="mark idle">•</span><div>Billing cash ≥30%<span class="why">62,7% dana masuk · menunggu AFI</span></div><span class="tag mute">Menunggu AFI</span></li>
                 <li><span class="mark no">!</span><div>Delivery cash belum lunas<span class="why">AR Open Rp 181.750.000 · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
                 <li><span class="mark ok">✓</span><div>Referensi pembayaran unik<span class="why">Belum pernah dipakai transaksi lain</span></div><span class="tag ok">Lolos</span></li>
                 <li><span class="mark ok">✓</span><div>Rekening penerima sesuai cabang<span class="why">BCA · FAST Outlet Cilandak</span></div><span class="tag ok">Lolos</span></li>
@@ -948,6 +1040,7 @@
           <button type="button" data-go="transaksi">Ringkasan</button>
           <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
@@ -1035,7 +1128,7 @@
         <div class="screenhead">
           <div>
             <h2>Dokumen · SPK/26/CLD/00418</h2>
-            <p>Diunggah sekali, divalidasi, lalu dipakai ulang oleh AFI/DO, delivery, STNK, dan BPKB.</p>
+            <p>Nama dan alamat STNK diisi di tab AFI sebelum billing. Vault dipakai ulang, tidak diketik di Samsat.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← Daftar</button>
@@ -1046,6 +1139,7 @@
           <button type="button" data-go="transaksi">Ringkasan</button>
           <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
@@ -1092,6 +1186,13 @@
                 <td>Foto serah terima + scan BSTKB <span class="sub">Unit terkirim 2 Sep · salesman unggah</span></td>
                 <td><span class="tag hold" data-gi-tag>Setujui GI</span></td>
                 <td>18 jam</td>
+              </tr>
+              <tr data-go="afi" data-afi-admin hidden>
+                <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · Innova Zenix</span></td>
+                <td>AFI</td>
+                <td>Pengajuan nama &amp; alamat STNK masuk <span class="sub">Proses terbit STNK/BPKB menyusul</span></td>
+                <td><span class="tag wait">Tercatat</span></td>
+                <td>—</td>
               </tr>
                 <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · bukti alamat</span></td>
                 <td>Exception dokumen</td>
@@ -1167,8 +1268,8 @@
               <div class="frow2"><span>Booking fee</span><span class="track"><i style="width:88%"></i></span><span class="n">125</span></div>
               <div class="frow2"><span>Sales Order</span><span class="track"><i style="width:80%"></i></span><span class="n">114</span></div>
               <div class="frow2"><span>Settlement</span><span class="track"><i class="warn" style="width:66%"></i></span><span class="n">94</span></div>
+              <div class="frow2"><span>AFI</span><span class="track"><i class="warn" style="width:58%"></i></span><span class="n">82</span></div>
               <div class="frow2"><span>Billing</span><span class="track"><i style="width:52%"></i></span><span class="n">74</span></div>
-              <div class="frow2"><span>AFI/DO</span><span class="track"><i style="width:45%"></i></span><span class="n">64</span></div>
               <div class="frow2"><span>Delivery</span><span class="track"><i style="width:38%"></i></span><span class="n">54</span></div>
               <div class="frow2"><span>Good Issue</span><span class="track"><i style="width:35%"></i></span><span class="n">50</span></div>
               <div class="frow2"><span>STNK/BPKB</span><span class="track"><i class="warn" style="width:28%"></i></span><span class="n">40</span></div>
@@ -1277,6 +1378,7 @@
         <ol class="path" aria-label="Perjalanan pesanan">
           <li class="done">Pesan</li>
           <li class="now">Bayar</li>
+          <li data-afi-step="afi">AFI</li>
           <li>Kirim</li>
           <li>STNK</li>
         </ol>
@@ -1288,6 +1390,13 @@
             <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar sesuai request</button>
             <button class="btn ghost" data-go="digiroom" data-pay-job="open" data-role="cust">Isi nominal sendiri · QRIS / VA</button>
             <button class="btn ghost" data-go="cashless">Di cabang</button>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Pengajuan AFI</h3>
+          <div class="pad">
+            <p data-afi-cust-wait>Salesman mengisi nama &amp; alamat STNK plus pengajuan khusus (pilih nomor, ganjil, genap) sebelum billing. Anda tidak mengisi form ini.</p>
+            <p data-afi-cust-sent hidden><b>Sudah diajukan.</b> <span data-afi-name>Budi Santoso</span> · <span data-afi-kind-out>standar</span>. Proses terbit STNK menyusul.</p>
           </div>
         </div>
         <div class="box">
@@ -1304,6 +1413,7 @@
             <li class="done"><span class="m">✓</span><div>Booking fee · 28 Agu</div></li>
             <li class="done"><span class="m">✓</span><div>Sales Order · 29 Agu</div></li>
             <li class="now"><span class="m">•</span><div>Pelunasan · sisa tagihan</div></li>
+            <li data-afi-mile><span class="m">•</span><div>AFI STNK/BPKB · sebelum billing</div></li>
             <li><span class="m">•</span><div>Pengiriman setelah lunas</div></li>
             <li><span class="m">•</span><div>STNK &amp; BPKB</div></li>
           </ul>
@@ -1398,7 +1508,7 @@
               <div class="fields">
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Aktif</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SO</span><span class="val">4500091238</span><span class="src">Terhubung</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Gate cash ≥30% lolos</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src" data-afi-billing-src>Menunggu pengajuan AFI</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Innova Zenix · VIN ••41827</span><span class="src">PDI selesai</span></div>
               </div>
             </div>
@@ -1489,6 +1599,7 @@
           <button type="button" data-go="transaksi">Ringkasan</button>
           <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
