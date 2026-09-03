@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <p class="queue-line"><b>5 perlu Anda</b> · 1 booking fee setelah SPK · 1 exception waivable · 1 siap kirim · 1 eskalasi STNK</p>
+        <p class="queue-line"><b>7 perlu Anda</b> · 1 booking fee · 1 ajukan kirim · 1 Good Issue · 1 exception</p>
 
         <label class="order-search" for="txSearch">
           <span class="sr-only">Cari transaksi</span>
@@ -181,17 +181,30 @@
               <p class="cta">Lanjutkan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="ready" data-go="tx_avanza">
+          <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-go="delivery">
             <div class="thumb done">AVANZA</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00425 · lunas</p>
               <strong class="oname">Agus Hermawan · Avanza</strong>
-              <p class="spec">Tindakan: konfirmasi kirim 4 Sep</p>
+              <p class="spec" data-del-spec>Tindakan: ajukan pengiriman</p>
               <div class="row2">
-                <span class="tag ok">Siap kirim</span>
+                <span class="tag ok" data-del-tag>Siap kirim</span>
                 <span class="amt">Rp 0</span>
               </div>
-              <p class="cta">Lanjutkan →</p>
+              <p class="cta">Ajukan delivery →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="gi" data-tx-action="1" data-go="gi">
+            <div class="thumb">RUSH</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00424 · terkirim 2 Sep</p>
+              <strong class="oname">Fajar Nugroho · Rush</strong>
+              <p class="spec" data-gi-spec>Tindakan: unggah foto serah terima + scan BSTKB</p>
+              <div class="row2">
+                <span class="tag wait" data-gi-tag>Good Issue</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Lengkapi bukti →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="exc" data-go="exc_stnk">
@@ -319,8 +332,9 @@
             <div class="box">
               <h3>Kerjakan sekarang</h3>
               <div class="pad">
-                <p class="hint">Customer Budi melihat sisa yang sama. Delivery terbuka setelah lunas — tidak bisa di-exception.</p>
+                <p class="hint">Customer Budi melihat sisa yang sama. Delivery cash hanya setelah lunas — tidak bisa di-exception, bukan jalur Deliverable 3 dulu.</p>
                 <button class="btn" style="width:100%;margin-bottom:8px" data-go="cashless">Terima bayar</button>
+                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="cashless">Ajukan delivery — lunas dulu</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="exc_alamat">Ajukan exception dokumen</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="request">Kirim pengingat bayar</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="customer_detail" data-role="cust">Lihat seperti customer</button>
@@ -521,7 +535,103 @@
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Kuitansi pelunasan aktif</p></div>
           <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px">Siap kirim</p><p class="n">Customer Home: siap kirim</p></div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Konfirmasi slot delivery. Good Issue menyusul serah terima. Tidak ada request bayar tersisa.</p></div></div>
+        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Gate delivery cash lolos (lunas). Ajukan pengiriman dari data SPK yang sama. Jadwal armada menyusul di Deliverable 3.</p><p><button class="btn" data-go="delivery">Ajukan pengiriman</button></p></div></div>
+      </section>
+
+      <section class="screen" id="delivery">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Delivery request · SPK/26/CLD/00425</p>
+            <h2>Ajukan pengiriman · Agus Hermawan</h2>
+            <p>Avanza 1.5 G CVT. Data customer, VIN, dan alamat dari SPK. Frontman tidak mengetik ulang.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="beranda">← Daftar</button></div>
+        </div>
+        <nav class="worktabs" aria-label="Isi transaksi">
+          <button type="button" data-go="tx_avanza">Ringkasan</button>
+          <button type="button" data-go="delivery">Kirim</button>
+        </nav>
+        <div class="cards">
+          <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Cash lunas · gate terbuka</p></div>
+          <div class="card"><p class="k">PDI / VIN</p><p class="v" style="font-size:18px">Siap</p><p class="n">MHKA4FA••••20425</p></div>
+          <div class="card"><p class="k">Lanjut</p><p class="v" style="font-size:18px">D3</p><p class="n">Jadwal &amp; armada belum di sini</p></div>
+        </div>
+        <div class="box">
+          <h3>Syarat delivery</h3>
+          <ul class="gates">
+            <li><span class="mark ok">✓</span><div>Delivery gate · cash<span class="why">Lunas · AR Open Rp 0 · non-waivable</span></div><span class="tag ok">Lolos</span></li>
+            <li><span class="mark ok">✓</span><div>PDI &amp; VIN<span class="why">Dari alokasi unit, bukan ketik ulang</span></div><span class="tag ok">Lolos</span></li>
+            <li><span class="mark idle">•</span><div>Deliverable 3<span class="why">Slot armada, tracking, dan konfirmasi tiba belum didefinisikan di mockup ini</span></div><span class="tag mute">Menyusul</span></li>
+          </ul>
+        </div>
+        <div class="box" data-del-open>
+          <h3>Pengajuan Frontman</h3>
+          <div class="form">
+            <div class="fgrid">
+              <div class="field"><label>Penerima</label><input value="Agus Hermawan" readonly></div>
+              <div class="field"><label>Alamat serah terima</label><input value="Jl. Cipete Raya No. 18, Jakarta Selatan" readonly></div>
+              <div class="field">
+                <label>Preferensi slot</label>
+                <select>
+                  <option>4 Sep 2026 · 09:00–12:00</option>
+                  <option>4 Sep 2026 · 13:00–16:00</option>
+                  <option>5 Sep 2026 · 09:00–12:00</option>
+                </select>
+              </div>
+              <div class="field"><label>Catatan untuk gudang</label><textarea>Customer di rumah. Minta konfirmasi 1 jam sebelumnya.</textarea></div>
+            </div>
+          </div>
+          <div class="formfoot">
+            <span class="hint">Ini request ke proses berikutnya. Bukan Approval Engine.</span>
+            <button type="button" class="btn" data-del-submit>Kirim request delivery</button>
+          </div>
+        </div>
+        <div class="box" data-del-sent hidden>
+          <h3>Request terkirim</h3>
+          <div class="pad">
+            <p>Pengajuan masuk. Penjadwalan armada, tracking, dan status tiba dilanjutkan di <b>Deliverable 3</b> — belum didefinisikan di sini.</p>
+            <p class="hint">Setelah unit benar-benar terkirim, Frontman unggah foto serah terima dan scan BSTKB untuk Good Issue.</p>
+            <button type="button" class="btn" data-go="gi">Contoh: unit yang sudah terkirim</button>
+          </div>
+        </div>
+        <p class="note">Cash yang belum lunas dan leasing tanpa TTD tidak bisa mengajukan delivery. Keduanya non-waivable.</p>
+      </section>
+
+      <section class="screen" id="gi">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Good Issue · SPK/26/CLD/00424</p>
+            <h2>Serah terima · Fajar Nugroho</h2>
+            <p>Rush S GR Sport. Unit sudah dikirim 2 Sep. Salesman unggah bukti; Administrasi yang menyetujui pencatatan GI.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="beranda">← Daftar</button></div>
+        </div>
+        <div class="cards">
+          <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px">Terkirim</p><p class="n">2 Sep 2026 · 14:20</p></div>
+          <div class="card"><p class="k">VIN</p><p class="v" style="font-size:18px">••20424</p><p class="n">Cocok dengan SO</p></div>
+          <div class="card"><p class="k">GI</p><p class="v" style="font-size:18px" data-gi-status>Menunggu bukti</p><p class="n">Bukan waiver lunas</p></div>
+        </div>
+        <p class="exc-note" data-gi-note>Unggah foto serah terima dan scan BSTKB. Administrasi memeriksa, lalu menyetujui Good Issue. Tracking armada lengkap menyusul di Deliverable 3.</p>
+        <div class="box">
+          <h3>Bukti dari salesman</h3>
+          <div class="pad">
+            <button type="button" class="drop" data-drop="foto"><b>Foto serah terima</b><span>Ketuk untuk pasang contoh · geotag 2 Sep 14:22</span></button>
+            <button type="button" class="drop" data-drop="bstkb"><b>Scan BSTKB</b><span>Ketuk untuk pasang scan · nomor mengikuti VIN</span></button>
+          </div>
+          <div class="formfoot" data-for="frontman">
+            <span class="hint">Anda mengunggah. Administrasi yang menyetujui pencatatan.</span>
+            <button type="button" class="btn" data-gi-submit>Kirim ke Administrasi</button>
+          </div>
+          <div class="formfoot" data-for="admin" hidden>
+            <span class="hint">Cocokkan foto, BSTKB, VIN, dan penerima. Jangan ketik ulang data SPK.</span>
+            <button type="button" class="btn" data-gi-approve>Setujui Good Issue</button>
+            <button type="button" class="btn ghost" data-gi-return>Kembalikan ke salesman</button>
+          </div>
+          <div class="formfoot" data-for="mgmt" hidden>
+            <span class="hint">GI diputuskan Administrasi operasional, bukan Kepala Cabang.</span>
+            <button type="button" class="btn ghost" data-go="verifikasi">Antrean verifikasi</button>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="tx_fortuner">
@@ -922,7 +1032,7 @@
             <div class="doc"><b>Kartu Keluarga</b><p class="meta">Diunggah 28 Agu · 1,6 MB</p><span class="tag ok">Valid</span></div>
             <div class="doc"><b>Surat Kuasa</b><p class="meta">Belum diperlukan</p><span class="tag mute">Menyusul saat delivery</span></div>
             <div class="doc miss" id="docAlamat"><b>Bukti alamat</b><p class="meta">Masa berlaku habis 14 Agu 2026</p><span class="tag hold">Perlu pembaruan</span><span class="reuse" style="color:var(--gate)">Waivable · Frontman</span><button class="btn" data-go="exc_alamat" style="width:100%;margin-top:10px">Ajukan exception</button></div>
-            <div class="doc"><b>BSTKB</b><p class="meta">Terbit otomatis saat Good Issue</p><span class="tag mute">Dihasilkan sistem</span></div>
+            <div class="doc"><b>BSTKB</b><p class="meta">Scan diunggah salesman saat Good Issue</p><span class="tag mute">Admin setujui</span></div>
           </div>
         </div>
       </section>
@@ -938,7 +1048,7 @@
         </div>
 
         <div class="cards">
-          <div class="card"><p class="k">Perlu verifikasi</p><p class="v">7</p><p class="n">SLA 4 jam</p></div>
+          <div class="card"><p class="k">Good Issue menunggu</p><p class="v">1</p><p class="n">Foto + scan BSTKB</p></div>
           <div class="card"><p class="k">Exception pembayaran</p><p class="v">2</p><p class="n">Transfer tanpa referensi</p></div>
           <div class="card"><p class="k">Peringatan duplikat</p><p class="v">1</p><p class="n">NIK terdaftar di 2 SPK</p></div>
           <div class="card"><p class="k">Menunggu compliance decision</p><p class="v">3</p><p class="n">Hanya eligible exception</p></div>
@@ -950,7 +1060,13 @@
           <table>
             <thead><tr><th>Transaksi</th><th>Jenis</th><th>Temuan sistem</th><th>Tindakan</th><th>Aging</th></tr></thead>
             <tbody>
-              <tr data-go="exc_alamat">
+              <tr data-go="gi">
+                <td><b>SPK/26/CLD/00424</b><span class="sub">Fajar Nugroho · Rush</span></td>
+                <td>Good Issue</td>
+                <td>Foto serah terima + scan BSTKB <span class="sub">Unit terkirim 2 Sep · salesman unggah</span></td>
+                <td><span class="tag hold" data-gi-tag>Setujui GI</span></td>
+                <td>18 jam</td>
+              </tr>
                 <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · bukti alamat</span></td>
                 <td>Exception dokumen</td>
                 <td>Bukti alamat kedaluwarsa <span class="sub">Waivable · Approval Engine</span></td>

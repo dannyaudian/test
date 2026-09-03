@@ -391,4 +391,10 @@
   background:#ecfeff;color:#0f172a;
 }
 #mockup .bf-panels [data-cash-panel]{display:none}
-#mockup .bf-panels [data-cash-panel].on{display:block}
+#mockup .drop{
+  border:1px dashed var(--rule);border-radius:14px;padding:16px;text-align:center;
+  background:var(--surface-2);width:100%;font:inherit;color:inherit;margin:0 0 10px;
+}
+#mockup .drop b{display:block;font-size:14px;margin-bottom:4px}
+#mockup .drop span{display:block;font-size:12px;color:var(--ink-soft)}
+#mockup .drop.on{border-style:solid;border-color:var(--flow);background:var(--flow-tint)}
