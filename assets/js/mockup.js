@@ -180,7 +180,9 @@
     bayar:'admin_kwt',e_kuitansi:'admin_kwt',
     cashless:'admin_pay',request:'admin_pay'
   };
+  var currentBookKey='spk';
   function activateAdminBook(key){
+    currentBookKey=key;
     document.querySelectorAll('#admin_book [data-book-panel]').forEach(function(p){
       p.hidden = p.getAttribute('data-book-panel')!==key;
     });
@@ -193,7 +195,7 @@
   }
   function filterAdminBook(){
     var q=((document.getElementById('adminBookSearch')||{}).value||'').toLowerCase();
-    var panel=document.querySelector('#admin_book [data-book-panel]:not([hidden])');
+    var panel=document.querySelector('#admin_book [data-book-panel="'+currentBookKey+'"]');
     if(!panel) return;
     var n=0,total=0;
     panel.querySelectorAll('tbody tr').forEach(function(row){
@@ -412,10 +414,25 @@
 
   document.addEventListener('input',function(e){
     if(e.target && e.target.id==='adminBookSearch') filterAdminBook();
-  });
+  }, true);
   document.addEventListener('keyup',function(e){
     if(e.target && e.target.id==='adminBookSearch') filterAdminBook();
-  });
+  }, true);
+  var bookSearch=document.getElementById('adminBookSearch');
+  if(bookSearch){
+    ['input','keyup','change','search'].forEach(function(ev){
+      bookSearch.addEventListener(ev, filterAdminBook);
+    });
+  }
+  var lastBookQ='';
+  setInterval(function(){
+    var box=document.getElementById('admin_book');
+    var q=document.getElementById('adminBookSearch');
+    if(!box || !q || !box.classList.contains('on')) return;
+    if(q.value===lastBookQ) return;
+    lastBookQ=q.value;
+    filterAdminBook();
+  }, 200);
 
   var excFilter='all';
   function filterExc(){
