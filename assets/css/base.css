@@ -236,6 +236,7 @@ button { font: inherit; cursor: pointer; }
   color: var(--signal);
 }
 .badge.ok { background: var(--flow-tint); color: var(--flow); }
+.eyebrow { font-size: 12px; font-weight: 700; color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
 
 @media (max-width: 720px) {
   .site-nav .brand span { display: none; }
