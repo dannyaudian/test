@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/mockup.css">
+<link rel="stylesheet" href="assets/css/cashless.css">
 </head>
 <body>
 <a class="skip" href="#mockup">Lewati ke mockup</a>
@@ -17,26 +18,25 @@
   <div class="links">
     <a href="index.html">Beranda</a>
     <a href="docs.html">Dokumentasi</a>
-    <a href="mockup.html" class="active">SAM</a>
-    <a href="mockup-cashless.html">Bayar</a>
+    <a href="mockup.html" class="active">Aplikasi</a>
   </div>
 </nav>
 
 <div id="mockup">
     <!-- ================= MOCKUP ================= -->
     <div class="pagehead">
-      <h1>FAST SAM</h1>
-      <p>Satu alur: buka transaksi → bayar → kirim. Frontman dan customer melihat status yang sama. Angka ilustratif.</p>
+      <h1>FAST</h1>
+      <p>Satu beranda untuk semua peran. Cashless adalah cara bayar di transaksi yang sama — bukan aplikasi terpisah.</p>
     </div>
-  <nav class="journey wrap-pad" aria-label="Tiga langkah">
-    <a class="on" href="mockup.html#beranda">1 Transaksi</a>
-    <a class="pay" href="mockup-cashless.html">2 Bayar</a>
-    <a href="mockup.html#customer">3 Status customer</a>
+  <nav class="journey wrap-pad" aria-label="Di dalam aplikasi">
+    <a class="on" href="#beranda">Transaksi</a>
+    <a class="pay" href="#cashless">Bayar</a>
+    <a href="#customer">Pesanan customer</a>
   </nav>
   <div class="live-sync wrap-pad" id="liveSync" hidden>
     <span class="live-dot"></span>
     <p><b>Pembayaran masuk.</b> <span id="syncMsg">AR Open dan e-kuitansi diperbarui.</span></p>
-    <a class="btn ghost" href="mockup.html#customer_detail">Lihat di pesanan</a>
+    <a class="btn ghost" href="#customer_detail">Lihat di pesanan</a>
   </div>
 <details class="legend-fold">
   <summary>Kepemilikan data (F / A / S / P)</summary>
@@ -195,7 +195,7 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="bayar">Bayar</button>
+          <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
           <button type="button" data-go="dokumen">Dokumen</button>
         </nav>
@@ -291,7 +291,7 @@
               <h3>Kerjakan sekarang</h3>
               <div class="pad">
                 <p class="hint">Customer Budi melihat sisa yang sama. Delivery terbuka setelah lunas — tidak bisa di-exception.</p>
-                <a class="btn" href="mockup-cashless.html" style="width:100%;display:block;text-align:center;text-decoration:none;margin-bottom:8px">Terima bayar</a>
+                <button class="btn" style="width:100%;margin-bottom:8px" data-go="cashless">Terima bayar</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="request">Kirim pengingat bayar</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="customer_detail" data-role="cust">Lihat seperti customer</button>
                 <button class="btn ghost" style="width:100%">Ajukan billing (≥30% lolos)</button>
@@ -379,7 +379,7 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="bayar">Bayar</button>
+          <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
           <button type="button" data-go="dokumen">Dokumen</button>
         </nav>
@@ -446,7 +446,7 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="bayar">Bayar</button>
+          <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
           <button type="button" data-go="dokumen">Dokumen</button>
         </nav>
@@ -684,7 +684,7 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="bayar">Bayar</button>
+          <button type="button" data-go="cashless">Bayar</button>
           <button type="button" data-go="request">Minta bayar</button>
           <button type="button" data-go="dokumen">Dokumen</button>
         </nav>
@@ -901,7 +901,7 @@
           <p class="n">Atau bayar request aktif Rp 100.000.000 dulu.</p>
           <div class="nextbar">
             <button class="btn" data-go="tagihan_customer">Bayar Rp 100.000.000</button>
-            <a class="btn ghost" href="mockup-cashless.html">Bayar di kasir / QR</a>
+            <button class="btn ghost" data-go="cashless">Bayar di kasir / QR</button>
           </div>
         </div>
         <div class="box">
@@ -1088,9 +1088,78 @@
           </div>
         </div>
       </section>
+
+      <section class="screen" id="cashless">
+        <div class="screenhead">
+          <div>
+            <h2>Bayar · Innova Zenix</h2>
+            <p>Tujuh kanal, satu tagihan. Nominal dari SPK — tidak ketik ulang.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-back data-go="beranda">← Daftar</button>
+          </div>
+        </div>
+        <nav class="worktabs" aria-label="Isi transaksi">
+          <button type="button" data-go="transaksi">Ringkasan</button>
+          <button type="button" data-go="cashless">Bayar</button>
+          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="dokumen">Dokumen</button>
+        </nav>
+        <div class="cards">
+          <div class="card alert"><p class="k">Sisa tagihan</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Sama di Frontman dan customer</p></div>
+          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">VA 8801 0418 0003</p></div>
+        </div>
+        <div class="box">
+          <h3>Pilih kanal</h3>
+          <div class="pad">
+            <div class="channels">
+              <button type="button" class="channel" data-channel="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Scan di HP</span></button>
+              <button type="button" class="channel" data-channel="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Setor di cabang</span></button>
+              <button type="button" class="channel" data-channel="edc" aria-pressed="false"><span class="n">3</span><b>EDC</b><span>Kartu di meja</span></button>
+              <button type="button" class="channel" data-channel="bank" aria-pressed="false"><span class="n">4</span><b>Bank app</b><span>Biller FAST</span></button>
+              <button type="button" class="channel" data-channel="brilink" aria-pressed="false"><span class="n">5</span><b>BRILink</b><span>Agen resmi</span></button>
+              <button type="button" class="channel" data-channel="wa" aria-pressed="false"><span class="n">6</span><b>WhatsApp</b><span>Link checkout</span></button>
+              <button type="button" class="channel" data-channel="portal" aria-pressed="false"><span class="n">7</span><b>Portal SPK</b><span>Link yang sama</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="split">
+          <div class="box">
+            <h3 id="cashPrevTitle">QRIS dinamis</h3>
+            <div class="pad" style="text-align:center">
+              <p class="hint" id="cashPrevHint">Customer scan. Jumlah Rp 100.000.000 sudah terisi.</p>
+              <div class="qrbox" id="cashQr" role="img" aria-label="QRIS"></div>
+              <p class="amt" style="font-size:24px;font-weight:800;margin:8px 0">Rp 100.000.000</p>
+              <button class="btn" id="cashPayBtn" data-pay="qris" data-amount="100000000" style="width:100%">Simulasi bayar</button>
+            </div>
+          </div>
+          <div class="box">
+            <h3>Kuitansi di transaksi ini</h3>
+            <div class="docs">
+              <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan 1 · Rp 300.000.000</p><span class="tag ok">Aktif</span></div>
+              <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking · Rp 5.000.000</p><span class="tag ok">Aktif</span></div>
+              <div class="doc miss" id="newReceiptSlot"><b>Kuitansi berikutnya</b><p class="meta">Terbit setelah simulasi bayar</p><span class="tag mute">Menunggu</span></div>
+            </div>
+            <div class="pad"><button class="btn ghost" data-go="bayar" style="width:100%">Riwayat alokasi</button></div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </div>
+</div>
+<div class="overlay" id="payflow" hidden>
+  <div class="overlay-card">
+    <p class="eyebrow" style="margin:0 0 8px">Pembayaran</p>
+    <h3 style="margin:0 0 12px">Memproses di transaksi ini</h3>
+    <ol>
+      <li data-step="1">Baca SPK &amp; AR Open</li>
+      <li data-step="2">Verifikasi Banking API</li>
+      <li data-step="3">Terbitkan e-kuitansi</li>
+      <li data-step="4">Perbarui tagihan di beranda</li>
+    </ol>
+    <p class="pf-status" id="pfStatus">Menyiapkan kanal…</p>
+  </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="assets/js/session.js"></script>

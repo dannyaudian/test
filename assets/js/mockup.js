@@ -2,7 +2,7 @@
 
   var receipts={
     'KWT/26/CLD/009115':{no:'KWT/26/CLD/009115',status:'Aktif',type:'Pelunasan tahap 1',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'1 Sep 2026, 14:08 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0002',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 300.000.000',verify:'VFY-CLD-009115-A7K2'},
-    'KWT/26/CLD/008731':{no:'KWT/26/CLD/008731',status:'Aktif',type:'Booking fee',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'28 Agu 2026, 16:30 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0001',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 5.000.000',verify:'VFY-CLD-008731-Q3M9'}
+    'KWT/26/CLD/009220':{no:'KWT/26/CLD/009220',status:'Aktif',type:'Pelunasan tahap 2',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'3 Sep 2026, 09:41 WIB',method:'Cashless',ref:'PAY-CLD-00418-3',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 100.000.000',verify:'VFY-CLD-009220-R8P1'}
   };
   function pdfEscape(s){ return String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)'); }
   function receiptPdf(r){
@@ -50,20 +50,39 @@
     var railId=({
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
       tagihan_customer:'customer',e_kuitansi:'customer',
-      transaksi:'beranda',bayar:'beranda',request:'beranda',dokumen:'beranda',
+      transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda'
     })[id]||id;
+    if((id==='cashless'||id==='bayar') && currentRole==='cust') railId='customer';
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
       if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
     document.querySelectorAll('.worktabs [data-go]').forEach(function(b){
-      b.setAttribute('aria-current', b.dataset.go===id ? 'true' : 'false');
+      var tabOn=(id==='cashless'&&b.dataset.go==='cashless')||b.dataset.go===id;
+      b.setAttribute('aria-current', tabOn ? 'true' : 'false');
+    });
+    document.querySelectorAll('.journey a').forEach(function(a){
+      var href=(a.getAttribute('href')||'');
+      var hid=href.split('#')[1]||'';
+      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'))
+        ||(hid==='cashless'&&(id==='cashless'||id==='bayar'))
+        ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id.indexOf('order_')===0));
+      a.classList.toggle('on', on);
+      a.classList.toggle('pay', hid==='cashless');
     });
     var bar=document.querySelector('.urlbar');
     if(bar) bar.textContent='sam.fast.id/fast/'+id;
     if(history.replaceState) try { history.replaceState(null,'','#'+id); } catch(err) {}
+    var cashBack=document.querySelector('#cashless [data-back]');
+    if(cashBack){
+      cashBack.setAttribute('data-go', currentRole==='cust'?'customer_detail':'beranda');
+      cashBack.textContent=currentRole==='cust'?'← Pesanan':'← Daftar';
+    }
+    document.querySelectorAll('#cashless .worktabs, #cashless [data-go="transaksi"]').forEach(function(el){
+      el.hidden=currentRole==='cust';
+    });
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
@@ -99,9 +118,11 @@
     seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false');});
   }); }); }
 
+  var currentRole='frontman';
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   function applyRole(role){
+    currentRole=role;
     document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
     document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
   }
@@ -178,11 +199,100 @@
     });
     document.querySelectorAll('[data-live="avail"]').forEach(function(el){ el.textContent=s.ar===0?'Rp 0':'Rp 81.750.000'; });
     document.querySelectorAll('[data-live="payhint"]').forEach(function(el){
-      el.textContent=s.ar===0?'100% terbayar · delivery cash terbuka':'83,2% terbayar · tersinkron dari Cashless D2';
+      el.textContent=s.ar===0?'100% terbayar · delivery cash terbuka':'83,2% terbayar · cashless di transaksi ini';
     });
     var barFill=document.querySelector('#transaksi .bar i');
     if(barFill) barFill.style.width=s.ar===0?'100%':'83.2%';
   }
   applyLive();
   window.addEventListener('fast-session', applyLive);
+
+  var channelMeta={
+    qris:{title:'QRIS dinamis',hint:'Customer scan. Jumlah sudah terisi dari SPK.'},
+    cdm:{title:'CDM cabang',hint:'Setor tunai. Kode bayar dari SPK, bukan ketik nominal.'},
+    edc:{title:'EDC host-to-host',hint:'Kartu di mesin. Nominal didorong sistem.'},
+    bank:{title:'Aplikasi bank',hint:'Biller resmi FAST. VA sudah terisi.'},
+    brilink:{title:'Agen BRILink',hint:'Menu resmi di EDC agen.'},
+    wa:{title:'WhatsApp checkout',hint:'Kirim satu link. Customer pilih metode.'},
+    portal:{title:'Portal SPK',hint:'URL yang sama dari booking sampai lunas.'}
+  };
+  var channelOrder=['qris','cdm','edc','bank','brilink','wa','portal'];
+  function selectChannel(ch){
+    document.querySelectorAll('.channel').forEach(function(c){
+      c.setAttribute('aria-pressed', c.getAttribute('data-channel')===ch?'true':'false');
+    });
+    var meta=channelMeta[ch]||channelMeta.qris;
+    var title=document.getElementById('cashPrevTitle');
+    var hint=document.getElementById('cashPrevHint');
+    var qr=document.getElementById('cashQr');
+    var btn=document.getElementById('cashPayBtn');
+    if(title) title.textContent=meta.title;
+    if(hint) hint.textContent=meta.hint;
+    if(qr) qr.style.display=ch==='qris'?'':'none';
+    if(btn){ btn.setAttribute('data-pay', ch); }
+  }
+  document.querySelectorAll('.channel[data-channel]').forEach(function(b){
+    b.addEventListener('click',function(){ selectChannel(b.getAttribute('data-channel')); });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    var cash=document.getElementById('cashless');
+    if(!cash || !cash.classList.contains('on')) return;
+    var n=parseInt(e.key,10);
+    if(n>=1 && n<=7) selectChannel(channelOrder[n-1]);
+  });
+  function settle(channel, amount){
+    var ar=amount>=181750000?0:81750000;
+    var label=ar===0?'Rp 0':'Rp 81.750.000';
+    var slot=document.getElementById('newReceiptSlot');
+    if(slot){
+      slot.className='doc';
+      slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Pelunasan 2 · '+(channelMeta[channel]?channelMeta[channel].title:'Cashless')+'</p><span class="tag ok">Aktif</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
+      var db=slot.querySelector('button');
+      if(db) db.addEventListener('click',function(){ downloadReceipt('KWT/26/CLD/009220'); toast('E-kuitansi PDF diunduh.'); });
+    }
+    if(window.FAST && FAST.save){
+      FAST.save({paid:true,ar:ar,arLabel:label,receipt:'KWT/26/CLD/009220',channel:(channelMeta[channel]||{}).title||channel});
+    }
+    toast(ar===0?'Lunas. E-kuitansi terbit. Delivery cash terbuka.':'Pembayaran masuk. Tagihan di beranda ikut berkurang.');
+    show(currentRole==='cust'?'customer_detail':'cashless');
+  }
+  function runPayflow(channel, amount){
+    var overlay=document.getElementById('payflow');
+    var status=document.getElementById('pfStatus');
+    var steps=overlay?overlay.querySelectorAll('[data-step]'):[];
+    if(!overlay){ settle(channel, amount); return; }
+    overlay.hidden=false;
+    steps.forEach(function(li){ li.className=''; });
+    var labels=['Membaca SPK & AR Open…','Verifikasi Banking API…','Menerbitkan e-kuitansi…','Memperbarui beranda…'];
+    var i=0;
+    function tick(){
+      if(i>0) steps[i-1].className='done';
+      if(i<steps.length){
+        steps[i].className='on';
+        if(status) status.textContent=labels[i];
+        i++;
+        setTimeout(tick, 400);
+      } else {
+        overlay.hidden=true;
+        settle(channel, amount);
+      }
+    }
+    tick();
+  }
+  document.querySelectorAll('[data-pay]').forEach(function(b){
+    b.addEventListener('click',function(){
+      runPayflow(b.getAttribute('data-pay'), Number(b.getAttribute('data-amount')||100000000));
+    });
+  });
+  document.querySelectorAll('.journey a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=(a.getAttribute('href')||'').split('#')[1];
+      if(!id || !document.getElementById(id)) return;
+      e.preventDefault();
+      if(id==='customer'||id==='customer_detail') applyRole('cust');
+      else if(id==='beranda'||id==='transaksi') applyRole('frontman');
+      show(id);
+    });
+  });
 })();
