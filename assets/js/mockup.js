@@ -86,12 +86,21 @@
   }); }); }
 
   var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',eskalasi:'frontman',verifikasi:'admin',dashboard:'mgmt',customer:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  function applyRole(role){
+    document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x.dataset.role===role?'true':'false');});
+    document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==role; });
+  }
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
-      document.querySelectorAll('.roletab').forEach(function(x){x.setAttribute('aria-pressed', x===t?'true':'false');});
-      document.querySelectorAll('[data-rail]').forEach(function(r){ r.hidden = r.dataset.rail!==t.dataset.role; });
+      applyRole(t.dataset.role);
       show(first[t.dataset.role]);
       toast('Peran: '+t.textContent.trim());
     });
   });
+  var hash=(location.hash||'').replace('#','');
+  if(hash && document.getElementById(hash)){
+    applyRole(screenRole[hash]||'frontman');
+    show(hash);
+  }
 })();
