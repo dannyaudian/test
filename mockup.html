@@ -34,6 +34,19 @@
       <a class="btn" href="mockup-cashless.html">Buka mockup Cashless D2</a>
     </div>
   </div>
+  <nav class="journey wrap-pad" aria-label="Alur seamless D1 ke D2" style="margin-left:clamp(16px,4vw,44px);margin-right:clamp(16px,4vw,44px);max-width:1500px">
+    <a class="on" href="mockup.html#beranda">SPK</a>
+    <a href="mockup.html#bayar">Booking fee</a>
+    <a href="mockup.html#transaksi">SO</a>
+    <a class="pay" href="mockup-cashless.html">Cashless D2</a>
+    <a href="mockup.html#transaksi">Billing</a>
+    <a href="mockup.html#transaksi">Delivery</a>
+  </nav>
+  <div class="live-sync" id="liveSync" hidden>
+    <span class="live-dot"></span>
+    <p><b>Tersinkron dari Cashless D2.</b> <span id="syncMsg">Pembayaran terverifikasi. AR Open dan e-kuitansi diperbarui.</span></p>
+    <a class="btn ghost" href="mockup-cashless.html">Buka D2</a>
+  </div>
 <div class="legend">
     <b>Kepemilikan data</b>
     <span><i class="own f">F</i> Diinput Frontman</span>
@@ -97,6 +110,7 @@
             <p>Rabu, 2 September 2026 · FAST Outlet Cilandak</p>
           </div>
           <div class="actions">
+            <input class="search" id="txSearch" type="search" placeholder="Cari SPK, customer, unit…" aria-label="Cari transaksi">
             <button class="btn ghost">Cari transaksi</button>
             <button class="btn">Buat SPK baru</button>
           </div>
@@ -120,7 +134,7 @@
                 <td>Innova Zenix 2.0 G HV<span class="sub">Putih Mutiara</span></td>
                 <td>Delivery</td>
                 <td><span class="tag hold">Cash · belum lunas</span></td>
-                <td class="num">Rp 181.750.000</td>
+                <td class="num" data-live="ar">Rp 181.750.000</td>
                 <td>2 hari</td>
                 <td><button class="btn" data-go="request">Tambah request</button></td>
               </tr>
@@ -259,8 +273,8 @@
                 <div class="bar"><i style="width:62.7%"></i></div>
                 <p class="hint">62,7% terbayar · billing cash terbuka · delivery menunggu lunas</p>
                 <div class="row"><span>Payment request aktif</span><span>Rp 100.000.000</span></div>
-                <div class="row total"><span>AR Open</span><span>Rp 181.750.000</span></div>
-                <div class="row"><span>Tersedia untuk request baru</span><span>Rp 81.750.000</span></div>
+                <div class="row total"><span>AR Open</span><span data-live="ar">Rp 181.750.000</span></div>
+                <div class="row"><span>Tersedia untuk request baru</span><span data-live="avail">Rp 81.750.000</span></div>
               </div>
             </div>
 
@@ -736,7 +750,7 @@
 
         <div class="cards">
           <div class="card"><p class="k">Pesanan aktif</p><p class="v">1</p><p class="n">Innova Zenix · SO 4500091238</p></div>
-          <div class="card alert"><p class="k">AR Open</p><p class="v">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Tagihan unit masih terbuka</p></div>
+          <div class="card alert"><p class="k">AR Open</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Tagihan unit masih terbuka</p></div>
           <div class="card"><p class="k">Status pesanan</p><p class="v" style="font-size:18px">Menunggu pelunasan</p><p class="n">Billing cash sudah memenuhi 30%</p></div>
           <div class="card"><p class="k">Status unit</p><p class="v" style="font-size:18px">PDI selesai</p><p class="n">VIN sudah dialokasikan</p></div>
           <div class="card"><p class="k">E-Kuitansi tersedia</p><p class="v">2</p><p class="n"><button class="btn ghost" data-go="e_kuitansi">Lihat &amp; download</button></p></div>
@@ -817,7 +831,7 @@
         </div>
 
         <div class="cards">
-          <div class="card alert"><p class="k">AR Open</p><p class="v">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Nilai tagihan dikurangi kuitansi aktif</p></div>
+          <div class="card alert"><p class="k">AR Open</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Nilai tagihan dikurangi kuitansi aktif</p></div>
           <div class="card"><p class="k">Total kuitansi aktif</p><p class="v">305<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">2 kuitansi</p></div>
           <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Belum mengurangi AR</p></div>
           <div class="card"><p class="k">Belum masuk request</p><p class="v">81,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Masih tersedia</p></div>
@@ -831,7 +845,7 @@
                 <div class="row"><span>Nilai transaksi</span><span>Rp 486.750.000</span></div>
                 <div class="row"><span>Kuitansi booking fee · KWT/26/CLD/008731</span><span>− Rp 5.000.000</span></div>
                 <div class="row"><span>Kuitansi pelunasan 1 · KWT/26/CLD/009115</span><span>− Rp 300.000.000</span></div>
-                <div class="row total"><span>AR Open</span><span>Rp 181.750.000</span></div>
+                <div class="row total"><span>AR Open</span><span data-live="ar">Rp 181.750.000</span></div>
                 <div class="row"><span>Payment request aktif</span><span>Rp 100.000.000</span></div>
                 <div class="row"><span>Sisa belum masuk request</span><span>Rp 81.750.000</span></div>
               </div>
@@ -937,6 +951,7 @@
 </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/session.js"></script>
 <script src="assets/js/mockup.js"></script>
 </body>
 </html>

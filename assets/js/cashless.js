@@ -84,42 +84,94 @@
 
   var paid=false;
   var channelLabel={qris:'QRIS dinamis',cdm:'CDM cabang',edc:'EDC H2H',bank:'Aplikasi bank',brilink:'Agen BRILink',wa:'WhatsApp checkout',portal:'Portal SPK'};
+  var channelOrder=['qris','cdm','edc','bank','brilink','wa','portal'];
+  document.addEventListener('keydown',function(e){
+    if(e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    var n=parseInt(e.key,10);
+    if(n>=1 && n<=7) show(channelOrder[n-1]);
+  });
+
+  function settle(channel, amount){
+    var ar=amount>=181750000?0:81750000;
+    document.querySelectorAll('.ar-open').forEach(function(el){
+      el.innerHTML=ar===0?'0<span style="font-size:14px;font-weight:500"> Jt</span>':'81,75<span style="font-size:14px;font-weight:500"> Jt</span>';
+    });
+    document.querySelectorAll('.ar-open-text').forEach(function(el){
+      el.textContent=ar===0?'Rp 0':'Rp 81.750.000';
+    });
+    document.querySelectorAll('.pct-in').forEach(function(el){
+      el.textContent=ar===0?'100%':'83,2%';
+    });
+    var body=document.getElementById('ledgerBody');
+    if(body && !paid){
+      var tr=document.createElement('tr');
+      tr.className='paid-flash';
+      tr.innerHTML='<td>3 Sep 09:41</td><td>'+(channelLabel[channel]||channel)+'</td><td>PAY-CLD-00418-3</td><td>KWT/26/CLD/009220</td><td class="num">Rp '+(amount>=181750000?'181.750.000':'100.000.000')+'</td><td>'+(ar===0?'Delivery cash terbuka':'AR berkurang · D1 tersinkron')+'</td>';
+      if(body.querySelector('tr:last-child')) body.querySelector('tr:last-child').remove();
+      body.appendChild(tr);
+    }
+    var slot=document.getElementById('newReceiptSlot');
+    if(slot){
+      slot.className='doc';
+      slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Pelunasan 2 · '+(channelLabel[channel]||'Cashless')+' · real-time</p><span class="tag ok">Aktif</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
+      slot.querySelector('button').addEventListener('click',function(){
+        downloadReceipt('KWT/26/CLD/009220');
+        toast('E-kuitansi PDF diunduh. Lineage sama dengan Deliverable 1.');
+      });
+    }
+    paid=true;
+    if(window.FAST && FAST.save){
+      FAST.save({
+        paid:true,
+        ar:ar,
+        arLabel:ar===0?'Rp 0':'Rp 81.750.000',
+        receipt:'KWT/26/CLD/009220',
+        channel:channelLabel[channel]||channel
+      });
+    }
+    toast(ar===0
+      ? 'PAID penuh. E-kuitansi terbit. Buka D1 untuk melihat delivery gate.'
+      : 'PAID via '+(channelLabel[channel]||'kanal')+'. Kuitansi terbit. AR Open tersinkron ke D1.');
+    show('receipt');
+  }
+
+  function runPayflow(channel, amount){
+    var overlay=document.getElementById('payflow');
+    var status=document.getElementById('pfStatus');
+    var steps=overlay?overlay.querySelectorAll('[data-step]'):[];
+    if(!overlay){ settle(channel, amount); return; }
+    overlay.hidden=false;
+    steps.forEach(function(li){ li.className=''; });
+    var labels=['Mengambil data SPK dari D1…','Memverifikasi ke Banking API…','Menerbitkan e-kuitansi…','Menulis AR Open ke SAM D1…'];
+    var i=0;
+    function tick(){
+      if(i>0) steps[i-1].className='done';
+      if(i<steps.length){
+        steps[i].className='on';
+        if(status) status.textContent=labels[i];
+        i++;
+        setTimeout(tick, 420);
+      } else {
+        overlay.hidden=true;
+        settle(channel, amount);
+      }
+    }
+    tick();
+  }
+
   document.querySelectorAll('[data-pay]').forEach(function(b){
     b.addEventListener('click',function(){
-      var channel=b.getAttribute('data-pay');
-      var amount=Number(b.getAttribute('data-amount')||100000000);
-      var ar=amount>=181750000?0:81750000;
-      document.querySelectorAll('.ar-open').forEach(function(el){
-        el.innerHTML=ar===0?'0<span style="font-size:14px;font-weight:500"> Jt</span>':'81,75<span style="font-size:14px;font-weight:500"> Jt</span>';
-      });
-      document.querySelectorAll('.ar-open-text').forEach(function(el){
-        el.textContent=ar===0?'Rp 0':'Rp 81.750.000';
-      });
-      document.querySelectorAll('.pct-in').forEach(function(el){
-        el.textContent=ar===0?'100%':'83,2%';
-      });
-      var body=document.getElementById('ledgerBody');
-      if(body && !paid){
-        var tr=document.createElement('tr');
-        tr.className='paid-flash';
-        tr.innerHTML='<td>3 Sep 09:41</td><td>'+(channelLabel[channel]||channel)+'</td><td>PAY-CLD-00418-3</td><td>KWT/26/CLD/009220</td><td class="num">Rp '+(amount>=181750000?'181.750.000':'100.000.000')+'</td><td>'+(ar===0?'Delivery cash terbuka':'AR berkurang · D1 tersinkron')+'</td>';
-        if(body.querySelector('tr:last-child')) body.querySelector('tr:last-child').remove();
-        body.appendChild(tr);
-      }
-      var slot=document.getElementById('newReceiptSlot');
-      if(slot){
-        slot.className='doc';
-        slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Pelunasan 2 · '+(channelLabel[channel]||'Cashless')+' · real-time</p><span class="tag ok">Aktif</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
-        slot.querySelector('button').addEventListener('click',function(){
-          downloadReceipt('KWT/26/CLD/009220');
-          toast('E-kuitansi PDF diunduh. Lineage sama dengan Deliverable 1.');
-        });
-      }
-      paid=true;
-      toast(ar===0
-        ? 'PAID penuh. E-kuitansi terbit. Delivery gate cash di D1 terbuka.'
-        : 'PAID via '+(channelLabel[channel]||'kanal')+'. KWT/26/CLD/009220 terbit. AR Open di D1 dihitung ulang.');
-      show('receipt');
+      runPayflow(b.getAttribute('data-pay'), Number(b.getAttribute('data-amount')||100000000));
     });
   });
+
+  if(window.FAST && FAST.load){
+    var s=FAST.load();
+    if(s && s.paid){
+      paid=true;
+      document.querySelectorAll('.ar-open').forEach(function(el){
+        el.innerHTML=(s.ar===0?'0':'81,75')+'<span style="font-size:14px;font-weight:500"> Jt</span>';
+      });
+    }
+  }
 })();

@@ -77,7 +77,10 @@
     } else if(/Buat SPK baru/.test(label)){
       b.addEventListener('click',function(){ toast('Draft SPK dibuat. Lengkapi data customer sekali di sumber.'); });
     } else if(/Cari transaksi/.test(label)){
-      b.addEventListener('click',function(){ toast('Filter transaksi berdasarkan tahap tertahan.'); });
+      b.addEventListener('click',function(){
+        var q=document.getElementById('txSearch');
+        if(q){ q.focus(); show('beranda'); }
+      });
     }
   });
   var seg=document.getElementById('jenisSeg');
@@ -103,4 +106,36 @@
     applyRole(screenRole[hash]||'frontman');
     show(hash);
   }
+
+  var search=document.getElementById('txSearch');
+  if(search){
+    search.addEventListener('input',function(){
+      var q=search.value.toLowerCase();
+      document.querySelectorAll('#beranda tbody tr').forEach(function(tr){
+        tr.style.display = tr.textContent.toLowerCase().indexOf(q)>-1 ? '' : 'none';
+      });
+    });
+  }
+
+  function applyLive(){
+    if(!window.FAST || !FAST.load) return;
+    var s=FAST.load();
+    if(!s || !s.paid) return;
+    var bar=document.getElementById('liveSync');
+    var msg=document.getElementById('syncMsg');
+    if(bar) bar.hidden=false;
+    if(msg) msg.textContent=(s.channel||'Cashless')+' · '+(s.receipt||'KWT/26/CLD/009220')+' · AR Open '+(s.arLabel||'Rp 81.750.000')+'. Delivery '+(s.ar===0?'terbuka':'masih menunggu lunas')+'.';
+    document.querySelectorAll('[data-live="ar"]').forEach(function(el){ el.textContent=s.arLabel||'Rp 81.750.000'; });
+    document.querySelectorAll('[data-live="ar-short"]').forEach(function(el){
+      el.innerHTML=(s.ar===0?'0':'81,75')+'<span style="font-size:14px;font-weight:500"> Jt</span>';
+    });
+    document.querySelectorAll('[data-live="avail"]').forEach(function(el){ el.textContent=s.ar===0?'Rp 0':'Rp 81.750.000'; });
+    document.querySelectorAll('[data-live="payhint"]').forEach(function(el){
+      el.textContent=s.ar===0?'100% terbayar · delivery cash terbuka':'83,2% terbayar · tersinkron dari Cashless D2';
+    });
+    var barFill=document.querySelector('#transaksi .bar i');
+    if(barFill) barFill.style.width=s.ar===0?'100%':'83.2%';
+  }
+  applyLive();
+  window.addEventListener('fast-session', applyLive);
 })();
