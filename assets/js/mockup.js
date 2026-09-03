@@ -275,8 +275,12 @@
       var kind=b.getAttribute('data-home');
       if(currentRole==='admin'){
         b.setAttribute('data-go', kind==='pay'?'admin_pay':'admin_tx');
+        if(/Daftar|Transaksi saya|Buku|antrean/i.test(b.textContent||'')){
+          b.textContent=kind==='pay'?'← Buku pembayaran':'← Buku transaksi';
+        }
       } else {
         b.setAttribute('data-go','beranda');
+        if(/Buku/i.test(b.textContent||'')) b.textContent='← Daftar';
       }
     });
   }
@@ -295,7 +299,7 @@
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
       applyRole(t.dataset.role);
-      show(first[t.dataset.role]);
+      show(t.dataset.role==='admin'?'admin_tx':first[t.dataset.role]);
       toast('Peran: '+t.textContent.trim());
     });
   });
@@ -354,49 +358,63 @@
   var adminTxFilter='all';
   function filterAdminTx(){
     var q=((document.getElementById('adminTxSearch')||{}).value||'').toLowerCase();
+    var n=0, total=0;
     document.querySelectorAll('#adminTxList .order-card').forEach(function(card){
+      total++;
       var st=card.getAttribute('data-admin-tx-status');
       var act=card.getAttribute('data-admin-tx-action')==='1';
       var match=adminTxFilter==='all'||(adminTxFilter==='action'&&act)||st===adminTxFilter;
       var matchQ=!q||card.textContent.toLowerCase().indexOf(q)>-1;
-      card.classList.toggle('is-hidden', !(match&&matchQ));
+      var on=match&&matchQ;
+      if(on) n++;
+      card.classList.toggle('is-hidden', !on);
     });
+    var line=document.querySelector('[data-admin-tx-count]');
+    if(line) line.innerHTML='<b>'+n+' dari '+total+' transaksi</b> · filter dan cari di buku cabang yang sama dengan Frontman';
   }
-  document.querySelectorAll('[data-admin-tx-filter]').forEach(function(b){
-    b.addEventListener('click',function(){
-      adminTxFilter=b.getAttribute('data-admin-tx-filter');
-      document.querySelectorAll('[data-admin-tx-filter]').forEach(function(x){
-        x.setAttribute('aria-pressed', x===b?'true':'false');
-      });
-      show('admin_tx');
-      filterAdminTx();
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-admin-tx-filter]');
+    if(!b) return;
+    adminTxFilter=b.getAttribute('data-admin-tx-filter');
+    document.querySelectorAll('[data-admin-tx-filter]').forEach(function(x){
+      x.setAttribute('aria-pressed', x===b?'true':'false');
     });
+    filterAdminTx();
   });
-  var adminTxSearch=document.getElementById('adminTxSearch');
-  if(adminTxSearch) adminTxSearch.addEventListener('input', filterAdminTx);
+  document.addEventListener('input',function(e){
+    if(e.target && e.target.id==='adminTxSearch') filterAdminTx();
+    if(e.target && e.target.id==='adminPaySearch') filterAdminPay();
+  });
+  document.addEventListener('keyup',function(e){
+    if(e.target && e.target.id==='adminTxSearch') filterAdminTx();
+    if(e.target && e.target.id==='adminPaySearch') filterAdminPay();
+  });
 
   var adminPayFilter='all';
   function filterAdminPay(){
     var q=((document.getElementById('adminPaySearch')||{}).value||'').toLowerCase();
+    var n=0, total=0;
     document.querySelectorAll('#adminPayList tr').forEach(function(row){
+      total++;
       var st=row.getAttribute('data-admin-pay-status');
       var match=adminPayFilter==='all'||st===adminPayFilter;
       var matchQ=!q||row.textContent.toLowerCase().indexOf(q)>-1;
-      row.classList.toggle('is-hidden', !(match&&matchQ));
+      var on=match&&matchQ;
+      if(on) n++;
+      row.classList.toggle('is-hidden', !on);
     });
+    var line=document.querySelector('[data-admin-pay-count]');
+    if(line) line.textContent=n+' dari '+total+' arus kas · satu kuitansi per pembayaran terverifikasi';
   }
-  document.querySelectorAll('[data-admin-pay-filter]').forEach(function(b){
-    b.addEventListener('click',function(){
-      adminPayFilter=b.getAttribute('data-admin-pay-filter');
-      document.querySelectorAll('[data-admin-pay-filter]').forEach(function(x){
-        x.setAttribute('aria-pressed', x===b?'true':'false');
-      });
-      show('admin_pay');
-      filterAdminPay();
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-admin-pay-filter]');
+    if(!b) return;
+    adminPayFilter=b.getAttribute('data-admin-pay-filter');
+    document.querySelectorAll('[data-admin-pay-filter]').forEach(function(x){
+      x.setAttribute('aria-pressed', x===b?'true':'false');
     });
+    filterAdminPay();
   });
-  var adminPaySearch=document.getElementById('adminPaySearch');
-  if(adminPaySearch) adminPaySearch.addEventListener('input', filterAdminPay);
 
   var excFilter='all';
   function filterExc(){
