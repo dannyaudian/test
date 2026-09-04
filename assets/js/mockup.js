@@ -30,6 +30,24 @@
     document.body.appendChild(a); a.click();
     setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },0);
   }
+  function buktiPdf(){
+    var lines=['FAST — PAKET BUKTI SERAH TERIMA','SPK/24/CLD/01990','SO 4500081990','Penerima: Budi Santoso','Unit: Calya G AT · VIN ••01990','Waktu: 2 Des 2024, 14:18 WIB','Geotag: -6.2731, 106.8072 · FAST Outlet Cilandak','Foto serah terima: ada','Foto VIN: cocok SO','Scan BSTKB: ada','Disetujui Administrasi. Vault FAST — bukan rekaman CCTV dealer.','Klaim serah terima tanpa paket ini tidak cukup.'];
+    var stream='BT\n/F1 12 Tf\n';
+    lines.forEach(function(line,i){ stream += '1 0 0 1 50 '+(780-i*22)+' Tm ('+pdfEscape(line)+') Tj\n'; });
+    stream += 'ET';
+    var objects=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>','<< /Length '+stream.length+' >>\nstream\n'+stream+'\nendstream','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'];
+    var pdf='%PDF-1.4\n', offsets=[0];
+    objects.forEach(function(body,i){ offsets.push(pdf.length); pdf += (i+1)+' 0 obj\n'+body+'\nendobj\n'; });
+    var xref=pdf.length;
+    pdf += 'xref\n0 '+(objects.length+1)+'\n0000000000 65535 f \n';
+    for(var i=1;i<offsets.length;i++) pdf += String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+    pdf += 'trailer << /Size '+(objects.length+1)+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF';
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));
+    a.download='FAST-bukti-serah-Calya-01990.pdf';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },0);
+  }
   function isDownloadAction(el){ return /^Download/i.test((el.textContent||'').replace(/\s+/g,' ').trim()); }
   function receiptNoFrom(el){
     var box=el.closest('tr, .doc, .pad, .wa, .box')||el.parentElement;
@@ -233,7 +251,7 @@
     screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
     if(bookKey) activateAdminBook(bookKey);
     var railId=({
-      customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
+      customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',bukti_serah:'customer',
       tagihan_customer:'customer',e_kuitansi:'customer',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
@@ -269,7 +287,7 @@
       var on=(hid==='beranda'&&(id==='beranda'||id==='admin_book'||ADMIN_BOOK[id]||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='spk_baru'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='admin_kwt'||id==='digiroom'))
-        ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
+        ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
       a.classList.toggle('pay', hid==='cashless');
     });
@@ -336,6 +354,7 @@
     applyStnk();
     applyMgmtInbox();
     applyDewiProc();
+    applyHandoverCust();
   }
   if(window.FAST && FAST.lineageInit) FAST.lineageInit(show);
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
@@ -359,7 +378,7 @@
     window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
-    if(isDownloadAction(b) && !b.hasAttribute('data-go')){
+    if(isDownloadAction(b) && !b.hasAttribute('data-go') && !b.hasAttribute('data-bukti-pdf')){
       b.addEventListener('click',function(){ downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); });
       return;
     }
@@ -367,7 +386,7 @@
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
     if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
-    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
+    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
@@ -392,7 +411,7 @@
   var payJobSticky=false;
   var currentRole='frontman';
   var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_afi:'frontman',exc_stnk:'frontman',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_afi:'frontman',exc_stnk:'frontman',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   document.querySelectorAll('[data-go="beranda"]').forEach(function(b){
     if(b.closest('[data-rail]') || b.hasAttribute('data-back')) return;
     b.setAttribute('data-home', b.closest('#bayar, #request') ? 'pay' : 'tx');
@@ -1431,20 +1450,36 @@
   });
   function applyGi(){
     var s=window.FAST && FAST.load ? FAST.load(FAST.GI_KEY) : null;
-    var st=(s && s.gi)||'draft';
+    s=s||{};
+    var st=s.gi||'draft';
     var notes={
-      draft:'Unggah foto serah terima dan scan BSTKB. Administrasi memeriksa, lalu menyetujui Good Issue. Tracking armada lengkap menyusul di Deliverable 3.',
-      submitted:'Bukti masuk antrean Administrasi. Salesman tidak mencatat GI sendiri.',
-      approved:'Good Issue disetujui. Unit tertutup di gudang. STNK/BPKB memakai data yang sama.',
-      returned:'Dikembalikan. Lengkapi foto atau scan BSTKB, lalu kirim ulang.'
+      draft:'Unggah foto serah terima, foto VIN, dan scan BSTKB. Geotag dan waktu tercatat di perangkat. Administrasi memeriksa, lalu menyetujui. Paket yang sama nanti di akun pelanggan — bukan CCTV dealer.',
+      submitted:'Bukti masuk antrean Administrasi. Salesman tidak mencatat GI sendiri. Customer belum melihat paket sampai disetujui.',
+      approved:'Good Issue disetujui. Unit tertutup di gudang. Paket bukti yang sama tersedia untuk pelanggan. STNK/BPKB memakai data yang sama.',
+      returned:'Dikembalikan. Lengkapi foto, VIN, atau scan BSTKB, lalu kirim ulang.'
     };
     var tags={draft:'Good Issue',submitted:'Menunggu Admin',approved:'GI disetujui',returned:'Dikembalikan'};
     var specs={
-      draft:'Tindakan: unggah foto serah terima + scan BSTKB',
+      draft:'Tindakan: unggah foto, VIN, BSTKB + geotag',
       submitted:'Tindakan: pantau persetujuan Administrasi',
-      approved:'Good Issue tercatat · tidak ketik ulang VIN',
+      approved:'GI tercatat · paket bukti di akun pelanggan',
       returned:'Lengkapi bukti, kirim ulang ke Administrasi'
     };
+    var dropCopy={
+      foto:{off:'Ketuk untuk pasang contoh · geotag 2 Sep 14:22',on:'Terpasang · 2 Sep 2026 14:22 WIB · −6.2731, 106.8072'},
+      vin:{off:'Ketuk untuk pasang · cocokkan dengan SO',on:'Terpasang · VIN ••20424 cocok SO'},
+      bstkb:{off:'Ketuk untuk pasang scan · nomor mengikuti VIN',on:'Terpasang · scan BSTKB'}
+    };
+    Object.keys(dropCopy).forEach(function(kind){
+      var b=document.querySelector('#gi [data-drop="'+kind+'"]');
+      if(!b) return;
+      var on=!!s[kind];
+      b.classList.toggle('on', on);
+      var span=b.querySelector('span');
+      if(span) span.textContent=on?dropCopy[kind].on:dropCopy[kind].off;
+    });
+    var vault=document.querySelector('[data-gi-vault]');
+    if(vault) vault.hidden=st!=='approved';
     var note=document.querySelector('[data-gi-note]');
     if(note){
       note.textContent=notes[st]||notes.draft;
@@ -1460,31 +1495,42 @@
       el.textContent=st==='approved'?'Tercatat':st==='submitted'?'Cek Admin':st==='returned'?'Dikembalikan':'Menunggu bukti';
     });
   }
+  function applyHandoverCust(){
+    var s=window.FAST && FAST.load ? FAST.load() : null;
+    var paid=!!(s && s.paid && s.ar===0);
+    var lock=document.querySelector('[data-ho-lock]');
+    var ready=document.querySelector('[data-ho-ready]');
+    if(lock) lock.hidden=paid;
+    if(ready) ready.hidden=!paid;
+  }
   var delBtn=document.querySelector('[data-del-submit]');
   if(delBtn) delBtn.addEventListener('click',function(){
     if(window.FAST && FAST.save) FAST.save({requested:true,spk:'SPK/26/CLD/00425'}, FAST.DEL_KEY);
     applyDelivery();
     toast('Request delivery terkirim. Jadwal armada dilanjutkan di Deliverable 3.');
   });
-  document.querySelectorAll('[data-drop]').forEach(function(b){
+  document.querySelectorAll('#gi [data-drop]').forEach(function(b){
     b.addEventListener('click',function(){
-      b.classList.add('on');
       var kind=b.getAttribute('data-drop');
-      var span=b.querySelector('span');
-      if(span) span.textContent=kind==='foto'?'Terpasang · foto serah terima 2 Sep 14:22':'Terpasang · scan BSTKB';
+      var patch={};
+      patch[kind]=true;
+      if(window.FAST && FAST.save) FAST.save(patch, FAST.GI_KEY);
+      else {
+        b.classList.add('on');
+        applyGi();
+      }
     });
   });
   var giSubmit=document.querySelector('[data-gi-submit]');
   if(giSubmit) giSubmit.addEventListener('click',function(){
-    var foto=document.querySelector('[data-drop="foto"]');
-    var scan=document.querySelector('[data-drop="bstkb"]');
-    if(!foto||!scan||!foto.classList.contains('on')||!scan.classList.contains('on')){
-      toast('Pasang foto serah terima dan scan BSTKB dulu.');
+    var s=window.FAST && FAST.load ? FAST.load(FAST.GI_KEY)||{} : {};
+    if(!s.foto||!s.vin||!s.bstkb){
+      toast('Pasang foto serah terima, foto VIN, dan scan BSTKB dulu.');
       return;
     }
     if(window.FAST && FAST.save) FAST.save({gi:'submitted',spk:'SPK/26/CLD/00424'}, FAST.GI_KEY);
     applyGi();
-    toast('Bukti GI masuk antrean Administrasi.');
+    toast('Bukti GI masuk antrean Administrasi. Customer belum melihat paket.');
   });
   var giOk=document.querySelector('[data-gi-approve]');
   if(giOk) giOk.addEventListener('click',function(){
@@ -1495,13 +1541,19 @@
     }
     if(window.FAST && FAST.save) FAST.save({gi:'approved'}, FAST.GI_KEY);
     applyGi();
-    toast('Good Issue disetujui. Tidak ada pengetikan ulang VIN atau customer.');
+    toast('GI disetujui. Paket bukti yang sama bisa diunduh pelanggan — bukan CCTV dealer.');
   });
   var giBack=document.querySelector('[data-gi-return]');
   if(giBack) giBack.addEventListener('click',function(){
     if(window.FAST && FAST.save) FAST.save({gi:'returned'}, FAST.GI_KEY);
     applyGi();
     toast('Dikembalikan ke salesman. Lengkapi bukti serah terima.');
+  });
+  document.querySelectorAll('[data-bukti-pdf]').forEach(function(b){
+    b.addEventListener('click',function(){
+      buktiPdf();
+      toast('Paket bukti serah terima PDF diunduh.');
+    });
   });
 
   function runSoConvert(){
@@ -1673,10 +1725,11 @@
   applySpkDraft();
   applyDelivery();
   applyGi();
+  applyHandoverCust();
   applyAfi();
   applyDewiProc();
   syncRoleChrome();
-  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyAfi(); applyDewiProc(); });
+  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyAfi(); applyDewiProc(); applyHandoverCust(); });
 
   var channelMeta={
     qris:{title:'QRIS'},
@@ -1752,7 +1805,7 @@
       var id=(a.getAttribute('href')||'').split('#')[1];
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
-      if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
+      if(id==='customer'||id==='customer_detail'||id==='digiroom'||id==='bukti_serah'||id==='order_calya') applyRole('cust');
       else if(currentRole==='mgmt' && id==='beranda') id='dashboard';
       else if(currentRole==='admin' && id==='beranda') id='admin_spk';
       else if(currentRole==='admin' && id==='cashless') id='admin_pay';

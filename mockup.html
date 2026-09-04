@@ -1359,7 +1359,7 @@
           <div>
             <p class="eyebrow">Good Issue · SPK/26/CLD/00424</p>
             <h2>Serah terima · Fajar Nugroho</h2>
-            <p>Rush S GR Sport. Unit sudah dikirim 2 Sep. Salesman unggah bukti; Administrasi yang menyetujui pencatatan GI.</p>
+            <p>Rush S GR Sport. Unit sudah dikirim 2 Sep. Salesman unggah bukti otentik; Administrasi yang menyetujui. Paket yang sama tampil di akun pelanggan — bukan rekaman CCTV dealer.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Daftar</button></div>
         </div>
@@ -1368,25 +1368,43 @@
           <div class="card"><p class="k">VIN</p><p class="v" style="font-size:18px">••20424</p><p class="n">Cocok dengan SO</p></div>
           <div class="card"><p class="k">GI</p><p class="v" style="font-size:18px" data-gi-status>Menunggu bukti</p><p class="n">Bukan waiver lunas</p></div>
         </div>
-        <p class="exc-note" data-gi-note>Unggah foto serah terima dan scan BSTKB. Administrasi memeriksa, lalu menyetujui Good Issue. Tracking armada lengkap menyusul di Deliverable 3.</p>
+        <p class="exc-note" data-gi-note>Unggah foto serah terima, foto VIN, dan scan BSTKB. Geotag dan waktu tercatat di perangkat. Administrasi memeriksa, lalu menyetujui Good Issue. Tracking armada lengkap menyusul di Deliverable 3.</p>
+        <div class="box">
+          <h3>Data dari SPK — tidak diketik ulang</h3>
+          <div class="vault-grid">
+            <div class="vault-item"><p class="k">Penerima</p><p class="v">Fajar Nugroho</p></div>
+            <div class="vault-item"><p class="k">Lokasi</p><p class="v">FAST Outlet Cilandak</p></div>
+            <div class="vault-item"><p class="k">VIN</p><p class="v">••20424</p></div>
+            <div class="vault-item"><p class="k">SO</p><p class="v">4500091424</p></div>
+          </div>
+        </div>
         <div class="box">
           <h3>Bukti dari salesman</h3>
           <div class="pad">
             <button type="button" class="drop" data-drop="foto"><b>Foto serah terima</b><span>Ketuk untuk pasang contoh · geotag 2 Sep 14:22</span></button>
+            <button type="button" class="drop" data-drop="vin"><b>Foto VIN / identitas unit</b><span>Ketuk untuk pasang · cocokkan dengan SO</span></button>
             <button type="button" class="drop" data-drop="bstkb"><b>Scan BSTKB</b><span>Ketuk untuk pasang scan · nomor mengikuti VIN</span></button>
           </div>
           <div class="formfoot" data-for="frontman">
-            <span class="hint">Anda mengunggah. Administrasi yang menyetujui pencatatan.</span>
+            <span class="hint">Anda mengunggah. Administrasi yang menyetujui. Ini bukti otentik, bukan cadangan CCTV cabang.</span>
             <button type="button" class="btn" data-gi-submit>Kirim ke Administrasi</button>
           </div>
           <div class="formfoot" data-for="admin" hidden>
-            <span class="hint">Cocokkan foto, BSTKB, VIN, dan penerima. Jangan ketik ulang data SPK.</span>
+            <span class="hint">Cocokkan foto, VIN, BSTKB, dan penerima. Jangan ketik ulang data SPK.</span>
             <button type="button" class="btn" data-gi-approve>Setujui Good Issue</button>
             <button type="button" class="btn ghost" data-gi-return>Kembalikan ke salesman</button>
           </div>
           <div class="formfoot" data-for="mgmt" hidden>
             <span class="hint">GI diputuskan Administrasi operasional, bukan Kepala Cabang.</span>
             <button type="button" class="btn ghost" data-go="verifikasi">Antrean verifikasi</button>
+          </div>
+        </div>
+        <div class="box" data-gi-vault hidden>
+          <h3>Paket yang sama di akun pelanggan</h3>
+          <div class="pad">
+            <p>Good Issue disetujui. Customer melihat foto, VIN, geotag, timestamp, penerima, dan BSTKB dari vault yang sama. Tidak perlu merekam sendiri, tidak bergantung pada CCTV dealer.</p>
+            <p class="hint">Contoh paket selesai di akun Budi: Calya G AT (unit lama, sudah delivered).</p>
+            <p><button type="button" class="btn ghost" data-go="bukti_serah" data-role="cust">Lihat contoh paket customer</button></p>
           </div>
         </div>
       </section>
@@ -2772,7 +2790,7 @@
                 <span class="tag ok">Delivered</span>
                 <span class="amt">Lunas</span>
               </div>
-              <p class="cta">Lihat →</p>
+              <p class="cta">Lihat bukti serah terima →</p>
             </div>
           </button>
         </div>
@@ -2813,6 +2831,15 @@
           </div>
         </div>
         <div class="box">
+          <h3>Serah terima unit</h3>
+          <div class="pad" data-ho-lock>
+            <p class="exc-note warn" style="margin:0">Belum ada paket bukti. Kirim cash tertahan sampai AR Open Rp 0 — non-waivable, bukan ruang gelap. Setelah lunas, salesman unggah foto/VIN/BSTKB; Administrasi menyetujui Good Issue; paket yang sama muncul di sini. Bukan rekaman CCTV cabang.</p>
+          </div>
+          <div class="pad" data-ho-ready hidden>
+            <p class="exc-note ok" style="margin:0">Lunas. Jadwal kirim menyusul. Paket bukti (foto, geotag, VIN, penerima, BSTKB) muncul setelah salesman unggah dan Administrasi menyetujui Good Issue.</p>
+          </div>
+        </div>
+        <div class="box">
           <h3>Kuitansi</h3>
           <div class="docs">
             <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan 1 · Rp 300.000.000</p><button class="btn ghost">Download PDF</button></div>
@@ -2828,6 +2855,7 @@
             <li class="now"><span class="m">•</span><div>Pelunasan · sisa tagihan</div></li>
             <li data-afi-mile><span class="m">•</span><div>Billing &amp; AFI · data STNK dari SPK</div></li>
             <li><span class="m">•</span><div>Pengiriman setelah lunas</div></li>
+            <li><span class="m">•</span><div>Paket bukti serah terima</div></li>
             <li><span class="m">•</span><div>STNK &amp; BPKB</div></li>
           </ul>
         </details>
@@ -2871,7 +2899,42 @@
         <div class="box">
           <h3>Riwayat</h3>
           <div class="pad">
-            <p>Tidak ada tagihan terbuka. Dokumen kendaraan sudah serah terima. Pesanan baru (Innova Zenix) ada di daftar pesanan saya.</p>
+            <p>Tidak ada tagihan terbuka. Unit dan dokumen sudah serah terima. Paket bukti otentik tersimpan di vault — foto, VIN, geotag, penerima, BSTKB. Pesanan baru (Innova Zenix) masih di daftar.</p>
+            <p><button type="button" class="btn" data-go="bukti_serah" data-role="cust">Buka paket bukti serah terima</button></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="bukti_serah">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Paket bukti · SPK/24/CLD/01990</p>
+            <h2>Serah terima Calya G AT</h2>
+            <p>Disetujui Administrasi 2 Des 2024. Ini vault FAST, bukan rekaman CCTV dealer.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="order_calya" data-role="cust">← Calya</button></div>
+        </div>
+        <div class="cards">
+          <div class="card"><p class="k">Status</p><p class="v" style="font-size:18px">Diserahkan</p><p class="n">GI tercatat</p></div>
+          <div class="card"><p class="k">Waktu</p><p class="v" style="font-size:18px">2 Des 14:18</p><p class="n">WIB · perangkat salesman</p></div>
+          <div class="card"><p class="k">Geotag</p><p class="v" style="font-size:18px">−6.2731</p><p class="n">106.8072 · Cilandak</p></div>
+        </div>
+        <div class="box">
+          <h3>Yang dicatat</h3>
+          <div class="vault-grid">
+            <div class="vault-item"><p class="k">Penerima</p><p class="v">Budi Santoso</p></div>
+            <div class="vault-item"><p class="k">VIN</p><p class="v">••01990</p></div>
+            <div class="vault-item"><p class="k">Unit</p><p class="v">Calya G AT · putih</p></div>
+            <div class="vault-item"><p class="k">BSTKB</p><p class="v">Scan cocok VIN</p></div>
+          </div>
+          <div class="pad">
+            <div class="docs">
+              <div class="doc"><b>Foto serah terima</b><p class="meta">2 Des 2024 14:18 WIB · geotag Cilandak</p><span class="tag ok">Otentik</span></div>
+              <div class="doc"><b>Foto VIN</b><p class="meta">Cocok SO 4500081990</p><span class="tag ok">Otentik</span></div>
+              <div class="doc"><b>Scan BSTKB</b><p class="meta">Nomor mengikuti VIN ••01990</p><span class="tag ok">Otentik</span></div>
+            </div>
+            <p class="hint">Cabang dan customer melihat paket yang sama. Klaim “sudah diserahkan” tanpa paket ini tidak cukup.</p>
+            <p><button type="button" class="btn" data-bukti-pdf>Download paket PDF</button></p>
           </div>
         </div>
       </section>
