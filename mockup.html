@@ -68,7 +68,7 @@
       <div data-rail="frontman">
         <p class="grouplabel">Frontman · Rina Pratiwi</p>
         <button data-go="beranda" aria-current="true">Transaksi saya</button>
-        <button data-go="proses">Proses utuh</button>
+        <button data-go="proses">Proses SPK ini</button>
         <button data-go="eskalasi">Pengecualian<span class="pill" data-exc-pill>1</span></button>
       </div>
 
@@ -114,7 +114,7 @@
           </div>
         </div>
 
-        <p class="queue-line"><b>11 baris</b> · tiap SO sendiri · 1 isi SPK · 1 AFI · 1 kirim · 1 GI · 1 exception</p>
+        <p class="queue-line"><b>7 SPK</b> · satu kartu = satu transaksi utuh · SO per baris di dalam SPK</p>
 
         <label class="order-search" for="txSearch">
           <span class="sr-only">Cari transaksi</span>
@@ -133,7 +133,7 @@
             <div class="meta">
               <p class="oid" data-dewi-oid>Draft · belum nomor SPK</p>
               <strong class="oname">Dewi Lestari · Yaris</strong>
-              <p class="spec" data-dewi-spec>Tindakan: isi pemesan, STNK, unit, lalu unggah dokumen</p>
+              <p class="spec" data-dewi-spec>Tindakan: isi pemesan, STNK, unit, lalu unggah dokumen · Yaris + Agya di SPK yang sama</p>
               <div class="row2">
                 <span class="tag wait" data-dewi-tag>Isi dari awal</span>
                 <span class="amt" data-dewi-amt>Belum OTR</span>
@@ -144,92 +144,27 @@
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="budi" data-go="transaksi">
             <div class="thumb">ZENIX</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00418 · tunai</p>
+              <p class="oid">SPK/26/CLD/00418 · tunai · 1 SO</p>
               <strong class="oname">Budi Santoso · Innova Zenix</strong>
-              <p class="spec">Tindakan: terima pelunasan</p>
+              <p class="spec">Pelunasan, AFI, dan exception dokumen — semua di SPK ini</p>
               <div class="row2">
                 <span class="tag hold">Belum lunas</span>
                 <span class="amt" data-live="ar">Rp 181.750.000</span>
               </div>
-              <p class="cta">Lanjutkan →</p>
+              <p class="cta">Buka transaksi →</p>
             </div>
           </button>
-          <button type="button" class="order-card featured" data-tx-status="docs" data-tx-action="1" data-tx-dots="budi" data-go="afi">
-            <div class="thumb">AFI</div>
-            <div class="meta">
-              <p class="oid">SPK/26/CLD/00418 · sebelum billing</p>
-              <strong class="oname">Budi Santoso · AFI STNK/BPKB</strong>
-              <p class="spec" data-afi-spec>Tindakan: ajukan billing + AFI bersama · data STNK dari SPK</p>
-              <div class="row2">
-                <span class="tag wait" data-afi-tag>Berpasangan</span>
-                <span class="amt">Wajib lengkap</span>
-              </div>
-              <p class="cta">Billing &amp; AFI →</p>
-            </div>
-          </button>
-          <button type="button" class="order-card" data-tx-status="exc" data-tx-action="1" data-tx-dots="budi" data-go="exc_alamat">
-            <div class="thumb">ALAMAT</div>
-            <div class="meta">
-              <p class="oid">SPK/26/CLD/00418 · document gate</p>
-              <strong class="oname">Budi Santoso · bukti alamat kedaluwarsa</strong>
-              <p class="spec" data-exc-alamat-spec>Tindakan: ajukan exception (waivable)</p>
-              <div class="row2">
-                <span class="tag hold" data-exc-alamat-tag>Approval Engine</span>
-                <span class="amt">SLA 4 jam</span>
-              </div>
-              <p class="cta">Buka pengajuan →</p>
-            </div>
-          </button>
-          <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="agya" data-go="so2">
-            <div class="thumb">AGYA</div>
-            <div class="meta">
-              <p class="oid">SO 4500091428 · baris QT 2</p>
-              <strong class="oname">Dewi Lestari · Agya</strong>
-              <p class="spec">Tindakan: booking fee baris ini · bukan SO Yaris</p>
-              <div class="row2">
-                <span class="tag wait">SO tertahan booking</span>
-                <span class="amt">Rp 2.000.000</span>
-              </div>
-              <p class="cta">Booking Agya →</p>
-            </div>
-          </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-pick="1288" data-b2b-home="1288">
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-home-spk>
             <div class="thumb">HIACE</div>
             <div class="meta">
-              <p class="oid">SO 4500091288 · unit 1/3</p>
+              <p class="oid">SPK/26/CLD/00421 · leasing · 3 SO</p>
               <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec" data-b2b-home-spec>B2B · unduh kontrak leasing · unggah TTD</p>
+              <p class="spec" data-b2b-home-spec>Struktur harga SO memuat DP wajib B2B. Kerja Frontman dan penagihan Admin di SPK ini.</p>
               <div class="row2">
-                <span class="tag wait" data-b2b-home-tag>Kontrak dari leasing</span>
-                <span class="amt">Rp 348.400.000</span>
+                <span class="tag wait" data-b2b-home-tag>B2B leasing</span>
+                <span class="amt">3 unit</span>
               </div>
-              <p class="cta">Buka B2B →</p>
-            </div>
-          </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-pick="1289" data-b2b-home="1289">
-            <div class="thumb">HIACE</div>
-            <div class="meta">
-              <p class="oid">SO 4500091289 · unit 2/3</p>
-              <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec" data-b2b-home-spec>Backflow · NPWP kurang · unggah ulang</p>
-              <div class="row2">
-                <span class="tag stop" data-b2b-home-tag>Dikembalikan leasing</span>
-                <span class="amt">Rp 348.300.000</span>
-              </div>
-              <p class="cta">Lengkapi dokumen →</p>
-            </div>
-          </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-pick="1290" data-b2b-home="1290">
-            <div class="thumb">HIACE</div>
-            <div class="meta">
-              <p class="oid">SO 4500091290 · unit 3/3</p>
-              <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec" data-b2b-home-spec>Leasing minta dokumen · unggah paket B2B</p>
-              <div class="row2">
-                <span class="tag wait" data-b2b-home-tag>Dokumen diminta</span>
-                <span class="amt">Rp 348.300.000</span>
-              </div>
-              <p class="cta">Unggah dokumen →</p>
+              <p class="cta">Buka SPK leasing →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="raize" data-go="tx_raize">
@@ -341,7 +276,7 @@
                 <div class="frow locked"><i class="own s">S</i><span class="lab">VIN</span><span class="val">MHKA6GJ••••41827</span><span class="src">Dari alokasi unit</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Status PDI</span><span class="val">Selesai · 30 Agu</span><span class="src">Dari sistem logistik</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Metode pembelian</span><span class="val">Cash</span><span class="src">Dari SPK</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Minimum booking fee unit</span><span class="val">Rp 5.000.000 · Innova Zenix</span><span class="src">Master kendaraan</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Minimum booking fee unit</span><span class="val">Rp 5.000.000 · Innova Zenix</span><span class="src">Master kendaraan · bukan DP leasing</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Harga setelah program</span><span class="val">Rp 486.750.000</span><span class="src">Dihitung sistem</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Document compliance</span><span class="val">5 dari 6 valid · bukti alamat</span><span class="src">Document Gate</span></div>
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Exception aktif</span><span class="val">Tidak ada</span><span class="src">Seluruh rule lolos</span></div>
@@ -362,7 +297,7 @@
 
           <div>
             <div class="box">
-              <h3>Posisi keuangan</h3>
+              <h3>Struktur harga SO <span class="side">Tunai</span></h3>
               <div class="money">
                 <div class="row"><span>Nilai transaksi</span><span>Rp 486.750.000</span></div>
                 <div class="row"><span>Metode</span><span>Cash</span></div>
@@ -512,6 +447,7 @@
         </div>
         <nav class="worktabs" aria-label="Isi B2B leasing">
           <button type="button" data-b2b-tab="ringkas">Ringkasan</button>
+          <button type="button" data-b2b-tab="so">Sales Order</button>
           <button type="button" data-b2b-tab="alur">Alur &amp; status</button>
           <button type="button" data-b2b-tab="dokumen" data-b2b-tab-role="frontman">Kerja Frontman</button>
           <button type="button" data-b2b-tab="tagih" data-b2b-tab-role="admin">Penagihan Admin</button>
@@ -566,6 +502,47 @@
           </div>
         </div>
 
+        <div data-b2b-panel="so" hidden>
+          <div class="cards">
+            <div class="card"><p class="k">Nomor SO</p><p class="v" style="font-size:18px" data-b2b-so-no>4500091288</p><p class="n">Dari quotation SPK/26/CLD/00421</p></div>
+            <div class="card"><p class="k">Metode</p><p class="v" style="font-size:18px">Leasing</p><p class="n">PT Danapura Multifinance</p></div>
+            <div class="card"><p class="k">DP wajib</p><p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p><p class="n">Struktur harga SO · B2B · read-only</p></div>
+            <div class="card"><p class="k">Dibiayai leasing</p><p class="v" style="font-size:18px" data-b2b-finance>Rp 278.720.000</p><p class="n">OTR − DP wajib</p></div>
+          </div>
+          <div class="split">
+            <div>
+              <div class="box">
+                <h3>Dibawa ke SO <span class="side">Tidak diketik ulang</span></h3>
+                <div class="fields">
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00421</span><span class="src">Dokumen asal</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val" data-b2b-so-no>4500091288</span><span class="src">Satu SO per unit</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Debitur</span><span class="val">PT Danapura Utama</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val" data-b2b-so-unit>Hiace Premio · unit 1</span><span class="src">Baris quotation</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Leasing / credit</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Mitra leasing</span><span class="val">PT Danapura Multifinance</span><span class="src">B2B</span></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="box">
+                <h3>Struktur harga SO <span class="side">Credit / leasing</span></h3>
+                <div class="money">
+                  <div class="row"><span>OTR (area PO)</span><span data-b2b-otr>Rp 348.400.000</span></div>
+                  <div class="row"><span>Diskon / program / cashback / OPO</span><span>Rp 0</span></div>
+                  <div class="row"><span>Nilai transaksi akhir</span><span data-b2b-otr>Rp 348.400.000</span></div>
+                  <div class="row"><span>DP wajib customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
+                  <div class="row"><span>Sisa dibiayai leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
+                  <div class="row"><span>DP diterima</span><span data-b2b-dp-in>Rp 0</span></div>
+                  <div class="row total"><span>Tagihan ke leasing setelah DP</span><span data-b2b-finance>Rp 278.720.000</span></div>
+                  <div class="row"><span>Syarat billing leasing</span><span>Full DP diterima · B2B</span></div>
+                  <div class="row"><span>Syarat delivery leasing</span><span>Kontrak TTD · B2B</span></div>
+                </div>
+                <p class="hint" style="padding:0 16px 14px">Angka DP wajib menempel di struktur harga SO karena metode pembelian leasing. Bukan booking fee tunai, bukan diketik Frontman/Admin, bukan objek Approval Engine.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div data-b2b-panel="alur" hidden>
           <div class="box">
             <h3>Status <span data-b2b-so-title>SO 4500091288</span> <span class="side">Submit → pelunasan</span></h3>
@@ -587,7 +564,7 @@
             </div>
             <div class="formfoot" data-for="mgmt" hidden>
               <span class="hint">Management melihat status ke gate. TTD dan DP tidak di-waive dari kursi keputusan.</span>
-              <button type="button" class="btn ghost" data-go="dashboard">Lihat bottleneck area</button>
+              <button type="button" class="btn ghost" data-b2b-stay>Tetap di SPK ini</button>
             </div>
           </div>
         </div>
@@ -667,7 +644,13 @@
           <div class="card alert"><p class="k">Data gate</p><p class="v" style="font-size:18px">NPWP kosong</p><p class="n">Lengkapi di SPK, bukan di SO</p></div>
           <div class="card"><p class="k">Booking fee</p><p class="v" style="font-size:18px">Belum ditagih</p><p class="n">Setelah identitas valid</p></div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Unggah NPWP pada data customer SPK. Bukan jalur Approval Engine. Booking fee baru ditagih setelah identitas valid.</p><p><button class="btn" data-go="dokumen">Buka vault</button></p></div></div>
+        <div class="box">
+          <h3>Tindakan di SPK ini</h3>
+          <div class="pad">
+            <p>Unggah NPWP pada data customer SPK Sarah. Vault Budi tidak dibuka. Bukan jalur Approval Engine. Booking fee baru ditagih setelah identitas valid.</p>
+            <button type="button" class="drop" data-raize-npwp><b>NPWP Sarah Wijaya</b><span>Ketuk untuk pasang · tetap di SPK/26/CLD/00423</span></button>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="spk_baru">
@@ -1126,15 +1109,18 @@
             </div>
             <div>
               <div class="box">
-                <h3>Posisi keuangan</h3>
+                <h3>Struktur harga SO <span class="side">Tunai</span></h3>
                 <div class="money">
-                  <div class="row"><span>Nilai dari SPK</span><span>Rp 302.150.000</span></div>
+                  <div class="row"><span>OTR Depok</span><span data-qt-otr="yaris">Rp 296.800.000</span></div>
+                  <div class="row"><span>Aksesoris</span><span>Rp 5.350.000</span></div>
+                  <div class="row"><span>Nilai transaksi akhir</span><span>Rp 302.150.000</span></div>
+                  <div class="row"><span>Booking fee unit (bukan DP leasing)</span><span>Rp 3.000.000</span></div>
                   <div class="row"><span>Kuitansi booking fee</span><span>− Rp 3.000.000</span></div>
                   <div class="row total"><span>AR Open</span><span>Rp 299.150.000</span></div>
                   <div class="row"><span>Syarat billing cash</span><span>≥30% dana masuk</span></div>
                   <div class="row"><span>Syarat delivery cash</span><span>Lunas · belum</span></div>
                 </div>
-                <p class="hint" style="padding:0 16px 14px">0,99% terbayar. Billing cash belum. Bukan waiver Approval Engine.</p>
+                <p class="hint" style="padding:0 16px 14px">Tipe bayar tunai: struktur harga memakai booking fee dari master unit. DP wajib B2B hanya muncul jika metode SPK leasing/credit.</p>
               </div>
               <div class="box">
                 <h3>Gate SO</h3>
@@ -1189,18 +1175,29 @@
           </div>
           <div class="paystrip">
             <b>Cashless booking Agya</b>
-            <span class="hint" style="margin:0">Rp 2.000.000 terkunci · baris ini saja</span>
+            <span class="hint" style="margin:0">Rp 2.000.000 terkunci · baris ini saja · tetap SPK/26/CLD/00426</span>
             <button class="btn" data-go="digiroom" data-pay-job="agya" data-role="cust">Bayar di Digiroom</button>
             <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="agya">Cabang</button>
           </div>
+        </div>
+        <div class="box">
+          <h3>Struktur harga SO <span class="side">Tunai · baris Agya</span></h3>
+          <div class="money">
+            <div class="row"><span>OTR Depok</span><span data-qt-otr="agya">Rp 175.900.000</span></div>
+            <div class="row"><span>Diskon / program</span><span>Rp 0</span></div>
+            <div class="row"><span>Nilai transaksi akhir</span><span data-qt-otr="agya">Rp 175.900.000</span></div>
+            <div class="row"><span>Booking fee unit (bukan DP leasing)</span><span>Rp 2.000.000</span></div>
+            <div class="row total"><span>SO</span><span>Tertahan sampai booking meet</span></div>
+          </div>
+          <p class="hint" style="padding:0 16px 14px">Satu SPK Dewi, dua SO. Agya tidak membuka transaksi Budi atau Hiace. DP wajib B2B hanya jika tipe bayar leasing.</p>
         </div>
       </section>
 
       <section class="screen" id="proses">
         <div class="screenhead">
           <div>
-            <h2>Proses utuh · Dewi Lestari</h2>
-            <p>Isi &amp; unggah di SPK dulu, baru quotation → SO → AFI → DO → billing → delivery → STNK/BPKB. Cashless menempel di booking fee dan pelunasan.</p>
+            <h2>Proses utuh · SPK Dewi Lestari</h2>
+            <p>Hanya jejak SPK/26/CLD/00426. Tidak membuka Budi, Hiace, atau SPK lain.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← Daftar</button>
@@ -1550,8 +1547,7 @@
           <h3>Request terkirim</h3>
           <div class="pad">
             <p>Pengajuan masuk. Penjadwalan armada, tracking, dan status tiba dilanjutkan di <b>Deliverable 3</b> — belum didefinisikan di sini.</p>
-            <p class="hint">Setelah unit benar-benar terkirim, Frontman unggah foto serah terima dan scan BSTKB untuk Good Issue.</p>
-            <button type="button" class="btn" data-go="gi">Contoh: unit yang sudah terkirim</button>
+            <p class="hint">Setelah unit benar-benar terkirim, Frontman unggah foto serah terima dan scan BSTKB untuk Good Issue <b>SPK/26/CLD/00425</b> — bukan pindah ke transaksi Rush.</p>
           </div>
         </div>
         <p class="note">Cash yang belum lunas dan leasing tanpa TTD tidak bisa mengajukan delivery. Keduanya non-waivable.</p>
@@ -1605,9 +1601,8 @@
         <div class="box" data-gi-vault hidden>
           <h3>Paket yang sama di akun pelanggan</h3>
           <div class="pad">
-            <p>Good Issue disetujui. Customer melihat foto, VIN, geotag, timestamp, penerima, dan BSTKB dari vault yang sama. Tidak perlu merekam sendiri, tidak bergantung pada CCTV dealer.</p>
-            <p class="hint">Contoh paket selesai di akun Budi: Calya G AT (unit lama, sudah delivered).</p>
-            <p><button type="button" class="btn ghost" data-go="bukti_serah" data-role="cust">Lihat contoh paket customer</button></p>
+            <p>Good Issue disetujui. Customer melihat foto, VIN, geotag, timestamp, penerima, dan BSTKB dari vault yang sama untuk <b>SPK/26/CLD/00424</b>.</p>
+            <p class="hint">Paket Calya di akun customer adalah SPK lain — tidak dibuka dari sini.</p>
           </div>
         </div>
       </section>
@@ -1723,7 +1718,7 @@
               <h3>1 · Jenis pembayaran</h3>
               <div class="form">
                 <div class="seg" id="jenisSeg">
-                  <button type="button" data-go="booking" aria-pressed="false">Booking fee/DP</button>
+                  <button type="button" data-budi-bf aria-pressed="false">Booking fee</button>
                   <button type="button" aria-pressed="true">Pelunasan</button>
                 </div>
                 <p class="hint" style="margin:0">Satu model bayar: QRIS di layar Frontman, kode CDM, tautan Digiroom. Debit EDC hanya Frontman yang pilih mesinnya. Innova Zenix: booking fee sudah kuitansi; pelunasan tahap 2 menunggu.</p>
@@ -3377,7 +3372,7 @@
       <section class="screen" id="cashless">
         <div class="screenhead">
           <div>
-            <h2>Bayar · Innova Zenix</h2>
+            <h2>Bayar · <span data-pay-unit>Innova Zenix</span></h2>
             <p>QRIS dan VA penjualan unit: customer bisa isi nominal, kecuali sudah ada payment request salesman.</p>
           </div>
           <div class="actions">
@@ -3385,12 +3380,12 @@
           </div>
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
-          <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
-          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
-          <button type="button" data-go="afi">AFI</button>
-          <button type="button" data-go="dokumen">Dokumen</button>
-          <button type="button" data-go="exc_alamat">Pengecualian</button>
+          <button type="button" data-stay-tab="ringkas" data-go="transaksi">Ringkasan</button>
+          <button type="button" data-stay-tab="bayar" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-stay-tab="minta" data-go="request" data-fm-only>Minta bayar</button>
+          <button type="button" data-stay-tab="afi" data-go="afi">AFI</button>
+          <button type="button" data-stay-tab="dok" data-go="dokumen">Dokumen</button>
+          <button type="button" data-stay-tab="exc" data-go="exc_alamat">Pengecualian</button>
         </nav>
         <div class="cards">
           <div class="card alert"><p class="k">Sisa tagihan</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Sama di Frontman dan customer</p></div>

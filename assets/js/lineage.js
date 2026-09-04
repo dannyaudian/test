@@ -321,6 +321,15 @@
   }
   FAST.TX_STAGES=STAGES;
   FAST.txState=state;
+  FAST.screenTx=screenTx;
+  FAST.txFamily=function(tx){ return tx==='agya'?'dewi':tx; };
+  FAST.txHub=function(tx){
+    tx=FAST.txFamily(tx);
+    return ({
+      dewi:'spk', budi:'transaksi', hiace:'tx_hiace', raize:'tx_raize',
+      agus:'tx_avanza', fajar:'gi', maria:'tx_fortuner', calya:'order_calya'
+    })[tx]||null;
+  };
   FAST.lineageInit=function(fn){ showFn=fn; };
   FAST.renderLineage=render;
 })();
