@@ -1,4 +1,5 @@
 #mockup *{box-sizing:border-box}
+#mockup [hidden]{display:none !important}
 #mockup{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 #mockup :focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 #mockup button{font:inherit;cursor:pointer}
