@@ -28,7 +28,7 @@
     afi_d:'afi',do:'do',bill_d:'bill',kirim_d:'del',stnk_d:'stnk',
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
     cashless:'bill',exc_alamat:'afi',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
-    tx_hiace:'del',tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
+    tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
     tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'
   };
   function load(k){ return (FAST.load?FAST.load(k):null)||{}; }
@@ -69,6 +69,12 @@
   function agusNow(){
     return load(FAST.DEL_KEY).requested ? 'stnk' : 'del';
   }
+  function hiaceNow(){
+    var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,lunas:0};
+    if(x.lunas===3) return 'stnk';
+    if(x.dp===3) return 'del';
+    return 'bill';
+  }
   var CASES={
     dewi:{
       go:dewiGo,
@@ -104,8 +110,15 @@
     },
     hiace:{
       go:{spk:'tx_hiace',quot:'tx_hiace',so:'tx_hiace',afi:'tx_hiace',do:'tx_hiace',bill:'tx_hiace',del:'tx_hiace',stnk:'tx_hiace'},
-      now:function(){ return 'del'; },
-      copy:function(){ return 'Tiga SO terpisah. Kirim tiap baris tertahan TTD B2B — bukan cashless cabang.'; }
+      now:hiaceNow,
+      copy:function(now){
+        var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,back:0,lunas:0};
+        if(x.lunas===3) return 'Tiga SO. Pelunasan leasing tercatat. STNK/BPKB memakai data SPK yang sama.';
+        if(x.back) return 'Backflow B2B: ada dokumen kurang. Frontman lengkapi, kirim ulang — bukan waiver TTD/DP.';
+        if(now==='bill') return 'Tiga SO. Billing tiap baris tertahan full DP B2B. Status leasing masuk billing gate.';
+        if(now==='del') return 'DP B2B '+x.dp+'/3. Kirim tertahan TTD '+x.ttd+'/3 — status ke delivery gate, bukan Approval Engine.';
+        return 'Tiga SO terpisah. Alur B2B: submit → dokumen → kontrak → TTD → DP → penagihan paperless.';
+      }
     },
     raize:{
       go:{spk:'tx_raize',quot:'tx_raize',so:'tx_raize',afi:'tx_raize',do:'tx_raize',bill:'tx_raize',del:'tx_raize',stnk:'tx_raize'},
@@ -143,7 +156,11 @@
     var now=c.now();
     var allDone=now==='done';
     var done=allDone?{spk:1,quot:1,so:1,afi:1,do:1,bill:1,del:1,stnk:1}:doneBefore(now);
-    if(id==='hiace'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
+    if(id==='hiace'){
+      if(now==='bill') done={spk:1,quot:1,so:1,afi:1,do:1};
+      else if(now==='stnk') done={spk:1,quot:1,so:1,afi:1,do:1,bill:1,del:1};
+      else done={spk:1,quot:1,so:1,afi:1,do:1,bill:1};
+    }
     if(id==='raize'){ done={}; }
     if(id==='agya'){ done={spk:1}; }
     if(id==='fajar' && now==='del'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
@@ -156,7 +173,7 @@
     if(id==='dewi' && now==='spk'){ done={}; }
     var hold=(!allDone && (now==='del'||now==='spk'||now==='stnk'||now==='quot'))?now:null;
     if(id==='raize') hold='spk';
-    if(id==='hiace') hold='del';
+    if(id==='hiace') hold=(now==='stnk')?null:now;
     if(id==='agya') hold='quot';
     if(id==='maria') hold='stnk';
     return {id:id, now:allDone?'stnk':now, done:done, hold:hold, allDone:allDone, go:typeof c.go==='function'?c.go():c.go, copy:c.copy(allDone?'stnk':now)};

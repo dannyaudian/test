@@ -193,43 +193,43 @@
               <p class="cta">Booking Agya →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-pick="1288" data-b2b-home="1288">
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SO 4500091288 · unit 1/3</p>
               <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec">Leasing · TTD B2B · bukan cashless cabang</p>
+              <p class="spec" data-b2b-home-spec>B2B · unduh kontrak leasing · unggah TTD</p>
               <div class="row2">
-                <span class="tag wait">Kontrak belum TTD</span>
+                <span class="tag wait" data-b2b-home-tag>Kontrak dari leasing</span>
                 <span class="amt">Rp 348.400.000</span>
               </div>
-              <p class="cta">Buka SO →</p>
+              <p class="cta">Buka B2B →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-pick="1289" data-b2b-home="1289">
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SO 4500091289 · unit 2/3</p>
               <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec">SO sendiri · SPK/QT yang sama</p>
+              <p class="spec" data-b2b-home-spec>Backflow · NPWP kurang · unggah ulang</p>
               <div class="row2">
-                <span class="tag wait">Kontrak belum TTD</span>
+                <span class="tag stop" data-b2b-home-tag>Dikembalikan leasing</span>
                 <span class="amt">Rp 348.300.000</span>
               </div>
-              <p class="cta">Buka SO →</p>
+              <p class="cta">Lengkapi dokumen →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-pick="1290" data-b2b-home="1290">
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SO 4500091290 · unit 3/3</p>
               <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec">SO sendiri · DP dari B2B</p>
+              <p class="spec" data-b2b-home-spec>Leasing minta dokumen · unggah paket B2B</p>
               <div class="row2">
-                <span class="tag wait">Kontrak belum TTD</span>
+                <span class="tag wait" data-b2b-home-tag>Dokumen diminta</span>
                 <span class="amt">Rp 348.300.000</span>
               </div>
-              <p class="cta">Buka SO →</p>
+              <p class="cta">Unggah dokumen →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="raize" data-go="tx_raize">
@@ -504,46 +504,132 @@
       <section class="screen" id="tx_hiace">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">SPK/26/CLD/00421</p>
+            <p class="eyebrow">SPK/26/CLD/00421 · B2B leasing</p>
             <h2>PT Danapura Utama · Hiace Premio</h2>
-            <p>Satu SPK, satu quotation, tiga Sales Order — masing-masing satu baris. Billing setelah full DP B2B. Kirim setelah kontrak TTD. Bukan cashless cabang.</p>
+            <p>Satu SPK, satu quotation, tiga Sales Order. Mitra leasing: PT Danapura Multifinance. Frontman mengunduh kontrak, mengunggah dokumen, TTD, dan bukti penagihan. Administrasi menagih paperless. Status tiap SO masuk billing gate dan delivery gate — bukan objek Approval Engine.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
+        <nav class="worktabs" aria-label="Isi B2B leasing">
+          <button type="button" data-b2b-tab="ringkas">Ringkasan</button>
+          <button type="button" data-b2b-tab="alur">Alur &amp; status</button>
+          <button type="button" data-b2b-tab="dokumen">Dokumen &amp; kontrak</button>
+          <button type="button" data-b2b-tab="tagih">Penagihan paperless</button>
+        </nav>
         <div class="cards">
-          <div class="card"><p class="k">Metode</p><p class="v" style="font-size:18px">Leasing</p><p class="n">DP &amp; kontrak dari B2B</p></div>
-          <div class="card alert"><p class="k">Delivery</p><p class="v" style="font-size:18px">Kontrak belum TTD</p><p class="n">Non-waivable</p></div>
-          <div class="card"><p class="k">AR Open</p><p class="v" style="font-size:18px">Rp 1,045 M</p><p class="n">Menunggu DP leasing</p></div>
-        </div>
-        <div class="box">
-          <h3>Sales Order — satu baris per unit</h3>
-          <button type="button" class="soline btnline" data-go="tx_hiace">
-            <div>
-              <p><b>SO 4500091288 · unit 1</b></p>
-              <p class="meta">Hiace Premio · VIN menyusul · DP B2B · TTD belum</p>
-            </div>
-            <span class="tag wait">Kirim tertahan</span>
-          </button>
-          <button type="button" class="soline btnline" data-go="tx_hiace">
-            <div>
-              <p><b>SO 4500091289 · unit 2</b></p>
-              <p class="meta">SO sendiri · SPK/26/CLD/00421 · QT yang sama</p>
-            </div>
-            <span class="tag wait">Kirim tertahan</span>
-          </button>
-          <button type="button" class="soline btnline" data-go="tx_hiace">
-            <div>
-              <p><b>SO 4500091290 · unit 3</b></p>
-              <p class="meta">Tidak digabung ke 4500091288</p>
-            </div>
-            <span class="tag wait">Kirim tertahan</span>
-          </button>
-          <div class="paystrip">
-            <b>Integrasi B2B leasing</b>
-            <span class="hint" style="margin:0">DP dan TTD dari B2B. QRIS/CDM/EDC cabang tidak membuka delivery.</span>
+          <div class="card" data-b2b-card="bill">
+            <p class="k">Billing gate</p>
+            <p class="v" style="font-size:18px" data-b2b-dp-label>Full DP 0/3</p>
+            <p class="n">Status B2B · non-waivable</p>
+          </div>
+          <div class="card alert" data-b2b-card="del">
+            <p class="k">Delivery gate</p>
+            <p class="v" style="font-size:18px" data-b2b-ttd-label>TTD 0/3</p>
+            <p class="n">Kontrak customer · non-waivable</p>
+          </div>
+          <div class="card" data-b2b-card="paper">
+            <p class="k">Penagihan leasing</p>
+            <p class="v" style="font-size:18px" data-b2b-paper-label>Paperless 0/3</p>
+            <p class="n">Administrasi · online</p>
           </div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Kontrak TTD hanya dari B2B leasing. Approval Engine tidak dibuka. Operation Manager memantau SLA kirim, bukan me-waive TTD.</p><p><button class="btn" data-go="eskalasi">Lihat di antrean pengecualian</button></p></div></div>
+        <p class="note" data-b2b-gate-note>Approval Engine tidak membuka TTD atau full DP. Kekurangan dokumen = backflow operasional, bukan waiver.</p>
+
+        <div data-b2b-panel="ringkas">
+          <div class="box">
+            <h3>Tiga Sales Order — status leasing per baris</h3>
+            <button type="button" class="soline btnline" data-b2b-so="1288">
+              <div>
+                <p><b>SO 4500091288 · unit 1</b></p>
+                <p class="meta" data-b2b-so-meta>Hiace Premio · kontrak dari leasing siap diunduh</p>
+              </div>
+              <span class="tag wait" data-b2b-so-tag>Kontrak siap</span>
+            </button>
+            <button type="button" class="soline btnline" data-b2b-so="1289">
+              <div>
+                <p><b>SO 4500091289 · unit 2</b></p>
+                <p class="meta" data-b2b-so-meta>Backflow · NPWP badan kurang</p>
+              </div>
+              <span class="tag stop" data-b2b-so-tag>Dikembalikan</span>
+            </button>
+            <button type="button" class="soline btnline" data-b2b-so="1290">
+              <div>
+                <p><b>SO 4500091290 · unit 3</b></p>
+                <p class="meta" data-b2b-so-meta>Leasing meminta paket dokumen</p>
+              </div>
+              <span class="tag wait" data-b2b-so-tag>Dokumen diminta</span>
+            </button>
+            <div class="paystrip">
+              <b>Bukan cashless cabang</b>
+              <span class="hint" style="margin:0">QRIS/CDM/EDC tidak membuka billing atau delivery leasing. Angka DP dan TTD dari alur B2B.</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-b2b-panel="alur" hidden>
+          <div class="box">
+            <h3>Status <span data-b2b-so-title>SO 4500091288</span> <span class="side">Submit → pelunasan</span></h3>
+            <p class="exc-note" data-b2b-backflow hidden></p>
+            <div class="b2b-path" data-b2b-path></div>
+            <div class="pad">
+              <p data-b2b-now-copy></p>
+              <p class="hint">Normal flow dan backflow memakai jejak yang sama. Gate membaca status ini.</p>
+            </div>
+            <div class="formfoot" data-for="frontman">
+              <span class="hint">Setelah dokumen lengkap di tab Dokumen, kirim ulang ke leasing.</span>
+              <button type="button" class="btn" data-b2b-resubmit>Kirim ulang ke leasing</button>
+            </div>
+            <div class="formfoot" data-for="admin" hidden>
+              <span class="hint">Administrasi memicu kontrak dari leasing, mencatat DP, atau mengembalikan (backflow).</span>
+              <button type="button" class="btn ghost" data-b2b-issue-contract>Terbitkan kontrak dari leasing</button>
+              <button type="button" class="btn ghost" data-b2b-mark-dp>Catat full DP B2B</button>
+              <button type="button" class="btn stop" data-b2b-return>Kembalikan — dokumen kurang</button>
+            </div>
+            <div class="formfoot" data-for="mgmt" hidden>
+              <span class="hint">Management melihat status ke gate. TTD dan DP tidak di-waive dari kursi keputusan.</span>
+              <button type="button" class="btn ghost" data-go="dashboard">Lihat bottleneck area</button>
+            </div>
+          </div>
+        </div>
+
+        <div data-b2b-panel="dokumen" hidden>
+          <div class="box">
+            <h3>Kontrak dari leasing <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
+            <div class="pad">
+              <p>Sales mengunduh kontrak yang disubmit leasing, lalu mengunggah kembali yang sudah ditandatangani customer.</p>
+              <div class="nextbar">
+                <button type="button" class="btn" data-b2b-dl-contract>Unduh kontrak leasing</button>
+              </div>
+              <button type="button" class="drop" data-b2b-drop="signed"><b>Unggah kontrak TTD customer</b><span>Ketuk untuk pasang scan yang sudah ditandatangani</span></button>
+            </div>
+          </div>
+          <div class="box">
+            <h3>Dokumen yang diminta leasing</h3>
+            <button type="button" class="drop" data-b2b-doc="ktp"><b>KTP / identitas pengurus</b><span>Ketuk untuk pasang</span></button>
+            <button type="button" class="drop" data-b2b-doc="npwp"><b>NPWP badan</b><span>Ketuk untuk pasang</span></button>
+            <button type="button" class="drop" data-b2b-doc="siup"><b>NIB / SIUP</b><span>Ketuk untuk pasang</span></button>
+            <button type="button" class="drop" data-b2b-doc="spk"><b>SPK / quotation FAST</b><span>Ketuk untuk pasang</span></button>
+            <p class="hint">Paket yang sama dipakai ulang jika leasing minta kembali (backflow). Bukan diunggah sebagai waiver gate.</p>
+          </div>
+        </div>
+
+        <div data-b2b-panel="tagih" hidden>
+          <div class="box">
+            <h3>Dokumen penagihan ke leasing <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
+            <p class="pad" style="padding-bottom:0">Sales mengunggah BSTKB, foto serah terima, dan foto tanda tangan kontrak. Administrasi mengirim penagihan paperless setelah full DP B2B.</p>
+            <button type="button" class="drop" data-b2b-bill="bstkb"><b>Scan BSTKB</b><span>Ketuk untuk pasang</span></button>
+            <button type="button" class="drop" data-b2b-bill="fotoSerah"><b>Foto serah terima</b><span>Ketuk untuk pasang · geotag perangkat</span></button>
+            <button type="button" class="drop" data-b2b-bill="fotoTtd"><b>Foto tanda tangan kontrak</b><span>Ketuk untuk pasang</span></button>
+            <div class="formfoot" data-for="frontman">
+              <span class="hint">Setelah ketiga berkas terpasang, Administrasi bisa menagih paperless.</span>
+            </div>
+            <div class="formfoot" data-for="admin" hidden>
+              <span class="hint">Penagihan ke leasing online. Tidak cetak fisik. Syarat: full DP B2B + paket penagihan lengkap.</span>
+              <button type="button" class="btn" data-b2b-paperless>Kirim penagihan paperless</button>
+              <button type="button" class="btn ghost" data-b2b-lunas>Catat pelunasan leasing</button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="tx_raize">
@@ -1780,17 +1866,17 @@
               <p class="cta">Minta bayar →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-exc-kind="hold" data-go="tx_hiace" data-tx-dots="hiace">
+          <button type="button" class="order-card" data-exc-kind="hold" data-go="tx_hiace" data-b2b-pick="1288" data-tx-dots="hiace">
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00421 · delivery leasing</p>
-              <strong class="oname">PT Danapura · kontrak belum TTD</strong>
-              <p class="spec">Non-waivable. Status TTD hanya dari B2B leasing.</p>
+              <strong class="oname">PT Danapura · status B2B ke gate</strong>
+              <p class="spec">Non-waivable. Unduh kontrak, unggah TTD. Bukan antrean Approval Engine.</p>
               <div class="row2">
-                <span class="tag wait">Menunggu B2B</span>
+                <span class="tag wait" data-b2b-home-tag>Menunggu TTD</span>
                 <span class="amt">Rp 1.045.000.000</span>
               </div>
-              <p class="cta">Buka transaksi →</p>
+              <p class="cta">Buka B2B →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="esc" data-go="exc_stnk" data-tx-dots="maria">
@@ -2055,6 +2141,7 @@
           <button type="button" data-go="admin_do">DO</button>
           <button type="button" data-go="admin_afi">AFI</button>
           <button type="button" data-go="admin_bill">Billing</button>
+          <button type="button" data-go="admin_leasing">Leasing B2B</button>
           <button type="button" data-go="admin_kwt">Kuitansi</button>
           <button type="button" data-go="admin_pay">Pembayaran</button>
         </nav>
@@ -2418,6 +2505,39 @@
           </div>
         </div>
 
+        <div class="box book-panel" data-book-panel="leasing" hidden>
+          <h3>B2B leasing <span class="side">Status per SO · paperless · backflow</span></h3>
+          <div class="scroll">
+          <table>
+            <thead><tr><th>SO</th><th>Customer</th><th>Status leasing</th><th>Gate</th><th>Tindakan Admin</th></tr></thead>
+            <tbody>
+              <tr data-go="tx_hiace" data-b2b-pick="1288">
+                <td><b>4500091288</b><span class="sub">unit 1/3</span></td>
+                <td>PT Danapura · Hiace</td>
+                <td data-b2b-book-status="1288">Kontrak dari leasing</td>
+                <td>Billing DP · Delivery TTD</td>
+                <td><span class="tag wait" data-b2b-book-tag="1288">Pantau TTD</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-pick="1289">
+                <td><b>4500091289</b><span class="sub">unit 2/3</span></td>
+                <td>PT Danapura · Hiace</td>
+                <td data-b2b-book-status="1289">Backflow NPWP</td>
+                <td>Belum ke gate</td>
+                <td><span class="tag stop" data-b2b-book-tag="1289">Tunggu Frontman</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-pick="1290">
+                <td><b>4500091290</b><span class="sub">unit 3/3</span></td>
+                <td>PT Danapura · Hiace</td>
+                <td data-b2b-book-status="1290">Dokumen diminta</td>
+                <td>Belum ke gate</td>
+                <td><span class="tag wait" data-b2b-book-tag="1290">Terbitkan kontrak</span></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="hint" style="padding:12px 14px">Buka baris ke workspace B2B yang sama dengan Frontman. Kirim penagihan paperless di tab Penagihan — tidak cetak fisik ke leasing.</p>
+        </div>
+
         <div class="box book-panel" data-book-panel="kwt" hidden>
           <h3>Kuitansi cabang <span class="side">Satu nomor per pembayaran terverifikasi</span></h3>
           <div class="scroll">
@@ -2618,12 +2738,19 @@
                 <td><span class="tag stop">Cocokkan manual</span></td>
                 <td>1 hari</td>
               </tr>
-              <tr data-go="tx_hiace" data-tx-dots="hiace">
-                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura Utama</span></td>
-                <td>Data internal</td>
-                <td>Klasifikasi fleet belum diisi <span class="sub">Hanya bisa diisi Administrasi</span></td>
-                <td><span class="tag wait">Lengkapi</span></td>
+              <tr data-go="tx_hiace" data-b2b-pick="1288" data-tx-dots="hiace">
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091288</span></td>
+                <td>Penagihan paperless</td>
+                <td>Paket BSTKB / foto serah / foto TTD + full DP B2B <span class="sub">Kirim online ke leasing, bukan cetak</span></td>
+                <td><span class="tag wait">Paperless</span></td>
                 <td>4 jam</td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-pick="1289" data-tx-dots="hiace">
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091289</span></td>
+                <td>Backflow B2B</td>
+                <td>Leasing mengembalikan NPWP badan <span class="sub">Frontman unggah ulang · bukan Approval Engine</span></td>
+                <td><span class="tag stop">Pantau Frontman</span></td>
+                <td>1 hari</td>
               </tr>
               <tr data-go="exc_stnk" data-tx-dots="maria">
                 <td><b>SPK/26/CLD/00409</b><span class="sub">Maria Sitompul</span></td>
@@ -2834,11 +2961,11 @@
               <div class="thumb">HIACE</div>
               <div class="meta">
                 <p class="oid">SPK/26/CLD/00421 · leasing B2B</p>
-                <strong class="oname">PT Danapura · kontrak belum TTD</strong>
-                <p class="spec">Delivery gate leasing. Kontrak dari B2B, bukan waiver Kepala Cabang.</p>
+                <strong class="oname">PT Danapura · status ke compliance gate</strong>
+                <p class="spec">TTD dan full DP dari alur B2B. Bukan waiver Kepala Cabang. Backflow = dokumen kurang.</p>
                 <div class="row2">
                   <span class="tag stop">Non-waivable</span>
-                  <span class="amt">TTD dulu</span>
+                  <span class="amt">Baca status B2B</span>
                 </div>
                 <p class="cta">Buka Hiace →</p>
               </div>
