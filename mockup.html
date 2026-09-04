@@ -122,7 +122,7 @@
         </div>
 
         <div class="order-list" id="txList">
-          <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-go="spk_baru">
+          <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-tx-dots="dewi" data-go="spk_baru">
             <div class="thumb">YARIS</div>
             <div class="meta">
               <p class="oid" data-dewi-oid>Draft · belum nomor SPK</p>
@@ -135,7 +135,7 @@
               <p class="cta" data-dewi-cta>Input &amp; unggah →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-go="transaksi">
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="budi" data-go="transaksi">
             <div class="thumb">ZENIX</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00418 · tunai</p>
@@ -148,7 +148,7 @@
               <p class="cta">Lanjutkan →</p>
             </div>
           </button>
-          <button type="button" class="order-card featured" data-tx-status="docs" data-tx-action="1" data-go="afi">
+          <button type="button" class="order-card featured" data-tx-status="docs" data-tx-action="1" data-tx-dots="budi" data-go="afi">
             <div class="thumb">AFI</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00418 · sebelum billing</p>
@@ -161,7 +161,7 @@
               <p class="cta">Billing &amp; AFI →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="exc" data-tx-action="1" data-go="exc_alamat">
+          <button type="button" class="order-card" data-tx-status="exc" data-tx-action="1" data-tx-dots="budi" data-go="exc_alamat">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00418 · document gate</p>
@@ -174,7 +174,7 @@
               <p class="cta">Buka pengajuan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-go="tx_hiace">
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00421 · leasing</p>
@@ -187,7 +187,7 @@
               <p class="cta">Lanjutkan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-go="tx_raize">
+          <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="raize" data-go="tx_raize">
             <div class="thumb">RAIZE</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00423 · SPK baru</p>
@@ -200,7 +200,7 @@
               <p class="cta">Lanjutkan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-go="delivery">
+          <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-tx-dots="agus" data-go="delivery">
             <div class="thumb done">AVANZA</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00425 · lunas</p>
@@ -213,7 +213,7 @@
               <p class="cta">Ajukan delivery →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="gi" data-tx-action="1" data-go="gi">
+          <button type="button" class="order-card" data-tx-status="gi" data-tx-action="1" data-tx-dots="fajar" data-go="gi">
             <div class="thumb">RUSH</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00424 · terkirim 2 Sep</p>
@@ -226,7 +226,7 @@
               <p class="cta">Lengkapi bukti →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="exc" data-go="exc_stnk">
+          <button type="button" class="order-card" data-tx-status="exc" data-tx-dots="maria" data-go="exc_stnk">
             <div class="thumb">FORT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · delivered</p>
@@ -1615,7 +1615,7 @@
           <button type="button" data-exc-filter="esc" aria-pressed="false">Eskalasi STNK</button>
         </div>
         <div class="order-list" id="excList">
-          <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="alamat" data-go="exc_alamat">
+          <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="alamat" data-go="exc_alamat" data-tx-dots="budi">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
@@ -1628,7 +1628,7 @@
               <p class="cta">Buka pengajuan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="afi" data-go="exc_afi" data-afi-exc="early">
+          <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="afi" data-go="exc_afi" data-afi-exc="early" data-tx-dots="budi">
             <div class="thumb">AFI</div>
             <div class="meta">
               <p class="oid">E-26-0418-A · SPK/26/CLD/00418</p>
@@ -1641,7 +1641,7 @@
               <p class="cta">Buka exception →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="afi" data-go="exc_afi" data-afi-exc="nobill">
+          <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="afi" data-go="exc_afi" data-afi-exc="nobill" data-tx-dots="budi">
             <div class="thumb">BILL</div>
             <div class="meta">
               <p class="oid">E-26-0418-B · SPK/26/CLD/00418</p>
@@ -1667,7 +1667,7 @@
               <p class="cta">Minta bayar →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-exc-kind="hold" data-go="tx_hiace">
+          <button type="button" class="order-card" data-exc-kind="hold" data-go="tx_hiace" data-tx-dots="hiace">
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00421 · delivery leasing</p>
@@ -1680,7 +1680,7 @@
               <p class="cta">Buka transaksi →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-exc-kind="esc" data-go="exc_stnk">
+          <button type="button" class="order-card" data-exc-kind="esc" data-go="exc_stnk" data-tx-dots="maria">
             <div class="thumb">FORT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · delivered</p>
@@ -1948,7 +1948,7 @@
           <button type="button" data-go="admin_kwt">Kuitansi</button>
           <button type="button" data-go="admin_pay">Pembayaran</button>
         </nav>
-        <p class="book-path" aria-hidden="true">SPK → Quotation → SO → AFI → DO → Billing → Kuitansi · Pembayaran</p>
+        <p class="book-path">Jejak yang sama di setiap baris: SPK → QT → SO → AFI → DO → Billing → Kirim → STNK</p>
         <label class="order-search" for="adminBookSearch">
           <span class="sr-only">Cari di list aktif</span>
           <input id="adminBookSearch" type="search" placeholder="Cari nomor, nama, unit, atau kuitansi…" autocomplete="off" oninput="void 0">
@@ -1961,49 +1961,49 @@
           <table>
             <thead><tr><th>SPK</th><th>Customer</th><th>Unit</th><th>Lineage</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="spk">
+              <tr data-go="spk" data-tx-dots="dewi">
                 <td><b>SPK/26/CLD/00426</b><span class="sub">2 Sep 2026</span></td>
                 <td>Dewi Lestari</td>
                 <td>Yaris + Agya<span class="sub">2 unit · 1 SPK</span></td>
                 <td class="lineage">QT → 2 SO</td>
                 <td><span class="tag wait" data-dewi-tag>Belum bayar</span></td>
               </tr>
-              <tr data-go="transaksi">
+              <tr data-go="transaksi" data-tx-dots="budi">
                 <td><b>SPK/26/CLD/00418</b><span class="sub">28 Agu 2026</span></td>
                 <td>Budi Santoso</td>
                 <td>Innova Zenix</td>
                 <td class="lineage">SO 4500091238 · AFI · KWT</td>
                 <td><span class="tag hold">Belum lunas</span></td>
               </tr>
-              <tr data-go="tx_hiace">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td><b>SPK/26/CLD/00421</b><span class="sub">27 Agu 2026</span></td>
                 <td>PT Danapura Utama</td>
                 <td>Hiace × 3</td>
                 <td class="lineage">SO leasing · DP</td>
                 <td><span class="tag wait">Klasifikasi</span></td>
               </tr>
-              <tr data-go="tx_raize">
+              <tr data-go="tx_raize" data-tx-dots="raize">
                 <td><b>SPK/26/CLD/00423</b><span class="sub">30 Agu 2026</span></td>
                 <td>Sarah Wijaya</td>
                 <td>Raize</td>
                 <td class="lineage">SPK tertahan</td>
                 <td><span class="tag stop">NPWP kosong</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>SPK/26/CLD/00425</b><span class="sub">20 Agu 2026</span></td>
                 <td>Agus Hermawan</td>
                 <td>Avanza</td>
                 <td class="lineage">SO · DO · lunas</td>
                 <td><span class="tag ok">Siap kirim</span></td>
               </tr>
-              <tr data-go="gi">
+              <tr data-go="gi" data-tx-dots="fajar">
                 <td><b>SPK/26/CLD/00424</b><span class="sub">18 Agu 2026</span></td>
                 <td>Fajar Nugroho</td>
                 <td>Rush</td>
                 <td class="lineage">DO terkirim · GI</td>
                 <td><span class="tag wait">Good Issue</span></td>
               </tr>
-              <tr data-go="exc_stnk">
+              <tr data-go="exc_stnk" data-tx-dots="maria">
                 <td><b>SPK/26/CLD/00409</b><span class="sub">10 Agu 2026</span></td>
                 <td>Maria Sitompul</td>
                 <td>Fortuner</td>
@@ -2021,35 +2021,35 @@
           <table>
             <thead><tr><th>Quotation</th><th>Dari SPK</th><th>Customer</th><th>Baris / SO</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="quot">
+              <tr data-go="quot" data-tx-dots="dewi">
                 <td><b>QT/26/CLD/00426</b><span class="sub">rev <span data-qt-rev>1</span></span></td>
                 <td>SPK/26/CLD/00426</td>
                 <td>Dewi Lestari</td>
                 <td>Yaris + Agya<span class="sub">2 SO terkait</span></td>
                 <td><span class="tag wait">Aktif</span></td>
               </tr>
-              <tr data-go="transaksi">
+              <tr data-go="transaksi" data-tx-dots="budi">
                 <td><b>QT/26/CLD/00418</b><span class="sub">terkonversi</span></td>
                 <td>SPK/26/CLD/00418</td>
                 <td>Budi Santoso</td>
                 <td>Zenix<span class="sub">1 SO</span></td>
                 <td><span class="tag ok">Jadi SO</span></td>
               </tr>
-              <tr data-go="tx_hiace">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td><b>QT/26/CLD/00421</b><span class="sub">fleet</span></td>
                 <td>SPK/26/CLD/00421</td>
                 <td>PT Danapura</td>
                 <td>Hiace × 3<span class="sub">3 SO</span></td>
                 <td><span class="tag wait">Leasing</span></td>
               </tr>
-              <tr data-go="tx_raize">
+              <tr data-go="tx_raize" data-tx-dots="raize">
                 <td><b>QT/26/CLD/00423</b><span class="sub">tertahan</span></td>
                 <td>SPK/26/CLD/00423</td>
                 <td>Sarah Wijaya</td>
                 <td>Raize<span class="sub">SO belum</span></td>
                 <td><span class="tag stop">NPWP</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>QT/26/CLD/00425</b><span class="sub">terkonversi</span></td>
                 <td>SPK/26/CLD/00425</td>
                 <td>Agus Hermawan</td>
@@ -2067,49 +2067,49 @@
           <table>
             <thead><tr><th>SO</th><th>SPK / QT</th><th>Customer · unit</th><th>Lineage</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="so">
+              <tr data-go="so" data-tx-dots="dewi">
                 <td><b>4500091426</b><span class="sub">rev <span data-so-rev>1</span></span></td>
                 <td>SPK/26/CLD/00426<span class="sub">QT/26/CLD/00426 baris 1</span></td>
                 <td>Dewi Lestari · Yaris</td>
                 <td class="lineage">AFI → DO → billing</td>
                 <td><span class="tag wait" data-dewi-tag>Booking</span></td>
               </tr>
-              <tr data-go="so2">
+              <tr data-go="so2" data-tx-dots="dewi">
                 <td><b>4500091428</b></td>
                 <td>SPK/26/CLD/00426<span class="sub">QT/26/CLD/00426 baris 2</span></td>
                 <td>Dewi Lestari · Agya</td>
                 <td class="lineage">Quotation yang sama</td>
                 <td><span class="tag wait">Booking Agya</span></td>
               </tr>
-              <tr data-go="transaksi">
+              <tr data-go="transaksi" data-tx-dots="budi">
                 <td><b>4500091238</b></td>
                 <td>SPK/26/CLD/00418<span class="sub">QT/26/CLD/00418</span></td>
                 <td>Budi Santoso · Zenix</td>
                 <td class="lineage">KWT 008731 · 009115</td>
                 <td><span class="tag hold">AR terbuka</span></td>
               </tr>
-              <tr data-go="tx_hiace">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td><b>4500091288</b><span class="sub">+ 2 SO unit</span></td>
                 <td>SPK/26/CLD/00421</td>
                 <td>PT Danapura · Hiace × 3</td>
                 <td class="lineage">DP leasing</td>
                 <td><span class="tag wait">Kontrak</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>4500091301</b></td>
                 <td>SPK/26/CLD/00425</td>
                 <td>Agus Hermawan · Avanza</td>
                 <td class="lineage">Billing · DO</td>
                 <td><span class="tag ok">Lunas</span></td>
               </tr>
-              <tr data-go="gi">
+              <tr data-go="gi" data-tx-dots="fajar">
                 <td><b>4500091294</b></td>
                 <td>SPK/26/CLD/00424</td>
                 <td>Fajar Nugroho · Rush</td>
                 <td class="lineage">DO terkirim</td>
                 <td><span class="tag wait">GI</span></td>
               </tr>
-              <tr data-go="exc_stnk">
+              <tr data-go="exc_stnk" data-tx-dots="maria">
                 <td><b>4500091109</b></td>
                 <td>SPK/26/CLD/00409</td>
                 <td>Maria Sitompul · Fortuner</td>
@@ -2127,42 +2127,42 @@
           <table>
             <thead><tr><th>DO</th><th>SO</th><th>Customer · unit</th><th>Lineage</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="do">
+              <tr data-go="do" data-tx-dots="dewi">
                 <td><b>DO/26/CLD/01426</b><span class="sub">Yaris</span></td>
                 <td>4500091426</td>
                 <td>Dewi Lestari · Yaris</td>
                 <td class="lineage">Setelah AFI → billing</td>
                 <td><span class="tag wait">Menunggu AFI</span></td>
               </tr>
-              <tr data-go="afi">
+              <tr data-go="afi" data-tx-dots="budi">
                 <td>—<span class="sub">Belum terbit</span></td>
                 <td>4500091238</td>
                 <td>Budi Santoso · Zenix</td>
                 <td class="lineage">AFI dulu · berpasangan billing</td>
                 <td><span class="tag wait">AFI</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>DO/26/CLD/01425</b></td>
                 <td>4500091301</td>
                 <td>Agus Hermawan · Avanza</td>
                 <td class="lineage">Lunas · siap kirim</td>
                 <td><span class="tag ok">Terbit</span></td>
               </tr>
-              <tr data-go="gi">
+              <tr data-go="gi" data-tx-dots="fajar">
                 <td><b>DO/26/CLD/01424</b></td>
                 <td>4500091294</td>
                 <td>Fajar Nugroho · Rush</td>
                 <td class="lineage">Terkirim 2 Sep</td>
                 <td><span class="tag wait">Good Issue</span></td>
               </tr>
-              <tr data-go="exc_stnk">
+              <tr data-go="exc_stnk" data-tx-dots="maria">
                 <td><b>DO/26/CLD/01409</b></td>
                 <td>4500091109</td>
                 <td>Maria Sitompul · Fortuner</td>
                 <td class="lineage">Delivered</td>
                 <td><span class="tag ok">Selesai</span></td>
               </tr>
-              <tr data-go="so2">
+              <tr data-go="so2" data-tx-dots="dewi">
                 <td>—<span class="sub">Belum</span></td>
                 <td>4500091428</td>
                 <td>Dewi Lestari · Agya</td>
@@ -2180,42 +2180,42 @@
           <table>
             <thead><tr><th>AFI</th><th>SPK / SO</th><th>Customer</th><th>Lineage</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="afi_d">
+              <tr data-go="afi_d" data-tx-dots="dewi">
                 <td><b>AFI Yaris</b><span class="sub">STNK/BPKB</span></td>
                 <td>SPK/26/CLD/00426<span class="sub">SO 4500091426</span></td>
                 <td>Dewi Lestari</td>
                 <td class="lineage">Lanjut DO</td>
                 <td><span class="tag wait">Menunggu SO</span></td>
               </tr>
-              <tr data-go="afi">
+              <tr data-go="afi" data-tx-dots="budi">
                 <td><b>AFI Zenix</b><span class="sub">Berpasangan billing</span></td>
                 <td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td>
                 <td>Budi Santoso</td>
                 <td class="lineage">Data STNK dari SPK</td>
                 <td><span class="tag wait" data-afi-tag>Berpasangan</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>AFI Avanza</b><span class="sub">Selesai</span></td>
                 <td>SPK/26/CLD/00425</td>
                 <td>Agus Hermawan</td>
                 <td class="lineage">DO terbit</td>
                 <td><span class="tag ok">Selesai</span></td>
               </tr>
-              <tr data-go="gi">
+              <tr data-go="gi" data-tx-dots="fajar">
                 <td><b>AFI Rush</b><span class="sub">Selesai</span></td>
                 <td>SPK/26/CLD/00424</td>
                 <td>Fajar Nugroho</td>
                 <td class="lineage">GI menunggu</td>
                 <td><span class="tag ok">Selesai</span></td>
               </tr>
-              <tr data-go="exc_stnk">
+              <tr data-go="exc_stnk" data-tx-dots="maria">
                 <td><b>AFI Fortuner</b><span class="sub">STNK aging</span></td>
                 <td>SPK/26/CLD/00409</td>
                 <td>Maria Sitompul</td>
                 <td class="lineage">Bukan waiver lunas</td>
                 <td><span class="tag hold">Hari ke-19</span></td>
               </tr>
-              <tr data-go="tx_hiace">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td>—<span class="sub">Belum diajukan</span></td>
                 <td>SPK/26/CLD/00421</td>
                 <td>PT Danapura</td>
@@ -2233,42 +2233,42 @@
           <table>
             <thead><tr><th>Billing</th><th>SO</th><th>Customer</th><th>Lineage</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="bill_d">
+              <tr data-go="bill_d" data-tx-dots="dewi">
                 <td><b>Belum terbit</b><span class="sub">Setelah DO</span></td>
                 <td>4500091426</td>
                 <td>Dewi Lestari · Yaris</td>
                 <td class="lineage">Dana 0,99% · gate 30%</td>
                 <td><span class="tag stop">Tahan 30%</span></td>
               </tr>
-              <tr data-go="afi">
+              <tr data-go="afi" data-tx-dots="budi">
                 <td><b>Diajukan bersama AFI</b><span class="sub">Belum nomor</span></td>
                 <td>4500091238</td>
                 <td>Budi Santoso · Zenix</td>
                 <td class="lineage">AR Rp 181,75 jt</td>
                 <td><span class="tag wait">Berpasangan</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>BL/26/CLD/01301</b><span class="sub">Terbit</span></td>
                 <td>4500091301</td>
                 <td>Agus Hermawan · Avanza</td>
                 <td class="lineage">Lunas sebelum kirim</td>
                 <td><span class="tag ok">Lunas</span></td>
               </tr>
-              <tr data-go="gi">
+              <tr data-go="gi" data-tx-dots="fajar">
                 <td><b>BL/26/CLD/01294</b></td>
                 <td>4500091294</td>
                 <td>Fajar Nugroho · Rush</td>
                 <td class="lineage">Sudah kirim</td>
                 <td><span class="tag ok">Posted</span></td>
               </tr>
-              <tr data-go="tx_hiace">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td>—<span class="sub">Setelah full DP B2B</span></td>
                 <td>4500091288</td>
                 <td>PT Danapura · Hiace</td>
                 <td class="lineage">Non-waivable</td>
                 <td><span class="tag wait">DP</span></td>
               </tr>
-              <tr data-go="so2">
+              <tr data-go="so2" data-tx-dots="dewi">
                 <td>—</td>
                 <td>4500091428</td>
                 <td>Dewi Lestari · Agya</td>
@@ -2286,7 +2286,7 @@
           <table>
             <thead><tr><th>Kuitansi</th><th>Jenis</th><th>Customer</th><th>SPK / SO</th><th class="num">Nominal</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="so">
+              <tr data-go="so" data-tx-dots="dewi">
                 <td><b>KWT/26/CLD/009301</b><span class="sub">3 Sep · QRIS</span></td>
                 <td>Booking fee</td>
                 <td>Dewi Lestari · Yaris</td>
@@ -2294,7 +2294,7 @@
                 <td class="num">Rp 3.000.000</td>
                 <td><span class="tag ok">Aktif</span></td>
               </tr>
-              <tr data-go="delivery">
+              <tr data-go="delivery" data-tx-dots="agus">
                 <td><b>KWT/26/CLD/009280</b><span class="sub">2 Sep · VA</span></td>
                 <td>Pelunasan</td>
                 <td>Agus Hermawan · Avanza</td>
@@ -2336,7 +2336,7 @@
           <table id="adminPayTable">
             <thead><tr><th>Waktu</th><th>Referensi</th><th>Kuitansi</th><th>Jenis</th><th>Transaksi</th><th class="num">Nominal</th><th>Status</th></tr></thead>
             <tbody id="adminPayList">
-              <tr data-go="so" data-admin-pay-status="posted">
+              <tr data-go="so" data-admin-pay-status="posted" data-tx-dots="dewi">
                 <td>3 Sep 10:12<span class="sub">QRIS</span></td>
                 <td>PAY-CLD-00426-1<span class="sub">Banking API</span></td>
                 <td><b>KWT/26/CLD/009301</b></td>
@@ -2345,7 +2345,7 @@
                 <td class="num">Rp 3.000.000</td>
                 <td><span class="tag ok">Posted</span></td>
               </tr>
-              <tr data-go="delivery" data-admin-pay-status="posted">
+              <tr data-go="delivery" data-admin-pay-status="posted" data-tx-dots="agus">
                 <td>2 Sep 16:40<span class="sub">VA BCA</span></td>
                 <td>VA 8801 0425 0002</td>
                 <td><b>KWT/26/CLD/009280</b></td>
@@ -2399,7 +2399,7 @@
                 <td class="num">Rp 5.000.000</td>
                 <td><span class="tag ok">Posted</span></td>
               </tr>
-              <tr data-go="tx_hiace" data-admin-pay-status="request">
+              <tr data-go="tx_hiace" data-admin-pay-status="request" data-tx-dots="hiace">
                 <td>27 Agu 11:10<span class="sub">B2B</span></td>
                 <td>INV-DNP-2026-081</td>
                 <td>—</td>
@@ -2438,28 +2438,28 @@
           <table>
             <thead><tr><th>Transaksi</th><th>Jenis</th><th>Temuan sistem</th><th>Tindakan</th><th>Aging</th></tr></thead>
             <tbody>
-              <tr data-go="gi">
+              <tr data-go="gi" data-tx-dots="fajar">
                 <td><b>SPK/26/CLD/00424</b><span class="sub">Fajar Nugroho · Rush</span></td>
                 <td>Good Issue</td>
                 <td>Foto serah terima + scan BSTKB <span class="sub">Unit terkirim 2 Sep · salesman unggah</span></td>
                 <td><span class="tag hold" data-gi-tag>Setujui GI</span></td>
                 <td>18 jam</td>
               </tr>
-              <tr data-go="afi" data-afi-admin hidden>
+              <tr data-go="afi" data-afi-admin hidden data-tx-dots="budi">
                 <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · Innova Zenix</span></td>
                 <td>AFI</td>
                 <td>Pengajuan nama &amp; alamat STNK masuk <span class="sub">Proses terbit STNK/BPKB menyusul</span></td>
                 <td><span class="tag wait">Tercatat</span></td>
                 <td>—</td>
               </tr>
-              <tr data-go="exc_alamat">
+              <tr data-go="exc_alamat" data-tx-dots="budi">
                 <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · bukti alamat</span></td>
                 <td>Exception dokumen</td>
                 <td>Bukti alamat kedaluwarsa <span class="sub">Waivable · Approval Engine</span></td>
                 <td><span class="tag hold">Cek lalu teruskan</span></td>
                 <td>2j 10m</td>
               </tr>
-              <tr data-go="tx_raize">
+              <tr data-go="tx_raize" data-tx-dots="raize">
                 <td><b>SPK/26/CLD/00423</b><span class="sub">Sarah Wijaya</span></td>
                 <td>Verifikasi dokumen</td>
                 <td>NPWP belum diunggah <span class="sub">Pemilik input: Frontman · bukan waiver</span></td>
@@ -2480,14 +2480,14 @@
                 <td><span class="tag stop">Cocokkan manual</span></td>
                 <td>1 hari</td>
               </tr>
-              <tr data-go="tx_hiace">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura Utama</span></td>
                 <td>Data internal</td>
                 <td>Klasifikasi fleet belum diisi <span class="sub">Hanya bisa diisi Administrasi</span></td>
                 <td><span class="tag wait">Lengkapi</span></td>
                 <td>4 jam</td>
               </tr>
-              <tr data-go="exc_stnk">
+              <tr data-go="exc_stnk" data-tx-dots="maria">
                 <td><b>SPK/26/CLD/00409</b><span class="sub">Maria Sitompul</span></td>
                 <td>Dokumen kendaraan</td>
                 <td>STNK melewati 15 hari <span class="sub">Eskalasi otomatis</span></td>
@@ -2522,7 +2522,7 @@
           <button type="button" data-mgmt-filter="done" aria-pressed="false">Selesai</button>
         </div>
         <div class="order-list" id="mgmtList">
-          <button type="button" class="order-card featured" data-mgmt-case="alamat" data-go="exc_alamat">
+          <button type="button" class="order-card featured" data-mgmt-case="alamat" data-go="exc_alamat" data-tx-dots="budi">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
@@ -2535,7 +2535,7 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-mgmt-case="early" data-go="exc_afi" data-afi-exc="early">
+          <button type="button" class="order-card" data-mgmt-case="early" data-go="exc_afi" data-afi-exc="early" data-tx-dots="budi">
             <div class="thumb">AFI</div>
             <div class="meta">
               <p class="oid">E-26-0418-A · SPK/26/CLD/00418</p>
@@ -2548,7 +2548,7 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-mgmt-case="nobill" data-go="exc_afi" data-afi-exc="nobill">
+          <button type="button" class="order-card" data-mgmt-case="nobill" data-go="exc_afi" data-afi-exc="nobill" data-tx-dots="budi">
             <div class="thumb">BILL</div>
             <div class="meta">
               <p class="oid">E-26-0418-B · SPK/26/CLD/00418</p>
@@ -2561,7 +2561,7 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-mgmt-case="stnk" data-go="exc_stnk">
+          <button type="button" class="order-card" data-mgmt-case="stnk" data-go="exc_stnk" data-tx-dots="maria">
             <div class="thumb">FORT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · H+19</p>
@@ -2655,7 +2655,7 @@
           <h3>Tertahan sekarang</h3>
           <p class="hint" style="padding:0 16px 8px">Contoh lineage yang sama. Baris komersial hanya dibuka — tidak ada tombol setujui 30% atau lunas.</p>
           <div class="order-list" style="padding:0 12px 12px">
-            <button type="button" class="order-card" data-go="transaksi">
+            <button type="button" class="order-card" data-go="transaksi" data-tx-dots="budi">
               <div class="thumb">ZENIX</div>
               <div class="meta">
                 <p class="oid">SPK/26/CLD/00418 · cash</p>
@@ -2668,7 +2668,7 @@
                 <p class="cta">Buka transaksi →</p>
               </div>
             </button>
-            <button type="button" class="order-card" data-go="tx_hiace">
+            <button type="button" class="order-card" data-go="tx_hiace" data-tx-dots="hiace">
               <div class="thumb">HIACE</div>
               <div class="meta">
                 <p class="oid">SPK/26/CLD/00421 · leasing B2B</p>
@@ -2681,7 +2681,7 @@
                 <p class="cta">Buka Hiace →</p>
               </div>
             </button>
-            <button type="button" class="order-card" data-go="exc_alamat">
+            <button type="button" class="order-card" data-go="exc_alamat" data-tx-dots="budi">
               <div class="thumb">ALAMAT</div>
               <div class="meta">
                 <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
@@ -2694,7 +2694,7 @@
                 <p class="cta">Putuskan →</p>
               </div>
             </button>
-            <button type="button" class="order-card" data-go="bill_d">
+            <button type="button" class="order-card" data-go="bill_d" data-tx-dots="dewi">
               <div class="thumb">YARIS</div>
               <div class="meta">
                 <p class="oid">SPK/26/CLD/00426 · cash</p>
@@ -2707,7 +2707,7 @@
                 <p class="cta">Buka billing Dewi →</p>
               </div>
             </button>
-            <button type="button" class="order-card" data-go="exc_stnk">
+            <button type="button" class="order-card" data-go="exc_stnk" data-tx-dots="maria">
               <div class="thumb">FORT</div>
               <div class="meta">
                 <p class="oid">SPK/26/CLD/00409 · H+19</p>
@@ -2738,7 +2738,7 @@
           <button type="button" data-order-filter="done" aria-pressed="false">Selesai</button>
         </div>
         <div class="order-list" id="orderList">
-          <button type="button" class="order-card featured" data-order-status="ongoing" data-go="customer_detail">
+          <button type="button" class="order-card featured" data-order-status="ongoing" data-go="customer_detail" data-tx-dots="budi">
             <div class="thumb">ZENIX</div>
             <div class="meta">
             <p class="oid">28 Agu 2026 · SPK/26/CLD/00418</p>
@@ -2763,7 +2763,7 @@
               <p class="cta">Lihat →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-order-status="done" data-go="order_calya">
+          <button type="button" class="order-card" data-order-status="done" data-go="order_calya" data-tx-dots="calya">
             <div class="thumb done">CALYA</div>
             <div class="meta">
               <p class="oid">18 Nov 2024</p>
@@ -3130,6 +3130,7 @@
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="assets/js/session.js"></script>
+<script src="assets/js/lineage.js"></script>
 <script src="assets/js/mockup.js"></script>
 </body>
 </html>
