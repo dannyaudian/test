@@ -195,6 +195,8 @@
 /* gate list */
 #mockup .gates{list-style:none;margin:0;padding:0}
 #mockup .gates li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:start;padding:10px 16px;border-bottom:1px solid var(--rule-2);font-size:13px}
+#mockup .gates li[data-go]{cursor:pointer}
+#mockup .gates li[data-go]:hover{background:var(--signal-tint)}
 #mockup .gates li:last-child{border-bottom:0}
 #mockup .gates .mark{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;margin-top:1px}
 #mockup .gates .mark.ok{background:var(--flow)}
@@ -395,7 +397,7 @@
 #mockup .order-card .row2{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
 #mockup .order-card .amt{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
 #mockup .order-card .cta{margin:10px 0 0;font-size:12.5px;font-weight:700;color:var(--signal)}
-#mockup .kpi-btn{text-align:left;width:100%;font:inherit;color:inherit;background:var(--surface)}
+#mockup .kpi-btn{text-align:left;width:100%;font:inherit;color:inherit;background:var(--surface);cursor:pointer}
 #mockup .kpi-btn.alert{border-color:#E7C9C9;background:var(--stop-tint)}
 #mockup .integ{
   display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
