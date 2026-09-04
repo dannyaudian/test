@@ -20,7 +20,7 @@
     tx_avanza:'agus',delivery:'agus',
     gi:'fajar',
     tx_fortuner:'maria',exc_stnk:'maria',
-    order_calya:'calya'
+    order_calya:'calya',bukti_serah:'calya'
   };
   var VIEW={
     spk:'spk',spk_baru:'spk',quot:'quot',booking:'quot',so:'so',so2:'so',proses:'spk',
@@ -28,7 +28,7 @@
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
     cashless:'bill',exc_alamat:'afi',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
     tx_hiace:'del',tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
-    tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk'
+    tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'
   };
   function load(k){ return (FAST.load?FAST.load(k):null)||{}; }
   function idx(id){ return STAGES.findIndex(function(s){ return s.id===id; }); }
@@ -111,7 +111,7 @@
       go:{spk:'gi',quot:'gi',so:'gi',afi:'gi',do:'gi',bill:'gi',del:'gi',stnk:'gi'},
       now:fajarNow,
       copy:function(now){
-        return now==='stnk'?'Good Issue tercatat. STNK/BPKB memakai data SPK.':'Terkirim. Good Issue dulu, baru tracking STNK.';
+        return now==='stnk'?'Good Issue tercatat. Paket bukti sama di akun pelanggan.':'Terkirim. Unggah bukti otentik dulu — bukan CCTV dealer.';
       }
     },
     maria:{
@@ -122,7 +122,7 @@
     calya:{
       go:{spk:'order_calya',quot:'order_calya',so:'order_calya',afi:'order_calya',do:'order_calya',bill:'order_calya',del:'order_calya',stnk:'order_calya'},
       now:function(){ return 'done'; },
-      copy:function(){ return 'Selesai. SPK → STNK/BPKB tuntas di akun yang sama.'; }
+      copy:function(){ return 'Selesai. Paket bukti serah terima bisa diunduh — bukan rekaman CCTV.'; }
     }
   };
   function state(id){
