@@ -73,18 +73,9 @@
       </div>
 
       <div data-rail="admin" hidden>
-        <p class="grouplabel">Dokumen</p>
-        <button data-go="admin_spk" aria-current="true">SPK</button>
-        <button data-go="admin_qt">Quotation</button>
-        <button data-go="admin_so">SO</button>
-        <button data-go="admin_do">DO</button>
-        <button data-go="admin_afi">AFI</button>
-        <button data-go="admin_bill">Billing</button>
-        <p class="grouplabel">Kas</p>
-        <button data-go="admin_kwt">Kuitansi</button>
-        <button data-go="admin_pay">Pembayaran</button>
-        <p class="grouplabel">Tindakan</p>
-        <button data-go="verifikasi">Perlu saya<span class="pill">7</span></button>
+        <p class="grouplabel">Administrasi · Cilandak</p>
+        <button data-go="admin_spk" aria-current="true">Buku cabang</button>
+        <button data-go="verifikasi">Perlu saya<span class="pill" data-admin-pill>7</span></button>
         <button data-go="eskalasi">Pengecualian<span class="pill" data-exc-pill>1</span></button>
       </div>
 
@@ -101,6 +92,10 @@
     </aside>
 
     <div>
+      <div class="integ" id="adminStrip" hidden>
+        <p><b>Mode Administrasi.</b> Ini data Frontman yang sama — verifikasi atau lengkapi, jangan ketik ulang.</p>
+        <div class="integ-links"><button type="button" class="btn ghost" data-go="admin_spk" data-admin-home>← Kembali ke list</button></div>
+      </div>
       <!-- ============ BERANDA FRONTMAN ============ -->
       <section class="screen on" id="beranda">
         <div class="screenhead">
@@ -260,8 +255,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
@@ -354,7 +349,17 @@
               </ul>
             </div>
 
-            <div class="box">
+            <div class="box" data-for="admin" hidden>
+              <h3>Tindakan Administrasi</h3>
+              <div class="pad">
+                <p class="hint">Data sudah dari Frontman. Cek bukti, lengkapi yang hanya milik Admin, atau cocokkan pembayaran.</p>
+                <button class="btn" style="width:100%;margin-bottom:8px" data-go="exc_alamat">Cek bukti alamat</button>
+                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="dokumen">Buka document vault</button>
+                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="admin_pay">List pembayaran cabang</button>
+                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="verifikasi">Antrean perlu saya</button>
+              </div>
+            </div>
+            <div class="box" data-for="frontman">
               <h3>Kerjakan sekarang</h3>
               <div class="pad">
                 <p class="hint">Data STNK sudah dari SPK. Jalur normal: billing dan AFI diajukan bersama. Pecah urutan hanya lewat Approval Engine.</p>
@@ -383,8 +388,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
@@ -1286,8 +1291,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
@@ -1355,8 +1360,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
@@ -1573,8 +1578,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
@@ -1776,8 +1781,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
@@ -1801,7 +1806,7 @@
         <div class="screenhead">
           <div>
             <h2 data-book-title>List SPK · Cilandak</h2>
-            <p data-book-lead>Semua SPK cabang. Buka baris ke dokumen yang sama dengan Frontman — bukan ketik ulang.</p>
+            <p data-book-lead>Semua SPK cabang. Buka baris ke data yang sama dengan Frontman — verifikasi, bukan ketik ulang.</p>
           </div>
         </div>
         <nav class="worktabs booktabs" aria-label="List dokumen cabang">
@@ -1821,7 +1826,7 @@
         </label>
         <p class="queue-line" data-book-count></p>
 
-        <div class="box book-panel" id="admin_spk" data-book-panel="spk">
+        <div class="box book-panel" data-book-panel="spk">
           <h3>SPK cabang <span class="side">Satu SPK · satu quotation</span></h3>
           <div class="scroll">
           <table>
@@ -1881,7 +1886,7 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_qt" data-book-panel="qt" hidden>
+        <div class="box book-panel" data-book-panel="qt" hidden>
           <h3>Quotation cabang <span class="side">1 SPK = 1 quotation · 1 baris = 1 SO</span></h3>
           <div class="scroll">
           <table>
@@ -1927,7 +1932,7 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_so" data-book-panel="so" hidden>
+        <div class="box book-panel" data-book-panel="so" hidden>
           <h3>Sales Order cabang <span class="side">Dikonversi dari SPK/quotation, bukan form baru</span></h3>
           <div class="scroll">
           <table>
@@ -1987,7 +1992,7 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_do" data-book-panel="do" hidden>
+        <div class="box book-panel" data-book-panel="do" hidden>
           <h3>Delivery Order cabang <span class="side">Dari SO setelah AFI, bukan ketik unit ulang</span></h3>
           <div class="scroll">
           <table>
@@ -2040,7 +2045,7 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_afi" data-book-panel="afi" hidden>
+        <div class="box book-panel" data-book-panel="afi" hidden>
           <h3>AFI cabang <span class="side">Nama &amp; alamat STNK dari SPK</span></h3>
           <div class="scroll">
           <table>
@@ -2093,7 +2098,7 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_bill" data-book-panel="bill" hidden>
+        <div class="box book-panel" data-book-panel="bill" hidden>
           <h3>Billing cabang <span class="side">Cash ≥30% · leasing full DP — non-waivable</span></h3>
           <div class="scroll">
           <table>
@@ -2146,7 +2151,7 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_kwt" data-book-panel="kwt" hidden>
+        <div class="box book-panel" data-book-panel="kwt" hidden>
           <h3>Kuitansi cabang <span class="side">Satu nomor per pembayaran terverifikasi</span></h3>
           <div class="scroll">
           <table>
@@ -2189,8 +2194,15 @@
           </div>
         </div>
 
-        <div class="box book-panel" id="admin_pay" data-book-panel="pay" hidden>
+        <div class="box book-panel" data-book-panel="pay" hidden>
           <h3>Pembayaran cabang <span class="side">Posted, request, pending, unmatched</span></h3>
+          <div class="order-filters" role="tablist" aria-label="Filter pembayaran" style="margin:12px 16px 0">
+            <button type="button" data-admin-pay-filter="all" aria-pressed="true">Semua</button>
+            <button type="button" data-admin-pay-filter="posted" aria-pressed="false">Posted</button>
+            <button type="button" data-admin-pay-filter="request" aria-pressed="false">Request</button>
+            <button type="button" data-admin-pay-filter="pending" aria-pressed="false">Pending</button>
+            <button type="button" data-admin-pay-filter="unmatched" aria-pressed="false">Unmatched</button>
+          </div>
           <div class="scroll">
           <table id="adminPayTable">
             <thead><tr><th>Waktu</th><th>Referensi</th><th>Kuitansi</th><th>Jenis</th><th>Transaksi</th><th class="num">Nominal</th><th>Status</th></tr></thead>
@@ -2279,20 +2291,10 @@
         <div class="screenhead">
           <div>
             <h2>Perlu saya · verifikasi</h2>
-            <p>Antrean tindakan. List SPK sampai pembayaran di panel kiri. Tidak mengetik ulang data Frontman.</p>
+            <p>Antrean tindakan cabang. Delapan list dokumen ada di Buku cabang. Jangan ketik ulang data Frontman.</p>
           </div>
-          <div class="actions"><button class="btn ghost" data-go="admin_spk">← List SPK</button></div>
+          <div class="actions"><button class="btn ghost" data-go="admin_spk">← Buku cabang</button></div>
         </div>
-        <nav class="worktabs booktabs" aria-label="List dokumen cabang">
-          <button type="button" data-go="admin_spk">SPK</button>
-          <button type="button" data-go="admin_qt">Quotation</button>
-          <button type="button" data-go="admin_so">SO</button>
-          <button type="button" data-go="admin_do">DO</button>
-          <button type="button" data-go="admin_afi">AFI</button>
-          <button type="button" data-go="admin_bill">Billing</button>
-          <button type="button" data-go="admin_kwt">Kuitansi</button>
-          <button type="button" data-go="admin_pay">Pembayaran</button>
-        </nav>
 
         <div class="cards">
           <div class="card"><p class="k">Good Issue menunggu</p><p class="v">1</p><p class="n">Foto + scan BSTKB</p></div>
@@ -2879,8 +2881,8 @@
         </div>
         <nav class="worktabs" aria-label="Isi transaksi">
           <button type="button" data-go="transaksi">Ringkasan</button>
-          <button type="button" data-go="cashless">Bayar</button>
-          <button type="button" data-go="request">Minta bayar</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
           <button type="button" data-go="afi">AFI</button>
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
