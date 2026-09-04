@@ -1620,6 +1620,43 @@
     if(strip) strip.textContent='SO '+meta.so+' · DP wajib '+ (meta.dpLabel||'—') +'. QRIS/CDM/EDC cabang tidak mengganti angka B2B.';
     var kwtNo=document.querySelector('[data-b2b-kwt-no]');
     if(kwtNo) kwtNo.textContent=u.kwtIssued?('Kuitansi: '+(meta.kwt||'terbit')):'Kuitansi: belum terbit';
+    var checks={
+      dl:!!u.contractDownloaded,
+      signed:!!u.signedContract,
+      fotoTtd:!!(u.billing&&u.billing.fotoTtd),
+      fotoSerah:!!(u.billing&&u.billing.fotoSerah),
+      bstkb:!!(u.billing&&u.billing.bstkb),
+      dp:!!u.dpReceived
+    };
+    var miss=[];
+    var missMap={dl:'unduh kontrak',signed:'unggah kontrak TTD',fotoTtd:'foto TTD kontrak',fotoSerah:'foto serah terima',bstkb:'BSTKB',dp:'full DP dari B2B'};
+    Object.keys(checks).forEach(function(k){
+      var li=document.querySelector('[data-b2b-check="'+k+'"]');
+      if(!li) return;
+      var on=checks[k];
+      var mark=li.querySelector('.mark');
+      var tag=li.querySelector('.tag');
+      if(mark){ mark.className='mark '+(on?'ok':'no'); mark.textContent=on?'✓':(missMap[k]?String({dl:1,signed:2,fotoTtd:3,fotoSerah:4,bstkb:5,dp:6}[k]):'–'); }
+      if(tag){ tag.className='tag '+(on?'ok':'wait'); tag.textContent=on?'Ada':'Belum'; }
+      if(!on) miss.push(missMap[k]);
+    });
+    var canBill=typeof FAST.b2bAdminCanBill==='function'?FAST.b2bAdminCanBill(u):false;
+    var block=document.querySelector('[data-b2b-admin-block]');
+    if(block){
+      block.hidden=canBill||!!u.paperlessSent;
+      block.textContent=miss.length?('Belum bisa ditagih. Kurang: '+miss.join(', ')+'.'):'';
+    }
+    var paperBtn=document.querySelector('[data-b2b-paperless]');
+    if(paperBtn) paperBtn.disabled=!canBill || !!u.paperlessSent;
+    var kwtOnly=document.querySelector('[data-b2b-kwt]');
+    if(kwtOnly) kwtOnly.disabled=!u.paperlessSent || !!u.kwtIssued;
+    document.querySelectorAll('[data-b2b-tab-role]').forEach(function(b){
+      var need=b.getAttribute('data-b2b-tab-role');
+      b.hidden = !(currentRole===need || currentRole==='mgmt');
+    });
+    var tab=s.tab||'ringkas';
+    if(currentRole==='frontman' && tab==='tagih') tab='dokumen';
+    if(currentRole==='admin' && tab==='dokumen') tab='tagih';
     var billCard=document.querySelector('[data-b2b-card="bill"]');
     var delCard=document.querySelector('[data-b2b-card="del"]');
     var paperCard=document.querySelector('[data-b2b-card="paper"]');
@@ -1630,13 +1667,13 @@
     if(gateNote){
       gateNote.textContent=sum.back
         ? 'Ada backflow. Frontman lengkapi data — bukan waiver TTD/DP. Approval Engine tidak dibuka.'
-        : 'Billing gate membaca DP wajib dari B2B ('+sum.dp+'/3 diterima). Delivery gate membaca TTD ('+sum.ttd+'/3). Penagihan dan kuitansi ke leasing: Administrasi.';
+        : 'Frontman: unduh/unggah kontrak & bukti. Administrasi menagih hanya jika paket itu lengkap dan full DP B2B sudah dibayar.';
     }
     document.querySelectorAll('[data-b2b-tab]').forEach(function(b){
-      b.setAttribute('aria-current', b.getAttribute('data-b2b-tab')===(s.tab||'ringkas')?'true':'false');
+      b.setAttribute('aria-current', b.getAttribute('data-b2b-tab')===tab?'true':'false');
     });
     document.querySelectorAll('[data-b2b-panel]').forEach(function(p){
-      p.hidden = p.getAttribute('data-b2b-panel')!==(s.tab||'ringkas');
+      p.hidden = p.getAttribute('data-b2b-panel')!==tab;
     });
     document.querySelectorAll('[data-b2b-so]').forEach(function(b){
       var id=b.getAttribute('data-b2b-so');
@@ -1887,7 +1924,7 @@
         u.billing=u.billing||{};
         u.billing[key]=true;
       });
-      toast('Berkas penagihan tersimpan.');
+      toast('Bukti Frontman tersimpan.');
     });
   });
   var dlBtn=document.querySelector('[data-b2b-dl-contract]');
@@ -1899,7 +1936,8 @@
       return;
     }
     leasingContractPdf(b2bSoMeta(s.selected).so);
-    toast('Kontrak leasing diunduh. Minta customer TTD, lalu unggah kembali.');
+    patchB2b(function(st){ st.units[st.selected].contractDownloaded=true; });
+    toast('Kontrak leasing diunduh. Minta customer TTD, lalu unggah kembali di Kerja Frontman.');
   });
   var resub=document.querySelector('[data-b2b-resubmit]');
   if(resub) resub.addEventListener('click',function(){
@@ -1955,12 +1993,8 @@
   if(paper) paper.addEventListener('click',function(){
     var s=FAST.b2bLoad();
     var u=s.units[s.selected]||{};
-    if(!u.dpReceived){
-      toast('Billing gate masih tutup. DP wajib dari B2B belum diterima.');
-      return;
-    }
-    if(!FAST.b2bBillingComplete(u)){
-      toast('Minta Frontman lengkapi BSTKB, foto serah terima, dan foto TTD kontrak.');
+    if(!FAST.b2bAdminCanBill(u)){
+      toast('Belum bisa menagih. Frontman harus unduh kontrak, unggah kontrak TTD, foto TTD, foto serah terima, dan BSTKB — plus full DP dari B2B sudah dibayar.');
       return;
     }
     patchB2b(function(st){

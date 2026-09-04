@@ -41,7 +41,10 @@ FAST.b2bDocsComplete = function (u) {
 };
 FAST.b2bBillingComplete = function (u) {
   var b = (u && u.billing) || {};
-  return !!(b.bstkb && b.fotoSerah && b.fotoTtd);
+  return !!(u.contractDownloaded && u.signedContract && b.bstkb && b.fotoSerah && b.fotoTtd);
+};
+FAST.b2bAdminCanBill = function (u) {
+  return !!(u && u.dpReceived && FAST.b2bBillingComplete(u));
 };
 FAST.b2bDerive = function (u) {
   u = u || {};
@@ -66,6 +69,7 @@ FAST.b2bDefault = function () {
         backflowReason: '',
         docs: { ktp: true, npwp: true, siup: true, spk: true },
         contractFromLeasing: true,
+        contractDownloaded: false,
         signedContract: false,
         billing: { bstkb: false, fotoSerah: false, fotoTtd: false },
         dpReceived: false,
@@ -79,6 +83,7 @@ FAST.b2bDefault = function () {
         backflowReason: 'NPWP badan tidak terbaca. Unggah ulang, lalu kirim kembali ke leasing.',
         docs: { ktp: true, npwp: false, siup: true, spk: true },
         contractFromLeasing: false,
+        contractDownloaded: false,
         signedContract: false,
         billing: { bstkb: false, fotoSerah: false, fotoTtd: false },
         dpReceived: false,
@@ -92,6 +97,7 @@ FAST.b2bDefault = function () {
         backflowReason: '',
         docs: { ktp: false, npwp: false, siup: false, spk: true },
         contractFromLeasing: false,
+        contractDownloaded: false,
         signedContract: false,
         billing: { bstkb: false, fotoSerah: false, fotoTtd: false },
         dpReceived: false,
