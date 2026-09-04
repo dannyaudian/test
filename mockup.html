@@ -104,11 +104,11 @@
             <p>Cilandak · 2 Sep 2026. Buka kartu, kerjakan satu tindakan.</p>
           </div>
           <div class="actions">
-            <button class="btn">Buat SPK baru</button>
+            <button class="btn" data-go="spk_baru">Buat SPK baru</button>
           </div>
         </div>
 
-        <p class="queue-line"><b>8 perlu Anda</b> · 1 SPK baru · 1 AFI STNK · 1 ajukan kirim · 1 Good Issue · 1 exception</p>
+        <p class="queue-line"><b>8 perlu Anda</b> · 1 isi SPK dari awal · 1 AFI STNK · 1 ajukan kirim · 1 Good Issue · 1 exception</p>
 
         <label class="order-search" for="txSearch">
           <span class="sr-only">Cari transaksi</span>
@@ -122,17 +122,17 @@
         </div>
 
         <div class="order-list" id="txList">
-          <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-go="spk">
+          <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-go="spk_baru">
             <div class="thumb">YARIS</div>
             <div class="meta">
-              <p class="oid" data-dewi-oid>SPK/26/CLD/00426 · baru tersimpan</p>
+              <p class="oid" data-dewi-oid>Draft · belum nomor SPK</p>
               <strong class="oname">Dewi Lestari · Yaris</strong>
-              <p class="spec" data-dewi-spec>Tindakan: SPK → quotation → booking cashless</p>
+              <p class="spec" data-dewi-spec>Tindakan: isi pemesan, STNK, unit, lalu unggah dokumen</p>
               <div class="row2">
-                <span class="tag wait" data-dewi-tag>Belum bayar</span>
-                <span class="amt" data-dewi-amt>OTR Depok</span>
+                <span class="tag wait" data-dewi-tag>Isi dari awal</span>
+                <span class="amt" data-dewi-amt>Belum OTR</span>
               </div>
-              <p class="cta" data-dewi-cta>Data pemesan · STNK · unit →</p>
+              <p class="cta" data-dewi-cta>Input &amp; unggah →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-go="transaksi">
@@ -484,6 +484,131 @@
           <div class="card"><p class="k">Booking fee</p><p class="v" style="font-size:18px">Belum ditagih</p><p class="n">Setelah identitas valid</p></div>
         </div>
         <div class="box"><h3>Tindakan</h3><div class="pad"><p>Unggah NPWP pada data customer SPK. Bukan jalur Approval Engine. Booking fee baru ditagih setelah identitas valid.</p><p><button class="btn" data-go="dokumen">Buka vault</button></p></div></div>
+      </section>
+
+      <section class="screen" id="spk_baru">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Langkah 0 · sebelum nomor SPK</p>
+            <h2>Isi SPK dari awal</h2>
+            <p>Frontman menginput dan mengunggah sekali di sumber. Booking fee belum ditagih. Quotation menyusul setelah SPK tersimpan.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="beranda">← Daftar</button>
+            <button class="btn ghost" data-spk-reset>Mulai ulang</button>
+          </div>
+        </div>
+        <nav class="worktabs" aria-label="Isi SPK">
+          <button type="button" data-spk-step="pemesan">1 · Pemesan</button>
+          <button type="button" data-spk-step="stnk">2 · STNK</button>
+          <button type="button" data-spk-step="unit">3 · Unit</button>
+          <button type="button" data-spk-step="docs">4 · Unggah</button>
+        </nav>
+        <div class="cards">
+          <div class="card"><p class="k">Data pemesan</p><p class="v" style="font-size:18px" data-draft-pemesan>Kosong</p><p class="n">Nama, NIK, HP, alamat, email</p></div>
+          <div class="card"><p class="k">Data STNK</p><p class="v" style="font-size:18px" data-draft-stnk>Kosong</p><p class="n">Nama, alamat, kota → area PO</p></div>
+          <div class="card"><p class="k">Unit &amp; bayar</p><p class="v" style="font-size:18px" data-draft-unit>Kosong</p><p class="n">Tipe, warna, tunai/leasing, aksesoris</p></div>
+          <div class="card" data-draft-docs-card><p class="k">Dokumen</p><p class="v" style="font-size:18px" data-draft-docs>0 / 7</p><p class="n">Entri pemesan + pengajuan STNK/BPKB</p></div>
+        </div>
+        <p class="note">Wajib lengkap sebelum SPK punya nomor. Kekurangan identitas (misalnya NPWP) bukan Approval Engine — lengkapi di sini. Booking fee non-waivable ditagih <b>setelah</b> SPK tersimpan.</p>
+
+        <div class="box" data-spk-panel="pemesan">
+          <h3>1 · Data pemesan <span class="side">Diinput Frontman · F</span></h3>
+          <div class="form">
+            <p class="hint">Ambil dari KTP/KK yang akan diunggah di langkah 4. Jangan tunda ke SO.</p>
+            <div class="fgrid">
+              <div class="field"><label>Nama pemesan</label><input data-draft-f="nama" placeholder="Sesuai KTP" autocomplete="off"></div>
+              <div class="field"><label>NIK</label><input data-draft-f="nik" placeholder="16 digit" inputmode="numeric" autocomplete="off"></div>
+              <div class="field"><label>HP / WhatsApp</label><input data-draft-f="hp" placeholder="08…" inputmode="tel" autocomplete="off"></div>
+              <div class="field"><label>Email</label><input data-draft-f="email" placeholder="opsional tapi disarankan" autocomplete="off"></div>
+            </div>
+            <div class="field"><label>Alamat pemesan</label><textarea data-draft-f="alamat" placeholder="Jalan, kelurahan, kecamatan, kota, kode pos"></textarea></div>
+            <p class="hint">NPWP pemesan diunggah di langkah 4. Tanpa NPWP, data gate menahan — bukan waiver.</p>
+          </div>
+          <div class="formfoot">
+            <span class="hint">Contoh kasus: Dewi Lestari, Cilandak.</span>
+            <button type="button" class="btn" data-spk-fill="pemesan">Isi dari KTP Dewi</button>
+            <button type="button" class="btn ghost" data-spk-step="stnk">Lanjut STNK →</button>
+          </div>
+        </div>
+
+        <div class="box" data-spk-panel="stnk" hidden>
+          <h3>2 · Nama &amp; alamat STNK <span class="side">Dipakai AFI · jangan ketik ulang nanti</span></h3>
+          <div class="form">
+            <p class="hint">Kabupaten/kota STNK menghasilkan area PO dan harga OTR. Bukan diketik Frontman.</p>
+            <div class="seg" role="group" aria-label="Nama STNK">
+              <button type="button" data-spk-same="0" aria-pressed="true">Berbeda dari pemesan</button>
+              <button type="button" data-spk-same="1" aria-pressed="false">Sama dengan pemesan</button>
+            </div>
+            <div class="fgrid" style="margin-top:14px">
+              <div class="field"><label>Nama STNK</label><input data-draft-f="stnkNama" placeholder="Pemilik BPKB" autocomplete="off"></div>
+              <div class="field"><label>Kabupaten / kota STNK</label><input data-draft-f="stnkKota" placeholder="Contoh Kota Depok" autocomplete="off"></div>
+            </div>
+            <div class="field"><label>Alamat STNK</label><textarea data-draft-f="stnkAlamat" placeholder="Alamat pada pengajuan STNK"></textarea></div>
+            <div class="fgrid">
+              <div class="field"><label>Provinsi</label><input data-draft-po="prov" value="—" readonly></div>
+              <div class="field"><label>Area PO</label><input data-draft-po="po" value="—" readonly></div>
+            </div>
+            <p class="hint" data-spk-same-hint>Nama STNK berbeda: unggah KTP atas nama STNK, bukti alamat STNK, dan pernyataan di langkah 4.</p>
+          </div>
+          <div class="formfoot">
+            <span class="hint">Contoh: Andi Pratama · Kota Depok → area PO Depok.</span>
+            <button type="button" class="btn" data-spk-fill="stnk">Isi STNK Dewi</button>
+            <button type="button" class="btn ghost" data-spk-step="unit">Lanjut unit →</button>
+          </div>
+        </div>
+
+        <div class="box" data-spk-panel="unit" hidden>
+          <h3>3 · Unit, aksesoris, cara bayar <span class="side">Dari master kendaraan</span></h3>
+          <div class="form">
+            <p class="hint">Tipe dari master. OTR muncul setelah kota STNK ada. Booking fee unit menyusul setelah SPK tersimpan — non-waivable.</p>
+            <div class="seg" role="group" aria-label="Metode bayar">
+              <button type="button" data-spk-pay="cash" aria-pressed="true">Tunai</button>
+              <button type="button" data-spk-pay="lease" aria-pressed="false">Leasing</button>
+            </div>
+            <p class="hint" data-spk-pay-hint style="margin-top:10px">Tunai: billing ≥30% dan delivery lunas, keduanya non-waivable. Belum ditagih di langkah ini.</p>
+            <div class="fgrid">
+              <div class="field"><label>Tipe unit 1</label><input data-draft-f="tipe" placeholder="Pilih dari master" autocomplete="off"></div>
+              <div class="field"><label>Warna</label><input data-draft-f="warna" placeholder="Warna unit" autocomplete="off"></div>
+              <div class="field"><label>Unit 2 (opsional)</label><input data-draft-f="tipe2" placeholder="Kosongkan jika 1 unit" autocomplete="off"></div>
+              <div class="field"><label>Aksesoris</label><input data-draft-f="aksesoris" placeholder="Paket cabang" autocomplete="off"></div>
+            </div>
+            <div class="fgrid">
+              <div class="field"><label>OTR unit 1</label><input data-draft-po="otr" value="Menunggu kota STNK" readonly></div>
+              <div class="field"><label>Minimum booking fee</label><input data-draft-po="bf" value="Dari master unit, setelah SPK" readonly></div>
+            </div>
+          </div>
+          <div class="formfoot">
+            <span class="hint">Contoh: Yaris + Agya, tunai, aksesoris cabang.</span>
+            <button type="button" class="btn" data-spk-fill="unit">Isi unit Dewi</button>
+            <button type="button" class="btn ghost" data-spk-step="docs">Lanjut unggah →</button>
+          </div>
+        </div>
+
+        <div class="box" data-spk-panel="docs" hidden>
+          <h3>4 · Unggah dokumen <span class="side">Sekali di SPK, dipakai AFI/DO</span></h3>
+          <div class="pad">
+            <p class="hint">Administrasi memverifikasi, bukan unggah ulang. File di mockup ini simulasi — ketuk Unggah.</p>
+          </div>
+          <div class="pad" style="padding-bottom:0"><p class="hint" style="margin:0"><b>Dokumen entri</b> · identitas pemesan</p></div>
+          <div class="docs">
+            <div class="doc miss" data-spk-doc="ktp"><b>KTP pemesan</b><p class="meta">Wajib · data gate</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktp">Unggah</button></div>
+            <div class="doc miss" data-spk-doc="kk"><b>Kartu Keluarga</b><p class="meta">Wajib · data gate</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="kk">Unggah</button></div>
+            <div class="doc miss" data-spk-doc="npwp"><b>NPWP pemesan</b><p class="meta">Wajib · bukan waiver</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="npwp">Unggah</button></div>
+            <div class="doc miss" data-spk-doc="alamat"><b>Bukti alamat pemesan</b><p class="meta">Wajib · waivable hanya jika kedaluwarsa</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="alamat">Unggah</button></div>
+          </div>
+          <div class="pad" style="padding-bottom:0"><p class="hint" style="margin:0"><b>Dokumen pengajuan STNK / BPKB</b> · diunggah di SPK, dipakai AFI</p></div>
+          <div class="docs">
+            <div class="doc miss" data-spk-doc="ktpStnk"><b>KTP atas nama STNK</b><p class="meta">Wajib jika nama berbeda</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktpStnk">Unggah</button></div>
+            <div class="doc miss" data-spk-doc="kkStnk"><b>KK atas nama STNK</b><p class="meta">Boleh pakai ulang KK pemesan</p><span class="tag mute">Opsional</span><button type="button" class="btn ghost" style="width:100%;margin-top:10px" data-spk-up="kkStnk">Pakai ulang KK</button></div>
+            <div class="doc miss" data-spk-doc="alamatStnk"><b>Bukti alamat STNK</b><p class="meta">Wajib · kota harus sama dengan data STNK</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="alamatStnk">Unggah</button></div>
+            <div class="doc miss" data-spk-doc="pernyataan" data-spk-need-diff><b>Pernyataan nama STNK</b><p class="meta">Wajib jika nama ≠ pemesan</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="pernyataan">Unggah</button></div>
+          </div>
+          <div class="formfoot">
+            <span class="hint" data-spk-save-hint>Lengkapi keempat langkah. Surat kuasa dan BSTKB bukan di sini — menyusul delivery / GI.</span>
+            <button type="button" class="btn" data-spk-save disabled>Simpan SPK</button>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="spk">
@@ -884,15 +1009,19 @@
         <div class="screenhead">
           <div>
             <h2>Proses utuh · Dewi Lestari</h2>
-            <p>SPK → quotation → SO → AFI → DO → billing → delivery → STNK/BPKB. Cashless menempel di booking fee dan pelunasan.</p>
+            <p>Isi &amp; unggah di SPK dulu, baru quotation → SO → AFI → DO → billing → delivery → STNK/BPKB. Cashless menempel di booking fee dan pelunasan.</p>
           </div>
-          <div class="actions"><button class="btn ghost" data-go="beranda">← Daftar</button></div>
+          <div class="actions">
+            <button class="btn ghost" data-go="beranda">← Daftar</button>
+            <button class="btn" data-go="spk_baru">Isi SPK dari awal</button>
+          </div>
         </div>
         <nav class="proc" data-proc="proses" aria-label="Proses transaksi"></nav>
         <div class="box">
           <h3>Urutan</h3>
           <ul class="gates">
-            <li><span class="mark ok">1</span><div>SPK<span class="why">Pemesan, STNK, unit, dokumen. Satu SPK.</span></div><button class="btn ghost" data-go="spk">Buka</button></li>
+            <li><span class="mark ok">0</span><div>Isi &amp; unggah SPK<span class="why">Pemesan, STNK, unit, dokumen. Baru dapat nomor SPK.</span></div><button class="btn ghost" data-go="spk_baru">Dari awal</button></li>
+            <li><span class="mark ok">1</span><div>SPK tersimpan<span class="why">Pemesan, STNK, unit, dokumen. Satu SPK. Booking fee belum.</span></div><button class="btn ghost" data-go="spk">Buka</button></li>
             <li><span class="mark ok">2</span><div>Quotation<span class="why">1 SPK = 1 QT. Banyak unit = banyak SO. Ubah QT = semua SO berubah.</span></div><button class="btn ghost" data-go="quot">Buka</button></li>
             <li><span class="mark idle">3</span><div>Cashless booking<span class="why">QRIS / CDM / tautan / EDC Frontman. Meet → SO baris itu.</span></div><button class="btn ghost" data-go="booking">Bayar</button></li>
             <li><span class="mark idle">4</span><div>Sales Order<span class="why">Per unit. Data dari SPK + harga quotation.</span></div><button class="btn ghost" data-go="so">Buka</button></li>
