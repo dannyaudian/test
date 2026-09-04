@@ -472,6 +472,14 @@
     if(screenRole[hash]) applyRole(screenRole[hash]);
     show(hash);
   }
+  window.addEventListener('hashchange', function(){
+    var h=(location.hash||'').replace('#','');
+    if(h==='admin_tx') h='admin_spk';
+    if(h && (document.getElementById(h) || ADMIN_BOOK[h])){
+      if(screenRole[h]) applyRole(screenRole[h]);
+      show(h);
+    }
+  });
 
   var orderFilter='all';
   function filterOrders(){
@@ -1203,8 +1211,9 @@
   var afiExcKind='early';
   var afiKindLabel={none:'Standar · tanpa pilih nomor',pilih:'Pilih nomor',ganjil:'Plat ganjil',genap:'Plat genap'};
   function afiKindText(s){
+    var labels={none:'Standar · tanpa pilih nomor',pilih:'Pilih nomor',ganjil:'Plat ganjil',genap:'Plat genap'};
     var k=(s&&s.kind)||'none';
-    var label=afiKindLabel[k]||afiKindLabel.none;
+    var label=labels[k]||labels.none;
     if(k==='pilih' && s && s.plate) label='Pilih nomor · '+s.plate;
     return label;
   }
