@@ -11,8 +11,9 @@
     {id:'stnk',label:'STNK'}
   ];
   var SCREEN_TX={
-    spk:'dewi',spk_baru:'dewi',quot:'dewi',booking:'dewi',so:'dewi',so2:'dewi',proses:'dewi',
+    spk:'dewi',spk_baru:'dewi',quot:'dewi',booking:'dewi',so:'dewi',proses:'dewi',
     afi_d:'dewi',do:'dewi',bill_d:'dewi',kirim_d:'dewi',stnk_d:'dewi',
+    so2:'agya',
     transaksi:'budi',afi:'budi',dokumen:'budi',request:'budi',bayar:'budi',
     exc_alamat:'budi',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
     tx_hiace:'hiace',
@@ -48,6 +49,10 @@
     if(!(dewiDraft().saved)) return 'spk';
     return 'quot';
   }
+  function dewiGo(){
+    var saved=!!dewiDraft().saved;
+    return {spk:saved?'spk':'spk_baru',quot:'quot',so:'so',afi:'afi_d',do:'do',bill:'bill_d',del:'kirim_d',stnk:'stnk_d'};
+  }
   function budiNow(){
     var a=load(FAST.AFI_KEY);
     var live=load(FAST.KEY);
@@ -66,45 +71,52 @@
   }
   var CASES={
     dewi:{
-      go:function(){
-        var saved=!!dewiDraft().saved;
-        return {spk:saved?'spk':'spk_baru',quot:'quot',so:'so',afi:'afi_d',do:'do',bill:'bill_d',del:'kirim_d',stnk:'stnk_d'};
-      },
+      go:dewiGo,
       now:dewiNow,
       copy:function(now){
         if(now==='spk') return 'Isi & unggah dulu. Baru dapat nomor SPK. Booking fee menyusul.';
-        if(now==='quot') return 'SPK tersimpan. Quotation & booking fee menyusul — fee non-waivable.';
-        if(now==='afi') return 'SO terbuka. AFI memakai nama/alamat STNK dari SPK.';
-        if(now==='do') return 'AFI terkirim. DO gudang menyusul.';
-        if(now==='bill') return 'DO ada. Billing cash ≥30% non-waivable.';
-        return 'Jejak Dewi · SPK/26/CLD/00426 sampai STNK/BPKB.';
+        if(now==='quot') return 'SPK tersimpan. Booking cashless baris Yaris — fee non-waivable.';
+        if(now==='afi') return 'SO Yaris terbuka. AFI memakai nama/alamat STNK dari SPK. Cashless pelunasan menempel.';
+        if(now==='do') return 'AFI terkirim. DO gudang menyusul. Kanal bayar tetap sama.';
+        if(now==='bill') return 'DO ada. Billing cash ≥30% non-waivable. Bayar di Digiroom atau cabang.';
+        if(now==='del') return 'Billing jalan. Kirim cash tunggu lunas — cashless di tahap ini.';
+        return 'Jejak Dewi · SO Yaris 4500091426 sampai STNK/BPKB.';
       }
     },
+    agya:{
+      go:function(){
+        var g=dewiGo();
+        g.so='so2';
+        return g;
+      },
+      now:function(){ return 'quot'; },
+      copy:function(){ return 'SO 4500091428 tertahan booking fee baris Agya. Bukan jejak SO Yaris.'; }
+    },
     budi:{
-      go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'afi',do:'afi',bill:'afi',del:'cashless',stnk:'transaksi'},
+      go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'afi',do:'afi',bill:'cashless',del:'cashless',stnk:'transaksi'},
       now:budiNow,
       copy:function(now){
-        if(now==='afi') return 'SO ada. Billing + AFI berpasangan. Pelunasan cash tetap non-waivable.';
-        if(now==='bill') return 'Billing/AFI berjalan. Kirim tertahan sampai lunas.';
+        if(now==='afi') return 'SO 4500091238 ada. Billing + AFI berpasangan. Cashless pelunasan di tahap ini.';
+        if(now==='bill') return 'Billing/AFI berjalan. Bayar sisa di cashless — kirim tertahan sampai lunas.';
         if(now==='del') return 'Lunas atau AFI sudah. Delivery cash tetap tunggu AR Open Rp 0.';
-        return 'Jejak Budi · SPK/26/CLD/00418 sampai STNK/BPKB.';
+        return 'Jejak Budi · satu SO 4500091238 sampai STNK/BPKB.';
       }
     },
     hiace:{
       go:{spk:'tx_hiace',quot:'tx_hiace',so:'tx_hiace',afi:'tx_hiace',do:'tx_hiace',bill:'tx_hiace',del:'tx_hiace',stnk:'tx_hiace'},
       now:function(){ return 'del'; },
-      copy:function(){ return 'SO leasing ada. Kirim tertahan kontrak TTD dari B2B — bukan waiver.'; }
+      copy:function(){ return 'Tiga SO terpisah. Kirim tiap baris tertahan TTD B2B — bukan cashless cabang.'; }
     },
     raize:{
       go:{spk:'tx_raize',quot:'tx_raize',so:'tx_raize',afi:'tx_raize',do:'tx_raize',bill:'tx_raize',del:'tx_raize',stnk:'tx_raize'},
       now:function(){ return 'spk'; },
-      copy:function(){ return 'SPK tertahan NPWP. Data gate, bukan Approval Engine. Booking fee belum.'; }
+      copy:function(){ return 'SPK tertahan NPWP. Booking cashless belum ditagih. Data gate, bukan Approval Engine.'; }
     },
     agus:{
       go:{spk:'tx_avanza',quot:'tx_avanza',so:'tx_avanza',afi:'tx_avanza',do:'delivery',bill:'tx_avanza',del:'delivery',stnk:'tx_avanza'},
       now:agusNow,
       copy:function(now){
-        return now==='stnk'?'Pengiriman diajukan. STNK/BPKB menyusul data SPK yang sama.':'Lunas. Jejak di tahap kirim — ajukan delivery dari SPK.';
+        return now==='stnk'?'Pengiriman diajukan. STNK/BPKB menyusul data SPK yang sama.':'Lunas. Satu SO · ajukan delivery. Cashless sudah selesai.';
       }
     },
     fajar:{
@@ -117,7 +129,7 @@
     maria:{
       go:{spk:'tx_fortuner',quot:'tx_fortuner',so:'tx_fortuner',afi:'tx_fortuner',do:'tx_fortuner',bill:'tx_fortuner',del:'tx_fortuner',stnk:'exc_stnk'},
       now:function(){ return 'stnk'; },
-      copy:function(){ return 'Delivered & lunas. STNK hari ke-19 — eskalasi, bukan waiver lunas.'; }
+      copy:function(){ return 'Delivered & lunas. STNK hari ke-19 — eskalasi Kepala Cabang, bukan waiver lunas.'; }
     },
     calya:{
       go:{spk:'order_calya',quot:'order_calya',so:'order_calya',afi:'order_calya',do:'order_calya',bill:'order_calya',del:'order_calya',stnk:'order_calya'},
@@ -133,6 +145,7 @@
     var done=allDone?{spk:1,quot:1,so:1,afi:1,do:1,bill:1,del:1,stnk:1}:doneBefore(now);
     if(id==='hiace'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
     if(id==='raize'){ done={}; }
+    if(id==='agya'){ done={spk:1}; }
     if(id==='fajar' && now==='del'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
     if(id==='agus' && now==='del'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
     if(id==='maria'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1,del:1}; }
@@ -144,6 +157,7 @@
     var hold=(!allDone && (now==='del'||now==='spk'||now==='stnk'||now==='quot'))?now:null;
     if(id==='raize') hold='spk';
     if(id==='hiace') hold='del';
+    if(id==='agya') hold='quot';
     if(id==='maria') hold='stnk';
     return {id:id, now:allDone?'stnk':now, done:done, hold:hold, allDone:allDone, go:typeof c.go==='function'?c.go():c.go, copy:c.copy(allDone?'stnk':now)};
   }
@@ -184,10 +198,16 @@
   var showFn=null;
   function screenTx(id, payJob){
     if(id==='cashless'||id==='digiroom'||id==='booking'){
+      if(payJob==='agya') return 'agya';
       if(payJob==='booking'||payJob==='dewi') return 'dewi';
       return 'budi';
     }
     return SCREEN_TX[id]||null;
+  }
+  function payView(sid, payJob, tx){
+    if(sid==='booking'||payJob==='booking'||payJob==='agya') return 'quot';
+    if(payJob==='dewi'||tx==='dewi') return 'bill';
+    return 'bill';
   }
   function ensureNav(screen, tx){
     var nav=screen.querySelector(':scope > .proc, :scope > .worktabs + .proc');
@@ -267,7 +287,7 @@
       var pack=ensureNav(screen, tx);
       if(!pack) return;
       var st=state(tx);
-      var view=sid==='booking'?'quot':(tx==='dewi'?'quot':'bill');
+      var view=payView(sid, payJob, tx);
       fillNav(pack.nav, st, view, showFn);
       if(pack.note) pack.note.textContent=st.copy;
     });
@@ -276,7 +296,7 @@
       var tx=screenTx(current, payJob)||(on&&on.querySelector('[data-tx-track]')&&on.querySelector('[data-tx-track]').getAttribute('data-tx-track'));
       if(on && tx){
         var st=state(tx);
-        var view=VIEW[current]||st.now;
+        var view=VIEW[current]||payView(current, payJob, tx)||st.now;
         var nav=on.querySelector('.proc');
         if(nav) fillNav(nav, st, view, showFn);
       }

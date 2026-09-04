@@ -26,7 +26,7 @@
     <!-- ================= MOCKUP ================= -->
     <div class="pagehead">
       <h1>FAST</h1>
-      <p>Proses utuh: SPK → quotation → Sales Order → AFI → DO → billing → delivery → STNK/BPKB. Cashless (QRIS, CDM, tautan, EDC Frontman) di booking fee dan pelunasan, di transaksi yang sama.</p>
+      <p>Proses utuh: SPK → quotation → satu Sales Order per baris → AFI → DO → billing → delivery → STNK/BPKB. Cashless menempel di setiap tahap yang butuh dana (QRIS, CDM, tautan, EDC Frontman).</p>
     </div>
   <nav class="journey wrap-pad" aria-label="Di dalam aplikasi">
     <a class="on" href="#beranda">Transaksi</a>
@@ -80,9 +80,15 @@
       </div>
 
       <div data-rail="mgmt" hidden>
-        <p class="grouplabel">Management · Kepala Cabang</p>
-        <button data-go="mgmt_inbox" aria-current="true">Antrean keputusan<span class="pill" data-mgmt-pill>4</span></button>
-        <button data-go="dashboard">Cabang</button>
+        <p class="grouplabel" data-mgmt-label>Management · Kepala Administrasi</p>
+        <div class="seat-picks" role="tablist" aria-label="Kursi management">
+          <button type="button" data-mgmt-seat="ka" aria-pressed="true">Kepala Administrasi</button>
+          <button type="button" data-mgmt-seat="kc" aria-pressed="false">Kepala Cabang</button>
+          <button type="button" data-mgmt-seat="abh" aria-pressed="false">Area Business Head</button>
+          <button type="button" data-mgmt-seat="om" aria-pressed="false">Operation Manager</button>
+        </div>
+        <button data-go="mgmt_inbox" aria-current="true">Antrean<span class="pill" data-mgmt-pill>4</span></button>
+        <button data-go="dashboard">Volume cabang / area</button>
       </div>
 
       <div data-rail="cust" hidden>
@@ -101,14 +107,14 @@
         <div class="screenhead">
           <div>
             <h2>Transaksi saya</h2>
-            <p>Cilandak · 2 Sep 2026. Buka kartu, kerjakan satu tindakan.</p>
+            <p>Cilandak · 2 Sep 2026. Satu baris = satu Sales Order (atau satu tindakan pada SO itu).</p>
           </div>
           <div class="actions">
             <button class="btn" data-go="spk_baru">Buat SPK baru</button>
           </div>
         </div>
 
-        <p class="queue-line"><b>8 perlu Anda</b> · 1 isi SPK dari awal · 1 AFI STNK · 1 ajukan kirim · 1 Good Issue · 1 exception</p>
+        <p class="queue-line"><b>11 baris</b> · tiap SO sendiri · 1 isi SPK · 1 AFI · 1 kirim · 1 GI · 1 exception</p>
 
         <label class="order-search" for="txSearch">
           <span class="sr-only">Cari transaksi</span>
@@ -174,17 +180,56 @@
               <p class="cta">Buka pengajuan →</p>
             </div>
           </button>
+          <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="agya" data-go="so2">
+            <div class="thumb">AGYA</div>
+            <div class="meta">
+              <p class="oid">SO 4500091428 · baris QT 2</p>
+              <strong class="oname">Dewi Lestari · Agya</strong>
+              <p class="spec">Tindakan: booking fee baris ini · bukan SO Yaris</p>
+              <div class="row2">
+                <span class="tag wait">SO tertahan booking</span>
+                <span class="amt">Rp 2.000.000</span>
+              </div>
+              <p class="cta">Booking Agya →</p>
+            </div>
+          </button>
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
             <div class="thumb">HIACE</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00421 · leasing</p>
-              <strong class="oname">PT Danapura · Hiace × 3</strong>
-              <p class="spec">Tindakan: pantau kontrak TTD</p>
+              <p class="oid">SO 4500091288 · unit 1/3</p>
+              <strong class="oname">PT Danapura · Hiace Premio</strong>
+              <p class="spec">Leasing · TTD B2B · bukan cashless cabang</p>
               <div class="row2">
                 <span class="tag wait">Kontrak belum TTD</span>
-                <span class="amt">Rp 1.045.000.000</span>
+                <span class="amt">Rp 348.400.000</span>
               </div>
-              <p class="cta">Lanjutkan →</p>
+              <p class="cta">Buka SO →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
+            <div class="thumb">HIACE</div>
+            <div class="meta">
+              <p class="oid">SO 4500091289 · unit 2/3</p>
+              <strong class="oname">PT Danapura · Hiace Premio</strong>
+              <p class="spec">SO sendiri · SPK/QT yang sama</p>
+              <div class="row2">
+                <span class="tag wait">Kontrak belum TTD</span>
+                <span class="amt">Rp 348.300.000</span>
+              </div>
+              <p class="cta">Buka SO →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace">
+            <div class="thumb">HIACE</div>
+            <div class="meta">
+              <p class="oid">SO 4500091290 · unit 3/3</p>
+              <strong class="oname">PT Danapura · Hiace Premio</strong>
+              <p class="spec">SO sendiri · DP dari B2B</p>
+              <div class="row2">
+                <span class="tag wait">Kontrak belum TTD</span>
+                <span class="amt">Rp 348.300.000</span>
+              </div>
+              <p class="cta">Buka SO →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="raize" data-go="tx_raize">
@@ -261,14 +306,12 @@
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
-        <ol class="path" aria-label="Status">
-          <li class="done">SPK</li>
-          <li class="done">Booking</li>
-          <li class="now" data-afi-step="pair">Billing &amp; AFI</li>
-          <li>Kirim</li>
-          <li>STNK</li>
-        </ol>
-
+        <div class="paystrip">
+          <b>Cashless pelunasan</b>
+          <span class="hint" style="margin:0">SO 4500091238 · QRIS · CDM · tautan · EDC Frontman</span>
+          <button class="btn" data-go="cashless" data-fm-only data-pay-job="lunas">Bayar di cabang</button>
+          <button class="btn ghost" data-go="digiroom" data-pay-job="lunas" data-role="cust">Digiroom</button>
+        </div>
         <div class="split">
           <div>
             <div class="box">
@@ -394,8 +437,13 @@
           <button type="button" data-go="dokumen">Dokumen</button>
           <button type="button" data-go="exc_alamat">Pengecualian</button>
         </nav>
+        <div class="paystrip">
+          <b>Cashless pelunasan</b>
+          <span class="hint" style="margin:0">Sisa AR Open · kanal yang sama di tiap tahap</span>
+          <button class="btn" data-go="cashless" data-fm-only data-pay-job="lunas">Bayar di cabang</button>
+          <button class="btn ghost" data-go="digiroom" data-pay-job="lunas" data-role="cust">Digiroom</button>
+        </div>
         <div class="cards">
-          <div class="card"><p class="k">Data STNK</p><p class="v" style="font-size:18px">Lengkap</p><p class="n">Dari SPK · tidak ketik ulang</p></div>
           <div class="card"><p class="k">Billing cash</p><p class="v" style="font-size:18px">≥30%</p><p class="n">62,7% dana masuk</p></div>
           <div class="card"><p class="k">Status</p><p class="v" style="font-size:18px" data-afi-status>Berpasangan</p><p class="n">AFI dulu / billing saja = exception</p></div>
         </div>
@@ -458,7 +506,7 @@
           <div>
             <p class="eyebrow">SPK/26/CLD/00421</p>
             <h2>PT Danapura Utama · Hiace Premio</h2>
-            <p>3 unit · leasing. Gate B2B: billing setelah full DP, delivery setelah kontrak TTD.</p>
+            <p>Satu SPK, satu quotation, tiga Sales Order — masing-masing satu baris. Billing setelah full DP B2B. Kirim setelah kontrak TTD. Bukan cashless cabang.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
@@ -467,7 +515,35 @@
           <div class="card alert"><p class="k">Delivery</p><p class="v" style="font-size:18px">Kontrak belum TTD</p><p class="n">Non-waivable</p></div>
           <div class="card"><p class="k">AR Open</p><p class="v" style="font-size:18px">Rp 1,045 M</p><p class="n">Menunggu DP leasing</p></div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Kontrak TTD hanya dari B2B leasing. Approval Engine tidak dibuka. Pantau status di pengecualian bila SLA molor.</p><p><button class="btn" data-go="eskalasi">Lihat di antrean pengecualian</button></p></div></div>
+        <div class="box">
+          <h3>Sales Order — satu baris per unit</h3>
+          <button type="button" class="soline btnline" data-go="tx_hiace">
+            <div>
+              <p><b>SO 4500091288 · unit 1</b></p>
+              <p class="meta">Hiace Premio · VIN menyusul · DP B2B · TTD belum</p>
+            </div>
+            <span class="tag wait">Kirim tertahan</span>
+          </button>
+          <button type="button" class="soline btnline" data-go="tx_hiace">
+            <div>
+              <p><b>SO 4500091289 · unit 2</b></p>
+              <p class="meta">SO sendiri · SPK/26/CLD/00421 · QT yang sama</p>
+            </div>
+            <span class="tag wait">Kirim tertahan</span>
+          </button>
+          <button type="button" class="soline btnline" data-go="tx_hiace">
+            <div>
+              <p><b>SO 4500091290 · unit 3</b></p>
+              <p class="meta">Tidak digabung ke 4500091288</p>
+            </div>
+            <span class="tag wait">Kirim tertahan</span>
+          </button>
+          <div class="paystrip">
+            <b>Integrasi B2B leasing</b>
+            <span class="hint" style="margin:0">DP dan TTD dari B2B. QRIS/CDM/EDC cabang tidak membuka delivery.</span>
+          </div>
+        </div>
+        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Kontrak TTD hanya dari B2B leasing. Approval Engine tidak dibuka. Operation Manager memantau SLA kirim, bukan me-waive TTD.</p><p><button class="btn" data-go="eskalasi">Lihat di antrean pengecualian</button></p></div></div>
       </section>
 
       <section class="screen" id="tx_raize">
@@ -780,9 +856,10 @@
             <button class="btn ghost" data-go="so2">Buka SO Agya</button>
           </div>
           <div class="paystrip">
-            <b>Cashless booking</b>
-            <span class="hint" style="margin:0">QRIS · CDM · tautan · EDC Frontman · per baris</span>
-            <button class="btn" data-go="booking">Bayar booking Yaris</button>
+            <b>Cashless booking — per baris SO</b>
+            <span class="hint" style="margin:0">QRIS · CDM · tautan · EDC Frontman</span>
+            <button class="btn" data-go="booking">Booking Yaris</button>
+            <button class="btn ghost" data-go="digiroom" data-pay-job="agya" data-role="cust">Booking Agya</button>
           </div>
         </div>
         <div class="box">
@@ -1002,6 +1079,12 @@
             <p>Satu quotation, dua pembelian unit → dua SO. AFI, DO, billing, dan pelunasan Agya tidak tercampur dengan SO Yaris 4500091426.</p>
             <button class="btn ghost" data-go="so">Buka SO Yaris (baris 1)</button>
           </div>
+          <div class="paystrip">
+            <b>Cashless booking Agya</b>
+            <span class="hint" style="margin:0">Rp 2.000.000 terkunci · baris ini saja</span>
+            <button class="btn" data-go="digiroom" data-pay-job="agya" data-role="cust">Bayar di Digiroom</button>
+            <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="agya">Cabang</button>
+          </div>
         </div>
       </section>
 
@@ -1047,6 +1130,12 @@
           </div>
         </div>
         <nav class="proc" data-proc="afi_d" aria-label="Proses transaksi"></nav>
+        <div class="paystrip">
+          <b>Cashless Yaris</b>
+          <span class="hint" style="margin:0">Billing butuh ≥30%. Bayar di sini, jejak SO tetap 4500091426.</span>
+          <button class="btn" data-go="digiroom" data-pay-job="dewi" data-role="cust">Digiroom</button>
+          <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="dewi">Cabang</button>
+        </div>
         <div class="box" data-afi-d-wait>
           <h3>SO dulu</h3>
           <div class="pad"><p data-afi-need-so>AFI menunggu Sales Order baris Yaris. Booking fee belum meet.</p><p data-afi-need-qt hidden>Quotation berubah. Terapkan ke SO dulu, baru AFI.</p><button class="btn" data-go="quot">Ke quotation</button></div>
@@ -1084,6 +1173,12 @@
           <div class="actions"><button class="btn ghost" data-go="afi_d">← AFI</button></div>
         </div>
         <nav class="proc" data-proc="do" aria-label="Proses transaksi"></nav>
+        <div class="paystrip">
+          <b>Cashless Yaris</b>
+          <span class="hint" style="margin:0">DO tidak mengganti kanal bayar. Pelunasan tetap QRIS / CDM / tautan / EDC.</span>
+          <button class="btn" data-go="digiroom" data-pay-job="dewi" data-role="cust">Digiroom</button>
+          <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="dewi">Cabang</button>
+        </div>
         <div class="box" data-do-wait>
           <h3>AFI dulu</h3>
           <div class="pad"><p>DO tertahan sampai AFI baris ini terkirim.</p><button class="btn" data-go="afi_d">Ke AFI</button></div>
@@ -1770,10 +1865,10 @@
           <div class="formfoot" data-for="mgmt" hidden>
             <span class="hint">Putusan: setujui, minta revisi, atau tolak. Revisi dan tolak wajib komentar. Pelunasan tetap wajib.</span>
           </div>
-          <div data-for="mgmt" hidden>
+          <div data-for="mgmt" hidden data-mgmt-need="ka">
             <div class="form" style="padding-top:0">
               <div class="field">
-                <label for="mgmtComment-alamat">Komentar Kepala Cabang</label>
+                <label for="mgmtComment-alamat">Komentar Kepala Administrasi</label>
                 <textarea id="mgmtComment-alamat" placeholder="Wajib untuk revisi atau tolak. Opsional saat setujui."></textarea>
               </div>
             </div>
@@ -1846,10 +1941,10 @@
           <div class="formfoot" data-for="mgmt" hidden>
             <span class="hint">Setujui pecah urutan, minta revisi, atau tolak. 30% dan lunas tidak ikut di-waive.</span>
           </div>
-          <div data-for="mgmt" hidden>
+          <div data-for="mgmt" hidden data-mgmt-need="ka">
             <div class="form" style="padding-top:0">
               <div class="field">
-                <label for="mgmtComment-afi">Komentar Kepala Cabang</label>
+                <label for="mgmtComment-afi">Komentar Kepala Administrasi</label>
                 <textarea id="mgmtComment-afi" placeholder="Wajib untuk revisi atau tolak. Opsional saat setujui."></textarea>
               </div>
             </div>
@@ -1897,10 +1992,7 @@
           <span class="hint">Eskalasi otomatis. Lengkapi update biro jasa, bukan waiver lunas.</span>
           <button type="button" class="btn ghost" data-go="verifikasi">Antrean verifikasi</button>
         </div>
-        <div data-for="mgmt" hidden>
-          <div class="form">
-            <div class="field">
-              <label for="mgmtComment-stnk">Komentar Kepala Cabang</label>
+        <div data-for="mgmt" hidden data-mgmt-need="kc">
               <textarea id="mgmtComment-stnk" placeholder="Wajib untuk revisi atau tolak. Contoh: minta update plat ke biro jasa."></textarea>
             </div>
           </div>
@@ -2043,7 +2135,7 @@
                 <td><b>QT/26/CLD/00426</b><span class="sub">rev <span data-qt-rev>1</span></span></td>
                 <td>SPK/26/CLD/00426</td>
                 <td>Dewi Lestari</td>
-                <td>Yaris + Agya<span class="sub">2 SO terkait</span></td>
+                <td>Yaris + Agya<span class="sub">2 baris = 2 SO</span></td>
                 <td><span class="tag wait">Aktif</span></td>
               </tr>
               <tr data-go="transaksi" data-tx-dots="budi">
@@ -2057,7 +2149,7 @@
                 <td><b>QT/26/CLD/00421</b><span class="sub">fleet</span></td>
                 <td>SPK/26/CLD/00421</td>
                 <td>PT Danapura</td>
-                <td>Hiace × 3<span class="sub">3 SO</span></td>
+                <td>Hiace Premio<span class="sub">3 baris = 3 SO</span></td>
                 <td><span class="tag wait">Leasing</span></td>
               </tr>
               <tr data-go="tx_raize" data-tx-dots="raize">
@@ -2092,7 +2184,7 @@
                 <td class="lineage">AFI → DO → billing</td>
                 <td><span class="tag wait" data-dewi-tag>Booking</span></td>
               </tr>
-              <tr data-go="so2" data-tx-dots="dewi">
+              <tr data-go="so2" data-tx-dots="agya">
                 <td><b>4500091428</b></td>
                 <td>SPK/26/CLD/00426<span class="sub">QT/26/CLD/00426 baris 2</span></td>
                 <td>Dewi Lestari · Agya</td>
@@ -2107,10 +2199,24 @@
                 <td><span class="tag hold">AR terbuka</span></td>
               </tr>
               <tr data-go="tx_hiace" data-tx-dots="hiace">
-                <td><b>4500091288</b><span class="sub">+ 2 SO unit</span></td>
-                <td>SPK/26/CLD/00421</td>
-                <td>PT Danapura · Hiace × 3</td>
-                <td class="lineage">DP leasing</td>
+                <td><b>4500091288</b><span class="sub">unit 1/3</span></td>
+                <td>SPK/26/CLD/00421<span class="sub">QT/26/CLD/00421 baris 1</span></td>
+                <td>PT Danapura · Hiace Premio</td>
+                <td class="lineage">DP leasing · TTD B2B</td>
+                <td><span class="tag wait">Kontrak</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
+                <td><b>4500091289</b><span class="sub">unit 2/3</span></td>
+                <td>SPK/26/CLD/00421<span class="sub">QT/26/CLD/00421 baris 2</span></td>
+                <td>PT Danapura · Hiace Premio</td>
+                <td class="lineage">SO sendiri</td>
+                <td><span class="tag wait">Kontrak</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
+                <td><b>4500091290</b><span class="sub">unit 3/3</span></td>
+                <td>SPK/26/CLD/00421<span class="sub">QT/26/CLD/00421 baris 3</span></td>
+                <td>PT Danapura · Hiace Premio</td>
+                <td class="lineage">SO sendiri</td>
                 <td><span class="tag wait">Kontrak</span></td>
               </tr>
               <tr data-go="delivery" data-tx-dots="agus">
@@ -2180,7 +2286,7 @@
                 <td class="lineage">Delivered</td>
                 <td><span class="tag ok">Selesai</span></td>
               </tr>
-              <tr data-go="so2" data-tx-dots="dewi">
+              <tr data-go="so2" data-tx-dots="agya">
                 <td>—<span class="sub">Belum</span></td>
                 <td>4500091428</td>
                 <td>Dewi Lestari · Agya</td>
@@ -2282,11 +2388,25 @@
               <tr data-go="tx_hiace" data-tx-dots="hiace">
                 <td>—<span class="sub">Setelah full DP B2B</span></td>
                 <td>4500091288</td>
-                <td>PT Danapura · Hiace</td>
+                <td>PT Danapura · Hiace · SO 1</td>
                 <td class="lineage">Non-waivable</td>
                 <td><span class="tag wait">DP</span></td>
               </tr>
-              <tr data-go="so2" data-tx-dots="dewi">
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
+                <td>—<span class="sub">Setelah full DP B2B</span></td>
+                <td>4500091289</td>
+                <td>PT Danapura · Hiace · SO 2</td>
+                <td class="lineage">Non-waivable</td>
+                <td><span class="tag wait">DP</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-tx-dots="hiace">
+                <td>—<span class="sub">Setelah full DP B2B</span></td>
+                <td>4500091290</td>
+                <td>PT Danapura · Hiace · SO 3</td>
+                <td class="lineage">Non-waivable</td>
+                <td><span class="tag wait">DP</span></td>
+              </tr>
+              <tr data-go="so2" data-tx-dots="agya">
                 <td>—</td>
                 <td>4500091428</td>
                 <td>Dewi Lestari · Agya</td>
@@ -2524,13 +2644,13 @@
       <section class="screen" id="mgmt_inbox">
         <div class="screenhead">
           <div>
-            <h2>Antrean keputusan · Cilandak</h2>
-            <p>Setujui, minta revisi, atau tolak — plus komentar. Volume dan bottleneck cabang di tab Cabang. Bukan waiver 30% atau lunas.</p>
+            <h2>Antrean · <span data-mgmt-title>Kepala Administrasi</span></h2>
+            <p data-mgmt-lead>Exception waivable: Kepala Administrasi. STNK aging: Kepala Cabang. Volume area: Area Business Head. Kirim/GI: Operation Manager. Bukan waiver 30% atau lunas.</p>
           </div>
         </div>
         <nav class="worktabs" aria-label="Management">
           <button type="button" data-go="mgmt_inbox">Keputusan<span class="n" data-mgmt-pill>4</span></button>
-          <button type="button" data-go="dashboard">Cabang</button>
+          <button type="button" data-go="dashboard">Volume</button>
         </nav>
         <p class="queue-line" data-mgmt-count><b>4 menunggu putusan</b> · 3 exception waivable · 1 eskalasi STNK</p>
         <div class="order-filters" role="tablist" aria-label="Filter putusan">
@@ -2540,7 +2660,7 @@
           <button type="button" data-mgmt-filter="done" aria-pressed="false">Selesai</button>
         </div>
         <div class="order-list" id="mgmtList">
-          <button type="button" class="order-card featured" data-mgmt-case="alamat" data-go="exc_alamat" data-tx-dots="budi">
+          <button type="button" class="order-card featured" data-mgmt-case="alamat" data-mgmt-owner="ka" data-go="exc_alamat" data-tx-dots="budi">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
@@ -2553,7 +2673,7 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-mgmt-case="early" data-go="exc_afi" data-afi-exc="early" data-tx-dots="budi">
+          <button type="button" class="order-card" data-mgmt-case="early" data-mgmt-owner="ka" data-go="exc_afi" data-afi-exc="early" data-tx-dots="budi">
             <div class="thumb">AFI</div>
             <div class="meta">
               <p class="oid">E-26-0418-A · SPK/26/CLD/00418</p>
@@ -2566,7 +2686,7 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-mgmt-case="nobill" data-go="exc_afi" data-afi-exc="nobill" data-tx-dots="budi">
+          <button type="button" class="order-card" data-mgmt-case="nobill" data-mgmt-owner="ka" data-go="exc_afi" data-afi-exc="nobill" data-tx-dots="budi">
             <div class="thumb">BILL</div>
             <div class="meta">
               <p class="oid">E-26-0418-B · SPK/26/CLD/00418</p>
@@ -2579,7 +2699,7 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-mgmt-case="stnk" data-go="exc_stnk" data-tx-dots="maria">
+          <button type="button" class="order-card" data-mgmt-case="stnk" data-mgmt-owner="kc" data-go="exc_stnk" data-tx-dots="maria">
             <div class="thumb">FORT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · H+19</p>
@@ -2592,22 +2712,46 @@
               <p class="cta">Putuskan →</p>
             </div>
           </button>
+          <button type="button" class="order-card" data-mgmt-case="ops-gi" data-mgmt-owner="om" data-go="gi" data-tx-dots="fajar">
+            <div class="thumb">GI</div>
+            <div class="meta">
+              <p class="oid">SO 4500091294 · Operation Manager</p>
+              <strong class="oname">Fajar Nugroho · Good Issue</strong>
+              <p class="spec">Pantau bukti serah terima. Bukan Approval Engine, bukan waiver lunas.</p>
+              <div class="row2">
+                <span class="tag wait" data-gi-tag>Good Issue</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Buka GI →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="ops-del" data-mgmt-owner="om" data-go="delivery" data-tx-dots="agus">
+            <div class="thumb">KIRIM</div>
+            <div class="meta">
+              <p class="oid">SO 4500091301 · Operation Manager</p>
+              <strong class="oname">Agus Hermawan · delivery</strong>
+              <p class="spec">Lunas. Jadwal armada — bukan putusan exception.</p>
+              <div class="row2">
+                <span class="tag ok" data-del-tag>Siap kirim</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Buka kirim →</p>
+            </div>
+          </button>
         </div>
-        <p class="note">Gate komersial (booking fee, 30% cash, pelunasan, TTD kontrak) tidak masuk antrean ini.</p>
+        <p class="note">Gate komersial (booking fee, 30% cash, pelunasan, TTD kontrak) tidak masuk antrean putusan. Operation Manager hanya memantau kirim/GI.</p>
       </section>
-
-      <!-- ============ DASHBOARD MANAGEMENT ============ -->
       <section class="screen" id="dashboard">
         <div class="screenhead">
           <div>
-            <h2>Cabang · Cilandak</h2>
-            <p>Volume per stage, penyebab tertahan, dan mutu data — angka ilustratif. Klik baris untuk transaksi yang sama. Putusan exception di antrean keputusan.</p>
+            <h2>Volume · Cilandak / area</h2>
+            <p>Angka ilustratif. Area Business Head melihat bottleneck area. Kepala Cabang melihat cabang. Klik baris ke transaksi yang sama. Putusan exception hanya di antrean sesuai kursi.</p>
           </div>
           <div class="actions"><button class="btn ghost">September 2026</button></div>
         </div>
         <nav class="worktabs" aria-label="Management">
           <button type="button" data-go="mgmt_inbox">Keputusan<span class="n" data-mgmt-pill>4</span></button>
-          <button type="button" data-go="dashboard">Cabang</button>
+          <button type="button" data-go="dashboard">Volume</button>
         </nav>
 
         <div class="cards">
@@ -2806,13 +2950,6 @@
             <button class="btn ghost" data-go="customer">← Pesanan</button>
           </div>
         </div>
-        <ol class="path" aria-label="Perjalanan pesanan">
-          <li class="done">Pesan</li>
-          <li class="now">Bayar</li>
-          <li data-afi-step="pair">Billing &amp; AFI</li>
-          <li>Kirim</li>
-          <li>STNK</li>
-        </ol>
         <div class="payhero">
           <p class="k">Sisa tagihan</p>
           <p class="v" data-live="ar">Rp 181.750.000</p>
