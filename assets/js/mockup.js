@@ -966,6 +966,7 @@
       document.querySelectorAll('[data-dewi-amt]').forEach(function(amt){ amt.textContent=d.saved?'OTR Depok':'Belum OTR'; });
       document.querySelectorAll('[data-dewi-cta]').forEach(function(cta){ cta.textContent=d.saved?'Data pemesan · STNK · unit →':'Input & unggah →'; });
     }
+    if(window.FAST && FAST.renderLineage) FAST.renderLineage({payJob:payJobId, screen:(document.querySelector('.screen.on')||{}).id});
   }
   function saveDraft(patch){
     if(window.FAST && FAST.save) FAST.save(patch, FAST.DRAFT_KEY);

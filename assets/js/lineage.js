@@ -11,7 +11,7 @@
     {id:'stnk',label:'STNK'}
   ];
   var SCREEN_TX={
-    spk:'dewi',quot:'dewi',booking:'dewi',so:'dewi',so2:'dewi',proses:'dewi',
+    spk:'dewi',spk_baru:'dewi',quot:'dewi',booking:'dewi',so:'dewi',so2:'dewi',proses:'dewi',
     afi_d:'dewi',do:'dewi',bill_d:'dewi',kirim_d:'dewi',stnk_d:'dewi',
     transaksi:'budi',afi:'budi',dokumen:'budi',request:'budi',bayar:'budi',
     exc_alamat:'budi',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
@@ -23,7 +23,7 @@
     order_calya:'calya'
   };
   var VIEW={
-    spk:'spk',quot:'quot',booking:'quot',so:'so',so2:'so',proses:'spk',
+    spk:'spk',spk_baru:'spk',quot:'quot',booking:'quot',so:'so',so2:'so',proses:'spk',
     afi_d:'afi',do:'do',bill_d:'bill',kirim_d:'del',stnk_d:'stnk',
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
     cashless:'bill',exc_alamat:'afi',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
@@ -38,12 +38,14 @@
     STAGES.forEach(function(s,i){ if(n>i) set[s.id]=true; });
     return set;
   }
+  function dewiDraft(){ return load(FAST.DRAFT_KEY); }
   function dewiNow(){
     var paid=!!(load(FAST.BF_KEY).paid);
     var q=load(FAST.QT_KEY);
     if(q.dof) return 'bill';
     if(q.afi) return 'do';
     if(paid) return 'afi';
+    if(!(dewiDraft().saved)) return 'spk';
     return 'quot';
   }
   function budiNow(){
@@ -64,9 +66,13 @@
   }
   var CASES={
     dewi:{
-      go:{spk:'spk',quot:'quot',so:'so',afi:'afi_d',do:'do',bill:'bill_d',del:'kirim_d',stnk:'stnk_d'},
+      go:function(){
+        var saved=!!dewiDraft().saved;
+        return {spk:saved?'spk':'spk_baru',quot:'quot',so:'so',afi:'afi_d',do:'do',bill:'bill_d',del:'kirim_d',stnk:'stnk_d'};
+      },
       now:dewiNow,
       copy:function(now){
+        if(now==='spk') return 'Isi & unggah dulu. Baru dapat nomor SPK. Booking fee menyusul.';
         if(now==='quot') return 'SPK tersimpan. Quotation & booking fee menyusul — fee non-waivable.';
         if(now==='afi') return 'SO terbuka. AFI memakai nama/alamat STNK dari SPK.';
         if(now==='do') return 'AFI terkirim. DO gudang menyusul.';
@@ -134,11 +140,12 @@
     if(id==='budi' && now==='bill'){ done={spk:1,quot:1,so:1,afi:1,do:1}; }
     if(id==='budi' && now==='afi'){ done={spk:1,quot:1,so:1}; }
     if(id==='dewi' && now==='quot'){ done={spk:1}; }
+    if(id==='dewi' && now==='spk'){ done={}; }
     var hold=(!allDone && (now==='del'||now==='spk'||now==='stnk'||now==='quot'))?now:null;
     if(id==='raize') hold='spk';
     if(id==='hiace') hold='del';
     if(id==='maria') hold='stnk';
-    return {id:id, now:allDone?'stnk':now, done:done, hold:hold, allDone:allDone, go:c.go, copy:c.copy(allDone?'stnk':now)};
+    return {id:id, now:allDone?'stnk':now, done:done, hold:hold, allDone:allDone, go:typeof c.go==='function'?c.go():c.go, copy:c.copy(allDone?'stnk':now)};
   }
   function fillDots(el, st){
     if(!el||!st) return;
@@ -185,7 +192,9 @@
   function ensureNav(screen, tx){
     var nav=screen.querySelector(':scope > .proc, :scope > .worktabs + .proc');
     if(!nav) nav=screen.querySelector('.proc');
-    var hook=screen.querySelector('.worktabs')||screen.querySelector('.screenhead');
+    var hook=screen.id==='spk_baru'
+      ? screen.querySelector('.screenhead')
+      : (screen.querySelector('.worktabs')||screen.querySelector('.screenhead'));
     if(!nav && hook){
       nav=document.createElement('nav');
       nav.className='proc';
