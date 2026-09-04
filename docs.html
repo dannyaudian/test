@@ -227,8 +227,17 @@
           <div class="body">
             <p class="who">Administrasi · Cilandak</p>
             <h3>List SPK sampai pembayaran</h3>
-            <p>Panel Administrasi: Buku cabang (SPK sampai pembayaran), antrean verifikasi, dan pengecualian. Klik baris ke data Frontman yang sama — bukan form salesman.</p>
+            <p>Buku cabang, antrean verifikasi, dan pengecualian. Volume pekerjaan dan aging/SLA per baris — dasar KPI, bukan kira-kira.</p>
             <span class="go">Buka list SPK →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#verifikasi">
+          <div class="thumb list">SLA</div>
+          <div class="body">
+            <p class="who">Administrasi · Perlu saya</p>
+            <h3>Volume kerja &amp; aging</h3>
+            <p>Berapa banyak yang menunggu, jenisnya apa, sudah berapa lama. KPI Administrasi disusun dari antrean ini, bukan estimasi.</p>
+            <span class="go">Buka antrean verifikasi →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#mgmt_inbox">
@@ -602,7 +611,7 @@
           <div class="facet sys">
             <h4>Sistem akan</h4>
             <ol class="steps">
-              <li>Membawa data dan nomor SPK ke Sales Order.</li><li>Menyimpan nomor SPK sebagai referensi pada setiap Sales Order.</li><li>Membawa nomor Sales Order ke billing.</li><li>Menyimpan hubungan SPK, SO, dan billing sebagai satu transaction lineage.</li><li>Membawa data customer dan unit ke AFI/DO.</li><li>Membawa data payment, kuitansi, dan financial status ke billing dan delivery gate.</li><li>Membawa data delivery ke Good Issue.</li><li>Membawa data customer, unit, dan delivery ke STNK/BPKB.</li><li>Membuka proses berikutnya ketika persyaratan lengkap.</li><li>Menahan failed compliance gate.</li><li>Mengarahkan eligible exception.</li><li>Mencatat seluruh aktivitas dalam audit trail.</li>
+              <li>Membawa data dan nomor SPK ke Sales Order.</li><li>Menyimpan nomor SPK sebagai referensi pada setiap Sales Order.</li><li>Membawa nomor Sales Order ke billing.</li><li>Menyimpan hubungan SPK, SO, dan billing sebagai satu transaction lineage.</li><li>Membawa data customer dan unit ke AFI/DO.</li><li>Membawa data payment, kuitansi, dan financial status ke billing dan delivery gate.</li><li>Membawa data delivery ke Good Issue.</li><li>Membawa data customer, unit, dan delivery ke STNK/BPKB.</li><li>Membuka proses berikutnya ketika persyaratan lengkap.</li><li>Menahan failed compliance gate.</li><li>Mengarahkan eligible exception.</li><li>Memasukkan pekerjaan Administrasi ke antrean dengan timestamp (volume dan aging/SLA).</li><li>Mencatat seluruh aktivitas dalam audit trail.</li>
             </ol>
           </div>
           <div class="facet">
@@ -611,7 +620,7 @@
           </div>
           <div class="facet">
             <h4>Expected outputs</h4>
-            <ul><li>One integrated process.</li><li>One-time data capture.</li><li>Connected SPK, Sales Order, and billing references.</li><li>Frontman-driven request flow.</li><li>No redundant administrative re-entry.</li><li>Automated data population.</li><li>Automated completeness checking.</li><li>Structured compliance exception escalation.</li><li>Complete audit trail.</li></ul>
+            <ul><li>One integrated process.</li><li>One-time data capture.</li><li>Connected SPK, Sales Order, and billing references.</li><li>Frontman-driven request flow.</li><li>No redundant administrative re-entry.</li><li>Queued Administration work with volume and SLA clocks.</li><li>Automated data population.</li><li>Automated completeness checking.</li><li>Structured compliance exception escalation.</li><li>Complete audit trail.</li></ul>
             <p><a class="btn solid" href="mockup.html#beranda">Buka antrean FAST</a>
             <a class="textlink" href="mockup.html#exc_afi">Exception pecah urutan →</a></p>
           </div>
@@ -712,11 +721,53 @@
     <section class="sec" id="s3">
       <div class="sec-head">
         <span class="num">3</span>
-        <div><h2>KPI Items</h2></div>
+        <div>
+          <h2>KPI Items</h2>
+          <p class="deck">Dasar KPI adalah pekerjaan yang tercatat. Target angka (hari, %, kapasitas) disepakati di bagian Target setelah baseline.</p>
+        </div>
       </div>
-      <div class="empty">
-        <h4>To be defined</h4>
-        <p>KPI akan ditetapkan setelah current-state mapping, baseline, dan ruang lingkup implementasi disepakati.</p>
+      <blockquote class="rule">
+        <span class="tag">Dari kira-kira ke terukur</span>
+        <p>Selama ini beban Administrasi dan ketepatan waktu hanya dikira-kira — follow-up WhatsApp, “antrean terasa penuh”, SLA tidak punya jam mulai. Di FAST setiap pekerjaan Administrasi masuk antrean dengan jenis, transaksi, dan timestamp. Volume (berapa banyak) dan aging/SLA (berapa lama) bisa dihitung. KPI disusun dari data itu, bukan estimasi.</p>
+      </blockquote>
+      <div class="grid g2">
+        <div class="panel">
+          <h4>Yang bisa dihitung — volume</h4>
+          <p>Bukan target resmi. Ini jenis kerja yang sistem sudah pisahkan, jadi jumlahnya bisa di-KPI-kan.</p>
+          <ul>
+            <li>Antrean verifikasi (“Perlu saya”): berapa transaksi menunggu Administrasi.</li>
+            <li>Dipisah jenis: Good Issue, unmatched payment, duplikat NIK, exception dokumen, klasifikasi internal, STNK aging.</li>
+            <li>Buku cabang: volume SPK, quotation, SO, AFI, DO, billing, kuitansi, pembayaran per status.</li>
+            <li>Pengecualian waivable vs eskalasi STNK — terpisah dari gate komersial (booking fee, 30%, lunas, TTD).</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Yang bisa diukur — SLA / aging</h4>
+          <p>Jam mulai = saat pekerjaan masuk antrean. Durasi tercatat per baris. Ambang kebijakan (misalnya berapa jam “on SLA”) ditetapkan nanti di Target, bukan dikarang di sini.</p>
+          <ul>
+            <li>Aging per item verifikasi (contoh di mockup: jam, hari — ilustratif).</li>
+            <li>Waktu Frontman ajukan → Admin cek → Kepala Administrasi putuskan, untuk exception waivable.</li>
+            <li>STNK aging setelah delivery (eskalasi otomatis, bukan waiver lunas).</li>
+            <li>Waktu unmatched payment sampai cocok.</li>
+            <li>Waktu Good Issue dari unggah bukti sampai disetujui.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>Keluarga KPI yang sekarang bisa disusun</h4>
+        <p>Nama dan rumus resmi menyusul kesepakatan. Yang berubah: semuanya punya pembilang dan penyebut dari sistem.</p>
+        <ul>
+          <li><b>Beban kerja cabang</b> — jumlah item terbuka per jenis, per Administrasi, per hari.</li>
+          <li><b>Ketepatan waktu</b> — porsi item yang selesai di dalam jam SLA yang disepakati; aging yang tembus ambang.</li>
+          <li><b>Mutu antrean</b> — dikembalikan ke Frontman vs selesai di Administrasi; koreksi di sumber.</li>
+          <li><b>Kapasitas</b> — item selesai per orang per periode, tanpa menghitung ulang data Frontman sebagai “kerja”.</li>
+        </ul>
+        <p>Mockup menampilkan angka cabang dan aging sebagai ilustrasi Cilandak, bukan baseline resmi.</p>
+      </div>
+      <div class="see-row">
+        <a class="see" href="mockup.html#verifikasi"><span class="see-k">Admin</span><b>Perlu saya</b><span>Volume + aging per baris</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#admin_spk"><span class="see-k">Admin</span><b>Buku cabang</b><span>Volume dokumen per stage</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#dashboard"><span class="see-k">Cabang</span><b>Management</b><span>Volume &amp; bottleneck dari lineage yang sama</span><em>Lihat →</em></a>
       </div>
     </section>
 
@@ -728,7 +779,7 @@
       </div>
       <div class="empty">
         <h4>To be defined</h4>
-        <p>Target kuantitatif akan ditetapkan setelah KPI, baseline, periode pencapaian, dan cakupan implementasi disepakati.</p>
+        <p>Target kuantitatif (jam SLA, porsi on-time, kapasitas per orang) ditetapkan setelah rumus KPI dan baseline dari antrean Administrasi yang tercatat disepakati — bukan dari kira-kira beban cabang.</p>
       </div>
     </section>
 
@@ -1046,7 +1097,7 @@
         </div>
         <div class="panel">
           <h4>B. Administration view</h4>
-          <ul><li>Transactions requiring verification.</li><li>Data requiring enrichment.</li><li>Duplicate-input warning.</li><li>Broken SPK–SO–Billing reference.</li><li>Missing receipt for a verified payment.</li><li>Unmatched payment.</li><li>Failed compliance rule.</li><li>Waivable versus non-waivable status.</li><li>Pending compliance exception decision.</li><li>Vehicle or document mismatch.</li><li>Aging and SLA.</li><li>Downstream impact of data correction.</li></ul>
+          <ul><li>Transactions requiring verification, counted by type.</li><li>Data requiring enrichment.</li><li>Duplicate-input warning.</li><li>Broken SPK–SO–Billing reference.</li><li>Missing receipt for a verified payment.</li><li>Unmatched payment.</li><li>Failed compliance rule.</li><li>Waivable versus non-waivable status.</li><li>Pending compliance exception decision.</li><li>Vehicle or document mismatch.</li><li>Aging and SLA clock per work item (start when the item enters the queue).</li><li>Queue volume — how many items, not an estimate.</li><li>Downstream impact of data correction.</li></ul>
         </div>
         <div class="panel">
           <h4>C. Management view</h4>
@@ -1054,6 +1105,7 @@
         </div>
       </div>
       <div class="see-row" style="margin-top:14px">
+        <a class="see" href="mockup.html#verifikasi"><span class="see-k">Admin</span><b>Perlu saya</b><span>Volume kerja + aging/SLA</span><em>Lihat →</em></a>
         <a class="see" href="mockup.html#dashboard"><span class="see-k">Cabang</span><b>Volume Cilandak</b><span>Klik bottleneck ke transaksi yang sama</span><em>Lihat →</em></a>
         <a class="see" href="mockup.html#mgmt_inbox"><span class="see-k">Putusan</span><b>Antrean keputusan</b><span>Exception waivable + STNK, bukan 30%/lunas</span><em>Lihat →</em></a>
       </div>
@@ -1105,7 +1157,7 @@
         </div>
         <div class="panel">
           <h4>Administration Productivity</h4>
-          <ul><li>Administrasi tidak melakukan re-entry.</li><li>Administrasi fokus pada verification, control, dan exception.</li><li>Duplicate checking berkurang.</li><li>Data mismatch berkurang.</li><li>Processing capacity meningkat.</li></ul>
+          <ul><li>Administrasi tidak melakukan re-entry.</li><li>Administrasi fokus pada verification, control, dan exception.</li><li>Setiap pekerjaan masuk antrean: volume dan SLA/aging tercatat.</li><li>KPI kapasitas dan ketepatan waktu disusun dari data itu, bukan kira-kira.</li><li>Duplicate checking berkurang.</li><li>Data mismatch berkurang.</li><li>Processing capacity menjadi terukur.</li></ul>
         </div>
         <div class="panel">
           <h4>Financial Accuracy</h4>
@@ -1136,7 +1188,7 @@
       <ul>
         <li>Input Frontman dan Administrasi dipetakan dengan jelas.</li>
         <li>Data yang sama tidak diinput berulang.</li>
-        <li>Administrasi memverifikasi, bukan menyalin ulang.</li>
+        <li>Administrasi memverifikasi, bukan menyalin ulang — dan beban serta SLA kerja itu tercatat untuk KPI.</li>
         <li>Nomor SPK, SO, dan billing terhubung.</li>
         <li>Setiap pembayaran terverifikasi menghasilkan satu e-kuitansi.</li>
         <li>Customer dapat mengunduh e-kuitansi.</li>
