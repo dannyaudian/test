@@ -402,6 +402,7 @@
   margin:0 0 16px;padding:14px 16px;border-radius:16px;
   background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid var(--rule);
 }
+#mockup .integ[hidden]{display:none !important}
 #mockup .integ p{margin:0;font-size:13px;color:var(--ink-soft)}
 #mockup .integ b{color:var(--ink)}
 #mockup .integ-links{display:flex;flex-wrap:wrap;gap:8px}
