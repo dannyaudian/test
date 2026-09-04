@@ -214,6 +214,17 @@
     var line=document.querySelector('[data-book-count]');
     if(line) line.innerHTML='<b>'+n+' dari '+total+'</b> · klik baris ke data Frontman yang sama';
   }
+  document.addEventListener('click',function(e){
+    var payF=e.target.closest('[data-admin-pay-filter]');
+    if(!payF) return;
+    e.preventDefault();
+    adminPayFilter=payF.getAttribute('data-admin-pay-filter');
+    document.querySelectorAll('[data-admin-pay-filter]').forEach(function(x){
+      x.setAttribute('aria-pressed', x===payF?'true':'false');
+    });
+    if(currentBookKey!=='pay') activateAdminBook('pay');
+    else filterAdminBook();
+  });
   function show(id){
     if(id==='admin_tx') id='admin_spk';
     if(currentRole==='mgmt' && (id==='eskalasi'||id==='dashboard')) id='mgmt_inbox';
@@ -285,6 +296,16 @@
     if(strip){
       var adminHome=!!bookKey||id==='verifikasi'||id==='eskalasi'||id==='admin_book';
       strip.hidden=currentRole!=='admin'||adminHome;
+      var homeBtn=strip.querySelector('[data-admin-home]');
+      if(homeBtn){
+        homeBtn.setAttribute('data-go', adminReturn||'admin_spk');
+        if(adminReturn==='verifikasi') homeBtn.textContent='← Perlu saya';
+        else if(adminReturn==='eskalasi') homeBtn.textContent='← Pengecualian';
+        else {
+          var bk=(adminReturn||'admin_spk').replace('admin_','');
+          homeBtn.textContent=(ADMIN_BOOK_META[bk]&&ADMIN_BOOK_META[bk].back)||'← Buku cabang';
+        }
+      }
     }
     var adminPill=document.querySelector('[data-admin-pill]');
     if(adminPill){
@@ -482,18 +503,6 @@
     lastBookQ=q.value;
     filterAdminBook();
   },200);
-  document.querySelectorAll('[data-admin-pay-filter]').forEach(function(b){
-    b.addEventListener('click',function(){
-      adminPayFilter=b.getAttribute('data-admin-pay-filter');
-      document.querySelectorAll('[data-admin-pay-filter]').forEach(function(x){
-        x.setAttribute('aria-pressed', x===b?'true':'false');
-      });
-      filterAdminBook();
-    });
-  });
-  document.querySelectorAll('[data-admin-home]').forEach(function(b){
-    b.addEventListener('click',function(){ show(adminReturn||'admin_spk'); });
-  });
 
   var excFilter='all';
   function filterExc(){
@@ -719,6 +728,16 @@
     });
   }
   document.addEventListener('click',function(e){
+    var payF=e.target.closest('[data-admin-pay-filter]');
+    if(payF){
+      adminPayFilter=payF.getAttribute('data-admin-pay-filter');
+      document.querySelectorAll('[data-admin-pay-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x===payF?'true':'false');
+      });
+      if(currentBookKey!=='pay') activateAdminBook('pay');
+      else filterAdminBook();
+      return;
+    }
     var f=e.target.closest('[data-mgmt-filter]');
     if(f){
       mgmtFilter=f.getAttribute('data-mgmt-filter');
