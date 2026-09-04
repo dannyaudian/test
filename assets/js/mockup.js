@@ -1,7 +1,9 @@
 (function(){
 
   var receipts={
+    'KWT/26/CLD/008731':{no:'KWT/26/CLD/008731',status:'Aktif',type:'Booking fee',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'28 Agu 2026, 16:30 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0001',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 5.000.000',verify:'VFY-CLD-008731-B3M4'},
     'KWT/26/CLD/009115':{no:'KWT/26/CLD/009115',status:'Aktif',type:'Pelunasan tahap 1',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'1 Sep 2026, 14:08 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0002',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 300.000.000',verify:'VFY-CLD-009115-A7K2'},
+    'KWT/26/CLD/009280':{no:'KWT/26/CLD/009280',status:'Aktif',type:'Pelunasan',customer:'Agus Hermawan',unit:'Avanza',date:'2 Sep 2026, 16:40 WIB',method:'BCA Virtual Account',ref:'VA 8801 0425 0002',spk:'SPK/26/CLD/00425',so:'4500091301',billing:'Terbit',amount:'Rp 225.400.000',verify:'VFY-CLD-009280-G4N8'},
     'KWT/26/CLD/009220':{no:'KWT/26/CLD/009220',status:'Aktif',type:'Pelunasan tahap 2',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'3 Sep 2026, 09:41 WIB',method:'Cashless',ref:'PAY-CLD-00418-3',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 100.000.000',verify:'VFY-CLD-009220-R8P1'},
     'KWT/26/CLD/009301':{no:'KWT/26/CLD/009301',status:'Aktif',type:'Booking fee',customer:'Dewi Lestari',unit:'Yaris 1.5 G',date:'3 Sep 2026, 10:12 WIB',method:'Cashless',ref:'PAY-CLD-00426-1',spk:'SPK/26/CLD/00426',so:'Belum terbit',billing:'Belum terbit',amount:'Rp 3.000.000',verify:'VFY-CLD-009301-Y4R1'}
   };
@@ -153,8 +155,65 @@
     applyPayLockUI();
     showDg('home');
   }
+  var ADMIN_BOOK={
+    admin_spk:'spk',admin_qt:'qt',admin_so:'so',admin_do:'do',
+    admin_afi:'afi',admin_bill:'bill',admin_kwt:'kwt',admin_pay:'pay',
+    admin_tx:'spk'
+  };
+  var ADMIN_BOOK_META={
+    spk:{title:'List SPK · Cilandak',lead:'Semua SPK cabang. Buka baris ke data SPK yang sama dengan Frontman.'},
+    qt:{title:'List quotation · Cilandak',lead:'Satu SPK = satu quotation. Satu baris quotation = satu SO. Revisi menarik semua SO terkait.'},
+    so:{title:'List Sales Order · Cilandak',lead:'SO dikonversi dari SPK/quotation. Bukan form baru.'},
+    do:{title:'List Delivery Order · Cilandak',lead:'DO dari SO setelah AFI. Unit dan penerima dari SPK.'},
+    afi:{title:'List AFI · Cilandak',lead:'Nama dan alamat STNK dari SPK. Jalur normal berpasangan dengan billing.'},
+    bill:{title:'List billing · Cilandak',lead:'Cash ≥30% in dan leasing full DP dari B2B. Non-waivable.'},
+    kwt:{title:'List kuitansi · Cilandak',lead:'Satu nomor kuitansi per pembayaran terverifikasi, tertaut SPK/SO.'},
+    pay:{title:'List pembayaran · Cilandak',lead:'Posted, request, pending, dan unmatched. Unmatched dicocokkan di Perlu saya.'}
+  };
+  var ADMIN_RAIL_FROM={
+    spk:'admin_spk',tx_raize:'admin_spk',
+    quot:'admin_qt',booking:'admin_qt',
+    so:'admin_so',so2:'admin_so',transaksi:'admin_so',tx_hiace:'admin_so',
+    do:'admin_do',delivery:'admin_do',gi:'admin_do',
+    afi:'admin_afi',afi_d:'admin_afi',stnk_d:'admin_afi',tx_fortuner:'admin_afi',
+    bill_d:'admin_bill',
+    bayar:'admin_kwt',e_kuitansi:'admin_kwt',
+    cashless:'admin_pay',request:'admin_pay'
+  };
+  var currentBookKey='spk';
+  function activateAdminBook(key){
+    currentBookKey=key;
+    document.querySelectorAll('#admin_book [data-book-panel]').forEach(function(p){
+      p.hidden = p.getAttribute('data-book-panel')!==key;
+    });
+    var meta=ADMIN_BOOK_META[key]||ADMIN_BOOK_META.spk;
+    var t=document.querySelector('[data-book-title]');
+    var l=document.querySelector('[data-book-lead]');
+    if(t) t.textContent=meta.title;
+    if(l) l.textContent=meta.lead;
+    filterAdminBook();
+  }
+  function filterAdminBook(){
+    var q=((document.getElementById('adminBookSearch')||{}).value||'').toLowerCase();
+    var panel=document.querySelector('#admin_book [data-book-panel="'+currentBookKey+'"]');
+    if(!panel) return;
+    var n=0,total=0;
+    panel.querySelectorAll('tbody tr').forEach(function(row){
+      total++;
+      var on=!q||row.textContent.toLowerCase().indexOf(q)>-1;
+      if(on) n++;
+      row.classList.toggle('is-hidden', !on);
+    });
+    var line=document.querySelector('[data-book-count]');
+    if(line) line.innerHTML='<b>'+n+' dari '+total+'</b> · klik baris ke dokumen yang sama';
+  }
   function show(id){
-    screens.forEach(function(s){ s.classList.toggle('on', s.id===id); });
+    if(id==='admin_tx') id='admin_spk';
+    if(currentRole==='mgmt' && (id==='eskalasi'||id==='dashboard')) id='mgmt_inbox';
+    var bookKey=ADMIN_BOOK[id];
+    var screenId=bookKey?'admin_book':id;
+    screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
+    if(bookKey) activateAdminBook(bookKey);
     var railId=({
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',
       tagihan_customer:'customer',e_kuitansi:'customer',
@@ -165,7 +224,16 @@
       delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
       exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
-    if((id==='gi'||id==='delivery') && currentRole==='admin') railId='verifikasi';
+    if(currentRole==='admin'){
+      if(id==='verifikasi') railId='verifikasi';
+      else if(id==='eskalasi'||id.indexOf('exc_')===0) railId='eskalasi';
+      else if(ADMIN_BOOK[id]) railId=(id==='admin_tx'?'admin_spk':id);
+      else if(ADMIN_RAIL_FROM[id]) railId=ADMIN_RAIL_FROM[id];
+      else if(id!=='dashboard') railId='admin_spk';
+    }
+    if(currentRole==='mgmt'){
+      railId='mgmt_inbox';
+    }
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
       if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
@@ -178,9 +246,9 @@
     document.querySelectorAll('.journey a').forEach(function(a){
       var href=(a.getAttribute('href')||'');
       var hid=href.split('#')[1]||'';
-      var on=(hid==='beranda'&&(id==='beranda'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
+      var on=(hid==='beranda'&&(id==='beranda'||id==='admin_book'||ADMIN_BOOK[id]||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
-        ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='digiroom'))
+        ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='admin_kwt'||id==='digiroom'))
         ||(hid==='customer'&&(id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
       a.classList.toggle('pay', hid==='cashless');
@@ -190,22 +258,33 @@
     if(history.replaceState) try { history.replaceState(null,'','#'+id); } catch(err) {}
     var cashBack=document.querySelector('#cashless [data-back]');
     if(cashBack){
-      cashBack.setAttribute('data-go', currentRole==='cust'?'customer_detail':'beranda');
-      cashBack.textContent=currentRole==='cust'?'← Pesanan':'← Daftar';
+      cashBack.setAttribute('data-go', currentRole==='cust'?'customer_detail':(currentRole==='admin'?'admin_pay':'beranda'));
+      cashBack.textContent=currentRole==='cust'?'← Pesanan':(currentRole==='admin'?'← List pembayaran':'← Daftar');
     }
+    document.querySelectorAll('[data-exc-back]').forEach(function(b){
+      b.setAttribute('data-go', currentRole==='mgmt'?'mgmt_inbox':'eskalasi');
+      b.textContent=currentRole==='mgmt'?'← Antrean keputusan':'← Antrean';
+    });
+    syncHomeBack();
     document.querySelectorAll('#cashless .worktabs, #cashless [data-go="transaksi"]').forEach(function(el){
       el.hidden=currentRole==='cust';
     });
     applyCashlessEdc();
     if(id==='booking') setPayJob('booking');
     if(id==='so'||id==='bill_d'||id==='kirim_d') setPayJob('dewi');
-    if(id==='cashless'){ setPayJob('lunas'); setCashQrisMode('request'); }
+    if(id==='cashless'){
+      if(!payJobSticky) setPayJob('lunas');
+      setCashQrisMode('request');
+    }
+    payJobSticky=false;
     syncRoleChrome();
     applyExcAlamat();
     applyBooking();
     applyDelivery();
     applyGi();
     applyAfi();
+    applyStnk();
+    applyMgmtInbox();
   }
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
@@ -213,6 +292,7 @@
     if(b.dataset.role) applyRole(b.dataset.role);
     if(b.dataset.payJob){
       setPayJob(b.dataset.payJob);
+      payJobSticky=true;
       if(b.dataset.go==='digiroom') toast(fromFrontman?'Tautan terkirim. Customer masuk ke beranda Digiroom.':'Pilih QRIS atau VA di Digiroom.');
     }
     if(b.dataset.afiExc) setAfiExcView(b.dataset.afiExc);
@@ -225,6 +305,7 @@
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
+    if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter')) return;
     if(b.hasAttribute('data-qt-revise') || b.hasAttribute('data-qt-push') || b.hasAttribute('data-dewi-afi') || b.hasAttribute('data-dewi-do')) return;
     if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
@@ -248,9 +329,28 @@
     seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false');});
   }); }); }
 
+  var payJobSticky=false;
   var currentRole='frontman';
-  var first={frontman:'beranda',admin:'verifikasi',mgmt:'dashboard',cust:'customer'};
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',verifikasi:'admin',dashboard:'mgmt',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_afi:'frontman',exc_stnk:'frontman',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  document.querySelectorAll('[data-go="beranda"]').forEach(function(b){
+    if(b.closest('[data-rail]') || b.hasAttribute('data-back')) return;
+    b.setAttribute('data-home', b.closest('#bayar, #request') ? 'pay' : 'tx');
+  });
+  function syncHomeBack(){
+    document.querySelectorAll('[data-home]').forEach(function(b){
+      var kind=b.getAttribute('data-home');
+      if(currentRole==='admin'){
+        b.setAttribute('data-go', kind==='pay'?'admin_pay':'admin_spk');
+        if(/Daftar|Transaksi saya|Buku|antrean|List/i.test(b.textContent||'')){
+          b.textContent=kind==='pay'?'← List pembayaran':'← List SPK';
+        }
+      } else {
+        b.setAttribute('data-go','beranda');
+        if(/Buku/i.test(b.textContent||'')) b.textContent='← Daftar';
+      }
+    });
+  }
   function syncRoleChrome(){
     document.querySelectorAll('[data-for]').forEach(function(el){
       el.hidden = el.getAttribute('data-for') !== currentRole;
@@ -266,12 +366,13 @@
   document.querySelectorAll('.roletab').forEach(function(t){
     t.addEventListener('click',function(){
       applyRole(t.dataset.role);
-      show(first[t.dataset.role]);
+      show(t.dataset.role==='admin'?'admin_spk':first[t.dataset.role]);
       toast('Peran: '+t.textContent.trim());
     });
   });
   var hash=(location.hash||'').replace('#','');
-  if(hash && document.getElementById(hash)){
+  if(hash==='admin_tx') hash='admin_spk';
+  if(hash && (document.getElementById(hash) || ADMIN_BOOK[hash])){
     if(screenRole[hash]) applyRole(screenRole[hash]);
     show(hash);
   }
@@ -322,6 +423,28 @@
   var search=document.getElementById('txSearch');
   if(search) search.addEventListener('input', filterTx);
 
+  document.addEventListener('input',function(e){
+    if(e.target && e.target.id==='adminBookSearch') filterAdminBook();
+  }, true);
+  document.addEventListener('keyup',function(e){
+    if(e.target && e.target.id==='adminBookSearch') filterAdminBook();
+  }, true);
+  var bookSearch=document.getElementById('adminBookSearch');
+  if(bookSearch){
+    ['input','keyup','change','search'].forEach(function(ev){
+      bookSearch.addEventListener(ev, filterAdminBook);
+    });
+  }
+  var lastBookQ='';
+  setInterval(function(){
+    var box=document.getElementById('admin_book');
+    var q=document.getElementById('adminBookSearch');
+    if(!box || !q || !box.classList.contains('on')) return;
+    if(q.value===lastBookQ) return;
+    lastBookQ=q.value;
+    filterAdminBook();
+  }, 200);
+
   var excFilter='all';
   function filterExc(){
     document.querySelectorAll('#excList .order-card').forEach(function(card){
@@ -352,15 +475,18 @@
       submitted:'Pengajuan masuk. Admin Cilandak cek bukti, lalu teruskan ke Kepala Administrasi.',
       verified:'Admin sudah cek. Kepala Administrasi memutuskan dengan syarat: alamat asli sebelum DO.',
       approved:'Disetujui dengan syarat. Document gate lolos bersyarat. Pelunasan cash tetap wajib sebelum delivery.',
-      returned:'Dikembalikan ke Frontman. Lengkapi bukti, lalu kirim ulang.'
+      returned:'Dikembalikan untuk revisi. Lengkapi sesuai komentar Kepala Cabang, lalu kirim ulang.',
+      rejected:'Ditolak. Ikuti kelengkapan dokumen standar. Bukan waiver pelunasan.'
     };
-    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui bersyarat',returned:'Dikembalikan'};
+    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui bersyarat',returned:'Revisi',rejected:'Ditolak'};
+    if(currentRole==='mgmt' && (st==='draft'||st==='submitted')) tags[st]='Siap diputuskan';
     var specs={
       draft:'Waivable · Frontman ajukan → Admin cek → Kepala Administrasi',
       submitted:'Waivable · Admin sedang cek bukti',
       verified:'Waivable · Kepala Administrasi memutuskan',
       approved:'Syarat: alamat asli sebelum DO · pelunasan tetap wajib',
-      returned:'Lengkapi bukti, kirim ulang'
+      returned:'Revisi: lengkapi bukti, kirim ulang',
+      rejected:'Ditolak · lengkapi dokumen standar'
     };
     var note=document.querySelector('[data-exc-note]');
     if(note){
@@ -369,7 +495,7 @@
       note.classList.toggle('ok', st==='approved');
     }
     var order=['draft','submitted','verified','approved'];
-    var idx=order.indexOf(st==='returned'?'draft':st);
+    var idx=order.indexOf((st==='returned'||st==='rejected')?'draft':st);
     document.querySelectorAll('[data-exc-path] [data-step]').forEach(function(el){
       var step=el.getAttribute('data-step');
       var si=order.indexOf(step);
@@ -380,7 +506,7 @@
     });
     document.querySelectorAll('[data-exc-alamat-tag]').forEach(function(el){
       el.textContent=tags[st]||tags.draft;
-      el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
+      el.className='tag '+(st==='approved'?'ok':(st==='returned'||st==='rejected')?'stop':'hold');
     });
     document.querySelectorAll('[data-exc-alamat-spec]').forEach(function(el){ el.textContent=specs[st]||specs.draft; });
     var vault=document.getElementById('docAlamat');
@@ -414,7 +540,8 @@
         if(tag){ tag.className='tag hold'; tag.textContent='Exception'; }
       }
     });
-    document.querySelectorAll('[data-exc-pill]').forEach(function(el){ el.textContent=st==='approved'?'0':'1'; });
+    document.querySelectorAll('[data-exc-pill]').forEach(function(el){ el.textContent=(st==='approved'||st==='rejected')?'0':'1'; });
+    renderMgmtLog('alamat');
   }
   function setExcAlamat(next, msg){
     if(window.FAST && FAST.save) FAST.save({excAlamat:next});
@@ -450,6 +577,147 @@
       setExcAlamat('returned','Dikembalikan ke Frontman. Lengkapi bukti alamat.');
     });
   });
+
+  function escapeHtml(s){
+    return String(s||'').replace(/[&<>"]/g,function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]); });
+  }
+  function fmtWhen(ts){
+    try { return new Date(ts).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
+    catch(e){ return ''; }
+  }
+  function mgmtLogs(caseId){
+    if(caseId==='alamat') return ((FAST.load()||{}).excLog)||[];
+    if(caseId==='stnk') return ((FAST.load(FAST.STNK_KEY)||{}).stnkLog)||[];
+    var s=afiData();
+    if(caseId==='early'||(caseId==='afi'&&afiExcKind!=='nobill')) return s.logEarly||[];
+    return s.logNobill||[];
+  }
+  function renderMgmtLog(caseId){
+    var key=caseId==='afi'?(afiExcKind==='nobill'?'nobill':'early'):caseId;
+    var ul=document.querySelector('[data-mgmt-log="'+(caseId==='early'||caseId==='nobill'?'afi':caseId)+'"]');
+    if(caseId==='afi') ul=document.querySelector('[data-mgmt-log="afi"]');
+    if(!ul) return;
+    ul.innerHTML='';
+    mgmtLogs(key).slice().reverse().forEach(function(it){
+      var li=document.createElement('li');
+      li.innerHTML='<i class="own p">K</i><div><b>'+escapeHtml(it.label)+'</b>'+(it.comment?': '+escapeHtml(it.comment):'')+'<time>'+fmtWhen(it.ts)+' · '+(it.by||'Kepala Cabang')+'</time></div>';
+      ul.appendChild(li);
+    });
+  }
+  function stnkState(){
+    var s=window.FAST && FAST.load ? FAST.load(FAST.STNK_KEY) : null;
+    return (s && s.stnk) || 'open';
+  }
+  function applyStnk(){
+    var st=stnkState();
+    var tags={open:'Menunggu Kepala Cabang',returned:'Revisi',approved:'Tindak lanjut dicatat',rejected:'Waiver ditolak'};
+    var note=document.querySelector('#exc_stnk .exc-note');
+    var notes={
+      open:'Aging ≥15 hari naik sendiri. Setujui tindak lanjut biro jasa. Bukan tombol melewati pelunasan — unit ini sudah lunas.',
+      returned:'Revisi: lengkapi update biro jasa sesuai komentar, lalu ajukan putusan lagi.',
+      approved:'Tindak lanjut biro jasa dicatat. STNK tetap dipantau. Bukan waiver.',
+      rejected:'Waiver ditolak. Tidak ada pengecualian pelunasan (sudah lunas). Pantau terbit STNK secara operasional.'
+    };
+    if(note){
+      note.textContent=notes[st]||notes.open;
+      note.classList.toggle('warn', st!=='approved');
+      note.classList.toggle('ok', st==='approved');
+    }
+    document.querySelectorAll('[data-stnk-tag]').forEach(function(el){
+      el.textContent=tags[st]||tags.open;
+      el.className='tag '+(st==='approved'?'ok':(st==='returned'||st==='rejected')?'stop':'hold');
+    });
+    renderMgmtLog('stnk');
+  }
+  function mgmtCaseState(caseId){
+    if(caseId==='alamat') return excAlamatState();
+    if(caseId==='early') return afiExcSt('early');
+    if(caseId==='nobill') return afiExcSt('nobill');
+    var st=stnkState();
+    return st==='open'?'verified':st;
+  }
+  function mgmtBucket(st){
+    if(st==='returned') return 'revise';
+    if(st==='approved'||st==='rejected') return 'done';
+    return 'open';
+  }
+  function applyMgmtInbox(){
+    var nOpen=0,nRev=0,nDone=0;
+    document.querySelectorAll('#mgmtList .order-card').forEach(function(card){
+      var id=card.getAttribute('data-mgmt-case');
+      var st=mgmtCaseState(id);
+      var bucket=mgmtBucket(st);
+      card.setAttribute('data-mgmt-bucket', bucket);
+      if(bucket==='open') nOpen++;
+      if(bucket==='revise') nRev++;
+      if(bucket==='done') nDone++;
+    });
+    var line=document.querySelector('[data-mgmt-count]');
+    if(line) line.innerHTML='<b>'+nOpen+' menunggu</b> · '+nRev+' revisi · '+nDone+' selesai';
+    document.querySelectorAll('[data-mgmt-pill]').forEach(function(el){ el.textContent=String(nOpen+nRev); });
+    filterMgmtInbox();
+    renderMgmtLog('alamat');
+    renderMgmtLog('afi');
+    renderMgmtLog('stnk');
+  }
+  var mgmtFilter='all';
+  function filterMgmtInbox(){
+    document.querySelectorAll('#mgmtList .order-card').forEach(function(card){
+      var b=card.getAttribute('data-mgmt-bucket')||'open';
+      var match=mgmtFilter==='all'||b===mgmtFilter;
+      card.classList.toggle('is-hidden', !match);
+    });
+  }
+  document.addEventListener('click',function(e){
+    var f=e.target.closest('[data-mgmt-filter]');
+    if(f){
+      mgmtFilter=f.getAttribute('data-mgmt-filter');
+      document.querySelectorAll('[data-mgmt-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed', x===f?'true':'false');
+      });
+      show('mgmt_inbox');
+      filterMgmtInbox();
+      return;
+    }
+    var b=e.target.closest('[data-mgmt-act]');
+    if(!b) return;
+    decideMgmt(b.getAttribute('data-mgmt-case'), b.getAttribute('data-mgmt-act'));
+  });
+  function decideMgmt(caseId, act){
+    var boxId=caseId==='afi'||caseId==='early'||caseId==='nobill'?'afi':caseId;
+    var el=document.getElementById('mgmtComment-'+boxId);
+    var comment=((el&&el.value)||'').trim();
+    if((act==='revise'||act==='reject') && !comment){
+      toast('Isi komentar untuk '+(act==='revise'?'revisi':'penolakan')+'.');
+      if(el) el.focus();
+      return;
+    }
+    var labels={approve:'Setujui',revise:'Revisi',reject:'Tolak'};
+    var next=act==='approve'?'approved':act==='revise'?'returned':'rejected';
+    var entry={act:act,label:labels[act]||act,comment:comment,by:'Kepala Cabang',ts:Date.now()};
+    if(caseId==='alamat'){
+      var log=((FAST.load()||{}).excLog)||[];
+      log.push(entry);
+      FAST.save({excAlamat:next,excLog:log});
+      applyExcAlamat();
+      toast(act==='approve'?'Disetujui dengan syarat. Pelunasan tetap wajib.':act==='revise'?'Diminta revisi. Frontman lengkapi sesuai komentar.':'Ditolak. Ikuti dokumen standar.');
+    } else if(caseId==='stnk'){
+      var slog=((FAST.load(FAST.STNK_KEY)||{}).stnkLog)||[];
+      slog.push(entry);
+      FAST.save({stnk:next==='approved'?'approved':next,stnkLog:slog}, FAST.STNK_KEY);
+      applyStnk();
+      toast(act==='approve'?'Tindak lanjut biro jasa dicatat. Bukan waiver.':act==='revise'?'Revisi: minta update Admin/biro jasa.':'Waiver ditolak. STNK tetap dipantau operasional.');
+    } else {
+      var kind=caseId==='nobill'||(caseId==='afi'&&afiExcKind==='nobill')?'nobill':'early';
+      setAfiExcView(kind);
+      var patch=kind==='nobill'?{excNobill:next,logNobill:(afiData().logNobill||[]).concat([entry])}:{excEarly:next,logEarly:(afiData().logEarly||[]).concat([entry])};
+      saveAfi(patch);
+      applyAfiExcPath();
+      toast(act==='approve'?(kind==='nobill'?'Disetujui: billing tanpa AFI. 30% tidak di-waive.':'Disetujui: AFI sebelum billing. 30% tidak di-waive.'):act==='revise'?'Revisi pecah urutan. Lengkapi alasan.':'Ditolak. Pakai jalur billing + AFI bersama.');
+    }
+    if(el) el.value='';
+    applyMgmtInbox();
+  }
 
   var edcDevice='EDC-01';
   function showBfPanel(mode){
@@ -513,18 +781,12 @@
     var ready=document.querySelector('[data-so-ready]');
     if(block) block.hidden=paid;
     if(ready) ready.hidden=!paid;
-    var card=document.querySelector('[data-dewi-card]');
-    if(card) card.setAttribute('data-go', paid?'so':'spk');
-    var oid=document.querySelector('[data-dewi-oid]');
-    if(oid) oid.textContent=paid?'SO 4500091426 · dari SPK/26/CLD/00426':'SPK/26/CLD/00426 · baru tersimpan';
-    var spec=document.querySelector('[data-dewi-spec]');
-    if(spec) spec.textContent=paid?'Tindakan: SO → AFI → DO → billing':'Tindakan: SPK → quotation → booking cashless';
-    var tag=document.querySelector('[data-dewi-tag]');
-    if(tag){ tag.textContent=paid?'SO terbuka':'Belum bayar'; tag.className='tag '+(paid?'ok':'wait'); }
-    var amt=document.querySelector('[data-dewi-amt]');
-    if(amt) amt.textContent=paid?'AR Rp 299,15 Jt':'OTR Depok';
-    var cta=document.querySelector('[data-dewi-cta]');
-    if(cta) cta.textContent=paid?'Sales Order →':'Data pemesan · STNK · unit →';
+    document.querySelectorAll('[data-dewi-card]').forEach(function(card){ card.setAttribute('data-go', paid?'so':'spk'); });
+    document.querySelectorAll('[data-dewi-oid]').forEach(function(oid){ oid.textContent=paid?'SO 4500091426 · dari SPK/26/CLD/00426':'SPK/26/CLD/00426 · baru tersimpan'; });
+    document.querySelectorAll('[data-dewi-spec]').forEach(function(spec){ spec.textContent=paid?'Tindakan: SO → AFI → DO → billing':'Tindakan: SPK → quotation → booking cashless'; });
+    document.querySelectorAll('[data-dewi-tag]').forEach(function(tag){ tag.textContent=paid?'SO terbuka':'Belum bayar'; tag.className='tag '+(paid?'ok':'wait'); });
+    document.querySelectorAll('[data-dewi-amt]').forEach(function(amt){ amt.textContent=paid?'AR Rp 299,15 Jt':'OTR Depok'; });
+    document.querySelectorAll('[data-dewi-cta]').forEach(function(cta){ cta.textContent=paid?'Sales Order →':'Data pemesan · STNK · unit →'; });
     applyDewiProc();
   }
   function procSteps(){
@@ -691,7 +953,8 @@
       submitted:'Pengajuan masuk. Admin Cilandak cek alasan, lalu teruskan ke Kepala Administrasi.',
       verified:'Admin sudah cek. Kepala Administrasi memutuskan pecah urutan.',
       approved:afiExcKind==='nobill'?'Disetujui. Billing boleh tanpa AFI. AFI tetap wajib menyusul. 30% tidak di-waive.':'Disetujui. AFI boleh sebelum billing. Billing tetap wajib. 30% tidak di-waive.',
-      returned:'Dikembalikan ke Frontman. Lengkapi alasan, atau pakai jalur billing + AFI bersama.'
+      returned:'Revisi: lengkapi alasan sesuai komentar Kepala Cabang.',
+      rejected:'Ditolak. Pakai jalur billing + AFI bersama. 30% tidak di-waive.'
     };
     var note=document.querySelector('[data-exc-afi-note]');
     if(note){
@@ -700,7 +963,7 @@
       note.classList.toggle('ok', st==='approved');
     }
     var order=['draft','submitted','verified','approved'];
-    var idx=order.indexOf(st==='returned'?'draft':st);
+    var idx=order.indexOf((st==='returned'||st==='rejected')?'draft':st);
     document.querySelectorAll('[data-exc-afi-path] [data-step]').forEach(function(el){
       var si=order.indexOf(el.getAttribute('data-step'));
       el.classList.remove('on','ok');
@@ -708,12 +971,14 @@
       else if(si<idx) el.classList.add('ok');
       else if(si===idx) el.classList.add('on');
     });
-    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui',returned:'Dikembalikan'};
+    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui',returned:'Revisi',rejected:'Ditolak'};
+    if(currentRole==='mgmt' && (st==='draft'||st==='submitted')) tags[st]='Siap diputuskan';
     var sel=afiExcKind==='nobill'?'[data-afi-nobill-tag]':'[data-afi-early-tag]';
     document.querySelectorAll(sel).forEach(function(el){
       el.textContent=tags[st]||tags.draft;
-      el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
+      el.className='tag '+(st==='approved'?'ok':(st==='returned'||st==='rejected')?'stop':'hold');
     });
+    renderMgmtLog('afi');
   }
   function applyAfi(){
     var s=afiData();
@@ -1216,6 +1481,9 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
+      else if(currentRole==='admin' && id==='beranda') id='admin_spk';
+      else if(currentRole==='admin' && id==='cashless') id='admin_pay';
+      else if(ADMIN_BOOK[id]||id==='verifikasi'||id==='admin_book') applyRole('admin');
       else if(id==='beranda'||id==='transaksi'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='booking') applyRole('frontman');
       show(id);
     });
