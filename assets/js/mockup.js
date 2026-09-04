@@ -209,7 +209,7 @@
   }
   function show(id){
     if(id==='admin_tx') id='admin_spk';
-    if(currentRole==='mgmt' && (id==='eskalasi'||id==='dashboard')) id='mgmt_inbox';
+    if(currentRole==='mgmt' && id==='eskalasi') id='mgmt_inbox';
     var bookKey=ADMIN_BOOK[id];
     var screenId=bookKey?'admin_book':id;
     screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
@@ -232,7 +232,9 @@
       else if(id!=='dashboard') railId='admin_spk';
     }
     if(currentRole==='mgmt'){
-      railId='mgmt_inbox';
+      if(id==='dashboard') railId='dashboard';
+      else if(id==='mgmt_inbox'||id==='eskalasi'||id.indexOf('exc_')===0) railId='mgmt_inbox';
+      else railId='dashboard';
     }
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
@@ -296,7 +298,15 @@
       if(b.dataset.go==='digiroom') toast(fromFrontman?'Tautan terkirim. Customer masuk ke beranda Digiroom.':'Pilih QRIS atau VA di Digiroom.');
     }
     if(b.dataset.afiExc) setAfiExcView(b.dataset.afiExc);
-    show(b.dataset.go); window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
+    show(b.dataset.go);
+    if(b.dataset.scroll){
+      var hold=document.getElementById(b.dataset.scroll);
+      if(hold){
+        hold.scrollIntoView({behavior:'smooth',block:'start'});
+        return;
+      }
+    }
+    window.scrollTo({top:document.querySelector('.app').offsetTop-20,behavior:'smooth'});
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
     if(isDownloadAction(b) && !b.hasAttribute('data-go')){
@@ -344,6 +354,11 @@
         b.setAttribute('data-go', kind==='pay'?'admin_pay':'admin_spk');
         if(/Daftar|Transaksi saya|Buku|antrean|List/i.test(b.textContent||'')){
           b.textContent=kind==='pay'?'← List pembayaran':'← List SPK';
+        }
+      } else if(currentRole==='mgmt'){
+        b.setAttribute('data-go','dashboard');
+        if(/Daftar|Transaksi saya|Buku|antrean|List|Cabang/i.test(b.textContent||'')){
+          b.textContent='← Cabang';
         }
       } else {
         b.setAttribute('data-go','beranda');
@@ -1481,6 +1496,7 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom') applyRole('cust');
+      else if(currentRole==='mgmt' && id==='beranda') id='dashboard';
       else if(currentRole==='admin' && id==='beranda') id='admin_spk';
       else if(currentRole==='admin' && id==='cashless') id='admin_pay';
       else if(ADMIN_BOOK[id]||id==='verifikasi'||id==='admin_book') applyRole('admin');
