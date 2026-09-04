@@ -19,9 +19,9 @@ FAST.save = function (data, key) {
   return next;
 };
 FAST.B2B_SO = [
-  { id: '1288', so: '4500091288', unit: 'Hiace Premio · unit 1', amt: 'Rp 348.400.000' },
-  { id: '1289', so: '4500091289', unit: 'Hiace Premio · unit 2', amt: 'Rp 348.300.000' },
-  { id: '1290', so: '4500091290', unit: 'Hiace Premio · unit 3', amt: 'Rp 348.300.000' }
+  { id: '1288', so: '4500091288', unit: 'Hiace Premio · unit 1', amt: 'Rp 348.400.000', dp: 69680000, dpLabel: 'Rp 69.680.000', kwt: 'KWT/26/CLD/009410' },
+  { id: '1289', so: '4500091289', unit: 'Hiace Premio · unit 2', amt: 'Rp 348.300.000', dp: 69660000, dpLabel: 'Rp 69.660.000', kwt: 'KWT/26/CLD/009411' },
+  { id: '1290', so: '4500091290', unit: 'Hiace Premio · unit 3', amt: 'Rp 348.300.000', dp: 69660000, dpLabel: 'Rp 69.660.000', kwt: 'KWT/26/CLD/009412' }
 ];
 FAST.B2B_FLOW = ['submitted', 'docs_requested', 'docs_sent', 'contract_ready', 'ttd_uploaded', 'dp_received', 'billing_ready', 'paperless_sent', 'lunas'];
 FAST.B2B_FLOW_LABEL = {
@@ -70,6 +70,7 @@ FAST.b2bDefault = function () {
         billing: { bstkb: false, fotoSerah: false, fotoTtd: false },
         dpReceived: false,
         paperlessSent: false,
+        kwtIssued: false,
         lunas: false
       },
       '1289': {
@@ -82,6 +83,7 @@ FAST.b2bDefault = function () {
         billing: { bstkb: false, fotoSerah: false, fotoTtd: false },
         dpReceived: false,
         paperlessSent: false,
+        kwtIssued: false,
         lunas: false
       },
       '1290': {
@@ -94,6 +96,7 @@ FAST.b2bDefault = function () {
         billing: { bstkb: false, fotoSerah: false, fotoTtd: false },
         dpReceived: false,
         paperlessSent: false,
+        kwtIssued: false,
         lunas: false
       }
     }
@@ -115,14 +118,15 @@ FAST.b2bLoad = function () {
 FAST.b2bSummary = function () {
   var s = FAST.b2bLoad();
   var ids = ['1288', '1289', '1290'];
-  var ttd = 0, dp = 0, paper = 0, lunas = 0, back = 0;
+  var ttd = 0, dp = 0, paper = 0, kwt = 0, lunas = 0, back = 0;
   ids.forEach(function (id) {
     var u = s.units[id];
     if (u.signedContract) ttd++;
     if (u.dpReceived) dp++;
     if (u.paperlessSent) paper++;
+    if (u.kwtIssued) kwt++;
     if (u.lunas) lunas++;
     if (u.backflow) back++;
   });
-  return { selected: s.selected, ttd: ttd, dp: dp, paper: paper, lunas: lunas, back: back, units: s.units, tab: s.tab };
+  return { selected: s.selected, ttd: ttd, dp: dp, paper: paper, kwt: kwt, lunas: lunas, back: back, units: s.units, tab: s.tab };
 };

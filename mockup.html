@@ -506,7 +506,7 @@
           <div>
             <p class="eyebrow">SPK/26/CLD/00421 · B2B leasing</p>
             <h2>PT Danapura Utama · Hiace Premio</h2>
-            <p>Satu SPK, satu quotation, tiga Sales Order. Mitra leasing: PT Danapura Multifinance. Frontman mengunduh kontrak, mengunggah dokumen, TTD, dan bukti penagihan. Administrasi menagih paperless. Status tiap SO masuk billing gate dan delivery gate — bukan objek Approval Engine.</p>
+            <p>Satu SPK, satu quotation, tiga Sales Order. Mitra: PT Danapura Multifinance. Frontman hanya melengkapi data (dokumen, TTD, bukti). Administrasi menagih paperless dan menerbitkan kuitansi ke leasing. Total DP wajib customer ditarik dari B2B — bukan diketik di FAST.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
@@ -514,13 +514,13 @@
           <button type="button" data-b2b-tab="ringkas">Ringkasan</button>
           <button type="button" data-b2b-tab="alur">Alur &amp; status</button>
           <button type="button" data-b2b-tab="dokumen">Dokumen &amp; kontrak</button>
-          <button type="button" data-b2b-tab="tagih">Penagihan paperless</button>
+          <button type="button" data-b2b-tab="tagih">Penagihan</button>
         </nav>
         <div class="cards">
           <div class="card" data-b2b-card="bill">
-            <p class="k">Billing gate</p>
-            <p class="v" style="font-size:18px" data-b2b-dp-label>Full DP 0/3</p>
-            <p class="n">Status B2B · non-waivable</p>
+            <p class="k">DP wajib customer · B2B</p>
+            <p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p>
+            <p class="n" data-b2b-dp-status>Dari kontrak leasing · belum diterima</p>
           </div>
           <div class="card alert" data-b2b-card="del">
             <p class="k">Delivery gate</p>
@@ -528,9 +528,9 @@
             <p class="n">Kontrak customer · non-waivable</p>
           </div>
           <div class="card" data-b2b-card="paper">
-            <p class="k">Penagihan leasing</p>
-            <p class="v" style="font-size:18px" data-b2b-paper-label>Paperless 0/3</p>
-            <p class="n">Administrasi · online</p>
+            <p class="k">Penagihan Administrasi</p>
+            <p class="v" style="font-size:18px" data-b2b-paper-label>Kuitansi 0/3</p>
+            <p class="n">Paperless ke leasing</p>
           </div>
         </div>
         <p class="note" data-b2b-gate-note>Approval Engine tidak membuka TTD atau full DP. Kekurangan dokumen = backflow operasional, bukan waiver.</p>
@@ -560,8 +560,8 @@
               <span class="tag wait" data-b2b-so-tag>Dokumen diminta</span>
             </button>
             <div class="paystrip">
-              <b>Bukan cashless cabang</b>
-              <span class="hint" style="margin:0">QRIS/CDM/EDC tidak membuka billing atau delivery leasing. Angka DP dan TTD dari alur B2B.</span>
+              <b>DP wajib dari B2B</b>
+              <span class="hint" style="margin:0" data-b2b-dp-strip>Per unit mengikuti kontrak leasing. QRIS/CDM/EDC cabang tidak mengganti angka ini.</span>
             </div>
           </div>
         </div>
@@ -580,9 +580,9 @@
               <button type="button" class="btn" data-b2b-resubmit>Kirim ulang ke leasing</button>
             </div>
             <div class="formfoot" data-for="admin" hidden>
-              <span class="hint">Administrasi memicu kontrak dari leasing, mencatat DP, atau mengembalikan (backflow).</span>
+              <span class="hint">Kontrak dan status DP datang dari B2B. Kekurangan dokumen = kembalikan ke Frontman.</span>
               <button type="button" class="btn ghost" data-b2b-issue-contract>Terbitkan kontrak dari leasing</button>
-              <button type="button" class="btn ghost" data-b2b-mark-dp>Catat full DP B2B</button>
+              <button type="button" class="btn ghost" data-b2b-mark-dp>Tarik status DP dari B2B</button>
               <button type="button" class="btn stop" data-b2b-return>Kembalikan — dokumen kurang</button>
             </div>
             <div class="formfoot" data-for="mgmt" hidden>
@@ -615,17 +615,32 @@
 
         <div data-b2b-panel="tagih" hidden>
           <div class="box">
-            <h3>Dokumen penagihan ke leasing <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
-            <p class="pad" style="padding-bottom:0">Sales mengunggah BSTKB, foto serah terima, dan foto tanda tangan kontrak. Administrasi mengirim penagihan paperless setelah full DP B2B.</p>
+            <h3>DP wajib customer <span class="side">Info B2B · bukan input FAST</span></h3>
+            <div class="money">
+              <div class="row"><span>Nilai unit (OTR)</span><span data-b2b-otr>Rp 348.400.000</span></div>
+              <div class="row"><span>DP wajib menurut leasing</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
+              <div class="row"><span>DP sudah diterima (B2B)</span><span data-b2b-dp-in>Rp 0</span></div>
+            </div>
+            <p class="hint" style="padding:12px 16px">Angka DP ditarik dari mitra leasing. Frontman tidak mengetik DP. Billing gate terbuka setelah B2B menyatakan DP wajib sudah diterima.</p>
+          </div>
+          <div class="box">
+            <h3>Lengkapi data <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
+            <p class="pad" style="padding-bottom:0">Frontman memasang BSTKB, foto serah terima, dan foto TTD kontrak. Penagihan dan kuitansi ke leasing dikerjakan Administrasi.</p>
             <button type="button" class="drop" data-b2b-bill="bstkb"><b>Scan BSTKB</b><span>Ketuk untuk pasang</span></button>
             <button type="button" class="drop" data-b2b-bill="fotoSerah"><b>Foto serah terima</b><span>Ketuk untuk pasang · geotag perangkat</span></button>
             <button type="button" class="drop" data-b2b-bill="fotoTtd"><b>Foto tanda tangan kontrak</b><span>Ketuk untuk pasang</span></button>
             <div class="formfoot" data-for="frontman">
-              <span class="hint">Setelah ketiga berkas terpasang, Administrasi bisa menagih paperless.</span>
+              <span class="hint">Data lengkap. Administrasi yang mengirim penagihan paperless dan menerbitkan kuitansi.</span>
             </div>
-            <div class="formfoot" data-for="admin" hidden>
-              <span class="hint">Penagihan ke leasing online. Tidak cetak fisik. Syarat: full DP B2B + paket penagihan lengkap.</span>
+          </div>
+          <div class="box" data-for="admin" hidden>
+            <h3>Penagihan &amp; kuitansi ke leasing</h3>
+            <p class="pad" style="padding-bottom:0">Setelah DP wajib dari B2B diterima dan data Frontman lengkap: kirim paperless, lalu terbitkan kuitansi. Bukan cetak fisik.</p>
+            <p class="hint" style="padding:0 16px 8px" data-b2b-kwt-no>Kuitansi: belum terbit</p>
+            <div class="formfoot" data-for="admin">
+              <span class="hint">Syarat: DP B2B diterima + data BSTKB/foto lengkap.</span>
               <button type="button" class="btn" data-b2b-paperless>Kirim penagihan paperless</button>
+              <button type="button" class="btn ghost" data-b2b-kwt>Terbitkan kuitansi ke leasing</button>
               <button type="button" class="btn ghost" data-b2b-lunas>Catat pelunasan leasing</button>
             </div>
           </div>
@@ -2512,33 +2527,33 @@
           <h3>B2B leasing <span class="side">Status per SO · paperless · backflow</span></h3>
           <div class="scroll">
           <table>
-            <thead><tr><th>SO</th><th>Customer</th><th>Status leasing</th><th>Gate</th><th>Tindakan Admin</th></tr></thead>
+            <thead><tr><th>SO</th><th>Customer</th><th>DP wajib B2B</th><th>Status leasing</th><th>Tindakan Admin</th></tr></thead>
             <tbody>
               <tr data-go="tx_hiace" data-b2b-pick="1288">
                 <td><b>4500091288</b><span class="sub">unit 1/3</span></td>
                 <td>PT Danapura · Hiace</td>
+                <td data-b2b-book-dp="1288">Rp 69.680.000</td>
                 <td data-b2b-book-status="1288">Kontrak dari leasing</td>
-                <td>Billing DP · Delivery TTD</td>
                 <td><span class="tag wait" data-b2b-book-tag="1288">Pantau TTD</span></td>
               </tr>
               <tr data-go="tx_hiace" data-b2b-pick="1289">
                 <td><b>4500091289</b><span class="sub">unit 2/3</span></td>
                 <td>PT Danapura · Hiace</td>
+                <td data-b2b-book-dp="1289">Rp 69.660.000</td>
                 <td data-b2b-book-status="1289">Backflow NPWP</td>
-                <td>Belum ke gate</td>
                 <td><span class="tag stop" data-b2b-book-tag="1289">Tunggu Frontman</span></td>
               </tr>
               <tr data-go="tx_hiace" data-b2b-pick="1290">
                 <td><b>4500091290</b><span class="sub">unit 3/3</span></td>
                 <td>PT Danapura · Hiace</td>
+                <td data-b2b-book-dp="1290">Rp 69.660.000</td>
                 <td data-b2b-book-status="1290">Dokumen diminta</td>
-                <td>Belum ke gate</td>
                 <td><span class="tag wait" data-b2b-book-tag="1290">Terbitkan kontrak</span></td>
               </tr>
             </tbody>
           </table>
           </div>
-          <p class="hint" style="padding:12px 14px">Buka baris ke workspace B2B yang sama dengan Frontman. Kirim penagihan paperless di tab Penagihan — tidak cetak fisik ke leasing.</p>
+          <p class="hint" style="padding:12px 14px">DP wajib customer dari B2B, bukan diketik Admin. Frontman hanya lengkapi data. Admin mengirim paperless dan menerbitkan kuitansi ke leasing.</p>
         </div>
 
         <div class="box book-panel" data-book-panel="kwt" hidden>
@@ -2577,6 +2592,30 @@
                 <td>Budi Santoso · Zenix</td>
                 <td>SPK/26/CLD/00418<span class="sub">SO terhubung otomatis</span></td>
                 <td class="num">Rp 5.000.000</td>
+                <td><span class="tag ok">Aktif</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-kwt-row="1288" hidden>
+                <td><b>KWT/26/CLD/009410</b><span class="sub">Penagihan leasing</span></td>
+                <td>Penagihan B2B</td>
+                <td>PT Danapura Multifinance</td>
+                <td>SPK/26/CLD/00421<span class="sub">SO 4500091288</span></td>
+                <td class="num">Rp 69.680.000</td>
+                <td><span class="tag ok">Aktif</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-kwt-row="1289" hidden>
+                <td><b>KWT/26/CLD/009411</b><span class="sub">Penagihan leasing</span></td>
+                <td>Penagihan B2B</td>
+                <td>PT Danapura Multifinance</td>
+                <td>SPK/26/CLD/00421<span class="sub">SO 4500091289</span></td>
+                <td class="num">Rp 69.660.000</td>
+                <td><span class="tag ok">Aktif</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-kwt-row="1290" hidden>
+                <td><b>KWT/26/CLD/009412</b><span class="sub">Penagihan leasing</span></td>
+                <td>Penagihan B2B</td>
+                <td>PT Danapura Multifinance</td>
+                <td>SPK/26/CLD/00421<span class="sub">SO 4500091290</span></td>
+                <td class="num">Rp 69.660.000</td>
                 <td><span class="tag ok">Aktif</span></td>
               </tr>
             </tbody>
@@ -2743,8 +2782,8 @@
               </tr>
               <tr data-go="tx_hiace" data-b2b-pick="1288" data-tx-dots="hiace">
                 <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091288</span></td>
-                <td>Penagihan paperless</td>
-                <td>Paket BSTKB / foto serah / foto TTD + full DP B2B <span class="sub">Kirim online ke leasing, bukan cetak</span></td>
+                <td>Penagihan leasing</td>
+                <td>DP wajib dari B2B + data Frontman lengkap <span class="sub">Admin kirim paperless &amp; terbitkan kuitansi</span></td>
                 <td><span class="tag wait">Paperless</span></td>
                 <td>4 jam</td>
               </tr>

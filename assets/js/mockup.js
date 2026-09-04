@@ -5,7 +5,10 @@
     'KWT/26/CLD/009115':{no:'KWT/26/CLD/009115',status:'Aktif',type:'Pelunasan tahap 1',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'1 Sep 2026, 14:08 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0002',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 300.000.000',verify:'VFY-CLD-009115-A7K2'},
     'KWT/26/CLD/009280':{no:'KWT/26/CLD/009280',status:'Aktif',type:'Pelunasan',customer:'Agus Hermawan',unit:'Avanza',date:'2 Sep 2026, 16:40 WIB',method:'BCA Virtual Account',ref:'VA 8801 0425 0002',spk:'SPK/26/CLD/00425',so:'4500091301',billing:'Terbit',amount:'Rp 225.400.000',verify:'VFY-CLD-009280-G4N8'},
     'KWT/26/CLD/009220':{no:'KWT/26/CLD/009220',status:'Aktif',type:'Pelunasan tahap 2',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'3 Sep 2026, 09:41 WIB',method:'Cashless',ref:'PAY-CLD-00418-3',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 100.000.000',verify:'VFY-CLD-009220-R8P1'},
-    'KWT/26/CLD/009301':{no:'KWT/26/CLD/009301',status:'Aktif',type:'Booking fee',customer:'Dewi Lestari',unit:'Yaris 1.5 G',date:'3 Sep 2026, 10:12 WIB',method:'Cashless',ref:'PAY-CLD-00426-1',spk:'SPK/26/CLD/00426',so:'Belum terbit',billing:'Belum terbit',amount:'Rp 3.000.000',verify:'VFY-CLD-009301-Y4R1'}
+    'KWT/26/CLD/009301':{no:'KWT/26/CLD/009301',status:'Aktif',type:'Booking fee',customer:'Dewi Lestari',unit:'Yaris 1.5 G',date:'3 Sep 2026, 10:12 WIB',method:'Cashless',ref:'PAY-CLD-00426-1',spk:'SPK/26/CLD/00426',so:'Belum terbit',billing:'Belum terbit',amount:'Rp 3.000.000',verify:'VFY-CLD-009301-Y4R1'},
+    'KWT/26/CLD/009410':{no:'KWT/26/CLD/009410',status:'Aktif',type:'Penagihan leasing',customer:'PT Danapura Multifinance',unit:'Hiace Premio · SO 4500091288',date:'4 Sep 2026, 11:20 WIB',method:'Paperless B2B',ref:'B2B-DP-1288',spk:'SPK/26/CLD/00421',so:'4500091288',billing:'Paperless',amount:'Rp 69.680.000',verify:'VFY-CLD-009410-L1H8'},
+    'KWT/26/CLD/009411':{no:'KWT/26/CLD/009411',status:'Aktif',type:'Penagihan leasing',customer:'PT Danapura Multifinance',unit:'Hiace Premio · SO 4500091289',date:'4 Sep 2026, 11:21 WIB',method:'Paperless B2B',ref:'B2B-DP-1289',spk:'SPK/26/CLD/00421',so:'4500091289',billing:'Paperless',amount:'Rp 69.660.000',verify:'VFY-CLD-009411-L2H9'},
+    'KWT/26/CLD/009412':{no:'KWT/26/CLD/009412',status:'Aktif',type:'Penagihan leasing',customer:'PT Danapura Multifinance',unit:'Hiace Premio · SO 4500091290',date:'4 Sep 2026, 11:22 WIB',method:'Paperless B2B',ref:'B2B-DP-1290',spk:'SPK/26/CLD/00421',so:'4500091290',billing:'Paperless',amount:'Rp 69.660.000',verify:'VFY-CLD-009412-L3H0'}
   };
   function pdfEscape(s){ return String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)'); }
   function receiptPdf(r){
@@ -212,7 +215,7 @@
     do:{title:'List Delivery Order · Cilandak',lead:'DO dari SO setelah AFI. Unit dan penerima dari SPK.',back:'← List DO'},
     afi:{title:'List AFI · Cilandak',lead:'Nama dan alamat STNK dari SPK. Jalur normal berpasangan dengan billing.',back:'← List AFI'},
     bill:{title:'List billing · Cilandak',lead:'Cash ≥30% in dan leasing full DP dari B2B. Non-waivable.',back:'← List billing'},
-    leasing:{title:'List B2B leasing · Cilandak',lead:'Status per SO dari submit sampai pelunasan. Paperless ke leasing. Backflow jika dokumen kurang. Status yang sama dibaca billing gate dan delivery gate.',back:'← List leasing'},
+    leasing:{title:'List B2B leasing · Cilandak',lead:'DP wajib customer dari B2B. Frontman lengkapi data. Administrasi menagih paperless dan menerbitkan kuitansi ke leasing.',back:'← List leasing'},
     kwt:{title:'List kuitansi · Cilandak',lead:'Satu nomor kuitansi per pembayaran terverifikasi, tertaut SPK/SO.',back:'← List kuitansi'},
     pay:{title:'List pembayaran · Cilandak',lead:'Posted, request, pending, dan unmatched. Unmatched dicocokkan di Perlu saya.',back:'← List pembayaran'}
   };
@@ -424,7 +427,7 @@
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
     if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home') || b.hasAttribute('data-mgmt-seat')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
-    if(b.hasAttribute('data-b2b-tab') || b.hasAttribute('data-b2b-so') || b.hasAttribute('data-b2b-doc') || b.hasAttribute('data-b2b-drop') || b.hasAttribute('data-b2b-bill') || b.hasAttribute('data-b2b-dl-contract') || b.hasAttribute('data-b2b-paperless') || b.hasAttribute('data-b2b-lunas') || b.hasAttribute('data-b2b-resubmit') || b.hasAttribute('data-b2b-issue-contract') || b.hasAttribute('data-b2b-mark-dp') || b.hasAttribute('data-b2b-return')) return;
+    if(b.hasAttribute('data-b2b-tab') || b.hasAttribute('data-b2b-so') || b.hasAttribute('data-b2b-doc') || b.hasAttribute('data-b2b-drop') || b.hasAttribute('data-b2b-bill') || b.hasAttribute('data-b2b-dl-contract') || b.hasAttribute('data-b2b-paperless') || b.hasAttribute('data-b2b-kwt') || b.hasAttribute('data-b2b-lunas') || b.hasAttribute('data-b2b-resubmit') || b.hasAttribute('data-b2b-issue-contract') || b.hasAttribute('data-b2b-mark-dp') || b.hasAttribute('data-b2b-return')) return;
     if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
@@ -1569,10 +1572,10 @@
       docs_requested:'Leasing meminta paket dokumen. Unggah di tab Dokumen, lalu kirim.',
       docs_sent:'Dokumen terkirim. Administrasi dapat menerbitkan kontrak dari leasing.',
       contract_ready:'Kontrak dari leasing siap. Sales mengunduh, customer TTD, sales unggah kembali.',
-      ttd_uploaded:'Kontrak TTD tercatat. Delivery gate membaca status ini. Full DP B2B membuka billing gate.',
-      dp_received:'Full DP dari B2B tercatat. Billing gate terbuka. Lengkapi dokumen penagihan.',
-      billing_ready:'Paket penagihan lengkap. Administrasi kirim paperless ke leasing.',
-      paperless_sent:'Penagihan paperless terkirim. Menunggu pelunasan leasing.',
+      ttd_uploaded:'Kontrak TTD tercatat. Delivery gate membaca status ini. DP wajib customer dari B2B membuka billing gate.',
+      dp_received:'DP wajib dari B2B sudah diterima. Billing gate terbuka. Frontman lengkapi data; Administrasi menagih.',
+      billing_ready:'Data penagihan lengkap. Administrasi kirim paperless dan terbitkan kuitansi ke leasing.',
+      paperless_sent:'Penagihan paperless terkirim. Administrasi menerbitkan kuitansi ke leasing.',
       lunas:'Pelunasan leasing tercatat. Jejak SPK–SO–billing tetap sama.'
     };
     return map[flow]||map.submitted;
@@ -1585,8 +1588,8 @@
       docs_sent:{cls:'tag wait', text:'Dokumen terkirim'},
       contract_ready:{cls:'tag wait', text:'Kontrak siap'},
       ttd_uploaded:{cls:'tag ok', text:'TTD tercatat'},
-      dp_received:{cls:'tag ok', text:'Full DP'},
-      billing_ready:{cls:'tag wait', text:'Siap paperless'},
+      dp_received:{cls:'tag ok', text:'DP B2B diterima'},
+      billing_ready:{cls:'tag wait', text:'Siap ditagih Admin'},
       paperless_sent:{cls:'tag ok', text:'Paperless'},
       lunas:{cls:'tag ok', text:'Lunas leasing'}
     };
@@ -1603,20 +1606,31 @@
     var dpEl=document.querySelector('[data-b2b-dp-label]');
     var ttdEl=document.querySelector('[data-b2b-ttd-label]');
     var paperEl=document.querySelector('[data-b2b-paper-label]');
-    if(dpEl) dpEl.textContent='Full DP '+sum.dp+'/3';
+    if(dpEl) dpEl.textContent='DP diterima '+sum.dp+'/3';
     if(ttdEl) ttdEl.textContent='TTD '+sum.ttd+'/3';
-    if(paperEl) paperEl.textContent='Paperless '+sum.paper+'/3';
+    if(paperEl) paperEl.textContent='Kuitansi '+sum.kwt+'/3';
+    document.querySelectorAll('[data-b2b-dp-wajib]').forEach(function(el){ el.textContent=meta.dpLabel||'—'; });
+    var dpStatus=document.querySelector('[data-b2b-dp-status]');
+    if(dpStatus) dpStatus.textContent=u.dpReceived?('Diterima '+ (meta.dpLabel||'') +' · billing gate terbuka'):('Wajib '+ (meta.dpLabel||'') +' · belum diterima');
+    var dpIn=document.querySelector('[data-b2b-dp-in]');
+    if(dpIn) dpIn.textContent=u.dpReceived?(meta.dpLabel||'Rp 0'):'Rp 0';
+    var otr=document.querySelector('[data-b2b-otr]');
+    if(otr) otr.textContent=meta.amt||'—';
+    var strip=document.querySelector('[data-b2b-dp-strip]');
+    if(strip) strip.textContent='SO '+meta.so+' · DP wajib '+ (meta.dpLabel||'—') +'. QRIS/CDM/EDC cabang tidak mengganti angka B2B.';
+    var kwtNo=document.querySelector('[data-b2b-kwt-no]');
+    if(kwtNo) kwtNo.textContent=u.kwtIssued?('Kuitansi: '+(meta.kwt||'terbit')):'Kuitansi: belum terbit';
     var billCard=document.querySelector('[data-b2b-card="bill"]');
     var delCard=document.querySelector('[data-b2b-card="del"]');
     var paperCard=document.querySelector('[data-b2b-card="paper"]');
     if(billCard) billCard.classList.toggle('alert', sum.dp<3);
     if(delCard) delCard.classList.toggle('alert', sum.ttd<3);
-    if(paperCard) paperCard.classList.toggle('alert', sum.paper<3);
+    if(paperCard) paperCard.classList.toggle('alert', sum.kwt<3);
     var gateNote=document.querySelector('[data-b2b-gate-note]');
     if(gateNote){
       gateNote.textContent=sum.back
-        ? 'Ada backflow. Lengkapi dokumen — bukan waiver TTD/DP. Approval Engine tidak dibuka.'
-        : 'Billing gate membaca full DP B2B ('+sum.dp+'/3). Delivery gate membaca TTD ('+sum.ttd+'/3). Keduanya non-waivable.';
+        ? 'Ada backflow. Frontman lengkapi data — bukan waiver TTD/DP. Approval Engine tidak dibuka.'
+        : 'Billing gate membaca DP wajib dari B2B ('+sum.dp+'/3 diterima). Delivery gate membaca TTD ('+sum.ttd+'/3). Penagihan dan kuitansi ke leasing: Administrasi.';
     }
     document.querySelectorAll('[data-b2b-tab]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-b2b-tab')===(s.tab||'ringkas')?'true':'false');
@@ -1718,6 +1732,10 @@
       var tg=document.querySelector('[data-b2b-book-tag="'+id+'"]');
       if(st) st.textContent=uu.backflow?'Backflow': (FAST.B2B_FLOW_LABEL[ff]||ff);
       if(tg){ tg.className=t.cls; tg.textContent=t.text; }
+      var dpCell=document.querySelector('[data-b2b-book-dp="'+id+'"]');
+      var rowMeta=b2bSoMeta(id);
+      if(dpCell) dpCell.textContent=rowMeta.dpLabel||'—';
+      document.querySelectorAll('[data-b2b-kwt-row="'+id+'"]').forEach(function(row){ row.hidden=!uu.kwtIssued; });
     });
     if(window.FAST && FAST.renderLineage) FAST.renderLineage();
   }
@@ -1921,7 +1939,7 @@
       st.units[st.selected].dpReceived=true;
       st.units[st.selected].status='dp_received';
     });
-    toast('Full DP B2B tercatat. Billing gate membaca status ini.');
+    toast('Status DP ditarik dari B2B. Billing gate membaca DP wajib yang sudah diterima.');
   });
   var ret=document.querySelector('[data-b2b-return]');
   if(ret) ret.addEventListener('click',function(){
@@ -1938,11 +1956,11 @@
     var s=FAST.b2bLoad();
     var u=s.units[s.selected]||{};
     if(!u.dpReceived){
-      toast('Billing gate masih tutup. Full DP B2B belum masuk.');
+      toast('Billing gate masih tutup. DP wajib dari B2B belum diterima.');
       return;
     }
     if(!FAST.b2bBillingComplete(u)){
-      toast('Minta Frontman unggah BSTKB, foto serah terima, dan foto TTD kontrak.');
+      toast('Minta Frontman lengkapi BSTKB, foto serah terima, dan foto TTD kontrak.');
       return;
     }
     patchB2b(function(st){
@@ -1951,12 +1969,25 @@
     });
     toast('Penagihan paperless terkirim ke leasing. Tidak ada cetak fisik.');
   });
+  var kwtBtn=document.querySelector('[data-b2b-kwt]');
+  if(kwtBtn) kwtBtn.addEventListener('click',function(){
+    var s=FAST.b2bLoad();
+    var u=s.units[s.selected]||{};
+    var meta=b2bSoMeta(s.selected);
+    if(!u.paperlessSent){
+      toast('Kirim penagihan paperless dulu. Kuitansi ke leasing diterbitkan Administrasi.');
+      return;
+    }
+    patchB2b(function(st){ st.units[st.selected].kwtIssued=true; });
+    if(meta.kwt) downloadReceipt(meta.kwt);
+    toast('Kuitansi penagihan ke leasing terbit: '+(meta.kwt||'KWT')+'.');
+  });
   var lunasBtn=document.querySelector('[data-b2b-lunas]');
   if(lunasBtn) lunasBtn.addEventListener('click',function(){
     var s=FAST.b2bLoad();
     var u=s.units[s.selected]||{};
-    if(!u.paperlessSent){
-      toast('Kirim penagihan paperless dulu.');
+    if(!u.kwtIssued){
+      toast('Terbitkan kuitansi penagihan ke leasing dulu.');
       return;
     }
     patchB2b(function(st){
