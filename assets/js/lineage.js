@@ -115,9 +115,9 @@
         var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,back:0,lunas:0};
         if(x.lunas===3) return 'Tiga SO. Pelunasan leasing tercatat. STNK/BPKB memakai data SPK yang sama.';
         if(x.back) return 'Backflow B2B: ada dokumen kurang. Frontman lengkapi, kirim ulang — bukan waiver TTD/DP.';
-        if(now==='bill') return 'Tiga SO. Billing tiap baris tertahan full DP B2B. Status leasing masuk billing gate.';
-        if(now==='del') return 'DP B2B '+x.dp+'/3. Kirim tertahan TTD '+x.ttd+'/3 — status ke delivery gate, bukan Approval Engine.';
-        return 'Tiga SO terpisah. Alur B2B: submit → dokumen → kontrak → TTD → DP → penagihan paperless.';
+        if(now==='bill') return 'Tiga SO. Billing tertahan sampai DP wajib dari B2B diterima. Frontman lengkapi data; Admin menagih.';
+        if(now==='del') return 'DP B2B '+x.dp+'/3. Kirim tertahan TTD '+x.ttd+'/3. Kuitansi ke leasing dari Administrasi.';
+        return 'Tiga SO. DP wajib dari B2B. Frontman lengkapi data; Administrasi paperless + kuitansi.';
       }
     },
     raize:{

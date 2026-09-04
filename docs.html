@@ -209,7 +209,7 @@
           <div class="body">
             <p class="who">PT Danapura · B2B leasing</p>
             <h3>Alur leasing sampai pelunasan</h3>
-            <p>Unduh kontrak, unggah dokumen &amp; TTD, penagihan paperless, backflow jika kurang. Status masuk billing/delivery gate.</p>
+            <p>Unduh kontrak, unggah dokumen &amp; TTD. DP wajib dari B2B. Administrasi menagih paperless dan menerbitkan kuitansi.</p>
             <span class="go">Buka workspace B2B →</span>
           </div>
         </a>
@@ -719,11 +719,11 @@
         <div class="grid g2">
           <div class="facet">
             <h4>Scope</h4>
-            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Vehicle-specific booking-fee validation for Sales Order.</li><li>Cash 30% billing threshold.</li><li>B2B leasing workspace per Sales Order (submit → dokumen → kontrak → TTD → DP → penagihan → pelunasan).</li><li>Sales download of the leasing-submitted contract.</li><li>Sales upload of documents requested by leasing.</li><li>Sales re-upload of the customer-signed contract.</li><li>Sales upload of billing evidence (BSTKB, handover photo, signed-contract photo).</li><li>Paperless billing from Administration to leasing.</li><li>Normal-flow and backflow tracking when documents are incomplete.</li><li>Leasing status from first submit through pelunasan, read by compliance and approval gates.</li><li>Leasing full-DP validation from B2B leasing.</li><li>Cash lunas validation for delivery.</li><li>Leasing signed-contract validation from B2B leasing.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
+            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Vehicle-specific booking-fee validation for Sales Order.</li><li>Cash 30% billing threshold.</li><li>B2B leasing workspace per Sales Order (submit → dokumen → kontrak → TTD → DP → penagihan → pelunasan).</li><li>Sales download of the leasing-submitted contract.</li><li>Sales upload of documents requested by leasing.</li><li>Sales re-upload of the customer-signed contract.</li><li>Frontman completes billing evidence only (BSTKB, handover photo, signed-contract photo).</li><li>Paperless billing to leasing by Administration.</li><li>Leasing billing receipt (kuitansi) issued by Administration.</li><li>Required customer DP amount and received status from B2B leasing (read-only).</li><li>Normal-flow and backflow tracking when documents are incomplete.</li><li>Leasing status from first submit through pelunasan, read by compliance and approval gates.</li><li>Leasing full-DP validation from B2B leasing.</li><li>Cash lunas validation for delivery.</li><li>Leasing signed-contract validation from B2B leasing.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
           </div>
           <div class="facet">
             <h4>Expected Outputs</h4>
-            <ul><li>Real-time financial exposure.</li><li>Connected transaction documents.</li><li>Accurate AR Open.</li><li>Controlled payment requests.</li><li>Traceable e-kuitansi.</li><li>Per-unit delivery eligibility.</li><li>Paperless invoice pack to leasing.</li><li>Visible leasing backflow and next Frontman action.</li><li>Faster finance decision.</li><li>Clear compliance exception ownership.</li><li>Reduced manual finance follow-up.</li></ul>
+            <ul><li>Real-time financial exposure.</li><li>Connected transaction documents.</li><li>Accurate AR Open.</li><li>Controlled payment requests.</li><li>Traceable e-kuitansi, including leasing billing receipts.</li><li>Per-unit delivery eligibility.</li><li>Paperless invoice pack to leasing from Administration.</li><li>Visible required customer DP from B2B.</li><li>Visible leasing backflow and next Frontman action.</li><li>Faster finance decision.</li><li>Clear compliance exception ownership.</li><li>Reduced manual finance follow-up.</li></ul>
           </div>
         </div>
         <blockquote class="rule">
@@ -1096,10 +1096,10 @@
             <li>Sales downloads the contract submitted by leasing.</li>
             <li>Sales uploads documents requested by leasing (identity, NPWP, NIB/SIUP, SPK).</li>
             <li>Sales re-uploads the customer-signed contract; that status is TTD for the delivery gate.</li>
-            <li>Sales uploads billing evidence: BSTKB, handover photo, signed-contract photo.</li>
-            <li>Administration sends paperless billing to leasing (no physical print pack).</li>
+            <li>Sales uploads billing evidence only (BSTKB, handover photo, signed-contract photo). Frontman does not invoice leasing.</li>
+            <li>Administration sends paperless billing to leasing and issues the leasing billing receipt (kuitansi).</li>
             <li>Normal flow and backflow on the same tracker when leasing or Administration returns incomplete documents.</li>
-            <li>Full DP amount required per contract; DP received versus required.</li>
+            <li>Required customer DP amount and DP-received status come from B2B leasing (read-only in FAST).</li>
             <li>Billing gate reads full-DP status; delivery gate reads TTD status. Neither is an Approval Engine object.</li>
             <li>Missing documents are operational backflow, not a waiver of DP or TTD.</li>
             <li>Contract date and reference.</li>
@@ -1133,11 +1133,11 @@
       <div class="grid g3">
         <div class="panel">
           <h4>A. Frontman view</h4>
-          <ul><li>Current transaction stage.</li><li>Linked SPK, Sales Order, and billing numbers.</li><li>B2B leasing status per SO (submit through pelunasan, including backflow).</li><li>Download leasing contract; upload requested docs, signed contract, and billing evidence.</li><li>Data already captured.</li><li>Missing information.</li><li>Input owner for missing data.</li><li>Document readiness.</li><li>Payment and receipt history.</li><li>AR Open per unit.</li><li>Active payment requests.</li><li>Available Request Amount.</li><li>Failed compliance rule.</li><li>Exception eligibility.</li><li>Exception decision status.</li><li>Billing readiness (including full DP from B2B).</li><li>Delivery eligibility (including TTD from B2B).</li><li>Good Issue.</li><li>STNK/BPKB.</li><li>Process hold reason.</li></ul>
+          <ul><li>Current transaction stage.</li><li>Linked SPK, Sales Order, and billing numbers.</li><li>B2B leasing status per SO (submit through pelunasan, including backflow).</li><li>Required customer DP amount from B2B (read-only).</li><li>Download leasing contract; upload requested docs, signed contract, and billing evidence. Frontman does not send the leasing invoice.</li><li>Data already captured.</li><li>Missing information.</li><li>Input owner for missing data.</li><li>Document readiness.</li><li>Payment and receipt history.</li><li>AR Open per unit.</li><li>Active payment requests.</li><li>Available Request Amount.</li><li>Failed compliance rule.</li><li>Exception eligibility.</li><li>Exception decision status.</li><li>Billing readiness (including full DP from B2B).</li><li>Delivery eligibility (including TTD from B2B).</li><li>Good Issue.</li><li>STNK/BPKB.</li><li>Process hold reason.</li></ul>
         </div>
         <div class="panel">
           <h4>B. Administration view</h4>
-          <ul><li>Transactions requiring verification, counted by type.</li><li>Paperless billing packs waiting to be sent to leasing.</li><li>B2B backflow waiting on Frontman.</li><li>Data requiring enrichment.</li><li>Duplicate-input warning.</li><li>Broken SPK–SO–Billing reference.</li><li>Missing receipt for a verified payment.</li><li>Unmatched payment.</li><li>Failed compliance rule.</li><li>Waivable versus non-waivable status.</li><li>Pending compliance exception decision.</li><li>Vehicle or document mismatch.</li><li>Aging and SLA clock per work item (start when the item enters the queue).</li><li>Queue volume — how many items, not an estimate.</li><li>Downstream impact of data correction.</li></ul>
+          <ul><li>Transactions requiring verification, counted by type.</li><li>Paperless billing to leasing and leasing billing receipts (kuitansi) issued by Administration.</li><li>Required customer DP from B2B versus received.</li><li>B2B backflow waiting on Frontman.</li><li>Data requiring enrichment.</li><li>Duplicate-input warning.</li><li>Broken SPK–SO–Billing reference.</li><li>Missing receipt for a verified payment.</li><li>Unmatched payment.</li><li>Failed compliance rule.</li><li>Waivable versus non-waivable status.</li><li>Pending compliance exception decision.</li><li>Vehicle or document mismatch.</li><li>Aging and SLA clock per work item (start when the item enters the queue).</li><li>Queue volume — how many items, not an estimate.</li><li>Downstream impact of data correction.</li></ul>
         </div>
         <div class="panel">
           <h4>C. Management view</h4>
@@ -1239,8 +1239,8 @@
         <li>Sales Order membutuhkan minimum booking fee sesuai unit, yang ditagihkan setelah SPK.</li>
         <li>Billing cash terbuka pada ≥30% dana masuk; billing leasing terbuka setelah full DP dari B2B leasing.</li>
         <li>Delivery cash terbuka setelah lunas; delivery leasing terbuka setelah kontrak TTD dari B2B leasing.</li>
-        <li>Frontman mengunduh kontrak leasing, mengunggah dokumen yang diminta, mengunggah kontrak TTD, dan mengunggah bukti penagihan (BSTKB, foto serah terima, foto TTD).</li>
-        <li>Administrasi menagih leasing secara paperless; kekurangan dokumen kembali ke Frontman sebagai backflow, bukan sebagai waiver gate.</li>
+        <li>Frontman mengunduh kontrak leasing, mengunggah dokumen yang diminta, mengunggah kontrak TTD, dan melengkapi bukti penagihan (BSTKB, foto serah terima, foto TTD). Frontman tidak menagih leasing.</li>
+        <li>Administrasi menagih leasing secara paperless dan menerbitkan kuitansi penagihan ke leasing. Total DP wajib customer ditarik dari B2B. Kekurangan dokumen kembali ke Frontman sebagai backflow, bukan waiver gate.</li>
         <li>Customer dapat membuka seluruh tagihan unit yang masih open.</li>
         <li>Customer dapat melihat status, blocker, next action, dan journey pesanan.</li>
         <li>Approval Engine hanya menangani failed compliance gate yang waivable.</li>
