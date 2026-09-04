@@ -493,6 +493,19 @@
 #mockup .drop b{display:block;font-size:14px;margin-bottom:4px}
 #mockup .drop span{display:block;font-size:12px;color:var(--ink-soft)}
 #mockup .drop.on{border-style:solid;border-color:var(--flow);background:var(--flow-tint)}
+#mockup .b2b-path{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+  padding:14px 16px;border-bottom:1px solid var(--rule);
+}
+#mockup .b2b-path b{
+  font-size:11.5px;font-weight:700;padding:6px 10px;border-radius:999px;
+  border:1px solid var(--rule);background:#fff;color:var(--ink-soft);
+}
+#mockup .b2b-path b.on{border-color:var(--signal);background:var(--signal-tint);color:var(--signal)}
+#mockup .b2b-path b.done{border-color:var(--flow);background:var(--flow-tint);color:var(--ink-2)}
+#mockup .b2b-path b.back{border-color:var(--stop);background:var(--stop-tint);color:var(--stop)}
+#mockup .b2b-path span{color:var(--ink-soft);font-size:12px}
+#mockup .soline.btnline[aria-current="true"]{border-color:var(--signal);box-shadow:0 0 0 3px var(--signal-tint)}
 #mockup .vault-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:14px 14px 4px}
 #mockup .vault-item{background:var(--surface-2);border-radius:12px;padding:12px}
 #mockup .vault-item .k{margin:0;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
