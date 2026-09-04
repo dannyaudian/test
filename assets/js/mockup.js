@@ -335,7 +335,9 @@
     applyAfi();
     applyStnk();
     applyMgmtInbox();
+    applyDewiProc();
   }
+  if(window.FAST && FAST.lineageInit) FAST.lineageInit(show);
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
     if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
     var fromFrontman=currentRole==='frontman';
@@ -361,7 +363,7 @@
       b.addEventListener('click',function(){ downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); });
       return;
     }
-    if(b.hasAttribute('data-go') || b.classList.contains('roletab') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
+    if(b.hasAttribute('data-go') || b.classList.contains('roletab') || b.closest('.proc') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
     if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
@@ -1129,23 +1131,7 @@
       var t=stnkAfi.querySelector('.t');
       if(t) t.textContent=q.afi?'Pengajuan terkirim':'Menunggu SO / pengajuan';
     }
-    document.querySelectorAll('[data-proc]').forEach(function(nav){
-      var cur=nav.getAttribute('data-proc');
-      if(cur==='booking') cur='quot';
-      if(cur==='proses') cur='spk';
-      if(cur==='so2') cur='so';
-      nav.innerHTML='';
-      procSteps().forEach(function(step){
-        var b=document.createElement('button');
-        b.type='button';
-        b.textContent=step.label;
-        var done=(step.id==='spk'||step.id==='quot') || (step.id==='so'&&paid) || (step.id==='afi_d'&&q.afi) || (step.id==='do'&&q.dof);
-        if(step.id===cur) b.className='on';
-        else if(done) b.className='done';
-        b.addEventListener('click',function(){ show(step.id); });
-        nav.appendChild(b);
-      });
-    });
+    if(window.FAST && FAST.renderLineage) FAST.renderLineage({payJob:payJobId, screen:(document.querySelector('.screen.on')||{}).id});
   }
   document.querySelectorAll('[data-qt-revise]').forEach(function(b){
     b.addEventListener('click',function(){
