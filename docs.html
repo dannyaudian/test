@@ -719,7 +719,7 @@
         <div class="grid g2">
           <div class="facet">
             <h4>Scope</h4>
-            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Vehicle-specific booking-fee validation for Sales Order.</li><li>Cash 30% billing threshold.</li><li>B2B leasing workspace per Sales Order (submit → dokumen → kontrak → TTD → DP → penagihan → pelunasan).</li><li>Sales download of the leasing-submitted contract.</li><li>Sales upload of documents requested by leasing.</li><li>Sales re-upload of the customer-signed contract.</li><li>Frontman completes billing evidence only (BSTKB, handover photo, signed-contract photo).</li><li>Paperless billing to leasing by Administration.</li><li>Leasing billing receipt (kuitansi) issued by Administration.</li><li>Required customer DP amount and received status from B2B leasing (read-only).</li><li>Normal-flow and backflow tracking when documents are incomplete.</li><li>Leasing status from first submit through pelunasan, read by compliance and approval gates.</li><li>Leasing full-DP validation from B2B leasing.</li><li>Cash lunas validation for delivery.</li><li>Leasing signed-contract validation from B2B leasing.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
+            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Vehicle-specific booking-fee validation for Sales Order.</li><li>Cash 30% billing threshold.</li><li>B2B leasing workspace per Sales Order (submit → dokumen → kontrak → TTD → DP → penagihan → pelunasan).</li><li>Frontman download of the leasing-submitted contract.</li><li>Frontman re-upload of the customer-signed contract.</li><li>Frontman upload of signed-contract photo, handover photo, and BSTKB.</li><li>Sales upload of documents requested by leasing.</li><li>Paperless billing and leasing kuitansi by Administration only after the Frontman pack is complete and full DP from B2B is paid.</li><li>Required customer DP amount and received status from B2B leasing (read-only).</li><li>Normal-flow and backflow tracking when documents are incomplete.</li><li>Leasing status from first submit through pelunasan, read by compliance and approval gates.</li><li>Leasing full-DP validation from B2B leasing.</li><li>Cash lunas validation for delivery.</li><li>Leasing signed-contract validation from B2B leasing.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
           </div>
           <div class="facet">
             <h4>Expected Outputs</h4>
@@ -1093,11 +1093,9 @@
           <h4>B2B Leasing Integration</h4>
           <ul>
             <li>Per-SO status from submit to leasing through pelunasan.</li>
-            <li>Sales downloads the contract submitted by leasing.</li>
-            <li>Sales uploads documents requested by leasing (identity, NPWP, NIB/SIUP, SPK).</li>
-            <li>Sales re-uploads the customer-signed contract; that status is TTD for the delivery gate.</li>
-            <li>Sales uploads billing evidence only (BSTKB, handover photo, signed-contract photo). Frontman does not invoice leasing.</li>
-            <li>Administration sends paperless billing to leasing and issues the leasing billing receipt (kuitansi).</li>
+            <li>Frontman downloads the leasing-submitted contract, re-uploads the customer-signed contract, and uploads signed-contract photo, handover photo, and BSTKB.</li>
+            <li>Frontman also uploads documents leasing requested (identity, NPWP, NIB/SIUP, SPK).</li>
+            <li>Administration sends paperless billing and issues the leasing kuitansi only after that Frontman pack is complete and full customer DP from B2B is paid.</li>
             <li>Normal flow and backflow on the same tracker when leasing or Administration returns incomplete documents.</li>
             <li>Required customer DP amount and DP-received status come from B2B leasing (read-only in FAST).</li>
             <li>Billing gate reads full-DP status; delivery gate reads TTD status. Neither is an Approval Engine object.</li>
@@ -1239,8 +1237,8 @@
         <li>Sales Order membutuhkan minimum booking fee sesuai unit, yang ditagihkan setelah SPK.</li>
         <li>Billing cash terbuka pada ≥30% dana masuk; billing leasing terbuka setelah full DP dari B2B leasing.</li>
         <li>Delivery cash terbuka setelah lunas; delivery leasing terbuka setelah kontrak TTD dari B2B leasing.</li>
-        <li>Frontman mengunduh kontrak leasing, mengunggah dokumen yang diminta, mengunggah kontrak TTD, dan melengkapi bukti penagihan (BSTKB, foto serah terima, foto TTD). Frontman tidak menagih leasing.</li>
-        <li>Administrasi menagih leasing secara paperless dan menerbitkan kuitansi penagihan ke leasing. Total DP wajib customer ditarik dari B2B. Kekurangan dokumen kembali ke Frontman sebagai backflow, bukan waiver gate.</li>
+        <li>Frontman mengunduh kontrak leasing, mengunggah kontrak setelah TTD, mengunggah foto TTD kontrak, foto serah terima, dan BSTKB. Frontman tidak menagih leasing.</li>
+        <li>Administrasi menagih leasing secara paperless dan menerbitkan kuitansi hanya setelah paket Frontman lengkap dan full DP dari B2B sudah dibayar. Kekurangan dokumen kembali ke Frontman sebagai backflow, bukan waiver gate.</li>
         <li>Customer dapat membuka seluruh tagihan unit yang masih open.</li>
         <li>Customer dapat melihat status, blocker, next action, dan journey pesanan.</li>
         <li>Approval Engine hanya menangani failed compliance gate yang waivable.</li>
