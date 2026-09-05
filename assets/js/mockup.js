@@ -305,6 +305,10 @@
     }
     var nextTx=txOf(id);
     var cur=activeTx||txOf(fromId);
+    if(LIST_SCREENS[fromId]){
+      if(nextTx) persistTx(nextTx);
+      return id;
+    }
     if(cur && nextTx && familyOf(cur)!==familyOf(nextTx)){
       if(id==='cashless'||id==='digiroom'||id==='booking'||id==='dokumen'||id==='request'||id==='afi'||id==='exc_alamat'||id==='transaksi'||id==='customer_detail'||id==='bukti_serah'||id==='gi'||id==='bayar'){
         return hubOf(cur);
