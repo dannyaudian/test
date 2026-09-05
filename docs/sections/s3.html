@@ -1,0 +1,55 @@
+    <section class="sec" id="s3">
+      <div class="sec-head">
+        <span class="num">3</span>
+        <div>
+          <h2>KPI Items</h2>
+          <p class="deck">Dasar KPI adalah pekerjaan yang tercatat. Target angka (hari, %, kapasitas) disepakati di bagian Target setelah baseline.</p>
+        </div>
+      </div>
+      <blockquote class="rule">
+        <span class="tag">Dari kira-kira ke terukur</span>
+        <p>Selama ini beban Administrasi dan ketepatan waktu hanya dikira-kira — follow-up WhatsApp, “antrean terasa penuh”, SLA tidak punya jam mulai. Di FAST setiap pekerjaan Administrasi masuk antrean dengan jenis, transaksi, dan timestamp. Volume (berapa banyak) dan aging/SLA (berapa lama) bisa dihitung. KPI disusun dari data itu, bukan estimasi.</p>
+      </blockquote>
+      <div class="grid g2">
+        <div class="panel">
+          <h4>Yang bisa dihitung — volume</h4>
+          <p>Bukan target resmi. Ini jenis kerja yang sistem sudah pisahkan, jadi jumlahnya bisa di-KPI-kan.</p>
+          <ul>
+            <li>Antrean verifikasi (“Perlu saya”): berapa transaksi menunggu Administrasi.</li>
+            <li>Dipisah jenis: Good Issue, unmatched payment, duplikat NIK, exception dokumen, klasifikasi internal, STNK aging.</li>
+            <li>Buku cabang: volume SPK, quotation, SO, AFI, DO, billing, leasing B2B, kuitansi, pembayaran per status.</li>
+            <li>Penagihan paperless ke leasing, e-PO, dan backflow dokumen B2B. Billing tanpa e-PO → Operation Manager — terpisah dari waiver DP/TTD.</li>
+            <li>Pengecualian waivable vs eskalasi STNK — terpisah dari gate komersial (booking fee, 30%, lunas, TTD).</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Yang bisa diukur — SLA / aging</h4>
+          <p>Jam mulai = saat pekerjaan masuk antrean. Durasi tercatat per baris. Ambang kebijakan (misalnya berapa jam “on SLA”) ditetapkan nanti di Target, bukan dikarang di sini.</p>
+          <ul>
+            <li>Aging per item verifikasi (contoh di mockup: jam, hari — ilustratif).</li>
+            <li>Waktu Frontman ajukan → Admin cek → Kepala Administrasi putuskan, untuk exception waivable.</li>
+            <li>STNK aging setelah delivery (eskalasi otomatis, bukan waiver lunas).</li>
+            <li>Waktu unmatched payment sampai cocok.</li>
+            <li>Waktu Good Issue dari unggah bukti sampai disetujui.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>Keluarga KPI yang sekarang bisa disusun</h4>
+        <p>Nama dan rumus resmi menyusul kesepakatan. Yang berubah: semuanya punya pembilang dan penyebut dari sistem.</p>
+        <ul>
+          <li><b>Beban kerja cabang</b> — jumlah item terbuka per jenis, per Administrasi, per hari.</li>
+          <li><b>Ketepatan waktu</b> — porsi item yang selesai di dalam jam SLA yang disepakati; aging yang tembus ambang.</li>
+          <li><b>Mutu antrean</b> — dikembalikan ke Frontman vs selesai di Administrasi; koreksi di sumber.</li>
+          <li><b>Kapasitas</b> — item selesai per orang per periode, tanpa menghitung ulang data Frontman sebagai “kerja”.</li>
+        </ul>
+        <p>Mockup menampilkan angka cabang dan aging sebagai ilustrasi Cilandak, bukan baseline resmi.</p>
+      </div>
+      <div class="see-row">
+        <a class="see" href="mockup.html#verifikasi"><span class="see-k">Admin</span><b>Perlu saya</b><span>Volume + aging per baris</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#admin_spk"><span class="see-k">Admin</span><b>Buku cabang</b><span>Volume dokumen per stage</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#dashboard"><span class="see-k">Cabang</span><b>Management</b><span>Volume &amp; bottleneck dari lineage yang sama</span><em>Lihat →</em></a>
+      </div>
+    </section>
+
+    <!-- ================= 4 ================= -->

@@ -1,0 +1,143 @@
+      <section class="screen" id="quot">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">QT/26/CLD/00426 · rev <span data-qt-rev>1</span></p>
+            <h2>Quotation · Dewi Lestari</h2>
+            <p>Satu SPK menghasilkan satu quotation. Satu quotation bisa beberapa SO — satu SO per unit. Ubah quotation, semua SO terkait wajib ikut revisi.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="spk">← SPK</button>
+            <button class="btn" data-go="booking" data-bf-hide-paid>Tagih booking fee</button>
+            <button class="btn" data-go="so" data-bf-show-paid hidden>Buka SO Yaris</button>
+          </div>
+        </div>
+        <nav class="proc" data-proc="quot" aria-label="Proses transaksi"></nav>
+        <div class="box">
+          <h3>Aturan dokumen</h3>
+          <ul class="gates">
+            <li><span class="mark ok">1</span><div>1 SPK → 1 quotation<span class="why">SPK/26/CLD/00426 hanya punya QT/26/CLD/00426. Tidak pecah quotation per unit.</span></div><span class="tag ok">Tetap</span></li>
+            <li><span class="mark ok">n</span><div>1 quotation → banyak SO<span class="why">Pembelian &gt; 1 unit: satu baris quotation = satu SO. Yaris dan Agya tidak digabung.</span></div><span class="tag ok">Per unit</span></li>
+            <li><span class="mark no">↻</span><div>Quotation berubah → SO berubah<span class="why">Semua SO terkait (terbit atau belum) wajib ikut rev quotation. Bukan Approval Engine.</span></div><span class="tag hold">Wajib</span></li>
+          </ul>
+        </div>
+        <div class="cards">
+          <div class="card"><p class="k">SPK</p><p class="v" style="font-size:18px">1</p><p class="n">SPK/26/CLD/00426</p></div>
+          <div class="card"><p class="k">Quotation</p><p class="v" style="font-size:18px">1</p><p class="n">Tidak dipecah per unit</p></div>
+          <div class="card"><p class="k">Baris / SO</p><p class="v" style="font-size:18px">2</p><p class="n">Yaris + Agya</p></div>
+          <div class="card"><p class="k">OTR Yaris</p><p class="v" style="font-size:18px" data-qt-otr="yaris">Rp 296.800.000</p><p class="n">Ikut quotation · rev <span data-qt-rev>1</span></p></div>
+        </div>
+        <div class="box">
+          <h3>Baris quotation → Sales Order</h3>
+          <div class="soline">
+            <div>
+              <p><b>1 · Yaris 1.5 G CVT · Putih Metalik</b></p>
+              <p class="meta">OTR Depok <span data-qt-otr="yaris">Rp 296.800.000</span> + aksesoris Rp 5.350.000 · booking fee Rp 3.000.000 · SO rev <span data-so-rev>1</span></p>
+            </div>
+            <span class="tag ok" data-bf-show-paid hidden>SO 4500091426</span>
+            <span class="tag wait" data-bf-hide-paid>SO tertahan</span>
+          </div>
+          <div class="soline">
+            <div>
+              <p><b>2 · Agya 1.2 G CVT · Hitam</b></p>
+              <p class="meta">OTR Depok <span data-qt-otr="agya">Rp 175.900.000</span> · booking fee Rp 2.000.000 · SO sendiri 4500091428</p>
+            </div>
+            <span class="tag mute" data-so2-tag>Booking belum · SO tertahan</span>
+          </div>
+          <p class="hint" style="padding:12px 16px 14px">Baris 2 tidak menimpa SO Yaris. Tambah unit = baris baru = SO baru. Ubah OTR di quotation ini: kedua baris (SO terbit dan SO tertahan) harus ikut harga baru.</p>
+          <div class="pad" style="padding-top:0">
+            <button class="btn ghost" data-go="so">Buka SO Yaris</button>
+            <button class="btn ghost" data-go="so2">Buka SO Agya</button>
+          </div>
+          <div class="paystrip">
+            <b>Cashless booking — per baris SO</b>
+            <span class="hint" style="margin:0">QRIS · CDM · tautan · EDC Frontman</span>
+            <button class="btn" data-go="booking">Booking Yaris</button>
+            <button class="btn ghost" data-go="digiroom" data-pay-job="agya" data-role="cust">Booking Agya</button>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Revisi quotation</h3>
+          <div class="pad">
+            <p data-qt-fresh>Quotation rev <span data-qt-rev>1</span> = versi SO. Harga di kedua baris sama dengan SO.</p>
+            <p data-qt-stale hidden>Quotation naik ke rev <span data-qt-rev>1</span>. SO 4500091426 (Yaris, sudah terbit) dan SO 4500091428 (Agya, belum terbit) kedaluwarsa sampai diterapkan.</p>
+            <button class="btn ghost" style="margin-right:8px" data-qt-revise>Ubah harga quotation</button>
+            <button class="btn" data-qt-push hidden>Terapkan ke semua SO terkait</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="booking">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Setelah data SPK · SPK/26/CLD/00426</p>
+            <h2>Tagih booking fee · Dewi Lestari</h2>
+            <p>Yaris 1.5 G CVT · OTR Depok. Nominal booking dari master unit — Frontman tidak mengetik ulang. SO terbuka setelah kuitansi aktif.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="quot">← Quotation</button>
+          </div>
+        </div>
+        <nav class="proc" data-proc="booking" aria-label="Proses transaksi"></nav>
+        <div class="cards">
+          <div class="card"><p class="k">Booking fee unit</p><p class="v" style="font-size:22px">Rp 3.000.000</p><p class="n">Master Yaris</p></div>
+          <div class="card" data-bf-hide-paid><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Menunggu kuitansi booking fee</p></div>
+          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">4500091426</p><p class="n">Dikonversi dari SPK</p></div>
+        </div>
+        <div class="box" data-bf-hide-paid>
+          <h3>QRIS, CDM, tautan, atau EDC</h3>
+          <div class="pad">
+            <div class="channels" id="bfSeg">
+              <button type="button" class="channel" data-bf="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode di layar Frontman</span></button>
+              <button type="button" class="channel" data-bf="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Kode bayar di mesin setor</span></button>
+              <button type="button" class="channel" data-bf="link" aria-pressed="false"><span class="n">3</span><b>Tautan bayar</b><span>Beranda Digiroom</span></button>
+              <button type="button" class="channel" data-bf="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Pilih perangkat</span></button>
+            </div>
+            <div class="bf-panels">
+              <div data-bf-panel="qris" class="on">
+                <p class="hint">Tunjukkan layar ini ke customer. Jumlah sudah terisi. Jangan minta customer ketik nominal.</p>
+                <div class="qrbox lg" role="img" aria-label="QRIS booking fee Yaris Rp 3.000.000"></div>
+                <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 3.000.000</p>
+                <button type="button" class="btn" style="width:100%" data-bf-pay="qris">Simulasi ter-scan</button>
+              </div>
+              <div data-bf-panel="cdm">
+                <p class="hint">Customer setor tunai di CDM cabang. Masukkan kode ini di mesin — nominal terikat SPK, jangan diketik ulang.</p>
+                <div class="kiosk" style="max-width:360px">
+                  <p style="margin:0;font-size:12px;opacity:.7">CDM · FAST Outlet Cilandak</p>
+                  <p style="margin:8px 0 0;font-size:13px">Kode bayar</p>
+                  <p class="pay-code">0426 3000 01</p>
+                  <p style="margin:8px 0 0;font-size:12px;opacity:.7">Booking fee · Rp 3.000.000</p>
+                </div>
+                <button type="button" class="btn" style="width:100%;margin-top:12px" data-bf-pay="cdm">Simulasi setor CDM</button>
+              </div>
+              <div data-bf-panel="link">
+                <p class="hint">Tautan membuka beranda Digiroom. Booking fee adalah request salesman — QRIS dan VA terkunci Rp 3.000.000.</p>
+                <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
+                  <p class="from">FAST · tautan Digiroom</p>
+                  <p>Halo Bu Dewi, SPK Yaris Anda sudah tersimpan. Booking fee Rp 3.000.000.</p>
+                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/beranda</b></div>
+                </div>
+                <button type="button" class="btn" style="width:100%" data-go="digiroom" data-pay-job="booking" data-role="cust">Kirim tautan ke Digiroom</button>
+              </div>
+              <div data-bf-panel="edc">
+                <p class="hint">Pilih EDC yang dituju. Nominal didorong host-to-host — kasir tidak ketik di mesin.</p>
+                <div class="device-list">
+                  <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Kasir 1</b><span>Meja penerimaan · Cilandak</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Kasir 2</b><span>Meja SPK</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-03" aria-pressed="false"><b>EDC-03 · Outdoor</b><span>Pos serah terima</span></button>
+                </div>
+                <p class="hint edc-hint" style="margin:12px 0">Siap dorong ke EDC-01 · Kasir 1</p>
+                <button type="button" class="btn" style="width:100%" data-bf-pay="edc">Kirim Rp 3.000.000 ke perangkat</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box" data-bf-show-paid hidden>
+          <h3>SPK dikonversi menjadi Sales Order</h3>
+          <div class="pad">
+            <p>Kuitansi KWT/26/CLD/009301 aktif dan memenuhi minimum Yaris. Sistem membawa pemesan, STNK, unit, harga area PO, aksesoris, dan dokumen ke SO 4500091426. Tidak ada form SO baru.</p>
+            <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-go="so">Buka Sales Order</button>
+            <button type="button" class="btn ghost" style="width:100%" data-go="beranda">Kembali ke antrean</button>
+          </div>
+        </div>
+      </section>
+

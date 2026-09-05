@@ -1,0 +1,101 @@
+      <!-- ============ VERIFIKASI ADMIN ============ -->
+      <section class="screen" id="verifikasi">
+        <div class="screenhead">
+          <div>
+            <h2>Perlu saya · verifikasi</h2>
+            <p>Antrean tindakan cabang. Delapan list dokumen ada di Buku cabang. Jangan ketik ulang data Frontman.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="admin_spk">← Buku cabang</button></div>
+        </div>
+
+        <div class="cards">
+          <div class="card"><p class="k">Good Issue menunggu</p><p class="v">1</p><p class="n">Foto + scan BSTKB</p></div>
+          <div class="card"><p class="k">Exception pembayaran</p><p class="v">2</p><p class="n">Transfer tanpa referensi</p></div>
+          <div class="card"><p class="k">Peringatan duplikat</p><p class="v">1</p><p class="n">NIK terdaftar di 2 SPK</p></div>
+          <div class="card"><p class="k">Menunggu compliance decision</p><p class="v">3</p><p class="n">Hanya eligible exception</p></div>
+        </div>
+
+        <div class="box">
+          <h3>Perlu tindakan Administrasi</h3>
+          <div class="scroll">
+          <table>
+            <thead><tr><th>Transaksi</th><th>Jenis</th><th>Temuan sistem</th><th>Tindakan</th><th>Aging</th></tr></thead>
+            <tbody>
+              <tr data-go="gi" data-tx-dots="fajar">
+                <td><b>SPK/26/CLD/00424</b><span class="sub">Fajar Nugroho · Rush</span></td>
+                <td>Good Issue</td>
+                <td>Foto serah terima + scan BSTKB <span class="sub">Unit terkirim 2 Sep · salesman unggah</span></td>
+                <td><span class="tag hold" data-gi-tag>Setujui GI</span></td>
+                <td>18 jam</td>
+              </tr>
+              <tr data-go="afi" data-afi-admin hidden data-tx-dots="budi">
+                <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · Innova Zenix</span></td>
+                <td>AFI</td>
+                <td>Pengajuan nama &amp; alamat STNK masuk <span class="sub">Proses terbit STNK/BPKB menyusul</span></td>
+                <td><span class="tag wait">Tercatat</span></td>
+                <td>—</td>
+              </tr>
+              <tr data-go="exc_alamat" data-tx-dots="budi">
+                <td><b>SPK/26/CLD/00418</b><span class="sub">Budi Santoso · bukti alamat</span></td>
+                <td>Exception dokumen</td>
+                <td>Bukti alamat kedaluwarsa <span class="sub">Waivable · Approval Engine</span></td>
+                <td><span class="tag hold">Cek lalu teruskan</span></td>
+                <td>2j 10m</td>
+              </tr>
+              <tr data-go="tx_raize" data-tx-dots="raize">
+                <td><b>SPK/26/CLD/00423</b><span class="sub">Sarah Wijaya</span></td>
+                <td>Verifikasi dokumen</td>
+                <td>NPWP belum diunggah <span class="sub">Pemilik input: Frontman · bukan waiver</span></td>
+                <td><span class="tag hold">Kembalikan ke Frontman</span></td>
+                <td>3 hari</td>
+              </tr>
+              <tr>
+                <td><b>SPK/26/CLD/00431</b><span class="sub">Hendra Gunawan</span></td>
+                <td>Peringatan duplikat</td>
+                <td>NIK sama dengan SPK/26/BSD/00187 <span class="sub">Deteksi otomatis · non-waivable</span></td>
+                <td><span class="tag stop">Koreksi di sumber</span></td>
+                <td>5 jam</td>
+              </tr>
+              <tr data-go="admin_pay">
+                <td><b>Transfer Rp 25.000.000</b><span class="sub">BCA · 1 Sep 15:22</span></td>
+                <td>Exception pembayaran</td>
+                <td>Referensi tidak dikenali <span class="sub">Resolution, bukan approval</span></td>
+                <td><span class="tag stop">Cocokkan manual</span></td>
+                <td>1 hari</td>
+              </tr>
+              <tr data-go="exc_epo" data-b2b-pick="1288" data-tx-dots="hiace">
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091288</span></td>
+                <td>Penagihan leasing</td>
+                <td>E-PO belum dari leasing <span class="sub">Waivable · Operation Manager · bukan waiver DP</span></td>
+                <td><span class="tag hold" data-exc-epo-tag>Cek lalu teruskan</span></td>
+                <td>4 jam</td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-pick="1288" data-tx-dots="hiace">
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091288</span></td>
+                <td>Penagihan leasing</td>
+                <td>DP wajib dari B2B + data Frontman lengkap <span class="sub">Admin kirim paperless &amp; terbitkan kuitansi</span></td>
+                <td><span class="tag wait">Paperless</span></td>
+                <td>4 jam</td>
+              </tr>
+              <tr data-go="tx_hiace" data-b2b-pick="1289" data-tx-dots="hiace">
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091289</span></td>
+                <td>Backflow B2B</td>
+                <td>Leasing mengembalikan NPWP badan <span class="sub">Frontman unggah ulang · bukan Approval Engine</span></td>
+                <td><span class="tag stop">Pantau Frontman</span></td>
+                <td>1 hari</td>
+              </tr>
+              <tr data-go="exc_stnk" data-tx-dots="maria">
+                <td><b>SPK/26/CLD/00409</b><span class="sub">Maria Sitompul</span></td>
+                <td>Dokumen kendaraan</td>
+                <td>STNK melewati 15 hari <span class="sub">Eskalasi otomatis</span></td>
+                <td><span class="tag hold">Tindak lanjut biro jasa</span></td>
+                <td>19 hari</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <p class="note">Saat Administrasi mengoreksi data, koreksi dilakukan pada sumber data asal dan sistem menampilkan proses mana saja yang terdampak sebelum perubahan disimpan.</p>
+      </section>
+

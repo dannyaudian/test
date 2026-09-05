@@ -1,0 +1,50 @@
+    <section class="sec" id="s8">
+      <div class="sec-head">
+        <span class="num">8</span>
+        <div>
+          <h2>Open Kitchen Visibility</h2>
+          <p class="deck">Empat sudut pandang atas satu transaksi yang sama.</p>
+        </div>
+      </div>
+      <div class="grid g3">
+        <div class="panel">
+          <h4>A. Frontman view</h4>
+          <ul><li>Current transaction stage.</li><li>Linked SPK, Sales Order, and billing numbers.</li><li>B2B leasing status per SO (submit through pelunasan, including backflow).</li><li>Required customer DP amount from B2B (read-only).</li><li>Download leasing contract; upload requested docs, signed contract, and billing evidence. Frontman does not send the leasing invoice.</li><li>Data already captured.</li><li>Missing information.</li><li>Input owner for missing data.</li><li>Document readiness.</li><li>Payment and receipt history.</li><li>AR Open per unit.</li><li>Active payment requests.</li><li>Available Request Amount.</li><li>Failed compliance rule.</li><li>Exception eligibility.</li><li>Exception decision status.</li><li>Billing readiness (including full DP from B2B).</li><li>Delivery eligibility (including TTD from B2B).</li><li>Good Issue.</li><li>STNK/BPKB.</li><li>Process hold reason.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>B. Administration view</h4>
+          <ul><li>Transactions requiring verification, counted by type.</li><li>Paperless billing to leasing and leasing billing receipts (kuitansi) issued by Administration.</li><li>Required customer DP from B2B versus received.</li><li>B2B backflow waiting on Frontman.</li><li>Data requiring enrichment.</li><li>Duplicate-input warning.</li><li>Broken SPK–SO–Billing reference.</li><li>Missing receipt for a verified payment.</li><li>Unmatched payment.</li><li>Failed compliance rule.</li><li>Waivable versus non-waivable status.</li><li>Pending compliance exception decision.</li><li>Vehicle or document mismatch.</li><li>Aging and SLA clock per work item (start when the item enters the queue).</li><li>Queue volume — how many items, not an estimate.</li><li>Downstream impact of data correction.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>C. Management view</h4>
+          <ul><li>Empat kursi: Kepala Administrasi (exception waivable), Kepala Cabang (STNK aging cabang), Area Business Head (volume/bottleneck area), Operation Manager (kirim &amp; Good Issue).</li><li>Transaction volume by stage.</li><li>Bottleneck with drill-down to the same lineage.</li><li>Aging.</li><li>Locked transaction and cause (commercial gates remain non-waivable).</li><li>Approval inbox sesuai kursi — bukan 30%/lunas.</li></ul>
+        </div>
+      </div>
+      <div class="see-row" style="margin-top:14px">
+        <a class="see" href="mockup.html#verifikasi"><span class="see-k">Admin</span><b>Perlu saya</b><span>Volume kerja + aging/SLA</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#dashboard"><span class="see-k">ABH</span><b>Volume area</b><span>Klik bottleneck ke transaksi yang sama</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#mgmt_inbox"><span class="see-k">KA / KC / OM</span><b>Antrean sesuai kursi</b><span>Exception, STNK, kirim/GI — bukan 30%/lunas</span><em>Lihat →</em></a>
+      </div>
+      <h3>D. Customer View</h3>
+      <p>Layar customer (shop.fast.id) adalah daftar pesanan, bukan katalog toko dan bukan workspace SAM. Jejak internal SPK→STNK tetap di Frontman/Administrasi. Customer klik pesanan untuk lacak progres, lalu memilih salah satu dari dua proses bayar yang terpisah — dengan AR Open, kuitansi, dan paket serah terima yang sama.</p>
+      <div class="grid g3">
+        <div class="panel"><h4>Daftar &amp; lacak</h4><ul><li>List pesanan (Zenix berlangsung, Calya/aksesoris selesai).</li><li>Klik masuk untuk jejak: dipesan → DP → pelunasan → kirim → dokumen.</li><li>Tab Pesanan · Lacak · Bayar · Akun.</li><li>Calya FAST-01990 + aksesoris FAST-88102 hanya pelacakan.</li></ul></div>
+        <div class="panel"><h4>Dua proses bayar (kondisional)</h4><ul><li><b>Penagihan Frontman</b> — nominal dikunci (default Rp 100.000.000), QRIS/VA terkunci.</li><li><b>Pelunasan cashless</b> — customer isi sendiri; maks. sisa di luar request (Rp 81.750.000) atau penuh AR Open (Rp 181.750.000) jika tidak ada request.</li><li>Skenario: ada keduanya / hanya request / hanya cashless / lunas (AR 0, menu bayar hilang).</li><li>Bukan satu bar CTA. EDC tidak ada di customer.</li></ul></div>
+        <div class="panel"><h4>Bukti &amp; kirim</h4><ul><li>E-kuitansi sebagai struk, nomor sama dengan cabang.</li><li>Pengiriman terkunci sampai cash lunas.</li><li>Paket bukti serah terima setelah unit diterima.</li></ul></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h4>Order Journey (bahasa pelanggan)</h4>
+        <div class="journey">
+          <span class="done">Dipesan ✓</span><span class="done">DP ✓</span><span>Pelunasan</span><span>Dikirim</span><span>Dokumen</span>
+        </div>
+        <div class="see-row" style="margin-top:14px">
+          <a class="see" href="mockup.html#customer"><span class="see-k">List</span><b>Pesanan saya</b><span>Klik kartu untuk lacak</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#customer_detail"><span class="see-k">Lacak</span><b>Zenix FAST-00418</b><span>Dua menu bayar terpisah</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#tagihan_customer"><span class="see-k">Bayar</span><b>Penagihan vs cashless</b><span>Skenario kondisional</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Bukti</span><b>Serah terima Calya</b><span>Bukan rekaman CCTV</span><em>Lihat →</em></a>
+        </div>
+      </div>
+      <p>Customer menerima informasi yang berasal dari transaksi dan sumber data yang sama, bukan update manual dari fungsi yang berbeda.</p>
+    </section>
+
+    <!-- ================= 9 ================= -->
