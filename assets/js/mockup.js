@@ -292,7 +292,7 @@
   function familyOf(tx){ return (window.FAST && FAST.txFamily)?FAST.txFamily(tx):tx; }
   function txOf(id){ return (window.FAST && FAST.screenTx)?FAST.screenTx(id, payJobId):null; }
   function hubOf(tx){ return (window.FAST && FAST.txHub && FAST.txHub(tx))||'beranda'; }
-  function stayTarget(id, fromId){
+  function stayTarget(id, fromId, explicit){
     if(LIST_SCREENS[id]){
       if(id==='beranda'||id==='admin_spk'||id==='customer'||id==='dashboard'||id==='mgmt_inbox'||id==='verifikasi'||id==='eskalasi') persistTx(null);
       return id;
@@ -305,6 +305,10 @@
     }
     var nextTx=txOf(id);
     var cur=activeTx||txOf(fromId);
+    if(explicit || LIST_SCREENS[fromId]){
+      if(nextTx) persistTx(nextTx);
+      return id;
+    }
     if(cur && nextTx && familyOf(cur)!==familyOf(nextTx)){
       if(id==='cashless'||id==='digiroom'||id==='booking'||id==='dokumen'||id==='request'||id==='afi'||id==='exc_alamat'||id==='transaksi'||id==='customer_detail'||id==='bukti_serah'||id==='gi'||id==='bayar'){
         return hubOf(cur);
@@ -320,6 +324,16 @@
       map={ringkas:'so2',bayar:'cashless',minta:'so2',afi:'quot',dok:'spk',exc:'spk'};
     } else if(fam==='dewi'){
       map={ringkas:'so',bayar:'cashless',minta:'so',afi:'afi_d',dok:'spk',exc:'spk'};
+    } else if(fam==='agus'){
+      map={ringkas:'tx_avanza',bayar:'tx_avanza',minta:'tx_avanza',afi:'tx_avanza',dok:'tx_avanza',exc:'tx_avanza'};
+    } else if(fam==='raize'){
+      map={ringkas:'tx_raize',bayar:'tx_raize',minta:'tx_raize',afi:'tx_raize',dok:'tx_raize',exc:'tx_raize'};
+    } else if(fam==='hiace'){
+      map={ringkas:'tx_hiace',bayar:'tx_hiace',minta:'tx_hiace',afi:'tx_hiace',dok:'tx_hiace',exc:'tx_hiace'};
+    } else if(fam==='maria'){
+      map={ringkas:'tx_fortuner',bayar:'tx_fortuner',minta:'tx_fortuner',afi:'tx_fortuner',dok:'tx_fortuner',exc:'exc_stnk'};
+    } else if(fam==='fajar'){
+      map={ringkas:'gi',bayar:'gi',minta:'gi',afi:'gi',dok:'gi',exc:'gi'};
     }
     document.querySelectorAll('#cashless [data-stay-tab]').forEach(function(b){
       var k=b.getAttribute('data-stay-tab');
@@ -327,14 +341,19 @@
       if(k==='minta'||k==='exc') b.hidden=fam==='dewi';
     });
   }
-  function show(id){
+  function show(id, opts){
+    opts=opts||{};
     var from=(document.querySelector('.screen.on')||{}).id;
-    id=stayTarget(id, from);
+    id=stayTarget(id, from, opts.explicit);
     if(id==='admin_tx') id='admin_spk';
     if(currentRole==='mgmt' && id==='eskalasi') id='mgmt_inbox';
     var bookKey=ADMIN_BOOK[id];
     var screenId=bookKey?'admin_book':id;
     screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
+    if(from && from!==screenId){
+      var landed=document.getElementById(screenId);
+      if(landed) landed.removeAttribute('data-stage-view');
+    }
     if(bookKey) activateAdminBook(bookKey);
     var railId=({
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',bukti_serah:'customer',
@@ -489,7 +508,7 @@
     if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home') || b.hasAttribute('data-mgmt-seat')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
     if(b.hasAttribute('data-b2b-tab') || b.hasAttribute('data-b2b-so') || b.hasAttribute('data-b2b-doc') || b.hasAttribute('data-b2b-drop') || b.hasAttribute('data-b2b-bill') || b.hasAttribute('data-b2b-dl-contract') || b.hasAttribute('data-b2b-paperless') || b.hasAttribute('data-b2b-kwt') || b.hasAttribute('data-b2b-lunas') || b.hasAttribute('data-b2b-resubmit') || b.hasAttribute('data-b2b-issue-contract') || b.hasAttribute('data-b2b-mark-dp') || b.hasAttribute('data-b2b-return') || b.hasAttribute('data-b2b-stay') || b.hasAttribute('data-raize-npwp') || b.hasAttribute('data-budi-bf')) return;
-    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
+    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-gi-stay') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
@@ -607,14 +626,14 @@
   if(hash==='admin_tx') hash='admin_spk';
   if(hash && (document.getElementById(hash) || ADMIN_BOOK[hash])){
     if(screenRole[hash]) applyRole(screenRole[hash]);
-    show(hash);
+    show(hash, {explicit:true});
   }
   window.addEventListener('hashchange', function(){
     var h=(location.hash||'').replace('#','');
     if(h==='admin_tx') h='admin_spk';
     if(h && (document.getElementById(h) || ADMIN_BOOK[h])){
       if(screenRole[h]) applyRole(screenRole[h]);
-      show(h);
+      show(h, {explicit:true});
     }
   });
 
@@ -1734,6 +1753,12 @@
     var tab=s.tab||'ringkas';
     if(currentRole==='frontman' && tab==='tagih') tab='dokumen';
     if(currentRole==='admin' && tab==='dokumen') tab='tagih';
+    document.querySelectorAll('[data-b2b-chrome]').forEach(function(el){ el.hidden = tab!=='ringkas'; });
+    var hiace=document.getElementById('tx_hiace');
+    if(hiace){
+      var viewTab={ringkas:'spk',so:'so',alur:'del',dokumen:'bill',tagih:'bill'};
+      if(viewTab[tab]) hiace.setAttribute('data-stage-view', viewTab[tab]);
+    }
     var billCard=document.querySelector('[data-b2b-card="bill"]');
     var delCard=document.querySelector('[data-b2b-card="del"]');
     var paperCard=document.querySelector('[data-b2b-card="paper"]');
@@ -1958,6 +1983,13 @@
     b.addEventListener('click',function(){
       patchB2b(function(s){ s.tab=b.getAttribute('data-b2b-tab'); });
     });
+  });
+  document.addEventListener('fast-stage-map', function(e){
+    var tab=(e.detail&&e.detail.tab)||'ringkas';
+    patchB2b(function(s){ s.tab=tab; });
+  });
+  document.querySelectorAll('[data-gi-stay]').forEach(function(b){
+    b.addEventListener('click',function(){ toast('Tetap di SPK/26/CLD/00424. Antrean cabang dibuka dari list, bukan dari dalam GI ini.'); });
   });
   document.querySelectorAll('[data-b2b-stay]').forEach(function(b){
     b.addEventListener('click',function(){ toast('Tetap di SPK/26/CLD/00421. Volume area dibuka dari daftar, bukan dari dalam transaksi ini.'); });
