@@ -58,8 +58,13 @@
   var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
   function setCurrent() {
     var current = null;
+    var best = -Infinity;
     targets.forEach(function (t) {
-      if (t.getBoundingClientRect().top <= 150) current = t.id;
+      var top = t.getBoundingClientRect().top;
+      if (top <= 160 && top >= best) {
+        best = top;
+        current = t.id;
+      }
     });
     links.forEach(function (a) { a.removeAttribute('aria-current'); });
     if (current && map[current]) map[current].setAttribute('aria-current', 'true');
