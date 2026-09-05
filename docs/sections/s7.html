@@ -1,0 +1,74 @@
+    <section class="sec" id="s7">
+      <div class="sec-head">
+        <span class="num">7</span>
+        <div>
+          <h2>Technology and Control Enablers</h2>
+          <p class="deck">Komponen sistem yang menjalankan input ownership, validasi, dan carry-forward data.</p>
+        </div>
+      </div>
+      <div class="grid g2">
+        <div class="panel">
+          <h4>SAM — Single front-end</h4>
+          <p>Digunakan Frontman untuk:</p>
+          <ul><li>Input customer and transaction data.</li><li>Upload documents.</li><li>Create payment requests.</li><li>View open unit bills.</li><li>Monitor payments and receipts.</li><li>Submit Sales Order request.</li><li>Request billing.</li><li>Request AFI/DO.</li><li>Request delivery.</li><li>Submit handover evidence.</li><li>Monitor STNK/BPKB.</li><li>View failed compliance rules.</li><li>Complete missing requirements.</li><li>Submit eligible compliance exception.</li><li>View exception decision and escalation.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>SAP/ERP — Transaction Backbone</h4>
+          <ul><li>Sales Order.</li><li>Billing.</li><li>SPK–SO–Billing document references.</li><li>Account Receivable.</li><li>Payment allocation.</li><li>Receipt generation and posting.</li><li>Outstanding balance.</li><li>Vehicle transaction.</li><li>Financial release.</li><li>Good Issue.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>Payment Gateway and Banking API</h4>
+          <ul><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Real-time verification.</li><li>Payment matching.</li><li>Payment allocation.</li><li>Settlement.</li><li>Payment exception identification.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>Master Data and Single Source of Truth</h4>
+          <ul><li>Validated customer data.</li><li>Transaction data.</li><li>Vehicle data.</li><li>Final transaction value from source system.</li><li>Payment and receipt status.</li><li>Document status.</li><li>Compliance-rule status.</li><li>Exception-decision status.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>Integration and API Layer</h4>
+          <ul><li>Menghubungkan SAM, SAP/ERP, Banking API, Document Vault, Compliance Exception Approval Engine, dan customer channel.</li><li>Mencegah input ulang.</li><li>Menyinkronkan status.</li><li>Mempertahankan SPK–SO–Billing lineage.</li><li>Memperkaya receipt lineage ketika SO atau billing terbit.</li><li>Memicu proses downstream.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>Rules and Workflow Engine</h4>
+          <ul><li>Input ownership control.</li><li>Completeness checking.</li><li>Duplicate detection.</li><li>SPK–SO–Billing reference integrity.</li><li>Payment validation.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount validation.</li><li>Receipt-cancellation reversal.</li><li>Next-process eligibility.</li><li>Process unlock.</li><li>Process hold.</li><li>Exception identification.</li><li>Escalation routing.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>Compliance Exception Approval Engine</h4>
+          <ul><li>Failed compliance gate only.</li><li>Waivable versus non-waivable classification.</li><li>Role-based decision authority.</li><li>Evidence completeness.</li><li>Approve with conditions.</li><li>Reject.</li><li>Return for completion.</li><li>Validity period and expiry.</li><li>Limited release by process, unit, dan Sales Order.</li><li>Automatic re-lock.</li><li>SLA monitoring and escalation.</li></ul>
+          <p>Transaction value, discount, cashback, program, dan OPO/OPK tetap menjadi read-only source-system data dan bukan objek approval dalam FAST.</p>
+        </div>
+        <div class="panel">
+          <h4>Document Vault</h4>
+          <ul><li>Store documents once.</li><li>Validate document status.</li><li>Reuse valid documents.</li><li>Support AFI/DO, delivery, STNK, dan BPKB.</li><li>Store digital handover evidence (photo, VIN, geotag, timestamp, recipient, BSTKB) as one pack.</li><li>Give the same pack to Frontman, Administration, and the customer after Good Issue is approved.</li><li>Prevent repeated document upload.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>B2B Leasing Integration</h4>
+          <ul>
+            <li>Per-SO status from submit to leasing through pelunasan.</li>
+            <li>Frontman downloads the leasing-submitted contract, re-uploads the customer-signed contract, and uploads signed-contract photo, handover photo, and BSTKB.</li>
+            <li>Frontman also uploads documents leasing requested (identity, NPWP, NIB/SIUP, SPK).</li>
+            <li>Administration sends paperless billing and issues the leasing kuitansi only after that Frontman pack is complete and full customer DP from B2B is paid.</li>
+            <li>Normal flow and backflow on the same tracker when leasing or Administration returns incomplete documents.</li>
+            <li>Required customer DP amount and DP-received status come from B2B leasing (read-only in FAST) and appear on the Sales Order pricing structure when payment type is credit/leasing.</li>
+            <li>Billing gate reads full-DP status; delivery gate reads TTD status. Neither is an Approval Engine object.</li>
+            <li>Missing documents are operational backflow, not a waiver of DP or TTD.</li>
+            <li>Contract date and reference.</li>
+            <li>Read-only commercial facts into FAST gates; Frontman still performs the human upload/download steps.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>E-Receipt Service</h4>
+          <ul><li>Generate one receipt per verified payment.</li><li>Generate receipt number.</li><li>Generate PDF.</li><li>Add verification code atau QR.</li><li>Maintain Active, Cancelled, Reversed, dan Reissued status.</li><li>Preserve payment-to-receipt lineage.</li><li>Provide customer download access.</li><li>Maintain download history.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>Audit Trail</h4>
+          <ul><li>Input owner.</li><li>Verification owner.</li><li>SPK–SO–Billing lineage.</li><li>Payment-to-receipt lineage.</li><li>Receipt reversal or reissue.</li><li>Data changes.</li><li>Original and revised value.</li><li>Actor.</li><li>Timestamp.</li><li>Reason.</li><li>Compliance exception decision.</li><li>Conditions and validity.</li><li>Compliance-gate result.</li><li>Process unlock and re-lock.</li></ul>
+        </div>
+        <div class="panel">
+          <h4>WhatsApp and Digiroom</h4>
+          <ul><li>Payment request.</li><li>Payment confirmation.</li><li>E-kuitansi delivery and download.</li><li>Outstanding balance information.</li><li>Transaction milestones.</li><li>Delivery notification.</li><li>STNK/BPKB updates.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 8 ================= -->

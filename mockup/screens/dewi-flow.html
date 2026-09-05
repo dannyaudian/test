@@ -1,0 +1,158 @@
+      <section class="screen" id="afi_d">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">AFI · SO 4500091426</p>
+            <h2>Pengajuan AFI · Yaris</h2>
+            <p>Setelah SO. Data STNK dari SPK. Bukan ketik ulang. DO menyusul.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="so">← SO</button>
+            <button class="btn" data-go="do" data-dewi-afi-done hidden>Lanjut DO</button>
+          </div>
+        </div>
+        <nav class="proc" data-proc="afi_d" aria-label="Proses transaksi"></nav>
+        <div class="paystrip">
+          <b>Cashless Yaris</b>
+          <span class="hint" style="margin:0">Billing butuh ≥30%. Bayar di sini, jejak SO tetap 4500091426.</span>
+          <button class="btn" data-go="digiroom" data-pay-job="dewi" data-role="cust">Digiroom</button>
+          <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="dewi">Cabang</button>
+        </div>
+        <div class="box" data-afi-d-wait>
+          <h3>SO dulu</h3>
+          <div class="pad"><p data-afi-need-so>AFI menunggu Sales Order baris Yaris. Booking fee belum meet.</p><p data-afi-need-qt hidden>Quotation berubah. Terapkan ke SO dulu, baru AFI.</p><button class="btn" data-go="quot">Ke quotation</button></div>
+        </div>
+        <div data-afi-d-open hidden>
+          <div class="cards">
+            <div class="card"><p class="k">Nama STNK</p><p class="v" style="font-size:18px">Andi Pratama</p><p class="n">Dari SPK</p></div>
+            <div class="card"><p class="k">Kota</p><p class="v" style="font-size:18px">Depok</p><p class="n">Area PO sama</p></div>
+            <div class="card"><p class="k">Dokumen</p><p class="v" style="font-size:18px">Vault</p><p class="n">Unggah di SPK</p></div>
+          </div>
+          <div class="box">
+            <h3>Ajukan AFI</h3>
+            <div class="pad">
+              <p>Plat standar. Nama dan alamat tidak diubah di sini.</p>
+              <button class="btn" style="width:100%" data-dewi-afi>Kirim pengajuan AFI</button>
+            </div>
+          </div>
+        </div>
+        <div class="box" data-afi-d-sent hidden>
+          <h3>AFI tercatat</h3>
+          <div class="pad">
+            <p>Pengajuan masuk. Lanjut Delivery Order. Billing belum — tunggu DO dan dana ≥30%.</p>
+            <button class="btn" data-go="do">Buka DO</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="do">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Delivery Order · SO 4500091426</p>
+            <h2>DO · Yaris Putih Metalik</h2>
+            <p>Setelah AFI. Perintah gudang dari SO, bukan ketik unit ulang. Billing menyusul.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="afi_d">← AFI</button></div>
+        </div>
+        <nav class="proc" data-proc="do" aria-label="Proses transaksi"></nav>
+        <div class="paystrip">
+          <b>Cashless Yaris</b>
+          <span class="hint" style="margin:0">DO tidak mengganti kanal bayar. Pelunasan tetap QRIS / CDM / tautan / EDC.</span>
+          <button class="btn" data-go="digiroom" data-pay-job="dewi" data-role="cust">Digiroom</button>
+          <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="dewi">Cabang</button>
+        </div>
+        <div class="box" data-do-wait>
+          <h3>AFI dulu</h3>
+          <div class="pad"><p>DO tertahan sampai AFI baris ini terkirim.</p><button class="btn" data-go="afi_d">Ke AFI</button></div>
+        </div>
+        <div data-do-open hidden>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor DO</span><span class="val">DO/26/CLD/01426</span><span class="src">Dihasilkan saat terbit</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Yaris 1.5 G CVT · Putih Metalik</span><span class="src">SO / quotation</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Penerima</span><span class="val">Dewi Lestari · Cipete</span><span class="src">SPK</span></div>
+          </div>
+          <div class="pad">
+            <button class="btn" style="width:100%" data-dewi-do>Terbitkan DO</button>
+          </div>
+        </div>
+        <div class="box" data-do-sent hidden>
+          <h3>DO terbit</h3>
+          <div class="pad">
+            <p>DO/26/CLD/01426. Lanjut billing — tetap butuh cash ≥30%.</p>
+            <button class="btn" data-go="bill_d">Buka billing</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="bill_d">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Billing · setelah DO</p>
+            <h2>Billing · SO 4500091426</h2>
+            <p>Urutan: AFI → DO → billing. Gate cash ≥30% non-waivable. Pelunasan cashless di transaksi ini.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="do">← DO</button></div>
+        </div>
+        <nav class="proc" data-proc="bill_d" aria-label="Proses transaksi"></nav>
+        <div class="cards">
+          <div class="card"><p class="k">Dana masuk</p><p class="v" style="font-size:18px">0,99%</p><p class="n">Booking Rp 3.000.000</p></div>
+          <div class="card alert"><p class="k">Syarat</p><p class="v" style="font-size:18px">≥30%</p><p class="n">Belum · bukan exception</p></div>
+          <div class="card"><p class="k">DO</p><p class="v" style="font-size:18px" data-bill-do>Menunggu</p><p class="n">Harus terbit dulu</p></div>
+        </div>
+        <div class="paystrip">
+          <b>Cashless pelunasan</b>
+          <span class="hint" style="margin:0">Naikkan dana masuk lewat QRIS / CDM / tautan / EDC Frontman</span>
+          <button class="btn" data-go="digiroom" data-pay-job="dewi" data-role="cust">Bayar di Digiroom</button>
+        </div>
+        <div class="box">
+          <h3>Gate billing</h3>
+          <ul class="gates">
+            <li data-bill-need-do><span class="mark no">!</span><div>Delivery Order<span class="why">Belum terbit</span></div><span class="tag stop">Tertahan</span></li>
+            <li data-bill-has-do hidden><span class="mark ok">✓</span><div>Delivery Order<span class="why">DO/26/CLD/01426</span></div><span class="tag ok">Lolos</span></li>
+            <li><span class="mark no">!</span><div>Cash ≥30%<span class="why">0,99% · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
+          </ul>
+          <div class="pad"><button class="btn" disabled>Ajukan billing</button><p class="hint">Tombol hidup setelah DO dan 30% dana masuk.</p></div>
+        </div>
+      </section>
+
+      <section class="screen" id="kirim_d">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Delivery · setelah billing</p>
+            <h2>Pengiriman · Yaris</h2>
+            <p>Cash lunas non-waivable. Alamat dari SPK. Jadwal armada Deliverable 3.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="bill_d">← Billing</button></div>
+        </div>
+        <nav class="proc" data-proc="kirim_d" aria-label="Proses transaksi"></nav>
+        <div class="box">
+          <h3>Gate delivery</h3>
+          <ul class="gates">
+            <li><span class="mark no">!</span><div>Billing<span class="why">Belum terbit</span></div><span class="tag stop">Tertahan</span></li>
+            <li><span class="mark no">!</span><div>Cash lunas<span class="why">AR Open Rp 299.150.000 · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
+          </ul>
+          <div class="paystrip">
+            <b>Cashless pelunasan</b>
+            <button class="btn" data-go="digiroom" data-pay-job="dewi" data-role="cust">Bayar sisa di Digiroom</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="stnk_d">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">STNK / BPKB tracking</p>
+            <h2>Tracking · Andi Pratama</h2>
+            <p>Data dari SPK. Aging eskalasi, bukan tombol melewati lunas. AFI sudah mengisi pengajuan.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="kirim_d">← Delivery</button></div>
+        </div>
+        <nav class="proc" data-proc="stnk_d" aria-label="Proses transaksi"></nav>
+        <ul class="milestones">
+          <li class="done"><span class="m">✓</span><div>Data STNK di SPK<div class="t">Andi Pratama · Kota Depok</div></div></li>
+          <li data-stnk-afi><span class="m">2</span><div>AFI<div class="t">Menunggu SO / pengajuan</div></div></li>
+          <li><span class="m">3</span><div>Proses Samsat<div class="t">Setelah AFI masuk</div></div></li>
+          <li><span class="m">4</span><div>STNK terbit<div class="t">Tracking, bukan waiver delivery</div></div></li>
+          <li><span class="m">5</span><div>BPKB<div class="t">Serah terima dokumen</div></div></li>
+        </ul>
+      </section>
+

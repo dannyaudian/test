@@ -1,0 +1,35 @@
+      <!-- ============ DOKUMEN ============ -->
+      <section class="screen" id="dokumen">
+        <div class="screenhead">
+          <div>
+            <h2>Dokumen · SPK/26/CLD/00418</h2>
+            <p>Nama dan alamat STNK diisi di SPK. Tab AFI mengajukan billing berpasangan. Vault dipakai ulang.</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="beranda">← Daftar</button>
+            <button class="btn">Unggah</button>
+          </div>
+        </div>
+        <nav class="worktabs" aria-label="Isi transaksi">
+          <button type="button" data-go="transaksi">Ringkasan</button>
+          <button type="button" data-go="cashless" data-fm-only>Bayar</button>
+          <button type="button" data-go="request" data-fm-only>Minta bayar</button>
+          <button type="button" data-go="afi">AFI</button>
+          <button type="button" data-go="dokumen">Dokumen</button>
+          <button type="button" data-go="exc_alamat">Pengecualian</button>
+        </nav>
+
+        <div class="box">
+          <h3>Document Vault <span class="side">4 dokumen dipakai ulang dari transaksi sebelumnya</span></h3>
+          <div class="docs">
+            <div class="doc"><b>KTP</b><p class="meta">Diunggah 28 Agu · 1,2 MB</p><span class="tag ok">Valid</span><span class="reuse">Dipakai ulang dari CST-0090412</span></div>
+            <div class="doc"><b>NPWP</b><p class="meta">Diunggah 28 Agu · 0,8 MB</p><span class="tag ok">Valid</span><span class="reuse">Dipakai ulang dari CST-0090412</span></div>
+            <div class="doc"><b>Kartu Keluarga</b><p class="meta">Diunggah 28 Agu · 1,6 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>Surat Kuasa</b><p class="meta">Belum diperlukan</p><span class="tag mute">Menyusul saat delivery</span></div>
+            <div class="doc miss" id="docAlamat"><b>Bukti alamat</b><p class="meta">Masa berlaku habis 14 Agu 2026</p><span class="tag hold">Perlu pembaruan</span><span class="reuse" style="color:var(--gate)">Waivable · Frontman</span><button class="btn" data-go="exc_alamat" style="width:100%;margin-top:10px">Ajukan exception</button></div>
+            <div class="doc"><b>BSTKB</b><p class="meta">Scan diunggah salesman saat Good Issue</p><span class="tag mute">Admin setujui</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BUKU ADMIN: SPK … PEMBAYARAN ============ -->
