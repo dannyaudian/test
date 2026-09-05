@@ -1,0 +1,53 @@
+      <section class="screen" id="tx_raize">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">SPK/26/CLD/00423 · data gate</p>
+            <h2>Sarah Wijaya · Raize 1.0 T GR Sport</h2>
+            <p>Satu jejak SPK→STNK. Tahap setelah SPK tertahan sampai NPWP ada di sumber — bukan Approval Engine.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
+        </div>
+        <div class="cards" data-stage-kpis="spk">
+          <div class="card alert"><p class="k">Data gate</p><p class="v" style="font-size:18px">NPWP kosong</p><p class="n">Lengkapi di SPK ini</p></div>
+          <div class="card"><p class="k">Booking fee</p><p class="v" style="font-size:18px">Belum ditagih</p><p class="n">Setelah identitas valid</p></div>
+          <div class="card"><p class="k">Metode</p><p class="v" style="font-size:18px">Tunai</p><p class="n">Booking fee unit, bukan DP leasing</p></div>
+        </div>
+        <div data-stage-panel="spk">
+          <div class="box">
+            <h3>SPK · lengkapi identitas</h3>
+            <div class="pad">
+              <p>Unggah NPWP pada data customer SPK Sarah. Vault transaksi lain tidak dibuka.</p>
+              <button type="button" class="drop" data-raize-npwp><b>NPWP Sarah Wijaya</b><span>Ketuk untuk pasang · tetap di SPK/26/CLD/00423</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="box stage-lock" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>Tertahan data gate. Quotation memakai OTR area PO setelah NPWP valid. Bukan pindah ke SPK Dewi.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="so" hidden>
+          <h3>Sales Order</h3>
+          <p>SO belum terbentuk. Booking fee Raize dari master unit ditagih dulu — non-waivable. Nopol cadangan muncul setelah AFI. Struktur harga tunai, bukan DP B2B.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Nama dan alamat STNK sudah akan dipakai dari SPK ini setelah SO terbuka. Tidak diketik di AFI.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="do" hidden>
+          <h3>Delivery Order</h3>
+          <p>DO gudang menyusul AFI pada jejak yang sama.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Cash ≥30% setelah SO. Gate non-waivable. Belum relevan sampai identitas dan booking fee selesai.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="del" hidden>
+          <h3>Pengiriman</h3>
+          <p>Delivery cash menunggu lunas pada SO Raize ini — bukan transaksi Agus.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>Tracking dokumen Deliverable 3 memakai vault SPK/26/CLD/00423 setelah serah terima.</p>
+        </div>
+      </section>
+

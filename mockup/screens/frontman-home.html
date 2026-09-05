@@ -1,0 +1,121 @@
+      <!-- ============ BERANDA FRONTMAN ============ -->
+      <section class="screen on" id="beranda">
+        <div class="screenhead">
+          <div>
+            <h2>Transaksi saya</h2>
+            <p>Cilandak · 2 Sep 2026. Satu kartu = satu SPK. SO per baris tetap di dalam SPK itu, tanpa pindah ke transaksi lain.</p>
+          </div>
+          <div class="actions">
+            <button class="btn" data-go="spk_baru">Buat SPK baru</button>
+          </div>
+        </div>
+
+        <p class="queue-line"><b>7 SPK</b> · satu kartu = satu transaksi utuh · SO per baris di dalam SPK</p>
+
+        <label class="order-search" for="txSearch">
+          <span class="sr-only">Cari transaksi</span>
+          <input id="txSearch" type="search" placeholder="Cari nama, SPK, atau unit…" autocomplete="off">
+        </label>
+        <div class="order-filters" role="tablist" aria-label="Filter transaksi">
+          <button type="button" data-tx-filter="all" aria-pressed="true">Semua</button>
+          <button type="button" data-tx-filter="action" aria-pressed="false">Perlu saya</button>
+          <button type="button" data-tx-filter="exc" aria-pressed="false">Pengecualian</button>
+          <button type="button" data-tx-filter="ready" aria-pressed="false">Siap kirim</button>
+        </div>
+
+        <div class="order-list" id="txList">
+          <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-tx-dots="dewi" data-go="spk_baru">
+            <div class="thumb">YARIS</div>
+            <div class="meta">
+              <p class="oid" data-dewi-oid>Draft · belum nomor SPK</p>
+              <strong class="oname">Dewi Lestari · Yaris</strong>
+              <p class="spec" data-dewi-spec>Tindakan: isi pemesan, STNK, unit, lalu unggah dokumen · Yaris + Agya di SPK yang sama</p>
+              <div class="row2">
+                <span class="tag wait" data-dewi-tag>Isi dari awal</span>
+                <span class="amt" data-dewi-amt>Belum OTR</span>
+              </div>
+              <p class="cta" data-dewi-cta>Input &amp; unggah →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="budi" data-go="transaksi">
+            <div class="thumb">ZENIX</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00418 · tunai · 1 SO</p>
+              <strong class="oname">Budi Santoso · Innova Zenix</strong>
+              <p class="spec">Pelunasan, AFI, dan exception dokumen — semua di SPK ini</p>
+              <div class="row2">
+                <span class="tag hold">Belum lunas</span>
+                <span class="amt" data-live="ar">Rp 181.750.000</span>
+              </div>
+              <p class="cta">Buka transaksi →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-home-spk>
+            <div class="thumb">HIACE</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00421 · leasing · 3 SO</p>
+              <strong class="oname">PT Danapura · Hiace Premio</strong>
+              <p class="spec" data-b2b-home-spec>Struktur harga SO memuat DP wajib B2B. Kerja Frontman dan penagihan Admin di SPK ini.</p>
+              <div class="row2">
+                <span class="tag wait" data-b2b-home-tag>B2B leasing</span>
+                <span class="amt">3 unit</span>
+              </div>
+              <p class="cta">Buka SPK leasing →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="raize" data-go="tx_raize">
+            <div class="thumb">RAIZE</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00423 · SPK baru</p>
+              <strong class="oname">Sarah Wijaya · Raize</strong>
+              <p class="spec">Tindakan: unggah NPWP</p>
+              <div class="row2">
+                <span class="tag stop">NPWP kosong</span>
+                <span class="amt">—</span>
+              </div>
+              <p class="cta">Lanjutkan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-tx-dots="agus" data-go="tx_avanza">
+            <div class="thumb done">AVANZA</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00425 · lunas</p>
+              <strong class="oname">Agus Hermawan · Avanza</strong>
+              <p class="spec" data-del-spec>Tindakan: ajukan pengiriman</p>
+              <div class="row2">
+                <span class="tag ok" data-del-tag>Siap kirim</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Ajukan delivery →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="gi" data-tx-action="1" data-tx-dots="fajar" data-go="gi">
+            <div class="thumb">RUSH</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00424 · terkirim 2 Sep</p>
+              <strong class="oname">Fajar Nugroho · Rush</strong>
+              <p class="spec" data-gi-spec>Tindakan: unggah foto serah terima + scan BSTKB</p>
+              <div class="row2">
+                <span class="tag wait" data-gi-tag>Good Issue</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Lengkapi bukti →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-tx-status="exc" data-tx-dots="maria" data-go="tx_fortuner">
+            <div class="thumb">FORT</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00409 · delivered</p>
+              <strong class="oname">Maria Sitompul · Fortuner</strong>
+              <p class="spec">Eskalasi otomatis · STNK hari ke-19</p>
+              <div class="row2">
+                <span class="tag hold">Bukan waiver</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Lanjut eskalasi →</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ============ DETAIL TRANSAKSI ============ -->

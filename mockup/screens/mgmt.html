@@ -1,0 +1,274 @@
+      <section class="screen" id="mgmt_inbox">
+        <div class="screenhead">
+          <div>
+            <h2>Antrean · <span data-mgmt-title>Kepala Administrasi</span></h2>
+            <p data-mgmt-lead>Exception waivable: Kepala Administrasi. Billing tanpa e-PO: Operation Manager. STNK aging: Kepala Cabang. Volume area: Area Business Head. Bukan waiver 30%, DP, TTD, atau lunas.</p>
+          </div>
+        </div>
+        <nav class="worktabs" aria-label="Management">
+          <button type="button" data-go="mgmt_inbox">Keputusan<span class="n" data-mgmt-pill>4</span></button>
+          <button type="button" data-go="dashboard">Volume</button>
+        </nav>
+        <p class="queue-line" data-mgmt-count><b>4 menunggu putusan</b> · 3 exception waivable · 1 eskalasi STNK</p>
+        <div class="order-filters" role="tablist" aria-label="Filter putusan">
+          <button type="button" data-mgmt-filter="all" aria-pressed="true">Semua</button>
+          <button type="button" data-mgmt-filter="open" aria-pressed="false">Menunggu</button>
+          <button type="button" data-mgmt-filter="revise" aria-pressed="false">Revisi</button>
+          <button type="button" data-mgmt-filter="done" aria-pressed="false">Selesai</button>
+        </div>
+        <div class="order-list" id="mgmtList">
+          <button type="button" class="order-card featured" data-mgmt-case="epo" data-mgmt-owner="om" data-go="exc_epo" data-b2b-pick="1288" data-tx-dots="hiace">
+            <div class="thumb">E-PO</div>
+            <div class="meta">
+              <p class="oid">E-26-0421-P · SO 4500091288</p>
+              <strong class="oname">PT Danapura · billing tanpa e-PO</strong>
+              <p class="spec">Waivable. E-PO = total DP, nilai leasing, tenor. Paperless saja — pelunasan tetap butuh e-PO asli.</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-epo-tag>Menunggu pengajuan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="nama" data-mgmt-owner="ka" data-go="exc_nama" data-tx-dots="dewi">
+            <div class="thumb">NAMA</div>
+            <div class="meta">
+              <p class="oid">E-26-0426-N · SPK/26/CLD/00426</p>
+              <strong class="oname">Dewi Lestari · nama STNK Andi Pratama</strong>
+              <p class="spec">Waivable. Supporting document wajib. Bukan waiver booking fee.</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-nama-tag>Menunggu pengajuan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="alamat" data-mgmt-owner="ka" data-go="exc_alamat" data-tx-dots="budi">
+            <div class="thumb">ALAMAT</div>
+            <div class="meta">
+              <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
+              <strong class="oname">Budi Santoso · bukti alamat kedaluwarsa</strong>
+              <p class="spec">Waivable. Syarat jika setujui: alamat asli sebelum DO. Pelunasan tetap wajib.</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-alamat-tag>Siap diputuskan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="early" data-mgmt-owner="ka" data-go="exc_afi" data-afi-exc="early" data-tx-dots="budi">
+            <div class="thumb">AFI</div>
+            <div class="meta">
+              <p class="oid">E-26-0418-A · SPK/26/CLD/00418</p>
+              <strong class="oname">Budi Santoso · AFI sebelum billing</strong>
+              <p class="spec">Pecah urutan. Data STNK dari SPK. 30% tidak di-waive.</p>
+              <div class="row2">
+                <span class="tag hold" data-afi-early-tag>Siap diputuskan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="nobill" data-mgmt-owner="ka" data-go="exc_afi" data-afi-exc="nobill" data-tx-dots="budi">
+            <div class="thumb">BILL</div>
+            <div class="meta">
+              <p class="oid">E-26-0418-B · SPK/26/CLD/00418</p>
+              <strong class="oname">Budi Santoso · billing tanpa AFI</strong>
+              <p class="spec">Pecah urutan. AFI menyusul. Bukan waiver lunas.</p>
+              <div class="row2">
+                <span class="tag hold" data-afi-nobill-tag>Siap diputuskan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="stnk" data-mgmt-owner="kc" data-go="exc_stnk" data-tx-dots="maria">
+            <div class="thumb">FORT</div>
+            <div class="meta">
+              <p class="oid">SPK/26/CLD/00409 · H+19</p>
+              <strong class="oname">Maria Sitompul · STNK aging</strong>
+              <p class="spec">Eskalasi otomatis. Setujui tindak lanjut biro jasa — bukan tombol lunas.</p>
+              <div class="row2">
+                <span class="tag hold" data-stnk-tag>Menunggu Kepala Cabang</span>
+                <span class="amt">H+19</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="ops-gi" data-mgmt-owner="om" data-go="gi" data-tx-dots="fajar">
+            <div class="thumb">GI</div>
+            <div class="meta">
+              <p class="oid">SO 4500091294 · Operation Manager</p>
+              <strong class="oname">Fajar Nugroho · Good Issue</strong>
+              <p class="spec">Pantau bukti serah terima. Bukan Approval Engine, bukan waiver lunas.</p>
+              <div class="row2">
+                <span class="tag wait" data-gi-tag>Good Issue</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Buka GI →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="ops-del" data-mgmt-owner="om" data-go="delivery" data-tx-dots="agus">
+            <div class="thumb">KIRIM</div>
+            <div class="meta">
+              <p class="oid">SO 4500091301 · Operation Manager</p>
+              <strong class="oname">Agus Hermawan · delivery</strong>
+              <p class="spec">Lunas. Jadwal armada — bukan putusan exception.</p>
+              <div class="row2">
+                <span class="tag ok" data-del-tag>Siap kirim</span>
+                <span class="amt">Rp 0</span>
+              </div>
+              <p class="cta">Buka kirim →</p>
+            </div>
+          </button>
+        </div>
+        <p class="note">Gate komersial (booking fee, 30% cash, pelunasan, TTD kontrak) tidak masuk antrean putusan. Operation Manager memutuskan billing tanpa e-PO dan memantau kirim/GI. DP dan TTD tidak di-waive.</p>
+      </section>
+      <section class="screen" id="dashboard">
+        <div class="screenhead">
+          <div>
+            <h2>Volume · Cilandak / area</h2>
+            <p>Angka ilustratif. Area Business Head melihat bottleneck area. Kepala Cabang melihat cabang. Klik baris ke transaksi yang sama. Putusan exception hanya di antrean sesuai kursi.</p>
+          </div>
+          <div class="actions"><button class="btn ghost">September 2026</button></div>
+        </div>
+        <nav class="worktabs" aria-label="Management">
+          <button type="button" data-go="mgmt_inbox">Keputusan<span class="n" data-mgmt-pill>4</span></button>
+          <button type="button" data-go="dashboard">Volume</button>
+        </nav>
+
+        <div class="cards">
+          <div class="card"><p class="k">Transaksi berjalan</p><p class="v">142</p><p class="n">+11 dari pekan lalu</p></div>
+          <div class="card"><p class="k">SPK ke Sales Order</p><p class="v">1,4<span style="font-size:14px;font-weight:500"> hari</span></p><p class="n">Sebelumnya 3,2 hari</p></div>
+          <div class="card"><p class="k">Outstanding cabang</p><p class="v">18,6<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">Dari 41 Sales Order</p></div>
+          <div class="card alert kpi-btn" data-go="dashboard" data-scroll="holdNow" role="button">
+            <p class="k">Transaksi tertahan</p><p class="v">23</p><p class="n">Terbanyak di delivery lunas/kontrak</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="box">
+            <h3>Volume per stage</h3>
+            <div class="funnel">
+              <div class="frow2"><span>SPK</span><span class="track"><i style="width:100%"></i></span><span class="n">142</span></div>
+              <div class="frow2"><span>Booking fee</span><span class="track"><i style="width:88%"></i></span><span class="n">125</span></div>
+              <div class="frow2"><span>Sales Order</span><span class="track"><i style="width:80%"></i></span><span class="n">114</span></div>
+              <div class="frow2"><span>Settlement</span><span class="track"><i class="warn" style="width:66%"></i></span><span class="n">94</span></div>
+              <div class="frow2"><span>AFI</span><span class="track"><i class="warn" style="width:58%"></i></span><span class="n">82</span></div>
+              <div class="frow2"><span>Billing</span><span class="track"><i style="width:52%"></i></span><span class="n">74</span></div>
+              <div class="frow2"><span>Delivery</span><span class="track"><i style="width:38%"></i></span><span class="n">54</span></div>
+              <div class="frow2"><span>Good Issue</span><span class="track"><i style="width:35%"></i></span><span class="n">50</span></div>
+              <div class="frow2"><span>STNK/BPKB</span><span class="track"><i class="warn" style="width:28%"></i></span><span class="n">40</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>Penyebab transaksi tertahan</h3>
+              <ul class="gates">
+                <li data-go="transaksi"><span class="mark no">8</span><div>Cash belum lunas<span class="why">Delivery gate · Budi Zenix · non-waivable</span></div><span class="tag stop">35%</span></li>
+                <li data-go="tx_hiace"><span class="mark no">5</span><div>Kontrak leasing belum TTD<span class="why">Delivery gate · B2B leasing · Hiace</span></div><span class="tag hold">22%</span></li>
+                <li data-go="exc_alamat"><span class="mark no">5</span><div>Dokumen kurang atau kedaluwarsa<span class="why">Document gate · waivable · antrean keputusan</span></div><span class="tag hold">22%</span></li>
+                <li data-go="spk"><span class="mark no">3</span><div>Booking fee unit belum masuk<span class="why">SO gate · Dewi Yaris · non-waivable</span></div><span class="tag hold">13%</span></li>
+                <li data-go="exc_epo" data-b2b-pick="1288"><span class="mark no">3</span><div>E-PO leasing belum terbit<span class="why">Billing leasing · waivable · Operation Manager</span></div><span class="tag hold">Gate baru</span></li>
+                <li data-go="bill_d"><span class="mark no">2</span><div>Cash belum 30% / DP leasing belum penuh<span class="why">Billing gate · non-waivable</span></div><span class="tag mute">9%</span></li>
+              </ul>
+            </div>
+            <div class="box">
+              <h3>Mutu data</h3>
+              <div class="money">
+                <div class="row"><span>Field yang masih diinput ulang</span><span>12</span></div>
+                <div class="row"><span>Koreksi di sumber data</span><span>31</span></div>
+                <div class="row"><span>Intervensi manual</span><span>18</span></div>
+                <div class="row"><span>Peringatan duplikat</span><span>4</span></div>
+              </div>
+            </div>
+            <div class="box">
+              <h3>Approval Engine · cabang ini</h3>
+              <div class="pad">
+                <p class="hint">Exception waivable dan eskalasi STNK diputus di antrean keputusan. Pelunasan cash tidak masuk antrean putusan.</p>
+                <div class="nextbar">
+                  <button type="button" class="btn" data-go="mgmt_inbox">Buka antrean keputusan</button>
+                  <button type="button" class="btn ghost" data-go="exc_epo" data-b2b-pick="1288">Gate e-PO</button>
+                  <button type="button" class="btn ghost" data-go="exc_alamat">Bukti alamat</button>
+                  <button type="button" class="btn ghost" data-go="exc_stnk">Eskalasi STNK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box" id="holdNow">
+          <h3>Tertahan sekarang</h3>
+          <p class="hint" style="padding:0 16px 8px">Contoh lineage yang sama. Baris komersial hanya dibuka — tidak ada tombol setujui 30% atau lunas.</p>
+          <div class="order-list" style="padding:0 12px 12px">
+            <button type="button" class="order-card" data-go="transaksi" data-tx-dots="budi">
+              <div class="thumb">ZENIX</div>
+              <div class="meta">
+                <p class="oid">SPK/26/CLD/00418 · cash</p>
+                <strong class="oname">Budi Santoso · belum lunas</strong>
+                <p class="spec">Delivery gate. AR Open Rp 181.750.000. Putusan Kepala Cabang tidak tersedia.</p>
+                <div class="row2">
+                  <span class="tag stop">Non-waivable</span>
+                  <span class="amt">Lunas dulu</span>
+                </div>
+                <p class="cta">Buka transaksi →</p>
+              </div>
+            </button>
+            <button type="button" class="order-card" data-go="tx_hiace" data-tx-dots="hiace">
+              <div class="thumb">HIACE</div>
+              <div class="meta">
+                <p class="oid">SPK/26/CLD/00421 · leasing B2B</p>
+                <strong class="oname">PT Danapura · status ke compliance gate</strong>
+                <p class="spec">TTD dan full DP dari alur B2B. Bukan waiver Kepala Cabang. Backflow = dokumen kurang.</p>
+                <div class="row2">
+                  <span class="tag stop">Non-waivable</span>
+                  <span class="amt">Baca status B2B</span>
+                </div>
+                <p class="cta">Buka Hiace →</p>
+              </div>
+            </button>
+            <button type="button" class="order-card" data-go="exc_alamat" data-tx-dots="budi">
+              <div class="thumb">ALAMAT</div>
+              <div class="meta">
+                <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
+                <strong class="oname">Budi Santoso · bukti alamat kedaluwarsa</strong>
+                <p class="spec">Document gate waivable. Putuskan di antrean — syarat alamat asli sebelum DO.</p>
+                <div class="row2">
+                  <span class="tag hold">Bisa diputuskan</span>
+                  <span class="amt">SLA 4 jam</span>
+                </div>
+                <p class="cta">Putuskan →</p>
+              </div>
+            </button>
+            <button type="button" class="order-card" data-go="bill_d" data-tx-dots="dewi">
+              <div class="thumb">YARIS</div>
+              <div class="meta">
+                <p class="oid">SPK/26/CLD/00426 · cash</p>
+                <strong class="oname">Dewi Lestari · billing belum 30%</strong>
+                <p class="spec">Billing gate. Booking fee saja. Approval Engine tidak melewati 30%.</p>
+                <div class="row2">
+                  <span class="tag stop">Non-waivable</span>
+                  <span class="amt">≥30% dulu</span>
+                </div>
+                <p class="cta">Buka billing Dewi →</p>
+              </div>
+            </button>
+            <button type="button" class="order-card" data-go="exc_stnk" data-tx-dots="maria">
+              <div class="thumb">FORT</div>
+              <div class="meta">
+                <p class="oid">SPK/26/CLD/00409 · H+19</p>
+                <strong class="oname">Maria Sitompul · STNK aging</strong>
+                <p class="spec">Eskalasi, bukan waiver lunas. Tindak lanjut biro jasa di antrean keputusan.</p>
+                <div class="row2">
+                  <span class="tag hold">Bisa diputuskan</span>
+                  <span class="amt">H+19</span>
+                </div>
+                <p class="cta">Putuskan →</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CUSTOMER ORDERS ============ -->
