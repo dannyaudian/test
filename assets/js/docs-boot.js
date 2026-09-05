@@ -23,13 +23,17 @@
     });
   })).then(function (htmls) {
     if (host) host.innerHTML = htmls.join('\n');
-    var s = document.createElement('script');
-    s.src = 'assets/js/main.js';
-    s.onload = function () {
+    function jump() {
       var id = (location.hash || '').replace('#', '');
       var t = id && document.getElementById(id);
       if (t) t.scrollIntoView();
-    };
+    }
+    jump();
+    requestAnimationFrame(jump);
+    setTimeout(jump, 80);
+    var s = document.createElement('script');
+    s.src = 'assets/js/main.js';
+    s.onload = jump;
     document.body.appendChild(s);
   }).catch(function (err) {
     console.error(err);

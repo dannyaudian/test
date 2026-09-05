@@ -24,6 +24,29 @@
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
+  function jumpToId(id) {
+    if (!id) return false;
+    var t = document.getElementById(id);
+    if (!t) return false;
+    t.scrollIntoView({ block: 'start' });
+    return true;
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.length < 2 || href === '#') return;
+    var id = href.slice(1);
+    if (!document.getElementById(id)) return;
+    e.preventDefault();
+    if (history.replaceState) history.replaceState(null, '', href);
+    jumpToId(id);
+  });
+  window.addEventListener('hashchange', function () {
+    jumpToId((location.hash || '').replace('#', ''));
+  });
+
   var toc = document.querySelector('#sidenav nav');
   if (!toc) return;
   var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
