@@ -1944,13 +1944,15 @@
       if(!on) miss.push(missMap[k]);
     });
     var canBill=typeof FAST.b2bAdminCanBill==='function'?FAST.b2bAdminCanBill(u):false;
+    var packDp=!!(u.dpReceived && FAST.b2bBillingComplete(u));
+    var onlyEpo=packDp && !FAST.b2bEpoOk(u) && !u.paperlessSent;
     var block=document.querySelector('[data-b2b-admin-block]');
     if(block){
-      block.hidden=canBill||!!u.paperlessSent;
+      block.hidden=canBill||!!u.paperlessSent||onlyEpo;
       block.textContent=miss.length?('Belum bisa ditagih. Kurang: '+miss.join(', ')+'.'):'';
     }
     var paperBtn=document.querySelector('[data-b2b-paperless]');
-    if(paperBtn) paperBtn.disabled=!canBill || !!u.paperlessSent;
+    if(paperBtn) paperBtn.disabled=(!canBill && !onlyEpo) || !!u.paperlessSent;
     var kwtOnly=document.querySelector('[data-b2b-kwt]');
     if(kwtOnly) kwtOnly.disabled=!u.paperlessSent || !!u.kwtIssued;
     document.querySelectorAll('[data-b2b-tab-role]').forEach(function(b){
@@ -1974,7 +1976,6 @@
     if(delCard) delCard.classList.toggle('alert', sum.ttd<3);
     if(paperCard) paperCard.classList.toggle('alert', sum.kwt<3);
     if(epoCard) epoCard.classList.toggle('alert', sum.epo<3);
-    var packDp=!!(u.dpReceived && FAST.b2bBillingComplete(u));
     var epoHint=document.querySelector('[data-b2b-epo-exc-hint]');
     if(epoHint) epoHint.hidden = !packDp || !!u.epoReceived || u.excEpo==='approved';
     document.querySelectorAll('[data-b2b-epo-exc]').forEach(function(b){
