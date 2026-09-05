@@ -3,52 +3,52 @@
         <span class="num">3</span>
         <div>
           <h2>KPI Items</h2>
-          <p class="deck">Dasar KPI adalah pekerjaan yang tercatat. Target angka (hari, %, kapasitas) disepakati di bagian Target setelah baseline.</p>
+          <p class="deck">The basis for KPIs is recorded work. Target figures (days, %, capacity) are agreed in the Target section after the baseline.</p>
         </div>
       </div>
       <blockquote class="rule">
-        <span class="tag">Dari kira-kira ke terukur</span>
+        <span class="tag">From guesswork to measurable</span>
         <p>So far, Administration workload and timeliness have only been estimated — WhatsApp follow-ups, “the queue feels full,” and no SLA start time. In FAST, every Administration job enters a queue with type, transaction, and timestamp. Volume (how many) and aging/SLA (how long) can be measured. KPIs are built from that data, not estimates.</p>
       </blockquote>
       <div class="grid g2">
         <div class="panel">
-          <h4>Yang bisa dihitung — volume</h4>
-          <p>Bukan target resmi. Ini jenis kerja yang sistem sudah pisahkan, jadi jumlahnya bisa di-KPI-kan.</p>
+          <h4>What can be counted — volume</h4>
+          <p>Not an official target. These are the types of work the system already separates, so their counts can be turned into KPIs.</p>
           <ul>
-            <li>Queue verification (“Needs My Action”): berapa transactions pending Administration.</li>
-            <li>Dipisah jenis: Good Issue, unmatched payment, duplikat NIK, exception documents, klasifikasi internal, STNK aging.</li>
-            <li>Branch Ledger: volume SPK, quotation, SO, AFI, DO, billing, leasing B2B, receipt, pembayaran per status.</li>
-            <li>Paperless billing requests to leasing, e-PO, and B2B document backflow. Billing without an e-PO goes to the Operation Manager — separate from DP/TTD waivers.</li>
-            <li>Exceptions waivable vs eskalasi STNK — terpisah dari gate komersial (booking fee, 30%, paid in full, TTD).</li>
+            <li>Queue verification (“Needs My Action”): how many transactions are pending Administration.</li>
+            <li>Split by type: Good Issue, unmatched payment, duplicate NIK, exception documents, internal classification, STNK aging.</li>
+            <li>Branch Ledger: volume of SPK, quotation, SO, AFI, DO, billing, B2B leasing, receipt, and payments per status.</li>
+            <li>Paperless billing requests to leasing, e-PO, and B2B document backflow. Billing without an e-PO goes to the Operation Manager — separate from DP/signed-contract waivers.</li>
+            <li>Waivable exceptions vs STNK escalation — separate from commercial gates (booking fee, 30%, paid in full, signed contract).</li>
           </ul>
         </div>
         <div class="panel">
-          <h4>Yang bisa diukur — SLA / aging</h4>
+          <h4>What can be measured — SLA / aging</h4>
           <p>Start time = when the job enters the queue. Duration is recorded per row. Policy thresholds (for example, how many hours counts as “on SLA”) are set later in Target, not invented here.</p>
           <ul>
-            <li>Aging per item verification (Example di mockup: jam, hari — ilustratif).</li>
-            <li>Waktu Frontman submit → Admin cek → Head of Administration decide, untuk exception waivable.</li>
-            <li>STNK aging setelah delivery (eskalasi otomatis, bukan waiver paid in full).</li>
-            <li>Waktu unmatched payment sampai cocok.</li>
-            <li>Waktu Good Issue dari upload proof sampai approved.</li>
+            <li>Aging per verification item (example in the mockup: hours, days — illustrative).</li>
+            <li>Time from Frontman submit → Admin check → Head of Administration decide, for waivable exceptions.</li>
+            <li>STNK aging after delivery (automatic escalation, not a paid-in-full waiver).</li>
+            <li>Time from unmatched payment until it is matched.</li>
+            <li>Good Issue time from proof upload until approved.</li>
           </ul>
         </div>
       </div>
       <div class="panel">
-        <h4>Keluarga KPI yang sekarang bisa disusun</h4>
-        <p>Name dan rumus resmi menyusul kesepakatan. Yang berubah: semuanya punya pembilang dan penyebut dari sistem.</p>
+        <h4>KPI families that can now be assembled</h4>
+        <p>Official names and formulas will follow agreement. What changes: everything has a numerator and denominator from the system.</p>
         <ul>
-          <li><b>Beban kerja branch</b> — jumlah item unlocked per jenis, per Administration, per hari.</li>
-          <li><b>Ketepatan waktu</b> — porsi item yang selesai di dalam jam SLA yang disepakati; aging yang tembus ambang.</li>
-          <li><b>Mutu antrean</b> — dikembalikan ke Frontman vs selesai di Administration; koreksi di sumber.</li>
-          <li><b>Kapasitas</b> — item selesai per orang per periode, tanpa menghitung again data Frontman sebagai “kerja”.</li>
+          <li><b>Branch workload</b> — number of unlocked items per type, per Administration, per day.</li>
+          <li><b>Timeliness</b> — the proportion of items completed within the agreed SLA hours; aging that breaches the threshold.</li>
+          <li><b>Queue quality</b> — returned to the Frontman vs completed in Administration; corrected at source.</li>
+          <li><b>Capacity</b> — items completed per person per period, without counting the Frontman's data as “work.”</li>
         </ul>
-        <p>Mockup menampilkan angka branch dan aging sebagai ilustrasi Cilandak, bukan baseline resmi.</p>
+        <p>The mockup shows branch and aging figures as a Cilandak illustration, not an official baseline.</p>
       </div>
       <div class="see-row">
         <a class="see" href="mockup.html#verifikasi"><span class="see-k">Admin</span><b>Needs My Action</b><span>Volume + aging per row</span><em>View →</em></a>
         <a class="see" href="mockup.html#admin_spk"><span class="see-k">Admin</span><b>Branch Ledger</b><span>Volume documents per stage</span><em>View →</em></a>
-        <a class="see" href="mockup.html#dashboard"><span class="see-k">Branch</span><b>Management</b><span>Volume &amp; bottleneck dari lineage yang same</span><em>View →</em></a>
+        <a class="see" href="mockup.html#dashboard"><span class="see-k">Branch</span><b>Management</b><span>Volume &amp; bottleneck from the same lineage</span><em>View →</em></a>
       </div>
     </section>
 

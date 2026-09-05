@@ -2,80 +2,80 @@
         <div class="screenhead">
           <div>
             <h2>Exceptions</h2>
-            <p>Satu antrean untuk Frontman, Admin, dan Head of Administration. Hanya gate compliance yang waivable yang punya button decision.</p>
+            <p>One queue for Frontman, Admin, and Head of Administration. Only waivable compliance gates have a decision button.</p>
           </div>
         </div>
-        <p class="queue-line"><b>5 bisa diajukan</b> · 2 tertahan non-waivable · 1 eskalasi STNK</p>
-        <div class="order-filters" role="tablist" aria-label="Filter pengecualian">
+        <p class="queue-line"><b>5 can be submitted</b> · 2 held non-waivable · 1 STNK escalation</p>
+        <div class="order-filters" role="tablist" aria-label="Exception filter">
           <button type="button" data-exc-filter="all" aria-pressed="true">All</button>
-          <button type="button" data-exc-filter="decide" aria-pressed="false">Bisa diputuskan</button>
-          <button type="button" data-exc-filter="hold" aria-pressed="false">Tertahan</button>
-          <button type="button" data-exc-filter="esc" aria-pressed="false">Eskalasi STNK</button>
+          <button type="button" data-exc-filter="decide" aria-pressed="false">Can be decided</button>
+          <button type="button" data-exc-filter="hold" aria-pressed="false">Held</button>
+          <button type="button" data-exc-filter="esc" aria-pressed="false">STNK escalation</button>
         </div>
         <div class="order-list" id="excList">
           <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="epo" data-go="exc_epo" data-b2b-pick="1288" data-tx-dots="hiace">
             <div class="thumb">E-PO</div>
             <div class="meta">
               <p class="oid">E-26-0421-P · SPK/26/CLD/00421 · SO 4500091288</p>
-              <strong class="oname">PT Danapura · billing tanpa e-PO leasing</strong>
-              <p class="spec" data-exc-epo-spec>Waivable · e-PO = total DP, nilai dibiayai, tenor · Operation Manager</p>
+              <strong class="oname">PT Danapura · billing without leasing e-PO</strong>
+              <p class="spec" data-exc-epo-spec>Waivable · e-PO = total DP, financed amount, tenor · Operation Manager</p>
               <div class="row2">
                 <span class="tag hold" data-exc-epo-tag>Pending submission</span>
-                <span class="amt">SLA 4 jam</span>
+                <span class="amt">SLA 4 hours</span>
               </div>
-              <p class="cta">Buka Approval Engine →</p>
+              <p class="cta">Open Approval Engine →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="nama" data-go="exc_nama" data-tx-dots="dewi">
             <div class="thumb">NAMA</div>
             <div class="meta">
               <p class="oid">E-26-0426-N · SPK/26/CLD/00426</p>
-              <strong class="oname">Dewi Lestari · name STNK berbeda</strong>
+              <strong class="oname">Dewi Lestari · different STNK name</strong>
               <p class="spec" data-exc-nama-spec>Waivable · buyer ≠ STNK · upload supporting document</p>
               <div class="row2">
                 <span class="tag hold" data-exc-nama-tag>Pending submission</span>
-                <span class="amt">SLA 4 jam</span>
+                <span class="amt">SLA 4 hours</span>
               </div>
-              <p class="cta">Buka Approval Engine →</p>
+              <p class="cta">Open Approval Engine →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="alamat" data-go="exc_alamat" data-tx-dots="budi">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
-              <strong class="oname">Budi Santoso · proof address expired</strong>
-              <p class="spec" data-exc-alamat-spec>Waivable · Frontman submit → Admin cek → Head of Administration</p>
+              <strong class="oname">Budi Santoso · address proof expired</strong>
+              <p class="spec" data-exc-alamat-spec>Waivable · Frontman submit → Admin check → Head of Administration</p>
               <div class="row2">
                 <span class="tag hold" data-exc-alamat-tag>Pending submission</span>
-                <span class="amt">SLA 4 jam</span>
+                <span class="amt">SLA 4 hours</span>
               </div>
-              <p class="cta">Buka pengajuan →</p>
+              <p class="cta">Open submission →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="afi" data-go="exc_afi" data-afi-exc="early" data-tx-dots="budi">
             <div class="thumb">AFI</div>
             <div class="meta">
               <p class="oid">E-26-0418-A · SPK/26/CLD/00418</p>
-              <strong class="oname">Budi Santoso · AFI sebelum billing</strong>
-              <p class="spec" data-afi-early-spec>Waivable · pecah urutan. Data STNK tetap dari SPK.</p>
+              <strong class="oname">Budi Santoso · AFI before billing</strong>
+              <p class="spec" data-afi-early-spec>Waivable · out-of-sequence. STNK data still from the SPK.</p>
               <div class="row2">
                 <span class="tag hold" data-afi-early-tag>Pending submission</span>
-                <span class="amt">SLA 4 jam</span>
+                <span class="amt">SLA 4 hours</span>
               </div>
-              <p class="cta">Buka exception →</p>
+              <p class="cta">Open exception →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="afi" data-go="exc_afi" data-afi-exc="nobill" data-tx-dots="budi">
             <div class="thumb">BILL</div>
             <div class="meta">
               <p class="oid">E-26-0418-B · SPK/26/CLD/00418</p>
-              <strong class="oname">Budi Santoso · billing tanpa AFI</strong>
-              <p class="spec" data-afi-nobill-spec>Waivable · pecah urutan. AFI menyusul setelah billing.</p>
+              <strong class="oname">Budi Santoso · billing without AFI</strong>
+              <p class="spec" data-afi-nobill-spec>Waivable · out-of-sequence. AFI follows after billing.</p>
               <div class="row2">
                 <span class="tag hold" data-afi-nobill-tag>Pending submission</span>
-                <span class="amt">SLA 4 jam</span>
+                <span class="amt">SLA 4 hours</span>
               </div>
-              <p class="cta">Buka exception →</p>
+              <p class="cta">Open exception →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="hold" data-go="cashless">
@@ -83,9 +83,9 @@
             <div class="meta">
               <p class="oid">SPK/26/CLD/00418 · delivery cash</p>
               <strong class="oname">Budi Santoso · not yet paid in full</strong>
-              <p class="spec">Non-waivable. Tidak ada Setujui. Request payment di FAST.</p>
+              <p class="spec">Non-waivable. No Approve. Request payment in FAST.</p>
               <div class="row2">
-                <span class="tag stop">Approval tidak tersedia</span>
+                <span class="tag stop">Approval not available</span>
                 <span class="amt" data-live="ar">Rp 181.750.000</span>
               </div>
               <p class="cta">Request payment →</p>
@@ -95,30 +95,30 @@
             <div class="thumb">HIACE</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00421 · delivery leasing</p>
-              <strong class="oname">PT Danapura · status B2B ke gate</strong>
-              <p class="spec">Non-waivable. Download kontrak, upload TTD. Bukan antrean Approval Engine.</p>
+              <strong class="oname">PT Danapura · B2B status to gate</strong>
+              <p class="spec">Non-waivable. Download the contract, upload the signature. Not an Approval Engine queue.</p>
               <div class="row2">
-                <span class="tag wait" data-b2b-home-tag>Pending TTD</span>
+                <span class="tag wait" data-b2b-home-tag>Pending signature</span>
                 <span class="amt">Rp 1.045.000.000</span>
               </div>
-              <p class="cta">Buka B2B →</p>
+              <p class="cta">Open B2B →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-exc-kind="esc" data-go="exc_stnk" data-tx-dots="maria">
             <div class="thumb">FORT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · delivered</p>
-              <strong class="oname">Maria Sitompul · STNK hari ke-19</strong>
-              <p class="spec">Automatic escalation ke Branch Head + biro jasa. Not a waiver paid in full.</p>
+              <strong class="oname">Maria Sitompul · STNK day 19</strong>
+              <p class="spec">Automatic escalation to Branch Head + service bureau. Not a paid-in-full waiver.</p>
               <div class="row2">
                 <span class="tag hold">Not a waiver</span>
-                <span class="amt">H+19</span>
+                <span class="amt">D+19</span>
               </div>
-              <p class="cta">Buka eskalasi →</p>
+              <p class="cta">Open escalation →</p>
             </div>
           </button>
         </div>
-        <p class="note">Gate komersial (booking fee, 30% cash / full DP leasing, settlement cash, TTD kontrak) tidak received Approval Engine. Billing tanpa e-PO leasing diputuskan Operation Manager — bukan waiver DP atau TTD.</p>
+        <p class="note">Commercial gates (booking fee, 30% cash / full leasing DP, cash settlement, contract signature) do not go to the Approval Engine. Billing without a leasing e-PO is decided by the Operation Manager — not a DP or signature waiver.</p>
       </section>
 
       </section>

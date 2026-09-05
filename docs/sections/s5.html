@@ -3,7 +3,7 @@
         <span class="num">5</span>
         <div>
           <h2>Concept &amp; Details</h2>
-          <p class="deck">Empat lapis konsep: design principle, straight-through data flow, standard data handling logic, dan customer journey per stage.</p>
+          <p class="deck">Four concept layers: design principle, straight-through data flow, standard data handling logic, and customer journey per stage.</p>
         </div>
       </div>
 
@@ -14,15 +14,15 @@
           <span class="chip">Frontman-driven</span><span class="chip">Input-once</span><span class="chip">System-controlled</span><span class="chip">Seamless front-to-back</span><span class="chip">Compliance-secured</span>
         </div>
         <ul>
-          <li>Frontman menginput data customer dan transactions pada sumber awal.</li>
-          <li>Administration memverifikasi dan melengkapi data internal.</li>
-          <li>Sistem mencegah redundant input.</li>
-          <li>Data valid digunakan kembali.</li>
-          <li>Nomor SPK, SO, billing, payment reference, dan receipt terhubung.</li>
-          <li>Setiap pembayaran terverifikasi menghasilkan e-receipt.</li>
-          <li>Data dibawa dari SPK sampai STNK/BPKB.</li>
-          <li>Failed compliance rule yang waivable diarahkan kepada decision owner.</li>
-          <li>Seluruh perubahan memiliki audit trail.</li>
+          <li>The Frontman enters customer and transaction data at the initial source.</li>
+          <li>Administration verifies and completes internal data.</li>
+          <li>The system prevents redundant input.</li>
+          <li>Valid data is reused.</li>
+          <li>The SPK, SO, billing, payment reference, and receipt numbers are connected.</li>
+          <li>Every verified payment produces an e-receipt.</li>
+          <li>Data is carried from SPK through to STNK/BPKB.</li>
+          <li>A waivable failed compliance rule is routed to the decision owner.</li>
+          <li>Every change has an audit trail.</li>
         </ul>
         <div class="callout">
           <span class="tag">Core statement</span>
@@ -34,17 +34,17 @@
         <p class="eyebrow">Layer 2</p>
         <h3>Straight-Through Data Flow</h3>
         <div class="flowstack">
-          <div class="step"><b>Frontman Input</b><span>Customer, transaction, unit request, documents, payment request, delivery preference, dan compliance exception request apabila eligible.</span></div>
+          <div class="step"><b>Frontman Input</b><span>Customer, transaction, unit request, documents, payment request, delivery preference, and compliance exception request when eligible.</span></div>
           <div class="arrow"></div>
-          <div class="step"><b>System Validation</b><span>Format, completeness, duplicate checking, master-data matching, document validity, payment verification, dan reference integrity.</span></div>
+          <div class="step"><b>System Validation</b><span>Format, completeness, duplicate checking, master-data matching, document validity, payment verification, and reference integrity.</span></div>
           <div class="arrow"></div>
-          <div class="step"><b>Administration Verification and Enrichment</b><span>Verification serta penambahan data internal yang benar-benar new.</span></div>
+          <div class="step"><b>Administration Verification and Enrichment</b><span>Verification and the addition of internal data that is genuinely new.</span></div>
           <div class="arrow"></div>
-          <div class="step"><b>Single Source of Truth</b><span>Customer, transaction value, vehicle, payment, receipt, document, compliance, dan exception-decision data.</span></div>
+          <div class="step"><b>Single Source of Truth</b><span>Customer, transaction value, vehicle, payment, receipt, document, compliance, and exception-decision data.</span></div>
           <div class="arrow"></div>
-          <div class="step"><b>Automatic Data Carry-Forward</b><span>SPK No. → SO No. → Billing No. → AFI/DO → Delivery → Good Issue → STNK/BPKB. Setiap payment reference yang terverifikasi menghasilkan satu nomor receipt dalam transaction lineage yang same.</span></div>
+          <div class="step"><b>Automatic Data Carry-Forward</b><span>SPK No. → SO No. → Billing No. → AFI/DO → Delivery → Good Issue → STNK/BPKB. Every verified payment reference produces one receipt number within the same transaction lineage.</span></div>
           <div class="arrow"></div>
-          <div class="step"><b>Open Kitchen Visibility</b><span>Frontman, Administration, Finance, management, dan customer melihat status dari transactions yang same.</span></div>
+          <div class="step"><b>Open Kitchen Visibility</b><span>The Frontman, Administration, Finance, management, and customer see the status from the same transaction.</span></div>
         </div>
       </div>
 
@@ -53,12 +53,12 @@
         <h3>Standard Data Handling Logic</h3>
         <div class="grid g2">
           <div class="panel"><h4>Step 1 — Capture at source</h4><p>Data is entered by the party with the most valid source information.</p></div>
-          <div class="panel"><h4>Step 2 — Validate</h4><p>Sistem memeriksa format, kelengkapan, duplikasi, master data, dan reference integrity.</p></div>
-          <div class="panel"><h4>Step 3 — Verify or enrich</h4><p>Administration memverifikasi data dan hanya menambahkan data internal yang not yet tersedia.</p></div>
-          <div class="panel"><h4>Step 4 — Store as source of truth</h4><p>Data valid disimpan sebagai data transactions resmi.</p></div>
-          <div class="panel"><h4>Step 5 — Reuse downstream</h4><p>Data digunakan otomatis oleh proses berikutnya tanpa input again.</p></div>
-          <div class="panel"><h4>Step 6 — Correct at source</h4><p>Apabila ada kesalahan, koreksi dilakukan pada data asal dan bukan melalui input berbeda pada proses belakang.</p></div>
-          <div class="panel"><h4>Step 7 — Control changes</h4><p>Perubahan setelah transaction lock atau compliance exception decision harus menggunakan workflow, version control, dan audit trail.</p></div>
+          <div class="panel"><h4>Step 2 — Validate</h4><p>The system checks format, completeness, duplication, master data, and reference integrity.</p></div>
+          <div class="panel"><h4>Step 3 — Verify or enrich</h4><p>Administration verifies the data and only adds internal data that is not yet available.</p></div>
+          <div class="panel"><h4>Step 4 — Store as source of truth</h4><p>Valid data is stored as the official transaction data.</p></div>
+          <div class="panel"><h4>Step 5 — Reuse downstream</h4><p>The data is used automatically by the next process without re-entry.</p></div>
+          <div class="panel"><h4>Step 6 — Correct at source</h4><p>If there is an error, the correction is made on the original data and not through a different input at a later process.</p></div>
+          <div class="panel"><h4>Step 7 — Control changes</h4><p>Changes after a transaction lock or compliance exception decision must use a workflow, version control, and audit trail.</p></div>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
         <p class="eyebrow">Layer 4</p>
         <h3>End-to-End Customer Journey</h3>
         <div class="chain"><span>SPK No.</span><i>→</i><span>Booking Fee/DP + Receipt</span><i>→</i><span>SO No.</span><i>→</i><span>Settlement + Receipt(s)</span><i>→</i><span>Billing No.</span><i>→</i><span>AFI/DO</span><i>→</i><span>Delivery</span><i>→</i><span>Good Issue</span><i>→</i><span>STNK/BPKB</span></div>
-        <p>Setiap stage memiliki: Frontman action, Administration action, system-generated data, data carried from previous stage, new data genuinely required, system validation, compliance gate, dan output yang digunakan stage berikutnya.</p>
+        <p>Each stage has: Frontman action, Administration action, system-generated data, data carried from the previous stage, new data genuinely required, system validation, compliance gate, and output used by the next stage.</p>
 
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 1</span><h3>SPK</h3></div>
@@ -74,7 +74,7 @@
             <div class="facet"><h4>Frontman inputs</h4><ul><li>Customer identity.</li><li>Customer contact.</li><li>Buyer address.</li><li>STNK name and address, including district/city.</li><li>Purchase method (cash or leasing).</li><li>Unit type and colour.</li><li>Accessories.</li><li>Customer documents for SPK entry.</li><li>Documents for later STNK/BPKB filing.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Verify customer data.</li><li>Verify documents.</li><li>Identify missing or invalid requirements.</li><li>Add internal classification if required.</li></ul></div>
             <div class="facet sys"><h4>System generates</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Area PO from kabupaten/kota on the STNK address.</li><li>OTR price from that PO area.</li><li>Repeat-order status.</li><li>Document readiness.</li><li>Minimum booking fee according to the selected unit.</li></ul></div>
-            <div class="facet"><h4>Data carried forward</h4><p>Customer, transaction, unit, document, dan compliance data digunakan oleh booking fee/DP request, Sales Order, billing, AFI/DO, delivery, serta STNK/BPKB.</p></div>
+            <div class="facet"><h4>Data carried forward</h4><p>Customer, transaction, unit, document, and compliance data are used by the booking fee/DP request, Sales Order, billing, AFI/DO, delivery, and STNK/BPKB.</p></div>
           </div>
           <blockquote class="rule"><span class="tag">Business rule</span><p>Customer and transaction data captured at SPK must not be re-entered at subsequent stages. Unit OTR follows the PO area generated from kabupaten/kota on the STNK address. Booking fee is billed only after this SPK data is saved.</p></blockquote>
         </div>
@@ -82,20 +82,20 @@
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 2</span><h3>Booking Fee/DP and Sales Order</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Frontman action</h4><ul><li>Simpan SPK.</li><li>Monitor invoice booking fee yang dikirim sistem ke customer.</li><li>Confirm payment instruction bila needs dikirim again.</li><li>Submit Sales Order request setelah minimum booking fee unit terverifikasi.</li></ul></div>
+            <div class="facet"><h4>Frontman action</h4><ul><li>Save the SPK.</li><li>Monitor the booking fee invoice the system sends to the customer.</li><li>Confirm the payment instruction if it needs to be resent.</li><li>Submit the Sales Order request after the unit's minimum booking fee is verified.</li></ul></div>
             <div class="facet"><h4>Administration role</h4><ul><li>Handle unmatched or exceptional payment only.</li><li>Does not re-enter payment status.</li><li>Does not set the booking fee amount manually.</li></ul></div>
             <div class="facet sys"><h4>System process</h4><ul><li>Pull the minimum booking fee from the unit master.</li><li>Send the booking fee request to the customer as soon as the SPK is saved.</li><li>Generate payment reference.</li><li>Verify payment.</li><li>Match payment.</li><li>Generate a unique receipt.</li><li>Link receipt to SPK.</li><li>Compare incoming amount with the unit minimum.</li><li>Convert the saved SPK into a Sales Order only when the booking fee meets the unit minimum.</li><li>Carry buyer, STNK, unit, PO-area price, accessories, and documents without re-entry.</li><li>Generate SO number with originating SPK reference.</li><li>Add SO reference automatically to receipt lineage.</li></ul></div>
             <div class="facet"><h4>Customer sees</h4><ul><li>Booking fee request locked to the unit master (not self-entered amount).</li><li>Digiroom link: pay.fast.id checkout with locked QRIS/VA.</li><li>Frontman QRIS: scan the barcode on the salesperson screen; the phone only confirms the same amount.</li><li>EDC is not shown on the customer phone.</li></ul><p><a class="textlink" href="mockup.html#customer_booking">Dewi Orders · Digiroom →</a> · <a class="textlink" href="mockup.html#customer_booking_qris">Scan Table QRIS →</a></p></div>
             <div class="facet"><h4>Data carried forward</h4><ul><li>Customer ID.</li><li>SPK number.</li><li>Sales Order number.</li><li>Unit data.</li><li>Transaction structure.</li><li>Booking fee/DP amount.</li><li>Payment reference.</li><li>Receipt number.</li><li>Payment verification.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>After Saved SPK, sistem menagih booking fee ke customer. Nominal minimum mengikuti unit yang dipilih. Tidak ada booking fee terverifikasi sesuai minimum unit, tidak ada Sales Order. Ketika booking fee meet, data SPK dikonversi menjadi Sales Order — bukan diisi again. Receipt tertaut ke SPK, lalu nomor SO ditambahkan pada lineage.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>After the SPK is saved, the system bills the booking fee to the customer. The minimum amount follows the selected unit. Without a booking fee verified against the unit minimum, there is no Sales Order. When the booking fee is met, the SPK data is converted into a Sales Order — not re-entered. The receipt is linked to the SPK, then the SO number is added to the lineage.</p></blockquote>
         </div>
 
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 3</span><h3>Settlement Payment and E-Receipt</h3></div>
           <div class="grid g2">
             <div class="facet"><h4>Frontman action</h4><ul><li>View AR Open per unit or Sales Order.</li><li>View active payment requests.</li><li>Create settlement payment request within Available Request Amount.</li><li>Resend, adjust, or cancel an active request.</li><li>Monitor partial or full payment.</li><li>View accumulated active receipts.</li><li>View outstanding balance.</li></ul></div>
-            <div class="facet"><h4>Administration role</h4><ul><li>Resolve unmatched payment.</li><li>Handle documented exception.</li><li>Tidak menghitung again outstanding secara manual.</li></ul></div>
+            <div class="facet"><h4>Administration role</h4><ul><li>Resolve unmatched payment.</li><li>Handle documented exception.</li><li>Does not recalculate outstanding manually.</li></ul></div>
             <div class="facet sys"><h4>System process</h4><ul><li>Calculate AR Open from active receipts.</li><li>Calculate Available Request Amount after deducting active payment requests.</li><li>Validate request nominal against real-time availability.</li><li>Expose open unit bills on Customer Home.</li><li>Record every verified payment.</li><li>Allocate payment.</li><li>Generate one unique receipt for each verified payment.</li><li>Reduce AR by the active receipt amount.</li><li>Link every receipt to the payment reference, SPK, SO, and billing document when available.</li><li>Deliver the digital receipt to the customer.</li><li>Close or adjust overlapping payment requests.</li><li>On receipt cancellation, restore AR and reclassify the linked request.</li><li>Calculate accumulated active receipts.</li><li>Determine Partially Paid or Fully Paid status.</li></ul></div>
             <div class="facet"><h4>Data carried forward</h4><ul><li>Payment and receipt history.</li><li>Billing readiness.</li><li>Account Receivable monitoring.</li><li>Delivery eligibility.</li><li>Management dashboard.</li><li>Customer notification.</li></ul></div>
           </div>
@@ -108,7 +108,7 @@
             <div class="facet"><h4>Frontman action</h4><ul><li>Submit billing-readiness request.</li><li>View every failed compliance rule.</li><li>Complete missing requirements.</li><li>Submit compliance exception only when the failed rule is marked waivable.</li></ul></div>
             <div class="facet"><h4>Administration and Finance role</h4><ul><li>Verify compliance evidence.</li><li>Confirm whether the failed requirement has been completed.</li><li>Review eligible compliance exception without changing transaction data.</li><li>Does not re-enter customer, unit, payment, or Sales Order data.</li></ul></div>
             <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>SPK number.</li><li>Sales Order number.</li><li>Unit information.</li><li>Final transaction value from source system.</li><li>Purchase method.</li><li>Booking fee according to unit.</li><li>Payment and receipt history.</li><li>Funds-in percentage.</li><li>Full DP required and received from B2B leasing (shown on the Sales Order pricing structure when payment type is credit/leasing).</li><li>Leasing e-PO (customer total DP, financed amount, tenor) from B2B.</li><li>Settlement status.</li><li>Outstanding balance.</li><li>Document readiness.</li><li>Compliance-gate results.</li><li>Active exception decision, conditions, and expiry.</li></ul></div>
-            <div class="facet sys"><h4>System generates</h4><ul><li>Billing readiness.</li><li>Billing Locked atau Billing Ready status.</li><li>Failed-rule and lock reason.</li><li>Exception eligibility and decision route when waivable.</li><li>Billing document number after the gate is passed or a valid exception permits conditional release.</li><li>Permanent linkage between billing number, Sales Order number, and originating SPK number.</li><li>Automatic enrichment of related receipt lineage with the billing number.</li></ul></div>
+            <div class="facet sys"><h4>System generates</h4><ul><li>Billing readiness.</li><li>Billing Locked or Billing Ready status.</li><li>Failed-rule and lock reason.</li><li>Exception eligibility and decision route when waivable.</li><li>Billing document number after the gate is passed or a valid exception permits conditional release.</li><li>Permanent linkage between billing number, Sales Order number, and originating SPK number.</li><li>Automatic enrichment of related receipt lineage with the billing number.</li></ul></div>
           </div>
           <blockquote class="rule"><span class="tag">Business rule</span><p>Billing uses validated upstream data and must not require transaction re-entry. For cash, billing only unlocks once at least 30% of the transaction value has been received. For leasing, billing only unlocks once the full DP has been received and the leasing e-PO exists (total DP, financed amount, tenor); both are pulled from B2B. Without an e-PO, paperless billing only goes through the Operation Manager. SPK and SO references must stay consistent. The 30% cash / full leasing DP requirement is non-waivable.</p></blockquote>
         </div>
@@ -116,7 +116,7 @@
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 5</span><h3>AFI/DO</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Administration inputs</h4><p>Hanya data administratif new yang not yet tersedia pada proses sebelumnya.</p></div>
+            <div class="facet"><h4>Administration inputs</h4><p>Only new administrative data that is not yet available from the previous process.</p></div>
             <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer identity.</li><li>STNK name.</li><li>Customer address.</li><li>Supporting documents.</li><li>Sales Order.</li><li>Unit type.</li><li>Color.</li><li>VIN.</li><li>OPO/OPK.</li><li>Billing status.</li></ul></div>
             <div class="facet sys"><h4>System process</h4><ul><li>Auto-populate AFI.</li><li>Auto-populate DO.</li><li>Match customer and vehicle data.</li><li>Identify mismatch.</li><li>Lock only affected SO.</li></ul></div>
           </div>
@@ -131,7 +131,7 @@
             <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>Unit and VIN.</li><li>Billing status.</li><li>AFI/DO status.</li><li>Purchase method.</li><li>Payment history.</li><li>Outstanding balance / paid in full status for cash.</li><li>Leasing contract signed status from B2B leasing.</li><li>AR status.</li><li>PDI status.</li><li>Delivery authorization.</li></ul></div>
             <div class="facet sys"><h4>System generates</h4><ul><li>Eligible for Delivery.</li><li>Locked for Delivery.</li><li>Hold reason.</li><li>Required action.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Delivery eligibility memakai data upstream yang same. Untuk cash, delivery hanya unlocked setelah transactions paid in full. Untuk leasing, delivery hanya unlocked setelah kontrak sudah ditandatangani customer; status TTD ditarik dari B2B leasing. Requirement delivery ini bersifat non-waivable.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Delivery eligibility uses the same upstream data. For cash, delivery only unlocks after the transaction is paid in full. For leasing, delivery only unlocks after the contract has been signed by the customer; the signed status is pulled from B2B leasing. This delivery requirement is non-waivable.</p></blockquote>
         </div>
 
         <div class="stage">
@@ -143,16 +143,16 @@
           </div>
           <blockquote class="rule"><span class="tag">Business rule</span><p>Good Issue must use existing customer, unit, and delivery data without re-entry. The evidence pack is the authentic record — not dealer CCTV. Cash still cannot be handed over before paid in full.</p></blockquote>
           <div class="see-row">
-            <a class="see" href="mockup.html#gi"><span class="see-k">Frontman</span><b>Upload GI Fajar</b><span>Foto · VIN · BSTKB · geotag</span><em>View →</em></a>
-            <a class="see" href="mockup.html#customer_detail"><span class="see-k">Lock</span><b>Zenix not yet paid in full</b><span>Delivery tertahan, status unlocked</span><em>View →</em></a>
-            <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Customer</span><b>Download paket Calya</b><span>Proof yang same di akun</span><em>View →</em></a>
+            <a class="see" href="mockup.html#gi"><span class="see-k">Frontman</span><b>Upload GI Fajar</b><span>Photo · VIN · BSTKB · geotag</span><em>View →</em></a>
+            <a class="see" href="mockup.html#customer_detail"><span class="see-k">Lock</span><b>Zenix not yet paid in full</b><span>Delivery on hold, status unlocked</span><em>View →</em></a>
+            <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Customer</span><b>Download the Calya pack</b><span>The same proof in the account</span><em>View →</em></a>
           </div>
         </div>
 
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 8</span><h3>STNK/BPKB</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Administration inputs</h4><p>Hanya informasi new terkait proses documents kendaraan dan penyelesaiannya.</p></div>
+            <div class="facet"><h4>Administration inputs</h4><p>Only new information related to the vehicle document process and its completion.</p></div>
             <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer identity.</li><li>STNK name.</li><li>Customer address.</li><li>Unit.</li><li>VIN.</li><li>Sales Order.</li><li>AFI/DO.</li><li>Delivery date.</li><li>Supporting documents.</li></ul></div>
             <div class="facet sys"><h4>System process</h4><ul><li>Track milestones.</li><li>Detect aging.</li><li>Send escalation.</li><li>Notify Frontman and customer.</li><li>Close completed document milestones.</li></ul></div>
           </div>
