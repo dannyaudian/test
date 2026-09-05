@@ -1,0 +1,90 @@
+        <div class="box book-panel" data-book-panel="pay" hidden>
+          <h3>Pembayaran cabang <span class="side">Posted, request, pending, unmatched</span></h3>
+          <div class="order-filters" role="tablist" aria-label="Filter pembayaran" style="margin:12px 16px 0">
+            <button type="button" data-admin-pay-filter="all" aria-pressed="true">Semua</button>
+            <button type="button" data-admin-pay-filter="posted" aria-pressed="false">Posted</button>
+            <button type="button" data-admin-pay-filter="request" aria-pressed="false">Request</button>
+            <button type="button" data-admin-pay-filter="pending" aria-pressed="false">Pending</button>
+            <button type="button" data-admin-pay-filter="unmatched" aria-pressed="false">Unmatched</button>
+          </div>
+          <div class="scroll">
+          <table id="adminPayTable">
+            <thead><tr><th>Waktu</th><th>Referensi</th><th>Kuitansi</th><th>Jenis</th><th>Transaksi</th><th class="num">Nominal</th><th>Status</th></tr></thead>
+            <tbody id="adminPayList">
+              <tr data-go="so" data-admin-pay-status="posted" data-tx-dots="dewi">
+                <td>3 Sep 10:12<span class="sub">QRIS</span></td>
+                <td>PAY-CLD-00426-1<span class="sub">Banking API</span></td>
+                <td><b>KWT/26/CLD/009301</b></td>
+                <td>Booking fee</td>
+                <td>Dewi Lestari · Yaris<span class="sub">SPK/26/CLD/00426</span></td>
+                <td class="num">Rp 3.000.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="delivery" data-admin-pay-status="posted" data-tx-dots="agus">
+                <td>2 Sep 16:40<span class="sub">VA BCA</span></td>
+                <td>VA 8801 0425 0002</td>
+                <td><b>KWT/26/CLD/009280</b></td>
+                <td>Pelunasan</td>
+                <td>Agus Hermawan · Avanza<span class="sub">SPK/26/CLD/00425</span></td>
+                <td class="num">Rp 225.400.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="cashless" data-pay-job="lunas" data-admin-pay-status="request">
+                <td>2 Sep 09:05<span class="sub">Request</span></td>
+                <td>VA 8801 0418 0003</td>
+                <td>—</td>
+                <td>Pelunasan tahap 2</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418</span></td>
+                <td class="num">Rp 100.000.000</td>
+                <td><span class="tag wait">Request</span></td>
+              </tr>
+              <tr data-go="cashless" data-pay-job="dewi" data-admin-pay-status="pending">
+                <td>2 Sep 08:20<span class="sub">Cashless</span></td>
+                <td>PAY-CLD-00426-2</td>
+                <td>—</td>
+                <td>Pelunasan Yaris</td>
+                <td>Dewi Lestari · Yaris<span class="sub">SO 4500091426</span></td>
+                <td class="num">Sisa AR</td>
+                <td><span class="tag wait">Pending</span></td>
+              </tr>
+              <tr data-go="bayar" data-admin-pay-status="posted">
+                <td>1 Sep 14:08<span class="sub">VA BCA</span></td>
+                <td>VA 8801 0418 0002</td>
+                <td><b>KWT/26/CLD/009115</b></td>
+                <td>Pelunasan tahap 1</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418</span></td>
+                <td class="num">Rp 300.000.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="verifikasi" data-admin-pay-status="unmatched">
+                <td>1 Sep 15:22<span class="sub">BCA transfer</span></td>
+                <td>Tidak dikenali</td>
+                <td>—</td>
+                <td>Exception</td>
+                <td>Belum dialokasi</td>
+                <td class="num">Rp 25.000.000</td>
+                <td><span class="tag stop">Unmatched</span></td>
+              </tr>
+              <tr data-go="bayar" data-admin-pay-status="posted">
+                <td>28 Agu 16:30<span class="sub">VA BCA</span></td>
+                <td>VA 8801 0418 0001</td>
+                <td><b>KWT/26/CLD/008731</b></td>
+                <td>Booking fee</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418</span></td>
+                <td class="num">Rp 5.000.000</td>
+                <td><span class="tag ok">Posted</span></td>
+              </tr>
+              <tr data-go="tx_hiace" data-admin-pay-status="request" data-tx-dots="hiace">
+                <td>27 Agu 11:10<span class="sub">B2B</span></td>
+                <td>INV-DNP-2026-081</td>
+                <td>—</td>
+                <td>DP leasing</td>
+                <td>PT Danapura · Hiace × 3</td>
+                <td class="num">Full DP</td>
+                <td><span class="tag wait">Request</span></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="note">Unmatched tidak menempel ke SPK sampai dicocokkan. Request belum mengurangi AR Open. Kuitansi aktif ada di list Kuitansi.</p>
+        </div>

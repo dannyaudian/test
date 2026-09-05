@@ -21,12 +21,28 @@
     'mockup/screens/customer.html',
     'mockup/screens/cashless.html'
   ];
+  var bookPanels = [
+    'mockup/screens/admin-book/spk.html',
+    'mockup/screens/admin-book/qt.html',
+    'mockup/screens/admin-book/so.html',
+    'mockup/screens/admin-book/do.html',
+    'mockup/screens/admin-book/afi.html',
+    'mockup/screens/admin-book/bill.html',
+    'mockup/screens/admin-book/leasing.html',
+    'mockup/screens/admin-book/kwt.html',
+    'mockup/screens/admin-book/pay.html'
+  ];
   var scripts = [
     'assets/js/mockup-pdf.js',
+    'assets/js/mockup-jobs.js',
     'assets/js/mockup-nav.js',
+    'assets/js/mockup-book.js',
     'assets/js/mockup-filters.js',
     'assets/js/mockup-exc.js',
-    'assets/js/mockup-spk.js',
+    'assets/js/mockup-mgmt.js',
+    'assets/js/mockup-draft.js',
+    'assets/js/mockup-dewi-proc.js',
+    'assets/js/mockup-afi.js',
     'assets/js/mockup-b2b.js',
     'assets/js/mockup-cust.js',
     'assets/js/mockup-pay.js'
@@ -39,6 +55,10 @@
   }
   Promise.all(parts.map(get)).then(function (htmls) {
     if (host) host.outerHTML = htmls.join('\n');
+    return Promise.all(bookPanels.map(get));
+  }).then(function (panels) {
+    var mount = document.getElementById('adminBookMount');
+    if (mount) mount.outerHTML = panels.join('\n');
     return Promise.all(scripts.map(get));
   }).then(function (codes) {
     var body = codes.map(function (src) {
