@@ -102,6 +102,7 @@
     var railId=({
       shop_home:'customer',shop_akun:'shop_akun',
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',bukti_serah:'customer',
+      customer_booking:'customer',customer_booking_qris:'customer',
       tagihan_customer:'tagihan_customer',e_kuitansi:'e_kuitansi',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
       tx_hiace:'beranda',tx_raize:'beranda',tx_avanza:'beranda',tx_fortuner:'beranda',
@@ -137,20 +138,21 @@
       var on=(hid==='beranda'&&(id==='beranda'||id==='admin_book'||ADMIN_BOOK[id]||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='spk_baru'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='admin_kwt'||id==='digiroom'))
-        ||((hid==='customer'||hid==='shop_home')&&(id==='shop_home'||id==='shop_akun'||id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id.indexOf('order_')===0));
+        ||((hid==='customer'||hid==='shop_home')&&(id==='shop_home'||id==='shop_akun'||id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id==='customer_booking'||id==='customer_booking_qris'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
       a.classList.toggle('pay', hid==='cashless');
     });
     var bar=document.querySelector('.urlbar');
     if(bar){
       if(currentRole==='cust'){
-        if(id==='digiroom') bar.textContent='pay.fast.id/checkout';
+        if(id==='digiroom') bar.textContent=payJobId==='booking'?'pay.fast.id/checkout/FAST-00426':'pay.fast.id/checkout';
         else if(id==='cashless') bar.textContent='shop.fast.id/outlet-bayar';
         else if(id==='tagihan_customer') bar.textContent='shop.fast.id/bayar';
         else if(id==='e_kuitansi') bar.textContent='shop.fast.id/bukti-bayar';
         else if(id==='shop_akun') bar.textContent='shop.fast.id/akun';
         else if(id==='customer') bar.textContent='shop.fast.id/pesanan';
         else if(id==='customer_detail') bar.textContent='shop.fast.id/pesanan/FAST-00418';
+        else if(id==='customer_booking'||id==='customer_booking_qris') bar.textContent='shop.fast.id/pesanan/FAST-00426';
         else bar.textContent='shop.fast.id/pesanan/'+id;
       } else {
         bar.textContent=(id==='digiroom'?'digiroom.fast.id/beranda':'sam.fast.id/fast/'+id);
@@ -159,11 +161,13 @@
     var shopTab=({
       shop_home:'orders', customer:'orders', customer_detail:'track', order_aksesoris:'orders',
       order_calya:'orders', bukti_serah:'orders', tagihan_customer:'pay', e_kuitansi:'pay',
-      digiroom:'pay', cashless:'pay', shop_akun:'akun'
+      digiroom:'pay', cashless:'pay', shop_akun:'akun',
+      customer_booking:'track', customer_booking_qris:'pay'
     })[id]||'orders';
     document.querySelectorAll('.shop-tabbar [data-shop-tab]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-shop-tab')===shopTab ? 'true' : 'false');
     });
+    syncCustWho(id);
     if(history.replaceState) try { history.replaceState(null,'','#'+id); } catch(err) {}
     var cashBack=document.querySelector('#cashless [data-back]');
     if(cashBack){
@@ -208,7 +212,7 @@
       el.hidden=currentRole==='cust';
     });
     applyCashlessEdc();
-    if(id==='booking') setPayJob('booking');
+    if(id==='booking'||id==='customer_booking'||id==='customer_booking_qris') setPayJob('booking');
     if(id==='so2' && !payJobSticky) setPayJob('agya');
     if(id==='so'||id==='bill_d'||id==='kirim_d'||id==='afi_d'||id==='do'){
       if(!payJobSticky) setPayJob('dewi');
@@ -334,7 +338,7 @@
       el.hidden = currentRole!=='mgmt' || mgmtSeat!==need;
     });
   }
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_leasing:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_nama:'frontman',exc_epo:'frontman',exc_afi:'frontman',exc_stnk:'frontman',shop_home:'cust',shop_akun:'cust',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_leasing:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_nama:'frontman',exc_epo:'frontman',exc_afi:'frontman',exc_stnk:'frontman',shop_home:'cust',shop_akun:'cust',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust',customer_booking:'cust',customer_booking_qris:'cust'};
   document.querySelectorAll('[data-go="beranda"]').forEach(function(b){
     if(b.closest('[data-rail]') || b.hasAttribute('data-back')) return;
     b.setAttribute('data-home', b.closest('#bayar, #request') ? 'pay' : 'tx');
@@ -376,6 +380,31 @@
     });
     var app=document.querySelector('#mockup .app');
     if(app) app.classList.toggle('cust-shop', currentRole==='cust');
+  }
+  function isDewiCustScreen(id){
+    return id==='customer_booking'||id==='customer_booking_qris'||(id==='digiroom'&&payJobId==='booking');
+  }
+  function syncCustWho(id){
+    var dewi=isDewiCustScreen(id);
+    var lab=document.querySelector('[data-rail="cust"] .grouplabel');
+    if(lab) lab.textContent=dewi?'Customer · Dewi Lestari':'Customer · Budi Santoso';
+    document.querySelectorAll('.shop-tabbar [data-shop-tab="track"]').forEach(function(b){
+      b.setAttribute('data-go', dewi?'customer_booking':'customer_detail');
+    });
+    document.querySelectorAll('.shop-tabbar [data-shop-tab="pay"]').forEach(function(b){
+      b.setAttribute('data-go', dewi?'customer_booking':'tagihan_customer');
+      if(dewi){ b.setAttribute('data-pay-job','booking'); b.setAttribute('data-role','cust'); }
+      else b.removeAttribute('data-pay-job');
+    });
+    document.querySelectorAll('[data-rail="cust"] button[data-go]').forEach(function(b){
+      var t=(b.textContent||'').replace(/\s+/g,' ').trim();
+      if(t.indexOf('Lacak')===0) b.setAttribute('data-go', dewi?'customer_booking':'customer_detail');
+      if(t==='Bayar'){
+        b.setAttribute('data-go', dewi?'customer_booking':'tagihan_customer');
+        if(dewi){ b.setAttribute('data-pay-job','booking'); b.setAttribute('data-role','cust'); }
+        else b.removeAttribute('data-pay-job');
+      }
+    });
   }
   function applyRole(role){
     currentRole=role;

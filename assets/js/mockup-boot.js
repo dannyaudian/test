@@ -19,6 +19,7 @@
     'mockup/screens/admin-queue.html',
     'mockup/screens/mgmt.html',
     'mockup/screens/customer.html',
+    'mockup/screens/customer-booking.html',
     'mockup/screens/cashless.html'
   ];
   var bookPanels = [

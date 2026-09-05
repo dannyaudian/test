@@ -10,7 +10,7 @@
         <h4>Deliverable × jejak SPK</h4>
         <ul>
           <li><b>D1 Frontman flow</b> — Dewi (isi SPK→SO, tracker di tiap layar Dewi), Sarah (data gate NPWP + tracker 8 tahap), Budi (AFI berpasangan + tracker di workspace Zenix).</li>
-          <li><b>D2 Cashless &amp; e-kuitansi</b> — Dewi booking fee (kanal menempel di jejak Dewi), Budi pelunasan QRIS/VA (tab Bayar di SPK 00418).</li>
+          <li><b>D2 Cashless &amp; e-kuitansi</b> — Dewi booking fee setelah SPK (Frontman tagih, customer bayar lewat Digiroom atau scan QRIS meja), Budi pelunasan QRIS/VA (tab Bayar di SPK 00418).</li>
           <li><b>D3 Dokumen &amp; STNK</b> — Sarah vault SPK, Maria aging STNK (hub + eskalasi), Fajar GI bukti, Agus request kirim (hub + form slot), Calya paket bukti selesai.</li>
           <li><b>D4 Finance &amp; compliance</b> — Hiace DP + e-PO di tracking B2B, paperless, billing tanpa e-PO → Operation Manager, Budi exception alamat, Dewi nama pemesan ≠ STNK, gate 30%/lunas/TTD non-waivable.</li>
         </ul>
@@ -21,7 +21,7 @@
           <div class="body">
             <p class="who">Dewi Lestari · proses utuh</p>
             <h3>SPK → QT → SO → AFI → DO → Billing → Delivery → STNK</h3>
-            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, dan Management. Customer melihat daftar pesanan, lacak progres, lalu dua proses bayar terpisah (penagihan Frontman vs pelunasan cashless) dengan nomor tagihan dan kuitansi yang sama.</p>
+            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, dan Management. Setelah SPK, customer Dewi melihat booking fee terkunci (Digiroom atau scan QRIS meja). Customer Budi melihat daftar pesanan, lacak, lalu dua proses bayar terpisah (penagihan Frontman vs pelunasan cashless).</p>
             <span class="go">Buka proses →</span>
           </div>
         </a>
@@ -48,8 +48,26 @@
           <div class="body">
             <p class="who">Dewi Lestari · Frontman</p>
             <h3>Booking fee setelah SPK</h3>
-            <p>Yaris 1.5 G · Rp 3.000.000 dari master unit. Setelah kuitansi meet, SPK dikonversi jadi Sales Order — bukan form baru.</p>
+            <p>Yaris 1.5 G · Rp 3.000.000 dari master unit. Frontman menagih request terkunci. Setelah kuitansi meet, SPK dikonversi jadi Sales Order — bukan form baru.</p>
             <span class="go">Buka layar booking →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#customer_booking">
+          <div class="thumb yaris">YARIS</div>
+          <div class="body">
+            <p class="who">Dewi Lestari · Customer Digiroom</p>
+            <h3>Booking fee di HP · tautan pay.fast.id</h3>
+            <p>Setelah SPK, pesanan FAST-00426 menampilkan booking fee terkunci Rp 3.000.000. Digiroom membuka request yang sama — QRIS/VA tidak bisa diubah. Bukan pelunasan isi sendiri.</p>
+            <span class="go">Buka pesanan customer →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#customer_booking_qris">
+          <div class="thumb yaris">QRIS</div>
+          <div class="body">
+            <p class="who">Dewi Lestari · Customer di counter</p>
+            <h3>Booking fee · scan QRIS Frontman</h3>
+            <p>Barcode di layar salesman. HP customer hanya konfirmasi Rp 3.000.000 terkunci. Request yang sama dengan tautan Digiroom; EDC tidak tampil di HP.</p>
+            <span class="go">Buka HP saat scan →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#so">

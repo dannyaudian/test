@@ -79,9 +79,19 @@
         </div>
         <nav class="proc" data-proc="booking" aria-label="Proses transaksi"></nav>
         <div class="cards">
-          <div class="card"><p class="k">Booking fee unit</p><p class="v" style="font-size:22px">Rp 3.000.000</p><p class="n">Master Yaris</p></div>
+          <div class="card"><p class="k">Booking fee unit</p><p class="v" style="font-size:22px">Rp 3.000.000</p><p class="n">Master Yaris · tidak diketik Frontman</p></div>
           <div class="card" data-bf-hide-paid><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Menunggu kuitansi booking fee</p></div>
           <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">4500091426</p><p class="n">Dikonversi dari SPK</p></div>
+        </div>
+        <div class="box" data-bf-hide-paid>
+          <h3>Dua cara customer membayar request yang sama</h3>
+          <div class="pad">
+            <p>SPK sudah diinput. Yang ditagih ke customer adalah booking fee terkunci Rp 3.000.000 — bukan pelunasan isi sendiri. EDC hanya di meja Frontman.</p>
+            <div class="nextbar" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+              <button type="button" class="btn" data-go="customer_booking" data-pay-job="booking" data-role="cust">Pesanan customer · tautan Digiroom</button>
+              <button type="button" class="btn ghost" data-go="customer_booking_qris" data-pay-job="booking" data-role="cust">HP customer · scan QRIS meja</button>
+            </div>
+          </div>
         </div>
         <div class="box" data-bf-hide-paid>
           <h3>QRIS, CDM, tautan, atau EDC</h3>
@@ -97,7 +107,8 @@
                 <p class="hint">Tunjukkan layar ini ke customer. Jumlah sudah terisi. Jangan minta customer ketik nominal.</p>
                 <div class="qrbox lg" role="img" aria-label="QRIS booking fee Yaris Rp 3.000.000"></div>
                 <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 3.000.000</p>
-                <button type="button" class="btn" style="width:100%" data-bf-pay="qris">Simulasi ter-scan</button>
+                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="qris">Simulasi ter-scan di counter</button>
+                <button type="button" class="btn ghost" style="width:100%" data-go="customer_booking_qris" data-pay-job="booking" data-role="cust">Lihat konfirmasi di HP customer</button>
               </div>
               <div data-bf-panel="cdm">
                 <p class="hint">Customer setor tunai di CDM cabang. Masukkan kode ini di mesin — nominal terikat SPK, jangan diketik ulang.</p>
@@ -110,13 +121,14 @@
                 <button type="button" class="btn" style="width:100%;margin-top:12px" data-bf-pay="cdm">Simulasi setor CDM</button>
               </div>
               <div data-bf-panel="link">
-                <p class="hint">Tautan membuka beranda Digiroom. Booking fee adalah request salesman — QRIS dan VA terkunci Rp 3.000.000.</p>
+                <p class="hint">Tautan membuka checkout Digiroom di HP customer. Booking fee adalah request salesman — QRIS dan VA terkunci Rp 3.000.000.</p>
                 <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
                   <p class="from">FAST · tautan Digiroom</p>
-                  <p>Halo Bu Dewi, SPK Yaris Anda sudah tersimpan. Booking fee Rp 3.000.000.</p>
-                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/beranda</b></div>
+                  <p>Halo Bu Dewi, SPK Yaris Anda sudah tersimpan. Booking fee Rp 3.000.000. Buka tautan — angka tidak perlu diketik.</p>
+                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>pay.fast.id/checkout</b></div>
                 </div>
-                <button type="button" class="btn" style="width:100%" data-go="digiroom" data-pay-job="booking" data-role="cust">Kirim tautan ke Digiroom</button>
+                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-go="customer_booking" data-pay-job="booking" data-role="cust">Lihat dulu di pesanan customer</button>
+                <button type="button" class="btn ghost" style="width:100%" data-go="digiroom" data-pay-job="booking" data-role="cust">Langsung buka Digiroom</button>
               </div>
               <div data-bf-panel="edc">
                 <p class="hint">Pilih EDC yang dituju. Nominal didorong host-to-host — kasir tidak ketik di mesin.</p>
