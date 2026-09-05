@@ -137,45 +137,72 @@
 
       <div class="scheme" id="skema-dokumen">
         <h3>Preview skema · skenario document gate</h3>
-        <p class="deck">Dokumen diunggah sekali di SPK, diverifikasi Administrasi, dipakai ulang sampai AFI, kirim, STNK, dan paket serah terima. Document gate yang lolos membuka tagihan booking fee — bukan form unggah baru di SO.</p>
-        <div class="chain"><span>Unggah di SPK</span><i>→</i><span>Vault + masa berlaku</span><i>→</i><span>Admin verifikasi</span><i>→</i><span>Booking fee boleh ditagih</span><i>→</i><span>Pakai ulang ke AFI / GI / customer</span></div>
+        <p class="deck">Dokumen diunggah sekali di SPK, masuk vault, dicek masa berlaku, lalu diverifikasi Administrasi — bukan diketik ulang di SO, AFI, atau billing. Gate yang lolos membuka <b>tagihan booking fee</b>. Kekurangan identitas dilengkapi di sumber (SPK). Masa berlaku habis yang waivable masuk Approval Engine; Admin tidak unggah ulang.</p>
+        <div class="chain"><span>Unggah di SPK</span><i>→</i><span>Vault + masa berlaku</span><i>→</i><span>Admin verifikasi</span><i>→</i><span>Booking fee boleh ditagih</span><i>→</i><span>Pakai ulang AFI / GI / STNK / customer</span></div>
+        <div class="scheme-legend">
+          <span class="ok">Gate lolos · fee boleh ditagih</span>
+          <span class="stop">Tertahan di sumber / belum lengkap</span>
+          <span class="hold">Gagal masa berlaku · waivable</span>
+        </div>
+        <h4>Sebelum booking fee</h4>
+        <div class="see-row">
+          <a class="see" href="mockup.html#spk_baru"><span class="see-k">Unggah</span><b>Dewi · isi SPK dari awal</b><span>KTP, KK, NPWP, alamat. Nama STNK beda = paket supporting. Baru dapat nomor SPK, lalu fee.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#spk"><span class="see-k">Vault</span><b>Dewi · data SPK lengkap</b><span>Dokumen entri dan STNK/BPKB sudah diunggah. Booking fee menyusul, bukan form SO.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#tx_raize"><span class="see-k">Tahan</span><b>Sarah · NPWP kosong</b><span>Lengkapi di SPK Raize. Booking fee belum ditagih. Bukan Approval Engine.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#dokumen"><span class="see-k">Ulang</span><b>Budi · vault dipakai ulang</b><span>KTP/NPWP dari customer ID yang sama. Bukti alamat kedaluwarsa ditahan.</span><em>Buka →</em></a>
+        </div>
+        <h4>Gagal masa berlaku atau bukti serah</h4>
+        <div class="see-row">
+          <a class="see" href="mockup.html#exc_alamat"><span class="see-k">Waivable</span><b>Budi · alamat kedaluwarsa</b><span>Document gate gagal. Frontman ajukan; Admin cek; Kepala Administrasi. Bukan waiver lunas.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#exc_nama"><span class="see-k">Waivable</span><b>Dewi · supporting nama STNK</b><span>KTP STNK, alamat STNK, pernyataan sudah di vault SPK sebelum engine.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#gi"><span class="see-k">GI</span><b>Fajar · paket serah terima</b><span>Foto, VIN, geotag, timestamp, BSTKB. Admin setujui. Customer unduh paket yang sama.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Customer</span><b>Calya · bukti di akun</b><span>Bukan rekaman CCTV. Nomor dan paket sama dengan cabang.</span><em>Buka →</em></a>
+        </div>
+        <h4>Pakai ulang ke proses berikutnya</h4>
+        <div class="see-row">
+          <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>Budi · nama/alamat dari SPK</b><span>Tidak diketik di AFI. Billing + AFI berpasangan.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#tx_fortuner"><span class="see-k">STNK</span><b>Maria · tracking hari ke-19</b><span>Data SPK yang sama. Eskalasi Kepala Cabang, bukan tombol lunas.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#tx_hiace"><span class="see-k">B2B</span><b>Hiace · dokumen leasing</b><span>Frontman unggah yang diminta mitra. Backflow bukan waiver DP/TTD.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#exc_stnk"><span class="see-k">KC</span><b>Eskalasi STNK aging</b><span>Bukan Approval Engine. Document logistics, bukan gate komersial.</span><em>Buka →</em></a>
+        </div>
         <div class="scroller">
           <table>
-            <thead><tr><th>Skenario mockup</th><th>Dokumen</th><th>Yang terbuka / tertahan</th><th>Buka</th></tr></thead>
+            <thead><tr><th>Skenario</th><th>Apa yang dicek</th><th>Jika lolos / gagal</th></tr></thead>
             <tbody>
               <tr>
-                <td>Dewi · isi SPK dari awal</td>
-                <td>KTP, KK, NPWP, alamat; plus paket STNK jika nama/alamat berbeda.</td>
-                <td>Document gate lolos → sistem menagih booking fee. Tanpa unggahan wajib, nomor SPK dan fee belum jalan.</td>
-                <td><a href="mockup.html#spk_baru">Isi SPK</a> · <a href="mockup.html#spk">Data SPK</a></td>
+                <td>Dewi · unggah wajib SPK</td>
+                <td>KTP, KK, NPWP, alamat; plus KTP/alamat STNK dan pernyataan jika nama berbeda.</td>
+                <td>Lolos → nomor SPK + tagihan booking fee. Belum lengkap → belum ada fee, belum ada SO.</td>
               </tr>
               <tr>
                 <td>Sarah · NPWP kosong</td>
-                <td>Identitas belum lengkap di vault SPK.</td>
-                <td>Booking fee belum ditagih. Bukan exception Approval Engine.</td>
-                <td><a href="mockup.html#tx_raize">Vault Raize</a></td>
+                <td>Identitas di sumber SPK.</td>
+                <td>Tertahan di data/document gate. Lengkapi di SPK/26/CLD/00423. Tidak ada tombol approve.</td>
               </tr>
               <tr>
-                <td>Budi · alamat kedaluwarsa</td>
-                <td>Bukti alamat di vault gagal masa berlaku.</td>
-                <td>Waivable ke Kepala Administrasi. Admin tidak unggah ulang.</td>
-                <td><a href="mockup.html#exc_alamat">Exception alamat</a> · <a href="mockup.html#dokumen">Vault Budi</a></td>
+                <td>Budi · bukti alamat expired</td>
+                <td>Masa berlaku di vault.</td>
+                <td>Waivable. Admin verifikasi, tidak unggah ulang. Lunas tetap non-waivable.</td>
               </tr>
               <tr>
-                <td>Fajar · Good Issue</td>
-                <td>Foto serah, VIN, geotag, timestamp, BSTKB.</td>
-                <td>Admin menyetujui paket. Customer mengunduh paket yang sama — bukan CCTV.</td>
-                <td><a href="mockup.html#gi">Bukti GI</a> · <a href="mockup.html#bukti_serah">Akun customer</a></td>
+                <td>Budi · KTP/NPWP repeat order</td>
+                <td>Dokumen valid dari Customer ID yang sama.</td>
+                <td>Dipakai ulang. Tidak unggah kedua kali.</td>
+              </tr>
+              <tr>
+                <td>Fajar / Calya · Good Issue</td>
+                <td>Foto serah, VIN, geotag, timestamp, penerima, scan BSTKB.</td>
+                <td>Satu paket vault. Frontman unggah, Admin setujui, customer unduh.</td>
               </tr>
               <tr>
                 <td>Maria · STNK aging</td>
-                <td>Tracking STNK/BPKB dari data SPK yang sama.</td>
-                <td>Hari ke-19 naik ke Kepala Cabang. Bukan tombol lunas.</td>
-                <td><a href="mockup.html#tx_fortuner">Fortuner</a> · <a href="mockup.html#exc_stnk">Eskalasi</a></td>
+                <td>Tracking dokumen dari SPK, bukan form baru.</td>
+                <td>≥15 hari → Kepala Cabang. Bukan waiver pelunasan.</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <p class="deck" style="margin:0">Document gate membuka booking fee, bukan Sales Order. SO tetap menunggu kuitansi booking fee unit (non-waivable).</p>
       </div>
 
       <div class="cases">
