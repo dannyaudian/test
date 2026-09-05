@@ -229,7 +229,7 @@
 #mockup .stages .st.locked b{color:var(--ink-soft)}
 /* field rows */
 #mockup .fields{display:grid;grid-template-columns:1fr;}
-#mockup .frow{display:grid;grid-template-columns:26px 172px 1fr auto;gap:12px;align-items:center;padding:9px 16px;border-bottom:1px solid var(--rule-2)}
+#mockup .addr-fields .frow .lab{min-width:0}
 #mockup .frow:last-child{border-bottom:0}
 #mockup .frow .lab{font-size:12.5px;color:var(--ink-soft)}
 #mockup .frow .val{font-size:13.5px;font-weight:500}

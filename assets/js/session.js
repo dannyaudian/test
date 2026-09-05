@@ -136,3 +136,59 @@ FAST.b2bSummary = function () {
   });
   return { selected: s.selected, ttd: ttd, dp: dp, paper: paper, kwt: kwt, lunas: lunas, back: back, units: s.units, tab: s.tab };
 };
+FAST.NAMA_KEY = 'fast.spk.00426.nama';
+FAST.ADDR_LABELS = [
+  { id: 'line1', label: 'Alamat 1' },
+  { id: 'line2', label: 'Alamat 2' },
+  { id: 'rtrw', label: 'RT/RW' },
+  { id: 'kelurahan', label: 'Kelurahan/desa' },
+  { id: 'kecamatan', label: 'Kecamatan' },
+  { id: 'kota', label: 'Kabupaten/kota' },
+  { id: 'provinsi', label: 'Provinsi' }
+];
+FAST.ADDR = {
+  dewi_pemesan: { line1: 'Jl. Cipete Raya No. 88', line2: 'Komplek Cipete Indah Blok B2', rtrw: '003/004', kelurahan: 'Cipete Selatan', kecamatan: 'Cilandak', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  dewi_stnk: { line1: 'Jl. Raya Sawangan No. 17', line2: '', rtrw: '001/002', kelurahan: 'Mampang', kecamatan: 'Pancoran Mas', kota: 'Kota Depok', provinsi: 'Jawa Barat' },
+  budi: { line1: 'Jl. Kemang Selatan VIII No. 12', line2: 'Ruko Kemang Square Lt. 1', rtrw: '005/007', kelurahan: 'Bangka', kecamatan: 'Mampang Prapatan', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  sarah: { line1: 'Jl. Fatmawati Raya No. 45', line2: 'Apartemen One Park, tower A', rtrw: '002/006', kelurahan: 'Cipete Utara', kecamatan: 'Kebayoran Baru', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  agus: { line1: 'Jl. Cipete Raya No. 18', line2: '', rtrw: '008/003', kelurahan: 'Cipete Selatan', kecamatan: 'Cilandak', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  fajar: { line1: 'Jl. TB Simatupang No. 8', line2: 'Cluster Cilandak Town Square', rtrw: '011/002', kelurahan: 'Cilandak Barat', kecamatan: 'Cilandak', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  maria: { line1: 'Jl. Ampera Raya No. 20', line2: 'Komplek Ampera Elok', rtrw: '004/001', kelurahan: 'Ragunan', kecamatan: 'Pasar Minggu', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  hiace: { line1: 'Jl. Raya Pasar Minggu No. 10', line2: 'Gedung Danapura Lt. 5', rtrw: '006/002', kelurahan: 'Pejaten Barat', kecamatan: 'Pasar Minggu', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  calya: { line1: 'Jl. Kemang Selatan VIII No. 12', line2: 'Ruko Kemang Square Lt. 1', rtrw: '005/007', kelurahan: 'Bangka', kecamatan: 'Mampang Prapatan', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' }
+};
+FAST.NOPOL = {
+  'dewi.yaris': { spk: 'SPK/26/CLD/00426', so: '4500091426', nopol: 'B 1426 DPK', status: 'cadangan', note: 'Cadangan AFI · belum terbit STNK' },
+  'dewi.agya': { spk: 'SPK/26/CLD/00426', so: '4500091428', nopol: '—', status: 'menunggu', note: 'SO tertahan booking fee Agya' },
+  'budi': { spk: 'SPK/26/CLD/00418', so: '4500091238', nopol: 'B 1418 KL', status: 'cadangan', note: 'Plat standar · AFI dari SPK' },
+  'hiace.1288': { spk: 'SPK/26/CLD/00421', so: '4500091288', nopol: 'B 1288 UA', status: 'cadangan', note: 'Tiga SO · nopol per unit' },
+  'hiace.1289': { spk: 'SPK/26/CLD/00421', so: '4500091289', nopol: 'B 1289 UA', status: 'cadangan', note: 'Tiga SO · nopol per unit' },
+  'hiace.1290': { spk: 'SPK/26/CLD/00421', so: '4500091290', nopol: 'B 1290 UA', status: 'cadangan', note: 'Tiga SO · nopol per unit' },
+  'raize': { spk: 'SPK/26/CLD/00423', so: '—', nopol: '—', status: 'menunggu', note: 'SPK tertahan NPWP · nopol setelah AFI' },
+  'agus': { spk: 'SPK/26/CLD/00425', so: '4500091301', nopol: 'B 1301 F', status: 'cadangan', note: 'Lunas · nopol cadangan sebelum GI' },
+  'fajar': { spk: 'SPK/26/CLD/00424', so: '4500091424', nopol: 'B 1424 F', status: 'terbit', note: 'Terbit bersama GI · Rush' },
+  'maria': { spk: 'SPK/26/CLD/00409', so: '4500091409', nopol: 'B 1409 B', status: 'terbit', note: 'STNK terbit · aging plat' },
+  'calya': { spk: 'SPK/24/CLD/01990', so: '4500081990', nopol: 'B 1990 T', status: 'terbit', note: 'Delivered 2024' }
+};
+FAST.NAME_REL = {
+  dewi: { pemesan: 'Dewi Lestari', stnk: 'Andi Pratama', same: false, rel: 'Pasangan', docs: 'KTP atas nama STNK, bukti alamat STNK, pernyataan', gate: 'approval', spk: 'SPK/26/CLD/00426' },
+  budi: { pemesan: 'Budi Santoso', stnk: 'Budi Santoso', same: true, rel: 'Sama dengan pemesan', docs: 'KTP/KK pemesan dipakai ulang', gate: 'lolos', spk: 'SPK/26/CLD/00418' },
+  hiace: { pemesan: 'PT Danapura Utama', stnk: 'PT Danapura Utama', same: true, rel: 'Badan · nama STNK = debitur', docs: 'NPWP badan + SIUP', gate: 'lolos', spk: 'SPK/26/CLD/00421' },
+  raize: { pemesan: 'Sarah Wijaya', stnk: 'Sarah Wijaya', same: true, rel: 'Sama dengan pemesan', docs: 'Menunggu NPWP', gate: 'data', spk: 'SPK/26/CLD/00423' },
+  agus: { pemesan: 'Agus Hermawan', stnk: 'Agus Hermawan', same: true, rel: 'Sama dengan pemesan', docs: 'Vault SPK', gate: 'lolos', spk: 'SPK/26/CLD/00425' },
+  fajar: { pemesan: 'Fajar Nugroho', stnk: 'Fajar Nugroho', same: true, rel: 'Sama dengan pemesan', docs: 'Vault SPK', gate: 'lolos', spk: 'SPK/26/CLD/00424' },
+  maria: { pemesan: 'Maria Sitompul', stnk: 'Maria Sitompul', same: true, rel: 'Sama dengan pemesan', docs: 'Vault SPK', gate: 'lolos', spk: 'SPK/26/CLD/00409' },
+  calya: { pemesan: 'Budi Santoso', stnk: 'Budi Santoso', same: true, rel: 'Sama dengan pemesan', docs: 'Historis 2024', gate: 'lolos', spk: 'SPK/24/CLD/01990' }
+};
+FAST.addrOneLine = function (a) {
+  if (!a) return '—';
+  var parts = [a.line1, a.line2, a.rtrw ? 'RT/RW ' + a.rtrw : '', a.kelurahan, a.kecamatan, a.kota, a.provinsi];
+  return parts.filter(Boolean).join(', ');
+};
+FAST.nopolRec = function (key) {
+  if (key === 'hiace.active') {
+    var sel = (FAST.b2bLoad && FAST.b2bLoad().selected) || '1288';
+    return FAST.NOPOL['hiace.' + sel] || FAST.NOPOL['hiace.1288'];
+  }
+  return FAST.NOPOL[key] || null;
+};

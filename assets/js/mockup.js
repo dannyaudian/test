@@ -310,7 +310,7 @@
       return id;
     }
     if(cur && nextTx && familyOf(cur)!==familyOf(nextTx)){
-      if(id==='cashless'||id==='digiroom'||id==='booking'||id==='dokumen'||id==='request'||id==='afi'||id==='exc_alamat'||id==='transaksi'||id==='customer_detail'||id==='bukti_serah'||id==='gi'||id==='bayar'){
+      if(id==='cashless'||id==='digiroom'||id==='booking'||id==='dokumen'||id==='request'||id==='afi'||id==='exc_alamat'||id==='exc_nama'||id==='transaksi'||id==='customer_detail'||id==='bukti_serah'||id==='gi'||id==='bayar'){
         return hubOf(cur);
       }
     }
@@ -323,7 +323,7 @@
     if(fam==='dewi' && (activeTx==='agya'||payJobId==='agya')){
       map={ringkas:'so2',bayar:'cashless',minta:'so2',afi:'quot',dok:'spk',exc:'spk'};
     } else if(fam==='dewi'){
-      map={ringkas:'so',bayar:'cashless',minta:'so',afi:'afi_d',dok:'spk',exc:'spk'};
+      map={ringkas:'so',bayar:'cashless',minta:'so',afi:'afi_d',dok:'spk',exc:'exc_nama'};
     } else if(fam==='agus'){
       map={ringkas:'tx_avanza',bayar:'tx_avanza',minta:'tx_avanza',afi:'tx_avanza',dok:'tx_avanza',exc:'tx_avanza'};
     } else if(fam==='raize'){
@@ -363,7 +363,7 @@
       booking:'beranda',spk:'beranda',spk_baru:'beranda',quot:'beranda',so:'beranda',so2:'beranda',proses:'beranda',
       afi_d:'beranda',do:'beranda',bill_d:'beranda',kirim_d:'beranda',stnk_d:'beranda',
       delivery:'beranda',gi:'beranda',afi:'beranda',digiroom:'customer',
-      exc_alamat:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
+      exc_alamat:'eskalasi',exc_nama:'eskalasi',exc_stnk:'eskalasi',exc_afi:'eskalasi'
     })[id]||id;
     if(currentRole==='admin'){
       if(id==='verifikasi'){ railId='verifikasi'; adminReturn='verifikasi'; }
@@ -460,6 +460,7 @@
     syncRoleChrome();
     syncMgmtSeat();
     applyExcAlamat();
+    applyExcNama();
     applyBooking();
     applySpkDraft();
     applyDelivery();
@@ -470,6 +471,7 @@
     applyMgmtInbox();
     applyDewiProc();
     applyHandoverCust();
+    if(window.FAST && FAST.renderMaster) FAST.renderMaster();
   }
   if(window.FAST && FAST.lineageInit) FAST.lineageInit(show);
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
@@ -564,7 +566,7 @@
       el.hidden = currentRole!=='mgmt' || mgmtSeat!==need;
     });
   }
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_leasing:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_afi:'frontman',exc_stnk:'frontman',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_leasing:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_nama:'frontman',exc_afi:'frontman',exc_stnk:'frontman',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust'};
   document.querySelectorAll('[data-go="beranda"]').forEach(function(b){
     if(b.closest('[data-rail]') || b.hasAttribute('data-back')) return;
     b.setAttribute('data-home', b.closest('#bayar, #request') ? 'pay' : 'tx');
@@ -803,6 +805,58 @@
     document.querySelectorAll('[data-exc-pill]').forEach(function(el){ el.textContent=(st==='approved'||st==='rejected')?'0':'1'; });
     renderMgmtLog('alamat');
   }
+  function excNamaState(){
+    var s=window.FAST && FAST.load ? FAST.load(FAST.NAMA_KEY) : null;
+    return (s && s.excNama) || 'draft';
+  }
+  function applyExcNama(){
+    var st=excNamaState();
+    var notes={
+      draft:'Nama berbeda. Unggah supporting document di SPK, lalu ajukan. SLA 4 jam mulai saat pengajuan masuk.',
+      submitted:'Pengajuan nama masuk. Admin Cilandak mencocokkan KTP STNK dengan field nama STNK.',
+      verified:'Admin sudah cek. Kepala Administrasi memutuskan. Bukan waiver booking fee.',
+      approved:'Nama STNK Andi Pratama disetujui untuk AFI. Booking fee dan 30% tetap non-waivable.',
+      returned:'Dikembalikan. Lengkapi pernyataan atau KTP atas nama STNK.',
+      rejected:'Ditolak. Samakan nama STNK dengan pemesan, atau unggah dokumen yang sah.'
+    };
+    var tags={draft:'Menunggu pengajuan',submitted:'Admin cek',verified:'Siap diputuskan',approved:'Disetujui',returned:'Revisi',rejected:'Ditolak'};
+    var specs={
+      draft:'Waivable · pemesan ≠ STNK · unggah supporting document',
+      submitted:'Admin Cilandak sedang mencocokkan dokumen',
+      verified:'Siap diputuskan Kepala Administrasi',
+      approved:'Nama STNK dipakai AFI · syarat dokumen',
+      returned:'Lengkapi supporting document',
+      rejected:'Ditolak · perbaiki data SPK'
+    };
+    var note=document.querySelector('[data-exc-nama-note]');
+    if(note){
+      note.textContent=notes[st]||notes.draft;
+      note.classList.toggle('warn', st!=='approved');
+      note.classList.toggle('ok', st==='approved');
+    }
+    document.querySelectorAll('[data-exc-nama-tag]').forEach(function(el){
+      el.textContent=tags[st]||tags.draft;
+      el.className='tag '+(st==='approved'?'ok':(st==='rejected'||st==='returned')?'stop':'hold');
+    });
+    document.querySelectorAll('[data-exc-nama-spec]').forEach(function(el){ el.textContent=specs[st]||specs.draft; });
+    var path=document.querySelector('[data-exc-nama-path]');
+    if(path){
+      var order=['draft','submitted','verified','approved'];
+      var idx=order.indexOf(st==='returned'||st==='rejected'?'draft':st);
+      path.querySelectorAll('b[data-step]').forEach(function(b){
+        var i=order.indexOf(b.getAttribute('data-step'));
+        b.classList.toggle('on', i===idx);
+        b.classList.toggle('ok', i<idx);
+      });
+    }
+    renderMgmtLog('nama');
+    if(window.FAST && FAST.renderMaster) FAST.renderMaster();
+  }
+  function setExcNama(next, msg){
+    if(window.FAST && FAST.save) FAST.save({excNama:next}, FAST.NAMA_KEY);
+    applyExcNama();
+    toast(msg);
+  }
   function setExcAlamat(next, msg){
     if(window.FAST && FAST.save) FAST.save({excAlamat:next});
     applyExcAlamat();
@@ -810,11 +864,22 @@
   }
   document.querySelectorAll('[data-exc-submit]').forEach(function(b){
     b.addEventListener('click',function(){
-      setExcAlamat('submitted','Pengajuan terkirim. Admin Cilandak akan cek bukti.');
+      var kind=b.getAttribute('data-exc-submit');
+      if(kind==='nama') setExcNama('submitted','Pengajuan nama terkirim. Admin Cilandak akan cek supporting document.');
+      else setExcAlamat('submitted','Pengajuan terkirim. Admin Cilandak akan cek bukti.');
     });
   });
   document.querySelectorAll('[data-exc-verify]').forEach(function(b){
     b.addEventListener('click',function(){
+      var kind=b.getAttribute('data-exc-verify');
+      if(kind==='nama'){
+        if(excNamaState()==='draft' || excNamaState()==='returned'){
+          toast('Frontman belum mengajukan nama. Minta pengajuan dulu.');
+          return;
+        }
+        setExcNama('verified','Dokumen nama dicek. Siap diputuskan Kepala Administrasi.');
+        return;
+      }
       if(excAlamatState()==='draft' || excAlamatState()==='returned'){
         toast('Frontman belum mengajukan. Minta pengajuan dulu.');
         return;
@@ -847,6 +912,7 @@
   }
   function mgmtLogs(caseId){
     if(caseId==='alamat') return ((FAST.load()||{}).excLog)||[];
+    if(caseId==='nama') return ((FAST.load(FAST.NAMA_KEY)||{}).namaLog)||[];
     if(caseId==='stnk') return ((FAST.load(FAST.STNK_KEY)||{}).stnkLog)||[];
     var s=afiData();
     if(caseId==='early'||(caseId==='afi'&&afiExcKind!=='nobill')) return s.logEarly||[];
@@ -891,6 +957,7 @@
   }
   function mgmtCaseState(caseId){
     if(caseId==='alamat') return excAlamatState();
+    if(caseId==='nama') return excNamaState();
     if(caseId==='early') return afiExcSt('early');
     if(caseId==='nobill') return afiExcSt('nobill');
     if(caseId==='stnk'){
@@ -922,6 +989,7 @@
     document.querySelectorAll('[data-mgmt-pill]').forEach(function(el){ el.textContent=String(nOpen+nRev); });
     filterMgmtInbox();
     renderMgmtLog('alamat');
+    renderMgmtLog('nama');
     renderMgmtLog('afi');
     renderMgmtLog('stnk');
   }
@@ -993,6 +1061,12 @@
       FAST.save({excAlamat:next,excLog:log});
       applyExcAlamat();
       toast(act==='approve'?'Disetujui dengan syarat. Pelunasan tetap wajib.':act==='revise'?'Diminta revisi. Frontman lengkapi sesuai komentar.':'Ditolak. Ikuti dokumen standar.');
+    } else if(caseId==='nama'){
+      var nlog=((FAST.load(FAST.NAMA_KEY)||{}).namaLog)||[];
+      nlog.push(entry);
+      FAST.save({excNama:next,namaLog:nlog}, FAST.NAMA_KEY);
+      applyExcNama();
+      toast(act==='approve'?'Nama STNK disetujui untuk AFI. Booking fee tetap wajib.':act==='revise'?'Revisi nama: lengkapi supporting document.':'Ditolak. Samakan nama atau unggah dokumen sah.');
     } else if(caseId==='stnk'){
       var slog=((FAST.load(FAST.STNK_KEY)||{}).stnkLog)||[];
       slog.push(entry);
@@ -1082,8 +1156,8 @@
   }
   function fieldsReady(group, d){
     var f=d.fields||{};
-    if(group==='pemesan') return !!(f.nama&&f.nik&&f.hp&&f.alamat);
-    if(group==='stnk') return !!(f.stnkNama&&f.stnkKota&&f.stnkAlamat);
+    if(group==='pemesan') return !!(f.nama&&f.nik&&f.hp&&f.pemAddr1&&f.pemRt&&f.pemKel&&f.pemKec&&f.pemKota&&f.pemProv);
+    if(group==='stnk') return !!(f.stnkNama&&f.stnkAddr1&&f.stnkRt&&f.stnkKel&&f.stnkKec&&f.stnkKota&&f.stnkProv);
     if(group==='unit') return !!(f.tipe&&f.warna);
     return false;
   }
@@ -1131,7 +1205,7 @@
     var sameHint=document.querySelector('[data-spk-same-hint]');
     if(sameHint) sameHint.textContent=d.sameStnk
       ? 'Nama STNK = pemesan. KTP/KK/alamat pemesan dipakai ulang. Pernyataan nama tidak wajib.'
-      : 'Nama STNK berbeda: unggah KTP atas nama STNK, bukti alamat STNK, dan pernyataan di langkah 4.';
+      : 'Nama STNK berbeda: unggah supporting document di langkah 4, lalu Approval Engine (Kepala Administrasi).';
     var po=poFromKota((d.fields||{}).stnkKota);
     var poMap={prov:po.prov,po:po.po,otr:po.otr,bf:po.bf};
     Object.keys(poMap).forEach(function(k){
@@ -1204,19 +1278,32 @@
       var d=draftData();
       var fields=Object.assign({}, d.fields||{});
       if(kind==='pemesan'){
-        Object.assign(fields,{nama:'Dewi Lestari',nik:'3276••••••••0012',hp:'0812••••8831',email:'dewi.lestari@mail.test',alamat:'Jl. Cipete Raya No. 88, Kel. Cipete Selatan, Kec. Cilandak, Kota Jakarta Selatan 12410'});
+        var pa=FAST.ADDR && FAST.ADDR.dewi_pemesan;
+        Object.assign(fields,{
+          nama:'Dewi Lestari',nik:'3276••••••••0012',hp:'0812••••8831',email:'dewi.lestari@mail.test',
+          pemAddr1:pa.line1,pemAddr2:pa.line2,pemRt:pa.rtrw,pemKel:pa.kelurahan,pemKec:pa.kecamatan,pemKota:pa.kota,pemProv:pa.provinsi
+        });
         saveDraft({fields:fields,step:'stnk'});
         toast('Pemesan tersimpan di SPK. Lanjut nama dan alamat STNK.');
       } else if(kind==='stnk'){
         if(d.sameStnk){
-          Object.assign(fields,{stnkNama:fields.nama||'Dewi Lestari',stnkKota:'Kota Jakarta Selatan',stnkAlamat:fields.alamat||'Jl. Cipete Raya No. 88, Jakarta Selatan'});
+          Object.assign(fields,{
+            stnkNama:fields.nama||'Dewi Lestari', stnkRel:'Sama dengan pemesan',
+            stnkAddr1:fields.pemAddr1, stnkAddr2:fields.pemAddr2, stnkRt:fields.pemRt,
+            stnkKel:fields.pemKel, stnkKec:fields.pemKec, stnkKota:fields.pemKota, stnkProv:fields.pemProv
+          });
         } else {
-          Object.assign(fields,{stnkNama:'Andi Pratama',stnkKota:'Kota Depok',stnkAlamat:'Jl. Raya Sawangan No. 17, Kel. Mampang, Kec. Pancoran Mas'});
+          var sa=FAST.ADDR && FAST.ADDR.dewi_stnk;
+          Object.assign(fields,{
+            stnkNama:'Andi Pratama', stnkRel:'Pasangan',
+            stnkAddr1:sa.line1, stnkAddr2:sa.line2, stnkRt:sa.rtrw,
+            stnkKel:sa.kelurahan, stnkKec:sa.kecamatan, stnkKota:sa.kota, stnkProv:sa.provinsi
+          });
         }
         saveDraft({fields:fields,step:'unit'});
         toast('Kota STNK mengisi area PO. OTR mengikuti area itu.');
       } else if(kind==='unit'){
-        Object.assign(fields,{tipe:'Yaris 1.5 G CVT',warna:'Putih Metalik',tipe2:'Agya 1.2 G CVT · Hitam',aksesoris:'Kaca film full + karpet premium'});
+        Object.assign(fields,{tipe:'Yaris 1.5 G CVT',warna:'Putih Metalik',tipe2:'Agya 1.2 G CVT · Hitam',aksesoris:'Kaca film full + karpet premium',nopol1:'B 1426 DPK',nopol2:''});
         saveDraft({fields:fields,cash:true,step:'docs'});
         toast('Unit dari master. Booking fee belum ditagih.');
       }
@@ -1229,7 +1316,14 @@
       if(same){
         var f=Object.assign({}, draftData().fields||{});
         if(f.nama) f.stnkNama=f.nama;
-        if(f.alamat) f.stnkAlamat=f.alamat;
+        f.stnkRel='Sama dengan pemesan';
+        if(f.pemAddr1) f.stnkAddr1=f.pemAddr1;
+        f.stnkAddr2=f.pemAddr2||'';
+        if(f.pemRt) f.stnkRt=f.pemRt;
+        if(f.pemKel) f.stnkKel=f.pemKel;
+        if(f.pemKec) f.stnkKec=f.pemKec;
+        if(f.pemKota) f.stnkKota=f.pemKota;
+        if(f.pemProv) f.stnkProv=f.pemProv;
         patch.fields=f;
       }
       saveDraft(patch);
@@ -1877,6 +1971,7 @@
       document.querySelectorAll('[data-b2b-kwt-row="'+id+'"]').forEach(function(row){ row.hidden=!uu.kwtIssued; });
     });
     if(window.FAST && FAST.renderLineage) FAST.renderLineage();
+    if(window.FAST && FAST.renderMaster) FAST.renderMaster();
   }
   function applyGi(){
     var s=window.FAST && FAST.load ? FAST.load(FAST.GI_KEY) : null;
@@ -2331,6 +2426,7 @@
   }
   applyLive();
   applyExcAlamat();
+  applyExcNama();
   applyBooking();
   applySpkDraft();
   applyDelivery();
@@ -2341,7 +2437,8 @@
   applyDewiProc();
   syncRoleChrome();
   syncMgmtSeat();
-  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyB2b(); applyAfi(); applyDewiProc(); applyHandoverCust(); applyMgmtInbox(); });
+  if(window.FAST && FAST.renderMaster) FAST.renderMaster();
+  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyExcNama(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyB2b(); applyAfi(); applyDewiProc(); applyHandoverCust(); applyMgmtInbox(); if(window.FAST && FAST.renderMaster) FAST.renderMaster(); });
 
   var channelMeta={
     qris:{title:'QRIS'},

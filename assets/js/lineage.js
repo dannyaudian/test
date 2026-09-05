@@ -15,7 +15,7 @@
     afi_d:'dewi',do:'dewi',bill_d:'dewi',kirim_d:'dewi',stnk_d:'dewi',
     so2:'agya',
     transaksi:'budi',afi:'budi',dokumen:'budi',request:'budi',bayar:'budi',
-    exc_alamat:'budi',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
+    exc_alamat:'budi',exc_nama:'dewi',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
     tx_hiace:'hiace',
     tx_raize:'raize',
     tx_avanza:'agus',delivery:'agus',
@@ -27,7 +27,7 @@
     spk:'spk',spk_baru:'spk',quot:'quot',booking:'quot',so:'so',so2:'so',proses:'spk',
     afi_d:'afi',do:'do',bill_d:'bill',kirim_d:'del',stnk_d:'stnk',
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
-    cashless:'bill',exc_alamat:'afi',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
+    cashless:'bill',exc_alamat:'afi',exc_nama:'spk',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
     tx_hiace:'bill',
     tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
     tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'

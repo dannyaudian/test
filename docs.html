@@ -92,7 +92,7 @@
           <li><b>D1 Frontman flow</b> — Dewi (isi SPK→SO, tracker di tiap layar Dewi), Sarah (data gate NPWP + tracker 8 tahap), Budi (AFI berpasangan + tracker di workspace Zenix).</li>
           <li><b>D2 Cashless &amp; e-kuitansi</b> — Dewi booking fee (kanal menempel di jejak Dewi), Budi pelunasan QRIS/VA (tab Bayar di SPK 00418).</li>
           <li><b>D3 Dokumen &amp; STNK</b> — Sarah vault SPK, Maria aging STNK (hub + eskalasi), Fajar GI bukti, Agus request kirim (hub + form slot), Calya paket bukti selesai.</li>
-          <li><b>D4 Finance &amp; compliance</b> — Hiace DP di struktur harga SO + paperless, Budi exception alamat, gate 30%/lunas/TTD non-waivable.</li>
+          <li><b>D4 Finance &amp; compliance</b> — Hiace DP di struktur harga SO + paperless, Budi exception alamat, Dewi nama pemesan ≠ STNK (Approval Engine + supporting document), gate 30%/lunas/TTD non-waivable.</li>
         </ul>
       </div>
       <div class="cases">
@@ -202,6 +202,15 @@
             <h3>Paket serah terima di akun customer</h3>
             <p>Unit lama yang sudah lunas dan diserahkan. Customer unduh bukti otentik. Pesanan Zenix masih tertahan pelunasan — blocker terlihat, bukan ruang gelap.</p>
             <span class="go">Buka paket bukti →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#exc_nama">
+          <div class="thumb exc">NAMA</div>
+          <div class="body">
+            <p class="who">Dewi · Approval Engine</p>
+            <h3>Nama pemesan ≠ nama STNK</h3>
+            <p>Andi Pratama di STNK. Supporting document di vault. Kepala Administrasi memutuskan. Bukan waiver booking fee.</p>
+            <span class="go">Buka pengecualian nama →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#exc_alamat">
@@ -547,9 +556,9 @@
 
       <h4>Data domains to be mapped</h4>
       <div class="grid g3">
-        <div class="panel"><h4>1. Customer Data</h4><ul><li>Nama customer.</li><li>Customer ID.</li><li>NIK/KTP.</li><li>NPWP.</li><li>Alamat.</li><li>Nomor telepon.</li><li>Email.</li><li>Repeat-order status.</li><li>STNK name.</li><li>Customer classification.</li></ul></div>
+        <div class="panel"><h4>1. Customer Data</h4><ul><li>Nama customer / pemesan.</li><li>Customer ID.</li><li>NIK/KTP.</li><li>NPWP.</li><li>Alamat terstruktur: Alamat 1, Alamat 2, RT/RW, kelurahan/desa, kecamatan, kabupaten/kota, provinsi (pemesan dan STNK, masing-masing).</li><li>Nomor telepon.</li><li>Email.</li><li>Repeat-order status.</li><li>Nama STNK dan hubungan dengan pemesan (sama atau berbeda).</li><li>Customer classification.</li></ul></div>
         <div class="panel"><h4>2. Transaction Data</h4><ul><li>Purchase method (cash atau leasing).</li><li>Transaction type.</li><li>SPK number.</li><li>Sales Order number.</li><li>Billing document number.</li><li>Parent-child document reference.</li><li>Unit quantity.</li><li>Branch.</li><li>Frontman.</li><li>Transaction structure.</li></ul></div>
-        <div class="panel"><h4>3. Vehicle Data</h4><ul><li>Model.</li><li>Type.</li><li>Color.</li><li>VIN.</li><li>Engine number.</li><li>Allocation status.</li><li>PDI status.</li><li>AFI status.</li><li>DO status.</li></ul></div>
+        <div class="panel"><h4>3. Vehicle Data</h4><ul><li>Model.</li><li>Type.</li><li>Color.</li><li>VIN.</li><li>Engine number.</li><li>Nomor polisi per SPK/SO (cadangan AFI atau terbit).</li><li>Allocation status.</li><li>PDI status.</li><li>AFI status.</li><li>DO status.</li></ul></div>
         <div class="panel"><h4>4. Transaction Value Data</h4><ul><li>Price.</li><li>Discount.</li><li>Program.</li><li>Cashback.</li><li>Subsidy.</li><li>OPO/OPK.</li><li>Final transaction value.</li><li>Leasing information.</li><li>Required customer DP on the Sales Order pricing structure when purchase method is credit/leasing (from B2B, read-only).</li><li>Amount financed by leasing (final value − required DP).</li><li>Source-system reference.</li></ul><p>Data tersebut dibawa dari source system / B2B sebagai bagian transaksi dan bersifat read-only dalam FAST. Data tersebut bukan objek Compliance Exception Approval Engine. Untuk tunai, struktur harga SO memakai booking fee unit, bukan DP leasing.</p></div>
         <div class="panel"><h4>5. Payment and E-Receipt Data</h4><ul><li>Vehicle-specific booking fee requirement.</li><li>Booking fee billed after SPK.</li><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Payment amount.</li><li>Payment date.</li><li>Payment method.</li><li>Payment stage.</li><li>Payment allocation.</li><li>E-receipt number.</li><li>E-receipt issue date.</li><li>E-receipt status.</li><li>Linked SPK.</li><li>Linked Sales Order.</li><li>Linked billing document.</li><li>Verification code atau QR.</li><li>PDF document reference.</li><li>Customer download history.</li><li>Accumulated payment.</li><li>AR Open.</li><li>Active payment request amount.</li><li>Available Request Amount.</li><li>Settlement status.</li><li>Funds-in percentage for cash billing (≥30%).</li><li>Full DP amount from B2B leasing.</li><li>Leasing DP received versus required.</li><li>Leasing contract signed status from B2B leasing.</li></ul></div>
         <div class="panel"><h4>6. Administrative Documents</h4><ul><li>KTP.</li><li>NPWP.</li><li>KK.</li><li>PO.</li><li>NIB.</li><li>Akta.</li><li>Leasing documents.</li><li>STNK documents.</li><li>Tax documents.</li><li>Surat Kuasa.</li><li>BSTKB.</li><li>Electronic OKK.</li></ul></div>
@@ -991,7 +1000,7 @@
         <table>
           <thead><tr><th>Gate</th><th>Validation scope</th><th>Process unlocked</th></tr></thead>
           <tbody>
-            <tr><td>Data Gate</td><td>Customer identity, STNK name, transaction structure, purchase method, dan duplicate check</td><td class="gate-note">Valid SPK</td></tr>
+            <tr><td>Data Gate</td><td>Customer identity, STNK name vs pemesan, alamat 7 field, transaction structure, purchase method, dan duplicate check. Nama berbeda wajib supporting document.</td><td class="gate-note">Valid SPK</td></tr>
             <tr><td>Document Gate</td><td>Mandatory dan unit-specific documents</td><td class="gate-note">Booking fee request</td></tr>
             <tr><td>Booking Fee Gate</td><td>SPK tersimpan, tagihan booking fee ke customer, nominal minimum sesuai unit, payment reference, verification, receipt, dan SPK linkage</td><td class="gate-note">Sales Order linked to SPK</td></tr>
             <tr><td>Settlement Gate</td><td>Payment allocation, active receipt completeness, AR Open, active-request exposure, receipt reversal, dan Available Request Amount</td><td class="gate-note">AR and request control</td></tr>
@@ -1002,6 +1011,7 @@
         </table>
       </div>
       <div class="see-row">
+        <a class="see" href="mockup.html#exc_nama"><span class="see-k">Waivable</span><b>Nama pemesan ≠ STNK</b><span>Dewi · supporting document → Kepala Administrasi</span><em>Lihat →</em></a>
         <a class="see" href="mockup.html#tx_raize"><span class="see-k">Data</span><b>Sarah · NPWP kosong</b><span>Bukan Approval Engine</span><em>Lihat →</em></a>
         <a class="see" href="mockup.html#exc_alamat"><span class="see-k">Waivable</span><b>Bukti alamat kedaluwarsa</b><span>Frontman → Admin → Kepala Administrasi</span><em>Lihat →</em></a>
         <a class="see" href="mockup.html#tx_hiace"><span class="see-k">Non-waivable</span><b>Hiace status B2B ke gate</b><span>TTD &amp; DP dari alur leasing, bukan waiver</span><em>Lihat →</em></a>
