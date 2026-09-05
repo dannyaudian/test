@@ -10,11 +10,171 @@
         <h4>Deliverable × jejak SPK</h4>
         <ul>
           <li><b>D1 Frontman flow</b> — Dewi (isi SPK→SO, tracker di tiap layar Dewi), Sarah (data gate NPWP + tracker 8 tahap), Budi (AFI berpasangan + tracker di workspace Zenix).</li>
-          <li><b>D2 Cashless &amp; e-kuitansi</b> — Dewi booking fee setelah SPK (Frontman tagih, customer bayar lewat Digiroom atau scan QRIS meja), Budi pelunasan QRIS/VA (tab Bayar di SPK 00418).</li>
+          <li><b>D2 Cashless &amp; e-kuitansi</b> — Dewi booking fee setelah SPK (Frontman tagih, customer bayar lewat Digiroom atau scan QRIS meja), Budi pelunasan QRIS/VA (tab Bayar di SPK 00418). Satu bayar terverifikasi = satu kuitansi; nomor sama di customer dan cabang. Preview skema di bawah.</li>
           <li><b>D3 Dokumen &amp; STNK</b> — Sarah vault SPK, Maria aging STNK (hub + eskalasi), Fajar GI bukti, Agus request kirim (hub + form slot), Calya paket bukti selesai.</li>
           <li><b>D4 Finance &amp; compliance</b> — Hiace DP + e-PO di tracking B2B, paperless, billing tanpa e-PO → Operation Manager, Budi exception alamat, Dewi nama pemesan ≠ STNK, gate 30%/lunas/TTD non-waivable.</li>
         </ul>
       </div>
+
+      <div class="scheme" id="skema-cashless">
+        <h3>Preview skema · skenario cashless dan kuitansi</h3>
+        <p class="deck">Kanal (QRIS, VA, CDM, tautan Digiroom, EDC Frontman) hanya cara bayar. Yang mengikat transaksi adalah payment request + kuitansi. Request yang belum dibayar tidak menerbitkan kuitansi dan tidak mengurangi AR Open.</p>
+        <div class="chain"><span>Bayar terverifikasi</span><i>→</i><span>1 nomor kuitansi</span><i>→</i><span>E-kuitansi PDF</span><i>→</i><span>AR Open turun</span><i>→</i><span>Gate billing / kirim dievaluasi</span></div>
+        <div class="scheme-legend">
+          <span class="hold">Request terkunci</span>
+          <span>Isi nominal sendiri</span>
+          <span class="ok">Kuitansi aktif</span>
+          <span class="stop">Belum bayar = belum KWT</span>
+        </div>
+        <div class="scroller">
+          <table>
+            <thead><tr><th>Skenario mockup</th><th>Yang tampil</th><th>Hubungan ke kuitansi</th><th>Buka</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Dewi · booking fee setelah SPK</td>
+                <td>Request salesman terkunci Rp 3.000.000. Customer: tautan Digiroom atau scan QRIS di layar Frontman. Bukan isi sendiri. EDC hanya di meja Frontman.</td>
+                <td><span class="kwt">KWT/26/CLD/009301</span> terbit setelah Banking API. Tertaut SPK/26/CLD/00426 dulu; nomor SO 4500091426 ditambah ke lineage setelah fee meet. Tanpa kuitansi ini, SO tidak terbuka.</td>
+                <td><a href="mockup.html#booking">Frontman</a> · <a href="mockup.html#customer_booking">Digiroom</a> · <a href="mockup.html#customer_booking_qris">QRIS meja</a></td>
+              </tr>
+              <tr>
+                <td>Budi · penagihan Frontman</td>
+                <td>Proses 1: request terkunci Rp 100.000.000. QRIS/VA tidak bisa diubah. Terpisah dari pelunasan cashless.</td>
+                <td>Satu pembayaran terverifikasi = satu kuitansi baru. Request yang masih menggantung tidak memotong AR Open; kuitansi aktif yang memotong.</td>
+                <td><a href="mockup.html#cashless">Frontman bayar</a> · <a href="mockup.html#tagihan_customer">Customer bayar</a></td>
+              </tr>
+              <tr>
+                <td>Budi · pelunasan cashless</td>
+                <td>Proses 2: tidak memakai request. Customer isi nominal. QRIS tampil setelah angka; VA terbit setelah angka.</td>
+                <td>Setiap setoran dapat kuitansi sendiri. Contoh aktif: <span class="kwt">KWT/26/CLD/008731</span> tanda jadi Rp 5 jt dan <span class="kwt">KWT/26/CLD/009115</span> pelunasan 1 Rp 300 jt. Total kuitansi aktif = pengurang AR Open Rp 181,75 jt.</td>
+                <td><a href="mockup.html#digiroom">Digiroom isi nominal</a> · <a href="mockup.html#e_kuitansi">E-kuitansi customer</a></td>
+              </tr>
+              <tr>
+                <td>Frontman · debit EDC</td>
+                <td>Pilih perangkat di kasir. Nominal didorong host-to-host. Tidak ada EDC di HP customer.</td>
+                <td>Tetap satu kuitansi per pembayaran terverifikasi — nomor sama di buku cabang dan di akun customer.</td>
+                <td><a href="mockup.html#booking">EDC booking Dewi</a> · <a href="mockup.html#cashless">EDC pelunasan Budi</a></td>
+              </tr>
+              <tr>
+                <td>Administrasi · buku kuitansi</td>
+                <td>List kuitansi cabang. Unmatched payment ditangani di sini, bukan diketik ulang Frontman.</td>
+                <td>Nomor, status (aktif / cancelled), SPK/SO, dan metode sama dengan yang customer unduh. Cancelled mengembalikan AR dan menahan gate.</td>
+                <td><a href="mockup.html#admin_kwt">Buku kuitansi</a> · <a href="mockup.html#admin_pay">Pembayaran</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="deck" style="margin:0">Aturan: tidak ada pembayaran terverifikasi, tidak ada kuitansi. Kuitansi tidak ditimpa; koreksi pakai reversal/reissue. Customer dan cabang melihat nomor yang sama.</p>
+      </div>
+
+      <div class="scheme" id="skema-approval">
+        <h3>Preview skema · skenario approval gate</h3>
+        <p class="deck">Approval Engine hanya untuk failed compliance rule yang waivable. Booking fee, 30% cash, lunas cash, full DP leasing, dan TTD kontrak tidak masuk antrean putusan.</p>
+        <div class="scheme-legend">
+          <span class="ok">Waivable · Approval Engine</span>
+          <span class="hold">Eskalasi operasional</span>
+          <span class="stop">Non-waivable / data gate</span>
+        </div>
+        <div class="scroller">
+          <table>
+            <thead><tr><th>Skenario mockup</th><th>Gate</th><th>Engine?</th><th>Decision owner</th><th>Buka</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Dewi · nama pemesan ≠ STNK</td>
+                <td>Data / compliance</td>
+                <td>Waivable. Supporting document di vault.</td>
+                <td>Kepala Administrasi</td>
+                <td><a href="mockup.html#exc_nama">Pengecualian nama</a></td>
+              </tr>
+              <tr>
+                <td>Budi · bukti alamat kedaluwarsa</td>
+                <td>Document</td>
+                <td>Waivable. Bukan waiver lunas.</td>
+                <td>Frontman ajukan → Admin cek → Kepala Administrasi</td>
+                <td><a href="mockup.html#exc_alamat">Pengecualian alamat</a></td>
+              </tr>
+              <tr>
+                <td>Budi · AFI dulu atau billing tanpa AFI</td>
+                <td>AFI + billing berpasangan</td>
+                <td>Waivable hanya untuk pecah urutan.</td>
+                <td>Kepala Administrasi</td>
+                <td><a href="mockup.html#exc_afi">Exception AFI</a></td>
+              </tr>
+              <tr>
+                <td>Hiace · billing tanpa e-PO</td>
+                <td>Leasing e-PO</td>
+                <td>Waivable untuk paperless saja. DP dan TTD tidak di-waive. Pelunasan tetap butuh e-PO asli.</td>
+                <td>Operation Manager</td>
+                <td><a href="mockup.html#exc_epo">Gate e-PO</a></td>
+              </tr>
+              <tr>
+                <td>Maria · STNK hari ke-19</td>
+                <td>Document aging</td>
+                <td>Bukan Approval Engine. Eskalasi aging.</td>
+                <td>Kepala Cabang</td>
+                <td><a href="mockup.html#exc_stnk">Eskalasi STNK</a></td>
+              </tr>
+              <tr>
+                <td>Sarah · NPWP kosong</td>
+                <td>Data gate</td>
+                <td>Tidak. Lengkapi di SPK.</td>
+                <td>Frontman (input owner)</td>
+                <td><a href="mockup.html#tx_raize">SPK Raize</a></td>
+              </tr>
+              <tr>
+                <td>Booking fee / 30% / lunas / TTD</td>
+                <td>Gate komersial</td>
+                <td>Tidak. Engine tidak bisa membuka.</td>
+                <td>—</td>
+                <td><a href="docs.html#s6">Tabel gate</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="scheme" id="skema-dokumen">
+        <h3>Preview skema · skenario document gate</h3>
+        <p class="deck">Dokumen diunggah sekali di SPK, diverifikasi Administrasi, dipakai ulang sampai AFI, kirim, STNK, dan paket serah terima. Document gate yang lolos membuka tagihan booking fee — bukan form unggah baru di SO.</p>
+        <div class="chain"><span>Unggah di SPK</span><i>→</i><span>Vault + masa berlaku</span><i>→</i><span>Admin verifikasi</span><i>→</i><span>Booking fee boleh ditagih</span><i>→</i><span>Pakai ulang ke AFI / GI / customer</span></div>
+        <div class="scroller">
+          <table>
+            <thead><tr><th>Skenario mockup</th><th>Dokumen</th><th>Yang terbuka / tertahan</th><th>Buka</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Dewi · isi SPK dari awal</td>
+                <td>KTP, KK, NPWP, alamat; plus paket STNK jika nama/alamat berbeda.</td>
+                <td>Document gate lolos → sistem menagih booking fee. Tanpa unggahan wajib, nomor SPK dan fee belum jalan.</td>
+                <td><a href="mockup.html#spk_baru">Isi SPK</a> · <a href="mockup.html#spk">Data SPK</a></td>
+              </tr>
+              <tr>
+                <td>Sarah · NPWP kosong</td>
+                <td>Identitas belum lengkap di vault SPK.</td>
+                <td>Booking fee belum ditagih. Bukan exception Approval Engine.</td>
+                <td><a href="mockup.html#tx_raize">Vault Raize</a></td>
+              </tr>
+              <tr>
+                <td>Budi · alamat kedaluwarsa</td>
+                <td>Bukti alamat di vault gagal masa berlaku.</td>
+                <td>Waivable ke Kepala Administrasi. Admin tidak unggah ulang.</td>
+                <td><a href="mockup.html#exc_alamat">Exception alamat</a> · <a href="mockup.html#dokumen">Vault Budi</a></td>
+              </tr>
+              <tr>
+                <td>Fajar · Good Issue</td>
+                <td>Foto serah, VIN, geotag, timestamp, BSTKB.</td>
+                <td>Admin menyetujui paket. Customer mengunduh paket yang sama — bukan CCTV.</td>
+                <td><a href="mockup.html#gi">Bukti GI</a> · <a href="mockup.html#bukti_serah">Akun customer</a></td>
+              </tr>
+              <tr>
+                <td>Maria · STNK aging</td>
+                <td>Tracking STNK/BPKB dari data SPK yang sama.</td>
+                <td>Hari ke-19 naik ke Kepala Cabang. Bukan tombol lunas.</td>
+                <td><a href="mockup.html#tx_fortuner">Fortuner</a> · <a href="mockup.html#exc_stnk">Eskalasi</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div class="cases">
         <a class="case" href="mockup.html#proses">
           <div class="thumb yaris">FLOW</div>
@@ -95,6 +255,24 @@
             <h3>Isi nominal sendiri</h3>
             <p>Beranda pay.fast.id. QRIS tampil setelah angka diisi. VA menerbitkan nomor rekening setelah angka diisi.</p>
             <span class="go">Buka Digiroom →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#e_kuitansi">
+          <div class="thumb pay">KWT</div>
+          <div class="body">
+            <p class="who">Budi · Customer e-kuitansi</p>
+            <h3>Struk dengan nomor cabang</h3>
+            <p>KWT/26/CLD/009115 dan 008731. Satu bayar terverifikasi, satu nomor. PDF yang sama dengan buku kuitansi Administrasi.</p>
+            <span class="go">Buka bukti bayar →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#admin_kwt">
+          <div class="thumb list">KWT</div>
+          <div class="body">
+            <p class="who">Administrasi · buku kuitansi</p>
+            <h3>Lineage pembayaran cabang</h3>
+            <p>List kuitansi aktif dan unmatched. Nomor mengikuti payment reference, SPK, dan SO — bukan diketik ulang.</p>
+            <span class="go">Buka buku kuitansi →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#afi">
