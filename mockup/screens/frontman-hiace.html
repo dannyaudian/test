@@ -1,115 +1,115 @@
-      <section class="screen" id="tx_hiace" data-stage-map="spk:ringkas,quot:ringkas,so:so,afi:dokumen,do:alur,bill:tagih,del:alur,stnk:ringkas">
+      <section class="screen" id="tx_hiace" data-stage-map="spk:ringkas,quot:ringkas,so:so,afi:documents,do:alur,bill:tagih,del:alur,stnk:ringkas">
         <div class="screenhead">
           <div>
             <p class="eyebrow">SPK/26/CLD/00421 · B2B leasing</p>
             <h2>PT Danapura Utama · Hiace Premio</h2>
-            <p>Frontman: unduh kontrak leasing, unggah kontrak TTD, foto TTD, foto serah terima, dan BSTKB. Administrasi: penagihan paperless setelah paket Frontman, full DP B2B, dan e-PO leasing (total DP, nilai dibiayai, tenor). Billing tanpa e-PO hanya lewat Operation Manager.</p>
+            <p>Frontman: download leasing contract, upload signed contract, photo of signature, handover photo, and BSTKB. Administration: paperless billing request after Frontman package, full B2B DP, and leasing e-PO (total DP, financed amount, tenor). Billing without e-PO requires Operation Manager approval.</p>
           </div>
-          <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
+          <div class="actions"><button class="btn ghost" data-go="beranda">← My Transactions</button></div>
         </div>
-        <nav class="worktabs" aria-label="Isi B2B leasing">
-          <button type="button" data-b2b-tab="ringkas">Ringkasan</button>
+        <nav class="worktabs" aria-label="B2B Leasing">
+          <button type="button" data-b2b-tab="ringkas">Summary</button>
           <button type="button" data-b2b-tab="so">Sales Order</button>
-          <button type="button" data-b2b-tab="alur">Alur &amp; status</button>
-          <button type="button" data-b2b-tab="dokumen" data-b2b-tab-role="frontman">Kerja Frontman</button>
-          <button type="button" data-b2b-tab="tagih" data-b2b-tab-role="admin">Penagihan Admin</button>
+          <button type="button" data-b2b-tab="alur">Flow &amp; Status</button>
+          <button type="button" data-b2b-tab="documents" data-b2b-tab-role="frontman">Frontman Checklist</button>
+          <button type="button" data-b2b-tab="tagih" data-b2b-tab-role="admin">Billing Request Admin</button>
         </nav>
         <div class="cards" data-b2b-chrome>
           <div class="card" data-b2b-card="bill">
-            <p class="k">DP wajib customer · B2B</p>
+            <p class="k">Required DP · B2B Customer</p>
             <p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p>
-            <p class="n" data-b2b-dp-status>Dari kontrak leasing · belum diterima</p>
+            <p class="n" data-b2b-dp-status>From leasing contract · not yet received</p>
           </div>
           <div class="card alert" data-b2b-card="del">
             <p class="k">Delivery gate</p>
             <p class="v" style="font-size:18px" data-b2b-ttd-label>TTD 0/3</p>
-            <p class="n">Kontrak customer · non-waivable</p>
+            <p class="n">Customer contract · non-waivable</p>
           </div>
           <div class="card" data-b2b-card="paper">
-            <p class="k">Penagihan Administrasi</p>
-            <p class="v" style="font-size:18px" data-b2b-paper-label>Kuitansi 0/3</p>
-            <p class="n">Paperless ke leasing</p>
+            <p class="k">Billing Request Administration</p>
+            <p class="v" style="font-size:18px" data-b2b-paper-label>Receipt 0/3</p>
+            <p class="n">Paperless to leasing</p>
           </div>
           <div class="card" data-b2b-card="epo">
             <p class="k">E-PO leasing</p>
             <p class="v" style="font-size:18px" data-b2b-epo-label>E-PO 0/3</p>
-            <p class="n">DP · nilai leasing · tenor</p>
+            <p class="n">DP · leasing amount · tenor</p>
           </div>
         </div>
-        <p class="note" data-b2b-gate-note data-b2b-chrome>Tahap yang sudah dilewati (SPK, QT, SO, AFI, DO) bisa dibuka — datanya tetap terisi. Kirim dan STNK terkunci sampai tahap itu selesai. Approval Engine tidak membuka TTD atau full DP. Billing tanpa e-PO leasing = putusan Operation Manager.</p>
+        <p class="note" data-b2b-gate-note data-b2b-chrome>Completed stages (SPK, QT, SO, AFI, DO) remain accessible — data is preserved. Delivery and STNK locked until each stage is done. Approval Engine does not waive signature or full DP. Billing without leasing e-PO = Operation Manager decision.</p>
 
         <div data-stage-panel="spk">
         <div data-b2b-panel="ringkas">
           <div class="box">
-            <h3>SPK/26/CLD/00421 <span class="side">Tetap bisa dibuka setelah SO</span></h3>
+            <h3>SPK/26/CLD/00421 <span class="side">Accessible after SO</span></h3>
             <div class="fields">
-              <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00421</span><span class="src">Dokumen asal</span></div>
-              <div class="frow locked"><i class="own f">F</i><span class="lab">Debitur / pemesan</span><span class="val">PT Danapura Utama</span><span class="src">SPK</span></div>
-              <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Leasing / credit</span><span class="src">SPK</span></div>
-              <div class="frow locked"><i class="own s">S</i><span class="lab">Mitra leasing</span><span class="val">PT Danapura Multifinance</span><span class="src">B2B</span></div>
-              <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Hiace Premio · 3 baris quotation</span><span class="src">Satu SPK</span></div>
+              <div class="frow locked"><i class="own s">S</i><span class="lab">SPK Number</span><span class="val">SPK/26/CLD/00421</span><span class="src">Source documents</span></div>
+              <div class="frow locked"><i class="own f">F</i><span class="lab">Debtor / Buyer</span><span class="val">PT Danapura Utama</span><span class="src">SPK</span></div>
+              <div class="frow locked"><i class="own f">F</i><span class="lab">Payment type</span><span class="val">Leasing / credit</span><span class="src">SPK</span></div>
+              <div class="frow locked"><i class="own s">S</i><span class="lab">Partner leasing</span><span class="val">PT Danapura Multifinance</span><span class="src">B2B</span></div>
+              <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Hiace Premio · 3 quotation lines</span><span class="src">Single SPK</span></div>
             </div>
           </div>
           <div class="box">
-            <h3>Tiga Sales Order — status leasing per baris</h3>
+            <h3>Three Sales Orders — leasing status per line</h3>
             <button type="button" class="soline btnline" data-b2b-so="1288">
               <div>
                 <p><b>SO 4500091288 · unit 1</b></p>
-                <p class="meta" data-b2b-so-meta>Hiace Premio · kontrak dari leasing siap diunduh</p>
+                <p class="meta" data-b2b-so-meta>Hiace Premio · leasing contract ready downloaded</p>
               </div>
-              <span class="tag wait" data-b2b-so-tag>Kontrak siap</span>
+              <span class="tag wait" data-b2b-so-tag>Contract ready</span>
             </button>
             <button type="button" class="soline btnline" data-b2b-so="1289">
               <div>
                 <p><b>SO 4500091289 · unit 2</b></p>
-                <p class="meta" data-b2b-so-meta>Backflow · NPWP badan kurang</p>
+                <p class="meta" data-b2b-so-meta>Backflow · corporate NPWP missing</p>
               </div>
-              <span class="tag stop" data-b2b-so-tag>Dikembalikan</span>
+              <span class="tag stop" data-b2b-so-tag>Returned</span>
             </button>
             <button type="button" class="soline btnline" data-b2b-so="1290">
               <div>
                 <p><b>SO 4500091290 · unit 3</b></p>
-                <p class="meta" data-b2b-so-meta>Leasing meminta paket dokumen</p>
+                <p class="meta" data-b2b-so-meta>Leasing requesting document package</p>
               </div>
-              <span class="tag wait" data-b2b-so-tag>Dokumen diminta</span>
+              <span class="tag wait" data-b2b-so-tag>Documents requested</span>
             </button>
             <div class="paystrip">
-              <b>DP wajib dari B2B</b>
-              <span class="hint" style="margin:0" data-b2b-dp-strip>Per unit mengikuti kontrak leasing. QRIS/CDM/EDC cabang tidak mengganti angka ini.</span>
+              <b>Required DP from B2B</b>
+              <span class="hint" style="margin:0" data-b2b-dp-strip>Per unit per leasing contract. QRIS/CDM/EDC branch payments do not replace this amount.</span>
             </div>
           </div>
         </div>
         </div>
 
         <div class="box" data-stage-panel="quot" hidden>
-          <h3>Quotation · tiga baris Hiace Premio</h3>
+          <h3>Quotation · three Hiace Premio lines</h3>
           <div class="money">
             <div class="row"><span>Unit 1 · SO 4500091288</span><span>OTR Rp 348.400.000 · DP Rp 69.680.000</span></div>
             <div class="row"><span>Unit 2 · SO 4500091289</span><span>OTR Rp 348.300.000 · DP Rp 69.660.000</span></div>
             <div class="row"><span>Unit 3 · SO 4500091290</span><span>OTR Rp 348.300.000 · DP Rp 69.660.000</span></div>
-            <div class="row total"><span>Mitra</span><span>PT Danapura Multifinance</span></div>
+            <div class="row total"><span>Partner</span><span>PT Danapura Multifinance</span></div>
           </div>
-          <p class="hint" style="padding:0 16px 14px">Quotation sudah dilewati. DP wajib per baris dibawa ke SO — bukan diketik di billing.</p>
+          <p class="hint" style="padding:0 16px 14px">Quotation completed. Required DP per line carried to SO — not typed in billing.</p>
         </div>
 
         <div data-b2b-panel="so" data-stage-panel="so" hidden>
           <div class="cards">
-            <div class="card"><p class="k">Nomor SO</p><p class="v" style="font-size:18px" data-b2b-so-no>4500091288</p><p class="n">Dari quotation SPK/26/CLD/00421</p></div>
-            <div class="card"><p class="k">Metode</p><p class="v" style="font-size:18px">Leasing</p><p class="n">PT Danapura Multifinance</p></div>
-            <div class="card"><p class="k">DP wajib</p><p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p><p class="n">Struktur harga SO · B2B · read-only</p></div>
-            <div class="card"><p class="k">Dibiayai leasing</p><p class="v" style="font-size:18px" data-b2b-finance>Rp 278.720.000</p><p class="n">OTR − DP wajib</p></div>
+            <div class="card"><p class="k">SO Number</p><p class="v" style="font-size:18px" data-b2b-so-no>4500091288</p><p class="n">From quotation SPK/26/CLD/00421</p></div>
+            <div class="card"><p class="k">Method</p><p class="v" style="font-size:18px">Leasing</p><p class="n">PT Danapura Multifinance</p></div>
+            <div class="card"><p class="k">Required DP</p><p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p><p class="n">SO price structure · B2B · read-only</p></div>
+            <div class="card"><p class="k">Financed by leasing</p><p class="v" style="font-size:18px" data-b2b-finance>Rp 278.720.000</p><p class="n">OTR − Required DP</p></div>
           </div>
           <div class="split">
             <div>
               <div class="box">
-                <h3>Dibawa ke SO <span class="side">Tidak diketik ulang</span></h3>
+                <h3>Carried to SO <span class="side">Not re-entered</span></h3>
                 <div class="fields">
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00421</span><span class="src">Dokumen asal</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val" data-b2b-so-no>4500091288</span><span class="src">Satu SO per unit</span></div>
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Debitur</span><span class="val">PT Danapura Utama</span><span class="src">SPK</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val" data-b2b-so-unit>Hiace Premio · unit 1</span><span class="src">Baris quotation</span></div>
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Leasing / credit</span><span class="src">SPK</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Mitra leasing</span><span class="val">PT Danapura Multifinance</span><span class="src">B2B</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">SPK Number</span><span class="val">SPK/26/CLD/00421</span><span class="src">Source documents</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Sales Order Number</span><span class="val" data-b2b-so-no>4500091288</span><span class="src">One SO per unit</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Debtor</span><span class="val">PT Danapura Utama</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val" data-b2b-so-unit>Hiace Premio · unit 1</span><span class="src">Quotation line</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Payment type</span><span class="val">Leasing / credit</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Partner leasing</span><span class="val">PT Danapura Multifinance</span><span class="src">B2B</span></div>
                 </div>
                 <div class="fields addr-fields" data-addr="hiace"></div>
                 <div class="fields" data-nopol="hiace.active"></div>
@@ -118,21 +118,21 @@
             </div>
             <div>
               <div class="box">
-                <h3>Struktur harga SO <span class="side">Credit / leasing</span></h3>
+                <h3>SO Price Structure <span class="side">Credit / leasing</span></h3>
                 <div class="money">
                   <div class="row"><span>OTR (area PO)</span><span data-b2b-otr>Rp 348.400.000</span></div>
-                  <div class="row"><span>Diskon / program / cashback / OPO</span><span>Rp 0</span></div>
-                  <div class="row"><span>Nilai transaksi akhir</span><span data-b2b-otr>Rp 348.400.000</span></div>
-                  <div class="row"><span>DP wajib customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
-                  <div class="row"><span>Sisa dibiayai leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
-                  <div class="row"><span>Tenor (e-PO)</span><span data-b2b-tenor>36 bulan</span></div>
-                  <div class="row"><span>E-PO leasing</span><span data-b2b-epo-no>Belum terbit</span></div>
-                  <div class="row"><span>DP diterima</span><span data-b2b-dp-in>Rp 0</span></div>
-                  <div class="row total"><span>Tagihan ke leasing setelah DP</span><span data-b2b-finance>Rp 278.720.000</span></div>
-                  <div class="row"><span>Syarat billing leasing</span><span>Full DP diterima · B2B</span></div>
-                  <div class="row"><span>Syarat delivery leasing</span><span>Kontrak TTD · B2B</span></div>
+                  <div class="row"><span>Discount / program / cashback / OPO</span><span>Rp 0</span></div>
+                  <div class="row"><span>Final transaction value</span><span data-b2b-otr>Rp 348.400.000</span></div>
+                  <div class="row"><span>Required DP customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
+                  <div class="row"><span>Amount financed by leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
+                  <div class="row"><span>Tenor (e-PO)</span><span data-b2b-tenor>36 months</span></div>
+                  <div class="row"><span>E-PO leasing</span><span data-b2b-epo-no>Not yet issued</span></div>
+                  <div class="row"><span>DP received</span><span data-b2b-dp-in>Rp 0</span></div>
+                  <div class="row total"><span>Billing request to leasing after DP</span><span data-b2b-finance>Rp 278.720.000</span></div>
+                  <div class="row"><span>Leasing billing requirement</span><span>Full DP received · B2B</span></div>
+                  <div class="row"><span>Leasing delivery requirement</span><span>Signed contract · B2B</span></div>
                 </div>
-                <p class="hint" style="padding:0 16px 14px">Angka DP wajib menempel di struktur harga SO karena metode pembelian leasing. Bukan booking fee tunai, bukan diketik Frontman/Admin, bukan objek Approval Engine.</p>
+                <p class="hint" style="padding:0 16px 14px">Angka Required DP menempel di struktur harga SO karena metode pembelian leasing. Bukan booking fee tunai, bukan diketik Frontman/Admin, bukan objek Approval Engine.</p>
               </div>
             </div>
           </div>
@@ -140,27 +140,27 @@
 
         <div data-b2b-panel="alur" data-stage-panel="del" hidden>
           <div class="box">
-            <h3>Status <span data-b2b-so-title>SO 4500091288</span> <span class="side">Submit → pelunasan</span></h3>
+            <h3>Status <span data-b2b-so-title>SO 4500091288</span> <span class="side">Submit → settlement</span></h3>
             <p class="exc-note" data-b2b-backflow hidden></p>
             <div class="b2b-path" data-b2b-path></div>
             <div class="pad">
               <p data-b2b-now-copy></p>
-              <p class="hint">Normal flow dan backflow memakai jejak yang sama. Gate membaca status ini.</p>
+              <p class="hint">Normal flow and backflow share the same trail. Gates read this status.</p>
             </div>
             <div class="formfoot" data-for="frontman">
-              <span class="hint">Setelah dokumen lengkap di tab Dokumen, kirim ulang ke leasing.</span>
-              <button type="button" class="btn" data-b2b-resubmit>Kirim ulang ke leasing</button>
+              <span class="hint">After Documents tab is complete, resubmit delivery to leasing.</span>
+              <button type="button" class="btn" data-b2b-resubmit>Resubmit Delivery to Leasing</button>
             </div>
             <div class="formfoot" data-for="admin" hidden>
-              <span class="hint">Kontrak, DP, dan e-PO datang dari B2B. E-PO = persetujuan leasing atas total DP, nilai dibiayai, dan tenor. Kekurangan dokumen = kembalikan ke Frontman.</span>
-              <button type="button" class="btn ghost" data-b2b-issue-contract>Terbitkan kontrak dari leasing</button>
-              <button type="button" class="btn ghost" data-b2b-mark-dp>Tarik status DP dari B2B</button>
-              <button type="button" class="btn ghost" data-b2b-mark-epo>Tarik e-PO dari leasing</button>
-              <button type="button" class="btn stop" data-b2b-return>Kembalikan — dokumen kurang</button>
+              <span class="hint">Contract, DP, and e-PO come from B2B. E-PO = leasing approval of total DP, financed amount, and tenor. Missing documents = return to Frontman.</span>
+              <button type="button" class="btn ghost" data-b2b-issue-contract>Issue Contract from Leasing</button>
+              <button type="button" class="btn ghost" data-b2b-mark-dp>Pull DP Status from B2B</button>
+              <button type="button" class="btn ghost" data-b2b-mark-epo>Pull e-PO from Leasing</button>
+              <button type="button" class="btn stop" data-b2b-return>Return — Documents Incomplete</button>
             </div>
             <div class="formfoot" data-for="mgmt" hidden>
-              <span class="hint">TTD dan DP tidak di-waive. Billing tanpa e-PO diputuskan Operation Manager.</span>
-              <button type="button" class="btn ghost" data-go="exc_epo">Buka gate e-PO</button>
+              <span class="hint">Signature and DP cannot be waived. Billing without e-PO requires Operation Manager decision.</span>
+              <button type="button" class="btn ghost" data-go="exc_epo">Open e-PO Gate</button>
             </div>
           </div>
         </div>
@@ -168,82 +168,82 @@
         <div class="box" data-stage-panel="do" hidden>
           <h3>Delivery Order · per SO</h3>
           <div class="fields">
-            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091288</span><span class="val">DO menunggu TTD kontrak</span><span class="src">Unit 1</span></div>
-            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091289</span><span class="val">DO tertahan backflow NPWP</span><span class="src">Unit 2</span></div>
-            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091290</span><span class="val">DO menunggu paket leasing</span><span class="src">Unit 3</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091288</span><span class="val">DO pending contract signature</span><span class="src">Unit 1</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091289</span><span class="val">DO held — NPWP backflow</span><span class="src">Unit 2</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091290</span><span class="val">DO pending leasing package</span><span class="src">Unit 3</span></div>
           </div>
-          <p class="hint" style="padding:0 16px 14px">DO sudah pada jejak ini. Gudang mengikuti TTD per SO — bukan pindah ke SPK tunai.</p>
+          <p class="hint" style="padding:0 16px 14px">DO is on this trail. Warehouse follows signature per SO — not transferred to cash SPK.</p>
         </div>
 
-        <div data-b2b-panel="dokumen" data-stage-panel="afi" hidden>
+        <div data-b2b-panel="documents" data-stage-panel="afi" hidden>
           <div class="box">
-            <h3>Kontrak leasing <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
-            <p class="pad" style="padding-bottom:0">Hanya Frontman. Unduh kontrak dari leasing, lalu unggah kembali setelah customer TTD.</p>
+            <h3>Leasing Contract <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
+            <p class="pad" style="padding-bottom:0">Frontman only. Download the contract from leasing, then re-upload after customer signs.</p>
             <div class="nextbar" style="padding:0 16px 12px">
-              <button type="button" class="btn" data-b2b-dl-contract data-fm-only>Unduh kontrak leasing</button>
+              <button type="button" class="btn" data-b2b-dl-contract data-fm-only>Download Leasing Contract</button>
             </div>
-            <button type="button" class="drop" data-b2b-drop="signed" data-fm-only><b>Unggah kontrak setelah TTD</b><span>Ketuk untuk pasang scan yang sudah ditandatangani customer</span></button>
+            <button type="button" class="drop" data-b2b-drop="signed" data-fm-only><b>Upload Signed Contract</b><span>Tap to attach the customer-signed scan</span></button>
           </div>
           <div class="box">
-            <h3>Bukti Frontman</h3>
-            <p class="pad" style="padding-bottom:0">Unggah foto TTD kontrak, foto serah terima, dan BSTKB. Administrasi tidak mengunggah ini.</p>
-            <button type="button" class="drop" data-b2b-bill="fotoTtd" data-fm-only><b>Foto tanda tangan kontrak</b><span>Ketuk untuk pasang</span></button>
-            <button type="button" class="drop" data-b2b-bill="fotoSerah" data-fm-only><b>Foto serah terima</b><span>Ketuk untuk pasang · geotag perangkat</span></button>
-            <button type="button" class="drop" data-b2b-bill="bstkb" data-fm-only><b>Scan BSTKB</b><span>Ketuk untuk pasang</span></button>
+            <h3>Proof Frontman</h3>
+            <p class="pad" style="padding-bottom:0">Upload contract signature photo, handover photo, and BSTKB. Administration does not upload these.</p>
+            <button type="button" class="drop" data-b2b-bill="fotoTtd" data-fm-only><b>Contract Signature Photo</b><span>Tap to attach</span></button>
+            <button type="button" class="drop" data-b2b-bill="fotoSerah" data-fm-only><b>Handover photo</b><span>Tap to attach · device geotag</span></button>
+            <button type="button" class="drop" data-b2b-bill="bstkb" data-fm-only><b>BSTKB scan</b><span>Tap to attach</span></button>
           </div>
           <div class="box">
-            <h3>Dokumen yang diminta leasing</h3>
-            <button type="button" class="drop" data-b2b-doc="ktp" data-fm-only><b>KTP / identitas pengurus</b><span>Ketuk untuk pasang</span></button>
-            <button type="button" class="drop" data-b2b-doc="npwp" data-fm-only><b>NPWP badan</b><span>Ketuk untuk pasang</span></button>
-            <button type="button" class="drop" data-b2b-doc="siup" data-fm-only><b>NIB / SIUP</b><span>Ketuk untuk pasang</span></button>
-            <button type="button" class="drop" data-b2b-doc="spk" data-fm-only><b>SPK / quotation FAST</b><span>Ketuk untuk pasang</span></button>
-            <p class="hint">Jika leasing mengembalikan (backflow), Frontman lengkapi di sini lalu kirim ulang di tab Alur.</p>
+            <h3>Documents Requested by Leasing</h3>
+            <button type="button" class="drop" data-b2b-doc="ktp" data-fm-only><b>KTP / Director ID</b><span>Tap to attach</span></button>
+            <button type="button" class="drop" data-b2b-doc="npwp" data-fm-only><b>Corporate NPWP</b><span>Tap to attach</span></button>
+            <button type="button" class="drop" data-b2b-doc="siup" data-fm-only><b>NIB / SIUP</b><span>Tap to attach</span></button>
+            <button type="button" class="drop" data-b2b-doc="spk" data-fm-only><b>SPK / FAST quotation</b><span>Tap to attach</span></button>
+            <p class="hint">If leasing returns the package (backflow), Frontman completes it here then resubmits via the Flow & Status tab.</p>
           </div>
         </div>
 
         <div data-b2b-panel="tagih" data-stage-panel="bill" hidden>
           <div class="box">
-            <h3>Syarat penagihan <span class="side">Administrasi · tidak mengunggah</span></h3>
-            <p class="pad" style="padding-bottom:0">Kuitansi dan penagihan ke leasing hanya setelah paket Frontman, full DP B2B, dan e-PO leasing. E-PO memuat total DP customer, jumlah yang dibiayai leasing, dan tenor.</p>
+            <h3>Billing Request Requirements <span class="side">Administration · does not upload</span></h3>
+            <p class="pad" style="padding-bottom:0">Receipt and billing request to leasing only after Frontman package, full B2B DP, and leasing e-PO. E-PO contains total customer DP, amount financed by leasing, and tenor.</p>
             <div class="money">
-              <div class="row"><span>DP wajib customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
-              <div class="row"><span>Full DP sudah dibayar</span><span data-b2b-dp-in>Rp 0</span></div>
-              <div class="row"><span>Nilai dibiayai leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
-              <div class="row"><span>Tenor</span><span data-b2b-tenor>36 bulan</span></div>
-              <div class="row"><span>E-PO</span><span data-b2b-epo-no>Belum terbit</span></div>
-              <div class="row"><span>Nilai unit (OTR)</span><span data-b2b-otr>Rp 348.400.000</span></div>
+              <div class="row"><span>Required DP customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
+              <div class="row"><span>Full DP paid</span><span data-b2b-dp-in>Rp 0</span></div>
+              <div class="row"><span>Amount financed by leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
+              <div class="row"><span>Tenor</span><span data-b2b-tenor>36 months</span></div>
+              <div class="row"><span>E-PO</span><span data-b2b-epo-no>Not yet issued</span></div>
+              <div class="row"><span>Unit value (OTR)</span><span data-b2b-otr>Rp 348.400.000</span></div>
             </div>
             <ul class="gates" data-b2b-admin-checks style="padding:12px 16px 0">
-              <li data-b2b-check="dl"><span class="mark no">1</span><div>Unduh kontrak leasing<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
-              <li data-b2b-check="signed"><span class="mark no">2</span><div>Unggah kontrak setelah TTD<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
-              <li data-b2b-check="fotoTtd"><span class="mark no">3</span><div>Foto TTD kontrak<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
-              <li data-b2b-check="fotoSerah"><span class="mark no">4</span><div>Foto serah terima<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
-              <li data-b2b-check="bstkb"><span class="mark no">5</span><div>Scan BSTKB<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
-              <li data-b2b-check="dp"><span class="mark no">6</span><div>Full DP sudah dibayar<span class="why">Status B2B · bukan diketik Admin</span></div><span class="tag wait">Belum</span></li>
-              <li data-b2b-check="epo"><span class="mark no">7</span><div>E-PO leasing<span class="why">Persetujuan leasing: total DP, nilai dibiayai, tenor. Tanpa ini → Operation Manager</span></div><span class="tag wait">Belum</span></li>
+              <li data-b2b-check="dl"><span class="mark no">1</span><div>Download Leasing Contract<span class="why">Frontman</span></div><span class="tag wait">Not yet</span></li>
+              <li data-b2b-check="signed"><span class="mark no">2</span><div>Upload Signed Contract<span class="why">Frontman</span></div><span class="tag wait">Not yet</span></li>
+              <li data-b2b-check="fotoTtd"><span class="mark no">3</span><div>Contract Signature Photo<span class="why">Frontman</span></div><span class="tag wait">Not yet</span></li>
+              <li data-b2b-check="fotoSerah"><span class="mark no">4</span><div>Handover photo<span class="why">Frontman</span></div><span class="tag wait">Not yet</span></li>
+              <li data-b2b-check="bstkb"><span class="mark no">5</span><div>BSTKB scan<span class="why">Frontman</span></div><span class="tag wait">Not yet</span></li>
+              <li data-b2b-check="dp"><span class="mark no">6</span><div>Full DP paid<span class="why">B2B status · not typed by Admin</span></div><span class="tag wait">Not yet</span></li>
+              <li data-b2b-check="epo"><span class="mark no">7</span><div>E-PO leasing<span class="why">Leasing approval: total DP, financed amount, tenor. Without this → Operation Manager</span></div><span class="tag wait">Not yet</span></li>
             </ul>
           </div>
           <div class="box" data-for="admin" hidden>
-            <h3>Penagihan &amp; kuitansi ke leasing</h3>
-            <p class="hint" style="padding:12px 16px 0" data-b2b-kwt-no>Kuitansi: belum terbit</p>
-            <p class="hint" style="padding:0 16px" data-b2b-admin-block>Belum bisa ditagih. Tunggu paket Frontman, full DP B2B, dan e-PO leasing.</p>
-            <p class="hint" style="padding:0 16px" data-b2b-epo-exc-hint hidden>Paket dan DP lengkap, e-PO belum. Billing tanpa e-PO butuh Operation Manager.</p>
+            <h3>Billing Request &amp; receipt ke leasing</h3>
+            <p class="hint" style="padding:12px 16px 0" data-b2b-kwt-no>Receipt: not yet issued</p>
+            <p class="hint" style="padding:0 16px" data-b2b-admin-block>Cannot bill yet. Waiting for Frontman package, full B2B DP, and leasing e-PO.</p>
+            <p class="hint" style="padding:0 16px" data-b2b-epo-exc-hint hidden>Package and DP complete, e-PO pending. Billing without e-PO requires Operation Manager.</p>
             <div class="formfoot" data-for="admin">
-              <span class="hint">Bukan cetak fisik. Frontman tidak menagih. E-PO tidak melewati DP.</span>
-              <button type="button" class="btn" data-b2b-paperless>Kirim penagihan paperless</button>
-              <button type="button" class="btn ghost" data-b2b-kwt>Terbitkan kuitansi ke leasing</button>
-              <button type="button" class="btn ghost" data-b2b-lunas>Catat pelunasan leasing</button>
-              <button type="button" class="btn ghost" data-go="exc_epo" data-b2b-epo-exc hidden>Ajukan billing tanpa e-PO</button>
+              <span class="hint">Not a physical printout. Frontman does not bill leasing. E-PO does not bypass DP.</span>
+              <button type="button" class="btn" data-b2b-paperless>Send Paperless Billing Request</button>
+              <button type="button" class="btn ghost" data-b2b-kwt>Issue Receipt to Leasing</button>
+              <button type="button" class="btn ghost" data-b2b-lunas>Record leasing settlement</button>
+              <button type="button" class="btn ghost" data-go="exc_epo" data-b2b-epo-exc hidden>Submit Billing Without e-PO</button>
             </div>
           </div>
           <div class="box" data-for="frontman">
-            <h3>Bukan tugas Frontman</h3>
-            <div class="pad"><p>Penagihan dan kuitansi ke leasing dikerjakan Administrasi di tab ini setelah Anda menyelesaikan Kerja Frontman dan full DP B2B masuk.</p></div>
+            <h3>Not a Frontman Task</h3>
+            <div class="pad"><p>Billing Request and receipt to leasing are handled by Administration on this tab after you complete the Frontman Checklist and full B2B DP is received.</p></div>
           </div>
         </div>
         <div class="box" data-stage-panel="stnk" hidden>
           <h3>STNK / BPKB</h3>
-          <p>Nama dan alamat STNK dari SPK ini. Tracking setelah serah terima. Bukan waiver TTD atau DP.</p>
+          <p>STNK name and address from this SPK. Tracking starts after handover. Does not waive signature or DP.</p>
         </div>
       </section>
 

@@ -190,9 +190,9 @@ FAST.NAME_REL = {
   budi: { pemesan: 'Budi Santoso', stnk: 'Budi Santoso', same: true, rel: 'Sama dengan pemesan', docs: 'KTP/KK pemesan dipakai ulang', gate: 'lolos', spk: 'SPK/26/CLD/00418' },
   hiace: { pemesan: 'PT Danapura Utama', stnk: 'PT Danapura Utama', same: true, rel: 'Badan · nama STNK = debitur', docs: 'NPWP badan + SIUP', gate: 'lolos', spk: 'SPK/26/CLD/00421' },
   raize: { pemesan: 'Sarah Wijaya', stnk: 'Sarah Wijaya', same: true, rel: 'Sama dengan pemesan', docs: 'Menunggu NPWP', gate: 'data', spk: 'SPK/26/CLD/00423' },
-  agus: { pemesan: 'Agus Hermawan', stnk: 'Agus Hermawan', same: true, rel: 'Sama dengan pemesan', docs: 'Vault SPK', gate: 'lolos', spk: 'SPK/26/CLD/00425' },
-  fajar: { pemesan: 'Fajar Nugroho', stnk: 'Fajar Nugroho', same: true, rel: 'Sama dengan pemesan', docs: 'Vault SPK', gate: 'lolos', spk: 'SPK/26/CLD/00424' },
-  maria: { pemesan: 'Maria Sitompul', stnk: 'Maria Sitompul', same: true, rel: 'Sama dengan pemesan', docs: 'Vault SPK', gate: 'lolos', spk: 'SPK/26/CLD/00409' },
+  agus: { pemesan: 'Agus Hermawan', stnk: 'Agus Hermawan', same: true, rel: 'Sama dengan pemesan', docs: 'SPK Vault', gate: 'lolos', spk: 'SPK/26/CLD/00425' },
+  fajar: { pemesan: 'Fajar Nugroho', stnk: 'Fajar Nugroho', same: true, rel: 'Sama dengan pemesan', docs: 'SPK Vault', gate: 'lolos', spk: 'SPK/26/CLD/00424' },
+  maria: { pemesan: 'Maria Sitompul', stnk: 'Maria Sitompul', same: true, rel: 'Sama dengan pemesan', docs: 'SPK Vault', gate: 'lolos', spk: 'SPK/26/CLD/00409' },
   calya: { pemesan: 'Budi Santoso', stnk: 'Budi Santoso', same: true, rel: 'Sama dengan pemesan', docs: 'Historis 2024', gate: 'lolos', spk: 'SPK/24/CLD/01990' }
 };
 FAST.addrOneLine = function (a) {

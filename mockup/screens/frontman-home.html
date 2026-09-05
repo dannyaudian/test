@@ -2,52 +2,52 @@
       <section class="screen on" id="beranda">
         <div class="screenhead">
           <div>
-            <h2>Transaksi saya</h2>
-            <p>Cilandak · 2 Sep 2026. Satu kartu = satu SPK. SO per baris tetap di dalam SPK itu, tanpa pindah ke transaksi lain.</p>
+            <h2>My Transactions</h2>
+            <p>Cilandak · 2 Sep 2026. One card = one SPK. SO per line item stays inside that SPK, without moving to another transaction.</p>
           </div>
           <div class="actions">
-            <button class="btn" data-go="spk_baru">Buat SPK baru</button>
+            <button class="btn" data-go="spk_baru">Create New SPK</button>
           </div>
         </div>
 
-        <p class="queue-line"><b>7 SPK</b> · satu kartu = satu transaksi utuh · SO per baris di dalam SPK</p>
+        <p class="queue-line"><b>7 SPK</b> · one card = one complete transaction · SO per line item inside the SPK</p>
 
         <label class="order-search" for="txSearch">
-          <span class="sr-only">Cari transaksi</span>
-          <input id="txSearch" type="search" placeholder="Cari nama, SPK, atau unit…" autocomplete="off">
+          <span class="sr-only">Search transactions</span>
+          <input id="txSearch" type="search" placeholder="Search name, SPK, or unit…" autocomplete="off">
         </label>
-        <div class="order-filters" role="tablist" aria-label="Filter transaksi">
-          <button type="button" data-tx-filter="all" aria-pressed="true">Semua</button>
-          <button type="button" data-tx-filter="action" aria-pressed="false">Perlu saya</button>
-          <button type="button" data-tx-filter="exc" aria-pressed="false">Pengecualian</button>
-          <button type="button" data-tx-filter="ready" aria-pressed="false">Siap kirim</button>
+        <div class="order-filters" role="tablist" aria-label="Filter transactions">
+          <button type="button" data-tx-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-tx-filter="action" aria-pressed="false">Needs My Action</button>
+          <button type="button" data-tx-filter="exc" aria-pressed="false">Exceptions</button>
+          <button type="button" data-tx-filter="ready" aria-pressed="false">Ready for delivery</button>
         </div>
 
         <div class="order-list" id="txList">
           <button type="button" class="order-card featured" data-dewi-card data-tx-status="docs" data-tx-action="1" data-tx-dots="dewi" data-go="spk_baru">
             <div class="thumb">YARIS</div>
             <div class="meta">
-              <p class="oid" data-dewi-oid>Draft · belum nomor SPK</p>
+              <p class="oid" data-dewi-oid>Draft · no SPK number yet</p>
               <strong class="oname">Dewi Lestari · Yaris</strong>
-              <p class="spec" data-dewi-spec>Tindakan: isi pemesan, STNK, unit, lalu unggah dokumen · Yaris + Agya di SPK yang sama</p>
+              <p class="spec" data-dewi-spec>Action: fill buyer, STNK, unit, then upload documents · Yaris + Agya in the same SPK</p>
               <div class="row2">
-                <span class="tag wait" data-dewi-tag>Isi dari awal</span>
-                <span class="amt" data-dewi-amt>Belum OTR</span>
+                <span class="tag wait" data-dewi-tag>Start from scratch</span>
+                <span class="amt" data-dewi-amt>No OTR yet</span>
               </div>
-              <p class="cta" data-dewi-cta>Input &amp; unggah →</p>
+              <p class="cta" data-dewi-cta>Enter &amp; upload →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="budi" data-go="transaksi">
             <div class="thumb">ZENIX</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00418 · tunai · 1 SO</p>
+              <p class="oid">SPK/26/CLD/00418 · cash · 1 SO</p>
               <strong class="oname">Budi Santoso · Innova Zenix</strong>
-              <p class="spec">Pelunasan, AFI, dan exception dokumen — semua di SPK ini</p>
+              <p class="spec">Settlement, AFI, and document exceptions — all within this SPK</p>
               <div class="row2">
-                <span class="tag hold">Belum lunas</span>
+                <span class="tag hold">Not paid in full yet</span>
                 <span class="amt" data-live="ar">Rp 181.750.000</span>
               </div>
-              <p class="cta">Buka transaksi →</p>
+              <p class="cta">Open transaction →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="hold" data-tx-action="1" data-tx-dots="hiace" data-go="tx_hiace" data-b2b-home-spk>
@@ -55,51 +55,51 @@
             <div class="meta">
               <p class="oid">SPK/26/CLD/00421 · leasing · 3 SO</p>
               <strong class="oname">PT Danapura · Hiace Premio</strong>
-              <p class="spec" data-b2b-home-spec>Struktur harga SO memuat DP wajib B2B. Kerja Frontman dan penagihan Admin di SPK ini.</p>
+              <p class="spec" data-b2b-home-spec>The SO pricing structure carries the required B2B DP. Frontman work and Administration billing stay in this SPK.</p>
               <div class="row2">
                 <span class="tag wait" data-b2b-home-tag>B2B leasing</span>
-                <span class="amt">3 unit</span>
+                <span class="amt">3 units</span>
               </div>
-              <p class="cta">Buka SPK leasing →</p>
+              <p class="cta">Open leasing SPK →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="docs" data-tx-action="1" data-tx-dots="raize" data-go="tx_raize">
             <div class="thumb">RAIZE</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00423 · SPK baru</p>
+              <p class="oid">SPK/26/CLD/00423 · new SPK</p>
               <strong class="oname">Sarah Wijaya · Raize</strong>
-              <p class="spec">Tindakan: unggah NPWP</p>
+              <p class="spec">Action: upload NPWP</p>
               <div class="row2">
-                <span class="tag stop">NPWP kosong</span>
+                <span class="tag stop">NPWP missing</span>
                 <span class="amt">—</span>
               </div>
-              <p class="cta">Lanjutkan →</p>
+              <p class="cta">Continue →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-tx-dots="agus" data-go="tx_avanza">
             <div class="thumb done">AVANZA</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00425 · lunas</p>
+              <p class="oid">SPK/26/CLD/00425 · paid in full</p>
               <strong class="oname">Agus Hermawan · Avanza</strong>
-              <p class="spec" data-del-spec>Tindakan: ajukan pengiriman</p>
+              <p class="spec" data-del-spec>Action: request delivery</p>
               <div class="row2">
-                <span class="tag ok" data-del-tag>Siap kirim</span>
+                <span class="tag ok" data-del-tag>Ready for delivery</span>
                 <span class="amt">Rp 0</span>
               </div>
-              <p class="cta">Ajukan delivery →</p>
+              <p class="cta">Request delivery →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="gi" data-tx-action="1" data-tx-dots="fajar" data-go="gi">
             <div class="thumb">RUSH</div>
             <div class="meta">
-              <p class="oid">SPK/26/CLD/00424 · terkirim 2 Sep</p>
+              <p class="oid">SPK/26/CLD/00424 · delivered 2 Sep</p>
               <strong class="oname">Fajar Nugroho · Rush</strong>
-              <p class="spec" data-gi-spec>Tindakan: unggah foto serah terima + scan BSTKB</p>
+              <p class="spec" data-gi-spec>Action: upload handover photo + BSTKB scan</p>
               <div class="row2">
                 <span class="tag wait" data-gi-tag>Good Issue</span>
                 <span class="amt">Rp 0</span>
               </div>
-              <p class="cta">Lengkapi bukti →</p>
+              <p class="cta">Complete proof →</p>
             </div>
           </button>
           <button type="button" class="order-card" data-tx-status="exc" data-tx-dots="maria" data-go="tx_fortuner">
@@ -107,12 +107,12 @@
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · delivered</p>
               <strong class="oname">Maria Sitompul · Fortuner</strong>
-              <p class="spec">Eskalasi otomatis · STNK hari ke-19</p>
+              <p class="spec">Automatic escalation · STNK on day 19</p>
               <div class="row2">
-                <span class="tag hold">Bukan waiver</span>
+                <span class="tag hold">Not a waiver</span>
                 <span class="amt">Rp 0</span>
               </div>
-              <p class="cta">Lanjut eskalasi →</p>
+              <p class="cta">Continue escalation →</p>
             </div>
           </button>
         </div>

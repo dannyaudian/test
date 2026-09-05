@@ -38,6 +38,6 @@
     document.body.appendChild(s);
   }).catch(function (err) {
     console.error(err);
-    if (host) host.innerHTML = '<p>Dokumentasi tidak termuat. Buka lewat http:// (bukan file://).</p>';
+    if (host) host.innerHTML = '<p>Documentation failed to load. Open it via http:// (not file://).</p>';
   });
 })();

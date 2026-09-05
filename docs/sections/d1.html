@@ -2,74 +2,74 @@
       <div class="sec-head">
         <span class="num">D1</span>
         <div>
-          <h2>Deliverable 1 — Alur Frontman dan administrasi otomatis</h2>
-          <p class="deck">Satu workspace: data diisi sekali, proses berikutnya diajukan dari layar yang sama, Administrasi bekerja dari antrean — bukan dari salinan ulang.</p>
+          <h2>Deliverable 1 — Frontman Flow and Automated Administration</h2>
+          <p class="deck">One workspace: data is entered once, the next process is submitted from the same screen, and Administration works from a queue — not from duplicate copies.</p>
         </div>
       </div>
 
       <div class="callout">
-        <span class="tag">Apa yang berubah</span>
-        <p>Administrasi tidak lagi menjadi rantai serah-terima manual. Frontman mengajukan langkah berikutnya; sistem membawa nomor SPK, SO, dan billing; Administrasi memverifikasi pekerjaan yang masuk antrean.</p>
+        <span class="tag">What changes</span>
+        <p>Administration is no longer a manual handoff chain. Frontman submits the next step; the system carries the SPK, SO, and billing numbers; Administration verifies work that enters the queue.</p>
       </div>
 
-      <h3>Fitur</h3>
+      <h3>Features</h3>
       <div class="feat-list">
         <article class="feat">
-          <h4>SPK digital, satu kali isi</h4>
-          <p>Identitas, kontak, metode beli, struktur transaksi, unit, nama STNK, dan dokumen awal diisi Frontman sebagai pemilik data. Sistem menerbitkan Customer ID dan nomor SPK. Administrasi tidak mengetik ulang field yang sudah valid.</p>
-          <p class="feat-ex"><b>Contoh di mockup</b> Dewi: form pemesan + unit Yaris (+Agya) + kota STNK. Simpan baru dapat <a href="mockup.html#spk_baru">SPK/26/CLD/00426</a>. Data yang sama tampil di <a href="mockup.html#spk">SPK tersimpan</a> — bukan form kedua.</p>
+          <h4>Digital SPK, entered once</h4>
+          <p>Identity, contact, purchase method, transaction structure, unit, STNK name, and initial documents are entered by Frontman as the data owner. The system issues the Customer ID and SPK number. Administration does not retype fields that are already valid.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Dewi: buyer form + Yaris unit (+Agya) + STNK city. Save first to get <a href="mockup.html#spk_baru">SPK/26/CLD/00426</a>. Data yang same tampil di <a href="mockup.html#spk">Saved SPK</a> — bukan form kedua.</p>
         </article>
         <article class="feat">
-          <h4>Unggah dokumen sebelum booking fee</h4>
-          <p>Document gate membuka <em>penagihan</em> booking fee, bukan langsung membuka Sales Order. Tanpa paket wajib, request fee tidak terbit. Lihat juga <a href="#d3">D3</a> dan <a href="#skema-dokumen">skema dokumen</a>.</p>
-          <p class="feat-ex"><b>Contoh di mockup</b> Tombol tagih fee tertutup sampai KTP/KK/NPWP ada. Sarah tanpa NPWP tetap tertahan di <a href="mockup.html#tx_raize">Raize 00423</a> — bukan antrean discount.</p>
+          <h4>Upload documents before booking fee</h4>
+          <p>Document Gate membuka <em>billing request</em> booking fee, bukan langsung membuka Sales Order. Without the required package, the fee request is not issued. See also <a href="#d3">D3</a> dan <a href="#skema-documents">document flow</a>.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> The fee request button stays closed until KTP/KK/NPWP are available. Sarah without NPWP remains blocked in <a href="mockup.html#tx_raize">Raize 00423</a> — not the discount queue.</p>
         </article>
         <article class="feat">
-          <h4>Booking fee setelah SPK tersimpan</h4>
-          <p>Nominal minimum mengikuti master kendaraan (contoh Yaris Rp 3.000.000). Request terkunci. Fee terverifikasi adalah syarat non-waivable pembentukan SO — bukan objek Approval Engine.</p>
-          <p class="feat-ex"><b>Contoh di mockup</b> Meja Frontman <a href="mockup.html#booking">#booking</a>: Rp 3.000.000 tidak bisa diubah. Customer: tautan <a href="mockup.html#customer_booking">Digiroom</a> atau <a href="mockup.html#customer_booking_qris">scan QRIS</a>. EDC hanya di perangkat salesman.</p>
+          <h4>Booking fee after SPK is saved</h4>
+          <p>The minimum amount follows the vehicle master (for example Yaris Rp 3.000.000). The request is locked. A verified fee is the non-waivable requirement to create the SO — not an Approval Engine object.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Frontman desk <a href="mockup.html#booking">#booking</a>: Rp 3.000.000 tidak bisa diubah. Customer: tautan <a href="mockup.html#customer_booking">Digiroom</a> atau <a href="mockup.html#customer_booking_qris">scan QRIS</a>. EDC hanya di perangkat salesman.</p>
         </article>
         <article class="feat">
-          <h4>Sales Order setelah fee meet</h4>
-          <p>Sistem membawa data SPK ke SO, menyimpan nomor SPK pada setiap SO, lalu lineage yang sama ke billing. Satu SPK dapat punya beberapa unit/SO; tiap jejak tetap milik transaksi itu.</p>
-          <p class="feat-ex"><b>Contoh di mockup</b> Setelah <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> di <a href="mockup.html#so">#so</a>. Pemesan, STNK, OTR area PO tidak diketik ulang.</p>
+          <h4>Sales Order after fee is met</h4>
+          <p>The system carries SPK data into the SO, keeps the SPK number on each SO, and extends the same lineage into billing. One SPK can contain multiple units/SOs; each trail still belongs to that transaction.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> After <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> di <a href="mockup.html#so">#so</a>. Buyer, STNK, and PO-area OTR are not retyped.</p>
         </article>
         <article class="feat">
-          <h4>Ajukan langkah berikutnya dari satu platform</h4>
-          <p>Setelah syarat terpenuhi: pelunasan, billing, AFI/DO, delivery. Gate yang gagal menahan proses. Rule waivable bisa diajukan sebagai pengecualian; rule non-waivable harus dilengkapi, bukan di-override.</p>
-          <p class="feat-ex"><b>Contoh di mockup</b> Budi ajukan AFI dari workspace SPK <a href="mockup.html#afi">#afi</a>. Pecah urutan AFI/billing hanya lewat <a href="mockup.html#exc_afi">#exc_afi</a>. Nama ≠ STNK: <a href="mockup.html#exc_nama">#exc_nama</a> — bukan waiver fee.</p>
+          <h4>Submit the next step from one platform</h4>
+          <p>Once requirements are met: settlement, billing, AFI/DO, and delivery can proceed. Failed gates hold the process. Waivable rules can be submitted as exceptions; non-waivable rules must be completed, not overridden.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Budi submits AFI from the SPK workspace <a href="mockup.html#afi">#afi</a>. Breaking AFI/billing sequence only goes through <a href="mockup.html#exc_afi">#exc_afi</a>. Name ≠ STNK: <a href="mockup.html#exc_nama">#exc_nama</a> — bukan waiver fee.</p>
         </article>
         <article class="feat">
-          <h4>Antrean Administrasi + audit</h4>
-          <p>Pekerjaan masuk antrean dengan stempel waktu (volume dan aging/SLA). Setiap aksi punya aktor, waktu, dan alasan. Administrasi memverifikasi dan menambah data internal, bukan menyalin form Frontman.</p>
-          <p class="feat-ex"><b>Contoh di mockup</b> List di <a href="mockup.html#beranda">beranda FAST</a> dan antrean <a href="mockup.html#verifikasi">Perlu saya</a>. Bukan spreadsheet terpisah.</p>
+          <h4>Administration Queue + Audit</h4>
+          <p>Work enters the queue with timestamps (volume and aging/SLA). Every action has an actor, time, and reason. Administration verifies and adds internal data instead of copying Frontman forms.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> List in <a href="mockup.html#beranda">FAST home</a> dan antrean <a href="mockup.html#verifikasi">Needs My Action</a>. Not a separate spreadsheet.</p>
         </article>
       </div>
 
-      <h3>Alur di mockup</h3>
-      <div class="chain"><span>Isi SPK</span><i>→</i><span>Unggah dokumen</span><i>→</i><span>Tagih booking fee</span><i>→</i><span>Kuitansi fee</span><i>→</i><span>Sales Order</span><i>→</i><span>AFI / billing / kirim</span></div>
+      <h3>Flow in the mockup</h3>
+      <div class="chain"><span>Fill SPK</span><i>→</i><span>Upload documents</span><i>→</i><span>Request booking fee</span><i>→</i><span>Fee receipt</span><i>→</i><span>Sales Order</span><i>→</i><span>AFI / billing / delivery</span></div>
 
-      <h3>Contoh: Dewi · Yaris SPK/26/CLD/00426</h3>
-      <p>Ini jejak D1 yang paling lengkap: dari form sampai SO, tanpa pindah ke SPK orang lain.</p>
+      <h3>Example: Dewi · Yaris SPK/26/CLD/00426</h3>
+      <p>This is the most complete D1 trail: from form to SO, without moving to someone else’s SPK.</p>
       <ol class="walk">
-        <li><b>Isi SPK</b> Frontman mengisi pemesan Dewi, unit Yaris (+Agya bila ada), kota STNK. OTR mengikuti area PO, bukan diketik. Simpan menghasilkan SPK 00426.
-          <span class="how">Yang terlihat: form satu halaman, belum ada nomor SO. <a href="mockup.html#spk_baru">Form</a> · <a href="mockup.html#spk">SPK tersimpan</a></span></li>
-        <li><b>Quotation</b> 1 SPK = 1 QT. Harga dan unit sama dengan SPK.
-          <span class="how">Yang terlihat: nomor QT menempel ke 00426. <a href="mockup.html#quot">Quotation Dewi</a></span></li>
-        <li><b>Booking fee</b> Setelah dokumen cukup, Frontman menagih Rp 3.000.000 terkunci. Customer bayar lewat Digiroom atau scan QRIS di layar salesman — request yang sama, instrumen berbeda. EDC tidak tampil di HP.
-          <span class="how">Yang terlihat: nominal tidak bisa diubah. <a href="mockup.html#booking">Meja Frontman</a> · <a href="mockup.html#customer_booking">HP Digiroom</a> · <a href="mockup.html#customer_booking_qris">QRIS meja</a></span></li>
-        <li><b>Sales Order</b> Setelah kuitansi fee <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> terbentuk. Nomor SPK tertinggal di SO.
-          <span class="how">Yang terlihat: pemesan/STNK/unit sudah terisi. <a href="mockup.html#so">SO Dewi</a></span></li>
-        <li><b>Pengecualian nama</b> Nama pemesan ≠ nama STNK (Andi Pratama). Gate data waivable ke Kepala Administrasi — bukan waiver fee Rp 3 jt.
-          <span class="how">Yang terlihat: tombol ajukan exception, bukan tombol “lanjut tanpa fee”. <a href="mockup.html#exc_nama">Exception nama</a></span></li>
+        <li><b>Fill SPK</b> Frontman fills in Dewi’s buyer data, the Yaris unit (+Agya if any), and STNK city. OTR follows the PO area, not manual typing. Saving creates SPK 00426.
+          <span class="how">What you see: a single-page form, with no SO number yet. <a href="mockup.html#spk_baru">Form</a> · <a href="mockup.html#spk">Saved SPK</a></span></li>
+        <li><b>Quotation</b> 1 SPK = 1 QT. The price and unit match the SPK.
+          <span class="how">What you see: the QT number is attached to 00426. <a href="mockup.html#quot">Quotation Dewi</a></span></li>
+        <li><b>Booking fee</b> Once the documents are complete, Frontman requests a locked Rp 3.000.000. The customer pays through Digiroom or scans QRIS on the salesperson’s screen — the same request, different instruments. EDC does not appear on the phone.
+          <span class="how">What you see: the amount cannot be changed. <a href="mockup.html#booking">Frontman desk</a> · <a href="mockup.html#customer_booking">Digiroom phone</a> · <a href="mockup.html#customer_booking_qris">Table QRIS</a></span></li>
+        <li><b>Sales Order</b> After the fee receipt <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> terbentuk. Nomor SPK tertinggal di SO.
+          <span class="how">What you see: buyer/STNK/unit are already filled in. <a href="mockup.html#so">SO Dewi</a></span></li>
+        <li><b>Name exception</b> Buyer Name ≠ STNK name (Andi Pratama). The waivable data gate goes to the Head of Administration — not a Rp 3 million fee waiver.
+          <span class="how">What you see: a submit-exception button, not a “continue without fee” button. <a href="mockup.html#exc_nama">Exception name</a></span></li>
       </ol>
 
-      <h3>Contoh lain di mockup</h3>
+      <h3>Example lain di mockup</h3>
       <div class="see-row">
-        <a class="see" href="mockup.html#tx_raize"><span class="see-k">Data gate</span><b>Sarah · Raize 00423</b><span>NPWP di SPK menahan langkah. Tracker 8 tahap milik Raize sendiri.</span><em>Lihat →</em></a>
-        <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>Budi · Zenix 00418</b><span>Ajukan AFI dari workspace SPK. Billing + AFI berpasangan; pecah urutan = exception.</span><em>Lihat →</em></a>
-        <a class="see" href="mockup.html#beranda"><span class="see-k">Antrean</span><b>Beranda FAST</b><span>Pekerjaan Administrasi dan eskalasi masuk list, bukan spreadsheet terpisah.</span><em>Lihat →</em></a>
-        <a class="see" href="mockup.html#exc_afi"><span class="see-k">Urutan</span><b>Exception pecah AFI</b><span>Frontman mengajukan; sistem menahan sampai putusan.</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#tx_raize"><span class="see-k">Data Gate</span><b>Sarah · Raize 00423</b><span>NPWP in the SPK holds the step. The 8-stage tracker belongs to Raize itself.</span><em>View →</em></a>
+        <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>Budi · Zenix 00418</b><span>Submit AFI dari workspace SPK. Billing + AFI are paired; breaking the sequence = exception.</span><em>View →</em></a>
+        <a class="see" href="mockup.html#beranda"><span class="see-k">Queue</span><b>Home FAST</b><span>Administration work and escalations enter a list, not a separate spreadsheet.</span><em>View →</em></a>
+        <a class="see" href="mockup.html#exc_afi"><span class="see-k">Sequence</span><b>Broken AFI sequence exception</b><span>Frontman submits it; the system holds it until a decision is made.</span><em>View →</em></a>
       </div>
-      <p class="note">Bukan bagian D1: mengubah harga, discount, atau program di FAST — itu data source system. Booking fee, 30% cash, lunas, full DP, dan TTD kontrak tidak bisa di-waiver lewat alur Frontman.</p>
+      <p class="note">Not part of D1: changing price, discount, or program in FAST — that belongs to the source system. Booking fee, 30% cash, paid in full, full DP, and signed contracts cannot be waived through the Frontman flow.</p>
     </section>

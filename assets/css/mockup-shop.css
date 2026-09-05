@@ -4,12 +4,13 @@
 #mockup .app.cust-shop .urlbar{color:#ffedd5}
 #mockup .app.cust-shop .rail{display:none !important}
 #mockup .app.cust-shop .layout{grid-template-columns:1fr;position:relative}
-#mockup .app.cust-shop .layout > div{padding-bottom:72px}
+#mockup .app.cust-shop .layout > div{padding-bottom:108px}
 #mockup .app:not(.cust-shop) .shop-tabbar{display:none}
 #mockup .app.cust-shop{position:relative}
 #mockup .app.cust-shop .shop-tabbar{
-  position:absolute;left:0;right:0;bottom:0;z-index:8;display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;border-top:1px solid var(--rule);background:#fff;padding:6px 8px calc(8px + env(safe-area-inset-bottom));
+  position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:12;display:grid;grid-template-columns:repeat(4,1fr);
+  width:min(calc(100% - 24px), 820px);gap:6px;border:1px solid rgba(148,163,184,.28);background:rgba(255,255,255,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  padding:8px 10px calc(10px + env(safe-area-inset-bottom));border-radius:20px;box-shadow:0 16px 42px rgba(15,23,42,.14);
 }
 #mockup .shop-tabbar button{
   border:0;background:transparent;font:inherit;font-size:11px;font-weight:700;color:var(--ink-soft);

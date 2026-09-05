@@ -3,14 +3,14 @@
           <div>
             <p class="eyebrow">Sales Order · dari SPK/26/CLD/00426</p>
             <h2>SO 4500091426 · Dewi Lestari</h2>
-            <p>Baris quotation 1. Terbit hanya setelah booking fee Yaris meet. Quotation berubah → SO ini harus ikut revisi.</p>
+            <p>Baris quotation 1. Issued hanya setelah booking fee Yaris meet. Quotation berubah → SO ini harus ikut revisi.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="quot">← Quotation</button>
-            <button class="btn" data-go="afi_d" data-bf-show-paid hidden>Ajukan AFI</button>
+            <button class="btn" data-go="afi_d" data-bf-show-paid hidden>Submit AFI</button>
           </div>
         </div>
-        <nav class="proc" data-proc="so" aria-label="Proses transaksi"></nav>
+        <nav class="proc" data-proc="so" aria-label="Process transactions"></nav>
         <div class="box" data-so-stale hidden>
           <h3>SO tertahan revisi quotation</h3>
           <div class="pad">
@@ -20,55 +20,55 @@
         </div>
         <div data-so-block hidden>
           <div class="box">
-            <h3>Sales Order belum terbuka</h3>
+            <h3>Sales Order not yet unlocked</h3>
             <div class="pad">
-              <p>Booking fee belum meet, atau quotation baris ini belum jadi SO. Bukan jalur Approval Engine.</p>
+              <p>Booking fee not yet meet, atau quotation baris ini not yet jadi SO. Bukan jalur Approval Engine.</p>
               <button class="btn" data-go="quot">Buka quotation</button>
             </div>
           </div>
         </div>
         <div data-so-ready hidden>
           <div class="cards">
-            <div class="card"><p class="k">Nomor SO</p><p class="v" style="font-size:18px">4500091426</p><p class="n">Dihasilkan sistem</p></div>
+            <div class="card"><p class="k">Nomor SO</p><p class="v" style="font-size:18px">4500091426</p><p class="n">System-generated</p></div>
             <div class="card"><p class="k">Asal</p><p class="v" style="font-size:18px">00426</p><p class="n">SPK/26/CLD/00426</p></div>
-            <div class="card"><p class="k">Kuitansi booking</p><p class="v" style="font-size:18px">009301</p><p class="n">Tertaut SPK lalu SO</p></div>
+            <div class="card"><p class="k">Receipt booking</p><p class="v" style="font-size:18px">009301</p><p class="n">Tertaut SPK lalu SO</p></div>
             <div class="card"><p class="k">AR Open</p><p class="v" style="font-size:18px">299,15 Jt</p><p class="n">Nilai SPK − booking fee</p></div>
           </div>
           <div class="split">
             <div>
               <div class="box">
-                <h3>Lineage <span class="side">Satu transaksi</span></h3>
+                <h3>Lineage <span class="side">Satu transactions</span></h3>
                 <div class="fields">
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00426</span><span class="src">Dokumen asal</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00426</span><span class="src">Documents asal</span></div>
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Quotation</span><span class="val">QT/26/CLD/00426 · rev <span data-qt-rev>1</span></span><span class="src">1 SPK = 1 QT</span></div>
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val">4500091426</span><span class="src">Konversi setelah booking fee</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Setelah DO · cash ≥30%</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Kuitansi</span><span class="val">KWT/26/CLD/009301</span><span class="src">Booking fee · aktif</span></div>
-                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor polisi</span><span class="val">B 1426 DPK</span><span class="src">Cadangan AFI · SO ini</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Not yet issued</span><span class="src">After DO · cash ≥30%</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Receipt</span><span class="val">KWT/26/CLD/009301</span><span class="src">Booking fee · aktif</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">License plate</span><span class="val">B 1426 DPK</span><span class="src">Reserved AFI · SO ini</span></div>
                 </div>
               </div>
               <div class="box">
-                <h3>Dibawa dari SPK <span class="side">Tidak diketik ulang</span></h3>
+                <h3>Dibawa dari SPK <span class="side">Tidak diketik again</span></h3>
                 <div class="fields">
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Dewi Lestari</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Buyer</span><span class="val">Dewi Lestari</span><span class="src">SPK</span></div>
                 </div>
                 <div class="fields addr-fields" data-addr="dewi_pemesan"></div>
                 <div class="fields">
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Andi Pratama</span><span class="src">≠ pemesan · Approval Engine</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">STNK Name</span><span class="val">Andi Pratama</span><span class="src">≠ buyer · Approval Engine</span></div>
                 </div>
                 <div class="fields addr-fields" data-addr="dewi_stnk"></div>
                 <div class="fields">
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO / OTR</span><span class="val">Depok · <span data-qt-otr="yaris">Rp 296.800.000</span></span><span class="src">Dari quotation rev <span data-so-rev>1</span></span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Unit</span><span class="val">Yaris 1.5 G CVT · Putih Metalik</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Aksesoris</span><span class="val">Kaca film + karpet · Rp 5.350.000</span><span class="src">SPK</span></div>
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Tunai</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe pay</span><span class="val">Tunai</span><span class="src">SPK</span></div>
                 </div>
               </div>
               <div class="box">
-                <h3>Dokumen ikut SO</h3>
+                <h3>Documents ikut SO</h3>
                 <div class="docs">
-                  <div class="doc"><b>Entri SPK</b><p class="meta">KTP · KK · NPWP · bukti alamat pemesan</p><span class="tag ok">Vault</span><span class="reuse">Dari SPK/26/CLD/00426</span></div>
-                  <div class="doc"><b>STNK / BPKB</b><p class="meta">KTP Andi · KK · bukti alamat Depok · pernyataan nama</p><span class="tag ok">Vault</span><span class="reuse">Siap AFI</span></div>
+                  <div class="doc"><b>Entri SPK</b><p class="meta">KTP · KK · NPWP · proof address buyer</p><span class="tag ok">Vault</span><span class="reuse">Dari SPK/26/CLD/00426</span></div>
+                  <div class="doc"><b>STNK / BPKB</b><p class="meta">KTP Andi · KK · proof address Depok · pernyataan name</p><span class="tag ok">Vault</span><span class="reuse">Ready AFI</span></div>
                 </div>
               </div>
             </div>
@@ -78,32 +78,32 @@
                 <div class="money">
                   <div class="row"><span>OTR Depok</span><span data-qt-otr="yaris">Rp 296.800.000</span></div>
                   <div class="row"><span>Aksesoris</span><span>Rp 5.350.000</span></div>
-                  <div class="row"><span>Nilai transaksi akhir</span><span>Rp 302.150.000</span></div>
+                  <div class="row"><span>Nilai transactions akhir</span><span>Rp 302.150.000</span></div>
                   <div class="row"><span>Booking fee unit (bukan DP leasing)</span><span>Rp 3.000.000</span></div>
-                  <div class="row"><span>Kuitansi booking fee</span><span>− Rp 3.000.000</span></div>
+                  <div class="row"><span>Receipt booking fee</span><span>− Rp 3.000.000</span></div>
                   <div class="row total"><span>AR Open</span><span>Rp 299.150.000</span></div>
-                  <div class="row"><span>Syarat billing cash</span><span>≥30% dana masuk</span></div>
-                  <div class="row"><span>Syarat delivery cash</span><span>Lunas · belum</span></div>
-                  <div class="row"><span>Nomor polisi</span><span>B 1426 DPK · cadangan AFI</span></div>
+                  <div class="row"><span>Requirement billing cash</span><span>≥30% dana received</span></div>
+                  <div class="row"><span>Requirement delivery cash</span><span>Paid in Full · not yet</span></div>
+                  <div class="row"><span>License plate</span><span>B 1426 DPK · cadangan AFI</span></div>
                 </div>
-                <p class="hint" style="padding:0 16px 14px">Tipe bayar tunai: struktur harga memakai booking fee dari master unit. DP wajib B2B hanya muncul jika metode SPK leasing/credit.</p>
+                <p class="hint" style="padding:0 16px 14px">Tipe pay tunai: struktur harga memakai booking fee dari master unit. DP wajib B2B hanya muncul jika metode SPK leasing/credit.</p>
               </div>
               <div class="box">
                 <h3>Gate SO</h3>
                 <ul class="gates">
                   <li><span class="mark ok">✓</span><div>Booking fee meet<span class="why">Minimum Yaris Rp 3.000.000 · KWT/26/CLD/009301</span></div><span class="tag ok">Lolos</span></li>
-                  <li><span class="mark ok">✓</span><div>Data SPK utuh<span class="why">Pemesan, STNK, unit, harga area PO, dokumen</span></div><span class="tag ok">Lolos</span></li>
-                  <li><span class="mark no">!</span><div>Nama pemesan ≠ STNK<span class="why">Andi Pratama · Approval Engine · supporting document</span></div><span class="tag hold">Waivable</span></li>
-                  <li><span class="mark idle">•</span><div>Billing + AFI<span class="why">Cash ≥30% belum · ajukan berpasangan nanti</span></div><span class="tag mute">Menunggu</span></li>
+                  <li><span class="mark ok">✓</span><div>Data SPK utuh<span class="why">Buyer, STNK, unit, harga area PO, documents</span></div><span class="tag ok">Lolos</span></li>
+                  <li><span class="mark no">!</span><div>Buyer Name ≠ STNK<span class="why">Andi Pratama · Approval Engine · supporting document</span></div><span class="tag hold">Waivable</span></li>
+                  <li><span class="mark idle">•</span><div>Billing + AFI<span class="why">Cash ≥30% not yet · submit berpasangan nanti</span></div><span class="tag mute">Pending</span></li>
                   <li><span class="mark no">!</span><div>Delivery cash<span class="why">AR Open Rp 299.150.000 · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
                 </ul>
               </div>
               <div class="box">
-                <h3>Tindakan</h3>
+                <h3>Action</h3>
                 <div class="pad">
-                  <p>SO baris 1 (Yaris). Lanjut AFI dari data STNK SPK, lalu DO, baru billing. Pelunasan cashless di kanal yang sama.</p>
-                  <button class="btn" style="width:100%;margin-bottom:8px" data-go="afi_d">Ajukan AFI</button>
-                  <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="digiroom" data-pay-job="dewi" data-role="cust">Pelunasan di Digiroom</button>
+                  <p>SO baris 1 (Yaris). Lanjut AFI dari data STNK SPK, lalu DO, new billing. Settlement cashless di kanal yang same.</p>
+                  <button class="btn" style="width:100%;margin-bottom:8px" data-go="afi_d">Submit AFI</button>
+                  <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="digiroom" data-pay-job="dewi" data-role="cust">Settlement in Digiroom</button>
                   <button class="btn ghost" style="width:100%" data-go="quot">Quotation (semua baris SO)</button>
                 </div>
               </div>
@@ -117,35 +117,35 @@
           <div>
             <p class="eyebrow">Baris quotation 2 · QT/26/CLD/00426</p>
             <h2>SO 4500091428 · Agya</h2>
-            <p>SO terpisah karena unit kedua di quotation yang sama. Harga mengikuti quotation; kalau QT berubah, SO ini ikut.</p>
+            <p>SO terpisah karena unit kedua di quotation yang same. Harga mengikuti quotation; kalau QT berubah, SO ini ikut.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="quot">← Quotation</button></div>
         </div>
-        <nav class="proc" data-proc="so" aria-label="Proses transaksi"></nav>
+        <nav class="proc" data-proc="so" aria-label="Process transactions"></nav>
         <div class="cards">
-          <div class="card"><p class="k">SPK / QT</p><p class="v" style="font-size:18px">1 / 1</p><p class="n">Sama dengan Yaris</p></div>
+          <div class="card"><p class="k">SPK / QT</p><p class="v" style="font-size:18px">1 / 1</p><p class="n">Match dengan Yaris</p></div>
           <div class="card"><p class="k">OTR Agya</p><p class="v" style="font-size:18px" data-qt-otr="agya">Rp 175.900.000</p><p class="n">Dari quotation rev <span data-qt-rev>1</span></p></div>
-          <div class="card alert"><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Booking fee Rp 2.000.000 belum meet</p></div>
-          <div class="card"><p class="k">Nopol</p><p class="v" style="font-size:18px">—</p><p class="n">Menunggu SO Agya</p></div>
+          <div class="card alert"><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Booking fee Rp 2.000.000 not yet meet</p></div>
+          <div class="card"><p class="k">Nopol</p><p class="v" style="font-size:18px">—</p><p class="n">Pending SO Agya</p></div>
         </div>
         <div class="box" data-qt-stale hidden>
           <h3>Harga quotation sudah berubah</h3>
           <div class="pad">
-            <p>Meski SO Agya belum terbit, baris ini sudah tidak boleh di-booking dengan OTR lama. Terapkan quotation dulu, lalu tagih booking fee.</p>
+            <p>Meski SO Agya not yet issued, baris ini sudah tidak boleh di-booking dengan OTR lama. Terapkan quotation dulu, lalu tagih booking fee.</p>
             <button class="btn" data-go="quot">Ke quotation</button>
           </div>
         </div>
         <div class="box">
           <h3>Kenapa SO sendiri?</h3>
           <div class="pad">
-            <p>Satu quotation, dua pembelian unit → dua SO. AFI, DO, billing, dan pelunasan Agya tidak tercampur dengan SO Yaris 4500091426.</p>
+            <p>Satu quotation, dua pembelian unit → dua SO. AFI, DO, billing, dan settlement Agya tidak tercampur dengan SO Yaris 4500091426.</p>
             <button class="btn ghost" data-go="so">Buka SO Yaris (baris 1)</button>
           </div>
           <div class="paystrip">
             <b>Cashless booking Agya</b>
-            <span class="hint" style="margin:0">Rp 2.000.000 terkunci · baris ini saja · tetap SPK/26/CLD/00426</span>
-            <button class="btn" data-go="digiroom" data-pay-job="agya" data-role="cust">Bayar di Digiroom</button>
-            <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="agya">Cabang</button>
+            <span class="hint" style="margin:0">Rp 2.000.000 locked · baris ini saja · tetap SPK/26/CLD/00426</span>
+            <button class="btn" data-go="digiroom" data-pay-job="agya" data-role="cust">Pay in Digiroom</button>
+            <button class="btn ghost" data-go="cashless" data-fm-only data-pay-job="agya">Branch</button>
           </div>
         </div>
         <div class="box">
@@ -153,39 +153,39 @@
           <div class="money">
             <div class="row"><span>OTR Depok</span><span data-qt-otr="agya">Rp 175.900.000</span></div>
             <div class="row"><span>Diskon / program</span><span>Rp 0</span></div>
-            <div class="row"><span>Nilai transaksi akhir</span><span data-qt-otr="agya">Rp 175.900.000</span></div>
+            <div class="row"><span>Nilai transactions akhir</span><span data-qt-otr="agya">Rp 175.900.000</span></div>
             <div class="row"><span>Booking fee unit (bukan DP leasing)</span><span>Rp 2.000.000</span></div>
             <div class="row total"><span>SO</span><span>Tertahan sampai booking meet</span></div>
           </div>
-          <p class="hint" style="padding:0 16px 14px">Satu SPK Dewi, dua SO. Agya tidak membuka transaksi Budi atau Hiace. DP wajib B2B hanya jika tipe bayar leasing.</p>
+          <p class="hint" style="padding:0 16px 14px">Satu SPK Dewi, dua SO. Agya tidak membuka transactions Budi atau Hiace. DP wajib B2B hanya jika tipe pay leasing.</p>
         </div>
       </section>
 
       <section class="screen" id="proses">
         <div class="screenhead">
           <div>
-            <h2>Proses utuh · SPK Dewi Lestari</h2>
+            <h2>Process utuh · SPK Dewi Lestari</h2>
             <p>Hanya jejak SPK/26/CLD/00426. Tidak membuka Budi, Hiace, atau SPK lain.</p>
           </div>
           <div class="actions">
-            <button class="btn ghost" data-go="beranda">← Daftar</button>
-            <button class="btn" data-go="spk_baru">Isi SPK dari awal</button>
+            <button class="btn ghost" data-go="beranda">← List</button>
+            <button class="btn" data-go="spk_baru">Fill SPK dari awal</button>
           </div>
         </div>
-        <nav class="proc" data-proc="proses" aria-label="Proses transaksi"></nav>
+        <nav class="proc" data-proc="proses" aria-label="Process transactions"></nav>
         <div class="box">
-          <h3>Urutan</h3>
+          <h3>Sequence</h3>
           <ul class="gates">
-            <li><span class="mark ok">0</span><div>Isi &amp; unggah SPK<span class="why">Pemesan, STNK, unit, dokumen. Baru dapat nomor SPK.</span></div><button class="btn ghost" data-go="spk_baru">Dari awal</button></li>
-            <li><span class="mark ok">1</span><div>SPK tersimpan<span class="why">Pemesan, STNK, unit, dokumen. Satu SPK. Booking fee belum.</span></div><button class="btn ghost" data-go="spk">Buka</button></li>
+            <li><span class="mark ok">0</span><div>Isi &amp; upload SPK<span class="why">Buyer, STNK, unit, documents. New dapat nomor SPK.</span></div><button class="btn ghost" data-go="spk_baru">Dari awal</button></li>
+            <li><span class="mark ok">1</span><div>Saved SPK<span class="why">Buyer, STNK, unit, documents. Satu SPK. Booking fee not yet.</span></div><button class="btn ghost" data-go="spk">Buka</button></li>
             <li><span class="mark ok">2</span><div>Quotation<span class="why">1 SPK = 1 QT. Banyak unit = banyak SO. Ubah QT = semua SO berubah.</span></div><button class="btn ghost" data-go="quot">Buka</button></li>
-            <li><span class="mark idle">3</span><div>Cashless booking<span class="why">QRIS / CDM / tautan / EDC Frontman. Meet → SO baris itu.</span></div><button class="btn ghost" data-go="booking">Bayar</button></li>
+            <li><span class="mark idle">3</span><div>Cashless booking<span class="why">QRIS / CDM / tautan / EDC Frontman. Meet → SO baris itu.</span></div><button class="btn ghost" data-go="booking">Pay</button></li>
             <li><span class="mark idle">4</span><div>Sales Order<span class="why">Per unit. Data dari SPK + harga quotation.</span></div><button class="btn ghost" data-go="so">Buka</button></li>
-            <li><span class="mark idle">5</span><div>AFI<span class="why">Nama/alamat STNK dari SPK. Setelah SO.</span></div><button class="btn ghost" data-go="afi_d">Buka</button></li>
-            <li><span class="mark idle">6</span><div>DO<span class="why">Delivery Order gudang. Setelah AFI.</span></div><button class="btn ghost" data-go="do">Buka</button></li>
-            <li><span class="mark idle">7</span><div>Billing<span class="why">Setelah DO. Cash ≥30% non-waivable.</span></div><button class="btn ghost" data-go="bill_d">Buka</button></li>
-            <li><span class="mark idle">8</span><div>Delivery<span class="why">Setelah billing. Cash lunas non-waivable.</span></div><button class="btn ghost" data-go="kirim_d">Buka</button></li>
-            <li><span class="mark idle">9</span><div>STNK / BPKB<span class="why">Tracking setelah serah terima. Aging bukan waiver lunas.</span></div><button class="btn ghost" data-go="stnk_d">Buka</button></li>
+            <li><span class="mark idle">5</span><div>AFI<span class="why">Name/address STNK dari SPK. After SO.</span></div><button class="btn ghost" data-go="afi_d">Buka</button></li>
+            <li><span class="mark idle">6</span><div>DO<span class="why">Delivery Order gudang. After AFI.</span></div><button class="btn ghost" data-go="do">Buka</button></li>
+            <li><span class="mark idle">7</span><div>Billing<span class="why">After DO. Cash ≥30% non-waivable.</span></div><button class="btn ghost" data-go="bill_d">Buka</button></li>
+            <li><span class="mark idle">8</span><div>Delivery<span class="why">After billing. Cash paid in full non-waivable.</span></div><button class="btn ghost" data-go="kirim_d">Buka</button></li>
+            <li><span class="mark idle">9</span><div>STNK / BPKB<span class="why">Tracking setelah serah terima. Aging bukan waiver paid in full.</span></div><button class="btn ghost" data-go="stnk_d">Buka</button></li>
           </ul>
         </div>
       </section>

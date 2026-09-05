@@ -12,21 +12,21 @@
   function b2bFlowCopy(flow, u){
     if(u && u.backflow) return u.backflowReason||'Leasing mengembalikan. Lengkapi dokumen, kirim ulang.';
     var map={
-      submitted:'Pengajuan sudah masuk ke leasing. Menunggu permintaan dokumen.',
+      submitted:'Submission has reached leasing. Awaiting document request.',
       docs_requested:'Leasing meminta paket dokumen. Unggah di tab Dokumen, lalu kirim.',
-      docs_sent:'Dokumen terkirim. Administrasi dapat menerbitkan kontrak dari leasing.',
+      docs_sent:'Documents sent. Administration can issue the contract from leasing.',
       contract_ready:'Kontrak dari leasing siap. Sales mengunduh, customer TTD, sales unggah kembali.',
       ttd_uploaded:'Kontrak TTD tercatat. Delivery gate membaca status ini. DP wajib customer dari B2B membuka billing gate.',
       dp_received:'DP wajib dari B2B sudah diterima. Billing gate menunggu e-PO leasing (total DP, nilai dibiayai, tenor) atau putusan Operation Manager.',
-      epo_received:'E-PO leasing tercatat, atau Operation Manager menyetujui paperless tanpa e-PO. Frontman lengkapi paket; Administrasi menagih.',
-      billing_ready:'Data penagihan lengkap. Administrasi kirim paperless dan terbitkan kuitansi ke leasing.',
-      paperless_sent:'Penagihan paperless terkirim. Administrasi menerbitkan kuitansi ke leasing.',
-      lunas:'Pelunasan leasing tercatat. Jejak SPK–SO–billing tetap sama.'
+      epo_received:'Leasing e-PO recorded, or the Operation Manager approves paperless without an e-PO. Frontman completes the package; Administration bills it.',
+      billing_ready:'Billing data complete. Administration sends paperless flow and issues the leasing receipt.',
+      paperless_sent:'Paperless billing request sent. Administration issues the leasing receipt.',
+      lunas:'Leasing settlement recorded. The SPK–SO–billing trail remains the same.'
     };
     return map[flow]||map.submitted;
   }
   function b2bTagFor(flow, back){
-    if(back) return {cls:'tag stop', text:'Dikembalikan'};
+    if(back) return {cls:'tag stop', text:'Returned'};
     var map={
       submitted:{cls:'tag mute', text:'Submit'},
       docs_requested:{cls:'tag wait', text:'Dokumen diminta'},
@@ -37,7 +37,7 @@
       epo_received:{cls:'tag wait', text:'E-PO / gate OM'},
       billing_ready:{cls:'tag wait', text:'Siap ditagih Admin'},
       paperless_sent:{cls:'tag ok', text:'Paperless'},
-      lunas:{cls:'tag ok', text:'Lunas leasing'}
+      lunas:{cls:'tag ok', text:'Leasing paid in full'}
     };
     return map[flow]||{cls:'tag wait', text:'B2B'};
   }
@@ -54,7 +54,7 @@
     var paperEl=document.querySelector('[data-b2b-paper-label]');
     if(dpEl) dpEl.textContent='DP diterima '+sum.dp+'/3';
     if(ttdEl) ttdEl.textContent='TTD '+sum.ttd+'/3';
-    if(paperEl) paperEl.textContent='Kuitansi '+sum.kwt+'/3';
+    if(paperEl) paperEl.textContent='Receipts '+sum.kwt+'/3';
     document.querySelectorAll('[data-b2b-epo-label]').forEach(function(el){ el.textContent='E-PO '+sum.epo+'/3'; });
     document.querySelectorAll('[data-b2b-dp-wajib]').forEach(function(el){ el.textContent=meta.dpLabel||'—'; });
     var dpStatus=document.querySelector('[data-b2b-dp-status]');
@@ -67,7 +67,7 @@
     document.querySelectorAll('[data-b2b-finance]').forEach(function(el){ el.textContent=meta.financeLabel||'—'; });
     document.querySelectorAll('[data-b2b-tenor]').forEach(function(el){ el.textContent=meta.tenor||'—'; });
     document.querySelectorAll('[data-b2b-epo-no]').forEach(function(el){
-      el.textContent=u.epoReceived?(meta.epoNo||'Terbit'):(u.excEpo==='approved'?'Pengecualian OM':'Belum terbit');
+      el.textContent=u.epoReceived?(meta.epoNo||'Issued'):(u.excEpo==='approved'?'Pengecualian OM':'Belum terbit');
     });
     document.querySelectorAll('[data-b2b-so-no]').forEach(function(el){ el.textContent=meta.so||'—'; });
     document.querySelectorAll('[data-b2b-so-unit]').forEach(function(el){ el.textContent=meta.unit||'Hiace Premio'; });
@@ -86,7 +86,7 @@
     var strip=document.querySelector('[data-b2b-dp-strip]');
     if(strip) strip.textContent='SO '+meta.so+' · DP wajib '+ (meta.dpLabel||'—') +'. QRIS/CDM/EDC cabang tidak mengganti angka B2B.';
     var kwtNo=document.querySelector('[data-b2b-kwt-no]');
-    if(kwtNo) kwtNo.textContent=u.kwtIssued?('Kuitansi: '+(meta.kwt||'terbit')):'Kuitansi: belum terbit';
+    if(kwtNo) kwtNo.textContent=u.kwtIssued?('Receipt: '+(meta.kwt||'issued')):'Receipt: not issued yet';
     var checks={
       dl:!!u.contractDownloaded,
       signed:!!u.signedContract,
@@ -159,7 +159,7 @@
     if(gateNote){
       gateNote.textContent=sum.back
         ? 'Ada backflow. Frontman lengkapi data — bukan waiver TTD/DP. Approval Engine tidak dibuka untuk TTD/DP.'
-        : 'Klik SPK, SO, atau Billing di jejak atas — tahap yang sudah jadi tetap terbuka. Administrasi menagih jika paket lengkap, full DP B2B, dan e-PO leasing — atau putusan Operation Manager.';
+        : 'Click SPK, SO, or Billing in the trail above — completed stages stay open. Administration bills it when the package is complete, full B2B DP is received, and the leasing e-PO exists — or after an Operation Manager decision.';
     }
     document.querySelectorAll('[data-b2b-tab]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-b2b-tab')===tab?'true':'false');
@@ -194,7 +194,7 @@
     var banner=document.querySelector('[data-b2b-backflow]');
     if(banner){
       banner.hidden=!u.backflow;
-      banner.textContent=u.backflow?(u.backflowReason||'Dikembalikan leasing.'):'';
+      banner.textContent=u.backflow?(u.backflowReason||'Returned by leasing.'):'';
       banner.classList.toggle('warn', !!u.backflow);
     }
     var path=document.querySelector('[data-b2b-path]');
@@ -276,17 +276,17 @@
     s=s||{};
     var st=s.gi||'draft';
     var notes={
-      draft:'Unggah foto serah terima, foto VIN, dan scan BSTKB. Geotag dan waktu tercatat di perangkat. Administrasi memeriksa, lalu menyetujui. Paket yang sama nanti di akun pelanggan — bukan CCTV dealer.',
-      submitted:'Bukti masuk antrean Administrasi. Salesman tidak mencatat GI sendiri. Customer belum melihat paket sampai disetujui.',
+      draft:'Upload the handover photo, VIN photo, and BSTKB scan. Geotag and time are recorded on the device. Administration reviews and approves it. The same package later appears in the customer account — not dealership CCTV.',
+      submitted:'Proof entered the Administration queue. The salesperson does not record GI alone. The customer cannot see the package until it is approved.',
       approved:'Good Issue disetujui. Unit tertutup di gudang. Paket bukti yang sama tersedia untuk pelanggan. STNK/BPKB memakai data yang sama.',
-      returned:'Dikembalikan. Lengkapi foto, VIN, atau scan BSTKB, lalu kirim ulang.'
+      returned:'Returned. Complete the photo, VIN, or BSTKB scan, then resubmit.'
     };
-    var tags={draft:'Good Issue',submitted:'Menunggu Admin',approved:'GI disetujui',returned:'Dikembalikan'};
+    var tags={draft:'Good Issue',submitted:'Awaiting Admin',approved:'GI approved',returned:'Returned'};
     var specs={
       draft:'Tindakan: unggah foto, VIN, BSTKB + geotag',
-      submitted:'Tindakan: pantau persetujuan Administrasi',
+      submitted:'Action: monitor Administration approval',
       approved:'GI tercatat · paket bukti di akun pelanggan',
-      returned:'Lengkapi bukti, kirim ulang ke Administrasi'
+      returned:'Complete the proof and resubmit to Administration'
     };
     var dropCopy={
       foto:{off:'Ketuk untuk pasang contoh · geotag 2 Sep 14:22',on:'Terpasang · 2 Sep 2026 14:22 WIB · −6.2731, 106.8072'},
@@ -315,6 +315,6 @@
     });
     document.querySelectorAll('[data-gi-spec]').forEach(function(el){ el.textContent=specs[st]||specs.draft; });
     document.querySelectorAll('[data-gi-status]').forEach(function(el){
-      el.textContent=st==='approved'?'Tercatat':st==='submitted'?'Cek Admin':st==='returned'?'Dikembalikan':'Menunggu bukti';
+      el.textContent=st==='approved'?'Recorded':st==='submitted'?'Admin review':st==='returned'?'Returned':'Awaiting proof';
     });
   }

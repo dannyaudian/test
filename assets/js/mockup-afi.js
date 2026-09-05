@@ -40,8 +40,8 @@
     var st=afiExcSt(afiExcKind);
     var notes={
       draft:'Belum diajukan. Jelaskan kenapa urutan billing dan AFI harus dipecah.',
-      submitted:'Pengajuan masuk. Admin Cilandak cek alasan, lalu teruskan ke Kepala Administrasi.',
-      verified:'Admin sudah cek. Kepala Administrasi memutuskan pecah urutan.',
+      submitted:'Submission received. Cilandak Administration reviews the reason, then forwards it to the Head of Administration.',
+      verified:'Administration has reviewed it. The Head of Administration decides on the split sequence.',
       approved:afiExcKind==='nobill'?'Disetujui. Billing boleh tanpa AFI. AFI tetap wajib menyusul. 30% tidak di-waive.':'Disetujui. AFI boleh sebelum billing. Billing tetap wajib. 30% tidak di-waive.',
       returned:'Revisi: lengkapi alasan sesuai komentar Kepala Cabang.',
       rejected:'Ditolak. Pakai jalur billing + AFI bersama. 30% tidak di-waive.'
@@ -61,8 +61,8 @@
       else if(si<idx) el.classList.add('ok');
       else if(si===idx) el.classList.add('on');
     });
-    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui',returned:'Revisi',rejected:'Ditolak'};
-    if(currentRole==='mgmt' && (st==='draft'||st==='submitted')) tags[st]='Siap diputuskan';
+    var tags={draft:'Awaiting submission',submitted:'Awaiting Admin',verified:'Ready for decision',approved:'Approved',returned:'Revisi',rejected:'Ditolak'};
+    if(currentRole==='mgmt' && (st==='draft'||st==='submitted')) tags[st]='Ready for decision';
     var sel=afiExcKind==='nobill'?'[data-afi-nobill-tag]':'[data-afi-early-tag]';
     document.querySelectorAll(sel).forEach(function(el){
       el.textContent=tags[st]||tags.draft;
@@ -163,12 +163,12 @@
     }
     document.querySelectorAll('[data-afi-early-tag]').forEach(function(el){
       var st=early;
-      el.textContent=st==='approved'?'Disetujui':st==='returned'?'Dikembalikan':st==='draft'?'Menunggu pengajuan':'Dalam proses';
+      el.textContent=st==='approved'?'Approved':st==='returned'?'Returned':st==='draft'?'Awaiting submission':'In progress';
       el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
     });
     document.querySelectorAll('[data-afi-nobill-tag]').forEach(function(el){
       var st=nobill;
-      el.textContent=st==='approved'?'Disetujui':st==='returned'?'Dikembalikan':st==='draft'?'Menunggu pengajuan':'Dalam proses';
+      el.textContent=st==='approved'?'Approved':st==='returned'?'Returned':st==='draft'?'Awaiting submission':'In progress';
       el.className='tag '+(st==='approved'?'ok':st==='returned'?'stop':'hold');
     });
     applyAfiExcPath();
@@ -215,7 +215,7 @@
       if(afiExcSt('early')!=='approved' && !afiData().bill){ toast('AFI dulu butuh Approval Engine.'); show('exc_afi'); setAfiExcView('early'); return; }
       if(afiKind==='pilih' && !plateVal()){ toast('Isi nomor yang diminta dulu.'); return; }
       saveAfi({afi:true});
-      toast('AFI diajukan sebelum billing (exception).');
+      toast('AFI submitted before billing (exception).');
     });
   });
   document.querySelectorAll('[data-afi-bill]').forEach(function(b){
@@ -231,12 +231,12 @@
     toast(msg);
   }
   document.querySelectorAll('[data-exc-afi-submit]').forEach(function(b){
-    b.addEventListener('click',function(){ setAfiExc('submitted','Pengajuan pecah urutan terkirim. Admin akan cek.'); });
+    b.addEventListener('click',function(){ setAfiExc('submitted','Split-sequence submission sent. Administration will review it.'); });
   });
   document.querySelectorAll('[data-exc-afi-verify]').forEach(function(b){
     b.addEventListener('click',function(){
       if(afiExcSt(afiExcKind)==='draft'||afiExcSt(afiExcKind)==='returned'){ toast('Frontman belum mengajukan.'); return; }
-      setAfiExc('verified','Alasan dicek. Siap diputuskan Kepala Administrasi.');
+      setAfiExc('verified','Reason reviewed. Ready for the Head of Administration decision.');
     });
   });
   document.querySelectorAll('[data-exc-afi-approve]').forEach(function(b){
@@ -247,5 +247,5 @@
     });
   });
   document.querySelectorAll('[data-exc-afi-reject]').forEach(function(b){
-    b.addEventListener('click',function(){ setAfiExc('returned','Dikembalikan. Pakai jalur berpasangan, atau ajukan ulang.'); });
+    b.addEventListener('click',function(){ setAfiExc('returned','Returned. Use the paired route or resubmit.'); });
   });

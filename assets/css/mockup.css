@@ -301,7 +301,7 @@
 #mockup .decide-actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
 #mockup .btn.stop{background:#fff;color:var(--stop);border:1px solid #E7C9C9;box-shadow:none}
 #mockup .audit.comments{margin:0;padding:0 16px 16px}
-#mockup .audit.comments:empty::before{content:'Belum ada komentar putusan.';font-size:12.5px;color:var(--ink-soft)}
+#mockup .audit.comments:empty::before{content:'No decision comments yet.';font-size:12.5px;color:var(--ink-soft)}
 /* eskalasi */
 #mockup .route{list-style:none;margin:0;padding:4px 16px 14px}
 #mockup .route li{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:11px 0;position:relative;font-size:13px}
