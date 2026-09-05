@@ -292,7 +292,7 @@
   function familyOf(tx){ return (window.FAST && FAST.txFamily)?FAST.txFamily(tx):tx; }
   function txOf(id){ return (window.FAST && FAST.screenTx)?FAST.screenTx(id, payJobId):null; }
   function hubOf(tx){ return (window.FAST && FAST.txHub && FAST.txHub(tx))||'beranda'; }
-  function stayTarget(id, fromId){
+  function stayTarget(id, fromId, explicit){
     if(LIST_SCREENS[id]){
       if(id==='beranda'||id==='admin_spk'||id==='customer'||id==='dashboard'||id==='mgmt_inbox'||id==='verifikasi'||id==='eskalasi') persistTx(null);
       return id;
@@ -305,7 +305,7 @@
     }
     var nextTx=txOf(id);
     var cur=activeTx||txOf(fromId);
-    if(LIST_SCREENS[fromId]){
+    if(explicit || LIST_SCREENS[fromId]){
       if(nextTx) persistTx(nextTx);
       return id;
     }
@@ -341,9 +341,10 @@
       if(k==='minta'||k==='exc') b.hidden=fam==='dewi';
     });
   }
-  function show(id){
+  function show(id, opts){
+    opts=opts||{};
     var from=(document.querySelector('.screen.on')||{}).id;
-    id=stayTarget(id, from);
+    id=stayTarget(id, from, opts.explicit);
     if(id==='admin_tx') id='admin_spk';
     if(currentRole==='mgmt' && id==='eskalasi') id='mgmt_inbox';
     var bookKey=ADMIN_BOOK[id];
@@ -621,14 +622,14 @@
   if(hash==='admin_tx') hash='admin_spk';
   if(hash && (document.getElementById(hash) || ADMIN_BOOK[hash])){
     if(screenRole[hash]) applyRole(screenRole[hash]);
-    show(hash);
+    show(hash, {explicit:true});
   }
   window.addEventListener('hashchange', function(){
     var h=(location.hash||'').replace('#','');
     if(h==='admin_tx') h='admin_spk';
     if(h && (document.getElementById(h) || ADMIN_BOOK[h])){
       if(screenRole[h]) applyRole(screenRole[h]);
-      show(h);
+      show(h, {explicit:true});
     }
   });
 
