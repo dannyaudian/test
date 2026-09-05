@@ -15,7 +15,7 @@
     afi_d:'dewi',do:'dewi',bill_d:'dewi',kirim_d:'dewi',stnk_d:'dewi',
     so2:'agya',
     transaksi:'budi',afi:'budi',dokumen:'budi',request:'budi',bayar:'budi',
-    exc_alamat:'budi',exc_nama:'dewi',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
+    exc_alamat:'budi',exc_nama:'dewi',exc_epo:'hiace',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
     tx_hiace:'hiace',
     tx_raize:'raize',
     tx_avanza:'agus',delivery:'agus',
@@ -27,7 +27,7 @@
     spk:'spk',spk_baru:'spk',quot:'quot',booking:'quot',so:'so',so2:'so',proses:'spk',
     afi_d:'afi',do:'do',bill_d:'bill',kirim_d:'del',stnk_d:'stnk',
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
-    cashless:'bill',exc_alamat:'afi',exc_nama:'spk',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
+    cashless:'bill',exc_alamat:'afi',exc_nama:'spk',exc_epo:'bill',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
     tx_hiace:'bill',
     tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
     tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'
@@ -71,9 +71,9 @@
     return load(FAST.DEL_KEY).requested ? 'stnk' : 'del';
   }
   function hiaceNow(){
-    var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,lunas:0};
+    var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,epo:0,lunas:0};
     if(x.lunas===3) return 'stnk';
-    if(x.dp===3) return 'del';
+    if(x.dp===3 && x.epo===3) return 'del';
     return 'bill';
   }
   var CASES={
@@ -113,12 +113,12 @@
       go:{spk:'tx_hiace',quot:'tx_hiace',so:'tx_hiace',afi:'tx_hiace',do:'tx_hiace',bill:'tx_hiace',del:'tx_hiace',stnk:'tx_hiace'},
       now:hiaceNow,
       copy:function(now){
-        var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,back:0,lunas:0};
+        var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,epo:0,back:0,lunas:0};
         if(x.lunas===3) return 'Tiga SO. Pelunasan leasing tercatat. STNK/BPKB memakai data SPK yang sama.';
         if(x.back) return 'Backflow B2B: ada dokumen kurang. Frontman lengkapi, kirim ulang — bukan waiver TTD/DP.';
-        if(now==='bill') return 'Tiga SO. Billing tertahan sampai DP wajib dari B2B diterima. Frontman lengkapi data; Admin menagih.';
-        if(now==='del') return 'DP B2B '+x.dp+'/3. Kirim tertahan TTD '+x.ttd+'/3. Kuitansi ke leasing dari Administrasi.';
-        return 'Tiga SO. DP wajib dari B2B. Frontman lengkapi data; Administrasi paperless + kuitansi.';
+        if(now==='bill') return 'Tiga SO. Billing tertahan sampai full DP B2B dan e-PO leasing (total DP, nilai dibiayai, tenor). Tanpa e-PO → Operation Manager.';
+        if(now==='del') return 'DP '+x.dp+'/3 · e-PO '+x.epo+'/3. Kirim tertahan TTD '+x.ttd+'/3. Kuitansi ke leasing dari Administrasi.';
+        return 'Tiga SO. DP wajib + e-PO dari B2B. Frontman lengkapi data; Administrasi paperless + kuitansi.';
       }
     },
     raize:{
