@@ -273,11 +273,13 @@
                 <div class="frow"><i class="own f">F</i><span class="lab">Nama customer</span><span class="val">Budi Santoso</span><span class="src">Sumber: SPK</span></div>
                 <div class="frow"><i class="own f">F</i><span class="lab">NIK</span><span class="val">3174••••••••0007</span><span class="src">Diverifikasi 28 Agu</span></div>
                 <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val" data-afi-name>Budi Santoso</span><span class="src">Diisi di SPK</span></div>
-                <div class="frow locked"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val" data-afi-addr>Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</span><span class="src">Diisi di SPK</span></div>
                 <div class="frow"><i class="own s">S</i><span class="lab">Customer ID</span><span class="val">CST-0090412</span><span class="src">Repeat order ke-2</span></div>
                 <div class="frow"><i class="own a">A</i><span class="lab">Klasifikasi</span><span class="val">Retail · Personal</span><span class="src">Ditambahkan Administrasi</span></div>
               </div>
+              <div class="fields addr-fields" data-addr="budi"></div>
+              <div class="fields" data-nopol="budi"></div>
             </div>
+            <div class="box" data-name-rel="budi"></div>
 
             <div class="box">
               <h3>Unit &amp; nilai transaksi <span class="side">Nilai ditarik dari source system</span></h3>
@@ -417,12 +419,13 @@
         <div class="box">
           <h3>Data STNK dari SPK</h3>
           <div class="fields">
-            <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val" data-afi-name>Budi Santoso</span><span class="src">SPK</span></div>
-            <div class="frow locked"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val" data-afi-addr>Jl. Kemang Selatan VIII No. 12, Jakarta Selatan</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val" data-afi-name>Budi Santoso</span><span class="src">= pemesan</span></div>
             <div class="frow locked"><i class="own s">S</i><span class="lab">NIK</span><span class="val">3174••••••••0007</span><span class="src">SPK</span></div>
             <div class="frow locked"><i class="own s">S</i><span class="lab">VIN</span><span class="val">MHKA6GJ••••41827</span><span class="src">Alokasi</span></div>
           </div>
-          <p class="hint">Kalau nama atau alamat STNK kosong, lengkapi di SPK. Bukan di layar ini, dan bukan Approval Engine.</p>
+          <div class="fields addr-fields" data-addr="budi"></div>
+          <div class="fields" data-nopol="budi"></div>
+          <p class="hint">Kalau nama atau alamat STNK kosong, lengkapi di SPK. Nama sama = bukan Approval Engine. Nama beda = supporting document + Approval Engine.</p>
         </div>
         <div class="box" data-afi-open>
           <h3>Pengajuan khusus plat</h3>
@@ -553,7 +556,10 @@
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Tipe bayar</span><span class="val">Leasing / credit</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Mitra leasing</span><span class="val">PT Danapura Multifinance</span><span class="src">B2B</span></div>
                 </div>
+                <div class="fields addr-fields" data-addr="hiace"></div>
+                <div class="fields" data-nopol="hiace.active"></div>
               </div>
+              <div class="box" data-name-rel="hiace"></div>
             </div>
             <div>
               <div class="box">
@@ -692,7 +698,7 @@
         </div>
         <div class="box stage-lock" data-stage-panel="so" hidden>
           <h3>Sales Order</h3>
-          <p>SO belum terbentuk. Booking fee Raize dari master unit ditagih dulu — non-waivable. Struktur harga tunai, bukan DP B2B.</p>
+          <p>SO belum terbentuk. Booking fee Raize dari master unit ditagih dulu — non-waivable. Nopol cadangan muncul setelah AFI. Struktur harga tunai, bukan DP B2B.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="afi" hidden>
           <h3>AFI</h3>
@@ -752,7 +758,16 @@
               <div class="field"><label>HP / WhatsApp</label><input data-draft-f="hp" placeholder="08…" inputmode="tel" autocomplete="off"></div>
               <div class="field"><label>Email</label><input data-draft-f="email" placeholder="opsional tapi disarankan" autocomplete="off"></div>
             </div>
-            <div class="field"><label>Alamat pemesan</label><textarea data-draft-f="alamat" placeholder="Jalan, kelurahan, kecamatan, kota, kode pos"></textarea></div>
+            <p class="hint" style="margin-top:12px"><b>Alamat pemesan</b> · tujuh field master. Bukan satu baris bebas.</p>
+            <div class="fgrid">
+              <div class="field"><label>Alamat 1</label><input data-draft-f="pemAddr1" placeholder="Nama jalan &amp; nomor" autocomplete="off"></div>
+              <div class="field"><label>Alamat 2</label><input data-draft-f="pemAddr2" placeholder="Blok, kompleks, opsional" autocomplete="off"></div>
+              <div class="field"><label>RT/RW</label><input data-draft-f="pemRt" placeholder="003/004" autocomplete="off"></div>
+              <div class="field"><label>Kelurahan/desa</label><input data-draft-f="pemKel" placeholder="Kelurahan" autocomplete="off"></div>
+              <div class="field"><label>Kecamatan</label><input data-draft-f="pemKec" placeholder="Kecamatan" autocomplete="off"></div>
+              <div class="field"><label>Kabupaten/kota</label><input data-draft-f="pemKota" placeholder="Kota Jakarta Selatan" autocomplete="off"></div>
+              <div class="field"><label>Provinsi</label><input data-draft-f="pemProv" placeholder="DKI Jakarta" autocomplete="off"></div>
+            </div>
             <p class="hint">NPWP pemesan diunggah di langkah 4. Tanpa NPWP, data gate menahan — bukan waiver.</p>
           </div>
           <div class="formfoot">
@@ -765,21 +780,30 @@
         <div class="box" data-spk-panel="stnk" hidden>
           <h3>2 · Nama &amp; alamat STNK <span class="side">Dipakai AFI · jangan ketik ulang nanti</span></h3>
           <div class="form">
-            <p class="hint">Kabupaten/kota STNK menghasilkan area PO dan harga OTR. Bukan diketik Frontman.</p>
+            <p class="hint">Kabupaten/kota STNK menghasilkan area PO dan harga OTR. Bukan diketik Frontman di SO.</p>
             <div class="seg" role="group" aria-label="Nama STNK">
               <button type="button" data-spk-same="0" aria-pressed="true">Berbeda dari pemesan</button>
               <button type="button" data-spk-same="1" aria-pressed="false">Sama dengan pemesan</button>
             </div>
             <div class="fgrid" style="margin-top:14px">
               <div class="field"><label>Nama STNK</label><input data-draft-f="stnkNama" placeholder="Pemilik BPKB" autocomplete="off"></div>
-              <div class="field"><label>Kabupaten / kota STNK</label><input data-draft-f="stnkKota" placeholder="Contoh Kota Depok" autocomplete="off"></div>
+              <div class="field"><label>Hubungan dengan pemesan</label><input data-draft-f="stnkRel" placeholder="Contoh: pasangan, orang tua" autocomplete="off"></div>
             </div>
-            <div class="field"><label>Alamat STNK</label><textarea data-draft-f="stnkAlamat" placeholder="Alamat pada pengajuan STNK"></textarea></div>
+            <p class="hint" style="margin-top:12px"><b>Alamat STNK</b> · tujuh field yang sama. Dipakai AFI, tidak diketik ulang.</p>
             <div class="fgrid">
-              <div class="field"><label>Provinsi</label><input data-draft-po="prov" value="—" readonly></div>
-              <div class="field"><label>Area PO</label><input data-draft-po="po" value="—" readonly></div>
+              <div class="field"><label>Alamat 1</label><input data-draft-f="stnkAddr1" placeholder="Nama jalan &amp; nomor" autocomplete="off"></div>
+              <div class="field"><label>Alamat 2</label><input data-draft-f="stnkAddr2" placeholder="Blok, kompleks, opsional" autocomplete="off"></div>
+              <div class="field"><label>RT/RW</label><input data-draft-f="stnkRt" placeholder="001/002" autocomplete="off"></div>
+              <div class="field"><label>Kelurahan/desa</label><input data-draft-f="stnkKel" placeholder="Kelurahan" autocomplete="off"></div>
+              <div class="field"><label>Kecamatan</label><input data-draft-f="stnkKec" placeholder="Kecamatan" autocomplete="off"></div>
+              <div class="field"><label>Kabupaten / kota STNK</label><input data-draft-f="stnkKota" placeholder="Contoh Kota Depok" autocomplete="off"></div>
+              <div class="field"><label>Provinsi</label><input data-draft-f="stnkProv" placeholder="Dari kota STNK" autocomplete="off"></div>
             </div>
-            <p class="hint" data-spk-same-hint>Nama STNK berbeda: unggah KTP atas nama STNK, bukti alamat STNK, dan pernyataan di langkah 4.</p>
+            <div class="fgrid">
+              <div class="field"><label>Area PO</label><input data-draft-po="po" value="—" readonly></div>
+              <div class="field"><label>Provinsi (sistem)</label><input data-draft-po="prov" value="—" readonly></div>
+            </div>
+            <p class="hint" data-spk-same-hint>Nama STNK berbeda: unggah supporting document di langkah 4, lalu Approval Engine (Kepala Administrasi). Bukan waiver lunas.</p>
           </div>
           <div class="formfoot">
             <span class="hint">Contoh: Andi Pratama · Kota Depok → area PO Depok.</span>
@@ -806,6 +830,8 @@
             <div class="fgrid">
               <div class="field"><label>OTR unit 1</label><input data-draft-po="otr" value="Menunggu kota STNK" readonly></div>
               <div class="field"><label>Minimum booking fee</label><input data-draft-po="bf" value="Dari master unit, setelah SPK" readonly></div>
+              <div class="field"><label>Nomor polisi unit 1</label><input data-draft-f="nopol1" placeholder="Cadangan setelah AFI" autocomplete="off"></div>
+              <div class="field"><label>Nomor polisi unit 2</label><input data-draft-f="nopol2" placeholder="Kosongkan jika 1 unit" autocomplete="off"></div>
             </div>
           </div>
           <div class="formfoot">
@@ -832,7 +858,7 @@
             <div class="doc miss" data-spk-doc="ktpStnk"><b>KTP atas nama STNK</b><p class="meta">Wajib jika nama berbeda</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktpStnk">Unggah</button></div>
             <div class="doc miss" data-spk-doc="kkStnk"><b>KK atas nama STNK</b><p class="meta">Boleh pakai ulang KK pemesan</p><span class="tag mute">Opsional</span><button type="button" class="btn ghost" style="width:100%;margin-top:10px" data-spk-up="kkStnk">Pakai ulang KK</button></div>
             <div class="doc miss" data-spk-doc="alamatStnk"><b>Bukti alamat STNK</b><p class="meta">Wajib · kota harus sama dengan data STNK</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="alamatStnk">Unggah</button></div>
-            <div class="doc miss" data-spk-doc="pernyataan" data-spk-need-diff><b>Pernyataan nama STNK</b><p class="meta">Wajib jika nama ≠ pemesan</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="pernyataan">Unggah</button></div>
+            <div class="doc miss" data-spk-doc="pernyataan" data-spk-need-diff><b>Pernyataan nama STNK</b><p class="meta">Wajib jika nama ≠ pemesan · masuk Approval Engine</p><span class="tag stop">Belum</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="pernyataan">Unggah</button></div>
           </div>
           <div class="formfoot">
             <span class="hint" data-spk-save-hint>Lengkapi keempat langkah. Surat kuasa dan BSTKB bukan di sini — menyusul delivery / GI.</span>
@@ -869,19 +895,26 @@
                 <div class="frow"><i class="own f">F</i><span class="lab">Nama pemesan</span><span class="val">Dewi Lestari</span><span class="src">SPK</span></div>
                 <div class="frow"><i class="own f">F</i><span class="lab">NIK</span><span class="val">3276••••••••0012</span><span class="src">KTP pemesan</span></div>
                 <div class="frow"><i class="own f">F</i><span class="lab">HP / WhatsApp</span><span class="val">0812••••8831</span><span class="src">SPK</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Alamat pemesan</span><span class="val">Jl. Cipete Raya No. 88, Kel. Cipete Selatan, Kec. Cilandak, Kota Jakarta Selatan 12410</span><span class="src">SPK</span></div>
               </div>
+              <div class="fields addr-fields" data-addr="dewi_pemesan" data-addr-src="SPK pemesan"></div>
             </div>
             <div class="box">
               <h3>STNK / BPKB <span class="side">Dipakai AFI nanti, tidak ketik ulang</span></h3>
               <div class="fields">
                 <div class="frow"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Andi Pratama</span><span class="src">SPK</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val">Jl. Raya Sawangan No. 17, Kel. Mampang, Kec. Pancoran Mas</span><span class="src">SPK</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Kabupaten / kota</span><span class="val">Kota Depok</span><span class="src">Bagian alamat STNK</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Provinsi</span><span class="val">Jawa Barat</span><span class="src">Dari kota STNK</span></div>
+              </div>
+              <div class="fields addr-fields" data-addr="dewi_stnk" data-addr-src="SPK STNK"></div>
+              <div class="fields">
                 <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO</span><span class="val">Depok · PO-DPK</span><span class="src">Di-generate dari Kota Depok</span></div>
               </div>
-              <p class="hint" style="padding:0 16px 14px">Ganti kabupaten/kota STNK, area PO berganti, harga OTR ikut. Bukan diketik Frontman. Kalau kota STNK Jakarta Selatan, area PO dan OTR mengikuti Jakarta Selatan.</p>
+              <p class="hint" style="padding:0 16px 14px">Ganti kabupaten/kota STNK, area PO berganti, harga OTR ikut. Bukan diketik Frontman.</p>
+            </div>
+            <div class="box" data-name-rel="dewi"></div>
+            <p class="pad" style="padding-top:0"><button type="button" class="btn" data-go="exc_nama">Ajukan Approval Engine nama</button></p>
+            <div class="box">
+              <h3>Nomor polisi <span class="side">Per SO · dari SPK</span></h3>
+              <div class="fields" data-nopol="dewi.yaris"></div>
+              <div class="fields" data-nopol="dewi.agya"></div>
             </div>
             <div class="box">
               <h3>Unit</h3>
@@ -917,8 +950,9 @@
             <div class="box">
               <h3>Gate sebelum bayar</h3>
               <ul class="gates">
-                <li><span class="mark ok">✓</span><div>Data pemesan<span class="why">Nama dan alamat lengkap</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark ok">✓</span><div>Data STNK<span class="why">Nama, alamat, kota Depok · area PO Depok</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Data pemesan<span class="why">Nama + alamat 1–2, RT/RW, kelurahan, kecamatan, kota, provinsi</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark ok">✓</span><div>Data STNK<span class="why">Alamat terstruktur Kota Depok · area PO Depok</span></div><span class="tag ok">Lolos</span></li>
+                <li><span class="mark no">!</span><div>Nama pemesan ≠ STNK<span class="why">Andi Pratama · supporting document di vault · Approval Engine</span></div><span class="tag hold">Waivable</span></li>
                 <li><span class="mark ok">✓</span><div>Dokumen entri &amp; STNK/BPKB<span class="why">Sudah diunggah di SPK</span></div><span class="tag ok">Lolos</span></li>
                 <li data-bf-hide-paid><span class="mark idle">•</span><div>Booking fee<span class="why">Belum ditagih · berikutnya di layar bayar</span></div><span class="tag wait">Menunggu</span></li>
                 <li data-bf-hide-paid><span class="mark idle">•</span><div>Sales Order<span class="why">Tertahan sampai kuitansi booking fee</span></div><span class="tag mute">Tertahan</span></li>
@@ -1148,14 +1182,20 @@
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor Sales Order</span><span class="val">4500091426</span><span class="src">Konversi setelah booking fee</span></div>
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor billing</span><span class="val">Belum terbit</span><span class="src">Setelah DO · cash ≥30%</span></div>
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Kuitansi</span><span class="val">KWT/26/CLD/009301</span><span class="src">Booking fee · aktif</span></div>
+                  <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor polisi</span><span class="val">B 1426 DPK</span><span class="src">Cadangan AFI · SO ini</span></div>
                 </div>
               </div>
               <div class="box">
                 <h3>Dibawa dari SPK <span class="side">Tidak diketik ulang</span></h3>
                 <div class="fields">
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Dewi Lestari · Jl. Cipete Raya No. 88, Cilandak, Jakarta Selatan</span><span class="src">SPK</span></div>
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Andi Pratama</span><span class="src">SPK</span></div>
-                  <div class="frow locked"><i class="own f">F</i><span class="lab">Alamat STNK</span><span class="val">Jl. Raya Sawangan No. 17, Pancoran Mas, Kota Depok</span><span class="src">SPK</span></div>
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Dewi Lestari</span><span class="src">SPK</span></div>
+                </div>
+                <div class="fields addr-fields" data-addr="dewi_pemesan"></div>
+                <div class="fields">
+                  <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Andi Pratama</span><span class="src">≠ pemesan · Approval Engine</span></div>
+                </div>
+                <div class="fields addr-fields" data-addr="dewi_stnk"></div>
+                <div class="fields">
                   <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO / OTR</span><span class="val">Depok · <span data-qt-otr="yaris">Rp 296.800.000</span></span><span class="src">Dari quotation rev <span data-so-rev>1</span></span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Unit</span><span class="val">Yaris 1.5 G CVT · Putih Metalik</span><span class="src">SPK</span></div>
                   <div class="frow locked"><i class="own f">F</i><span class="lab">Aksesoris</span><span class="val">Kaca film + karpet · Rp 5.350.000</span><span class="src">SPK</span></div>
@@ -1182,6 +1222,7 @@
                   <div class="row total"><span>AR Open</span><span>Rp 299.150.000</span></div>
                   <div class="row"><span>Syarat billing cash</span><span>≥30% dana masuk</span></div>
                   <div class="row"><span>Syarat delivery cash</span><span>Lunas · belum</span></div>
+                  <div class="row"><span>Nomor polisi</span><span>B 1426 DPK · cadangan AFI</span></div>
                 </div>
                 <p class="hint" style="padding:0 16px 14px">Tipe bayar tunai: struktur harga memakai booking fee dari master unit. DP wajib B2B hanya muncul jika metode SPK leasing/credit.</p>
               </div>
@@ -1189,7 +1230,7 @@
                 <h3>Gate SO</h3>
                 <ul class="gates">
                   <li><span class="mark ok">✓</span><div>Booking fee meet<span class="why">Minimum Yaris Rp 3.000.000 · KWT/26/CLD/009301</span></div><span class="tag ok">Lolos</span></li>
-                  <li><span class="mark ok">✓</span><div>Data SPK utuh<span class="why">Pemesan, STNK, unit, harga area PO, dokumen</span></div><span class="tag ok">Lolos</span></li>
+                  <li><span class="mark no">!</span><div>Nama pemesan ≠ STNK<span class="why">Andi Pratama · Approval Engine · supporting document</span></div><span class="tag hold">Waivable</span></li>
                   <li><span class="mark idle">•</span><div>Billing + AFI<span class="why">Cash ≥30% belum · ajukan berpasangan nanti</span></div><span class="tag mute">Menunggu</span></li>
                   <li><span class="mark no">!</span><div>Delivery cash<span class="why">AR Open Rp 299.150.000 · non-waivable</span></div><span class="tag stop">Tertahan</span></li>
                 </ul>
@@ -1222,6 +1263,7 @@
           <div class="card"><p class="k">SPK / QT</p><p class="v" style="font-size:18px">1 / 1</p><p class="n">Sama dengan Yaris</p></div>
           <div class="card"><p class="k">OTR Agya</p><p class="v" style="font-size:18px" data-qt-otr="agya">Rp 175.900.000</p><p class="n">Dari quotation rev <span data-qt-rev>1</span></p></div>
           <div class="card alert"><p class="k">Sales Order</p><p class="v" style="font-size:18px">Tertahan</p><p class="n">Booking fee Rp 2.000.000 belum meet</p></div>
+          <div class="card"><p class="k">Nopol</p><p class="v" style="font-size:18px">—</p><p class="n">Menunggu SO Agya</p></div>
         </div>
         <div class="box" data-qt-stale hidden>
           <h3>Harga quotation sudah berubah</h3>
@@ -1582,10 +1624,11 @@
               <div class="row"><span>Booking fee unit</span><span>Rp 2.000.000</span></div>
               <div class="row"><span>Pelunasan</span><span>Rp 243.400.000</span></div>
               <div class="row total"><span>AR Open</span><span>Rp 0</span></div>
+              <div class="row"><span>Nomor polisi</span><span>B 1301 F · cadangan</span></div>
               <div class="row"><span>Syarat billing</span><span>≥30% · lolos</span></div>
               <div class="row"><span>Syarat delivery</span><span>Lunas · lolos</span></div>
             </div>
-            <p class="hint" style="padding:0 16px 14px">Tunai: bukan DP B2B. Kuitansi KWT/26/CLD/009280 tertaut SO 4500091301.</p>
+            <p class="hint" style="padding:0 16px 14px">Tunai: bukan DP B2B. Kuitansi KWT/26/CLD/009280 tertaut SO 4500091301. Nopol cadangan B 1301 F dari SPK.</p>
           </div>
         </div>
         <div class="box" data-stage-panel="afi" hidden>
@@ -1671,7 +1714,13 @@
           <div class="form">
             <div class="fgrid">
               <div class="field"><label>Penerima</label><input value="Agus Hermawan" readonly></div>
-              <div class="field"><label>Alamat serah terima</label><input value="Jl. Cipete Raya No. 18, Jakarta Selatan" readonly></div>
+              <div class="field"><label>Alamat 1</label><input value="Jl. Cipete Raya No. 18" readonly></div>
+              <div class="field"><label>Alamat 2</label><input value="—" readonly></div>
+              <div class="field"><label>RT/RW</label><input value="008/003" readonly></div>
+              <div class="field"><label>Kelurahan/desa</label><input value="Cipete Selatan" readonly></div>
+              <div class="field"><label>Kecamatan</label><input value="Cilandak" readonly></div>
+              <div class="field"><label>Kabupaten/kota</label><input value="Kota Jakarta Selatan" readonly></div>
+              <div class="field"><label>Provinsi</label><input value="DKI Jakarta" readonly></div>
               <div class="field">
                 <label>Preferensi slot</label>
                 <select>
@@ -1750,6 +1799,7 @@
             <div class="vault-item"><p class="k">Lokasi</p><p class="v">FAST Outlet Cilandak</p></div>
             <div class="vault-item"><p class="k">VIN</p><p class="v">••20424</p></div>
             <div class="vault-item"><p class="k">SO</p><p class="v">4500091424</p></div>
+            <div class="vault-item"><p class="k">Nopol</p><p class="v">B 1424 F</p></div>
           </div>
         </div>
         <div class="box">
@@ -1815,7 +1865,7 @@
         </div>
         <div class="box" data-stage-panel="so" hidden>
           <h3>Sales Order</h3>
-          <p>SO 4500091409 · tunai · lunas. Struktur harga tanpa DP leasing.</p>
+          <p>SO 4500091409 · tunai · lunas. Nopol B 1409 B terbit. Struktur harga tanpa DP leasing.</p>
         </div>
         <div class="box" data-stage-panel="afi" hidden>
           <h3>AFI</h3>
@@ -2044,7 +2094,7 @@
             <p>Satu antrean untuk Frontman, Admin, dan Kepala Administrasi. Hanya gate compliance yang waivable yang punya tombol putusan.</p>
           </div>
         </div>
-        <p class="queue-line"><b>3 bisa diajukan</b> · 2 tertahan non-waivable · 1 eskalasi STNK</p>
+        <p class="queue-line"><b>4 bisa diajukan</b> · 2 tertahan non-waivable · 1 eskalasi STNK</p>
         <div class="order-filters" role="tablist" aria-label="Filter pengecualian">
           <button type="button" data-exc-filter="all" aria-pressed="true">Semua</button>
           <button type="button" data-exc-filter="decide" aria-pressed="false">Bisa diputuskan</button>
@@ -2052,7 +2102,20 @@
           <button type="button" data-exc-filter="esc" aria-pressed="false">Eskalasi STNK</button>
         </div>
         <div class="order-list" id="excList">
-          <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="alamat" data-go="exc_alamat" data-tx-dots="budi">
+          <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="nama" data-go="exc_nama" data-tx-dots="dewi">
+            <div class="thumb">NAMA</div>
+            <div class="meta">
+              <p class="oid">E-26-0426-N · SPK/26/CLD/00426</p>
+              <strong class="oname">Dewi Lestari · nama STNK berbeda</strong>
+              <p class="spec" data-exc-nama-spec>Waivable · pemesan ≠ STNK · unggah supporting document</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-nama-tag>Menunggu pengajuan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Buka Approval Engine →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="alamat" data-go="exc_alamat" data-tx-dots="budi">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
@@ -2132,6 +2195,75 @@
           </button>
         </div>
         <p class="note">Gate komersial (booking fee, 30% cash / full DP leasing, pelunasan cash, TTD kontrak) tidak masuk Approval Engine. AFI dulu atau billing tanpa AFI adalah exception urutan, bukan waiver 30% atau lunas.</p>
+      </section>
+
+      </section>
+
+      <section class="screen" id="exc_nama">
+        <div class="screenhead">
+          <div>
+            <h2>Nama pemesan ≠ nama STNK</h2>
+            <p>Dewi Lestari · SPK/26/CLD/00426. Andi Pratama di STNK. Bukan waiver booking fee atau lunas.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Antrean</button></div>
+        </div>
+        <div class="exc-path" data-exc-nama-path>
+          <b data-step="draft" class="on">Frontman unggah</b>
+          <span>→</span>
+          <b data-step="submitted">Admin cek</b>
+          <span>→</span>
+          <b data-step="verified">Kepala Administrasi</b>
+          <span>→</span>
+          <b data-step="approved">Nama STNK dipakai AFI</b>
+        </div>
+        <p class="exc-note warn" data-exc-nama-note>Nama berbeda. Unggah KTP atas nama STNK, bukti alamat STNK, dan pernyataan hubungan. Baru diajukan ke Approval Engine.</p>
+        <div class="box" data-name-rel="dewi"></div>
+        <div class="split">
+          <div>
+            <div class="box">
+              <h3>Alamat pemesan</h3>
+              <div class="fields addr-fields" data-addr="dewi_pemesan"></div>
+            </div>
+          </div>
+          <div>
+            <div class="box">
+              <h3>Alamat STNK</h3>
+              <div class="fields addr-fields" data-addr="dewi_stnk"></div>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Supporting document</h3>
+          <div class="docs">
+            <div class="doc"><b>KTP Andi Pratama</b><p class="meta">Atas nama STNK</p><span class="tag ok">Vault</span></div>
+            <div class="doc"><b>Bukti alamat Depok</b><p class="meta">Tujuh field sama dengan master STNK</p><span class="tag ok">Vault</span></div>
+            <div class="doc"><b>Pernyataan pasangan</b><p class="meta">Hubungan pemesan–STNK</p><span class="tag ok">Vault</span></div>
+          </div>
+          <div class="formfoot" data-for="frontman">
+            <span class="hint">Dokumen sudah di SPK. Kirim ke Admin lalu Kepala Administrasi.</span>
+            <button type="button" class="btn" data-exc-submit="nama">Kirim pengajuan nama</button>
+            <button type="button" class="btn ghost" data-go="spk">← Data SPK</button>
+          </div>
+          <div class="formfoot" data-for="admin" hidden>
+            <span class="hint">Cocokkan nama KTP STNK dengan field nama STNK. Jangan ketik ulang alamat.</span>
+            <button type="button" class="btn" data-exc-verify="nama">Tandai sudah dicek</button>
+          </div>
+          <div data-for="mgmt" hidden data-mgmt-need="ka">
+            <div class="form" style="padding-top:0">
+              <div class="field">
+                <label for="mgmtComment-nama">Komentar Kepala Administrasi</label>
+                <textarea id="mgmtComment-nama" placeholder="Wajib untuk revisi atau tolak."></textarea>
+              </div>
+            </div>
+            <div class="decide-actions">
+              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="nama">Setujui nama STNK</button>
+              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="nama">Revisi</button>
+              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="nama">Tolak</button>
+            </div>
+            <ul class="audit comments" data-mgmt-log="nama"></ul>
+            <p class="note">Setujui = nama STNK Andi Pratama dipakai AFI. Bukan melewati booking fee atau 30%.</p>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="exc_alamat">
@@ -3082,7 +3214,20 @@
           <button type="button" data-mgmt-filter="done" aria-pressed="false">Selesai</button>
         </div>
         <div class="order-list" id="mgmtList">
-          <button type="button" class="order-card featured" data-mgmt-case="alamat" data-mgmt-owner="ka" data-go="exc_alamat" data-tx-dots="budi">
+          <button type="button" class="order-card featured" data-mgmt-case="nama" data-mgmt-owner="ka" data-go="exc_nama" data-tx-dots="dewi">
+            <div class="thumb">NAMA</div>
+            <div class="meta">
+              <p class="oid">E-26-0426-N · SPK/26/CLD/00426</p>
+              <strong class="oname">Dewi Lestari · nama STNK Andi Pratama</strong>
+              <p class="spec">Waivable. Supporting document wajib. Bukan waiver booking fee.</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-nama-tag>Menunggu pengajuan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="alamat" data-mgmt-owner="ka" data-go="exc_alamat" data-tx-dots="budi">
             <div class="thumb">ALAMAT</div>
             <div class="meta">
               <p class="oid">E-26-0418-D · SPK/26/CLD/00418</p>
@@ -3782,6 +3927,7 @@
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="assets/js/session.js"></script>
+<script src="assets/js/master.js"></script>
 <script src="assets/js/lineage.js"></script>
 <script src="assets/js/mockup.js"></script>
 </body>
