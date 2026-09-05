@@ -3,11 +3,11 @@
         <span class="num">2</span>
         <div>
           <h2>Deliverables</h2>
-          <p class="deck">Satu fondasi lintas fungsi berupa mapping input ownership, diikuti empat deliverable transformasi.</p>
+          <p class="deck">Peta siapa mengisi apa, lalu empat deliverable. Fitur dan contoh mockup ada di D1–D4.</p>
         </div>
       </div>
 
-      <h3>Cross-Functional Foundation — Input Ownership and End-to-End Data Mapping</h3>
+      <h3>Fondasi lintas fungsi — siapa mengisi apa, data ke mana</h3>
       <p>Sebelum melakukan redesign sistem dan workflow, akan dilakukan pengecekan dan mapping menyeluruh terhadap seluruh data yang digunakan dalam proses.</p>
 
       <h4>Objective</h4>
@@ -40,7 +40,7 @@
       </div>
 
       <h4>Data domains to be mapped</h4>
-      <div class="grid g3">
+      <div class="grid g3 map-grid">
         <div class="panel"><h4>1. Customer Data</h4><ul><li>Nama customer / pemesan.</li><li>Customer ID.</li><li>NIK/KTP.</li><li>NPWP.</li><li>Alamat terstruktur: Alamat 1, Alamat 2, RT/RW, kelurahan/desa, kecamatan, kabupaten/kota, provinsi (pemesan dan STNK, masing-masing).</li><li>Nomor telepon.</li><li>Email.</li><li>Repeat-order status.</li><li>Nama STNK dan hubungan dengan pemesan (sama atau berbeda).</li><li>Customer classification.</li></ul></div>
         <div class="panel"><h4>2. Transaction Data</h4><ul><li>Purchase method (cash atau leasing).</li><li>Transaction type.</li><li>SPK number.</li><li>Sales Order number.</li><li>Billing document number.</li><li>Parent-child document reference.</li><li>Unit quantity.</li><li>Branch.</li><li>Frontman.</li><li>Transaction structure.</li></ul></div>
         <div class="panel"><h4>3. Vehicle Data</h4><ul><li>Model.</li><li>Type.</li><li>Color.</li><li>VIN.</li><li>Engine number.</li><li>Nomor polisi per SPK/SO (cadangan AFI atau terbit).</li><li>Allocation status.</li><li>PDI status.</li><li>AFI status.</li><li>DO status.</li></ul></div>
@@ -76,7 +76,7 @@
       </div>
 
       <h4>Core Data and Financial Rules</h4>
-      <ol class="steps">
+      <ol class="steps rule-cols">
         <li><strong>One field, one owner, one source of truth.</strong></li>
         <li>Data diinput pada sumber pertama yang paling valid.</li>
         <li>Administrasi memverifikasi dan melengkapi, bukan menyalin ulang.</li>
@@ -116,143 +116,32 @@
         <div class="panel"><ul><li>AR Open and payment-request control rules.</li><li>Receipt reversal and reissue workflow.</li><li>Customer Home data requirements.</li><li>Compliance rules and waivability matrix.</li><li>Exception and correction workflow.</li><li>Future-state input ownership design.</li></ul></div>
       </div>
 
-      <!-- Deliverable 1 -->
-      <div class="stage">
-        <div class="stage-head"><span class="marker">Deliverable 1</span><h3>Frontman-Driven Flow and Automated Administration</h3></div>
-        <p>Mengubah administrasi dari rangkaian manual handoff menjadi satu system-controlled workflow yang memungkinkan Frontman mengajukan setiap proses berikutnya dari satu platform.</p>
-        <div class="grid g2">
-          <div class="facet">
-            <h4>Frontman dapat</h4>
-            <ol class="steps">
-              <li>Menginput data customer dan transaksi satu kali.</li><li>Mengunggah dokumen awal.</li><li>Mengirimkan atau memonitor payment request booking fee yang ditagihkan setelah SPK, dengan nominal sesuai unit.</li><li>Mengajukan Sales Order setelah minimum booking fee terverifikasi.</li><li>Mengirimkan payment request pelunasan.</li><li>Melihat AR Open.</li><li>Melihat payment request aktif.</li><li>Melihat Available Request Amount.</li><li>Memonitor payment dan e-kuitansi.</li><li>Mengajukan billing, AFI/DO, dan delivery request.</li><li>Melihat failed compliance rule.</li><li>Melengkapi persyaratan.</li><li>Mengajukan compliance exception apabila eligible.</li><li>Memonitor exception decision dan escalation.</li>
-            </ol>
-          </div>
-          <div class="facet sys">
-            <h4>Sistem akan</h4>
-            <ol class="steps">
-              <li>Membawa data dan nomor SPK ke Sales Order.</li><li>Menyimpan nomor SPK sebagai referensi pada setiap Sales Order.</li><li>Membawa nomor Sales Order ke billing.</li><li>Menyimpan hubungan SPK, SO, dan billing sebagai satu transaction lineage.</li><li>Membawa data customer dan unit ke AFI/DO.</li><li>Membawa data payment, kuitansi, dan financial status ke billing dan delivery gate.</li><li>Membawa data delivery ke Good Issue.</li><li>Membawa data customer, unit, dan delivery ke STNK/BPKB.</li><li>Membuka proses berikutnya ketika persyaratan lengkap.</li><li>Menahan failed compliance gate.</li><li>Mengarahkan eligible exception.</li><li>Memasukkan pekerjaan Administrasi ke antrean dengan timestamp (volume dan aging/SLA).</li><li>Mencatat seluruh aktivitas dalam audit trail.</li>
-            </ol>
-          </div>
-          <div class="facet">
-            <h4>Scope</h4>
-            <ul><li>Digital SPK.</li><li>Single Customer ID.</li><li>Input ownership.</li><li>Document upload.</li><li>Vehicle-specific booking fee billed after SPK.</li><li>Sales Order request after minimum booking fee.</li><li>SPK–SO–Billing document linkage.</li><li>Settlement payment request.</li><li>Payment allocation.</li><li>Automated receipt generation.</li><li>Outstanding balance monitoring.</li><li>System Compliance Gates.</li><li>Waivable-rule classification.</li><li>Compliance exception workflow.</li><li>Billing readiness.</li><li>AFI/DO integration.</li><li>Delivery authorization.</li><li>Good Issue.</li><li>STNK/BPKB tracking.</li><li>Automated data carry-forward.</li><li>Exception escalation.</li></ul>
-          </div>
-          <div class="facet">
-            <h4>Expected outputs</h4>
-            <ul><li>One integrated process.</li><li>One-time data capture.</li><li>Connected SPK, Sales Order, and billing references.</li><li>Frontman-driven request flow.</li><li>No redundant administrative re-entry.</li><li>Queued Administration work with volume and SLA clocks.</li><li>Automated data population.</li><li>Automated completeness checking.</li><li>Structured compliance exception escalation.</li><li>Complete audit trail.</li></ul>
-            <p><a class="btn solid" href="mockup.html#beranda">Buka antrean FAST</a>
-            <a class="textlink" href="mockup.html#exc_afi">Exception pecah urutan →</a></p>
-          </div>
-        </div>
-        <div class="see-row">
-          <a class="see" href="mockup.html#spk"><span class="see-k">SPK</span><b>Dewi · data sebelum bayar</b><span>OTR area PO dari kota STNK</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#so"><span class="see-k">SO</span><b>Dewi · 4500091426</b><span>Konversi SPK setelah booking fee meet</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#cashless"><span class="see-k">Pelunasan</span><b>Budi · request 100 jt</b><span>QRIS/CDM/tautan. EDC hanya Frontman</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#digiroom"><span class="see-k">Digiroom</span><b>pay.fast.id</b><span>QRIS scan vs VA terbit setelah nominal</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#customer_booking"><span class="see-k">Booking</span><b>Dewi · HP Digiroom</b><span>Request terkunci Rp 3 jt setelah SPK</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#customer_booking_qris"><span class="see-k">QRIS</span><b>Dewi · scan meja</b><span>Barcode Frontman, konfirmasi di HP</span><em>Lihat →</em></a>
-        </div>
-      </div>
-
-      <!-- Deliverable 2 -->
-      <div class="stage">
-        <div class="stage-head"><span class="marker">Deliverable 2</span><h3>Integrated Cashless Payment and E-Receipt</h3></div>
-        <p>Mengubah payment request, payment confirmation, payment allocation, dan penerbitan kuitansi menjadi automated transaction flow yang mendukung booking fee/DP serta pelunasan satu kali maupun bertahap.</p>
-        <div class="grid g2">
-          <div class="facet">
-            <h4>Booking Fee</h4>
-            <ul><li>Ditagihkan ke customer segera setelah Frontman menyimpan SPK.</li><li>Nominal minimum berbeda-beda menurut unit/mobil, ditarik dari master kendaraan.</li><li>Menjadi syarat non-waivable untuk pembentukan Sales Order.</li><li>Memiliki payment request dan reference tersendiri.</li><li>Diverifikasi melalui Banking API.</li><li>Menghasilkan kuitansi setelah terverifikasi.</li><li>Kuitansi terhubung terlebih dahulu ke SPK.</li><li>Setelah SO dan billing terbit, reference ditambahkan otomatis pada receipt lineage.</li></ul>
-          </div>
-          <div class="facet">
-            <h4>Pelunasan</h4>
-            <ul><li>Dilakukan setelah Sales Order terbentuk.</li><li>Dapat dilakukan satu kali atau beberapa kali.</li><li>Frontman membuat request berdasarkan Available Request Amount.</li><li>Customer dapat membayar melalui request atau langsung dari open unit bill.</li><li>Setiap pembayaran dialokasikan ke unit atau Sales Order.</li><li>Setiap pembayaran terverifikasi menghasilkan kuitansi tersendiri.</li><li>Total kuitansi aktif mengurangi AR Open.</li><li>Request aktif yang belum dibayar mengurangi kapasitas permintaan baru, tetapi belum mengurangi AR Open.</li></ul>
-          </div>
-          <div class="facet sys">
-            <h4>Process Logic</h4>
-            <ol class="steps"><li>Frontman melihat AR Open.</li><li>Sistem mengurangi AR Open dengan active unpaid payment request untuk mendapatkan Available Request Amount.</li><li>Frontman menentukan nominal request dalam batas tersebut.</li><li>Sistem menghasilkan payment reference.</li><li>Customer melakukan pembayaran.</li><li>Banking API memverifikasi pembayaran.</li><li>Sistem mengalokasikan pembayaran.</li><li>Sistem menerbitkan satu nomor kuitansi.</li><li>Sistem memperbarui AR Open.</li><li>Sistem mengirimkan e-kuitansi kepada customer.</li><li>Sistem menutup atau menyesuaikan overlapping payment request.</li><li>Sistem mengevaluasi ulang billing dan delivery gate.</li></ol>
-          </div>
-          <div class="facet">
-            <h4>Receipt Status</h4>
-            <ul><li>Issued.</li><li>Active.</li><li>Reversed.</li><li>Cancelled.</li><li>Reissued.</li></ul>
-            <h4>Expected Outputs</h4>
-            <ul><li>Real-time payment confirmation.</li><li>Automated payment allocation.</li><li>One-payment-one-receipt control.</li><li>Downloadable e-kuitansi.</li><li>Real-time AR Open.</li><li>Controlled Available Request Amount.</li><li>Prevention of duplicate requests and overpayment.</li><li>Complete payment and receipt audit trail.</li></ul>
-          </div>
-        </div>
-        <blockquote class="rule">
-          <span class="tag">Business rules</span>
-          <p>No verified minimum booking fee for the selected unit, no Sales Order.</p>
-          <p>No verified payment, no receipt.</p>
-          <p>One verified payment, one traceable receipt.</p>
-          <p>Pending payment requests do not reduce AR Open.</p>
-          <p>Active receipts reduce AR Open.</p>
-          <p>Cancelled receipts restore AR Open and trigger financial-gate recalculation.</p>
-          <p>Cash: billing opens at ≥30% funds in; delivery opens only when lunas.</p>
-          <p>Leasing: billing opens when full DP from B2B leasing is received and leasing e-PO is present (total DP, financed amount, tenor). Missing e-PO is waivable to Operation Manager for paperless only. Delivery opens when the customer-signed contract is confirmed from B2B leasing. Settlement still requires the real e-PO.</p>
-        </blockquote>
-        <p><a href="mockup.html#cashless" style="font-weight:700">Bayar cashless di beranda FAST</a> · SPK/26/CLD/00418, bukan halaman terpisah. Preview skema skenario dan kuitansi ada di <a href="#skema-cashless">dokumentasi contoh</a>.</p>
-        <div class="see-row">
-          <a class="see" href="#skema-cashless"><span class="see-k">Skema</span><b>Cashless → kuitansi</b><span>Request, kanal, satu bayar satu KWT</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#e_kuitansi"><span class="see-k">KWT</span><b>E-kuitansi customer</b><span>Nomor sama dengan cabang</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Admin</span><b>Buku kuitansi</b><span>Lineage payment → receipt</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#customer_booking"><span class="see-k">Booking</span><b>Dewi FAST-00426</b><span>KWT/26/CLD/009301 membuka SO</span><em>Lihat →</em></a>
-        </div>
-      </div>
-
-      <!-- Deliverable 3 -->
-      <div class="stage">
-        <div class="stage-head"><span class="marker">Deliverable 3</span><h3>Digital Tax and Document Logistics</h3></div>
-        <p>Membangun document lifecycle yang memungkinkan dokumen diunggah sekali, divalidasi, kemudian digunakan kembali dari SPK sampai AFI/DO, delivery, STNK, dan BPKB.</p>
-        <div class="grid g2">
-          <div class="facet sys">
-            <h4>Process logic</h4>
-            <ol class="steps"><li>Frontman mengunggah dokumen dari customer.</li><li>Document Vault menyimpan dokumen.</li><li>Sistem memeriksa kelengkapan dan masa berlaku.</li><li>Administrasi melakukan verification, bukan upload ulang.</li><li>Dokumen valid digunakan kembali pada proses berikutnya.</li><li>Data dari dokumen mengisi kebutuhan downstream secara otomatis.</li><li>Kekurangan dikembalikan kepada input owner untuk dilengkapi.</li><li>Hanya failed compliance rule yang waivable yang dapat diarahkan ke Approval Engine.</li><li>Seluruh penggunaan dan perubahan dokumen tercatat.</li></ol>
-          </div>
-          <div class="facet">
-            <h4>Scope</h4>
-            <ul><li>KTP/NPWP validation.</li><li>Document Vault.</li><li>Repeat-order document reuse.</li><li>Missing atau expired document alert.</li><li>STNK name history.</li><li>AFI data auto-pull.</li><li>DO validation.</li><li>Tax document monitoring.</li><li>STNK/BPKB tracking.</li><li>Digital handover evidence.</li><li>Document data carry-forward.</li><li>Document exception escalation.</li></ul>
-          </div>
-          <div class="facet">
-            <h4>Expected outputs</h4>
-            <ul><li>Upload once and reuse when valid.</li><li>No duplicate document checking.</li><li>No administrative re-entry.</li><li>Reduced data mismatch.</li><li>End-to-end document visibility.</li><li>Structured compliance exception handling.</li><li>Clear document ownership.</li></ul>
-          </div>
-        </div>
-        <div class="see-row">
-          <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>Data STNK dari SPK</b><span>Billing + AFI bersama. Pecah urutan = exception</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#tx_raize"><span class="see-k">Vault</span><b>Sarah · NPWP di SPK</b><span>Data gate, jejak Raize sendiri</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#tx_fortuner"><span class="see-k">STNK</span><b>Maria · hari ke-19</b><span>Tracking dokumen D3 · eskalasi KC</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#gi"><span class="see-k">GI</span><b>Fajar · bukti serah</b><span>Paket vault di SPK Rush</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#dokumen"><span class="see-k">Vault</span><b>Dokumen Budi</b><span>Unggah sekali, pakai ulang</span><em>Lihat →</em></a>
-          <a class="see" href="#skema-dokumen"><span class="see-k">Skema</span><b>Skenario document gate</b><span>Unggah SPK → vault → booking fee → pakai ulang</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#spk_baru"><span class="see-k">SPK</span><b>Dewi unggah dulu</b><span>Document gate sebelum booking fee</span><em>Lihat →</em></a>
-        </div>
-      </div>
-
-      <!-- Deliverable 4 -->
-      <div class="stage">
-        <div class="stage-head"><span class="marker">Deliverable 4</span><h3>Finance Operation and Compliance Support</h3></div>
-        <p>Mengubah finance follow-up menjadi automated, controlled, dan auditable operation yang menggunakan data transaksi, payment, receipt, dan compliance yang sama dari proses depan.</p>
-        <div class="grid g2">
-          <div class="facet">
-            <h4>Scope</h4>
-            <ul><li>SPK–SO–Billing reference integrity.</li><li>Account Receivable monitoring.</li><li>Payment allocation control.</li><li>One-payment-one-receipt control.</li><li>AR Open calculation.</li><li>Active payment-request reservation.</li><li>Available Request Amount calculation.</li><li>Receipt reversal and reissue.</li><li>Vehicle-specific booking-fee validation for Sales Order.</li><li>Cash 30% billing threshold.</li><li>B2B leasing workspace per Sales Order (submit → dokumen → kontrak → TTD → DP → e-PO → penagihan → pelunasan).</li><li>Frontman download of the leasing-submitted contract.</li><li>Frontman re-upload of the customer-signed contract.</li><li>Frontman upload of signed-contract photo, handover photo, and BSTKB.</li><li>Sales upload of documents requested by leasing.</li><li>Paperless billing and leasing kuitansi by Administration only after the Frontman pack is complete, full DP from B2B is paid, and leasing e-PO is present — or Operation Manager approves paperless without e-PO.</li><li>Required customer DP amount and received status from B2B leasing (read-only).</li><li>Leasing e-PO (customer total DP, financed amount, tenor) from B2B, tracked per Sales Order.</li><li>Normal-flow and backflow tracking when documents are incomplete.</li><li>Leasing status from first submit through pelunasan, read by compliance and approval gates.</li><li>Leasing full-DP validation from B2B leasing.</li><li>Cash lunas validation for delivery.</li><li>Leasing signed-contract validation from B2B leasing.</li><li>Per-SO financial release.</li><li>System Compliance Gates.</li><li>Compliance-rule waivability.</li><li>Compliance exception routing.</li><li>Conditional release.</li><li>Automatic re-lock.</li><li>Immutable audit trail.</li></ul>
-          </div>
-          <div class="facet">
-            <h4>Expected Outputs</h4>
-            <ul><li>Real-time financial exposure.</li><li>Connected transaction documents.</li><li>Accurate AR Open.</li><li>Controlled payment requests.</li><li>Traceable e-kuitansi, including leasing billing receipts.</li><li>Per-unit delivery eligibility.</li><li>Paperless invoice pack to leasing from Administration.</li><li>Visible required customer DP from B2B.</li><li>Visible leasing e-PO (DP, financed amount, tenor) per Sales Order.</li><li>Visible leasing backflow and next Frontman action.</li><li>Faster finance decision.</li><li>Clear compliance exception ownership.</li><li>Reduced manual finance follow-up.</li></ul>
-          </div>
-        </div>
-        <blockquote class="rule">
-          <span class="tag">Important boundary</span>
-          <p>Compliance Exception Approval Engine hanya digunakan apabila compliance gate gagal, rule dinyatakan waivable oleh policy, evidence dan alasan tersedia, dan decision owner memiliki kewenangan.</p>
-          <p>Approval Engine FAST tidak digunakan untuk approval discount, cashback, program, atau perubahan nilai transaksi. Informasi tersebut ditarik dari source system sebagai data transaksi.</p>
-        </blockquote>
-        <div class="see-row">
-          <a class="see" href="mockup.html#tx_hiace"><span class="see-k">B2B</span><b>Hiace · workspace leasing</b><span>Unduh kontrak · e-PO · paperless · backflow</span><em>Lihat →</em></a>
-          <a class="see" href="#skema-approval"><span class="see-k">Skema</span><b>Skenario approval gate</b><span>Waivable vs non-waivable di mockup</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#eskalasi"><span class="see-k">Antrean</span><b>Pengecualian cabang</b><span>Hanya rule waivable yang punya putusan</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#admin_leasing"><span class="see-k">Admin</span><b>List leasing cabang</b><span>Status per SO sampai pelunasan</span><em>Lihat →</em></a>
-        </div>
+      <h3>Empat deliverable transformasi</h3>
+      <p>Uraian fitur dan contoh mockup ada di section masing-masing. Di bawah ini peta singkat; mapping field dan aturan keuangan tetap di halaman ini.</p>
+      <div class="d-index">
+        <a class="d-card" href="#d1">
+          <span class="marker">D1</span>
+          <h4>Alur Frontman</h4>
+          <p>SPK sekali isi, fee setelah dokumen, SO setelah kuitansi fee, ajukan AFI/billing/kirim dari satu workspace.</p>
+          <em>Fitur &amp; contoh →</em>
+        </a>
+        <a class="d-card" href="#d2">
+          <span class="marker">D2</span>
+          <h4>Cashless &amp; e-kuitansi</h4>
+          <p>Request vs setoran, satu bayar satu KWT, AR Open hanya turun oleh kuitansi aktif.</p>
+          <em>Fitur &amp; contoh →</em>
+        </a>
+        <a class="d-card" href="#d3">
+          <span class="marker">D3</span>
+          <h4>Dokumen &amp; STNK</h4>
+          <p>Vault, document gate sebelum fee, pakai ulang ke AFI/GI, tracking STNK/BPKB.</p>
+          <em>Fitur &amp; contoh →</em>
+        </a>
+        <a class="d-card" href="#d4">
+          <span class="marker">D4</span>
+          <h4>Finance &amp; compliance</h4>
+          <p>Gate 30%/lunas/DP/TTD, workspace leasing Danapura, Approval Engine hanya rule waivable.</p>
+          <em>Fitur &amp; contoh →</em>
+        </a>
       </div>
     </section>
-
-    <!-- ================= 3 ================= -->

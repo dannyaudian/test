@@ -1,0 +1,65 @@
+    <section class="sec d-sec" id="d4">
+      <div class="sec-head">
+        <span class="num">D4</span>
+        <div>
+          <h2>Deliverable 4 — Operasi finance dan dukungan compliance</h2>
+          <p class="deck">AR, kuitansi, gate billing/kirim, workspace leasing B2B, dan Approval Engine memakai data yang sama dari depan. Finance tidak menagih dari spreadsheet terpisah.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="tag">Batas Approval Engine</span>
+        <p>Engine hanya untuk compliance gate yang gagal <b>dan</b> rule waivable. Bukan untuk discount, cashback, program, booking fee, 30% cash, lunas, full DP leasing, atau TTD kontrak.</p>
+      </div>
+
+      <h3>Fitur</h3>
+      <div class="feat-list">
+        <article class="feat">
+          <h4>Integritas SPK–SO–billing dan AR</h4>
+          <p>Setiap dokumen membawa nomor induk. AR Open dan Available Request Amount dihitung sistem (lihat D2). Finance melihat eksposur real-time per unit, bukan rekonsiliasi malam hari.</p>
+        </article>
+        <article class="feat">
+          <h4>Gate keuangan non-waivable</h4>
+          <p>Cash: billing terbuka pada ≥30% dana masuk; delivery hanya lunas. Leasing: billing setelah full DP dari B2B + e-PO; delivery setelah kontrak TTD dari B2B. Kekurangan e-PO untuk paperless saja waivable ke Operation Manager.</p>
+        </article>
+        <article class="feat">
+          <h4>Reversal / reissue kuitansi</h4>
+          <p>Koreksi berjejak. Cancelled mengembalikan AR dan mengunci ulang gate yang sempat terbuka. Payment request terkait menjadi Cancelled atau Requires Follow-up.</p>
+        </article>
+        <article class="feat">
+          <h4>Workspace leasing per Sales Order</h4>
+          <p>Alur B2B: submit → dokumen → kontrak → TTD → DP → e-PO → penagihan paperless → pelunasan. Mitra ilustratif: PT Danapura Multifinance. FAST bukan lessor. Angka DP, tenor, dan financed amount read-only dari B2B.</p>
+        </article>
+        <article class="feat">
+          <h4>Peran Frontman vs Administrasi di leasing</h4>
+          <p>Frontman: unduh kontrak, unggah setelah TTD, foto TTD, foto serah, BSTKB, dokumen yang diminta leasing. Tidak menagih leasing. Administrasi: paperless + kuitansi leasing hanya setelah paket Frontman lengkap, full DP, dan e-PO — atau OM menyetujui paperless tanpa e-PO. Settlement tetap butuh e-PO asli.</p>
+        </article>
+        <article class="feat">
+          <h4>Exception routing</h4>
+          <p>Frontman + bukti → Administrasi verifikasi → Kepala Administrasi atau Operation Manager sesuai rule. Release bersyarat, validity, scope. Non-waivable: lengkapi data atau tahan. Eskalasi aging STNK ke KC adalah operasional, bukan engine komersial.</p>
+        </article>
+      </div>
+
+      <h3>Alur pengecualian</h3>
+      <div class="chain"><span>Gate gagal</span><i>→</i><span>Waivable?</span><i>→</i><span>Frontman + bukti</span><i>→</i><span>Admin cek</span><i>→</i><span>KA / OM</span><i>→</i><span>Release atau kunci</span></div>
+      <p>Gallery: <a href="#skema-approval">skema approval gate</a>.</p>
+
+      <h3>Contoh: Hiace · leasing B2B (SPK/26/CLD/00421)</h3>
+      <ol class="walk">
+        <li>Workspace leasing menampilkan DP wajib, e-PO, tenor, dan langkah berikutnya. <a href="mockup.html#tx_hiace">Hiace</a></li>
+        <li>Administrasi melihat status per SO sampai pelunasan. Backflow dokumen kembali ke Frontman. <a href="mockup.html#admin_leasing">List leasing</a></li>
+        <li>Billing paperless tanpa e-PO hanya jalan jika OM menyetujui — bukan Frontman mengetik waiver. <a href="mockup.html#exc_epo">Exception e-PO</a></li>
+      </ol>
+
+      <h3>Contoh: apa yang masuk engine, apa yang tidak</h3>
+      <ol class="walk">
+        <li><b>Masuk engine</b> — Dewi nama ≠ STNK; Budi alamat; pecah AFI; e-PO paperless ke OM. <a href="mockup.html#exc_nama">Nama</a> · <a href="mockup.html#exc_alamat">Alamat</a> · <a href="mockup.html#exc_afi">AFI</a></li>
+        <li><b>Tidak masuk engine</b> — Sarah NPWP (lengkapi data); Maria aging STNK (eskalasi KC); hold komersial; inbox manajemen. Lihat kartu di skema approval.</li>
+        <li>Antrean cabang hanya memuat rule waivable yang menunggu putusan. <a href="mockup.html#eskalasi">Eskalasi</a></li>
+      </ol>
+
+      <div class="see-row">
+        <a class="see" href="#skema-approval"><span class="see-k">Skema</span><b>Waivable vs bukan</b><span>Semua layar mockup yang relevan</span><em>Lihat →</em></a>
+        <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Finance</span><b>Buku kuitansi</b><span>Lineage payment → receipt → AR</span><em>Lihat →</em></a>
+      </div>
+    </section>
