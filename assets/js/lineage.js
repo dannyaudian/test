@@ -113,7 +113,7 @@
       copy:function(now){
         if(now==='afi') return 'SO 4500091238 ada. SPK, QT, dan SO sudah dilewati — klik untuk lihat data sumber. Billing + AFI berpasangan di tahap ini.';
         if(now==='bill') return 'Billing/AFI berjalan. Bayar sisa di cashless — kirim tertahan sampai lunas.';
-        if(now==='del') return 'Lunas atau AFI sudah. Delivery cash tetap tunggu AR Open Rp 0.';
+        if(now==='del') return 'Paid in full or AFI already completed. Cash delivery still waits for AR Open Rp 0.';
         return 'Jejak Budi · satu SO 4500091238 sampai STNK/BPKB.';
       }
     },
@@ -122,11 +122,11 @@
       now:hiaceNow,
       copy:function(now){
         var x=FAST.b2bSummary?FAST.b2bSummary():{ttd:0,dp:0,epo:0,back:0,lunas:0};
-        if(x.lunas===3) return 'Tiga SO. Pelunasan leasing tercatat. STNK/BPKB memakai data SPK yang sama.';
+        if(x.lunas===3) return 'Three SOs. Leasing settlement recorded. STNK/BPKB uses the same SPK data.';
         if(x.back) return 'Backflow B2B: ada dokumen kurang. Frontman lengkapi, kirim ulang — bukan waiver TTD/DP.';
         if(now==='bill') return 'Tiga SO. Billing tertahan sampai full DP B2B dan e-PO leasing (total DP, nilai dibiayai, tenor). Tanpa e-PO → Operation Manager.';
-        if(now==='del') return 'DP '+x.dp+'/3 · e-PO '+x.epo+'/3. Kirim tertahan TTD '+x.ttd+'/3. Kuitansi ke leasing dari Administrasi.';
-        return 'Tiga SO. DP wajib + e-PO dari B2B. Frontman lengkapi data; Administrasi paperless + kuitansi.';
+        if(now==='del') return 'DP '+x.dp+'/3 · e-PO '+x.epo+'/3. Delivery held by signed contract '+x.ttd+'/3. Leasing receipts are issued by Administration.';
+        return 'Three SOs. Required DP + e-PO from B2B. Frontman completes the data; Administration handles paperless flow + receipts.';
       }
     },
     raize:{
@@ -138,7 +138,7 @@
       go:{spk:'tx_avanza',quot:'tx_avanza',so:'tx_avanza',afi:'tx_avanza',do:'tx_avanza',bill:'tx_avanza',del:'tx_avanza',stnk:'tx_avanza'},
       now:agusNow,
       copy:function(now){
-        return now==='stnk'?'Pengiriman diajukan. STNK/BPKB menyusul data SPK yang sama.':'Lunas. Satu SO · ajukan delivery. Cashless sudah selesai.';
+        return now==='stnk'?'Delivery submitted. STNK/BPKB follows the same SPK data.':'Paid in full. One SO · request delivery. Cashless is complete.';
       }
     },
     fajar:{

@@ -1,7 +1,7 @@
 (function () {
   var FAST = window.FAST = window.FAST || {};
   var LABELS = FAST.ADDR_LABELS || [];
-  var TAG = { cadangan: 'Cadangan', menunggu: 'Menunggu', terbit: 'Terbit' };
+  var TAG = { cadangan: 'Reserved', menunggu: 'Pending', terbit: 'Issued' };
   var TAG_CLS = { cadangan: 'wait', menunggu: 'mute', terbit: 'ok' };
   function el(tag, cls) {
     var n = document.createElement(tag);
@@ -52,9 +52,9 @@
       r.appendChild(s);
       host.appendChild(r);
     }
-    row('Nomor polisi', rec.nopol, rec.spk);
-    row('Sales Order', rec.so, 'Satu SO per unit');
-    row('Status nopol', TAG[rec.status] || rec.status, rec.note);
+    row('License plate', rec.nopol, rec.spk);
+    row('Sales Order', rec.so, 'One SO per unit');
+    row('Plate status', TAG[rec.status] || rec.status, rec.note);
   }
   function fillNameRel(host) {
     var key = host.getAttribute('data-name-rel');
@@ -65,15 +65,15 @@
       st = (FAST.load(FAST.NAMA_KEY) || {}).excNama || 'draft';
     }
     var gateTxt = r.same
-      ? 'Nama sama · data gate lolos · bukan Approval Engine'
+      ? 'Names match · data gate passed · not Approval Engine'
       : (st === 'approved'
-        ? 'Nama berbeda · Approval Engine disetujui · syarat dokumen'
-        : 'Nama berbeda · waivable · unggah supporting document → Approval Engine');
+        ? 'Names differ · Approval Engine approved · document condition'
+        : 'Names differ · waivable · upload supporting document → Approval Engine');
     var tagCls = r.same ? 'ok' : (st === 'approved' ? 'ok' : 'hold');
-    var tagLab = r.same ? 'Sama' : (st === 'approved' ? 'Disetujui' : 'Perlu putusan');
+    var tagLab = r.same ? 'Match' : (st === 'approved' ? 'Approved' : 'Decision needed');
     host.innerHTML = '';
     var h = el('h3');
-    h.innerHTML = 'Hubungan nama pemesan &amp; STNK <span class="side">' + r.spk + '</span>';
+    h.innerHTML = 'Relationship: Buyer Name &amp; STNK <span class="side">' + r.spk + '</span>';
     var fields = el('div', 'fields');
     function row(lab, val, src, own) {
       var fr = el('div', 'frow locked');
@@ -91,10 +91,10 @@
       fr.appendChild(s);
       fields.appendChild(fr);
     }
-    row('Nama pemesan', r.pemesan, 'SPK', 'f');
-    row('Nama STNK', r.stnk, 'SPK · AFI/BPKB', 'f');
-    row('Hubungan', r.rel, r.same ? 'Tidak perlu pernyataan' : 'Wajib dokumen pendukung', 's');
-    row('Supporting document', r.docs, 'Vault SPK', 'f');
+    row('Buyer Name', r.pemesan, 'SPK', 'f');
+    row('STNK Name', r.stnk, 'SPK · AFI/BPKB', 'f');
+    row('Relationship', r.rel, r.same ? 'No declaration required' : 'Supporting document required', 's');
+    row('Supporting document', r.docs, 'SPK Vault', 'f');
     row('Gate', gateTxt, r.same ? 'Data gate' : 'Approval Engine · Kepala Administrasi', r.same ? 's' : 'p');
     host.appendChild(h);
     host.appendChild(fields);
@@ -102,8 +102,8 @@
     var p = el('p', 'hint');
     p.style.margin = '0';
     p.textContent = r.same
-      ? 'Kalau nama sama, KTP/KK pemesan dipakai ulang. Bukan exception.'
-      : 'Perbedaan nama ditahan sampai Kepala Administrasi memutuskan. Bukan waiver lunas/30%.';
+      ? 'If the names match, the buyer KTP/KK is reused. Not an exception.'
+      : 'Name differences are held until the Head of Administration decides. Not a paid-in-full/30% waiver.';
     pad.appendChild(p);
     host.appendChild(pad);
     var tagHost = host.parentElement && host.parentElement.querySelector('[data-name-rel-tag="' + key + '"]');

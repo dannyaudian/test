@@ -4,7 +4,7 @@
   var receipts={
     'KWT/26/CLD/008731':{no:'KWT/26/CLD/008731',status:'Aktif',type:'Booking fee',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'28 Agu 2026, 16:30 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0001',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 5.000.000',verify:'VFY-CLD-008731-B3M4'},
     'KWT/26/CLD/009115':{no:'KWT/26/CLD/009115',status:'Aktif',type:'Pelunasan tahap 1',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'1 Sep 2026, 14:08 WIB',method:'BCA Virtual Account',ref:'VA 8801 0418 0002',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 300.000.000',verify:'VFY-CLD-009115-A7K2'},
-    'KWT/26/CLD/009280':{no:'KWT/26/CLD/009280',status:'Aktif',type:'Pelunasan',customer:'Agus Hermawan',unit:'Avanza',date:'2 Sep 2026, 16:40 WIB',method:'BCA Virtual Account',ref:'VA 8801 0425 0002',spk:'SPK/26/CLD/00425',so:'4500091301',billing:'Terbit',amount:'Rp 225.400.000',verify:'VFY-CLD-009280-G4N8'},
+    'KWT/26/CLD/009280':{no:'KWT/26/CLD/009280',status:'Aktif',type:'Pelunasan',customer:'Agus Hermawan',unit:'Avanza',date:'2 Sep 2026, 16:40 WIB',method:'BCA Virtual Account',ref:'VA 8801 0425 0002',spk:'SPK/26/CLD/00425',so:'4500091301',billing:'Issued',amount:'Rp 225.400.000',verify:'VFY-CLD-009280-G4N8'},
     'KWT/26/CLD/009220':{no:'KWT/26/CLD/009220',status:'Aktif',type:'Pelunasan tahap 2',customer:'Budi Santoso',unit:'Innova Zenix · VIN ••41827',date:'3 Sep 2026, 09:41 WIB',method:'Cashless',ref:'PAY-CLD-00418-3',spk:'SPK/26/CLD/00418',so:'4500091238',billing:'Belum terbit',amount:'Rp 100.000.000',verify:'VFY-CLD-009220-R8P1'},
     'KWT/26/CLD/009301':{no:'KWT/26/CLD/009301',status:'Aktif',type:'Booking fee',customer:'Dewi Lestari',unit:'Yaris 1.5 G',date:'3 Sep 2026, 10:12 WIB',method:'Cashless',ref:'PAY-CLD-00426-1',spk:'SPK/26/CLD/00426',so:'Belum terbit',billing:'Belum terbit',amount:'Rp 3.000.000',verify:'VFY-CLD-009301-Y4R1'},
     'KWT/26/CLD/009410':{no:'KWT/26/CLD/009410',status:'Aktif',type:'Penagihan leasing',customer:'PT Danapura Multifinance',unit:'Hiace Premio · SO 4500091288',date:'4 Sep 2026, 11:20 WIB',method:'Paperless B2B',ref:'B2B-DP-1288',spk:'SPK/26/CLD/00421',so:'4500091288',billing:'Paperless',amount:'Rp 69.680.000',verify:'VFY-CLD-009410-L1H8'},
@@ -35,7 +35,7 @@
     setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },0);
   }
   function buktiPdf(){
-    var lines=['FAST — PAKET BUKTI SERAH TERIMA','SPK/24/CLD/01990','SO 4500081990','Penerima: Budi Santoso','Unit: Calya G AT · VIN ••01990','Waktu: 2 Des 2024, 14:18 WIB','Geotag: -6.2731, 106.8072 · FAST Outlet Cilandak','Foto serah terima: ada','Foto VIN: cocok SO','Scan BSTKB: ada','Disetujui Administrasi. Vault FAST — bukan rekaman CCTV dealer.','Klaim serah terima tanpa paket ini tidak cukup.'];
+    var lines=['FAST — HANDOVER PROOF PACKAGE','SPK/24/CLD/01990','SO 4500081990','Recipient: Budi Santoso','Unit: Calya G AT · VIN ••01990','Time: 2 Dec 2024, 14:18 WIB','Geotag: -6.2731, 106.8072 · FAST Outlet Cilandak','Handover photo: available','VIN photo: matches SO','BSTKB scan: available','Approved by Administration. FAST vault — not dealership CCTV footage.','A handover claim without this package is not sufficient.'];
     var stream='BT\n/F1 12 Tf\n';
     lines.forEach(function(line,i){ stream += '1 0 0 1 50 '+(780-i*22)+' Tm ('+pdfEscape(line)+') Tj\n'; });
     stream += 'ET';

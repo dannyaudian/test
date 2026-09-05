@@ -7,18 +7,18 @@
     var st=excAlamatState();
     var notes={
       draft:'Belum diajukan. Frontman kirim alasan dan bukti pengganti. SLA 4 jam mulai saat pengajuan masuk.',
-      submitted:'Pengajuan masuk. Admin Cilandak cek bukti, lalu teruskan ke Kepala Administrasi.',
-      verified:'Admin sudah cek. Kepala Administrasi memutuskan dengan syarat: alamat asli sebelum DO.',
+      submitted:'Submission received. Cilandak Administration reviews the proof, then forwards it to the Head of Administration.',
+      verified:'Administration has reviewed it. The Head of Administration approves it with one condition: original address proof before DO.',
       approved:'Disetujui dengan syarat. Document gate lolos bersyarat. Pelunasan cash tetap wajib sebelum delivery.',
-      returned:'Dikembalikan untuk revisi. Lengkapi sesuai komentar Kepala Administrasi, lalu kirim ulang.',
+      returned:'Returned for revision. Complete it based on the Head of Administration comment, then resubmit.',
       rejected:'Ditolak. Ikuti kelengkapan dokumen standar. Bukan waiver pelunasan.'
     };
-    var tags={draft:'Menunggu pengajuan',submitted:'Menunggu Admin',verified:'Siap diputuskan',approved:'Disetujui bersyarat',returned:'Revisi',rejected:'Ditolak'};
-    if(currentRole==='mgmt' && (st==='draft'||st==='submitted')) tags[st]='Siap diputuskan';
+    var tags={draft:'Awaiting submission',submitted:'Awaiting Admin',verified:'Ready for decision',approved:'Disetujui bersyarat',returned:'Revisi',rejected:'Ditolak'};
+    if(currentRole==='mgmt' && (st==='draft'||st==='submitted')) tags[st]='Ready for decision';
     var specs={
-      draft:'Waivable · Frontman ajukan → Admin cek → Kepala Administrasi',
+      draft:'Waivable · Frontman submits → Admin reviews → Head of Administration',
       submitted:'Waivable · Admin sedang cek bukti',
-      verified:'Waivable · Kepala Administrasi memutuskan',
+      verified:'Waivable · Head of Administration decides',
       approved:'Syarat: alamat asli sebelum DO · pelunasan tetap wajib',
       returned:'Revisi: lengkapi bukti, kirim ulang',
       rejected:'Ditolak · lengkapi dokumen standar'
@@ -53,7 +53,7 @@
         vault.classList.remove('miss');
         if(tag){ tag.className='tag ok'; tag.textContent='Lolos bersyarat'; }
         if(reuse) reuse.textContent='Syarat: alamat asli sebelum DO';
-        if(btn) btn.textContent='Lihat keputusan';
+        if(btn) btn.textContent='View decision';
       } else {
         vault.classList.add('miss');
         if(tag){ tag.className='tag hold'; tag.textContent='Perlu pembaruan'; }
@@ -86,17 +86,17 @@
     var st=excNamaState();
     var notes={
       draft:'Nama berbeda. Unggah supporting document di SPK, lalu ajukan. SLA 4 jam mulai saat pengajuan masuk.',
-      submitted:'Pengajuan nama masuk. Admin Cilandak mencocokkan KTP STNK dengan field nama STNK.',
-      verified:'Admin sudah cek. Kepala Administrasi memutuskan. Bukan waiver booking fee.',
+      submitted:'Name submission received. Cilandak Administration matches the STNK ID with the STNK name field.',
+      verified:'Administration has reviewed it. The Head of Administration decides. Not a booking fee waiver.',
       approved:'Nama STNK Andi Pratama disetujui untuk AFI. Booking fee dan 30% tetap non-waivable.',
-      returned:'Dikembalikan. Lengkapi pernyataan atau KTP atas nama STNK.',
+      returned:'Returned. Complete the declaration or provide the STNK-named ID.',
       rejected:'Ditolak. Samakan nama STNK dengan pemesan, atau unggah dokumen yang sah.'
     };
-    var tags={draft:'Menunggu pengajuan',submitted:'Admin cek',verified:'Siap diputuskan',approved:'Disetujui',returned:'Revisi',rejected:'Ditolak'};
+    var tags={draft:'Awaiting submission',submitted:'Admin cek',verified:'Ready for decision',approved:'Approved',returned:'Revisi',rejected:'Ditolak'};
     var specs={
       draft:'Waivable · pemesan ≠ STNK · unggah supporting document',
       submitted:'Admin Cilandak sedang mencocokkan dokumen',
-      verified:'Siap diputuskan Kepala Administrasi',
+      verified:'Ready for the Head of Administration decision',
       approved:'Nama STNK dipakai AFI · syarat dokumen',
       returned:'Lengkapi supporting document',
       rejected:'Ditolak · perbaiki data SPK'
@@ -146,14 +146,14 @@
     var st=work.excEpo||'draft';
     var inbox=demo.excEpo||'draft';
     var notes={
-      draft:'E-PO belum dari leasing. Setelah paket Frontman dan full DP, Administrasi mengajukan billing tanpa e-PO. Putusan: Operation Manager. Pelunasan tetap butuh e-PO asli.',
-      submitted:'Pengajuan masuk. Admin Cilandak mencocokkan paket Frontman dan full DP B2B.',
+      draft:'E-PO not yet received from leasing. After the Frontman package and full DP are complete, Administration can submit billing without an e-PO. Decision owner: Operation Manager. Settlement still requires the original e-PO.',
+      submitted:'Submission received. Cilandak Administration reviews the Frontman package and full B2B DP.',
       verified:'Admin sudah cek. Operation Manager memutuskan paperless tanpa e-PO. Bukan waiver DP atau TTD.',
-      approved:'Paperless boleh. Pelunasan leasing tetap menunggu e-PO asli (total DP, nilai dibiayai, tenor).',
-      returned:'Dikembalikan. Lengkapi paket Frontman / full DP, atau tarik e-PO di Alur B2B.',
+      approved:'Paperless is allowed. Leasing settlement still waits for the original e-PO (total DP, financed amount, tenor).',
+      returned:'Returned. Complete the Frontman package / full DP, or pull the e-PO in the B2B flow.',
       rejected:'Ditolak. Tagih hanya setelah e-PO leasing terbit. DP dan TTD tetap non-waivable.'
     };
-    var tags={draft:'Menunggu pengajuan',submitted:'Admin cek',verified:'Siap OM',approved:'Paperless boleh',returned:'Revisi',rejected:'Ditolak'};
+    var tags={draft:'Awaiting submission',submitted:'Admin cek',verified:'Siap OM',approved:'Paperless boleh',returned:'Revisi',rejected:'Ditolak'};
     var specs={
       draft:'Waivable · e-PO = total DP, nilai dibiayai, tenor · Operation Manager',
       submitted:'Admin Cilandak sedang mencocokkan paket + DP',
@@ -204,7 +204,7 @@
   document.querySelectorAll('[data-exc-submit]').forEach(function(b){
     b.addEventListener('click',function(){
       var kind=b.getAttribute('data-exc-submit');
-      if(kind==='nama') setExcNama('submitted','Pengajuan nama terkirim. Admin Cilandak akan cek supporting document.');
+      if(kind==='nama') setExcNama('submitted','Name submission sent. Cilandak Administration will review the supporting document.');
       else if(kind==='epo'){
         var u=epoUnitOf();
         if(!u.dpReceived || !FAST.b2bBillingComplete(u)){
@@ -215,9 +215,9 @@
           toast('E-PO leasing sudah ada. Tidak perlu pengecualian.');
           return;
         }
-        setExcEpo('submitted','Pengajuan billing tanpa e-PO terkirim. Admin cek, lalu Operation Manager.');
+        setExcEpo('submitted','Billing-without-e-PO submission sent. Administration reviews it, then the Operation Manager.');
       }
-      else setExcAlamat('submitted','Pengajuan terkirim. Admin Cilandak akan cek bukti.');
+      else setExcAlamat('submitted','Submission sent. Cilandak Administration will review the proof.');
     });
   });
   document.querySelectorAll('[data-exc-verify]').forEach(function(b){
@@ -228,7 +228,7 @@
           toast('Frontman belum mengajukan nama. Minta pengajuan dulu.');
           return;
         }
-        setExcNama('verified','Dokumen nama dicek. Siap diputuskan Kepala Administrasi.');
+        setExcNama('verified','Name documents reviewed. Ready for the Head of Administration decision.');
         return;
       }
       if(kind==='epo'){
@@ -244,7 +244,7 @@
         toast('Frontman belum mengajukan. Minta pengajuan dulu.');
         return;
       }
-      setExcAlamat('verified','Bukti dicek. Siap diputuskan Kepala Administrasi.');
+      setExcAlamat('verified','Proof reviewed. Ready for the Head of Administration decision.');
     });
   });
   document.querySelectorAll('[data-exc-approve]').forEach(function(b){
@@ -259,7 +259,7 @@
   });
   document.querySelectorAll('[data-exc-reject]').forEach(function(b){
     b.addEventListener('click',function(){
-      setExcAlamat('returned','Dikembalikan ke Frontman. Lengkapi bukti alamat.');
+      setExcAlamat('returned','Returned to Frontman. Complete the address proof.');
     });
   });
 

@@ -6,7 +6,7 @@
     if(!overlay){ show('so'); return; }
     overlay.hidden=false;
     steps.forEach(function(li){ li.className=''; });
-    var labels=['Membandingkan kuitansi dengan minimum Yaris…','Menyalin pemesan, STNK, unit, harga area PO…','Menerbitkan nomor Sales Order…','Menautkan kuitansi ke SPK dan SO…'];
+    var labels=['Checking receipt against Yaris minimum…','Copying buyer, STNK, unit, PO area pricing…','Issuing Sales Order number…','Linking receipt to SPK and SO…'];
     var i=0;
     function tick(){
       if(i>0) steps[i-1].className='done';
@@ -17,7 +17,7 @@
         setTimeout(tick, 380);
       } else {
         overlay.hidden=true;
-        toast('Booking fee meet. SPK dikonversi ke SO 4500091426.');
+        toast('Booking fee met. SPK converted to SO 4500091426.');
         show('so');
       }
     }
@@ -28,7 +28,7 @@
     applyBooking();
     applySpkDraft();
     if(currentRole==='cust'){
-      toast('Booking fee Yaris terbayar. Kuitansi KWT/26/CLD/009301. Cabang membuka Sales Order.');
+      toast('Yaris booking fee paid. Receipt KWT/26/CLD/009301. Branch opening Sales Order.');
       show('customer_booking');
       return;
     }
@@ -46,16 +46,16 @@
     });
     var j=currentJob();
     var n=currentDgAmount();
-    var amt=n?formatRp(n):(j.locked?j.amount:'isi nominal dulu');
+    var amt=n?formatRp(n):(j.locked?j.amount:'enter amount first');
     if(panel==='va'){
       dgVaBank=meta||dgVaBank||'BCA';
       var wait=document.getElementById('dgVaHint');
       var ready=document.getElementById('dgVaReadyHint');
       var no=document.getElementById('dgVaNo');
       if(wait) wait.textContent=j.locked
-        ? ('VA '+dgVaBank+' · request salesman '+j.amount+' sudah terkunci. Terbitkan nomor.')
-        : ('Isi nominal, lalu terbitkan VA '+dgVaBank+'. Ini transfer rekening virtual, bukan QRIS.');
-      if(ready) ready.textContent='Transfer ke VA '+dgVaBank+' · '+amt+'.';
+        ? ('VA '+dgVaBank+' · salesperson request '+j.amount+' is already locked. Issue the number.')
+        : ('Enter the amount, then issue VA '+dgVaBank+'. This is a virtual account transfer, not QRIS.');
+      if(ready) ready.textContent='Transfer to VA '+dgVaBank+' · '+amt+'.';
       if(no) no.textContent=(j.va&&j.va[dgVaBank])||j.va.BCA;
       refreshDgInstruments();
     }
@@ -64,7 +64,7 @@
     }
     if(panel==='app'){
       var hint=document.getElementById('dgAppHint');
-      if(hint) hint.textContent='Membuka '+(meta||'myBCA')+' · '+j.kind+' '+amt+'.';
+      if(hint) hint.textContent='Opening '+(meta||'myBCA')+' · '+j.kind+' '+amt+'.';
     }
   }
   document.querySelectorAll('[data-dg]').forEach(function(b){
@@ -76,7 +76,7 @@
     b.addEventListener('click',function(){
       var ch=b.getAttribute('data-dg-pay');
       var n=currentDgAmount();
-      if(!n){ toast('Isi nominal pembayaran dulu.'); return; }
+      if(!n){ toast('Enter payment amount first.'); return; }
       if(payJobId==='booking') settleBooking(ch);
       else runPayflow(ch, n);
     });
@@ -91,7 +91,7 @@
       var n=parseRp(amtInp.value);
       if(j.max && n>j.max){
         amtInp.value=String(j.max);
-        toast('Dibatasi '+formatRp(j.max)+'.');
+        toast('Capped at '+formatRp(j.max)+'.');
       }
       syncPayAmount();
       refreshDgInstruments();
@@ -103,7 +103,7 @@
         var inp=document.getElementById('cashQrisAmt');
         var n=parseRp(inp&&inp.value);
         if(n>81750000) n=81750000;
-        if(!n){ toast('Isi nominal QRIS dulu.'); return; }
+        if(!n){ toast('Enter QRIS amount first.'); return; }
         var label=document.getElementById('cashQrisLabel');
         var pay=document.getElementById('cashQrisPay');
         var box=document.querySelector('[data-cash-qris-ready]');
@@ -113,7 +113,7 @@
         return;
       }
       var n=currentDgAmount();
-      if(!n){ toast('Isi nominal pembayaran dulu.'); return; }
+      if(!n){ toast('Enter payment amount first.'); return; }
       dgQrisReady=true;
       refreshDgInstruments();
     });
@@ -121,13 +121,13 @@
   document.querySelectorAll('[data-va-issue]').forEach(function(b){
     b.addEventListener('click',function(){
       var n=currentDgAmount();
-      if(!n){ toast('Isi nominal pembayaran dulu.'); return; }
+      if(!n){ toast('Enter payment amount first.'); return; }
       dgVaReady=true;
       var j=currentJob();
       var no=document.getElementById('dgVaNo');
       if(no) no.textContent=(j.va&&j.va[dgVaBank])||j.va.BCA;
       var ready=document.getElementById('dgVaReadyHint');
-      if(ready) ready.textContent='Transfer ke VA '+dgVaBank+' · '+formatRp(n)+'.';
+      if(ready) ready.textContent='Transfer to VA '+dgVaBank+' · '+formatRp(n)+'.';
       refreshDgInstruments();
     });
   });
@@ -153,7 +153,7 @@
     var bar=document.getElementById('liveSync');
     var msg=document.getElementById('syncMsg');
     if(bar) bar.hidden=false;
-    if(msg) msg.textContent=(s.channel||'Cashless')+' · '+(s.receipt||'KWT/26/CLD/009220')+' · AR Open '+(s.arLabel||'Rp 81.750.000')+'. Delivery '+(s.ar===0?'terbuka':'masih menunggu lunas')+'.';
+    if(msg) msg.textContent=(s.channel||'Cashless')+' · '+(s.receipt||'KWT/26/CLD/009220')+' · AR Open '+(s.arLabel||'Rp 81.750.000')+'. Delivery '+(s.ar===0?'unlocked':'still awaiting paid in full')+'.';
     document.querySelectorAll('[data-live="ar"]').forEach(function(el){ el.textContent=s.arLabel||'Rp 81.750.000'; });
     document.querySelectorAll('[data-live="ar-short"]').forEach(function(el){
       var ar=typeof s.ar==='number'?s.ar:81750000;
@@ -162,7 +162,7 @@
     });
     document.querySelectorAll('[data-live="avail"]').forEach(function(el){ el.textContent=s.ar===0?'Rp 0':'Rp 81.750.000'; });
     document.querySelectorAll('[data-live="payhint"]').forEach(function(el){
-      el.textContent=s.ar===0?'100% terbayar · delivery cash terbuka':'83,2% terbayar · cashless di transaksi ini';
+      el.textContent=s.ar===0?'100% paid · cash delivery unlocked':'83.2% paid · cashless in this transaction';
     });
     var barFill=document.querySelector('#transaksi .bar i');
     if(barFill) barFill.style.width=s.ar===0?'100%':'83.2%';
@@ -187,11 +187,11 @@
 
   var channelMeta={
     qris:{title:'QRIS'},
-    cdm:{title:'CDM cabang'},
+    cdm:{title:'Branch CDM'},
     edc:{title:'Debit EDC'},
     brilink:{title:'BRILink'},
     va:{title:'Virtual Account'},
-    app:{title:'Aplikasi bank'},
+    app:{title:'Bank App'},
     link:{title:'Digiroom'}
   };
   document.addEventListener('keydown',function(e){
@@ -214,14 +214,14 @@
     var slot=document.getElementById('newReceiptSlot');
     if(slot){
       slot.className='doc';
-      slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Pembayaran · '+(channelMeta[channel]?channelMeta[channel].title:'Cashless')+' · '+formatRp(amount)+'</p><span class="tag ok">Aktif</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
+      slot.innerHTML='<b>KWT/26/CLD/009220</b><p class="meta">Payment · '+(channelMeta[channel]?channelMeta[channel].title:'Cashless')+' · '+formatRp(amount)+'</p><span class="tag ok">Active</span><button class="btn ghost" style="width:100%;margin-top:10px">Download PDF</button>';
       var db=slot.querySelector('button');
-      if(db) db.addEventListener('click',function(){ downloadReceipt('KWT/26/CLD/009220'); toast('E-kuitansi PDF diunduh.'); });
+      if(db) db.addEventListener('click',function(){ downloadReceipt('KWT/26/CLD/009220'); toast('E-receipt PDF downloaded.'); });
     }
     if(window.FAST && FAST.save){
       FAST.save({paid:true,ar:ar,arLabel:label,receipt:'KWT/26/CLD/009220',channel:(channelMeta[channel]||{}).title||channel});
     }
-    toast(ar===0?'Lunas. E-kuitansi terbit. Delivery cash terbuka.':'Pembayaran '+formatRp(amount)+' masuk. Tagihan di beranda ikut berkurang.');
+    toast(ar===0?'Paid in full. E-receipt issued. Cash delivery unlocked.':'Payment of '+formatRp(amount)+' received. Invoice updated on home.');
     show(currentRole==='cust'?'customer_detail':'cashless');
   }
   function runPayflow(channel, amount){
@@ -232,8 +232,8 @@
     overlay.hidden=false;
     steps.forEach(function(li){ li.className=''; });
     var labels=currentRole==='cust'
-      ? ['Memeriksa tagihan…','Konfirmasi pembayaran…','Menerbitkan bukti bayar…','Memperbarui pesanan…']
-      : ['Membaca SPK & AR Open…','Verifikasi Banking API…','Menerbitkan e-kuitansi…','Memperbarui beranda…'];
+      ? ['Checking invoice…','Confirming payment…','Issuing payment proof…','Updating order…']
+      : ['Reading SPK & AR Open…','Verifying Banking API…','Issuing e-receipt…','Updating home…'];
     var i=0;
     function tick(){
       if(i>0) steps[i-1].className='done';

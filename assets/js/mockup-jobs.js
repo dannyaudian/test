@@ -22,20 +22,20 @@
       lead:'Ada payment request salesman. Nominal QRIS dan VA terkunci Rp 100.000.000.'
     },
     open:{
-      name:'Budi Santoso',spk:'SPK/26/CLD/00418',unit:'Innova Zenix',kind:'Pembayaran unit',amount:'Isi nominal',
+      name:'Budi Santoso',spk:'SPK/26/CLD/00418',unit:'Innova Zenix',kind:'Unit payment',amount:'Enter amount',
       amountNum:0,max:81750000,locked:false,
       cdm:'0418 OPEN 01',brilink:'8810 0418 OPEN',
       va:{BCA:'8801 0418 8100',BRI:'0026 0418 8100',Mandiri:'8881 0418 8100'},
       back:'customer_detail',
-      lead:'Tidak ada request untuk sisa ini. Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.'
+      lead:'There is no request for this remainder. Enter the amount. QRIS shows a barcode; VA issues an account number.'
     },
     dewi:{
-      name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Yaris 1.5 G',kind:'Pelunasan Yaris',amount:'Isi nominal',
+      name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Yaris 1.5 G',kind:'Yaris settlement',amount:'Enter amount',
       amountNum:0,max:299150000,locked:false,
       cdm:'0426 OPEN 01',brilink:'8810 0426 OPEN',
       va:{BCA:'8801 0426 8100',BRI:'0026 0426 8100',Mandiri:'8881 0426 8100'},
       back:'so',
-      lead:'Pelunasan SO 4500091426. Isi nominal. QRIS tampil setelah angka; VA terbit setelah angka. EDC hanya Frontman di cabang.'
+      lead:'Settlement for SO 4500091426. Enter the amount. QRIS appears after the number; VA is issued after the amount. EDC is only available to Frontman at the branch.'
     },
     agya:{
       name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Agya 1.2 G',kind:'Booking fee Agya',amount:'Rp 2.000.000',
@@ -61,7 +61,7 @@
   function syncPayAmount(){
     var j=currentJob();
     var n=currentDgAmount();
-    var label=j.locked?j.amount:(n?formatRp(n):'Isi nominal');
+    var label=j.locked?j.amount:(n?formatRp(n):'Enter amount');
     document.querySelectorAll('[data-pay-amount]').forEach(function(el){ el.textContent=label; });
     document.querySelectorAll('[data-pay-amount-display]').forEach(function(el){ el.textContent=n?formatRp(n):'—'; });
     var inp=document.querySelector('#digiroom [data-pay-amount-input]');
@@ -90,7 +90,7 @@
       lead.textContent=shop
         ? (payJobId==='booking'
           ? 'Booking fee Yaris. Request salesman terkunci '+j.amount+'. QRIS dan VA langsung siap — Anda tidak mengetik angka.'
-          : (locked?'Ada permintaan bayar dari salesman. Nominal QRIS dan VA terkunci '+j.amount+'.':'Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.'))
+          : (locked?'There is a payment request from the salesperson. The QRIS and VA amount is locked at '+j.amount+'.':'Enter the amount. QRIS shows a barcode; VA issues an account number.'))
         : j.lead;
     }
     document.querySelectorAll('#digiroom [data-ch-hint]').forEach(function(el){

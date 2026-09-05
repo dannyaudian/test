@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mockup Interaktif — FAST</title>
+<title>Interactive Mockup — FAST</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,13 +13,13 @@
 <link rel="stylesheet" href="assets/css/mockup-shop.css">
 </head>
 <body>
-<a class="skip" href="#mockup">Lewati ke mockup</a>
-<nav class="site-nav" aria-label="Navigasi situs">
+<a class="skip" href="#mockup">Skip to mockup</a>
+<nav class="site-nav" aria-label="Site Navigation">
   <a class="brand" href="index.html"><b>FAST</b><span>Outline Project</span></a>
   <div class="links">
-    <a href="index.html">Beranda</a>
-    <a href="docs.html">Dokumentasi</a>
-    <a href="mockup.html" class="active">Aplikasi</a>
+    <a href="index.html">Home</a>
+    <a href="docs.html">Documentation</a>
+    <a href="mockup.html" class="active">App</a>
   </div>
 </nav>
 
@@ -27,36 +27,36 @@
     <!-- ================= MOCKUP ================= -->
     <div class="pagehead">
       <h1>FAST</h1>
-      <p>Proses utuh: SPK → quotation → satu Sales Order per baris → AFI → DO → billing → delivery → STNK/BPKB. Cashless menempel di setiap tahap yang butuh dana (QRIS, CDM, tautan, EDC Frontman).</p>
+      <p>Complete process: SPK → quotation → one Sales Order per line item → AFI → DO → billing → delivery → STNK/BPKB. Cashless is embedded at every stage that requires funds (QRIS, CDM, Digiroom link, Frontman EDC).</p>
     </div>
-  <nav class="journey wrap-pad" aria-label="Di dalam aplikasi">
-    <a class="on" href="#beranda">Transaksi</a>
-    <a href="#proses">Proses</a>
-    <a class="pay" href="#cashless">Bayar</a>
-    <a href="#customer">Pesanan customer</a>
+  <nav class="journey wrap-pad" aria-label="In-App Navigation">
+    <a class="on" href="#beranda">Transactions</a>
+    <a href="#proses">Process</a>
+    <a class="pay" href="#cashless">Pay</a>
+    <a href="#customer">Customer Orders</a>
   </nav>
   <div class="live-sync wrap-pad" id="liveSync" hidden>
     <span class="live-dot"></span>
-    <p><b>Pembayaran masuk.</b> <span id="syncMsg">AR Open dan e-kuitansi diperbarui.</span></p>
-    <button type="button" class="btn ghost" data-go="customer_detail" data-role="cust">Lihat di pesanan</button>
+    <p><b>Payment received.</b> <span id="syncMsg">AR Open and e-receipt updated.</span></p>
+    <button type="button" class="btn ghost" data-go="customer_detail" data-role="cust">View in Orders</button>
   </div>
 <details class="legend-fold">
-  <summary>Kepemilikan data (F / A / S / P)</summary>
+  <summary>Data Ownership (F / A / S / P)</summary>
   <div class="legend">
-    <span><i class="own f">F</i> Diinput Frontman</span>
-    <span><i class="own a">A</i> Diverifikasi Administrasi</span>
-    <span><i class="own s">S</i> Dihasilkan sistem</span>
-    <span><i class="own p">P</i> Keputusan Compliance Exception Approver</span>
+    <span><i class="own f">F</i> Entered by Frontman</span>
+    <span><i class="own a">A</i> Verified by Administration</span>
+    <span><i class="own s">S</i> System-generated</span>
+    <span><i class="own p">P</i> Decision by Compliance Exception Approver</span>
   </div>
 </details>
 
 <div class="app">
   <div class="chrome">
     <div class="dots"><i></i><i></i><i></i></div>
-    <div class="urlbar">sam.fast.id/fast/transaksi</div>
+    <div class="urlbar">sam.fast.id/fast/transactions</div>
     <div class="who">
       <button class="roletab" data-role="frontman" aria-pressed="true">Frontman</button>
-      <button class="roletab" data-role="admin" aria-pressed="false">Administrasi</button>
+      <button class="roletab" data-role="admin" aria-pressed="false">Administration</button>
       <button class="roletab" data-role="mgmt" aria-pressed="false">Management</button>
       <button class="roletab" data-role="cust" aria-pressed="false">Customer</button>
     </div>
@@ -68,79 +68,79 @@
 
       <div data-rail="frontman">
         <p class="grouplabel">Frontman · Rina Pratiwi</p>
-        <button data-go="beranda" aria-current="true">Transaksi saya</button>
-        <button data-go="proses">Proses SPK ini</button>
-        <button data-go="eskalasi">Pengecualian<span class="pill" data-exc-pill>1</span></button>
+        <button data-go="beranda" aria-current="true">My Transactions</button>
+        <button data-go="proses">Process SPK ini</button>
+        <button data-go="eskalasi">Exceptions<span class="pill" data-exc-pill>1</span></button>
       </div>
 
       <div data-rail="admin" hidden>
-        <p class="grouplabel">Administrasi · Cilandak</p>
-        <button data-go="admin_spk" aria-current="true">Buku cabang</button>
-        <button data-go="verifikasi">Perlu saya<span class="pill" data-admin-pill>7</span></button>
-        <button data-go="eskalasi">Pengecualian<span class="pill" data-exc-pill>1</span></button>
+        <p class="grouplabel">Administration · Cilandak</p>
+        <button data-go="admin_spk" aria-current="true">Branch Ledger</button>
+        <button data-go="verifikasi">Needs My Action<span class="pill" data-admin-pill>7</span></button>
+        <button data-go="eskalasi">Exceptions<span class="pill" data-exc-pill>1</span></button>
       </div>
 
       <div data-rail="mgmt" hidden>
-        <p class="grouplabel" data-mgmt-label>Management · Kepala Administrasi</p>
-        <div class="seat-picks" role="tablist" aria-label="Kursi management">
-          <button type="button" data-mgmt-seat="ka" aria-pressed="true">Kepala Administrasi</button>
-          <button type="button" data-mgmt-seat="kc" aria-pressed="false">Kepala Cabang</button>
+        <p class="grouplabel" data-mgmt-label>Management · Head of Administration</p>
+        <div class="seat-picks" role="tablist" aria-label="Management Seats">
+          <button type="button" data-mgmt-seat="ka" aria-pressed="true">Head of Administration</button>
+          <button type="button" data-mgmt-seat="kc" aria-pressed="false">Branch Head</button>
           <button type="button" data-mgmt-seat="abh" aria-pressed="false">Area Business Head</button>
           <button type="button" data-mgmt-seat="om" aria-pressed="false">Operation Manager</button>
         </div>
-        <button data-go="mgmt_inbox" aria-current="true">Antrean<span class="pill" data-mgmt-pill>4</span></button>
-        <button data-go="dashboard">Volume cabang / area</button>
+        <button data-go="mgmt_inbox" aria-current="true">Queue<span class="pill" data-mgmt-pill>4</span></button>
+        <button data-go="dashboard">Branch / Area Volume</button>
       </div>
 
       <div data-rail="cust" hidden>
         <p class="grouplabel">Customer · Budi Santoso</p>
-        <button data-go="customer" aria-current="true">Pesanan saya</button>
-        <button data-go="customer_detail">Lacak pesanan</button>
-        <button data-go="tagihan_customer">Bayar</button>
-        <button data-go="shop_akun">Akun</button>
+        <button data-go="customer" aria-current="true">My Orders</button>
+        <button data-go="customer_detail">Track Order</button>
+        <button data-go="tagihan_customer">Pay</button>
+        <button data-go="shop_akun">Account</button>
       </div>
     </aside>
 
     <div>
       <div class="integ" id="adminStrip" hidden>
-        <p><b>Mode Administrasi.</b> Ini data Frontman yang sama — verifikasi atau lengkapi, jangan ketik ulang.</p>
-        <div class="integ-links"><button type="button" class="btn ghost" data-go="admin_spk" data-admin-home>← Kembali ke list</button></div>
+        <p><b>Administration Mode.</b> This is the same Frontman data — verify or complete it, do not retype.</p>
+        <div class="integ-links"><button type="button" class="btn ghost" data-go="admin_spk" data-admin-home>← Back to List</button></div>
       </div>
-      <div id="screenHost"><p class="hint">Memuat layar…</p></div>
+      <div id="screenHost"><p class="hint">Loading screen…</p></div>
     </div>
-    <nav class="shop-tabbar" aria-label="Navigasi pesanan">
-      <button type="button" data-shop-tab="orders" data-go="customer" data-role="cust"><span class="ico">☰</span>Pesanan</button>
-      <button type="button" data-shop-tab="track" data-go="customer_detail" data-role="cust"><span class="ico">◎</span>Lacak</button>
-      <button type="button" data-shop-tab="pay" data-go="tagihan_customer" data-role="cust"><span class="ico">Rp</span>Bayar</button>
-      <button type="button" data-shop-tab="akun" data-go="shop_akun" data-role="cust"><span class="ico">●</span>Akun</button>
+    <nav class="shop-tabbar" aria-label="Order Navigation">
+      <button type="button" data-shop-tab="orders" data-go="customer" data-role="cust"><span class="ico">☰</span>Orders</button>
+      <button type="button" data-shop-tab="track" data-go="customer_detail" data-role="cust"><span class="ico">◎</span>Track</button>
+      <button type="button" data-shop-tab="pay" data-go="tagihan_customer" data-role="cust"><span class="ico">Rp</span>Pay</button>
+      <button type="button" data-shop-tab="akun" data-go="shop_akun" data-role="cust"><span class="ico">●</span>Account</button>
     </nav>
   </div>
 </div>
 </div>
 <div class="overlay" id="payflow" hidden>
   <div class="overlay-card">
-    <p class="eyebrow" style="margin:0 0 8px">Pembayaran</p>
-    <h3 style="margin:0 0 12px">Memproses di transaksi ini</h3>
+    <p class="eyebrow" style="margin:0 0 8px">Payment</p>
+    <h3 style="margin:0 0 12px">Processing in this transaction</h3>
     <ol>
-      <li data-step="1">Baca SPK &amp; AR Open</li>
-      <li data-step="2">Verifikasi Banking API</li>
-      <li data-step="3">Terbitkan e-kuitansi</li>
-      <li data-step="4">Perbarui tagihan di beranda</li>
+      <li data-step="1">Read SPK &amp; AR Open</li>
+      <li data-step="2">Verify Banking API</li>
+      <li data-step="3">Issue e-Receipt</li>
+      <li data-step="4">Update billing on home</li>
     </ol>
-    <p class="pf-status" id="pfStatus">Menyiapkan kanal…</p>
+    <p class="pf-status" id="pfStatus">Preparing channel…</p>
   </div>
 </div>
 <div class="overlay" id="soflow" hidden>
   <div class="overlay-card">
     <p class="eyebrow" style="margin:0 0 8px">Sales Order</p>
-    <h3 style="margin:0 0 12px">Mengonversi SPK setelah booking fee meet</h3>
+    <h3 style="margin:0 0 12px">Converting SPK after booking fee met</h3>
     <ol>
-      <li data-step="1">Cek kuitansi vs minimum unit</li>
-      <li data-step="2">Salin data SPK ke Sales Order</li>
-      <li data-step="3">Terbitkan nomor SO</li>
-      <li data-step="4">Tautkan kuitansi ke SPK dan SO</li>
+      <li data-step="1">Check receipt vs. unit minimum</li>
+      <li data-step="2">Copy SPK data to Sales Order</li>
+      <li data-step="3">Issue SO number</li>
+      <li data-step="4">Link receipt to SPK and SO</li>
     </ol>
-    <p class="pf-status" id="soStatus">Menyiapkan konversi…</p>
+    <p class="pf-status" id="soStatus">Preparing conversion…</p>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>

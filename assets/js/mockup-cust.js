@@ -30,26 +30,26 @@
     document.querySelectorAll('[data-cust-open-copy]').forEach(function(el){
       el.textContent=showReq
         ? 'Tidak memakai tagihan salesman. Anda isi nominal, lalu scan QRIS atau terbitkan VA. Maksimum sisa di luar request.'
-        : 'Tidak ada penagihan Frontman. Lunasi AR Open sendiri lewat QRIS atau VA. Isi nominal sampai maksimum sisa.';
+        : 'There is no Frontman billing request. Settle the AR Open yourself via QRIS or VA. Enter an amount up to the remaining maximum.';
     });
     var lead=document.querySelector('[data-cust-pay-lead]');
     if(lead){
-      if(paid) lead.textContent='Lunas. Tidak ada penagihan Frontman atau pelunasan cashless yang menunggu.';
+      if(paid) lead.textContent='Paid in full. There is no pending Frontman billing request or cashless settlement.';
       else if(scene==='request') lead.textContent='Hanya proses 1: bayar penagihan salesman. Nominal dikunci. Pelunasan cashless tidak tampil.';
-      else if(scene==='open') lead.textContent='Hanya proses 2: pelunasan cashless. Isi nominal sendiri. Tidak ada tagihan Frontman.';
+      else if(scene==='open') lead.textContent='Only process 2: cashless settlement. Enter the amount yourself. There is no Frontman billing request.';
       else lead.textContent='Dua jalur terpisah: bayar tagihan salesman bila ada, atau lunasi sendiri lewat cashless.';
     }
     var spec=document.querySelector('[data-cust-list-spec]');
     var tag=document.querySelector('[data-cust-list-tag]');
     var cta=document.querySelector('[data-cust-list-cta]');
     if(spec){
-      if(paid) spec.textContent='Lunas · lacak pengiriman dan dokumen';
+      if(paid) spec.textContent='Paid in full · track delivery and documents';
       else if(scene==='request') spec.textContent='Ada penagihan salesman Rp 100.000.000 · pelunasan cashless tidak dibuka';
       else if(scene==='open') spec.textContent='Tidak ada request Frontman · lunasi sendiri sisa AR Open';
       else spec.textContent='Ada penagihan salesman + sisa bisa dilunasi cashless';
     }
     if(tag){
-      tag.textContent=paid?'Lunas':'Menunggu bayar';
+      tag.textContent=paid?'Lunas':'Awaiting payment';
       tag.className=paid?'tag ok':'tag hold';
     }
     if(cta) cta.textContent=paid?'Lacak pengiriman →':'Lacak & bayar →';
@@ -121,7 +121,7 @@
     }
     if(window.FAST && FAST.save) FAST.save({gi:'submitted',spk:'SPK/26/CLD/00424'}, FAST.GI_KEY);
     applyGi();
-    toast('Bukti GI masuk antrean Administrasi. Customer belum melihat paket.');
+    toast('GI proof entered the Administration queue. The customer cannot see the package yet.');
   });
   var giOk=document.querySelector('[data-gi-approve]');
   if(giOk) giOk.addEventListener('click',function(){
@@ -138,7 +138,7 @@
   if(giBack) giBack.addEventListener('click',function(){
     if(window.FAST && FAST.save) FAST.save({gi:'returned'}, FAST.GI_KEY);
     applyGi();
-    toast('Dikembalikan ke salesman. Lengkapi bukti serah terima.');
+    toast('Returned to the salesperson. Complete the handover proof.');
   });
   document.querySelectorAll('[data-b2b-tab]').forEach(function(b){
     b.addEventListener('click',function(){
@@ -154,7 +154,7 @@
     patchB2b(function(s){ s.tab=tab; });
   });
   document.querySelectorAll('[data-gi-stay]').forEach(function(b){
-    b.addEventListener('click',function(){ toast('Tetap di SPK/26/CLD/00424. Antrean cabang dibuka dari list, bukan dari dalam GI ini.'); });
+    b.addEventListener('click',function(){ toast('Stay in SPK/26/CLD/00424. The branch queue opens from the list, not from inside this GI.'); });
   });
   document.querySelectorAll('[data-b2b-stay]').forEach(function(b){
     b.addEventListener('click',function(){ toast('Tetap di SPK/26/CLD/00421. Volume area dibuka dari daftar, bukan dari dalam transaksi ini.'); });
@@ -164,7 +164,7 @@
       b.classList.add('on');
       var sp=b.querySelector('span');
       if(sp) sp.textContent='Terpasang · NPWP Sarah · tetap di SPK/26/CLD/00423';
-      toast('NPWP tercatat di SPK Sarah. Vault transaksi lain tidak dibuka.');
+      toast("NPWP recorded in Sarah's SPK. Other transaction vaults are not opened.");
     });
   });
   document.querySelectorAll('[data-budi-bf]').forEach(function(b){
@@ -191,7 +191,7 @@
           u.status='docs_sent';
         }
       });
-      toast('Dokumen leasing tersimpan di vault B2B.');
+      toast('Leasing documents saved in the B2B vault.');
     });
   });
   var signedBtn=document.querySelector('[data-b2b-drop="signed"]');
@@ -217,7 +217,7 @@
         u.billing=u.billing||{};
         u.billing[key]=true;
       });
-      toast('Bukti Frontman tersimpan.');
+      toast('Frontman proof saved.');
     });
   });
   var dlBtn=document.querySelector('[data-b2b-dl-contract]');
@@ -262,7 +262,7 @@
       uu.backflow=false;
       uu.status='contract_ready';
     });
-    toast('Kontrak dari leasing terbit. Frontman bisa mengunduh.');
+    toast('The contract from leasing is issued. Frontman can download it.');
   });
   var markDp=document.querySelector('[data-b2b-mark-dp]');
   if(markDp) markDp.addEventListener('click',function(){
@@ -295,7 +295,7 @@
       uu.backflowReason='Kekurangan dokumen. Frontman lengkapi, kirim ulang ke leasing.';
       uu.status='docs_requested';
     });
-    toast('Backflow: dikembalikan ke Frontman. Bukan waiver gate.');
+    toast('Backflow: returned to Frontman. Not a waiver gate.');
   });
   var paper=document.querySelector('[data-b2b-paperless]');
   if(paper) paper.addEventListener('click',function(){
@@ -323,12 +323,12 @@
     var u=s.units[s.selected]||{};
     var meta=b2bSoMeta(s.selected);
     if(!u.paperlessSent){
-      toast('Kirim penagihan paperless dulu. Kuitansi ke leasing diterbitkan Administrasi.');
+      toast('Send the paperless billing request first. The leasing receipt is issued by Administration.');
       return;
     }
     patchB2b(function(st){ st.units[st.selected].kwtIssued=true; });
     if(meta.kwt) downloadReceipt(meta.kwt);
-    toast('Kuitansi penagihan ke leasing terbit: '+(meta.kwt||'KWT')+'.');
+    toast('Leasing billing receipt issued: '+(meta.kwt||'KWT')+'.');
   });
   var lunasBtn=document.querySelector('[data-b2b-lunas]');
   if(lunasBtn) lunasBtn.addEventListener('click',function(){
@@ -339,14 +339,14 @@
       return;
     }
     if(!u.epoReceived){
-      toast('Pelunasan leasing butuh e-PO asli dari leasing. Putusan Operation Manager hanya membuka paperless.');
+      toast('Leasing settlement requires the original e-PO from leasing. The Operation Manager decision only unlocks paperless flow.');
       return;
     }
     patchB2b(function(st){
       st.units[st.selected].lunas=true;
       st.units[st.selected].status='lunas';
     });
-    toast('Pelunasan leasing tercatat pada SO ini.');
+    toast('Leasing settlement recorded on this SO.');
   });
 
   document.querySelectorAll('[data-bukti-pdf]').forEach(function(b){

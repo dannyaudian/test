@@ -18,7 +18,7 @@
         </div>
         <div class="panel">
           <h4>Payment Gateway and Banking API</h4>
-          <ul><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Real-time verification.</li><li>Payment matching.</li><li>Payment allocation.</li><li>Settlement.</li><li>Payment exception identification.</li></ul>
+          <ul><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Real-time verification.</li><li>Payment matching.</li><li>Payment allocation.</li><li>Settlement.</li><li>Payment Exception identification.</li></ul>
         </div>
         <div class="panel">
           <h4>Master Data and Single Source of Truth</h4>
@@ -26,7 +26,7 @@
         </div>
         <div class="panel">
           <h4>Integration and API Layer</h4>
-          <ul><li>Menghubungkan SAM, SAP/ERP, Banking API, Document Vault, Compliance Exception Approval Engine, dan customer channel.</li><li>Mencegah input ulang.</li><li>Menyinkronkan status.</li><li>Mempertahankan SPK–SO–Billing lineage.</li><li>Memperkaya receipt lineage ketika SO atau billing terbit.</li><li>Memicu proses downstream.</li></ul>
+          <ul><li>Menghubungkan SAM, SAP/ERP, Banking API, Document Vault, Compliance Exception Approval Engine, dan customer channel.</li><li>Mencegah input again.</li><li>Menyinkronkan status.</li><li>Mempertahankan SPK–SO–Billing lineage.</li><li>Memperkaya receipt lineage ketika SO atau billing issued.</li><li>Memicu proses downstream.</li></ul>
         </div>
         <div class="panel">
           <h4>Rules and Workflow Engine</h4>
@@ -44,10 +44,10 @@
         <div class="panel">
           <h4>B2B Leasing Integration</h4>
           <ul>
-            <li>Per-SO status from submit to leasing through pelunasan.</li>
+            <li>Per-SO status from submit to leasing through settlement.</li>
             <li>Frontman downloads the leasing-submitted contract, re-uploads the customer-signed contract, and uploads signed-contract photo, handover photo, and BSTKB.</li>
             <li>Frontman also uploads documents leasing requested (identity, NPWP, NIB/SIUP, SPK).</li>
-            <li>Administration sends paperless billing and issues the leasing kuitansi only after that Frontman pack is complete and full customer DP from B2B is paid.</li>
+            <li>Administration sends paperless billing and issues the leasing receipt only after that Frontman pack is complete and full customer DP from B2B is paid.</li>
             <li>Normal flow and backflow on the same tracker when leasing or Administration returns incomplete documents.</li>
             <li>Required customer DP amount and DP-received status come from B2B leasing (read-only in FAST) and appear on the Sales Order pricing structure when payment type is credit/leasing.</li>
             <li>Billing gate reads full-DP status; delivery gate reads TTD status. Neither is an Approval Engine object.</li>
@@ -66,7 +66,7 @@
         </div>
         <div class="panel">
           <h4>WhatsApp and Digiroom</h4>
-          <ul><li>Payment request.</li><li>Payment confirmation.</li><li>E-kuitansi delivery and download.</li><li>Outstanding balance information.</li><li>Transaction milestones.</li><li>Delivery notification.</li><li>STNK/BPKB updates.</li></ul>
+          <ul><li>Payment request.</li><li>Payment confirmation.</li><li>E-receipt delivery and download.</li><li>Outstanding balance information.</li><li>Transaction milestones.</li><li>Delivery notification.</li><li>STNK/BPKB updates.</li></ul>
         </div>
       </div>
     </section>

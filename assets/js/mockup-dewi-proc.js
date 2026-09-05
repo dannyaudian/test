@@ -49,12 +49,12 @@
     document.querySelectorAll('[data-bill-need-do]').forEach(function(el){ el.hidden=!!q.dof; });
     document.querySelectorAll('[data-bill-has-do]').forEach(function(el){ el.hidden=!q.dof; });
     var billDo=document.querySelector('[data-bill-do]');
-    if(billDo) billDo.textContent=q.dof?'Terbit':'Menunggu';
+    if(billDo) billDo.textContent=q.dof?'Issued':'Pending';
     var stnkAfi=document.querySelector('[data-stnk-afi]');
     if(stnkAfi){
       stnkAfi.classList.toggle('done', !!q.afi);
       var t=stnkAfi.querySelector('.t');
-      if(t) t.textContent=q.afi?'Pengajuan terkirim':'Menunggu SO / pengajuan';
+      if(t) t.textContent=q.afi?'Submission sent':'Awaiting SO / submission';
     }
     if(window.FAST && FAST.renderLineage) FAST.renderLineage({payJob:payJobId, screen:(document.querySelector('.screen.on')||{}).id});
   }

@@ -34,7 +34,7 @@
 @media (prefers-reduced-motion:reduce){#mockup *{transition:none!important}
 }
 
-/* --- penyesuaian saat mockup disatukan ke dalam dokumen --- */
+/* --- penyesuaian saat mockup disatukan ke dalam documents --- */
 #mockup{--ink-2:#1B2A38;--ink-soft:#5A6D80;--surface-2:#F6F8FA;--rule:#D9E0E7;--rule-2:#E9EEF2;--stop:#9C2B2B;--stop-tint:#F9E9E9;font-family:var(--sans);font-size:14px;line-height:1.5;background:transparent;margin:0}
 #mockup p{margin:0 0 10px;max-width:none}
 #mockup .card p,#mockup .doc .meta,#mockup .wa .from{margin:0}

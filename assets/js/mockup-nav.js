@@ -177,14 +177,14 @@
     document.querySelectorAll('[data-exc-back]').forEach(function(b){
       if(currentRole==='mgmt'){
         b.setAttribute('data-go','eskalasi');
-        b.textContent='← Antrean';
+        b.textContent='← Queue';
       } else if(currentRole==='admin'){
         var to=adminReturn==='verifikasi'?'verifikasi':'eskalasi';
         b.setAttribute('data-go', to);
-        b.textContent=to==='verifikasi'?'← Perlu saya':'← Pengecualian';
+        b.textContent=to==='verifikasi'?'← Needs My Action':'← Exceptions';
       } else {
         b.setAttribute('data-go','eskalasi');
-        b.textContent='← Antrean';
+        b.textContent='← Queue';
       }
     });
     var strip=document.getElementById('adminStrip');
@@ -194,11 +194,11 @@
       var homeBtn=strip.querySelector('[data-admin-home]');
       if(homeBtn){
         homeBtn.setAttribute('data-go', adminReturn||'admin_spk');
-        if(adminReturn==='verifikasi') homeBtn.textContent='← Perlu saya';
-        else if(adminReturn==='eskalasi') homeBtn.textContent='← Pengecualian';
+        if(adminReturn==='verifikasi') homeBtn.textContent='← Needs My Action';
+        else if(adminReturn==='eskalasi') homeBtn.textContent='← Exceptions';
         else {
           var bk=(adminReturn||'admin_spk').replace('admin_','');
-          homeBtn.textContent=(ADMIN_BOOK_META[bk]&&ADMIN_BOOK_META[bk].back)||'← Buku cabang';
+          homeBtn.textContent=(ADMIN_BOOK_META[bk]&&ADMIN_BOOK_META[bk].back)||'← Branch Ledger';
         }
       }
     }
@@ -247,14 +247,14 @@
   }
   if(window.FAST && FAST.lineageInit) FAST.lineageInit(show);
   goBtns.forEach(function(b){ b.addEventListener('click',function(e){
-    if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); return; }
+    if(isDownloadAction(b)){ e.preventDefault(); downloadReceipt(receiptNoFrom(b)); toast('E-receipt PDF downloaded.'); return; }
     var fromFrontman=currentRole==='frontman';
     if(b.dataset.role) applyRole(b.dataset.role);
     if(b.dataset.txDots) persistTx(b.dataset.txDots);
     if(b.dataset.payJob){
       setPayJob(b.dataset.payJob);
       payJobSticky=true;
-      if(b.dataset.go==='digiroom') toast(fromFrontman?'Tautan terkirim. Customer masuk ke beranda Digiroom.':'Pilih QRIS atau VA di Digiroom.');
+      if(b.dataset.go==='digiroom') toast(fromFrontman?'Link sent. Customer entering Digiroom home.':'Select QRIS or VA in Digiroom.');
     }
     if(b.dataset.afiExc) setAfiExcView(b.dataset.afiExc);
     if(b.dataset.b2bPick && window.FAST && FAST.b2bLoad){
@@ -274,7 +274,7 @@
   }); });
   document.querySelectorAll('#mockup button').forEach(function(b){
     if(isDownloadAction(b) && !b.hasAttribute('data-go') && !b.hasAttribute('data-bukti-pdf')){
-      b.addEventListener('click',function(){ downloadReceipt(receiptNoFrom(b)); toast('E-kuitansi PDF diunduh.'); });
+      b.addEventListener('click',function(){ downloadReceipt(receiptNoFrom(b)); toast('E-receipt PDF downloaded.'); });
       return;
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || b.closest('.proc') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
@@ -309,7 +309,7 @@
   var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer'};
   var mgmtSeat='ka';
   var MGMT_SEATS={
-    ka:{label:'Kepala Administrasi',home:'mgmt_inbox'},
+    ka:{label:'Head of Administration',home:'mgmt_inbox'},
     kc:{label:'Kepala Cabang',home:'mgmt_inbox'},
     abh:{label:'Area Business Head',home:'dashboard'},
     om:{label:'Operation Manager',home:'mgmt_inbox'}
@@ -327,8 +327,8 @@
     if(lead){
       var leads={
         ka:'Putusan exception waivable (alamat, pecah AFI/billing). 30% dan lunas tidak di-waive.',
-        kc:'Eskalasi STNK aging cabang. Bukan tombol lunas. Volume cabang di tab Volume.',
-        abh:'Pantau bottleneck area. Putusan tetap di Kepala Administrasi / Kepala Cabang.',
+        kc:'Branch STNK aging escalation. This is not a paid-in-full button. Branch volume lives in the Volume tab.',
+        abh:'Monitor area bottlenecks. Decisions remain with the Head of Administration / Branch Head.',
         om:'Billing tanpa e-PO leasing, plus pantau kirim dan Good Issue. DP dan TTD tidak di-waive.'
       };
       lead.textContent=leads[mgmtSeat]||leads.ka;
@@ -352,17 +352,17 @@
         else if(dest==='verifikasi'||dest==='eskalasi') dest=dest;
         else if(!ADMIN_BOOK[dest]) dest='admin_spk';
         b.setAttribute('data-go', dest);
-        if(/Daftar|Transaksi saya|Buku|antrean|List|Perlu|Pengecualian|Cabang/i.test(b.textContent||'')){
-          if(dest==='verifikasi') b.textContent='← Perlu saya';
-          else if(dest==='eskalasi') b.textContent='← Pengecualian';
+        if(/Daftar|My Transactions|Branch Ledger|queue|List|Needs|Exceptions|Branch/i.test(b.textContent||'')){
+          if(dest==='verifikasi') b.textContent='← Needs My Action';
+          else if(dest==='eskalasi') b.textContent='← Exceptions';
           else {
             var key=dest.replace('admin_','');
-            b.textContent=(ADMIN_BOOK_META[key]&&ADMIN_BOOK_META[key].back)||'← Buku cabang';
+            b.textContent=(ADMIN_BOOK_META[key]&&ADMIN_BOOK_META[key].back)||'← Branch Ledger';
           }
         }
       } else if(currentRole==='mgmt'){
         b.setAttribute('data-go','dashboard');
-        if(/Daftar|Transaksi saya|Buku|antrean|List|Cabang/i.test(b.textContent||'')){
+        if(/Daftar|My Transactions|Branch Ledger|queue|List|Branch/i.test(b.textContent||'')){
           b.textContent='← Cabang';
         }
       } else {

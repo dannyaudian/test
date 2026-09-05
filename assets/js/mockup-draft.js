@@ -66,7 +66,7 @@
     var sameHint=document.querySelector('[data-spk-same-hint]');
     if(sameHint) sameHint.textContent=d.sameStnk
       ? 'Nama STNK = pemesan. KTP/KK/alamat pemesan dipakai ulang. Pernyataan nama tidak wajib.'
-      : 'Nama STNK berbeda: unggah supporting document di langkah 4, lalu Approval Engine (Kepala Administrasi).';
+      : 'STNK name differs: upload the supporting document in step 4, then continue to Approval Engine (Head of Administration).';
     var po=poFromKota((d.fields||{}).stnkKota);
     var poMap={prov:po.prov,po:po.po,otr:po.otr,bf:po.bf};
     Object.keys(poMap).forEach(function(k){
@@ -201,7 +201,7 @@
       var docs=Object.assign({}, draftData().docs||{});
       docs[key]=true;
       if(key==='kkStnk') toast('KK pemesan dipakai ulang dari vault.');
-      else toast('Dokumen masuk vault. Administrasi verifikasi, bukan unggah ulang.');
+      else toast('Documents entered the vault. Administration verifies them rather than re-uploading them.');
       saveDraft({docs:docs});
     });
   });
