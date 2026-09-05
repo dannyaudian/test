@@ -83,7 +83,7 @@
       copy:function(now){
         if(now==='spk') return 'Isi & unggah dulu. Baru dapat nomor SPK. Booking fee menyusul.';
         if(now==='quot') return 'SPK tersimpan. Booking cashless baris Yaris — fee non-waivable.';
-        if(now==='afi') return 'SO Yaris terbuka. AFI memakai nama/alamat STNK dari SPK. Cashless pelunasan menempel.';
+        if(now==='afi') return 'SO Yaris terbuka. Klik SPK atau Billing di jejak atas — tampilan tahap itu tetap ada. AFI memakai nama/alamat STNK dari SPK.';
         if(now==='do') return 'AFI terkirim. DO gudang menyusul. Kanal bayar tetap sama.';
         if(now==='bill') return 'DO ada. Billing cash ≥30% non-waivable. Bayar di Digiroom atau cabang.';
         if(now==='del') return 'Billing jalan. Kirim cash tunggu lunas — cashless di tahap ini.';
@@ -103,7 +103,7 @@
       go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'transaksi',do:'transaksi',bill:'transaksi',del:'transaksi',stnk:'transaksi'},
       now:budiNow,
       copy:function(now){
-        if(now==='afi') return 'SO 4500091238 ada. Billing + AFI berpasangan. Cashless pelunasan di tahap ini.';
+        if(now==='afi') return 'SO 4500091238 ada. Klik SPK, SO, atau Billing di jejak ini. Billing + AFI berpasangan. Cashless pelunasan di tahap Billing.';
         if(now==='bill') return 'Billing/AFI berjalan. Bayar sisa di cashless — kirim tertahan sampai lunas.';
         if(now==='del') return 'Lunas atau AFI sudah. Delivery cash tetap tunggu AR Open Rp 0.';
         return 'Jejak Budi · satu SO 4500091238 sampai STNK/BPKB.';
@@ -232,6 +232,16 @@
       if(s.id===st.now && !st.allDone) b.classList.add(st.hold===s.id?'hold':'now');
       if(s.id===view) b.classList.add('on');
       b.addEventListener('click',function(){
+        var panel=screen && screen.querySelector('[data-stage-panel="'+s.id+'"]');
+        if(panel){
+          showStagePanel(screen, s.id);
+          fillNav(nav, st, s.id, showFn);
+          var map=parseStageMap(screen);
+          if(map && map[s.id]){
+            screen.dispatchEvent(new CustomEvent('fast-stage-map',{bubbles:true,detail:{tab:map[s.id],stage:s.id}}));
+          }
+          return;
+        }
         var map=parseStageMap(screen);
         if(map && map[s.id]){
           screen.dispatchEvent(new CustomEvent('fast-stage-map',{bubbles:true,detail:{tab:map[s.id],stage:s.id}}));
@@ -239,14 +249,8 @@
           fillNav(nav, st, s.id, showFn);
           return;
         }
-        var panel=screen && screen.querySelector('[data-stage-panel="'+s.id+'"]');
-        if(panel){
-          showStagePanel(screen, s.id);
-          fillNav(nav, st, s.id, showFn);
-          return;
-        }
         var go=st.go[s.id];
-        if(go && typeof showFn==='function') showFn(go);
+        if(go && typeof showFn==='function') showFn(go, {explicit:true, stage:s.id});
       });
       nav.appendChild(b);
     });
@@ -337,6 +341,7 @@
       if(!pack) return;
       var st=state(tx);
       var view=screen.getAttribute('data-stage-view')||VIEW[sid]||st.now;
+      if(view) showStagePanel(screen, view);
       fillNav(pack.nav, st, view, showFn);
       if(pack.note) pack.note.textContent=st.copy;
     });
@@ -356,7 +361,8 @@
       var tx=screenTx(current, payJob)||(on&&on.querySelector('[data-tx-track]')&&on.querySelector('[data-tx-track]').getAttribute('data-tx-track'));
       if(on && tx){
         var st=state(tx);
-        var view=VIEW[current]||payView(current, payJob, tx)||st.now;
+        var view=on.getAttribute('data-stage-view')||VIEW[current]||payView(current, payJob, tx)||st.now;
+        if(view) showStagePanel(on, view);
         var nav=on.querySelector('.proc');
         if(nav) fillNav(nav, st, view, showFn);
       }

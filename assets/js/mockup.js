@@ -350,9 +350,12 @@
     var bookKey=ADMIN_BOOK[id];
     var screenId=bookKey?'admin_book':id;
     screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
-    if(from && from!==screenId){
-      var landed=document.getElementById(screenId);
-      if(landed) landed.removeAttribute('data-stage-view');
+    var landed=document.getElementById(screenId);
+    var sameFam=from && landed && familyOf(txOf(from)) && familyOf(txOf(from))===familyOf(txOf(screenId));
+    if(landed && opts.stage){
+      landed.setAttribute('data-stage-view', opts.stage);
+    } else if(from && from!==screenId && !sameFam && landed){
+      landed.removeAttribute('data-stage-view');
     }
     if(bookKey) activateAdminBook(bookKey);
     var railId=({
@@ -1965,8 +1968,13 @@
     document.querySelectorAll('[data-b2b-chrome]').forEach(function(el){ el.hidden = tab!=='ringkas'; });
     var hiace=document.getElementById('tx_hiace');
     if(hiace){
-      var viewTab={ringkas:'spk',so:'so',alur:'del',dokumen:'bill',tagih:'bill'};
-      if(viewTab[tab]) hiace.setAttribute('data-stage-view', viewTab[tab]);
+      var viewTab={ringkas:'spk',so:'so',alur:'del',dokumen:'afi',tagih:'bill'};
+      var chosen=hiace.getAttribute('data-stage-view');
+      if(!chosen && viewTab[tab]){
+        hiace.setAttribute('data-stage-view', viewTab[tab]);
+        chosen=viewTab[tab];
+      }
+      if(chosen && window.FAST && FAST.showStagePanel) FAST.showStagePanel(hiace, chosen);
     }
     var billCard=document.querySelector('[data-b2b-card="bill"]');
     var delCard=document.querySelector('[data-b2b-card="del"]');
@@ -1985,7 +1993,7 @@
     if(gateNote){
       gateNote.textContent=sum.back
         ? 'Ada backflow. Frontman lengkapi data — bukan waiver TTD/DP. Approval Engine tidak dibuka untuk TTD/DP.'
-        : 'Frontman: unduh/unggah kontrak & bukti. Administrasi menagih jika paket lengkap, full DP B2B, dan e-PO leasing — atau putusan Operation Manager untuk paperless tanpa e-PO.';
+        : 'Klik SPK, SO, atau Billing di jejak atas — tahap yang sudah jadi tetap terbuka. Administrasi menagih jika paket lengkap, full DP B2B, dan e-PO leasing — atau putusan Operation Manager.';
     }
     document.querySelectorAll('[data-b2b-tab]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-b2b-tab')===tab?'true':'false');
@@ -2200,7 +2208,11 @@
   });
   document.querySelectorAll('[data-b2b-tab]').forEach(function(b){
     b.addEventListener('click',function(){
-      patchB2b(function(s){ s.tab=b.getAttribute('data-b2b-tab'); });
+      var tab=b.getAttribute('data-b2b-tab');
+      var viewTab={ringkas:'spk',so:'so',alur:'del',dokumen:'afi',tagih:'bill'};
+      var hiace=document.getElementById('tx_hiace');
+      if(hiace && viewTab[tab]) hiace.setAttribute('data-stage-view', viewTab[tab]);
+      patchB2b(function(s){ s.tab=tab; });
     });
   });
   document.addEventListener('fast-stage-map', function(e){
