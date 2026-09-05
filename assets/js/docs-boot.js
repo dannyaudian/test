@@ -2,6 +2,11 @@
   var host = document.getElementById('docsHost');
   var parts = [
     'docs/sections/contoh.html',
+    'docs/sections/d1.html',
+    'docs/sections/d2.html',
+    'docs/sections/d3.html',
+    'docs/sections/d4.html',
+    'docs/sections/galeri.html',
     'docs/sections/s1.html',
     'docs/sections/s2.html',
     'docs/sections/s3.html',
@@ -19,13 +24,17 @@
     });
   })).then(function (htmls) {
     if (host) host.innerHTML = htmls.join('\n');
-    var s = document.createElement('script');
-    s.src = 'assets/js/main.js';
-    s.onload = function () {
+    function jump() {
       var id = (location.hash || '').replace('#', '');
       var t = id && document.getElementById(id);
       if (t) t.scrollIntoView();
-    };
+    }
+    jump();
+    requestAnimationFrame(jump);
+    setTimeout(jump, 80);
+    var s = document.createElement('script');
+    s.src = 'assets/js/main.js';
+    s.onload = jump;
     document.body.appendChild(s);
   }).catch(function (err) {
     console.error(err);

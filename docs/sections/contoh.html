@@ -2,244 +2,38 @@
       <div class="sec-head">
         <span class="num">•</span>
         <div>
-          <h2>Contoh kasus di mockup</h2>
-          <p class="deck">Angka dan nama ilustratif. Tiap SPK punya jejak SPK→STNK sendiri. Ketuk kartu untuk membuka workspace itu — bukan pindah ke transaksi lain.</p>
+          <h2>Cara baca dokumentasi ini</h2>
+          <p class="deck">Empat deliverable dulu — apa fiturnya, lalu langkah contoh di mockup. Skema layar dan kartu kasus ada setelah D4.</p>
         </div>
       </div>
-      <div class="panel" style="margin:0 0 22px">
-        <h4>Deliverable × jejak SPK</h4>
-        <ul>
-          <li><b>D1 Frontman flow</b> — Dewi (isi SPK→SO, tracker di tiap layar Dewi), Sarah (data gate NPWP + tracker 8 tahap), Budi (AFI berpasangan + tracker di workspace Zenix).</li>
-          <li><b>D2 Cashless &amp; e-kuitansi</b> — Dewi booking fee setelah SPK (Frontman tagih, customer bayar lewat Digiroom atau scan QRIS meja), Budi pelunasan QRIS/VA (tab Bayar di SPK 00418).</li>
-          <li><b>D3 Dokumen &amp; STNK</b> — Sarah vault SPK, Maria aging STNK (hub + eskalasi), Fajar GI bukti, Agus request kirim (hub + form slot), Calya paket bukti selesai.</li>
-          <li><b>D4 Finance &amp; compliance</b> — Hiace DP + e-PO di tracking B2B, paperless, billing tanpa e-PO → Operation Manager, Budi exception alamat, Dewi nama pemesan ≠ STNK, gate 30%/lunas/TTD non-waivable.</li>
-        </ul>
+      <div class="read-guide">
+        <p>Angka dan nama di mockup ilustratif. Tiap SPK punya jejak sendiri: ketuk tautan membuka workspace itu, bukan pindah ke transaksi lain.</p>
       </div>
-      <div class="cases">
-        <a class="case" href="mockup.html#proses">
-          <div class="thumb yaris">FLOW</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · proses utuh</p>
-            <h3>SPK → QT → SO → AFI → DO → Billing → Delivery → STNK</h3>
-            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, dan Management. Setelah SPK, customer Dewi melihat booking fee terkunci (Digiroom atau scan QRIS meja). Customer Budi melihat daftar pesanan, lacak, lalu dua proses bayar terpisah (penagihan Frontman vs pelunasan cashless).</p>
-            <span class="go">Buka proses →</span>
-          </div>
+      <div class="d-index">
+        <a class="d-card" href="#d1">
+          <span class="marker">D1</span>
+          <h4>Alur Frontman</h4>
+          <p>SPK sekali isi → unggah dokumen → booking fee terkunci → kuitansi → Sales Order. Contoh utama: Dewi Yaris 00426.</p>
+          <em>Fitur &amp; contoh →</em>
         </a>
-        <a class="case" href="mockup.html#spk_baru">
-          <div class="thumb yaris">AWAL</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · Frontman</p>
-            <h3>Isi SPK dari awal</h3>
-            <p>Pemesan, STNK, unit, lalu unggah KTP/KK/NPWP dan dokumen STNK/BPKB. Baru dapat nomor SPK. Booking fee menyusul.</p>
-            <span class="go">Buka isi SPK →</span>
-          </div>
+        <a class="d-card" href="#d2">
+          <span class="marker">D2</span>
+          <h4>Cashless &amp; e-kuitansi</h4>
+          <p>Request vs setoran sendiri, satu bayar satu KWT, AR hanya turun oleh kuitansi aktif. Contoh: Dewi fee + Budi dua proses.</p>
+          <em>Fitur &amp; contoh →</em>
         </a>
-        <a class="case" href="mockup.html#spk">
-          <div class="thumb yaris">YARIS</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · Frontman</p>
-            <h3>Data SPK sebelum bayar</h3>
-            <p>Pemesan, nama &amp; alamat STNK, tipe/warna, aksesoris, tunai. OTR dari area PO Kota Depok. Dokumen entri dan STNK/BPKB sudah diunggah.</p>
-            <span class="go">Buka data SPK →</span>
-          </div>
+        <a class="d-card" href="#d3">
+          <span class="marker">D3</span>
+          <h4>Dokumen &amp; STNK</h4>
+          <p>Vault sekali unggah, gate sebelum fee, pakai ulang ke AFI/GI, tracking STNK. Contoh: Sarah, Maria, Fajar.</p>
+          <em>Fitur &amp; contoh →</em>
         </a>
-        <a class="case" href="mockup.html#booking">
-          <div class="thumb yaris">YARIS</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · Frontman</p>
-            <h3>Booking fee setelah SPK</h3>
-            <p>Yaris 1.5 G · Rp 3.000.000 dari master unit. Frontman menagih request terkunci. Setelah kuitansi meet, SPK dikonversi jadi Sales Order — bukan form baru.</p>
-            <span class="go">Buka layar booking →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#customer_booking">
-          <div class="thumb yaris">YARIS</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · Customer Digiroom</p>
-            <h3>Booking fee di HP · tautan pay.fast.id</h3>
-            <p>Setelah SPK, pesanan FAST-00426 menampilkan booking fee terkunci Rp 3.000.000. Digiroom membuka request yang sama — QRIS/VA tidak bisa diubah. Bukan pelunasan isi sendiri.</p>
-            <span class="go">Buka pesanan customer →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#customer_booking_qris">
-          <div class="thumb yaris">QRIS</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · Customer di counter</p>
-            <h3>Booking fee · scan QRIS Frontman</h3>
-            <p>Barcode di layar salesman. HP customer hanya konfirmasi Rp 3.000.000 terkunci. Request yang sama dengan tautan Digiroom; EDC tidak tampil di HP.</p>
-            <span class="go">Buka HP saat scan →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#so">
-          <div class="thumb yaris">SO</div>
-          <div class="body">
-            <p class="who">Dewi Lestari · Frontman</p>
-            <h3>SPK jadi Sales Order</h3>
-            <p>Setelah booking fee Yaris meet, data SPK dikonversi ke SO 4500091426. Pemesan, STNK, unit, harga area PO, dan dokumen tidak diketik ulang.</p>
-            <span class="go">Buka Sales Order →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#cashless">
-          <div class="thumb zenix">ZENIX</div>
-          <div class="body">
-            <p class="who">Budi Santoso · Frontman</p>
-            <h3>Pelunasan QRIS &amp; VA</h3>
-            <p>Request salesman Rp 100.000.000 terkunci. Tanpa request, customer isi nominal sendiri di QRIS atau VA. Debit EDC dipilih Frontman di kasir, bukan dari layar customer.</p>
-            <span class="go">Buka layar bayar →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#digiroom">
-          <div class="thumb pay">PAY</div>
-          <div class="body">
-            <p class="who">Budi · Customer Digiroom</p>
-            <h3>Isi nominal sendiri</h3>
-            <p>Beranda pay.fast.id. QRIS tampil setelah angka diisi. VA menerbitkan nomor rekening setelah angka diisi.</p>
-            <span class="go">Buka Digiroom →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#afi">
-          <div class="thumb afi">AFI</div>
-          <div class="body">
-            <p class="who">Budi Santoso · Frontman</p>
-            <h3>AFI + billing berpasangan</h3>
-            <p>Data STNK sudah di SPK. Jalur normal: ajukan billing dan AFI bersama. AFI dulu atau billing tanpa AFI butuh Approval Engine.</p>
-            <span class="go">Buka billing &amp; AFI →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#customer">
-          <div class="thumb cust">ORDER</div>
-          <div class="body">
-            <p class="who">Budi Santoso · Customer</p>
-            <h3>Pesanan, lacak, dan bayar</h3>
-            <p>Daftar pesanan, klik masuk untuk lacak. Penagihan Frontman (nominal dikunci) dan pelunasan cashless (isi sendiri) adalah dua proses terpisah. AR Open sama dengan cabang.</p>
-            <span class="go">Buka pesanan customer →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#delivery">
-          <div class="thumb avanza">AVANZA</div>
-          <div class="body">
-            <p class="who">Agus Hermawan · Frontman</p>
-            <h3>Ajukan pengiriman</h3>
-            <p>Jejak SPK→STNK di workspace Agus. Request kirim dan slot armada (D3) tanpa pindah ke Rush.</p>
-            <span class="go">Buka delivery request →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#gi">
-          <div class="thumb rush">RUSH</div>
-          <div class="body">
-            <p class="who">Fajar Nugroho · Salesman → Admin</p>
-            <h3>Good Issue + paket bukti</h3>
-            <p>Foto, VIN, geotag, timestamp, penerima, scan BSTKB. Administrasi yang menyetujui. Paket yang sama bisa diunduh pelanggan — bukan CCTV dealer.</p>
-            <span class="go">Buka bukti GI →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#bukti_serah">
-          <div class="thumb cust">BUKTI</div>
-          <div class="body">
-            <p class="who">Budi · Calya delivered</p>
-            <h3>Paket serah terima di akun customer</h3>
-            <p>Unit lama yang sudah lunas dan diserahkan. Customer unduh bukti otentik. Pesanan Zenix masih tertahan pelunasan — blocker terlihat, bukan ruang gelap.</p>
-            <span class="go">Buka paket bukti →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#exc_nama">
-          <div class="thumb exc">NAMA</div>
-          <div class="body">
-            <p class="who">Dewi · Approval Engine</p>
-            <h3>Nama pemesan ≠ nama STNK</h3>
-            <p>Andi Pratama di STNK. Supporting document di vault. Kepala Administrasi memutuskan. Bukan waiver booking fee.</p>
-            <span class="go">Buka pengecualian nama →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#exc_alamat">
-          <div class="thumb exc">EXC</div>
-          <div class="body">
-            <p class="who">Budi · Approval Engine</p>
-            <h3>Bukti alamat kedaluwarsa</h3>
-            <p>Waivable. Frontman ajukan, Administrasi cek, Kepala Administrasi putuskan. Bukan waiver lunas.</p>
-            <span class="go">Buka pengecualian →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#tx_hiace">
-          <div class="thumb hiace">HIACE</div>
-          <div class="body">
-            <p class="who">PT Danapura · B2B leasing</p>
-            <h3>Alur leasing sampai pelunasan</h3>
-            <p>Unduh kontrak, unggah TTD. DP wajib, nilai dibiayai, tenor, dan e-PO tampil per SO. Administrasi menagih paperless setelah paket Frontman, full DP, dan e-PO — atau putusan Operation Manager jika e-PO belum ada.</p>
-            <span class="go">Buka workspace B2B →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#exc_epo">
-          <div class="thumb hiace">E-PO</div>
-          <div class="body">
-            <p class="who">PT Danapura · Approval Engine</p>
-            <h3>Billing tanpa e-PO leasing</h3>
-            <p>E-PO = persetujuan leasing atas total DP, nilai dibiayai, tenor. Tanpa e-PO, paperless hanya lewat Operation Manager. Pelunasan tetap butuh e-PO asli.</p>
-            <span class="go">Buka gate e-PO →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#tx_raize">
-          <div class="thumb raize">RAIZE</div>
-          <div class="body">
-            <p class="who">Sarah Wijaya · Data gate</p>
-            <h3>NPWP kosong</h3>
-            <p>Lengkapi di SPK, bukan di SO. Booking fee belum ditagih sampai identitas valid.</p>
-            <span class="go">Buka Raize →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#exc_stnk">
-          <div class="thumb fort">FORT</div>
-          <div class="body">
-            <p class="who">Maria Sitompul · Eskalasi</p>
-            <h3>STNK hari ke-19</h3>
-            <p>Aging ≥15 hari naik sendiri ke Kepala Cabang. Bukan tombol untuk melewati pelunasan.</p>
-            <span class="go">Buka eskalasi STNK →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#admin_spk">
-          <div class="thumb list">ADMIN</div>
-          <div class="body">
-            <p class="who">Administrasi · Cilandak</p>
-            <h3>List SPK sampai pembayaran</h3>
-            <p>Buku cabang, antrean verifikasi, dan pengecualian. Volume pekerjaan dan aging/SLA per baris — dasar KPI, bukan kira-kira.</p>
-            <span class="go">Buka list SPK →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#verifikasi">
-          <div class="thumb list">SLA</div>
-          <div class="body">
-            <p class="who">Administrasi · Perlu saya</p>
-            <h3>Volume kerja &amp; aging</h3>
-            <p>Berapa banyak yang menunggu, jenisnya apa, sudah berapa lama. KPI Administrasi disusun dari antrean ini, bukan estimasi.</p>
-            <span class="go">Buka antrean verifikasi →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#mgmt_inbox">
-          <div class="thumb list">MGMT</div>
-          <div class="body">
-            <p class="who">Kepala Administrasi · Kepala Cabang · ABH · Operation Manager</p>
-            <h3>Empat kursi management</h3>
-            <p>KA memutus exception waivable dokumen. Operation Manager memutus billing tanpa e-PO. Kepala Cabang eskalasi STNK. Area Business Head melihat volume. Bukan waiver 30%, DP, TTD, atau lunas.</p>
-            <span class="go">Buka antrean →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#dashboard">
-          <div class="thumb list">AREA</div>
-          <div class="body">
-            <p class="who">Area Business Head · volume</p>
-            <h3>Bottleneck cabang / area</h3>
-            <p>Klik penyebab tertahan ke transaksi yang sama. 30% dan lunas tetap non-waivable. Putusan hanya di kursi yang berwenang.</p>
-            <span class="go">Buka volume →</span>
-          </div>
-        </a>
-        <a class="case" href="mockup.html#beranda">
-          <div class="thumb list">LIST</div>
-          <div class="body">
-            <p class="who">Frontman · Cilandak</p>
-            <h3>Antrean transaksi</h3>
-            <p>List dulu, baru detail. Satu baris = satu Sales Order: booking, AFI, bayar, kirim, GI, exception.</p>
-            <span class="go">Buka antrean →</span>
-          </div>
+        <a class="d-card" href="#d4">
+          <span class="marker">D4</span>
+          <h4>Finance &amp; compliance</h4>
+          <p>Gate 30%/lunas/DP/TTD, leasing Danapura, Approval Engine hanya rule waivable. Contoh: Hiace + exception.</p>
+          <em>Fitur &amp; contoh →</em>
         </a>
       </div>
+      <p class="note" style="margin-top:8px">Gallery layar: <a href="#skema-cashless">cashless → kuitansi</a> · <a href="#skema-approval">approval</a> · <a href="#skema-dokumen">dokumen</a>. Mapping field: <a href="#s2">section 2</a>.</p>
     </section>
