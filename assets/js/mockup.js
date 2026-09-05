@@ -365,7 +365,9 @@
   function show(id, opts){
     opts=opts||{};
     var from=(document.querySelector('.screen.on')||{}).id;
+    if(id==='shop_home') id='customer';
     id=stayTarget(id, from, opts.explicit);
+    if(id==='shop_home') id='customer';
     if(id==='admin_tx') id='admin_spk';
     if(currentRole==='mgmt' && id==='eskalasi') id='mgmt_inbox';
     var bookKey=ADMIN_BOOK[id];
@@ -380,7 +382,7 @@
     }
     if(bookKey) activateAdminBook(bookKey);
     var railId=({
-      shop_home:'shop_home',shop_akun:'shop_akun',
+      shop_home:'customer',shop_akun:'shop_akun',
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',bukti_serah:'customer',
       tagihan_customer:'tagihan_customer',e_kuitansi:'e_kuitansi',
       transaksi:'beranda',bayar:'cashless',request:'beranda',dokumen:'beranda',cashless:'beranda',
@@ -426,20 +428,21 @@
       if(currentRole==='cust'){
         if(id==='digiroom') bar.textContent='pay.fast.id/checkout';
         else if(id==='cashless') bar.textContent='shop.fast.id/outlet-bayar';
-        else if(id==='tagihan_customer') bar.textContent='shop.fast.id/checkout';
+        else if(id==='tagihan_customer') bar.textContent='shop.fast.id/bayar';
         else if(id==='e_kuitansi') bar.textContent='shop.fast.id/bukti-bayar';
         else if(id==='shop_akun') bar.textContent='shop.fast.id/akun';
-        else if(id==='shop_home') bar.textContent='shop.fast.id/toko';
+        else if(id==='customer') bar.textContent='shop.fast.id/pesanan';
+        else if(id==='customer_detail') bar.textContent='shop.fast.id/pesanan/FAST-00418';
         else bar.textContent='shop.fast.id/pesanan/'+id;
       } else {
         bar.textContent=(id==='digiroom'?'digiroom.fast.id/beranda':'sam.fast.id/fast/'+id);
       }
     }
     var shopTab=({
-      shop_home:'home', customer:'orders', customer_detail:'orders', order_aksesoris:'orders',
+      shop_home:'orders', customer:'orders', customer_detail:'track', order_aksesoris:'orders',
       order_calya:'orders', bukti_serah:'orders', tagihan_customer:'pay', e_kuitansi:'pay',
       digiroom:'pay', cashless:'pay', shop_akun:'akun'
-    })[id]||'home';
+    })[id]||'orders';
     document.querySelectorAll('.shop-tabbar [data-shop-tab]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-shop-tab')===shopTab ? 'true' : 'false');
     });
@@ -517,6 +520,7 @@
     applyMgmtInbox();
     applyDewiProc();
     applyHandoverCust();
+    applyCustPayScene();
     if(window.FAST && FAST.renderMaster) FAST.renderMaster();
   }
   if(window.FAST && FAST.lineageInit) FAST.lineageInit(show);
@@ -580,7 +584,7 @@
 
   var payJobSticky=false;
   var currentRole='frontman';
-  var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'shop_home'};
+  var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer'};
   var mgmtSeat='ka';
   var MGMT_SEATS={
     ka:{label:'Kepala Administrasi',home:'mgmt_inbox'},
@@ -706,13 +710,8 @@
       filterOrders();
     });
   });
-  var shopSearch=document.getElementById('shopSearch');
-  if(shopSearch) shopSearch.addEventListener('input', function(){
-    var q=shopSearch.value.toLowerCase();
-    document.querySelectorAll('#shopCatalog .shop-product').forEach(function(card){
-      card.classList.toggle('is-hidden', !(!q||card.textContent.toLowerCase().indexOf(q)>-1));
-    });
-  });
+  var orderSearch=document.getElementById('orderSearch');
+  if(orderSearch) orderSearch.addEventListener('input', filterOrders);
 
   var txFilter='all';
   function filterTx(){
@@ -2201,6 +2200,93 @@
       el.textContent=st==='approved'?'Tercatat':st==='submitted'?'Cek Admin':st==='returned'?'Dikembalikan':'Menunggu bukti';
     });
   }
+  function getCustPayScene(){
+    var live=window.FAST && FAST.load ? FAST.load() : null;
+    if(live && live.paid && live.ar===0) return 'paid';
+    var s=window.FAST && FAST.load ? FAST.load(FAST.CUST_PAY_KEY) : null;
+    var scene=s && s.scene;
+    if(scene==='request'||scene==='open'||scene==='both') return scene;
+    return 'both';
+  }
+  function applyCustPayScene(){
+    var scene=getCustPayScene();
+    var paid=scene==='paid';
+    var showReq=!paid && (scene==='both'||scene==='request');
+    var showOpen=!paid && (scene==='both'||scene==='open');
+    payJobs.open.max=showReq?81750000:181750000;
+    document.querySelectorAll('[data-cust-pay]').forEach(function(el){
+      var k=el.getAttribute('data-cust-pay');
+      if(k==='request') el.hidden=!showReq;
+      else if(k==='open') el.hidden=!showOpen;
+      else if(k==='none'||k==='paid') el.hidden=!paid;
+    });
+    document.querySelectorAll('[data-cust-pay-scene]').forEach(function(b){
+      var key=b.getAttribute('data-cust-pay-scene');
+      b.setAttribute('aria-pressed', (!paid && key===scene)?'true':'false');
+    });
+    var openMax=formatRp(payJobs.open.max);
+    document.querySelectorAll('[data-cust-open-max]').forEach(function(el){
+      el.textContent='Maks. '+openMax;
+    });
+    document.querySelectorAll('[data-cust-open-copy]').forEach(function(el){
+      el.textContent=showReq
+        ? 'Tidak memakai tagihan salesman. Anda isi nominal, lalu scan QRIS atau terbitkan VA. Maksimum sisa di luar request.'
+        : 'Tidak ada penagihan Frontman. Lunasi AR Open sendiri lewat QRIS atau VA. Isi nominal sampai maksimum sisa.';
+    });
+    var lead=document.querySelector('[data-cust-pay-lead]');
+    if(lead){
+      if(paid) lead.textContent='Lunas. Tidak ada penagihan Frontman atau pelunasan cashless yang menunggu.';
+      else if(scene==='request') lead.textContent='Hanya proses 1: bayar penagihan salesman. Nominal dikunci. Pelunasan cashless tidak tampil.';
+      else if(scene==='open') lead.textContent='Hanya proses 2: pelunasan cashless. Isi nominal sendiri. Tidak ada tagihan Frontman.';
+      else lead.textContent='Dua jalur terpisah: bayar tagihan salesman bila ada, atau lunasi sendiri lewat cashless.';
+    }
+    var spec=document.querySelector('[data-cust-list-spec]');
+    var tag=document.querySelector('[data-cust-list-tag]');
+    var cta=document.querySelector('[data-cust-list-cta]');
+    if(spec){
+      if(paid) spec.textContent='Lunas · lacak pengiriman dan dokumen';
+      else if(scene==='request') spec.textContent='Ada penagihan salesman Rp 100.000.000 · pelunasan cashless tidak dibuka';
+      else if(scene==='open') spec.textContent='Tidak ada request Frontman · lunasi sendiri sisa AR Open';
+      else spec.textContent='Ada penagihan salesman + sisa bisa dilunasi cashless';
+    }
+    if(tag){
+      tag.textContent=paid?'Lunas':'Menunggu bayar';
+      tag.className=paid?'tag ok':'tag hold';
+    }
+    if(cta) cta.textContent=paid?'Lacak pengiriman →':'Lacak & bayar →';
+    var payLi=document.querySelector('[data-cust-track-pay]');
+    var shipLi=document.querySelector('[data-cust-track-ship]');
+    var docLi=document.querySelector('[data-cust-track-doc]');
+    function setMs(el, state, sub){
+      if(!el) return;
+      el.classList.remove('done','now');
+      if(state) el.classList.add(state);
+      var m=el.querySelector('.m');
+      if(m) m.textContent=state==='done'?'✓':(state==='now'?'•':'•');
+      var t=el.querySelector('.t');
+      if(t && sub) t.textContent=sub;
+    }
+    if(paid){
+      setMs(payLi,'done','AR Open Rp 0 · kuitansi baru terbit');
+      setMs(shipLi,'now','Antrian kirim terbuka setelah lunas');
+      setMs(docLi,null,'STNK & BPKB setelah pengajuan cabang');
+    } else {
+      setMs(payLi,'now', showReq && showOpen
+        ? 'Sisa tagihan masih terbuka — pilih penagihan Frontman atau pelunasan cashless'
+        : (showReq?'Menunggu bayar penagihan Frontman Rp 100.000.000':'Menunggu pelunasan cashless — isi nominal sendiri'));
+      setMs(shipLi,null,'Tertahan sampai lunas · bukan ruang gelap');
+      setMs(docLi,null,'STNK & BPKB setelah pelunasan dan pengajuan cabang');
+    }
+    if(!paid && payJobId==='open') applyPayLockUI();
+  }
+  document.querySelectorAll('[data-cust-pay-scene]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var scene=b.getAttribute('data-cust-pay-scene');
+      if(window.FAST && FAST.save) FAST.save({scene:scene}, FAST.CUST_PAY_KEY);
+      applyCustPayScene();
+      toast(scene==='request'?'Skenario: hanya penagihan Frontman.':scene==='open'?'Skenario: hanya pelunasan cashless.':'Skenario: ada request + sisa cashless.');
+    });
+  });
   function applyHandoverCust(){
     var s=window.FAST && FAST.load ? FAST.load() : null;
     var paid=!!(s && s.paid && s.ar===0);
@@ -2644,12 +2730,13 @@
   applyGi();
   applyB2b();
   applyHandoverCust();
+  applyCustPayScene();
   applyAfi();
   applyDewiProc();
   syncRoleChrome();
   syncMgmtSeat();
   if(window.FAST && FAST.renderMaster) FAST.renderMaster();
-  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyExcNama(); applyExcEpo(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyB2b(); applyAfi(); applyDewiProc(); applyHandoverCust(); applyMgmtInbox(); if(window.FAST && FAST.renderMaster) FAST.renderMaster(); });
+  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyExcNama(); applyExcEpo(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyB2b(); applyAfi(); applyDewiProc(); applyHandoverCust(); applyCustPayScene(); applyMgmtInbox(); if(window.FAST && FAST.renderMaster) FAST.renderMaster(); });
 
   var channelMeta={
     qris:{title:'QRIS'},
