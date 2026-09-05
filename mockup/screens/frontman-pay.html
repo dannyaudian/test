@@ -2,7 +2,7 @@
         <div class="screenhead">
           <div>
             <h2>Payment · SPK/26/CLD/00418</h2>
-            <p>Setiap pembayaran terverifikasi dicatat sekali, menghasilkan satu receipt, dialokasikan otomatis, dan tetap terhubung dengan nomor SPK, SO, serta billing.</p>
+            <p>Every verified payment is recorded once, produces a single receipt, is allocated automatically, and stays linked to the SPK, SO, and billing numbers.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← List</button>
@@ -20,58 +20,58 @@
         <div class="split">
           <div>
             <div class="box">
-              <h3>Riwayat &amp; alokasi</h3>
+              <h3>History &amp; allocation</h3>
               <div class="scroll">
               <table>
-                <thead><tr><th>Tanggal</th><th>Payment reference</th><th>Receipt</th><th>Type</th><th>Alokasi</th><th class="num">Nominal</th><th>Status</th></tr></thead>
+                <thead><tr><th>Date</th><th>Payment reference</th><th>Receipt</th><th>Type</th><th>Allocation</th><th class="num">Amount</th><th>Status</th></tr></thead>
                 <tbody>
-                  <tr><td>28 Aug 2026</td><td>VA 8801 0418 0001<span class="sub">BCA</span></td><td>KWT/26/CLD/008731<span class="sub">Download PDF</span></td><td>Booking fee</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238 terhubung otomatis</span></td><td class="num">Rp 5.000.000</td><td><span class="tag ok">Terverifikasi</span></td></tr>
-                  <tr><td>1 Sep 2026</td><td>VA 8801 0418 0002<span class="sub">BCA</span></td><td>KWT/26/CLD/009115<span class="sub">Download PDF</span></td><td>Settlement tahap 1</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 300.000.000</td><td><span class="tag ok">Teralokasi</span></td></tr>
-                  <tr><td>2 Sep 2026</td><td>VA 8801 0418 0003<span class="sub">Pending transfer</span></td><td>—<span class="sub">Not yet issued</span></td><td>Settlement tahap 2</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 100.000.000</td><td><span class="tag wait">Request aktif</span></td></tr>
+                  <tr><td>28 Aug 2026</td><td>VA 8801 0418 0001<span class="sub">BCA</span></td><td>KWT/26/CLD/008731<span class="sub">Download PDF</span></td><td>Booking fee</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238 linked automatically</span></td><td class="num">Rp 5.000.000</td><td><span class="tag ok">Verified</span></td></tr>
+                  <tr><td>1 Sep 2026</td><td>VA 8801 0418 0002<span class="sub">BCA</span></td><td>KWT/26/CLD/009115<span class="sub">Download PDF</span></td><td>Settlement stage 1</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 300.000.000</td><td><span class="tag ok">Allocated</span></td></tr>
+                  <tr><td>2 Sep 2026</td><td>VA 8801 0418 0003<span class="sub">Pending transfer</span></td><td>—<span class="sub">Not yet issued</span></td><td>Settlement stage 2</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 100.000.000</td><td><span class="tag wait">Active request</span></td></tr>
                 </tbody>
               </table>
               </div>
             </div>
 
             <div class="box">
-              <h3>Payment not yet cocok <span class="side">Ditangani Administration</span></h3>
+              <h3>Payment not yet matched <span class="side">Handled by Administration</span></h3>
               <div class="pad">
-                <p style="margin:0;font-size:13px;color:var(--ink-soft)">Tidak ada pembayaran unmatched untuk transactions ini. Setiap transfer tanpa referensi valid akan otomatis received antrean exception Administration, bukan ke transactions ini.</p>
+                <p style="margin:0;font-size:13px;color:var(--ink-soft)">There are no unmatched payments for this transaction. Any transfer without a valid reference is automatically routed to the Administration exception queue, not to this transaction.</p>
               </div>
             </div>
 
             <div class="box">
-              <h3>Konsekuensi pembatalan receipt</h3>
+              <h3>Consequences of cancelling a receipt</h3>
               <ul class="gates">
-                <li><span class="mark no">1</span><div>Receipt menjadi Cancelled<span class="why">Documents asli tetap saved pada audit trail</span></div><span class="tag stop">Reversal</span></li>
-                <li><span class="mark idle">2</span><div>Nominal dikembalikan ke AR Open<span class="why">Outstanding unit dihitung again</span></div><span class="tag hold">Recalculate</span></li>
-                <li><span class="mark idle">3</span><div>Related payment request updated<span class="why">Menjadi Cancelled atau Requires Follow-up</span></div><span class="tag hold">Follow-up</span></li>
-                <li><span class="mark idle">4</span><div>Billing dan delivery gate dievaluasi again<span class="why">Cash: cek again 30% dan paid in full. Leasing: cek again full DP dan kontrak TTD</span></div><span class="tag mute">Recheck</span></li>
+                <li><span class="mark no">1</span><div>Receipt becomes Cancelled<span class="why">Original documents remain saved in the audit trail</span></div><span class="tag stop">Reversal</span></li>
+                <li><span class="mark idle">2</span><div>Amount returned to AR Open<span class="why">Unit outstanding is recalculated</span></div><span class="tag hold">Recalculate</span></li>
+                <li><span class="mark idle">3</span><div>Related payment request updated<span class="why">Becomes Cancelled or Requires Follow-up</span></div><span class="tag hold">Follow-up</span></li>
+                <li><span class="mark idle">4</span><div>Billing and delivery gate re-evaluated<span class="why">Cash: recheck 30% and paid in full. Leasing: recheck full DP and signed contract</span></div><span class="tag mute">Recheck</span></li>
               </ul>
             </div>
           </div>
 
           <div>
             <div class="box">
-              <h3>Kontrol permintaan settlement</h3>
+              <h3>Settlement request control</h3>
               <div class="pad">
                 <div class="frow" style="padding-left:0;padding-right:0"><i class="own s">S</i><span class="lab">AR Open</span><span class="val">Rp 181.750.000</span><span class="src"></span></div>
-                <div class="frow" style="padding-left:0;padding-right:0"><i class="own s">S</i><span class="lab">Request aktif</span><span class="val">Rp 100.000.000</span><span class="src"></span></div>
-                <div class="frow" style="padding-left:0;padding-right:0;border-bottom:0"><i class="own s">S</i><span class="lab">Tersedia untuk request new</span><span class="val">Rp 81.750.000</span><span class="src"></span></div>
-                <button class="btn" style="width:100%;margin-top:12px" data-go="request">Buat request Rp 81.750.000</button>
+                <div class="frow" style="padding-left:0;padding-right:0"><i class="own s">S</i><span class="lab">Active request</span><span class="val">Rp 100.000.000</span><span class="src"></span></div>
+                <div class="frow" style="padding-left:0;padding-right:0;border-bottom:0"><i class="own s">S</i><span class="lab">Available for a new request</span><span class="val">Rp 81.750.000</span><span class="src"></span></div>
+                <button class="btn" style="width:100%;margin-top:12px" data-go="request">Create request Rp 81.750.000</button>
               </div>
             </div>
-            <p class="note">Tidak ada booking fee minimum unit, tidak ada SO. Cash: billing pada ≥30%, delivery hanya setelah paid in full. Leasing: billing setelah full DP B2B, delivery setelah kontrak TTD B2B.</p>
+            <p class="note">No minimum unit booking fee, no SO. Cash: billing at ≥30%, delivery only after paid in full. Leasing: billing after full B2B DP, delivery after the signed B2B contract.</p>
           </div>
         </div>
       </section>
 
-      <!-- ============ FORM PERMINTAAN PEMBAYARAN ============ -->
+      <!-- ============ PAYMENT REQUEST FORM ============ -->
       <section class="screen" id="request">
         <div class="screenhead">
           <div>
-            <h2>Buat permintaan pembayaran</h2>
-            <p>SPK/26/CLD/00418 · Budi Santoso · SO 4500091238. Data transactions ditarik otomatis, Frontman hanya menentukan nominal dan kanal.</p>
+            <h2>Create a payment request</h2>
+            <p>SPK/26/CLD/00418 · Budi Santoso · SO 4500091238. Transaction data is pulled automatically; the Frontman only sets the amount and channel.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← List</button>
@@ -89,7 +89,7 @@
         <div class="split">
           <div>
             <div class="box">
-              <h3>1 · Type pembayaran</h3>
+              <h3>1 · Payment type</h3>
               <div class="form">
                 <div class="seg" id="jenisSeg">
                   <button type="button" data-budi-bf aria-pressed="false">Booking fee</button>
@@ -104,51 +104,51 @@
               <div class="form">
                 <div class="fgrid">
                   <div class="field"><label><i class="own s">S</i> Customer</label><input value="Budi Santoso · CST-0090412" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Nomor SPK</label><input value="SPK/26/CLD/00418" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> SPK Number</label><input value="SPK/26/CLD/00418" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Sales Order</label><input value="4500091238" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Nomor billing</label><input value="Belum issued · diajukan bersama AFI" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Billing Number</label><input value="Not yet issued · submitted together with AFI" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Unit</label><input value="Innova Zenix 2.0 G HV · VIN ••41827" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Metode / requirement</label><input value="Cash · billing + AFI berpasangan · ≥30% · delivery menunggu lunas" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Nilai transactions</label><input value="Rp 486.750.000" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Method / requirement</label><input value="Cash · billing + AFI paired · ≥30% · delivery awaiting paid in full" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Transaction value</label><input value="Rp 486.750.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Total receipt aktif</label><input value="Rp 305.000.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> AR Open</label><input value="Rp 181.750.000" readonly></div>
-                  <div class="field"><label><i class="own s">S</i> Request aktif</label><input value="Rp 100.000.000" readonly></div>
+                  <div class="field"><label><i class="own s">S</i> Active request</label><input value="Rp 100.000.000" readonly></div>
                   <div class="field"><label><i class="own s">S</i> Available Request Amount</label><input value="Rp 81.750.000" readonly></div>
                 </div>
               </div>
             </div>
 
             <div class="box">
-              <h3>3 · Diisi Frontman</h3>
+              <h3>3 · Entered by Frontman</h3>
               <div class="form">
                 <div class="fgrid">
                   <div class="field">
-                    <label><i class="own f">F</i> Nominal diminta</label>
+                    <label><i class="own f">F</i> Requested amount</label>
                     <input value="Rp 81.750.000">
-                    <span class="help">Maksimal sebesar AR Open dikurangi seluruh request aktif. Nilai divalidasi again saat dikirim dan saat customer membukanya.</span>
+                    <span class="help">At most the AR Open minus all active requests. The value is re-validated when sent and when the customer opens it.</span>
                   </div>
                   <div class="field">
-                    <label><i class="own f">F</i> Alokasi</label>
-                    <select><option>SO 4500091238 · 1 unit</option><option>Bagi per unit (multi-unit)</option></select>
-                    <span class="help">Untuk cash, delivery tetap pending paid in full per unit. Billing sudah lolos karena ≥30%.</span>
+                    <label><i class="own f">F</i> Allocation</label>
+                    <select><option>SO 4500091238 · 1 unit</option><option>Split per unit (multi-unit)</option></select>
+                    <span class="help">For cash, delivery stays pending paid in full per unit. Billing has passed because it is ≥30%.</span>
                   </div>
                   <div class="field">
-                    <label><i class="own f">F</i> Berlaku sampai</label>
+                    <label><i class="own f">F</i> Valid until</label>
                     <input value="5 September 2026, 23:59">
                   </div>
                   <div class="field">
-                    <label><i class="own f">F</i> Kanal delivery</label>
-                    <select><option>WhatsApp · 0812••••4471</option><option>Digiroom</option><option>WhatsApp dan Digiroom</option></select>
+                    <label><i class="own f">F</i> Delivery channel</label>
+                    <select><option>WhatsApp · 0812••••4471</option><option>Digiroom</option><option>WhatsApp and Digiroom</option></select>
                   </div>
                 </div>
                 <div class="field">
-                  <label><i class="own f">F</i> Catatan untuk customer</label>
-                  <textarea>Unit sudah lolos PDI. Billing cash sudah memenuhi 30%. Jadwal serah terima dapat dikonfirmasi setelah settlement paid in full.</textarea>
+                  <label><i class="own f">F</i> Note for the customer</label>
+                  <textarea>The unit has passed PDI. Cash billing has met 30%. The handover schedule can be confirmed after settlement is paid in full.</textarea>
                 </div>
               </div>
               <div class="formfoot">
-                <span class="hint">Request mengunci nominal di QRIS dan VA. Tanpa request, customer mengisi angka sendiri lalu QRIS tampil atau VA issued.</span>
-                <button class="btn ghost">Simpan draft</button>
+                <span class="hint">A request locks the amount in QRIS and VA. Without a request, the customer enters the amount themselves, then QRIS is shown or a VA is issued.</span>
+                <button class="btn ghost">Save draft</button>
                 <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Send Digiroom link</button>
               </div>
             </div>

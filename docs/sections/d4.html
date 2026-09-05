@@ -2,76 +2,76 @@
       <div class="sec-head">
         <span class="num">D4</span>
         <div>
-          <h2>Deliverable 4 — Operasi finance dan dukungan compliance</h2>
-          <p class="deck">AR, receipt, gate billing/delivery, workspace leasing B2B, dan Approval Engine memakai data yang same dari depan. Finance tidak menagih dari spreadsheet terpisah.</p>
+          <h2>Deliverable 4 — Finance operations and compliance support</h2>
+          <p class="deck">AR, receipts, billing/delivery gates, the B2B leasing workspace, and the Approval Engine all use the same data from the front. Finance does not bill from a separate spreadsheet.</p>
         </div>
       </div>
 
       <div class="callout">
-        <span class="tag">Batas Approval Engine</span>
-        <p>Engine hanya untuk compliance gate yang gagal <b>dan</b> rule waivable. Bukan untuk discount, cashback, program, booking fee, 30% cash, paid in full, full DP leasing, atau TTD kontrak.</p>
+        <span class="tag">Approval Engine boundary</span>
+        <p>The engine is only for a failed compliance gate <b>and</b> a waivable rule. Not for discount, cashback, program, booking fee, 30% cash, paid in full, full leasing DP, or contract signature.</p>
       </div>
 
       <h3>Features</h3>
       <div class="feat-list">
         <article class="feat">
-          <h4>Integritas SPK–SO–billing dan AR</h4>
-          <p>Setiap documents membawa nomor induk. AR Open dan Available Request Amount dihitung sistem (lihat D2). Finance melihat eksposur real-time per unit, bukan rekonsiliasi malam hari.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Buku receipt <a href="mockup.html#admin_kwt">#admin_kwt</a> menampilkan SPK/SO/metode. Lineage Budi di <a href="mockup.html#transaksi">#transactions</a>.</p>
+          <h4>SPK–SO–billing and AR integrity</h4>
+          <p>Every document carries the parent number. AR Open and Available Request Amount are computed by the system (see D2). Finance sees real-time exposure per unit, not overnight reconciliation.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> The receipt ledger <a href="mockup.html#admin_kwt">#admin_kwt</a> shows SPK/SO/method. Budi's lineage in <a href="mockup.html#transaksi">#transactions</a>.</p>
         </article>
         <article class="feat">
-          <h4>Gate keuangan non-waivable</h4>
-          <p>Cash: billing unlocked pada ≥30% dana received; delivery hanya paid in full. Leasing: billing setelah full DP dari B2B + e-PO; delivery setelah kontrak TTD dari B2B. Kekurangan e-PO untuk paperless saja waivable ke Operation Manager.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Hold komersial di <a href="mockup.html#eskalasi">#eskalasi</a> — tidak ada button decision untuk fee, 30%, paid in full, DP, atau TTD.</p>
+          <h4>Non-waivable financial gate</h4>
+          <p>Cash: billing unlocked at ≥30% of funds received; delivery only when paid in full. Leasing: billing after full DP from B2B + e-PO; delivery after the signed contract from B2B. Only a missing e-PO for paperless is waivable to the Operation Manager.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Commercial hold in <a href="mockup.html#eskalasi">#eskalasi</a> — there is no decision button for fee, 30%, paid in full, DP, or signature.</p>
         </article>
         <article class="feat">
-          <h4>Reversal / reissue receipt</h4>
-          <p>Koreksi berjejak. Cancelled mengembalikan AR dan mengunci again gate yang sempat unlocked. Payment request terkait menjadi Cancelled atau Requires Follow-up.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Status cancelled tetap terlihat di buku branch dan histori customer. Gate billing/delivery dievaluasi again.</p>
+          <h4>Receipt reversal / reissue</h4>
+          <p>Corrections are traced. Cancelled returns AR and re-locks the gate that was briefly unlocked. The related payment request becomes Cancelled or Requires Follow-up.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> The cancelled status stays visible in the branch ledger and customer history. The billing/delivery gate is re-evaluated.</p>
         </article>
         <article class="feat">
-          <h4>Workspace leasing per Sales Order</h4>
-          <p>Alur B2B: submit → documents → kontrak → TTD → DP → e-PO → billing request paperless → settlement. Mitra ilustratif: PT Danapura Multifinance. FAST bukan lessor. Angka DP, tenor, dan financed amount read-only dari B2B.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Hiace SPK/26/CLD/00421 di <a href="mockup.html#tx_hiace">#tx_hiace</a>. List branch: <a href="mockup.html#admin_leasing">#admin_leasing</a>.</p>
+          <h4>Leasing workspace per Sales Order</h4>
+          <p>B2B flow: submit → documents → contract → signature → DP → e-PO → paperless billing request → settlement. Illustrative partner: PT Danapura Multifinance. FAST is not the lessor. DP amount, tenor, and financed amount are read-only from B2B.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Hiace SPK/26/CLD/00421 in <a href="mockup.html#tx_hiace">#tx_hiace</a>. Branch list: <a href="mockup.html#admin_leasing">#admin_leasing</a>.</p>
         </article>
         <article class="feat">
-          <h4>Peran Frontman vs Administration di leasing</h4>
-          <p>Frontman: download kontrak, upload setelah TTD, foto TTD, foto serah, BSTKB, documents yang diminta leasing. Tidak menagih leasing. Administration: paperless + receipt leasing hanya setelah paket Frontman lengkap, full DP, dan e-PO — atau OM menyetujui paperless tanpa e-PO. Settlement tetap butuh e-PO asli.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Exception paperless: <a href="mockup.html#exc_epo">#exc_epo</a>. Kekurangan documents kembali ke Frontman sebagai backflow, bukan waiver DP/TTD.</p>
+          <h4>Frontman vs Administration roles in leasing</h4>
+          <p>Frontman: download the contract, upload after signing, photo of signature, photo of handover, BSTKB, documents requested by leasing. Does not bill leasing. Administration: paperless + leasing receipt only after the Frontman package is complete, full DP, and e-PO — or the OM approves paperless without an e-PO. Settlement still requires the original e-PO.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Paperless exception: <a href="mockup.html#exc_epo">#exc_epo</a>. Missing documents go back to Frontman as a backflow, not a DP/signature waiver.</p>
         </article>
         <article class="feat">
           <h4>Exception routing</h4>
-          <p>Frontman + proof → Administration verification → Head of Administration atau Operation Manager sesuai rule. Release bersyarat, validity, scope. Non-waivable: lengkapi data atau tahan. Eskalasi aging STNK ke KC adalah operasional, bukan engine komersial.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Received engine: <a href="mockup.html#exc_nama">name</a>, <a href="mockup.html#exc_alamat">address</a>, <a href="mockup.html#exc_afi">AFI</a>, e-PO. Bukan engine: Sarah NPWP, Maria STNK, hold 30%/paid in full. Inbox: <a href="mockup.html#mgmt_inbox">#mgmt_inbox</a>.</p>
+          <p>Frontman + proof → Administration verification → Head of Administration or Operation Manager per the rule. Conditional release, validity, scope. Non-waivable: complete the data or hold. STNK aging escalation to KC is operational, not the commercial engine.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Accepted by the engine: <a href="mockup.html#exc_nama">name</a>, <a href="mockup.html#exc_alamat">address</a>, <a href="mockup.html#exc_afi">AFI</a>, e-PO. Not the engine: Sarah NPWP, Maria STNK, 30%/paid-in-full hold. Inbox: <a href="mockup.html#mgmt_inbox">#mgmt_inbox</a>.</p>
         </article>
       </div>
 
-      <h3>Alur pengecualian</h3>
-      <div class="chain"><span>Gate gagal</span><i>→</i><span>Waivable?</span><i>→</i><span>Frontman + proof</span><i>→</i><span>Admin cek</span><i>→</i><span>KA / OM</span><i>→</i><span>Release atau kunci</span></div>
-      <p>Gallery: <a href="#skema-approval">skema approval gate</a>.</p>
+      <h3>Exception flow</h3>
+      <div class="chain"><span>Gate failed</span><i>→</i><span>Waivable?</span><i>→</i><span>Frontman + proof</span><i>→</i><span>Admin check</span><i>→</i><span>KA / OM</span><i>→</i><span>Release or lock</span></div>
+      <p>Gallery: <a href="#skema-approval">approval gate scheme</a>.</p>
 
-      <h3>Example: Hiace · leasing B2B (SPK/26/CLD/00421)</h3>
+      <h3>Example: Hiace · B2B leasing (SPK/26/CLD/00421)</h3>
       <ol class="walk">
-        <li><b>Workspace leasing</b> DP wajib, e-PO, tenor, dan langkah berikutnya tampil per SO. Angka dari B2B, read-only.
+        <li><b>Leasing workspace</b> Required DP, e-PO, tenor, and the next steps are shown per SO. Numbers from B2B, read-only.
           <span class="how"><a href="mockup.html#tx_hiace">Hiace 00421</a></span></li>
-        <li><b>Administration</b> Status per SO sampai settlement. Documents kurang kembali ke Frontman — bukan waiver gate.
-          <span class="how"><a href="mockup.html#admin_leasing">List leasing</a></span></li>
-        <li><b>Paperless tanpa e-PO</b> Hanya jika Operation Manager menyetujui. Frontman tidak mengetik waiver. Full DP dan TTD tetap non-waivable. Settlement tetap butuh e-PO asli.
+        <li><b>Administration</b> Status per SO through to settlement. Missing documents go back to Frontman — not a gate waiver.
+          <span class="how"><a href="mockup.html#admin_leasing">Leasing list</a></span></li>
+        <li><b>Paperless without e-PO</b> Only if the Operation Manager approves. Frontman does not type a waiver. Full DP and signature remain non-waivable. Settlement still requires the original e-PO.
           <span class="how"><a href="mockup.html#exc_epo">Exception e-PO</a></span></li>
       </ol>
 
-      <h3>Example: apa yang received engine, apa yang tidak</h3>
+      <h3>Example: what the engine accepts and what it does not</h3>
       <ol class="walk">
-        <li><b>Received engine</b> Dewi name ≠ STNK; Budi address expired; pecah AFI; e-PO paperless ke OM.
+        <li><b>Accepted by the engine</b> Dewi name ≠ STNK; Budi address expired; broken AFI; paperless e-PO to OM.
           <span class="how"><a href="mockup.html#exc_nama">Name</a> · <a href="mockup.html#exc_alamat">Address</a> · <a href="mockup.html#exc_afi">AFI</a> · <a href="mockup.html#exc_epo">e-PO</a></span></li>
-        <li><b>Tidak received engine</b> Sarah NPWP (lengkapi data); Maria aging STNK (eskalasi KC); hold booking fee / 30% / paid in full / TTD.
-          <span class="how">Kartu di <a href="#skema-approval">skema approval</a> — tidak ada button setuju pada gerbang komersial.</span></li>
-        <li><b>Queue branch</b> Hanya rule waivable yang pending decision. Empat kursi: KA, OM, KC, ABH.
-          <span class="how"><a href="mockup.html#mgmt_inbox">Inbox</a> · <a href="mockup.html#eskalasi">Eskalasi</a></span></li>
+        <li><b>Not accepted by the engine</b> Sarah NPWP (complete the data); Maria STNK aging (KC escalation); booking fee / 30% / paid-in-full / signature hold.
+          <span class="how">Cards in the <a href="#skema-approval">approval scheme</a> — there is no approve button on commercial gates.</span></li>
+        <li><b>Branch queue</b> Only waivable rules are pending decision. Four seats: KA, OM, KC, ABH.
+          <span class="how"><a href="mockup.html#mgmt_inbox">Inbox</a> · <a href="mockup.html#eskalasi">Escalation</a></span></li>
       </ol>
 
       <div class="see-row">
-        <a class="see" href="#skema-approval"><span class="see-k">Flow</span><b>Waivable vs bukan</b><span>All layar mockup yang relevan</span><em>View →</em></a>
-        <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Finance</span><b>Buku receipt</b><span>Lineage payment → receipt → AR</span><em>View →</em></a>
+        <a class="see" href="#skema-approval"><span class="see-k">Flow</span><b>Waivable vs not</b><span>All relevant mockup screens</span><em>View →</em></a>
+        <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Finance</span><b>Receipt ledger</b><span>Lineage payment → receipt → AR</span><em>View →</em></a>
       </div>
     </section>

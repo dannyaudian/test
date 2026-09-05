@@ -2,82 +2,82 @@
       <div class="sec-head">
         <span class="num">D2</span>
         <div>
-          <h2>Deliverable 2 — Payment cashless dan e-receipt</h2>
-          <p class="deck">Kanal (QRIS, VA, CDM, Digiroom, EDC) hanya cara pay. Yang mengikat adalah payment request, verification Banking API, dan satu nomor receipt per pembayaran paid in full.</p>
+          <h2>Deliverable 2 — Cashless payments and e-receipts</h2>
+          <p class="deck">Channels (QRIS, VA, CDM, Digiroom, EDC) are only ways to pay. What binds the transaction is the payment request, Banking API verification, and one receipt number per fully paid payment.</p>
         </div>
       </div>
 
       <div class="callout">
         <span class="tag">What changes</span>
-        <p>Konfirmasi pay, alokasi, dan receipt tidak diketik di kasir. Request yang not yet paid tidak menerbitkan receipt dan tidak memotong AR Open. Receipt aktif yang memotong AR.</p>
+        <p>Payment confirmation, allocation, and receipts are not typed at the cashier. A request that is not yet paid does not issue a receipt and does not reduce AR Open. It is the active receipt that reduces AR.</p>
       </div>
 
       <h3>Features</h3>
       <div class="feat-list">
         <article class="feat">
           <h4>Booking fee: request locked</h4>
-          <p>After SPK + document gate, sistem menagih nominal master unit. Customer tidak mengisi angka sendiri. EDC hanya di perangkat Frontman. Tanpa receipt fee, SO tidak unlocked.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Dewi Rp 3.000.000 di <a href="mockup.html#customer_booking">#customer_booking</a> dan <a href="mockup.html#customer_booking_qris">#customer_booking_qris</a>. Dua cara, satu request, satu receipt <span class="kwt">KWT/26/CLD/009301</span>.</p>
+          <p>After the SPK + document gate, the system bills the unit master amount. The customer does not enter the amount themselves. EDC is only on the Frontman device. Without a fee receipt, the SO is not unlocked.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Dewi Rp 3.000.000 in <a href="mockup.html#customer_booking">#customer_booking</a> and <a href="mockup.html#customer_booking_qris">#customer_booking_qris</a>. Two ways, one request, one receipt <span class="kwt">KWT/26/CLD/009301</span>.</p>
         </article>
         <article class="feat">
-          <h4>Settlement: request Frontman atau setoran customer</h4>
-          <p><b>Process 1</b> — Frontman membuat request dalam batas Available Request Amount; QRIS/VA locked. <b>Process 2</b> — customer membuka invoice unit dari home dan mengenter amount; QRIS/VA issued setelah angka. Ini dua proses, dua receipt — jangan digabung.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Process 1 Budi: <a href="mockup.html#cashless">#cashless</a> (Frontman) dan <a href="mockup.html#tagihan_customer">#tagihan_customer</a>. Process 2: <a href="mockup.html#digiroom">#digiroom</a> — enter amount dulu, new QR/VA.</p>
+          <h4>Settlement: Frontman request or customer deposit</h4>
+          <p><b>Process 1</b> — Frontman creates a request within the Available Request Amount limit; QRIS/VA locked. <b>Process 2</b> — the customer opens the unit invoice from home and enters the amount; QRIS/VA is issued after the amount. These are two processes, two receipts — do not merge them.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Process 1 Budi: <a href="mockup.html#cashless">#cashless</a> (Frontman) and <a href="mockup.html#tagihan_customer">#tagihan_customer</a>. Process 2: <a href="mockup.html#digiroom">#digiroom</a> — enter the amount first, then a new QR/VA.</p>
         </article>
         <article class="feat">
           <h4>AR Open vs Available Request Amount</h4>
-          <p>AR Open = nilai invoice unit − total receipt aktif. Available Request Amount = AR Open − request aktif yang not yet paid dan not yet expired. Request menggantung tidak boleh menumpuk sampai overpayment.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Budi: receipt aktif <span class="kwt">008731</span> Rp 5 jt + <span class="kwt">009115</span> Rp 300 jt memotong AR. Sisa ilustratif Rp 181,75 jt. Request yang masih menggantung tidak memotong AR.</p>
+          <p>AR Open = unit invoice value − total active receipts. Available Request Amount = AR Open − active requests that are not yet paid and not yet expired. Pending requests must not pile up into overpayment.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Budi: active receipts <span class="kwt">008731</span> Rp 5 million + <span class="kwt">009115</span> Rp 300 million reduce AR. Illustrative balance Rp 181.75 million. Pending requests do not reduce AR.</p>
         </article>
         <article class="feat">
-          <h4>Satu pay, satu receipt</h4>
-          <p>Banking API memverifikasi → alokasi ke unit/SO → satu nomor KWT → e-receipt PDF. Nomor same di HP customer dan buku branch. Not yet pay = not yet KWT.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Customer download di <a href="mockup.html#e_kuitansi">#e_kuitansi</a>. Branch melihat nomor yang same di <a href="mockup.html#admin_kwt">#admin_kwt</a>.</p>
+          <h4>One payment, one receipt</h4>
+          <p>Banking API verifies → allocation to unit/SO → one KWT number → e-receipt PDF. The same number on the customer's phone and in the branch ledger. Not yet paid = no KWT yet.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> The customer downloads it at <a href="mockup.html#e_kuitansi">#e_kuitansi</a>. The branch sees the same number at <a href="mockup.html#admin_kwt">#admin_kwt</a>.</p>
         </article>
         <article class="feat">
-          <h4>Status receipt dan koreksi</h4>
-          <p>Issued / Active / Reversed / Cancelled / Reissued. Tidak ditimpa. Cancelled mengembalikan AR dan mengevaluasi again gate billing/delivery. Customer tetap melihat histori cancelled.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Filter status di buku branch. Cancelled tetap baris histori, bukan dihapus. Gate 30%/paid in full dievaluasi again setelah batal.</p>
+          <h4>Receipt status and corrections</h4>
+          <p>Issued / Active / Reversed / Cancelled / Reissued. Not overwritten. Cancelled returns AR and re-evaluates the billing/delivery gate. The customer still sees the cancelled history.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Status filter in the branch ledger. Cancelled stays as a history row, not deleted. The 30%/paid-in-full gate is re-evaluated after cancellation.</p>
         </article>
         <article class="feat">
-          <h4>Open unit bill di home customer</h4>
-          <p>Customer sees seluruh invoice unit yang masih open, status request, dan download PDF. Frontman dan customer memakai angka AR yang same. Tidak ada EDC di toko customer.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Order List <a href="mockup.html#customer">#customer</a> — Zenix masih open, Calya yang sudah diserahkan terpisah.</p>
+          <h4>Open unit bill on the customer home</h4>
+          <p>The customer sees every unit invoice still open, request status, and downloads the PDF. Frontman and customer use the same AR amount. There is no EDC in the customer's store.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Order List <a href="mockup.html#customer">#customer</a> — Zenix still open, the already-delivered Calya is separate.</p>
         </article>
       </div>
 
       <h3>Flow in the mockup</h3>
-      <div class="chain"><span>Lihat AR / request</span><i>→</i><span>Kanal pay</span><i>→</i><span>Banking API</span><i>→</i><span>1 nomor KWT</span><i>→</i><span>AR turun</span><i>→</i><span>Gate dievaluasi</span></div>
-      <p>Tabel skenario lengkap: <a href="#skema-cashless">skema cashless → receipt</a>.</p>
+      <div class="chain"><span>View AR / request</span><i>→</i><span>Payment channel</span><i>→</i><span>Banking API</span><i>→</i><span>1 KWT number</span><i>→</i><span>AR decreases</span><i>→</i><span>Gate evaluated</span></div>
+      <p>Full scenario table: <a href="#skema-cashless">cashless → receipt scheme</a>.</p>
 
       <h3>Example: Dewi · booking fee Yaris</h3>
       <ol class="walk">
-        <li><b>Request dari Frontman</b> SPK 00426 saved, documents cukup. Frontman membuka request booking Rp 3.000.000 — bukan form SO.
-          <span class="how">Yang terlihat: nominal master unit, dua cara customer membayar request yang same. <a href="mockup.html#booking">Layar tagih</a></span></li>
-        <li><b>Customer Digiroom</b> HP hanya konfirmasi angka locked, lalu pilih VA (norek + salin) atau QRIS (gambar QR).
-          <span class="how">Yang terlihat: tidak ada kolom “isi sendiri”, tidak ada EDC. <a href="mockup.html#customer_booking">pay.fast.id</a></span></li>
+        <li><b>Request from Frontman</b> SPK 00426 saved, documents sufficient. Frontman opens a Rp 3.000.000 booking request — not an SO form.
+          <span class="how">What you see: the unit master amount, two ways for the customer to pay the same request. <a href="mockup.html#booking">Billing screen</a></span></li>
+        <li><b>Customer Digiroom</b> The phone only confirms the locked amount, then chooses VA (account number + copy) or QRIS (QR image).
+          <span class="how">What you see: no “enter it yourself” field, no EDC. <a href="mockup.html#customer_booking">pay.fast.id</a></span></li>
         <li><b>Or scan the QRIS stand</b> Barcode on the salesman's screen. Your phone confirms the same request.
-          <span class="how">Yang terlihat: layar konfirmasi sempit, bukan kasir. <a href="mockup.html#customer_booking_qris">Table QRIS</a></span></li>
-        <li><b>Receipt lalu SO</b> After Banking API, <span class="kwt">KWT/26/CLD/009301</span> tertaut SPK dulu. Nomor SO 4500091426 ditambah ke lineage setelah fee meet — receipt tidak diganti.</li>
+          <span class="how">What you see: a narrow confirmation screen, not a cashier. <a href="mockup.html#customer_booking_qris">Table QRIS</a></span></li>
+        <li><b>Receipt then SO</b> After Banking API, <span class="kwt">KWT/26/CLD/009301</span> is linked to the SPK first. SO number 4500091426 is added to the lineage after the fee is met — the receipt is not replaced.</li>
       </ol>
 
-      <h3>Example: Budi · Zenix dua proses pay</h3>
+      <h3>Example: Budi · Zenix two payment processes</h3>
       <ol class="walk">
-        <li><b>Process 1 — request Frontman</b> Nominal Rp 100.000.000 locked. Customer tidak mengubah angka. Ini bukan settlement isi sendiri.
-          <span class="how"><a href="mockup.html#cashless">Frontman</a> · <a href="mockup.html#tagihan_customer">HP customer</a></span></li>
-        <li><b>Process 2 — setoran sendiri</b> Tanpa request. Customer enter amount di Digiroom; QRIS tampil setelah angka, VA issued setelah angka.
-          <span class="how"><a href="mockup.html#digiroom">Enter amount</a> — receipt berbeda dari proses 1.</span></li>
-        <li><b>AR hanya turun oleh receipt aktif</b> Example: <span class="kwt">KWT/26/CLD/008731</span> tanda jadi Rp 5 jt dan <span class="kwt">KWT/26/CLD/009115</span> settlement 1 Rp 300 jt. Sisa ilustratif Rp 181,75 jt. Request menggantung tidak memotong AR.</li>
-        <li><b>Nomor same di dua sisi</b> Customer download PDF; branch membuka buku. Unmatched ditangani Administration, bukan diketik Frontman.
+        <li><b>Process 1 — Frontman request</b> Amount Rp 100.000.000 locked. The customer does not change the amount. This is not a self-entered settlement.
+          <span class="how"><a href="mockup.html#cashless">Frontman</a> · <a href="mockup.html#tagihan_customer">Customer phone</a></span></li>
+        <li><b>Process 2 — self deposit</b> No request. The customer enters the amount in Digiroom; QRIS appears after the amount, VA is issued after the amount.
+          <span class="how"><a href="mockup.html#digiroom">Enter amount</a> — a different receipt from process 1.</span></li>
+        <li><b>AR only decreases from active receipts</b> Example: <span class="kwt">KWT/26/CLD/008731</span> deposit Rp 5 million and <span class="kwt">KWT/26/CLD/009115</span> settlement 1 Rp 300 million. Illustrative balance Rp 181.75 million. Pending requests do not reduce AR.</li>
+        <li><b>The same number on both sides</b> The customer downloads the PDF; the branch opens the ledger. Unmatched items are handled by Administration, not typed by Frontman.
           <span class="how"><a href="mockup.html#e_kuitansi">E-receipt</a> · <a href="mockup.html#admin_kwt">Branch Ledger</a> · <a href="mockup.html#admin_pay">Payment</a></span></li>
       </ol>
 
       <div class="see-row">
-        <a class="see" href="#skema-cashless"><span class="see-k">Flow</span><b>All skenario D2</b><span>Request vs setoran, EDC, unmatched, not yet pay</span><em>View →</em></a>
-        <a class="see" href="mockup.html#admin_pay"><span class="see-k">Admin</span><b>Payment branch</b><span>Unmatched ditangani Administration, bukan diketik Frontman</span><em>View →</em></a>
+        <a class="see" href="#skema-cashless"><span class="see-k">Flow</span><b>All D2 scenarios</b><span>Request vs deposit, EDC, unmatched, not yet paid</span><em>View →</em></a>
+        <a class="see" href="mockup.html#admin_pay"><span class="see-k">Admin</span><b>Payment branch</b><span>Unmatched items are handled by Administration, not typed by Frontman</span><em>View →</em></a>
       </div>
       <blockquote class="rule">
-        <span class="tag">Yang tidak berubah</span>
-        <p>Tidak ada pembayaran terverifikasi, tidak ada receipt. Cash: billing ≥30% dana received; delivery hanya paid in full. Leasing: billing setelah full DP + e-PO (e-PO hilang waivable ke OM untuk paperless); delivery setelah kontrak TTD dari B2B.</p>
+        <span class="tag">What does not change</span>
+        <p>No verified payment, no receipt. Cash: billing ≥30% of funds received; delivery only when paid in full. Leasing: billing after full DP + e-PO (a missing e-PO is waivable to the OM for paperless); delivery after the signed contract from B2B.</p>
       </blockquote>
     </section>

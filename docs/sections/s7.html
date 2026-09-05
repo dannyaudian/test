@@ -3,13 +3,13 @@
         <span class="num">7</span>
         <div>
           <h2>Technology and Control Enablers</h2>
-          <p class="deck">Komponen sistem yang menjalankan input ownership, validasi, dan carry-forward data.</p>
+          <p class="deck">System components that carry out input ownership, validation, and carry-forward of data.</p>
         </div>
       </div>
       <div class="grid g2">
         <div class="panel">
           <h4>SAM — Single front-end</h4>
-          <p>Digunakan Frontman untuk:</p>
+          <p>Used by the Frontman to:</p>
           <ul><li>Input customer and transaction data.</li><li>Upload documents.</li><li>Create payment requests.</li><li>View open unit bills.</li><li>Monitor payments and receipts.</li><li>Submit Sales Order request.</li><li>Request billing.</li><li>Request AFI/DO.</li><li>Request delivery.</li><li>Submit handover evidence.</li><li>Monitor STNK/BPKB.</li><li>View failed compliance rules.</li><li>Complete missing requirements.</li><li>Submit eligible compliance exception.</li><li>View exception decision and escalation.</li></ul>
         </div>
         <div class="panel">
@@ -26,7 +26,7 @@
         </div>
         <div class="panel">
           <h4>Integration and API Layer</h4>
-          <ul><li>Menghubungkan SAM, SAP/ERP, Banking API, Document Vault, Compliance Exception Approval Engine, dan customer channel.</li><li>Mencegah input again.</li><li>Menyinkronkan status.</li><li>Mempertahankan SPK–SO–Billing lineage.</li><li>Memperkaya receipt lineage ketika SO atau billing issued.</li><li>Memicu proses downstream.</li></ul>
+          <ul><li>Connects SAM, SAP/ERP, Banking API, Document Vault, Compliance Exception Approval Engine, and the customer channel.</li><li>Prevents re-input.</li><li>Synchronizes status.</li><li>Maintains SPK–SO–Billing lineage.</li><li>Enriches receipt lineage when the SO or billing is issued.</li><li>Triggers downstream processes.</li></ul>
         </div>
         <div class="panel">
           <h4>Rules and Workflow Engine</h4>
@@ -34,12 +34,12 @@
         </div>
         <div class="panel">
           <h4>Compliance Exception Approval Engine</h4>
-          <ul><li>Failed compliance gate only.</li><li>Waivable versus non-waivable classification.</li><li>Role-based decision authority.</li><li>Evidence completeness.</li><li>Approve with conditions.</li><li>Reject.</li><li>Return for completion.</li><li>Validity period and expiry.</li><li>Limited release by process, unit, dan Sales Order.</li><li>Automatic re-lock.</li><li>SLA monitoring and escalation.</li></ul>
-          <p>Transaction value, discount, cashback, program, dan OPO/OPK tetap menjadi read-only source-system data dan bukan objek approval dalam FAST.</p>
+          <ul><li>Failed compliance gate only.</li><li>Waivable versus non-waivable classification.</li><li>Role-based decision authority.</li><li>Evidence completeness.</li><li>Approve with conditions.</li><li>Reject.</li><li>Return for completion.</li><li>Validity period and expiry.</li><li>Limited release by process, unit, and Sales Order.</li><li>Automatic re-lock.</li><li>SLA monitoring and escalation.</li></ul>
+          <p>Transaction value, discount, cashback, program, and OPO/OPK remain read-only source-system data and are not approval objects within FAST.</p>
         </div>
         <div class="panel">
           <h4>Document Vault</h4>
-          <ul><li>Store documents once.</li><li>Validate document status.</li><li>Reuse valid documents.</li><li>Support AFI/DO, delivery, STNK, dan BPKB.</li><li>Store digital handover evidence (photo, VIN, geotag, timestamp, recipient, BSTKB) as one pack.</li><li>Give the same pack to Frontman, Administration, and the customer after Good Issue is approved.</li><li>Prevent repeated document upload.</li></ul>
+          <ul><li>Store documents once.</li><li>Validate document status.</li><li>Reuse valid documents.</li><li>Support AFI/DO, delivery, STNK, and BPKB.</li><li>Store digital handover evidence (photo, VIN, geotag, timestamp, recipient, BSTKB) as one pack.</li><li>Give the same pack to Frontman, Administration, and the customer after Good Issue is approved.</li><li>Prevent repeated document upload.</li></ul>
         </div>
         <div class="panel">
           <h4>B2B Leasing Integration</h4>
@@ -58,7 +58,7 @@
         </div>
         <div class="panel">
           <h4>E-Receipt Service</h4>
-          <ul><li>Generate one receipt per verified payment.</li><li>Generate receipt number.</li><li>Generate PDF.</li><li>Add verification code atau QR.</li><li>Maintain Active, Cancelled, Reversed, dan Reissued status.</li><li>Preserve payment-to-receipt lineage.</li><li>Provide customer download access.</li><li>Maintain download history.</li></ul>
+          <ul><li>Generate one receipt per verified payment.</li><li>Generate receipt number.</li><li>Generate PDF.</li><li>Add verification code or QR.</li><li>Maintain Active, Cancelled, Reversed, and Reissued status.</li><li>Preserve payment-to-receipt lineage.</li><li>Provide customer download access.</li><li>Maintain download history.</li></ul>
         </div>
         <div class="panel">
           <h4>Audit Trail</h4>

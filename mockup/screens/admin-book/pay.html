@@ -1,6 +1,6 @@
         <div class="box book-panel" data-book-panel="pay" hidden>
           <h3>Payment branch <span class="side">Posted, request, pending, unmatched</span></h3>
-          <div class="order-filters" role="tablist" aria-label="Filter pembayaran" style="margin:12px 16px 0">
+          <div class="order-filters" role="tablist" aria-label="Filter payments" style="margin:12px 16px 0">
             <button type="button" data-admin-pay-filter="all" aria-pressed="true">All</button>
             <button type="button" data-admin-pay-filter="posted" aria-pressed="false">Posted</button>
             <button type="button" data-admin-pay-filter="request" aria-pressed="false">Request</button>
@@ -9,7 +9,7 @@
           </div>
           <div class="scroll">
           <table id="adminPayTable">
-            <thead><tr><th>Waktu</th><th>Referensi</th><th>Receipt</th><th>Type</th><th>Transactions</th><th class="num">Nominal</th><th>Status</th></tr></thead>
+            <thead><tr><th>Time</th><th>Reference</th><th>Receipt</th><th>Type</th><th>Transactions</th><th class="num">Amount</th><th>Status</th></tr></thead>
             <tbody id="adminPayList">
               <tr data-go="so" data-admin-pay-status="posted" data-tx-dots="dewi">
                 <td>3 Sep 10:12<span class="sub">QRIS</span></td>
@@ -33,7 +33,7 @@
                 <td>2 Sep 09:05<span class="sub">Request</span></td>
                 <td>VA 8801 0418 0003</td>
                 <td>—</td>
-                <td>Settlement tahap 2</td>
+                <td>Settlement stage 2</td>
                 <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418</span></td>
                 <td class="num">Rp 100.000.000</td>
                 <td><span class="tag wait">Request</span></td>
@@ -44,24 +44,24 @@
                 <td>—</td>
                 <td>Settlement Yaris</td>
                 <td>Dewi Lestari · Yaris<span class="sub">SO 4500091426</span></td>
-                <td class="num">Sisa AR</td>
+                <td class="num">Remaining AR</td>
                 <td><span class="tag wait">Pending</span></td>
               </tr>
               <tr data-go="bayar" data-admin-pay-status="posted">
                 <td>1 Sep 14:08<span class="sub">VA BCA</span></td>
                 <td>VA 8801 0418 0002</td>
                 <td><b>KWT/26/CLD/009115</b></td>
-                <td>Settlement tahap 1</td>
+                <td>Settlement stage 1</td>
                 <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418</span></td>
                 <td class="num">Rp 300.000.000</td>
                 <td><span class="tag ok">Posted</span></td>
               </tr>
               <tr data-go="verifikasi" data-admin-pay-status="unmatched">
                 <td>1 Sep 15:22<span class="sub">BCA transfer</span></td>
-                <td>Tidak dikenali</td>
+                <td>Unrecognized</td>
                 <td>—</td>
                 <td>Exception</td>
-                <td>Not yet dialokasi</td>
+                <td>Not yet allocated</td>
                 <td class="num">Rp 25.000.000</td>
                 <td><span class="tag stop">Unmatched</span></td>
               </tr>
@@ -86,5 +86,5 @@
             </tbody>
           </table>
           </div>
-          <p class="note">Unmatched tidak menempel ke SPK sampai dicocokkan. Request not yet mengurangi AR Open. Receipt aktif ada di list Receipt.</p>
+          <p class="note">Unmatched does not attach to the SPK until it is matched. A request does not yet reduce AR Open. Active receipts are in the Receipt list.</p>
         </div>

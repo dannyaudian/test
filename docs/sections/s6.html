@@ -3,72 +3,72 @@
         <span class="num">6</span>
         <div>
           <h2>System Compliance Gates</h2>
-          <p class="deck">Gate yang menentukan kapan transactions boleh bergerak. SO, AFI, billing, dan delivery mengikuti metode cash atau leasing.</p>
+          <p class="deck">Gates that determine when transactions may move forward. SO, AFI, billing, and delivery follow the cash or leasing method.</p>
         </div>
       </div>
       <div class="scroller">
         <table>
           <thead><tr><th>Gate</th><th>Validation scope</th><th>Process unlocked</th></tr></thead>
           <tbody>
-            <tr><td>Data Gate</td><td>Customer identity, STNK name vs buyer, address 7 field, transaction structure, purchase method, dan duplicate check. Name berbeda wajib supporting document.</td><td class="gate-note">Valid SPK</td></tr>
-            <tr><td>Document Gate</td><td>Mandatory dan unit-specific documents</td><td class="gate-note">Booking fee request</td></tr>
-            <tr><td>Booking Fee Gate</td><td>Saved SPK, invoice booking fee ke customer, nominal minimum sesuai unit, payment reference, verification, receipt, dan SPK linkage</td><td class="gate-note">Sales Order linked to SPK</td></tr>
-            <tr><td>Settlement Gate</td><td>Payment allocation, active receipt completeness, AR Open, active-request exposure, receipt reversal, dan Available Request Amount</td><td class="gate-note">AR and request control</td></tr>
-            <tr><td>Compliance Exception Gate</td><td>Failed rule, waivability, evidence, risk, decision authority, conditions, scope, dan validity period</td><td class="gate-note">Conditional release or remain locked</td></tr>
-            <tr><td>AFI + Billing</td><td>Data STNK (name, address) lengkap di SPK. AFI dan billing diajukan bersama. AFI dulu atau billing tanpa AFI hanya lewat Approval Engine.</td><td class="gate-note">Billing number + pengajuan AFI</td></tr>
-            <tr><td>Leasing e-PO</td><td>Persetujuan leasing atas total DP customer, jumlah yang dibiayai, dan tenor. Status dari B2B. Tanpa e-PO, paperless ke Operation Manager. Settlement tetap butuh e-PO asli.</td><td class="gate-note">Paperless leasing / tetap tertahan</td></tr>
-            <tr><td>Delivery Gate</td><td>Cash: paid in full. Leasing: kontrak sudah TTD customer; status dari B2B leasing. Plus AFI/DO, VIN, PDI, dan handover.</td><td class="gate-note">Unit release</td></tr>
+            <tr><td>Data Gate</td><td>Customer identity, STNK name vs buyer, 7-field address, transaction structure, purchase method, and duplicate check. A differing name requires a supporting document.</td><td class="gate-note">Valid SPK</td></tr>
+            <tr><td>Document Gate</td><td>Mandatory and unit-specific documents</td><td class="gate-note">Booking fee request</td></tr>
+            <tr><td>Booking Fee Gate</td><td>Saved SPK, booking fee invoice to the customer, minimum nominal per unit, payment reference, verification, receipt, and SPK linkage</td><td class="gate-note">Sales Order linked to SPK</td></tr>
+            <tr><td>Settlement Gate</td><td>Payment allocation, active receipt completeness, AR Open, active-request exposure, receipt reversal, and Available Request Amount</td><td class="gate-note">AR and request control</td></tr>
+            <tr><td>Compliance Exception Gate</td><td>Failed rule, waivability, evidence, risk, decision authority, conditions, scope, and validity period</td><td class="gate-note">Conditional release or remain locked</td></tr>
+            <tr><td>AFI + Billing</td><td>STNK data (name, address) complete in the SPK. AFI and billing are submitted together. AFI first, or billing without AFI, only through the Approval Engine.</td><td class="gate-note">Billing number + AFI submission</td></tr>
+            <tr><td>Leasing e-PO</td><td>Leasing approval of the customer's total DP, the financed amount, and the tenor. Status from B2B. Without an e-PO, paperless to the Operation Manager. Settlement still requires the original e-PO.</td><td class="gate-note">Paperless leasing / remains held</td></tr>
+            <tr><td>Delivery Gate</td><td>Cash: paid in full. Leasing: contract already signed by the customer; status from B2B leasing. Plus AFI/DO, VIN, PDI, and handover.</td><td class="gate-note">Unit release</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Scenarios in the mockup: <a href="#skema-approval">approval gate</a> · <a href="#skema-documents">document gate</a>. Uraian fitur: <a href="#d3">D3 documents</a> · <a href="#d4">D4 finance</a>. Document Gate yang lolos membuka invoice booking fee, bukan Sales Order. Booking fee, 30%, paid in full, dan TTD tidak received Approval Engine.</p>
+      <p>Scenarios in the mockup: <a href="#skema-approval">approval gate</a> · <a href="#skema-documents">document gate</a>. Feature details: <a href="#d3">D3 documents</a> · <a href="#d4">D4 finance</a>. A passed Document Gate opens the booking fee invoice, not the Sales Order. Booking fee, 30%, paid in full, and signature are not handled by the Approval Engine.</p>
       <div class="see-row">
         <a class="see" href="#skema-documents"><span class="see-k">Documents</span><b>Document Gate scenarios</b><span>Dewi upload · Sarah NPWP · Budi vault · GI</span><em>View →</em></a>
         <a class="see" href="mockup.html#exc_nama"><span class="see-k">Waivable</span><b>Buyer Name ≠ STNK</b><span>Dewi · supporting document → Head of Administration</span><em>View →</em></a>
-        <a class="see" href="mockup.html#tx_raize"><span class="see-k">Data</span><b>Sarah · NPWP missing</b><span>Bukan Approval Engine</span><em>View →</em></a>
+        <a class="see" href="mockup.html#tx_raize"><span class="see-k">Data</span><b>Sarah · NPWP missing</b><span>Not the Approval Engine</span><em>View →</em></a>
         <a class="see" href="mockup.html#exc_alamat"><span class="see-k">Waivable</span><b>Expired address proof</b><span>Frontman → Admin → Head of Administration</span><em>View →</em></a>
-        <a class="see" href="mockup.html#exc_epo"><span class="see-k">Waivable</span><b>Billing tanpa e-PO</b><span>Hiace · Operation Manager · bukan waiver DP</span><em>View →</em></a>
-        <a class="see" href="mockup.html#tx_hiace"><span class="see-k">Non-waivable</span><b>Hiace status B2B ke gate</b><span>TTD &amp; DP dari alur leasing, bukan waiver</span><em>View →</em></a>
+        <a class="see" href="mockup.html#exc_epo"><span class="see-k">Waivable</span><b>Billing without e-PO</b><span>Hiace · Operation Manager · not a DP waiver</span><em>View →</em></a>
+        <a class="see" href="mockup.html#tx_hiace"><span class="see-k">Non-waivable</span><b>Hiace B2B status to gate</b><span>Signature &amp; DP from the leasing flow, not a waiver</span><em>View →</em></a>
       </div>
       <div class="grid g2">
         <div class="panel">
           <h4>Sales Order — Booking Fee Gate</h4>
           <ul>
-            <li>After Frontman menginput dan menyimpan SPK, sistem menagih booking fee ke customer.</li>
-            <li>Nominal booking fee berbeda-beda tergantung mobil/unit, ditarik dari master kendaraan.</li>
-            <li>Sales Order hanya dapat dibuat setelah minimum booking fee unit tersebut terverifikasi.</li>
-            <li>Rule ini non-waivable. Approval Engine tidak dapat membuka SO tanpa booking fee.</li>
+            <li>After the Frontman inputs and saves the SPK, the system bills the booking fee to the customer.</li>
+            <li>The booking fee nominal varies by car/unit and is pulled from the vehicle master.</li>
+            <li>A Sales Order can only be created after that unit's minimum booking fee is verified.</li>
+            <li>This rule is non-waivable. The Approval Engine cannot open an SO without the booking fee.</li>
           </ul>
         </div>
         <div class="panel">
           <h4>Billing Gate</h4>
           <ul>
-            <li>Data STNK (name, address) sudah lengkap di SPK sebelum billing.</li>
-            <li>Billing dan AFI diajukan bersama. AFI sebelum billing, atau billing tanpa AFI, hanya lewat Approval Engine.</li>
-            <li>Cash: uang received minimal 30% dari nilai transactions (non-waivable).</li>
-            <li>Leasing: full DP sudah received dan e-PO leasing ada (total DP, nilai dibiayai, tenor). Angka DP dan e-PO ditarik dari B2B, bukan entered again di FAST.</li>
-            <li>Tanpa e-PO, paperless billing hanya lewat Approval Engine dengan decision owner Operation Manager. Full DP dan TTD tidak di-waive. Settlement leasing tetap butuh e-PO asli.</li>
-            <li>Billing tidak pending paid in full untuk cash, dan tidak memakai persentase 30% untuk leasing.</li>
-            <li>Rule 30% cash / full DP leasing bersifat non-waivable. Rule e-PO pada billing leasing bersifat waivable kepada Operation Manager.</li>
+            <li>STNK data (name, address) is already complete in the SPK before billing.</li>
+            <li>Billing and AFI are submitted together. AFI before billing, or billing without AFI, only through the Approval Engine.</li>
+            <li>Cash: at least 30% of the transaction value received (non-waivable).</li>
+            <li>Leasing: full DP already received and the leasing e-PO present (total DP, financed value, tenor). The DP figures and e-PO are pulled from B2B, not entered again in FAST.</li>
+            <li>Without an e-PO, paperless billing only through the Approval Engine with the Operation Manager as decision owner. Full DP and signature are not waived. Leasing settlement still requires the original e-PO.</li>
+            <li>Billing does not wait for paid in full for cash, and does not use the 30% percentage for leasing.</li>
+            <li>The 30% cash / full DP leasing rule is non-waivable. The e-PO rule on leasing billing is waivable to the Operation Manager.</li>
           </ul>
         </div>
         <div class="panel">
           <h4>Delivery Gate</h4>
           <ul>
-            <li>Cash: transactions sudah paid in full.</li>
-            <li>Leasing: kontrak sudah ditandatangani customer. Status TTD ditarik dari B2B leasing setelah sales mengupload kembali kontrak yang sudah TTD (atau konfirmasi mitra).</li>
-            <li>AFI/DO, VIN, dan PDI tetap dicek sebagai kesiapan operasional.</li>
-            <li>Rule paid in full cash dan kontrak leasing bersifat non-waivable.</li>
+            <li>Cash: the transaction is already paid in full.</li>
+            <li>Leasing: the contract is already signed by the customer. Signature status is pulled from B2B leasing after sales re-uploads the signed contract (or the partner confirms).</li>
+            <li>AFI/DO, VIN, and PDI are still checked as operational readiness.</li>
+            <li>The paid-in-full cash rule and the leasing contract rule are non-waivable.</li>
           </ul>
         </div>
         <div class="panel">
-          <h4>Sumber data kontrol</h4>
+          <h4>Control data sources</h4>
           <ul>
-            <li>Minimum booking fee: master unit.</li>
-            <li>Persentase uang received cash: receipt aktif ÷ nilai transactions.</li>
+            <li>Minimum booking fee: unit master.</li>
+            <li>Cash received percentage: active receipt ÷ transaction value.</li>
             <li>Full DP leasing: B2B leasing.</li>
-            <li>E-PO leasing (DP, nilai dibiayai, tenor): B2B leasing.</li>
-            <li>Kontrak TTD leasing: B2B leasing.</li>
+            <li>Leasing e-PO (DP, financed value, tenor): B2B leasing.</li>
+            <li>Signed leasing contract: B2B leasing.</li>
           </ul>
         </div>
       </div>
@@ -76,7 +76,7 @@
         <span class="tag">Central rules</span>
         <p>No transaction moves forward unless the system confirms that the required data is complete, sourced from the correct owner, validated, and ready to be reused by the next process.</p>
         <p>Approval Engine is activated only when a compliance rule fails and the policy classifies that rule as waivable.</p>
-        <p>Minimum booking fee untuk SO, ambang billing 30% cash / full DP leasing, serta requirement delivery paid in full cash / kontrak leasing TTD bersifat non-waivable. Billing leasing tanpa e-PO waivable kepada Operation Manager; settlement leasing tetap butuh e-PO asli.</p>
+        <p>The minimum booking fee for the SO, the 30% cash / full DP leasing billing threshold, and the paid-in-full cash / signed leasing contract delivery requirement are non-waivable. Leasing billing without an e-PO is waivable to the Operation Manager; leasing settlement still requires the original e-PO.</p>
         <p>Non-waivable legal, regulatory, and mandatory policy requirements cannot be overridden.</p>
       </blockquote>
     </section>

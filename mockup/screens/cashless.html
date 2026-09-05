@@ -2,7 +2,7 @@
         <div class="screenhead">
           <div>
             <h2>Pay · <span data-pay-unit>Innova Zenix</span></h2>
-            <p>QRIS dan VA penjualan unit: customer bisa enter amount, kecuali sudah ada payment request salesman.</p>
+            <p>QRIS and VA for unit sales: the customer can enter the amount, unless a salesman payment request already exists.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-back data-go="beranda">← List</button>
@@ -17,83 +17,83 @@
           <button type="button" data-stay-tab="exc" data-go="exc_alamat">Exceptions</button>
         </nav>
         <div class="cards">
-          <div class="card alert"><p class="k">Sisa invoice</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">Match di Frontman dan customer</p></div>
-          <div class="card"><p class="k">Request aktif</p><p class="v">100<span style="font-size:14px;font-weight:500"> Jt</span></p><p class="n">QRIS &amp; VA locked ke request ini</p></div>
+          <div class="card alert"><p class="k">Remaining invoice</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">Matches on Frontman and customer</p></div>
+          <div class="card"><p class="k">Active request</p><p class="v">100<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">QRIS &amp; VA locked to this request</p></div>
         </div>
         <div class="box">
-          <h3 data-cash-title>Terima di branch atau delivery tautan</h3>
+          <h3 data-cash-title>Receive at branch or delivery link</h3>
           <div class="pad">
-            <p class="hint" data-cash-cust-note hidden>Debit EDC tidak ada di layar customer. Frontman yang pilih mesin dan dorong nominal host-to-host.</p>
+            <p class="hint" data-cash-cust-note hidden>Debit EDC is not on the customer screen. The Frontman picks the machine and pushes the amount host-to-host.</p>
             <div class="channels" id="cashSeg">
-              <button type="button" class="channel" data-cash="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode di layar Frontman</span></button>
-              <button type="button" class="channel" data-cash="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Kode pay di mesin setor</span></button>
-              <button type="button" class="channel" data-cash="link" aria-pressed="false"><span class="n">3</span><b>Tautan pay</b><span>Home Digiroom</span></button>
-              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Frontman pilih perangkat</span></button>
+              <button type="button" class="channel" data-cash="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Barcode on the Frontman screen</span></button>
+              <button type="button" class="channel" data-cash="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Payment code at the deposit machine</span></button>
+              <button type="button" class="channel" data-cash="link" aria-pressed="false"><span class="n">3</span><b>Payment link</b><span>Digiroom Home</span></button>
+              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Frontman picks the device</span></button>
             </div>
             <div class="bf-panels">
               <div data-cash-panel="qris" class="on">
-                <div class="amtchips" role="group" aria-label="Nominal QRIS">
-                  <button type="button" class="chip on" data-cash-amt="request">Sesuai request · Rp 100.000.000</button>
-                  <button type="button" class="chip" data-cash-amt="open">Nominal lain</button>
+                <div class="amtchips" role="group" aria-label="QRIS amount">
+                  <button type="button" class="chip on" data-cash-amt="request">As per request · Rp 100.000.000</button>
+                  <button type="button" class="chip" data-cash-amt="open">Other amount</button>
                 </div>
                 <div data-cash-qris-request>
-                  <p class="hint">Payment request salesman. Tunjukkan barcode — customer tidak mengubah angka.</p>
+                  <p class="hint">Salesman payment request. Show the barcode — the customer does not change the amount.</p>
                   <div class="qrbox lg" role="img" aria-label="QRIS settlement Innova"></div>
                   <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 100.000.000</p>
-                  <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000">Simulasi ter-scan</button>
+                  <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000">Simulate scanned</button>
                 </div>
                 <div data-cash-qris-open hidden>
-                  <p class="hint">Tidak memakai request. Enter amount (maks. Rp 81.750.000), lalu tampilkan QRIS. Bukan VA.</p>
+                  <p class="hint">Not using a request. Enter the amount (max. Rp 81.750.000), then show the QRIS. Not a VA.</p>
                   <label class="amtfield">
-                    <span>Nominal QRIS</span>
+                    <span>QRIS amount</span>
                     <input id="cashQrisAmt" inputmode="numeric" autocomplete="off" placeholder="Example 25000000">
                   </label>
-                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-show="cash">Tampilkan QRIS</button>
+                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-show="cash">Show QRIS</button>
                   <div data-cash-qris-ready hidden>
-                    <div class="qrbox lg" role="img" aria-label="QRIS nominal lain"></div>
+                    <div class="qrbox lg" role="img" aria-label="QRIS other amount"></div>
                     <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px" id="cashQrisLabel">Rp 0</p>
-                    <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="0" id="cashQrisPay">Simulasi ter-scan</button>
+                    <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="0" id="cashQrisPay">Simulate scanned</button>
                   </div>
                 </div>
               </div>
               <div data-cash-panel="cdm">
-                <p class="hint">Setor tunai di CDM branch. Kode dari SPK — jangan ketik nominal di mesin.</p>
+                <p class="hint">Deposit cash at the branch CDM. The code comes from the SPK — do not type the amount into the machine.</p>
                 <div class="kiosk" style="max-width:360px">
                   <p style="margin:0;font-size:12px;opacity:.7">CDM · FAST Outlet Cilandak</p>
-                  <p style="margin:8px 0 0;font-size:13px">Kode pay</p>
+                  <p style="margin:8px 0 0;font-size:13px">Payment code</p>
                   <p class="pay-code">0418 1000 03</p>
                   <p style="margin:8px 0 0;font-size:12px;opacity:.7">Settlement · Rp 100.000.000</p>
                 </div>
-                <button type="button" class="btn" style="width:100%;margin-top:12px" data-pay="cdm" data-amount="100000000">Simulasi setor CDM</button>
+                <button type="button" class="btn" style="width:100%;margin-top:12px" data-pay="cdm" data-amount="100000000">Simulate CDM deposit</button>
               </div>
               <div data-cash-panel="link">
-                <p class="hint">Di Digiroom customer pilih QRIS (scan) atau VA (transfer). Request 100 juta mengunci nominal; tanpa request, mereka isi sendiri.</p>
+                <p class="hint">In Digiroom the customer chooses QRIS (scan) or VA (transfer). A Rp 100 million request locks the amount; without a request, they fill it in themselves.</p>
                 <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
-                  <p class="from">FAST · tautan Digiroom</p>
-                  <p>Halo Pak Budi, ada request settlement Rp 100.000.000. Anda juga bisa pay nominal lain lewat QRIS atau VA.</p>
-                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Buka</span><b>digiroom.fast.id/home</b></div>
+                  <p class="from">FAST · Digiroom link</p>
+                  <p>Hello Mr. Budi, there is a settlement request of Rp 100.000.000. You can also pay another amount via QRIS or VA.</p>
+                  <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Open</span><b>digiroom.fast.id/home</b></div>
                 </div>
                 <button type="button" class="btn" style="width:100%" data-go="digiroom" data-pay-job="lunas" data-role="cust">Send Digiroom link</button>
               </div>
               <div data-cash-panel="edc">
-                <p class="hint">Pilih EDC di kasir. Customer tidak memilih perangkat. Nominal didorong host-to-host.</p>
+                <p class="hint">Pick an EDC at the cashier. The customer does not choose the device. The amount is pushed host-to-host.</p>
                 <div class="device-list">
-                  <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Kasir 1</b><span>Meja penerimaan · Cilandak</span></button>
-                  <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Kasir 2</b><span>Meja SPK</span></button>
-                  <button type="button" class="device" data-edc-device="EDC-03" aria-pressed="false"><b>EDC-03 · Outdoor</b><span>Pos serah terima</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-01" aria-pressed="true"><b>EDC-01 · Cashier 1</b><span>Reception desk · Cilandak</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-02" aria-pressed="false"><b>EDC-02 · Cashier 2</b><span>SPK desk</span></button>
+                  <button type="button" class="device" data-edc-device="EDC-03" aria-pressed="false"><b>EDC-03 · Outdoor</b><span>Handover post</span></button>
                 </div>
-                <p class="hint edc-hint" style="margin:12px 0">Ready dorong ke EDC-01 · Kasir 1</p>
-                <button type="button" class="btn" style="width:100%" data-pay="edc" data-amount="100000000">Delivery Rp 100.000.000 ke perangkat</button>
+                <p class="hint edc-hint" style="margin:12px 0">Ready to push to EDC-01 · Cashier 1</p>
+                <button type="button" class="btn" style="width:100%" data-pay="edc" data-amount="100000000">Send Rp 100.000.000 to the device</button>
               </div>
             </div>
           </div>
         </div>
         <div class="box">
-          <h3>Receipt di transactions ini</h3>
+          <h3>Receipts in this transaction</h3>
           <div class="docs">
             <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Settlement 1 · Rp 300.000.000</p><span class="tag ok">Active</span></div>
             <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking · Rp 5.000.000</p><span class="tag ok">Active</span></div>
-            <div class="doc miss" id="newReceiptSlot"><b>Receipt berikutnya</b><p class="meta">Issued setelah pay</p><span class="tag mute">Pending</span></div>
+            <div class="doc miss" id="newReceiptSlot"><b>Next receipt</b><p class="meta">Issued after payment</p><span class="tag mute">Pending</span></div>
           </div>
           <div class="pad"><button class="btn ghost" data-go="bayar" style="width:100%">Allocation history</button></div>
         </div>
