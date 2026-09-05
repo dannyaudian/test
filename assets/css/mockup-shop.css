@@ -34,13 +34,13 @@
   border-radius:18px;overflow:hidden;padding:0;background:#fff;
   box-shadow:0 8px 20px rgba(15,23,42,.04);
 }
-#mockup .cust-shop #orderList .order-card:hover{background:#fff;transform:translateY(-2px)}
-#mockup .cust-shop #orderList .order-card.featured{box-shadow:0 0 0 2px #c2410c, 0 8px 20px rgba(194,65,12,.12);background:#fff}
-#mockup .cust-shop #orderList .thumb{
+#mockup .cust-shop .order-card:hover{background:#fff;transform:translateY(-2px)}
+#mockup .cust-shop .order-card.featured{box-shadow:0 0 0 2px #c2410c, 0 8px 20px rgba(194,65,12,.12);background:#fff}
+#mockup .cust-shop .order-card .thumb{
   width:100%;height:92px;border-radius:0;font-size:15px;letter-spacing:.1em;
 }
-#mockup .cust-shop #orderList .meta{padding:12px 14px 14px}
-#mockup .cust-shop #orderList .spec{white-space:normal}
+#mockup .cust-shop .order-card .meta{padding:12px 14px 14px}
+#mockup .cust-shop .order-card .spec{white-space:normal}
 #mockup .shop-pdp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;margin:0 0 16px}
 #mockup .shop-gallery{
   border-radius:20px;min-height:220px;display:grid;place-items:center;color:#fff;
