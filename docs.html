@@ -101,7 +101,7 @@
           <div class="body">
             <p class="who">Dewi Lestari · proses utuh</p>
             <h3>SPK → QT → SO → AFI → DO → Billing → Delivery → STNK</h3>
-            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, Management, dan customer.</p>
+            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, dan Management. Customer melihat toko (katalog, pesanan, checkout) dengan nomor tagihan dan kuitansi yang sama.</p>
             <span class="go">Buka proses →</span>
           </div>
         </a>
@@ -168,13 +168,13 @@
             <span class="go">Buka billing &amp; AFI →</span>
           </div>
         </a>
-        <a class="case" href="mockup.html#customer_detail">
+        <a class="case" href="mockup.html#shop_home">
           <div class="thumb cust">HOME</div>
           <div class="body">
             <p class="who">Budi Santoso · Customer</p>
-            <h3>Pesanan &amp; sisa tagihan</h3>
-            <p>AR Open Rp 181.750.000 sama dengan Frontman. Bayar request atau nominal lain, unduh e-kuitansi.</p>
-            <span class="go">Buka pesanan customer →</span>
+            <h3>Toko &amp; sisa tagihan</h3>
+            <p>Tampilan e-commerce: katalog, kartu produk, checkout. AR Open Rp 181.750.000 sama dengan Frontman. Bukan layar SAM.</p>
+            <span class="go">Buka toko customer →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#delivery">
@@ -1182,22 +1182,23 @@
         <a class="see" href="mockup.html#mgmt_inbox"><span class="see-k">KA / KC / OM</span><b>Antrean sesuai kursi</b><span>Exception, STNK, kirim/GI — bukan 30%/lunas</span><em>Lihat →</em></a>
       </div>
       <h3>D. Customer View</h3>
+      <p>Layar customer adalah toko daring (shop.fast.id), bukan workspace SAM. Jejak internal SPK→STNK tetap di Frontman/Administrasi. Customer melihat katalog, kartu produk, checkout, dan struk — dengan AR Open, kuitansi, dan paket serah terima yang sama.</p>
       <div class="grid g3">
-        <div class="panel"><h4>Customer Home</h4><ul><li>Daftar seluruh pesanan (list dulu, seperti toko daring).</li><li>Detail pesanan setelah dipilih.</li><li>Current order status dan unit readiness.</li><li>AR Open per unit.</li><li>Active payment request.</li><li>Latest receipt.</li><li>Blocker dan next action (termasuk kirim tertahan lunas).</li><li>Paket bukti serah terima setelah Good Issue, atau status “belum ada bukti”.</li><li>Full order journey pada layar detail.</li></ul></div>
-        <div class="panel"><h4>Open Unit Bill</h4><ul><li>Transaction value.</li><li>Active receipts.</li><li>AR Open.</li><li>Active request amount.</li><li>Available payment amount.</li><li>Payment channel.</li><li>Nomor SPK.</li><li>Nomor Sales Order.</li><li>Nomor billing.</li><li>E-kuitansi.</li><li>Tombol pembayaran.</li></ul></div>
-        <div class="panel"><h4>E-Kuitansi</h4><ul><li>Melihat seluruh e-kuitansi.</li><li>Mengunduh PDF.</li><li>Melihat nomor dan status kuitansi.</li><li>Melihat unit dan nominal pembayaran.</li><li>Melihat payment reference.</li><li>Melihat hubungan SPK, SO, dan billing.</li><li>Memverifikasi kuitansi melalui verification code atau QR.</li><li>Melihat kuitansi cancelled sebagai histori, bukan bukti pembayaran aktif.</li></ul></div>
+        <div class="panel"><h4>Beranda toko</h4><ul><li>Banner checkout tertunda.</li><li>Kartu produk (bukan antrean SPK).</li><li>Cari unit / pesanan.</li><li>Tab Beranda · Pesanan · Bayar · Akun.</li></ul></div>
+        <div class="panel"><h4>Checkout &amp; tagihan</h4><ul><li>Sisa tagihan = AR Open cabang.</li><li>Permintaan salesman terkunci.</li><li>Isi nominal sendiri di QRIS/VA.</li><li>Bayar di outlet tanpa EDC customer.</li></ul></div>
+        <div class="panel"><h4>Bukti &amp; kirim</h4><ul><li>E-kuitansi sebagai struk, bukan tabel administrasi.</li><li>Status: Dipesan → Dibayar → Diproses → Dikirim → Selesai.</li><li>Paket bukti serah terima setelah unit diterima.</li></ul></div>
       </div>
       <div class="panel" style="margin-top:16px">
-        <h4>Order Journey</h4>
+        <h4>Order Journey (bahasa toko)</h4>
         <div class="journey">
-          <span class="done">SPK ✓</span><span class="done">Booking Fee/DP ✓</span><span class="done">Sales Order ✓</span><span>Pelunasan</span><span>AFI</span><span>Billing</span><span>Delivery</span><span>Good Issue</span><span>STNK/BPKB</span>
+          <span class="done">Dipesan ✓</span><span class="done">Dibayar ✓</span><span>Diproses</span><span>Dikirim</span><span>Selesai</span>
         </div>
         <div class="see-row" style="margin-top:14px">
-          <a class="see" href="mockup.html#customer"><span class="see-k">List</span><b>Pesanan saya</b><span>Budi melihat daftar dulu</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#shop_home"><span class="see-k">Toko</span><b>Beranda</b><span>Katalog + checkout tertunda</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#customer"><span class="see-k">List</span><b>Pesanan saya</b><span>Kartu produk, bukan antrean SPK</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#e_kuitansi"><span class="see-k">PDF</span><b>E-kuitansi KWT/26/CLD/009115</b><span>Unduh dari pesanan</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Bukti</span><b>Serah terima Calya</b><span>Bukan rekaman CCTV</span><em>Lihat →</em></a>
         </div>
-        <ul><li>Completed milestones and dates.</li><li>Current stage.</li><li>Hold reason.</li><li>Required customer action.</li><li>Billing status.</li><li>AFI/DO status.</li><li>Delivery schedule.</li><li>Handover status.</li><li>STNK progress.</li><li>BPKB progress.</li></ul>
       </div>
       <p>Customer menerima informasi yang berasal dari transaksi dan sumber data yang sama, bukan update manual dari fungsi yang berbeda.</p>
     </section>
