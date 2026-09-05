@@ -1,0 +1,104 @@
+      <section class="screen" id="customer_booking">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Use case · Dewi Lestari · bukan akun Budi</p>
+            <h2>Yaris 1.5 G CVT</h2>
+            <p>Pesanan FAST-00426 · Putih Metalik · FAST Outlet Cilandak</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="booking" data-role="frontman">← Tagihan Frontman</button>
+          </div>
+        </div>
+        <p class="hint" style="margin:0 0 8px">SPK sudah tersimpan. Yang muncul di sini hanya <b>booking fee</b> — request salesman terkunci Rp 3.000.000. Bukan pelunasan yang diisi sendiri, dan bukan EDC.</p>
+        <div class="payhero">
+          <p class="k">Harus dibayar sekarang</p>
+          <p class="v" data-bf-hide-paid>Rp 3.000.000</p>
+          <p class="v" data-bf-show-paid hidden>Rp 0</p>
+          <p class="n" data-bf-hide-paid>Booking fee Yaris dari master unit. Angka tidak bisa diubah di HP Anda.</p>
+          <p class="n" data-bf-show-paid hidden>Kuitansi KWT/26/CLD/009301 aktif. Cabang membuka Sales Order — Anda tidak mengisi form SO.</p>
+        </div>
+        <div class="box">
+          <h3>Lacak pesanan</h3>
+          <ul class="milestones">
+            <li class="done"><span class="m">✓</span><div>Data pesanan diterima<div class="t">5 Sep 2026 · SPK tersimpan · FAST-00426</div></div></li>
+            <li class="now" data-bf-hide-paid><span class="m">•</span><div>Booking fee<div class="t">Menunggu Rp 3.000.000 · request salesman terkunci</div></div></li>
+            <li class="done" data-bf-show-paid hidden><span class="m">✓</span><div>Booking fee<div class="t">KWT/26/CLD/009301 · Rp 3.000.000</div></div></li>
+            <li data-bf-hide-paid><span class="m">•</span><div>Pesanan diproses<div class="t">Sales Order terbuka setelah kuitansi booking fee</div></div></li>
+            <li class="now" data-bf-show-paid hidden><span class="m">•</span><div>Pesanan diproses<div class="t">SO 4500091426 menyusul di cabang</div></div></li>
+            <li><span class="m">•</span><div>Pengiriman &amp; dokumen<div class="t">Menyusul setelah pelunasan dan proses cabang</div></div></li>
+          </ul>
+        </div>
+        <div class="pay-proc request" data-bf-hide-paid>
+          <p class="k">Cara 1 · Tautan Digiroom</p>
+          <h3>Bayar di pay.fast.id</h3>
+          <p>Salesman mengirim tautan. Checkout Digiroom membuka request yang sama: QRIS dan VA terkunci Rp 3.000.000. Anda tidak mengetik angka.</p>
+          <p class="amt">Rp 3.000.000</p>
+          <p class="hint">Satu request · sama dengan yang dilihat Frontman</p>
+          <div class="nextbar">
+            <button class="btn" data-go="digiroom" data-pay-job="booking" data-role="cust">Buka Digiroom</button>
+          </div>
+        </div>
+        <div class="pay-proc cashless" data-bf-hide-paid>
+          <p class="k">Cara 2 · QRIS di meja Frontman</p>
+          <h3>Scan layar salesman</h3>
+          <p>Barcode tampil di layar Frontman di outlet. HP Anda hanya scan. Nominal sudah terisi di QR — jangan ketik ulang.</p>
+          <p class="amt">Rp 3.000.000</p>
+          <p class="hint">Bukan checkout Digiroom · EDC tetap di kasir, bukan di HP customer</p>
+          <div class="nextbar">
+            <button class="btn" data-go="customer_booking_qris" data-pay-job="booking" data-role="cust">Lihat HP saat scan</button>
+          </div>
+        </div>
+        <div class="box" data-bf-show-paid hidden>
+          <h3>Sudah dibayar</h3>
+          <div class="pad">
+            <p>Booking fee masuk. E-kuitansi KWT/26/CLD/009301. Frontman melihat kuitansi yang sama lalu sistem mengonversi SPK jadi Sales Order.</p>
+            <div class="shop-receipts">
+              <div class="shop-receipt">
+                <div><b>KWT/26/CLD/009301</b><p class="meta">Booking fee Yaris · Rp 3.000.000</p></div>
+                <button class="btn ghost" data-go="e_kuitansi">PDF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="customer_booking_qris">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">HP customer · scan di counter</p>
+            <h2>Scan QRIS Frontman</h2>
+            <p>Pesanan FAST-00426 · booking fee Yaris · FAST Outlet Cilandak</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="customer_booking" data-role="cust">← Pesanan Dewi</button>
+          </div>
+        </div>
+        <p class="hint" style="margin:0 0 12px">Barcode ada di <b>layar salesman</b>, bukan di aplikasi Anda. Setelah scan, HP hanya menampilkan konfirmasi nominal terkunci.</p>
+        <div class="box">
+          <h3>Yang Anda scan (layar Frontman)</h3>
+          <div class="pad">
+            <p class="hint">Tunjukkan layar SAM ke customer. Jumlah sudah terisi.</p>
+            <div class="qrbox lg" role="img" aria-label="QRIS booking fee di layar Frontman Rp 3.000.000"></div>
+            <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 4px">Rp 3.000.000</p>
+            <p class="hint" style="text-align:center">Booking fee · Yaris 1.5 G · request salesman</p>
+          </div>
+        </div>
+        <div class="pay-proc request" data-bf-hide-paid>
+          <p class="k">Konfirmasi di HP Anda</p>
+          <h3>Bayar ke FAST Outlet Cilandak</h3>
+          <p>Merchant FAST · booking fee. Nominal tidak bisa diedit. Ini request yang sama dengan tautan Digiroom — kanalnya saja yang berbeda.</p>
+          <p class="amt">Rp 3.000.000</p>
+          <p class="hint">e-wallet / QRIS bank · bukan EDC · bukan isi nominal sendiri</p>
+          <div class="nextbar">
+            <button class="btn" data-bf-pay="qris">Simulasi sudah scan</button>
+            <button class="btn ghost" data-go="booking" data-role="frontman">Lihat layar salesman</button>
+          </div>
+        </div>
+        <div class="box" data-bf-show-paid hidden>
+          <h3>Scan berhasil</h3>
+          <div class="pad">
+            <p>Pembayaran masuk. Kuitansi KWT/26/CLD/009301. Anda tetap di akun customer — konversi Sales Order berjalan di cabang.</p>
+            <button type="button" class="btn" style="width:100%" data-go="customer_booking" data-role="cust">Kembali ke pesanan</button>
+          </div>
+        </div>
+      </section>

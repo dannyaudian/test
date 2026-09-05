@@ -12,7 +12,8 @@
   ];
   var SHOP_SCREENS={
     shop_home:1,customer:1,customer_detail:1,order_aksesoris:1,order_calya:1,
-    bukti_serah:1,tagihan_customer:1,e_kuitansi:1,shop_akun:1
+    bukti_serah:1,tagihan_customer:1,e_kuitansi:1,shop_akun:1,
+    customer_booking:1,customer_booking_qris:1
   };
   function isShopScreen(id){ return !!SHOP_SCREENS[id]; }
   function shopChrome(){ return !!(document.querySelector('#mockup .app.cust-shop')); }
@@ -22,6 +23,7 @@
     so2:'agya',
     transaksi:'budi',afi:'budi',dokumen:'budi',request:'budi',bayar:'budi',
     exc_alamat:'budi',exc_nama:'dewi',exc_epo:'hiace',exc_afi:'budi',customer_detail:'budi',tagihan_customer:'budi',
+    customer_booking:'dewi',customer_booking_qris:'dewi',
     tx_hiace:'hiace',
     tx_raize:'raize',
     tx_avanza:'agus',delivery:'agus',
@@ -187,7 +189,7 @@
   }
   function fillDots(el, st){
     if(!el||!st) return;
-    if(el.closest('#shop_home, #customer, #customer_detail, #order_aksesoris, #order_calya, #bukti_serah, #tagihan_customer, #e_kuitansi, #shop_akun')) return;
+    if(el.closest('#shop_home, #customer, #customer_detail, #order_aksesoris, #order_calya, #bukti_serah, #tagihan_customer, #e_kuitansi, #shop_akun, #customer_booking, #customer_booking_qris')) return;
     el.classList.add('tx-dots');
     el.innerHTML='';
     STAGES.forEach(function(s){

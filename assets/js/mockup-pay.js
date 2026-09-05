@@ -25,9 +25,14 @@
   }
   function settleBooking(channel){
     if(window.FAST && FAST.save) FAST.save({paid:true,spk:'SPK/26/CLD/00426',so:'4500091426',channel:channel,receipt:'KWT/26/CLD/009301'}, FAST.BF_KEY);
-    applyRole('frontman');
     applyBooking();
     applySpkDraft();
+    if(currentRole==='cust'){
+      toast('Booking fee Yaris terbayar. Kuitansi KWT/26/CLD/009301. Cabang membuka Sales Order.');
+      show('customer_booking');
+      return;
+    }
+    applyRole('frontman');
     runSoConvert();
   }
   document.querySelectorAll('[data-bf-pay]').forEach(function(b){
@@ -256,7 +261,7 @@
       var id=(a.getAttribute('href')||'').split('#')[1];
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
-      if(id==='customer'||id==='customer_detail'||id==='digiroom'||id==='bukti_serah'||id==='order_calya'||id==='shop_home'||id==='shop_akun'||id==='tagihan_customer'||id==='e_kuitansi') applyRole('cust');
+      if(id==='customer'||id==='customer_detail'||id==='digiroom'||id==='bukti_serah'||id==='order_calya'||id==='shop_home'||id==='shop_akun'||id==='tagihan_customer'||id==='e_kuitansi'||id==='customer_booking'||id==='customer_booking_qris') applyRole('cust');
       else if(currentRole==='mgmt' && id==='beranda') id='dashboard';
       else if(currentRole==='admin' && id==='beranda') id='admin_spk';
       else if(currentRole==='admin' && id==='cashless') id='admin_pay';

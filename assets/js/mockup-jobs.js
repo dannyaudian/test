@@ -10,6 +10,7 @@
       cdm:'0426 3000 01',brilink:'8810 0426 3000',
       va:{BCA:'8801 0426 0001',BRI:'0026 0426 0001',Mandiri:'8881 0426 0001'},
       back:'booking',
+      custBack:'customer_booking',
       lead:'Booking fee adalah payment request salesman. QRIS dan VA terkunci Rp 3.000.000.'
     },
     lunas:{
@@ -42,6 +43,7 @@
       cdm:'0426 2000 02',brilink:'8810 0426 2000',
       va:{BCA:'8801 0426 0002',BRI:'0026 0426 0002',Mandiri:'8881 0426 0002'},
       back:'so2',
+      custBack:'customer_booking',
       lead:'Booking fee baris Agya. QRIS dan VA terkunci Rp 2.000.000. Tidak menimpa SO Yaris.'
     }
   };
@@ -86,9 +88,16 @@
     var lead=document.querySelector('[data-pay-lead]');
     if(lead){
       lead.textContent=shop
-        ? (locked?'Ada permintaan bayar dari salesman. Nominal QRIS dan VA terkunci '+j.amount+'.':'Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.')
+        ? (payJobId==='booking'
+          ? 'Booking fee Yaris. Request salesman terkunci '+j.amount+'. QRIS dan VA langsung siap — Anda tidak mengetik angka.'
+          : (locked?'Ada permintaan bayar dari salesman. Nominal QRIS dan VA terkunci '+j.amount+'.':'Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.'))
         : j.lead;
     }
+    document.querySelectorAll('#digiroom [data-ch-hint]').forEach(function(el){
+      var open=el.getAttribute('data-ch-open')||el.textContent;
+      var lock=el.getAttribute('data-ch-lock')||open;
+      el.textContent=locked?lock:open;
+    });
     dgQrisReady=locked;
     dgVaReady=locked;
     syncPayAmount();
@@ -119,9 +128,10 @@
     var back=document.querySelector('[data-dg-back]');
     if(back){
       if(currentRole==='cust'){
-        back.setAttribute('data-go', 'customer_detail');
+        var dest=j.custBack||'customer_detail';
+        back.setAttribute('data-go', dest);
         back.setAttribute('data-role', 'cust');
-        back.textContent='← Pesanan saya';
+        back.textContent=dest==='customer_booking'?'← Pesanan FAST-00426':'← Pesanan saya';
       } else {
         back.setAttribute('data-go', j.back);
         back.setAttribute('data-role', j.back==='customer_detail'?'cust':'frontman');
