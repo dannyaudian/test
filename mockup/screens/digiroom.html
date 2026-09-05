@@ -38,9 +38,9 @@
               <div class="dg-group">
                 <h3>Virtual Account</h3>
                 <div class="channels">
-                  <button type="button" class="channel" data-dg="va" data-bank="BCA"><span class="n">VA</span><b>BCA</b><span data-ch-hint data-ch-open="Enter amount, lalu issuedkan VA" data-ch-lock="Nomor VA langsung · nominal terkunci">Enter amount, lalu issuedkan VA</span></button>
-                  <button type="button" class="channel" data-dg="va" data-bank="BRI"><span class="n">VA</span><b>BRI</b><span data-ch-hint data-ch-open="Enter amount, lalu issuedkan VA" data-ch-lock="Nomor VA langsung · nominal terkunci">Enter amount, lalu issuedkan VA</span></button>
-                  <button type="button" class="channel" data-dg="va" data-bank="Mandiri"><span class="n">VA</span><b>Mandiri</b><span data-ch-hint data-ch-open="Enter amount, lalu issuedkan VA" data-ch-lock="Nomor VA langsung · nominal terkunci">Enter amount, lalu issuedkan VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="BCA"><span class="n">VA</span><b>BCA</b><span data-ch-hint data-ch-open="Enter amount, then generate VA" data-ch-lock="Nomor VA langsung · nominal terkunci">Enter amount, then generate VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="BRI"><span class="n">VA</span><b>BRI</b><span data-ch-hint data-ch-open="Enter amount, then generate VA" data-ch-lock="Nomor VA langsung · nominal terkunci">Enter amount, then generate VA</span></button>
+                  <button type="button" class="channel" data-dg="va" data-bank="Mandiri"><span class="n">VA</span><b>Mandiri</b><span data-ch-hint data-ch-open="Enter amount, then generate VA" data-ch-lock="Nomor VA langsung · nominal terkunci">Enter amount, then generate VA</span></button>
                 </div>
               </div>
               <div class="dg-group">
@@ -77,8 +77,8 @@
               <button type="button" class="btn ghost" style="width:100%" data-dg="home">Kembali ke home Digiroom</button>
             </div>
             <div data-dg-panel="va" hidden>
-              <p class="hint" id="dgVaHint" data-va-wait>Enter amount di atas, lalu issuedkan nomor VA. Bukan QRIS — transfer ke rekening virtual.</p>
-              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-va-wait data-va-issue>Issuedkan VA</button>
+              <p class="hint" id="dgVaHint" data-va-wait>Enter the amount above, then generate a VA number. Not QRIS — this is a virtual account transfer.</p>
+              <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-va-wait data-va-issue>Generate VA</button>
               <div data-va-ready hidden>
                 <p class="hint" id="dgVaReadyHint">Transfer ke VA BCA. Nominal sesuai yang diisi.</p>
                 <div class="dg-code" id="dgVaNo">8801 0426 0001</div>

@@ -89,11 +89,11 @@
             <div class="box">
               <h3>Riwayat perubahan</h3>
               <ul class="audit">
-                <li><i class="own s">S</i><div>Payment Rp 300.000.000 dialokasikan ke SO 4500091238 dan receipt KWT/26/CLD/009115 diissuedkan <time>1 Sep 2026, 14:08 · Banking API</time></div></li>
+                <li><i class="own s">S</i><div>Payment Rp 300.000.000 dialokasikan ke SO 4500091238 dan receipt KWT/26/CLD/009115 issued <time>1 Sep 2026, 14:08 · Banking API</time></div></li>
                 <li><i class="own a">A</i><div>Address customer dikoreksi pada sumber data SPK, perubahan diteruskan ke AFI dan DO <time>31 Aug 2026, 09:15 · Dewi Kusuma</time></div></li>
                 <li><i class="own s">S</i><div>Document Gate menahan: proof address expired — eligible Approval Engine <time>29 Aug 2026, 10:42 · Rules Engine</time></div></li>
-                <li><i class="own s">S</i><div>Booking fee terverifikasi sesuai minimum Innova Zenix, receipt KWT/26/CLD/008731 diissuedkan, dan Sales Order dibuka <time>28 Aug 2026, 16:30</time></div></li>
-                <li><i class="own s">S</i><div>Requestan booking fee Rp 5.000.000 dikirim ke customer setelah Saved SPK <time>28 Aug 2026, 11:05 · Master unit</time></div></li>
+                <li><i class="own s">S</i><div>Booking fee terverifikasi sesuai minimum Innova Zenix, receipt KWT/26/CLD/008731 issued, and Sales Order opened <time>28 Aug 2026, 16:30</time></div></li>
+                <li><i class="own s">S</i><div>Booking fee request of Rp 5,000,000 sent to customer after SPK saved <time>28 Aug 2026, 11:05 · Master unit</time></div></li>
               </ul>
             </div>
           </div>
@@ -150,7 +150,7 @@
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="cashless">Terima pay</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="cashless">Submit delivery — paid in full dulu</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="exc_alamat">Submit exception documents</button>
-                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="request">Delivery pengingat pay</button>
+                <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="request">Send payment reminder</button>
                 <button class="btn ghost" style="width:100%;margin-bottom:8px" data-go="customer_detail" data-role="cust">View as customer</button>
               </div>
             </div>
@@ -180,7 +180,7 @@
         </div>
         <div class="box stage-lock" data-stage-panel="del" hidden>
           <h3>Delivery</h3>
-          <p>Tertahan paid in full. AR Open masih ada. Bukan request delivery Augs.</p>
+          <p>Tertahan paid in full. AR Open masih ada. Not Agus's delivery request.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="stnk" hidden>
           <h3>STNK / BPKB</h3>
@@ -256,8 +256,8 @@
               <button type="button" class="btn ghost" data-go="exc_afi" data-afi-exc="nobill">Billing tanpa AFI</button>
             </div>
             <p class="hint" data-afi-exc-hint style="margin-top:10px">Not yet ada exception. Pakai jalur berpasangan.</p>
-            <button type="button" class="btn" data-afi-submit hidden>Delivery AFI saja</button>
-            <button type="button" class="btn" data-afi-bill hidden style="margin-top:8px">Delivery billing saja</button>
+            <button type="button" class="btn" data-afi-submit hidden>Submit AFI only</button>
+            <button type="button" class="btn" data-afi-bill hidden style="margin-top:8px">Submit billing only</button>
           </div>
         </div>
         <div class="box" data-afi-sent hidden>
