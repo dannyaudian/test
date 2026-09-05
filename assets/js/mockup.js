@@ -153,9 +153,14 @@
     var inp=document.querySelector('#digiroom [data-pay-amount-input]');
     if(inp && j.locked) inp.value=String(j.amountNum);
   }
+  function shopOrderNo(spk){
+    var m=String(spk||'').match(/(\d{5,})$/);
+    return m?'Pesanan FAST-'+m[1]:spk;
+  }
   function applyPayLockUI(){
     var j=currentJob();
     var locked=!!j.locked;
+    var shop=currentRole==='cust';
     document.querySelectorAll('[data-pay-locked]').forEach(function(el){ el.hidden=!locked; });
     document.querySelectorAll('[data-pay-open]').forEach(function(el){ el.hidden=locked; });
     var inp=document.querySelector('#digiroom [data-pay-amount-input]');
@@ -164,10 +169,14 @@
       inp.value=locked?String(j.amountNum):'';
     }
     document.querySelectorAll('[data-pay-max]').forEach(function(el){
-      el.textContent='Maksimum '+formatRp(j.max)+(locked?'':' · sisa di luar request aktif');
+      el.textContent='Maksimum '+formatRp(j.max)+(locked?'':' · sisa di luar permintaan aktif');
     });
     var lead=document.querySelector('[data-pay-lead]');
-    if(lead) lead.textContent=j.lead;
+    if(lead){
+      lead.textContent=shop
+        ? (locked?'Ada permintaan bayar dari salesman. Nominal QRIS dan VA terkunci '+j.amount+'.':'Isi nominal. QRIS menampilkan barcode; VA menerbitkan nomor rekening.')
+        : j.lead;
+    }
     dgQrisReady=locked;
     dgVaReady=locked;
     syncPayAmount();
@@ -186,9 +195,13 @@
     payJobId=payJobs[id]?id:'booking';
     var j=currentJob();
     document.querySelectorAll('[data-pay-name]').forEach(function(el){ el.textContent=j.name; });
-    document.querySelectorAll('[data-pay-spk]').forEach(function(el){ el.textContent=j.spk; });
+    document.querySelectorAll('[data-pay-spk]').forEach(function(el){
+      el.textContent=currentRole==='cust'?shopOrderNo(j.spk):j.spk;
+    });
+    document.querySelectorAll('[data-pay-kind]').forEach(function(el){
+      el.textContent=currentRole==='cust'?(j.kind||'').replace(/tahap \d+/i,'').trim():j.kind;
+    });
     document.querySelectorAll('[data-pay-unit]').forEach(function(el){ el.textContent=j.unit; });
-    document.querySelectorAll('[data-pay-kind]').forEach(function(el){ el.textContent=j.kind; });
     document.querySelectorAll('[data-pay-cdm]').forEach(function(el){ el.textContent=j.cdm; });
     document.querySelectorAll('[data-pay-brilink]').forEach(function(el){ el.textContent=j.brilink; });
     var back=document.querySelector('[data-dg-back]');
