@@ -320,6 +320,16 @@
       map={ringkas:'so2',bayar:'cashless',minta:'so2',afi:'quot',dok:'spk',exc:'spk'};
     } else if(fam==='dewi'){
       map={ringkas:'so',bayar:'cashless',minta:'so',afi:'afi_d',dok:'spk',exc:'spk'};
+    } else if(fam==='agus'){
+      map={ringkas:'tx_avanza',bayar:'tx_avanza',minta:'tx_avanza',afi:'tx_avanza',dok:'tx_avanza',exc:'tx_avanza'};
+    } else if(fam==='raize'){
+      map={ringkas:'tx_raize',bayar:'tx_raize',minta:'tx_raize',afi:'tx_raize',dok:'tx_raize',exc:'tx_raize'};
+    } else if(fam==='hiace'){
+      map={ringkas:'tx_hiace',bayar:'tx_hiace',minta:'tx_hiace',afi:'tx_hiace',dok:'tx_hiace',exc:'tx_hiace'};
+    } else if(fam==='maria'){
+      map={ringkas:'tx_fortuner',bayar:'tx_fortuner',minta:'tx_fortuner',afi:'tx_fortuner',dok:'tx_fortuner',exc:'exc_stnk'};
+    } else if(fam==='fajar'){
+      map={ringkas:'gi',bayar:'gi',minta:'gi',afi:'gi',dok:'gi',exc:'gi'};
     }
     document.querySelectorAll('#cashless [data-stay-tab]').forEach(function(b){
       var k=b.getAttribute('data-stay-tab');

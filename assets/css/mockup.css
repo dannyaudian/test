@@ -51,8 +51,19 @@
 #mockup .proc button.done{color:var(--flow)}
 #mockup .proc button.now{color:var(--signal)}
 #mockup .proc button.hold{color:var(--stop)}
-#mockup .tx-now{margin:0 0 12px;font-size:12.5px;color:var(--ink-soft)}
+#mockup .tx-now{
+  margin:0 0 12px;padding:8px 12px;font-size:12.5px;color:var(--ink-soft);
+  background:var(--surface-2);border:1px solid var(--rule);border-radius:12px;
+}
+#mockup .stage-lock{
+  border-style:dashed;background:var(--surface-2);
+}
+#mockup .stage-lock h3{margin-bottom:6px}
+#mockup .stage-lock p{margin:0;color:var(--ink-soft)}
 #mockup .stage-lock .why{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500;margin-top:4px}
+#mockup .proc button.on.done, #mockup .proc button.on.now, #mockup .proc button.on.hold{
+  box-shadow:inset 0 -2px 0 currentColor, 0 1px 4px rgba(15,23,42,.06);
+}
 #mockup .tx-dots{
   display:flex;align-items:center;gap:4px;margin:8px 0 0;flex-wrap:wrap;
 }
@@ -142,6 +153,7 @@
 #mockup .roletab:hover{background:rgba(255,255,255,.08)}
 #mockup .roletab[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
 #mockup .layout{display:grid;grid-template-columns:200px minmax(0,1fr)}
+#mockup .layout > div{min-width:0}
 #mockup .rail{background:var(--surface-2);border-right:1px solid var(--rule);padding:12px 10px;min-height:620px;max-height:820px;overflow-y:auto}
 #mockup .rail .brand{display:flex;align-items:baseline;gap:7px;padding:0 8px 14px}
 #mockup .rail .brand b{font-size:18px;letter-spacing:-.02em}

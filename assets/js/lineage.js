@@ -100,7 +100,7 @@
       copy:function(){ return 'SO 4500091428 tertahan booking fee baris Agya. Tetap SPK Dewi — bukan transaksi lain.'; }
     },
     budi:{
-      go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'afi',do:'afi',bill:'cashless',del:'cashless',stnk:'transaksi'},
+      go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'transaksi',do:'transaksi',bill:'transaksi',del:'transaksi',stnk:'transaksi'},
       now:budiNow,
       copy:function(now){
         if(now==='afi') return 'SO 4500091238 ada. Billing + AFI berpasangan. Cashless pelunasan di tahap ini.';
@@ -127,7 +127,7 @@
       copy:function(){ return 'SPK tertahan NPWP. Booking cashless belum ditagih. Data gate, bukan Approval Engine.'; }
     },
     agus:{
-      go:{spk:'tx_avanza',quot:'tx_avanza',so:'tx_avanza',afi:'tx_avanza',do:'delivery',bill:'tx_avanza',del:'delivery',stnk:'tx_avanza'},
+      go:{spk:'tx_avanza',quot:'tx_avanza',so:'tx_avanza',afi:'tx_avanza',do:'tx_avanza',bill:'tx_avanza',del:'tx_avanza',stnk:'tx_avanza'},
       now:agusNow,
       copy:function(now){
         return now==='stnk'?'Pengiriman diajukan. STNK/BPKB menyusul data SPK yang sama.':'Lunas. Satu SO · ajukan delivery. Cashless sudah selesai.';
@@ -141,7 +141,7 @@
       }
     },
     maria:{
-      go:{spk:'tx_fortuner',quot:'tx_fortuner',so:'tx_fortuner',afi:'tx_fortuner',do:'tx_fortuner',bill:'tx_fortuner',del:'tx_fortuner',stnk:'exc_stnk'},
+      go:{spk:'tx_fortuner',quot:'tx_fortuner',so:'tx_fortuner',afi:'tx_fortuner',do:'tx_fortuner',bill:'tx_fortuner',del:'tx_fortuner',stnk:'tx_fortuner'},
       now:function(){ return 'stnk'; },
       copy:function(){ return 'Delivered & lunas. STNK hari ke-19 — eskalasi Kepala Cabang, bukan waiver lunas.'; }
     },
@@ -199,9 +199,14 @@
   function showStagePanel(screen, stage){
     if(!screen||!stage) return;
     var panels=screen.querySelectorAll('[data-stage-panel]');
-    if(!panels.length) return;
-    panels.forEach(function(p){
-      p.hidden = p.getAttribute('data-stage-panel')!==stage;
+    if(panels.length){
+      panels.forEach(function(p){
+        p.hidden = p.getAttribute('data-stage-panel')!==stage;
+      });
+    }
+    screen.querySelectorAll('[data-stage-kpis]').forEach(function(el){
+      var allow=(el.getAttribute('data-stage-kpis')||'').split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+      el.hidden = allow.length ? allow.indexOf(stage)<0 : false;
     });
     screen.setAttribute('data-stage-view', stage);
   }
