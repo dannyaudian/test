@@ -234,11 +234,12 @@
 #mockup .stages .st.locked b{color:var(--ink-soft)}
 /* field rows */
 #mockup .fields{display:grid;grid-template-columns:1fr;}
-#mockup .addr-fields .frow .lab{min-width:0}
+#mockup .frow{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--rule-2)}
+#mockup .addr-fields .frow .lab{min-width:0;flex:none}
 #mockup .frow:last-child{border-bottom:0}
-#mockup .frow .lab{font-size:12.5px;color:var(--ink-soft)}
-#mockup .frow .val{font-size:13.5px;font-weight:500}
-#mockup .frow .src{font-size:11.5px;color:var(--ink-soft);text-align:right}
+#mockup .frow .lab{font-size:12.5px;color:var(--ink-soft);flex:0 0 138px}
+#mockup .frow .val{font-size:13.5px;font-weight:500;flex:1;min-width:0}
+#mockup .frow .src{font-size:11.5px;color:var(--ink-soft);text-align:right;flex:none;margin-left:8px;max-width:38%}
 #mockup .frow.locked{background:var(--surface-2)}
 /* gate list */
 #mockup .gates{list-style:none;margin:0;padding:0}

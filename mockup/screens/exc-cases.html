@@ -3,63 +3,63 @@
           <div>
             <p class="eyebrow">SPK/26/CLD/00421 · Approval Engine</p>
             <h2>Billing tanpa e-PO leasing</h2>
-            <p>SO <span data-b2b-so-no>4500091288</span> · PT Danapura. E-PO adalah persetujuan leasing atas total DP customer, jumlah yang dibiayai leasing, dan tenor. Not a waiver full DP atau TTD.</p>
+            <p>SO <span data-b2b-so-no>4500091288</span> · PT Danapura. The e-PO is the leasing approval for the customer's total DP, the amount financed by leasing, and the tenor. Not a full DP or signature waiver.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Queue</button></div>
         </div>
-        <nav class="worktabs" aria-label="Isi B2B leasing">
+        <nav class="worktabs" aria-label="B2B leasing content">
           <button type="button" data-go="tx_hiace">Workspace B2B</button>
           <button type="button" data-go="exc_epo">Gate e-PO</button>
         </nav>
         <div class="exc-path" data-exc-epo-path>
           <b data-step="draft" class="on">Admin submit</b>
           <span>→</span>
-          <b data-step="submitted">Admin cek paket</b>
+          <b data-step="submitted">Admin checks package</b>
           <span>→</span>
           <b data-step="verified">Operation Manager</b>
           <span>→</span>
-          <b data-step="approved">Paperless boleh</b>
+          <b data-step="approved">Paperless allowed</b>
         </div>
-        <p class="exc-note warn" data-exc-epo-note>E-PO not yet from leasing. After paket Frontman dan full DP, Administration dapat submits billing tanpa e-PO. Putusan: Operation Manager. Settlement tetap butuh e-PO asli.</p>
+        <p class="exc-note warn" data-exc-epo-note>E-PO not yet from leasing. After the Frontman package and full DP, Administration may submit billing without the e-PO. Decision: Operation Manager. Settlement still needs the original e-PO.</p>
         <div class="cards">
-          <div class="card"><p class="k">Total DP customer</p><p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p><p class="n" data-b2b-dp-status>Dari struktur harga SO</p></div>
-          <div class="card"><p class="k">Dibiayai leasing</p><p class="v" style="font-size:18px" data-b2b-finance>Rp 278.720.000</p><p class="n">OTR − DP wajib</p></div>
-          <div class="card"><p class="k">Tenor</p><p class="v" style="font-size:18px" data-b2b-tenor>36 bulan</p><p class="n">Isi e-PO</p></div>
-          <div class="card" data-b2b-card="epo-gate"><p class="k">Nomor e-PO</p><p class="v" style="font-size:18px" data-b2b-epo-no>Not yet issued</p><p class="n">Dari B2B leasing</p></div>
+          <div class="card"><p class="k">Total DP customer</p><p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p><p class="n" data-b2b-dp-status>From the SO price structure</p></div>
+          <div class="card"><p class="k">Financed by leasing</p><p class="v" style="font-size:18px" data-b2b-finance>Rp 278.720.000</p><p class="n">OTR − mandatory DP</p></div>
+          <div class="card"><p class="k">Tenor</p><p class="v" style="font-size:18px" data-b2b-tenor>36 months</p><p class="n">e-PO content</p></div>
+          <div class="card" data-b2b-card="epo-gate"><p class="k">e-PO Number</p><p class="v" style="font-size:18px" data-b2b-epo-no>Not yet issued</p><p class="n">From B2B leasing</p></div>
         </div>
         <div class="box">
-          <h3>Apa yang tertahan</h3>
+          <h3>What is being held</h3>
           <ul class="gates">
-            <li><span class="mark ok">✓</span><div>Full DP customer<span class="why">Non-waivable · angka dari B2B</span></div><span class="tag ok">Wajib tetap</span></li>
-            <li><span class="mark no">!</span><div>E-PO leasing<span class="why">Total DP · nilai dibiayai · tenor not yet approved leasing</span></div><span class="tag hold">Waivable · OM</span></li>
-            <li><span class="mark no">!</span><div>Settlement leasing<span class="why">Tetap butuh e-PO asli · decision OM tidak mengganti e-PO</span></div><span class="tag stop">Non-waivable</span></li>
-            <li><span class="mark ok">✓</span><div>Kontrak TTD<span class="why">Delivery gate · jalur terpisah, tidak di-waive di sini</span></div><span class="tag stop">Non-waivable</span></li>
+            <li><span class="mark ok">✓</span><div>Full DP customer<span class="why">Non-waivable · figures from B2B</span></div><span class="tag ok">Still required</span></li>
+            <li><span class="mark no">!</span><div>E-PO leasing<span class="why">Total DP · financed amount · tenor not yet approved by leasing</span></div><span class="tag hold">Waivable · OM</span></li>
+            <li><span class="mark no">!</span><div>Settlement leasing<span class="why">Still needs the original e-PO · the OM decision does not replace the e-PO</span></div><span class="tag stop">Non-waivable</span></li>
+            <li><span class="mark ok">✓</span><div>Signed contract<span class="why">Delivery gate · separate path, not waived here</span></div><span class="tag stop">Non-waivable</span></li>
           </ul>
         </div>
         <div class="box">
-          <h3>Pengajuan</h3>
+          <h3>Submission</h3>
           <p class="pad" style="padding-bottom:0">Normal path: pull e-PO from the B2B Flow tab. This path is only used if leasing has not yet issued the e-PO while the Frontman package and full DP are already complete.</p>
           <div class="formfoot" data-for="frontman">
-            <span class="hint">Frontman tidak menagih. Minta Administration submits, atau tarik e-PO di workspace B2B.</span>
+            <span class="hint">The Frontman does not charge. Ask Administration to submit, or pull the e-PO in the B2B workspace.</span>
             <button type="button" class="btn ghost" data-go="tx_hiace">← Workspace B2B</button>
           </div>
           <div class="formfoot" data-for="admin" hidden>
-            <span class="hint">Cek paket Frontman + full DP. Jangan setujui sendiri — Operation Manager yang memutuskan.</span>
-            <button type="button" class="btn" data-exc-submit="epo">Submit billing tanpa e-PO</button>
-            <button type="button" class="btn ghost" data-exc-verify="epo">Tandai sudah dicek</button>
+            <span class="hint">Check the Frontman package + full DP. Do not approve it yourself — the Operation Manager decides.</span>
+            <button type="button" class="btn" data-exc-submit="epo">Submit billing without e-PO</button>
+            <button type="button" class="btn ghost" data-exc-verify="epo">Mark as checked</button>
             <button type="button" class="btn ghost" data-go="tx_hiace">Workspace B2B</button>
           </div>
           <div data-for="mgmt" hidden data-mgmt-need="om">
             <div class="form" style="padding-top:0">
               <div class="field">
-                <label for="mgmtComment-epo">Komentar Operation Manager</label>
-                <textarea id="mgmtComment-epo" placeholder="Wajib untuk revisi atau tolak. Opsional saat setujui."></textarea>
+                <label for="mgmtComment-epo">Operation Manager comment</label>
+                <textarea id="mgmtComment-epo" placeholder="Required for revise or reject. Optional when approving."></textarea>
               </div>
             </div>
             <div class="decide-actions">
-              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="epo">Setujui paperless tanpa e-PO</button>
-              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="epo">Revisi</button>
-              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="epo">Tolak</button>
+              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="epo">Approve paperless without e-PO</button>
+              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="epo">Revise</button>
+              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="epo">Reject</button>
             </div>
             <ul class="audit comments" data-mgmt-log="epo"></ul>
             <p class="note">Approve = Administration may send billing request paperless. Does not bypass full DP. Leasing settlement remains pending the original e-PO from leasing.</p>
@@ -70,32 +70,32 @@
       <section class="screen" id="exc_nama">
         <div class="screenhead">
           <div>
-            <h2>Buyer Name ≠ name STNK</h2>
-            <p>Dewi Lestari · SPK/26/CLD/00426. Andi Pratama di STNK. Not a waiver booking fee atau paid in full.</p>
+            <h2>Buyer Name ≠ STNK name</h2>
+            <p>Dewi Lestari · SPK/26/CLD/00426. Andi Pratama on the STNK. Not a booking fee or paid-in-full waiver.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Queue</button></div>
         </div>
         <div class="exc-path" data-exc-nama-path>
           <b data-step="draft" class="on">Frontman upload</b>
           <span>→</span>
-          <b data-step="submitted">Admin cek</b>
+          <b data-step="submitted">Admin check</b>
           <span>→</span>
           <b data-step="verified">Head of Administration</b>
           <span>→</span>
-          <b data-step="approved">STNK Name dipakai AFI</b>
+          <b data-step="approved">STNK Name used by AFI</b>
         </div>
-        <p class="exc-note warn" data-exc-nama-note>Name berbeda. Upload KTP atas name STNK, proof address STNK, dan pernyataan hubungan. New diajukan ke Approval Engine.</p>
+        <p class="exc-note warn" data-exc-nama-note>Name differs. Upload the KTP under the STNK name, STNK address proof, and a relationship statement. Newly submitted to the Approval Engine.</p>
         <div class="box" data-name-rel="dewi"></div>
         <div class="split">
           <div>
             <div class="box">
-              <h3>Address buyer</h3>
+              <h3>Buyer address</h3>
               <div class="fields addr-fields" data-addr="dewi_pemesan"></div>
             </div>
           </div>
           <div>
             <div class="box">
-              <h3>Address STNK</h3>
+              <h3>STNK address</h3>
               <div class="fields addr-fields" data-addr="dewi_stnk"></div>
             </div>
           </div>
@@ -103,30 +103,30 @@
         <div class="box">
           <h3>Supporting document</h3>
           <div class="docs">
-            <div class="doc"><b>KTP Andi Pratama</b><p class="meta">Atas name STNK</p><span class="tag ok">Vault</span></div>
-            <div class="doc"><b>Address proof Depok</b><p class="meta">Tujuh field same dengan master STNK</p><span class="tag ok">Vault</span></div>
-            <div class="doc"><b>Pernyataan pasangan</b><p class="meta">Relationship buyer–STNK</p><span class="tag ok">Vault</span></div>
+            <div class="doc"><b>KTP Andi Pratama</b><p class="meta">Under the STNK name</p><span class="tag ok">Vault</span></div>
+            <div class="doc"><b>Address proof Depok</b><p class="meta">Seven fields matching the STNK master</p><span class="tag ok">Vault</span></div>
+            <div class="doc"><b>Spouse statement</b><p class="meta">Buyer–STNK relationship</p><span class="tag ok">Vault</span></div>
           </div>
           <div class="formfoot" data-for="frontman">
-            <span class="hint">Documents sudah di SPK. Delivery ke Admin lalu Head of Administration.</span>
-            <button type="button" class="btn" data-exc-submit="nama">Delivery pengajuan name</button>
-            <button type="button" class="btn ghost" data-go="spk">← Data SPK</button>
+            <span class="hint">Documents are already in the SPK. Deliver to Admin then Head of Administration.</span>
+            <button type="button" class="btn" data-exc-submit="nama">Deliver name submission</button>
+            <button type="button" class="btn ghost" data-go="spk">← SPK data</button>
           </div>
           <div class="formfoot" data-for="admin" hidden>
             <span class="hint">Match the KTP STNK name with the STNK name field. Do not retype the address.</span>
-            <button type="button" class="btn" data-exc-verify="nama">Tandai sudah dicek</button>
+            <button type="button" class="btn" data-exc-verify="nama">Mark as checked</button>
           </div>
           <div data-for="mgmt" hidden data-mgmt-need="ka">
             <div class="form" style="padding-top:0">
               <div class="field">
-                <label for="mgmtComment-nama">Komentar Head of Administration</label>
-                <textarea id="mgmtComment-nama" placeholder="Wajib untuk revisi atau tolak."></textarea>
+                <label for="mgmtComment-nama">Head of Administration comment</label>
+                <textarea id="mgmtComment-nama" placeholder="Required for revise or reject."></textarea>
               </div>
             </div>
             <div class="decide-actions">
-              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="nama">Setujui name STNK</button>
-              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="nama">Revisi</button>
-              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="nama">Tolak</button>
+              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="nama">Approve STNK name</button>
+              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="nama">Revise</button>
+              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="nama">Reject</button>
             </div>
             <ul class="audit comments" data-mgmt-log="nama"></ul>
             <p class="note">Approve = STNK name Andi Pratama used for AFI. Does not bypass booking fee or 30%.</p>
@@ -138,7 +138,7 @@
         <div class="screenhead">
           <div>
             <h2>Expired address proof</h2>
-            <p>Budi Santoso · SPK/26/CLD/00418. Decision tidak menggantikan settlement cash.</p>
+            <p>Budi Santoso · SPK/26/CLD/00418. The decision does not replace the cash settlement.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Queue</button></div>
         </div>
@@ -153,58 +153,58 @@
         <div class="exc-path" data-exc-path>
           <b data-step="draft" class="on">Frontman submit</b>
           <span>→</span>
-          <b data-step="submitted">Admin cek</b>
+          <b data-step="submitted">Admin check</b>
           <span>→</span>
           <b data-step="verified">Head of Administration</b>
           <span>→</span>
-          <b data-step="approved">Requirement berlaku</b>
+          <b data-step="approved">Requirement applies</b>
         </div>
-        <p class="exc-note warn" data-exc-note>Not yet diajukan. Frontman delivery alasan dan proof pengganti. SLA 4 jam mulai saat pengajuan received.</p>
+        <p class="exc-note warn" data-exc-note>Not yet submitted. The Frontman delivers the reason and a replacement proof. The 4-hour SLA starts when the submission is received.</p>
         <div class="box">
-          <h3>Apa yang tertahan</h3>
+          <h3>What is being held</h3>
           <ul class="gates">
-            <li><span class="mark ok">✓</span><div>KTP &amp; NPWP<span class="why">Valid di vault</span></div><span class="tag ok">Lolos</span></li>
+            <li><span class="mark ok">✓</span><div>KTP &amp; NPWP<span class="why">Valid in vault</span></div><span class="tag ok">Passed</span></li>
             <li><span class="mark no">!</span><div>Address proof<span class="why">Expired on 14 Aug 2026</span></div><span class="tag hold">Waivable</span></li>
-            <li><span class="mark no">!</span><div>Delivery cash<span class="why">AR Open masih ada · jalur terpisah, tidak di-waive di sini</span></div><span class="tag stop">Non-waivable</span></li>
+            <li><span class="mark no">!</span><div>Delivery cash<span class="why">AR Open still remains · separate path, not waived here</span></div><span class="tag stop">Non-waivable</span></li>
           </ul>
         </div>
         <div class="box">
-          <h3>Pengajuan</h3>
+          <h3>Submission</h3>
           <div class="form">
             <div class="field">
-              <label>Alasan</label>
-              <textarea id="excAlamatReason">Customer sudah pindah KTP. KK new masih proses dukcapil. Requestan listrik atas name yang same, address lama.</textarea>
+              <label>Reason</label>
+              <textarea id="excAlamatReason">The customer has already changed their KTP. The new KK is still being processed at Dukcapil. The electricity bill is under the same name, old address.</textarea>
             </div>
-            <p class="hint">Lampiran Example: invoice listrik 2 bulan terakhir. Requirement jika approved: address asli sebelum DO.</p>
+            <p class="hint">Attachment example: electricity invoice for the last 2 months. Requirement if approved: original address before DO.</p>
           </div>
           <div class="formfoot" data-for="frontman">
-            <span class="hint">Anda submits. Admin lalu Head of Administration yang memutuskan.</span>
-            <button type="button" class="btn" data-exc-submit="alamat">Delivery pengajuan</button>
+            <span class="hint">You submit. Admin then the Head of Administration decides.</span>
+            <button type="button" class="btn" data-exc-submit="alamat">Deliver submission</button>
           </div>
           <div class="formfoot" data-for="admin" hidden>
-            <span class="hint">Cek proof, lalu teruskan. Jangan setujui sendiri.</span>
-            <button type="button" class="btn" data-exc-verify="alamat">Tandai sudah dicek</button>
+            <span class="hint">Check the proof, then forward it. Do not approve it yourself.</span>
+            <button type="button" class="btn" data-exc-verify="alamat">Mark as checked</button>
             <button type="button" class="btn ghost" data-go="verifikasi">Queue verification</button>
           </div>
           <div class="formfoot" data-for="mgmt" hidden>
-            <span class="hint">Putusan: setujui, minta revisi, atau tolak. Revisi dan tolak wajib komentar. Settlement tetap wajib.</span>
+            <span class="hint">Decision: approve, request a revision, or reject. Revise and reject require a comment. Settlement is still required.</span>
           </div>
           <div data-for="mgmt" hidden data-mgmt-need="ka">
             <div class="form" style="padding-top:0">
               <div class="field">
-                <label for="mgmtComment-alamat">Komentar Head of Administration</label>
-                <textarea id="mgmtComment-alamat" placeholder="Wajib untuk revisi atau tolak. Opsional saat setujui."></textarea>
+                <label for="mgmtComment-alamat">Head of Administration comment</label>
+                <textarea id="mgmtComment-alamat" placeholder="Required for revise or reject. Optional when approving."></textarea>
               </div>
             </div>
             <div class="decide-actions">
-              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="alamat">Setujui</button>
-              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="alamat">Revisi</button>
-              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="alamat">Tolak</button>
+              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="alamat">Approve</button>
+              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="alamat">Revise</button>
+              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="alamat">Reject</button>
             </div>
             <ul class="audit comments" data-mgmt-log="alamat"></ul>
           </div>
           <div class="formfoot" data-for="cust" hidden>
-            <span class="hint">Customer tidak memutuskan exception. Lihat status di orders.</span>
+            <span class="hint">The customer does not decide the exception. See the status in orders.</span>
             <button type="button" class="btn ghost" data-go="customer_detail">Back to Orders</button>
           </div>
         </div>
@@ -213,9 +213,9 @@
       <section class="screen" id="exc_afi">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">Approval Engine · urutan AFI / billing</p>
-            <h2 data-afi-exc-title>AFI sebelum billing</h2>
-            <p data-afi-exc-lead>Budi Santoso · SPK/26/CLD/00418. Data STNK sudah di SPK. Exception hanya memecah urutan, bukan melewati 30% atau paid in full.</p>
+            <p class="eyebrow">Approval Engine · AFI / billing sequence</p>
+            <h2 data-afi-exc-title>AFI before billing</h2>
+            <p data-afi-exc-lead>Budi Santoso · SPK/26/CLD/00418. STNK data is already in the SPK. The exception only splits the sequence, not bypassing 30% or paid in full.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Queue</button></div>
         </div>
@@ -225,137 +225,137 @@
           <button type="button" data-go="exc_afi">Exceptions</button>
         </nav>
         <div class="amtchips" role="group" aria-label="Type exception">
-          <button type="button" class="chip on" data-afi-exc="early">AFI sebelum billing</button>
-          <button type="button" class="chip" data-afi-exc="nobill">Billing tanpa AFI</button>
+          <button type="button" class="chip on" data-afi-exc="early">AFI before billing</button>
+          <button type="button" class="chip" data-afi-exc="nobill">Billing without AFI</button>
         </div>
         <div class="exc-path" data-exc-afi-path>
           <b data-step="draft" class="on">Frontman submit</b>
           <span>→</span>
-          <b data-step="submitted">Admin cek</b>
+          <b data-step="submitted">Admin check</b>
           <span>→</span>
           <b data-step="verified">Head of Administration</b>
           <span>→</span>
-          <b data-step="approved">Sequence diizinkan</b>
+          <b data-step="approved">Sequence allowed</b>
         </div>
-        <p class="exc-note warn" data-exc-afi-note>Not yet diajukan. Jelaskan kenapa urutan harus dipecah.</p>
+        <p class="exc-note warn" data-exc-afi-note>Not yet submitted. Explain why the sequence must be split.</p>
         <div class="box" data-afi-exc-panel="early">
-          <h3>Yang diminta</h3>
-          <p>Submit AFI memakai name dan address STNK dari SPK, <b>sebelum</b> billing issued. Billing menyusul.</p>
+          <h3>What is requested</h3>
+          <p>Submit AFI using the STNK name and address from the SPK, <b>before</b> billing is issued. Billing follows.</p>
         </div>
         <div class="box" data-afi-exc-panel="nobill" hidden>
-          <h3>Yang diminta</h3>
-          <p>Submit billing cash (≥30% sudah lolos) <b>tanpa</b> AFI. Pengajuan AFI menyusul. Data STNK tetap lengkap di SPK.</p>
+          <h3>What is requested</h3>
+          <p>Submit cash billing (≥30% already passed) <b>without</b> AFI. The AFI submission follows. STNK data remains complete in the SPK.</p>
         </div>
         <div class="box">
-          <h3>Pengajuan</h3>
+          <h3>Submission</h3>
           <div class="form">
             <div class="field">
-              <label>Alasan pecah urutan</label>
+              <label>Reason for splitting the sequence</label>
               <textarea id="excAfiReason">Unit requires STNK processing first due to branch Samsat schedule. Billing will still be submitted this week. Does not bypass 30%.</textarea>
             </div>
           </div>
           <div class="formfoot" data-for="frontman">
-            <span class="hint">Anda submits. Admin lalu Head of Administration memutuskan.</span>
-            <button type="button" class="btn" data-exc-afi-submit>Delivery pengajuan</button>
+            <span class="hint">You submit. Admin then the Head of Administration decides.</span>
+            <button type="button" class="btn" data-exc-afi-submit>Deliver submission</button>
           </div>
           <div class="formfoot" data-for="admin" hidden>
-            <span class="hint">Cek alasan, lalu teruskan. Jangan setujui sendiri.</span>
-            <button type="button" class="btn" data-exc-afi-verify>Tandai sudah dicek</button>
+            <span class="hint">Check the reason, then forward it. Do not approve it yourself.</span>
+            <button type="button" class="btn" data-exc-afi-verify>Mark as checked</button>
           </div>
           <div class="formfoot" data-for="mgmt" hidden>
-            <span class="hint">Setujui pecah urutan, minta revisi, atau tolak. 30% dan paid in full tidak ikut di-waive.</span>
+            <span class="hint">Approve the sequence split, request a revision, or reject. 30% and paid in full are not waived along with it.</span>
           </div>
           <div data-for="mgmt" hidden data-mgmt-need="ka">
             <div class="form" style="padding-top:0">
               <div class="field">
-                <label for="mgmtComment-afi">Komentar Head of Administration</label>
-                <textarea id="mgmtComment-afi" placeholder="Wajib untuk revisi atau tolak. Opsional saat setujui."></textarea>
+                <label for="mgmtComment-afi">Head of Administration comment</label>
+                <textarea id="mgmtComment-afi" placeholder="Required for revise or reject. Optional when approving."></textarea>
               </div>
             </div>
             <div class="decide-actions">
-              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="afi">Setujui</button>
-              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="afi">Revisi</button>
-              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="afi">Tolak</button>
+              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="afi">Approve</button>
+              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="afi">Revise</button>
+              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="afi">Reject</button>
             </div>
             <ul class="audit comments" data-mgmt-log="afi"></ul>
           </div>
         </div>
-        <p class="note">After approved, kembali ke tab AFI: button AFI saja atau billing saja unlocked sesuai jenis exception.</p>
+        <p class="note">After approval, return to the AFI tab: the AFI-only or billing-only button is unlocked depending on the exception type.</p>
       </section>
 
       <section class="screen" id="exc_stnk">
         <div class="screenhead">
           <div>
-            <h2>STNK Fortuner hari ke-19</h2>
-            <p>Maria Sitompul · SPK/26/CLD/00409. Unit sudah paid in full dan terkirim.</p>
+            <h2>STNK Fortuner day 19</h2>
+            <p>Maria Sitompul · SPK/26/CLD/00409. The unit is already paid in full and delivered.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Queue</button></div>
         </div>
         <nav class="worktabs" aria-label="Transaction Navigation">
           <button type="button" data-go="tx_fortuner">Summary</button>
-          <button type="button" data-go="exc_stnk">Eskalasi</button>
+          <button type="button" data-go="exc_stnk">Escalation</button>
         </nav>
         <div class="exc-path" data-stage-kpis="stnk">
-          <b class="ok">Sistem H+15</b>
+          <b class="ok">System D+15</b>
           <span>→</span>
           <b class="on">Branch Head</b>
           <span>→</span>
-          <b>Biro jasa</b>
+          <b>Service bureau</b>
         </div>
-        <p class="exc-note" data-stage-kpis="stnk">Aging ≥15 hari naik sendiri. Tidak ada button Setujui untuk melewati settlement — ini sudah paid in full. Yang tertahan hanya issued STNK.</p>
+        <p class="exc-note" data-stage-kpis="stnk">Aging ≥15 days escalates automatically. There is no Approve button to bypass settlement — this is already paid in full. Only the STNK issuance is being held.</p>
         <div class="box" data-stage-panel="spk" hidden>
           <h3>SPK</h3>
-          <p>Maria Sitompul · Fortuner. Data buyer dan STNK dari SPK/26/CLD/00409.</p>
+          <p>Maria Sitompul · Fortuner. Buyer and STNK data from SPK/26/CLD/00409.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="quot" hidden>
           <h3>Quotation</h3>
-          <p>Harga sudah di quotation SPK ini. Bukan quotation Yaris.</p>
+          <p>The price is already in this SPK's quotation. Not the Yaris quotation.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="so" hidden>
           <h3>Sales Order</h3>
-          <p>SO 4500091409 · tunai · paid in full sebelum delivery.</p>
+          <p>SO 4500091409 · cash · paid in full before delivery.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="afi" hidden>
           <h3>AFI</h3>
-          <p>Name BPKB dari SPK. Completed.</p>
+          <p>BPKB name from the SPK. Completed.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="do" hidden>
           <h3>DO</h3>
-          <p>Unit delivered. Jejak ini.</p>
+          <p>Unit delivered. This trail.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="bill" hidden>
           <h3>Billing</h3>
-          <p>Paid in Full. Bukan objek waiver.</p>
+          <p>Paid in Full. Not a waiver subject.</p>
         </div>
         <div class="box stage-lock" data-stage-panel="del" hidden>
           <h3>Delivery</h3>
-          <p>Terkirim. Aging documents di tahap STNK.</p>
+          <p>Delivered. Document aging at the STNK stage.</p>
         </div>
         <div data-stage-panel="stnk">
         <div class="cards">
-          <div class="card"><p class="k">Received Samsat</p><p class="v" style="font-size:18px">Hari ke-4</p><p class="n">Berkas lengkap</p></div>
-          <div class="card alert"><p class="k">Antrian plat</p><p class="v" style="font-size:18px">H+19</p><p class="n">Estimasi 5–8 hari</p></div>
-          <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Bukan jalur waiver</p></div>
+          <div class="card"><p class="k">Received Samsat</p><p class="v" style="font-size:18px">Day 4</p><p class="n">Documents complete</p></div>
+          <div class="card alert"><p class="k">Plate queue</p><p class="v" style="font-size:18px">D+19</p><p class="n">Estimated 5–8 days</p></div>
+          <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Not a waiver path</p></div>
         </div>
         <div class="formfoot" data-for="frontman">
-          <span class="hint">Pantau biro jasa. Frontman tidak submits exception documents.</span>
-          <button type="button" class="btn ghost" data-go="tx_fortuner">Buka transactions</button>
+          <span class="hint">Monitor the service bureau. The Frontman does not submit exception documents.</span>
+          <button type="button" class="btn ghost" data-go="tx_fortuner">Open transaction</button>
         </div>
         <div class="formfoot" data-for="admin" hidden>
-          <span class="hint">Automatic escalation. Lengkapi update biro jasa, bukan waiver paid in full.</span>
+          <span class="hint">Automatic escalation. Complete the service bureau update, not a paid-in-full waiver.</span>
           <button type="button" class="btn ghost" data-go="verifikasi">Queue verification</button>
         </div>
         <div data-for="mgmt" hidden data-mgmt-need="kc">
           <div class="form" style="padding-top:0">
             <div class="field">
-              <label for="mgmtComment-stnk">Komentar Branch Head</label>
-              <textarea id="mgmtComment-stnk" placeholder="Wajib untuk revisi atau tolak. Example: minta update plat ke biro jasa."></textarea>
+              <label for="mgmtComment-stnk">Branch Head comment</label>
+              <textarea id="mgmtComment-stnk" placeholder="Required for revise or reject. Example: request a plate update from the service bureau."></textarea>
             </div>
           </div>
           <div class="decide-actions">
-            <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="stnk">Setujui tindak lanjut</button>
-            <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="stnk">Revisi</button>
-            <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="stnk">Tolak waiver</button>
+            <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="stnk">Approve follow-up</button>
+            <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="stnk">Revise</button>
+            <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="stnk">Reject waiver</button>
           </div>
           <ul class="audit comments" data-mgmt-log="stnk"></ul>
           <p class="note">Approve = record service bureau follow-up. Reject waiver = does not bypass settlement (this case is already paid in full). Revise = request update from Admin.</p>
