@@ -68,68 +68,71 @@
 
       <div class="scheme" id="skema-approval">
         <h3>Preview skema · skenario approval gate</h3>
-        <p class="deck">Approval Engine hanya untuk failed compliance rule yang waivable. Booking fee, 30% cash, lunas cash, full DP leasing, dan TTD kontrak tidak masuk antrean putusan.</p>
+        <p class="deck">Approval Engine hanya hidup jika compliance gate gagal <b>dan</b> policy menandai rule itu waivable. Frontman mengajukan plus bukti; Administrasi memeriksa; decision owner memutus. Discount, cashback, program, booking fee, 30% cash, lunas, full DP leasing, dan TTD kontrak tidak masuk antrean ini.</p>
+        <div class="chain"><span>Gate gagal</span><i>→</i><span>Waivable?</span><i>→</i><span>Frontman + bukti</span><i>→</i><span>Admin verifikasi</span><i>→</i><span>Putusan KA / OM</span><i>→</i><span>Release bersyarat atau tetap kunci</span></div>
         <div class="scheme-legend">
           <span class="ok">Waivable · Approval Engine</span>
-          <span class="hold">Eskalasi operasional</span>
-          <span class="stop">Non-waivable / data gate</span>
+          <span class="hold">Eskalasi operasional (bukan engine)</span>
+          <span class="stop">Non-waivable / lengkapi data</span>
+        </div>
+        <h4>Masuk Approval Engine</h4>
+        <div class="see-row">
+          <a class="see" href="mockup.html#exc_nama"><span class="see-k">KA</span><b>Dewi · nama ≠ STNK</b><span>Andi Pratama di STNK. Supporting document di vault. Bukan waiver booking fee.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#exc_alamat"><span class="see-k">KA</span><b>Budi · alamat kedaluwarsa</b><span>Frontman ajukan → Admin cek → Kepala Administrasi. Bukan waiver lunas.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#exc_afi"><span class="see-k">KA</span><b>Budi · pecah AFI / billing</b><span>Jalur normal berpasangan. AFI dulu atau billing tanpa AFI hanya lewat engine.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#exc_epo"><span class="see-k">OM</span><b>Hiace · billing tanpa e-PO</b><span>Paperless saja. DP dan TTD tidak di-waive. Pelunasan tetap butuh e-PO asli.</span><em>Buka →</em></a>
+        </div>
+        <h4>Bukan Approval Engine</h4>
+        <div class="see-row">
+          <a class="see" href="mockup.html#tx_raize"><span class="see-k">Data</span><b>Sarah · NPWP kosong</b><span>Lengkapi di SPK. Booking fee belum ditagih sampai identitas valid.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#exc_stnk"><span class="see-k">KC</span><b>Maria · STNK hari ke-19</b><span>Eskalasi aging ke Kepala Cabang. Bukan tombol melewati lunas.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#eskalasi"><span class="see-k">Hold</span><b>Booking fee · 30% · lunas · TTD</b><span>Tertahan di antrean tanpa tombol putusan. Engine tidak bisa membuka.</span><em>Buka →</em></a>
+          <a class="see" href="mockup.html#mgmt_inbox"><span class="see-k">Mgmt</span><b>Empat kursi antrean</b><span>KA dokumen waivable · OM e-PO paperless · KC STNK · ABH volume.</span><em>Buka →</em></a>
         </div>
         <div class="scroller">
           <table>
-            <thead><tr><th>Skenario mockup</th><th>Gate</th><th>Engine?</th><th>Decision owner</th><th>Buka</th></tr></thead>
+            <thead><tr><th>Skenario</th><th>Apa yang gagal</th><th>Siapa memutus</th><th>Hasil di mockup</th></tr></thead>
             <tbody>
               <tr>
                 <td>Dewi · nama pemesan ≠ STNK</td>
-                <td>Data / compliance</td>
-                <td>Waivable. Supporting document di vault.</td>
+                <td>Data/compliance. Wajib KTP STNK, alamat STNK, pernyataan hubungan.</td>
                 <td>Kepala Administrasi</td>
-                <td><a href="mockup.html#exc_nama">Pengecualian nama</a></td>
+                <td>Setujui bersyarat / tolak / kembalikan. SO tetap butuh booking fee terverifikasi.</td>
               </tr>
               <tr>
                 <td>Budi · bukti alamat kedaluwarsa</td>
-                <td>Document</td>
-                <td>Waivable. Bukan waiver lunas.</td>
-                <td>Frontman ajukan → Admin cek → Kepala Administrasi</td>
-                <td><a href="mockup.html#exc_alamat">Pengecualian alamat</a></td>
-              </tr>
-              <tr>
-                <td>Budi · AFI dulu atau billing tanpa AFI</td>
-                <td>AFI + billing berpasangan</td>
-                <td>Waivable hanya untuk pecah urutan.</td>
+                <td>Document gate. Masa berlaku vault habis.</td>
                 <td>Kepala Administrasi</td>
-                <td><a href="mockup.html#exc_afi">Exception AFI</a></td>
+                <td>Admin tidak unggah ulang. Conditional release terbatas unit/proses.</td>
               </tr>
               <tr>
-                <td>Hiace · billing tanpa e-PO</td>
-                <td>Leasing e-PO</td>
-                <td>Waivable untuk paperless saja. DP dan TTD tidak di-waive. Pelunasan tetap butuh e-PO asli.</td>
+                <td>Budi · AFI tanpa billing atau sebaliknya</td>
+                <td>Aturan berpasangan AFI + billing.</td>
+                <td>Kepala Administrasi</td>
+                <td>Pecah urutan hanya jika exception disetujui.</td>
+              </tr>
+              <tr>
+                <td>Hiace · billing leasing tanpa e-PO</td>
+                <td>E-PO = persetujuan total DP, nilai dibiayai, tenor dari B2B.</td>
                 <td>Operation Manager</td>
-                <td><a href="mockup.html#exc_epo">Gate e-PO</a></td>
-              </tr>
-              <tr>
-                <td>Maria · STNK hari ke-19</td>
-                <td>Document aging</td>
-                <td>Bukan Approval Engine. Eskalasi aging.</td>
-                <td>Kepala Cabang</td>
-                <td><a href="mockup.html#exc_stnk">Eskalasi STNK</a></td>
+                <td>Hanya paperless. Full DP dan TTD tetap non-waivable.</td>
               </tr>
               <tr>
                 <td>Sarah · NPWP kosong</td>
-                <td>Data gate</td>
-                <td>Tidak. Lengkapi di SPK.</td>
-                <td>Frontman (input owner)</td>
-                <td><a href="mockup.html#tx_raize">SPK Raize</a></td>
+                <td>Data gate di SPK, bukan failed waivable rule.</td>
+                <td>Frontman (lengkapi sumber)</td>
+                <td>Tidak ada tombol approve. Booking fee tertahan.</td>
               </tr>
               <tr>
-                <td>Booking fee / 30% / lunas / TTD</td>
-                <td>Gate komersial</td>
-                <td>Tidak. Engine tidak bisa membuka.</td>
-                <td>—</td>
-                <td><a href="docs.html#s6">Tabel gate</a></td>
+                <td>Maria · STNK aging ≥15 hari</td>
+                <td>Tracking dokumen, bukan compliance waiver.</td>
+                <td>Kepala Cabang (eskalasi)</td>
+                <td>Bukan Approval Engine. Lunas tidak dilewati.</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <p class="deck" style="margin:0">Putusan: setujui dengan syarat, tolak, atau kembalikan untuk dilengkapi. Expired/gagal syarat → proses terkunci lagi. Audit trail wajib.</p>
       </div>
 
       <div class="scheme" id="skema-dokumen">
