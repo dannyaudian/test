@@ -350,6 +350,10 @@
     var bookKey=ADMIN_BOOK[id];
     var screenId=bookKey?'admin_book':id;
     screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
+    if(from && from!==screenId){
+      var landed=document.getElementById(screenId);
+      if(landed) landed.removeAttribute('data-stage-view');
+    }
     if(bookKey) activateAdminBook(bookKey);
     var railId=({
       customer_detail:'customer',order_aksesoris:'customer',order_calya:'customer',bukti_serah:'customer',
