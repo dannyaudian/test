@@ -10,6 +10,12 @@
     {id:'del',label:'Kirim'},
     {id:'stnk',label:'STNK'}
   ];
+  var SHOP_SCREENS={
+    shop_home:1,customer:1,customer_detail:1,order_aksesoris:1,order_calya:1,
+    bukti_serah:1,tagihan_customer:1,e_kuitansi:1,shop_akun:1
+  };
+  function isShopScreen(id){ return !!SHOP_SCREENS[id]; }
+  function shopChrome(){ return !!(document.querySelector('#mockup .app.cust-shop')); }
   var SCREEN_TX={
     spk:'dewi',spk_baru:'dewi',quot:'dewi',booking:'dewi',so:'dewi',proses:'dewi',
     afi_d:'dewi',do:'dewi',bill_d:'dewi',kirim_d:'dewi',stnk_d:'dewi',
@@ -181,6 +187,7 @@
   }
   function fillDots(el, st){
     if(!el||!st) return;
+    if(el.closest('#shop_home, #customer, #customer_detail, #order_aksesoris, #order_calya, #bukti_serah, #tagihan_customer, #e_kuitansi, #shop_akun')) return;
     el.classList.add('tx-dots');
     el.innerHTML='';
     STAGES.forEach(function(s){
@@ -332,6 +339,10 @@
     Object.keys(SCREEN_TX).forEach(function(sid){
       var screen=document.getElementById(sid);
       if(!screen) return;
+      if(isShopScreen(sid)){
+        screen.querySelectorAll(':scope > .proc, :scope > .tx-now').forEach(function(el){ el.remove(); });
+        return;
+      }
       var tx=SCREEN_TX[sid];
       var pack=ensureNav(screen, tx);
       if(!pack) return;
@@ -343,6 +354,10 @@
     ['cashless','digiroom'].forEach(function(sid){
       var screen=document.getElementById(sid);
       if(!screen) return;
+      if(shopChrome()){
+        screen.querySelectorAll(':scope > .proc, :scope > .tx-now').forEach(function(el){ el.remove(); });
+        return;
+      }
       var tx=screenTx(sid, payJob);
       var pack=ensureNav(screen, tx);
       if(!pack) return;
