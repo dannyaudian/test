@@ -1,0 +1,352 @@
+      <section class="screen" id="customer">
+        <div class="screenhead">
+          <div>
+            <h2>Pesanan saya</h2>
+            <p>Halo, Budi. Ketuk pesanan untuk lacak sampai mana, lalu bayar — penagihan salesman dan pelunasan cashless adalah dua proses terpisah.</p>
+          </div>
+        </div>
+        <p class="queue-line"><b>3 pesanan</b> · FAST Outlet Cilandak</p>
+        <label class="shop-search" for="orderSearch">
+          <span aria-hidden="true">⌕</span>
+          <input id="orderSearch" type="search" placeholder="Cari nama unit atau nomor pesanan…" autocomplete="off">
+        </label>
+        <div class="order-filters" role="tablist" aria-label="Filter pesanan">
+          <button type="button" data-order-filter="all" aria-pressed="true">Semua</button>
+          <button type="button" data-order-filter="ongoing" aria-pressed="false">Berlangsung</button>
+          <button type="button" data-order-filter="done" aria-pressed="false">Selesai</button>
+        </div>
+        <div class="order-list" id="orderList">
+          <button type="button" class="order-card featured" data-order-status="ongoing" data-go="customer_detail" data-cust-zenix-card>
+            <div class="thumb">ZENIX</div>
+            <div class="meta">
+              <p class="oid">28 Agu 2026 · Pesanan FAST-00418</p>
+              <strong class="oname">Innova Zenix 2.0 G HV</strong>
+              <p class="spec" data-cust-list-spec>Ada penagihan salesman + sisa bisa dilunasi cashless</p>
+              <div class="row2">
+                <span class="tag hold" data-cust-list-tag>Menunggu bayar</span>
+                <span class="amt" data-live="ar">Rp 181.750.000</span>
+              </div>
+              <p class="cta" data-cust-list-cta>Lacak &amp; bayar →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-order-status="done" data-go="order_aksesoris">
+            <div class="thumb done">PAKET</div>
+            <div class="meta">
+              <p class="oid">12 Des 2025 · Pesanan FAST-88102</p>
+              <strong class="oname">Aksesoris &amp; coating</strong>
+              <p class="spec">Selesai · tidak ada tagihan terbuka</p>
+              <div class="row2">
+                <span class="tag ok">Selesai</span>
+                <span class="amt">Lunas</span>
+              </div>
+              <p class="cta">Lihat jejak →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-order-status="done" data-go="order_calya">
+            <div class="thumb done">CALYA</div>
+            <div class="meta">
+              <p class="oid">18 Nov 2024 · Pesanan FAST-01990</p>
+              <strong class="oname">Calya G AT</strong>
+              <p class="spec">Diterima · lacak selesai · bukti serah terima ada</p>
+              <div class="row2">
+                <span class="tag ok">Diterima</span>
+                <span class="amt">Lunas</span>
+              </div>
+              <p class="cta">Lacak jejak →</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen" id="customer_detail">
+        <div class="screenhead">
+          <div>
+            <h2>Innova Zenix 2.0 G HV</h2>
+            <p>Pesanan FAST-00418 · Putih Mutiara · FAST Outlet Cilandak</p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="customer">← Daftar pesanan</button>
+          </div>
+        </div>
+        <p class="hint" style="margin:0 0 8px">Skenario mockup — dua proses bayar tidak digabung:</p>
+        <div class="order-filters" role="tablist" aria-label="Skenario pembayaran Zenix">
+          <button type="button" data-cust-pay-scene="both" aria-pressed="true">Ada penagihan + sisa cashless</button>
+          <button type="button" data-cust-pay-scene="request">Hanya penagihan Frontman</button>
+          <button type="button" data-cust-pay-scene="open">Hanya pelunasan cashless</button>
+        </div>
+        <div class="payhero">
+          <p class="k">Sisa tagihan (AR Open cabang)</p>
+          <p class="v" data-live="ar">Rp 181.750.000</p>
+          <p class="n" data-cust-pay-lead>Dua jalur terpisah: bayar tagihan salesman bila ada, atau lunasi sendiri lewat cashless.</p>
+        </div>
+        <div class="box">
+          <h3>Lacak pesanan</h3>
+          <ul class="milestones" data-cust-track>
+            <li class="done"><span class="m">✓</span><div>Dipesan<div class="t">28 Agu 2026 · FAST-00418</div></div></li>
+            <li class="done"><span class="m">✓</span><div>Tanda jadi<div class="t">KWT/26/CLD/008731 · Rp 5.000.000</div></div></li>
+            <li class="done"><span class="m">✓</span><div>Pesanan diproses<div class="t">SO 4500091238 terbit 29 Agu</div></div></li>
+            <li class="now" data-cust-track-pay><span class="m">•</span><div>Pelunasan<div class="t">Sisa tagihan masih terbuka — unit belum dikirim</div></div></li>
+            <li data-cust-track-doc><span class="m">•</span><div>Dokumen kendaraan<div class="t">STNK &amp; BPKB setelah pelunasan dan pengajuan cabang</div></div></li>
+            <li data-cust-track-ship><span class="m">•</span><div>Pengiriman<div class="t">Tertahan sampai lunas · bukan ruang gelap</div></div></li>
+            <li><span class="m">•</span><div>Selesai<div class="t">Unit + paket bukti serah terima</div></div></li>
+          </ul>
+        </div>
+        <div class="pay-proc request" data-cust-pay="request">
+          <p class="k">Proses 1 · Penagihan Frontman</p>
+          <h3>Bayar tagihan salesman</h3>
+          <p>Salesman mengirim permintaan bayar. Nominal terkunci. Ini bukan pelunasan yang Anda isi sendiri.</p>
+          <p class="amt">Rp 100.000.000</p>
+          <p class="hint">Berlaku sampai 5 Sep 2026 · QRIS / VA terkunci ke angka ini</p>
+          <div class="nextbar">
+            <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar tagihan ini</button>
+          </div>
+        </div>
+        <div class="pay-proc cashless" data-cust-pay="open">
+          <p class="k">Proses 2 · Pelunasan cashless</p>
+          <h3>Lunasi sendiri</h3>
+          <p data-cust-open-copy>Tidak memakai tagihan salesman. Anda isi nominal, lalu scan QRIS atau terbitkan VA. Maksimum sisa di luar request.</p>
+          <p class="amt" data-cust-open-max>Maks. Rp 81.750.000</p>
+          <div class="nextbar">
+            <button class="btn" data-go="digiroom" data-pay-job="open" data-role="cust">Isi nominal · QRIS / VA</button>
+          </div>
+        </div>
+        <div class="box" data-cust-pay="none" hidden>
+          <h3>Tidak ada yang harus dibayar</h3>
+          <div class="pad"><p>Lunas. Lacak pengiriman dan dokumen di jejak di atas.</p></div>
+        </div>
+        <div class="box">
+          <h3>Pengiriman</h3>
+          <div class="pad" data-ho-lock>
+            <p class="exc-note warn" style="margin:0">Unit belum dikirim. Pelunasan cash masih wajib lunas. Setelah lunas, paket bukti (foto, VIN, BSTKB) muncul di sini.</p>
+          </div>
+          <div class="pad" data-ho-ready hidden>
+            <p class="exc-note ok" style="margin:0">Lunas. Jadwal kirim menyusul. Paket bukti muncul setelah cabang unggah dan setujui serah terima.</p>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Bukti bayar</h3>
+          <div class="shop-receipts">
+            <div class="shop-receipt">
+              <div><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan 1 · Rp 300.000.000</p></div>
+              <button class="btn ghost" data-go="e_kuitansi">PDF</button>
+            </div>
+            <div class="shop-receipt">
+              <div><b>KWT/26/CLD/008731</b><p class="meta">Tanda jadi · Rp 5.000.000</p></div>
+              <button class="btn ghost" data-go="e_kuitansi">PDF</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="order_aksesoris">
+        <div class="screenhead">
+          <div>
+            <h2>Paket aksesoris &amp; coating</h2>
+            <p>Pesanan FAST-88102 · dipasang 14 Des 2025 · lunas</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer">← Pesanan saya</button></div>
+        </div>
+        <div class="shop-pdp">
+          <div class="shop-gallery" style="background:linear-gradient(160deg,#1e3a8a,#38bdf8)">PAKET</div>
+          <div class="shop-buy">
+            <ol class="shop-steps" aria-label="Status pesanan">
+              <li class="done">Dipesan</li>
+              <li class="done">Dibayar</li>
+              <li class="done">Diproses</li>
+              <li class="done">Dikirim</li>
+              <li class="done">Selesai</li>
+            </ol>
+            <p class="lead">Karpet, coating, dan kaca film. Dibayar via QRIS 12 Des 2025. Tidak ada tagihan terbuka.</p>
+            <button class="btn ghost" data-go="e_kuitansi">Lihat e-kuitansi</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="order_calya">
+        <div class="screenhead">
+          <div>
+            <h2>Toyota Calya G AT</h2>
+            <p>Pesanan FAST-01990 · diterima 2 Des 2024 · lunas</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer">← Pesanan saya</button></div>
+        </div>
+        <div class="shop-pdp">
+          <div class="shop-gallery" style="background:linear-gradient(160deg,#14532d,#22c55e)">CALYA</div>
+          <div class="shop-buy">
+            <p class="price">Rp 0</p>
+            <p class="lead">Tidak ada sisa tagihan. Unit dan dokumen sudah di tangan Anda.</p>
+            <ol class="shop-steps" aria-label="Status pesanan">
+              <li class="done">Dipesan</li>
+              <li class="done">Dibayar</li>
+              <li class="done">Diproses</li>
+              <li class="done">Dikirim</li>
+              <li class="done">Selesai</li>
+            </ol>
+            <button type="button" class="btn" data-go="bukti_serah" data-role="cust">Buka bukti serah terima</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="bukti_serah">
+        <div class="screenhead">
+          <div>
+            <h2>Bukti serah terima · Calya G AT</h2>
+            <p>Diterima 2 Des 2024. Paket digital yang sama dengan cabang — bukan rekaman kamera outlet.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="order_calya" data-role="cust">← Calya</button></div>
+        </div>
+        <div class="shop-pdp">
+          <div class="shop-gallery" style="background:linear-gradient(160deg,#14532d,#22c55e)">CALYA</div>
+          <div class="shop-buy">
+            <p class="lead">2 Des 2024, 14:18 WIB · Cilandak (−6.2731, 106.8072)</p>
+            <ol class="shop-steps">
+              <li class="done">Dipesan</li>
+              <li class="done">Dibayar</li>
+              <li class="done">Diproses</li>
+              <li class="done">Dikirim</li>
+              <li class="done">Selesai</li>
+            </ol>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Yang dicatat</h3>
+          <div class="vault-grid">
+            <div class="vault-item"><p class="k">Penerima</p><p class="v">Budi Santoso</p></div>
+            <div class="vault-item"><p class="k">VIN</p><p class="v">••01990</p></div>
+            <div class="vault-item"><p class="k">Unit</p><p class="v">Calya G AT · putih</p></div>
+            <div class="vault-item"><p class="k">BSTKB</p><p class="v">Scan cocok VIN</p></div>
+          </div>
+          <div class="pad">
+            <div class="docs">
+              <div class="doc"><b>Foto serah terima</b><p class="meta">2 Des 2024 14:18 WIB · lokasi Cilandak</p><span class="tag ok">Otentik</span></div>
+              <div class="doc"><b>Foto VIN</b><p class="meta">Cocok pesanan FAST-01990</p><span class="tag ok">Otentik</span></div>
+              <div class="doc"><b>Scan BSTKB</b><p class="meta">Nomor mengikuti VIN ••01990</p><span class="tag ok">Otentik</span></div>
+            </div>
+            <p class="hint">Cabang dan Anda melihat paket yang sama. Klaim “sudah diserahkan” tanpa paket ini tidak cukup.</p>
+            <p><button type="button" class="btn" data-bukti-pdf>Download paket PDF</button></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="tagihan_customer">
+        <div class="screenhead">
+          <div>
+            <h2>Bayar pesanan</h2>
+            <p>FAST-00418 · Innova Zenix · sisa AR Open <span data-live="ar">Rp 181.750.000</span></p>
+          </div>
+          <div class="actions">
+            <button class="btn ghost" data-go="customer_detail">← Lacak pesanan</button>
+          </div>
+        </div>
+        <p class="hint" style="margin:0 0 8px">Dua proses berbeda. Pilih yang sesuai skenario — tidak digabung jadi satu checkout.</p>
+        <div class="order-filters" role="tablist" aria-label="Skenario pembayaran Zenix">
+          <button type="button" data-cust-pay-scene="both" aria-pressed="true">Ada penagihan + sisa cashless</button>
+          <button type="button" data-cust-pay-scene="request">Hanya penagihan Frontman</button>
+          <button type="button" data-cust-pay-scene="open">Hanya pelunasan cashless</button>
+        </div>
+        <div class="box">
+          <h3>Ringkasan tagihan cabang</h3>
+          <div class="money">
+            <div class="row"><span>Harga unit</span><span>Rp 486.750.000</span></div>
+            <div class="row"><span>Tanda jadi · KWT/26/CLD/008731</span><span>− Rp 5.000.000</span></div>
+            <div class="row"><span>Pelunasan 1 · KWT/26/CLD/009115</span><span>− Rp 300.000.000</span></div>
+            <div class="row total"><span>AR Open</span><span data-live="ar">Rp 181.750.000</span></div>
+          </div>
+        </div>
+        <div class="pay-proc request" data-cust-pay="request">
+          <p class="k">Proses 1 · Penagihan Frontman</p>
+          <h3>Bayar tagihan salesman</h3>
+          <p>Nominal dikunci Rp 100.000.000. QRIS/VA tidak bisa diubah. Ini bukan pelunasan yang Anda isi sendiri.</p>
+          <p class="amt">Rp 100.000.000</p>
+          <p class="hint">Berlaku sampai 5 Sep 2026</p>
+          <div class="nextbar">
+            <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Bayar penagihan ini</button>
+          </div>
+        </div>
+        <div class="pay-proc cashless" data-cust-pay="open">
+          <p class="k">Proses 2 · Pelunasan cashless</p>
+          <h3>Isi nominal sendiri</h3>
+          <p data-cust-open-copy>Tanpa tautan salesman. Isi angka, lalu QRIS atau VA. Bukan EDC.</p>
+          <p class="amt" data-cust-open-max>Maks. Rp 81.750.000</p>
+          <div class="nextbar">
+            <button class="btn" data-go="digiroom" data-pay-job="open" data-role="cust">Lanjut QRIS / VA</button>
+          </div>
+        </div>
+        <div class="box" data-cust-pay="none" hidden>
+          <h3>Tidak ada yang harus dibayar</h3>
+          <div class="pad"><p>AR Open Rp 0. Lacak pengiriman dari tab Lacak. Tidak ada penagihan Frontman maupun pelunasan cashless yang menunggu.</p></div>
+        </div>
+        <div class="box">
+          <h3>Bukti bayar sebelumnya</h3>
+          <div class="shop-receipts">
+            <div class="shop-receipt"><div><b>KWT/26/CLD/008731</b><p class="meta">Tanda jadi · Rp 5.000.000</p></div><button class="btn ghost" data-go="e_kuitansi">PDF</button></div>
+            <div class="shop-receipt"><div><b>KWT/26/CLD/009115</b><p class="meta">Pelunasan 1 · Rp 300.000.000</p></div><button class="btn ghost" data-go="e_kuitansi">PDF</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="e_kuitansi">
+        <div class="screenhead">
+          <div>
+            <h2>Bukti bayar saya</h2>
+            <p>Unduh e-kuitansi seperti struk toko daring — nomor sama dengan cabang.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="customer_detail">← Pesanan</button></div>
+        </div>
+        <div class="shop-receipts" style="padding:0 0 16px">
+          <div class="shop-receipt">
+            <div>
+              <b>KWT/26/CLD/009115</b>
+              <p class="meta">1 Sep 2026 · BCA VA · Rp 300.000.000 · Pesanan FAST-00418</p>
+            </div>
+            <button class="btn">PDF</button>
+          </div>
+          <div class="shop-receipt">
+            <div>
+              <b>KWT/26/CLD/008731</b>
+              <p class="meta">28 Agu 2026 · BCA VA · Rp 5.000.000 · tanda jadi</p>
+            </div>
+            <button class="btn ghost">PDF</button>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Pratinjau struk</h3>
+          <div class="pad">
+            <p class="eyebrow">FAST Outlet Cilandak · bukti pembayaran</p>
+            <h2 style="font-size:19px;margin:6px 0 16px">KWT/26/CLD/009115</h2>
+            <div class="money">
+              <div class="row"><span>Status</span><span class="tag ok">Aktif</span></div>
+              <div class="row"><span>Nama</span><span>Budi Santoso</span></div>
+              <div class="row"><span>Unit</span><span>Innova Zenix · VIN ••41827</span></div>
+              <div class="row"><span>Tanggal</span><span>1 Sep 2026, 14:08</span></div>
+              <div class="row"><span>Metode</span><span>BCA Virtual Account</span></div>
+              <div class="row"><span>Referensi</span><span>VA 8801 0418 0002</span></div>
+              <div class="row total"><span>Diterima</span><span>Rp 300.000.000</span></div>
+            </div>
+            <div class="va" style="margin:12px 0"><span style="font-size:11.5px;color:var(--ink-soft)">Kode verifikasi</span><b>VFY-CLD-009115-A7K2</b></div>
+            <button class="btn" style="width:100%">Download PDF</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="shop_akun">
+        <div class="screenhead">
+          <div>
+            <h2>Akun saya</h2>
+            <p>Profil toko · terhubung ke data cabang yang sama</p>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Pembeli</h3>
+          <div class="fields">
+            <div class="frow locked"><span class="lab">Nama</span><span class="val">Budi Santoso</span></div>
+            <div class="frow locked"><span class="lab">Outlet</span><span class="val">FAST Outlet Cilandak</span></div>
+            <div class="frow locked"><span class="lab">Aplikasi</span><span class="val">shop.fast.id · bukan SAM staf</span></div>
+          </div>
+        </div>
+        <div class="pad" style="padding:0 0 16px">
+          <button class="btn" style="width:100%;margin-bottom:8px" data-go="customer">Lihat pesanan</button>
+          <button class="btn ghost" style="width:100%" data-go="e_kuitansi">Semua bukti bayar</button>
+        </div>
+      </section>
+
