@@ -1,13 +1,13 @@
       <section class="screen" id="spk_baru">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">Langkah 0 · sebelum nomor SPK</p>
-            <h2>Fill SPK dari awal</h2>
-            <p>Frontman menginput dan mengupload sekali di sumber. Booking fee not yet ditagih. Quotation menyusul setelah Saved SPK.</p>
+            <p class="eyebrow">Step 0 · before the SPK number</p>
+            <h2>Fill SPK from scratch</h2>
+            <p>The Frontman inputs and uploads once at the source. Booking fee not yet charged. Quotation follows after the SPK is saved.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← List</button>
-            <button class="btn ghost" data-spk-reset>Mulai again</button>
+            <button class="btn ghost" data-spk-reset>Start over</button>
           </div>
         </div>
         <nav class="worktabs" aria-label="Fill SPK">
@@ -17,128 +17,128 @@
           <button type="button" data-spk-step="docs">4 · Upload</button>
         </nav>
         <div class="cards">
-          <div class="card"><p class="k">Data buyer</p><p class="v" style="font-size:18px" data-draft-pemesan>Empty</p><p class="n">Name, NIK, HP, address, email</p></div>
-          <div class="card"><p class="k">Data STNK</p><p class="v" style="font-size:18px" data-draft-stnk>Empty</p><p class="n">Name, address, kota → area PO</p></div>
-          <div class="card"><p class="k">Unit &amp; pay</p><p class="v" style="font-size:18px" data-draft-unit>Empty</p><p class="n">Tipe, warna, tunai/leasing, aksesoris</p></div>
-          <div class="card" data-draft-docs-card><p class="k">Documents</p><p class="v" style="font-size:18px" data-draft-docs>0 / 7</p><p class="n">Entri buyer + pengajuan STNK/BPKB</p></div>
+          <div class="card"><p class="k">Buyer data</p><p class="v" style="font-size:18px" data-draft-pemesan>Empty</p><p class="n">Name, NIK, HP, address, email</p></div>
+          <div class="card"><p class="k">STNK data</p><p class="v" style="font-size:18px" data-draft-stnk>Empty</p><p class="n">Name, address, city → PO area</p></div>
+          <div class="card"><p class="k">Unit &amp; payment</p><p class="v" style="font-size:18px" data-draft-unit>Empty</p><p class="n">Type, color, cash/leasing, accessories</p></div>
+          <div class="card" data-draft-docs-card><p class="k">Documents</p><p class="v" style="font-size:18px" data-draft-docs>0 / 7</p><p class="n">Buyer entry + STNK/BPKB submission</p></div>
         </div>
-        <p class="note">Wajib lengkap sebelum SPK punya nomor. Kekurangan identitas (misalnya NPWP) bukan Approval Engine — lengkapi di sini. Booking fee non-waivable ditagih <b>setelah</b> Saved SPK.</p>
+        <p class="note">Must be complete before the SPK gets a number. Missing identity (for example NPWP) is not an Approval Engine matter — complete it here. The non-waivable booking fee is charged <b>after</b> the SPK is saved.</p>
 
         <div class="box" data-spk-panel="pemesan">
-          <h3>1 · Data buyer <span class="side">Entered by Frontman · F</span></h3>
+          <h3>1 · Buyer data <span class="side">Entered by Frontman · F</span></h3>
           <div class="form">
-            <p class="hint">Ambil dari KTP/KK yang akan diupload di langkah 4. Jangan tunda ke SO.</p>
+            <p class="hint">Take from KTP/KK that will be uploaded in step 4. Do not defer to the SO.</p>
             <div class="fgrid">
-              <div class="field"><label>Buyer Name</label><input data-draft-f="nama" placeholder="Sesuai KTP" autocomplete="off"></div>
-              <div class="field"><label>NIK</label><input data-draft-f="nik" placeholder="16 digit" inputmode="numeric" autocomplete="off"></div>
+              <div class="field"><label>Buyer Name</label><input data-draft-f="nama" placeholder="As per KTP" autocomplete="off"></div>
+              <div class="field"><label>NIK</label><input data-draft-f="nik" placeholder="16 digits" inputmode="numeric" autocomplete="off"></div>
               <div class="field"><label>HP / WhatsApp</label><input data-draft-f="hp" placeholder="08…" inputmode="tel" autocomplete="off"></div>
-              <div class="field"><label>Email</label><input data-draft-f="email" placeholder="opsional tapi disarankan" autocomplete="off"></div>
+              <div class="field"><label>Email</label><input data-draft-f="email" placeholder="optional but recommended" autocomplete="off"></div>
             </div>
-            <p class="hint" style="margin-top:12px"><b>Address buyer</b> · tujuh field master. Bukan satu baris bebas.</p>
+            <p class="hint" style="margin-top:12px"><b>Buyer address</b> · seven master fields. Not a single free-text line.</p>
             <div class="fgrid">
-              <div class="field"><label>Address 1</label><input data-draft-f="pemAddr1" placeholder="Name jalan &amp; nomor" autocomplete="off"></div>
-              <div class="field"><label>Address 2</label><input data-draft-f="pemAddr2" placeholder="Blok, kompleks, opsional" autocomplete="off"></div>
+              <div class="field"><label>Address 1</label><input data-draft-f="pemAddr1" placeholder="Street name &amp; number" autocomplete="off"></div>
+              <div class="field"><label>Address 2</label><input data-draft-f="pemAddr2" placeholder="Block, complex, optional" autocomplete="off"></div>
               <div class="field"><label>RT/RW</label><input data-draft-f="pemRt" placeholder="003/004" autocomplete="off"></div>
-              <div class="field"><label>Kelurahan/desa</label><input data-draft-f="pemKel" placeholder="Kelurahan" autocomplete="off"></div>
-              <div class="field"><label>Kecamatan</label><input data-draft-f="pemKec" placeholder="Kecamatan" autocomplete="off"></div>
-              <div class="field"><label>Kabupaten/kota</label><input data-draft-f="pemKota" placeholder="Kota Jakarta Selatan" autocomplete="off"></div>
-              <div class="field"><label>Provinsi</label><input data-draft-f="pemProv" placeholder="DKI Jakarta" autocomplete="off"></div>
+              <div class="field"><label>Sub-district / village</label><input data-draft-f="pemKel" placeholder="Sub-district" autocomplete="off"></div>
+              <div class="field"><label>District</label><input data-draft-f="pemKec" placeholder="District" autocomplete="off"></div>
+              <div class="field"><label>Regency / city</label><input data-draft-f="pemKota" placeholder="South Jakarta City" autocomplete="off"></div>
+              <div class="field"><label>Province</label><input data-draft-f="pemProv" placeholder="DKI Jakarta" autocomplete="off"></div>
             </div>
-            <p class="hint">NPWP buyer diupload di langkah 4. Tanpa NPWP, data gate menahan — bukan waiver.</p>
+            <p class="hint">The buyer's NPWP is uploaded in step 4. Without NPWP, the data gate holds — not a waiver.</p>
           </div>
           <div class="formfoot">
-            <span class="hint">Example kasus: Dewi Lestari, Cilandak.</span>
-            <button type="button" class="btn" data-spk-fill="pemesan">Isi dari KTP Dewi</button>
-            <button type="button" class="btn ghost" data-spk-step="stnk">Lanjut STNK →</button>
+            <span class="hint">Example case: Dewi Lestari, Cilandak.</span>
+            <button type="button" class="btn" data-spk-fill="pemesan">Fill from Dewi's KTP</button>
+            <button type="button" class="btn ghost" data-spk-step="stnk">Continue to STNK →</button>
           </div>
         </div>
 
         <div class="box" data-spk-panel="stnk" hidden>
-          <h3>2 · Name &amp; address STNK <span class="side">Dipakai AFI · jangan ketik again nanti</span></h3>
+          <h3>2 · Name &amp; address STNK <span class="side">Used by AFI · do not type again later</span></h3>
           <div class="form">
-            <p class="hint">Kabupaten/kota STNK menghasilkan area PO dan harga OTR. Bukan diketik Frontman di SO.</p>
+            <p class="hint">The STNK regency/city produces the PO area and the OTR price. Not typed by the Frontman in the SO.</p>
             <div class="seg" role="group" aria-label="STNK Name">
-              <button type="button" data-spk-same="0" aria-pressed="true">Berbeda dari buyer</button>
-              <button type="button" data-spk-same="1" aria-pressed="false">Match dengan buyer</button>
+              <button type="button" data-spk-same="0" aria-pressed="true">Different from buyer</button>
+              <button type="button" data-spk-same="1" aria-pressed="false">Matches buyer</button>
             </div>
             <div class="fgrid" style="margin-top:14px">
-              <div class="field"><label>STNK Name</label><input data-draft-f="stnkNama" placeholder="Pemilik BPKB" autocomplete="off"></div>
-              <div class="field"><label>Relationship dengan buyer</label><input data-draft-f="stnkRel" placeholder="Example: pasangan, orang tua" autocomplete="off"></div>
+              <div class="field"><label>STNK Name</label><input data-draft-f="stnkNama" placeholder="BPKB owner" autocomplete="off"></div>
+              <div class="field"><label>Relationship to buyer</label><input data-draft-f="stnkRel" placeholder="Example: spouse, parent" autocomplete="off"></div>
             </div>
-            <p class="hint" style="margin-top:12px"><b>Address STNK</b> · tujuh field yang same. Dipakai AFI, tidak diketik again.</p>
+            <p class="hint" style="margin-top:12px"><b>STNK address</b> · the same seven fields. Used by AFI, not typed again.</p>
             <div class="fgrid">
-              <div class="field"><label>Address 1</label><input data-draft-f="stnkAddr1" placeholder="Name jalan &amp; nomor" autocomplete="off"></div>
-              <div class="field"><label>Address 2</label><input data-draft-f="stnkAddr2" placeholder="Blok, kompleks, opsional" autocomplete="off"></div>
+              <div class="field"><label>Address 1</label><input data-draft-f="stnkAddr1" placeholder="Street name &amp; number" autocomplete="off"></div>
+              <div class="field"><label>Address 2</label><input data-draft-f="stnkAddr2" placeholder="Block, complex, optional" autocomplete="off"></div>
               <div class="field"><label>RT/RW</label><input data-draft-f="stnkRt" placeholder="001/002" autocomplete="off"></div>
-              <div class="field"><label>Kelurahan/desa</label><input data-draft-f="stnkKel" placeholder="Kelurahan" autocomplete="off"></div>
-              <div class="field"><label>Kecamatan</label><input data-draft-f="stnkKec" placeholder="Kecamatan" autocomplete="off"></div>
-              <div class="field"><label>Kabupaten / kota STNK</label><input data-draft-f="stnkKota" placeholder="Example Kota Depok" autocomplete="off"></div>
-              <div class="field"><label>Provinsi</label><input data-draft-f="stnkProv" placeholder="Dari kota STNK" autocomplete="off"></div>
+              <div class="field"><label>Sub-district / village</label><input data-draft-f="stnkKel" placeholder="Sub-district" autocomplete="off"></div>
+              <div class="field"><label>District</label><input data-draft-f="stnkKec" placeholder="District" autocomplete="off"></div>
+              <div class="field"><label>STNK regency / city</label><input data-draft-f="stnkKota" placeholder="Example Depok City" autocomplete="off"></div>
+              <div class="field"><label>Province</label><input data-draft-f="stnkProv" placeholder="From STNK city" autocomplete="off"></div>
             </div>
             <div class="fgrid">
               <div class="field"><label>Area PO</label><input data-draft-po="po" value="—" readonly></div>
-              <div class="field"><label>Provinsi (sistem)</label><input data-draft-po="prov" value="—" readonly></div>
+              <div class="field"><label>Province (system)</label><input data-draft-po="prov" value="—" readonly></div>
             </div>
-            <p class="hint" data-spk-same-hint>STNK Name berbeda: upload supporting document di langkah 4, lalu Approval Engine (Head of Administration). Not a waiver paid in full.</p>
+            <p class="hint" data-spk-same-hint>STNK name differs: upload a supporting document in step 4, then Approval Engine (Head of Administration). Not a paid-in-full waiver.</p>
           </div>
           <div class="formfoot">
-            <span class="hint">Example: Andi Pratama · Kota Depok → area PO Depok.</span>
-            <button type="button" class="btn" data-spk-fill="stnk">Isi STNK Dewi</button>
-            <button type="button" class="btn ghost" data-spk-step="unit">Lanjut unit →</button>
+            <span class="hint">Example: Andi Pratama · Depok City → PO area Depok.</span>
+            <button type="button" class="btn" data-spk-fill="stnk">Fill Dewi's STNK</button>
+            <button type="button" class="btn ghost" data-spk-step="unit">Continue to unit →</button>
           </div>
         </div>
 
         <div class="box" data-spk-panel="unit" hidden>
-          <h3>3 · Unit, aksesoris, cara pay <span class="side">Dari master kendaraan</span></h3>
+          <h3>3 · Unit, accessories, payment method <span class="side">From vehicle master</span></h3>
           <div class="form">
-            <p class="hint">Tipe dari master. OTR muncul setelah kota STNK ada. Booking fee unit menyusul setelah Saved SPK — non-waivable.</p>
-            <div class="seg" role="group" aria-label="Metode pay">
-              <button type="button" data-spk-pay="cash" aria-pressed="true">Tunai</button>
+            <p class="hint">Type from the master. OTR appears after the STNK city is set. The unit booking fee follows after the SPK is saved — non-waivable.</p>
+            <div class="seg" role="group" aria-label="Payment method">
+              <button type="button" data-spk-pay="cash" aria-pressed="true">Cash</button>
               <button type="button" data-spk-pay="lease" aria-pressed="false">Leasing</button>
             </div>
-            <p class="hint" data-spk-pay-hint style="margin-top:10px">Tunai: billing ≥30% dan delivery paid in full, keduanya non-waivable. Not yet ditagih di langkah ini.</p>
+            <p class="hint" data-spk-pay-hint style="margin-top:10px">Cash: billing ≥30% and delivery paid in full, both non-waivable. Not yet charged in this step.</p>
             <div class="fgrid">
-              <div class="field"><label>Tipe unit 1</label><input data-draft-f="tipe" placeholder="Pilih dari master" autocomplete="off"></div>
-              <div class="field"><label>Warna</label><input data-draft-f="warna" placeholder="Warna unit" autocomplete="off"></div>
-              <div class="field"><label>Unit 2 (opsional)</label><input data-draft-f="tipe2" placeholder="Emptykan jika 1 unit" autocomplete="off"></div>
-              <div class="field"><label>Aksesoris</label><input data-draft-f="aksesoris" placeholder="Paket branch" autocomplete="off"></div>
+              <div class="field"><label>Unit type 1</label><input data-draft-f="tipe" placeholder="Select from master" autocomplete="off"></div>
+              <div class="field"><label>Color</label><input data-draft-f="warna" placeholder="Unit color" autocomplete="off"></div>
+              <div class="field"><label>Unit 2 (optional)</label><input data-draft-f="tipe2" placeholder="Leave empty if 1 unit" autocomplete="off"></div>
+              <div class="field"><label>Accessories</label><input data-draft-f="aksesoris" placeholder="Branch package" autocomplete="off"></div>
             </div>
             <div class="fgrid">
-              <div class="field"><label>OTR unit 1</label><input data-draft-po="otr" value="Pending kota STNK" readonly></div>
-              <div class="field"><label>Minimum booking fee</label><input data-draft-po="bf" value="Dari master unit, setelah SPK" readonly></div>
-              <div class="field"><label>License plate unit 1</label><input data-draft-f="nopol1" placeholder="Reserved setelah AFI" autocomplete="off"></div>
-              <div class="field"><label>License plate unit 2</label><input data-draft-f="nopol2" placeholder="Emptykan jika 1 unit" autocomplete="off"></div>
+              <div class="field"><label>OTR unit 1</label><input data-draft-po="otr" value="Pending STNK city" readonly></div>
+              <div class="field"><label>Minimum booking fee</label><input data-draft-po="bf" value="From the unit master, after SPK" readonly></div>
+              <div class="field"><label>License plate unit 1</label><input data-draft-f="nopol1" placeholder="Reserved after AFI" autocomplete="off"></div>
+              <div class="field"><label>License plate unit 2</label><input data-draft-f="nopol2" placeholder="Leave empty if 1 unit" autocomplete="off"></div>
             </div>
           </div>
           <div class="formfoot">
-            <span class="hint">Example: Yaris + Agya, tunai, aksesoris branch.</span>
-            <button type="button" class="btn" data-spk-fill="unit">Isi unit Dewi</button>
-            <button type="button" class="btn ghost" data-spk-step="docs">Lanjut upload →</button>
+            <span class="hint">Example: Yaris + Agya, cash, branch accessories.</span>
+            <button type="button" class="btn" data-spk-fill="unit">Fill Dewi's unit</button>
+            <button type="button" class="btn ghost" data-spk-step="docs">Continue to upload →</button>
           </div>
         </div>
 
         <div class="box" data-spk-panel="docs" hidden>
-          <h3>4 · Upload documents <span class="side">Sekali di SPK, dipakai AFI/DO</span></h3>
+          <h3>4 · Upload documents <span class="side">Once in SPK, used by AFI/DO</span></h3>
           <div class="pad">
-            <p class="hint">Administration memverifikasi, bukan upload again. File di mockup ini simulasi — ketuk Upload.</p>
+            <p class="hint">Administration verifies, not re-uploads. Files in this mockup are simulated — tap Upload.</p>
           </div>
-          <div class="pad" style="padding-bottom:0"><p class="hint" style="margin:0"><b>Documents entri</b> · identitas buyer</p></div>
+          <div class="pad" style="padding-bottom:0"><p class="hint" style="margin:0"><b>Entry documents</b> · buyer identity</p></div>
           <div class="docs">
-            <div class="doc miss" data-spk-doc="ktp"><b>KTP buyer</b><p class="meta">Wajib · data gate</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktp">Upload</button></div>
-            <div class="doc miss" data-spk-doc="kk"><b>Family Card</b><p class="meta">Wajib · data gate</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="kk">Upload</button></div>
-            <div class="doc miss" data-spk-doc="npwp"><b>NPWP buyer</b><p class="meta">Wajib · bukan waiver</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="npwp">Upload</button></div>
+            <div class="doc miss" data-spk-doc="ktp"><b>KTP buyer</b><p class="meta">Required · data gate</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktp">Upload</button></div>
+            <div class="doc miss" data-spk-doc="kk"><b>Family Card</b><p class="meta">Required · data gate</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="kk">Upload</button></div>
+            <div class="doc miss" data-spk-doc="npwp"><b>NPWP buyer</b><p class="meta">Required · not a waiver</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="npwp">Upload</button></div>
             <div class="doc miss" data-spk-doc="alamat"><b>Buyer address proof</b><p class="meta">Required · waivable only if expired</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="alamat">Upload</button></div>
           </div>
-          <div class="pad" style="padding-bottom:0"><p class="hint" style="margin:0"><b>Documents pengajuan STNK / BPKB</b> · diupload di SPK, dipakai AFI</p></div>
+          <div class="pad" style="padding-bottom:0"><p class="hint" style="margin:0"><b>STNK / BPKB submission documents</b> · uploaded in SPK, used by AFI</p></div>
           <div class="docs">
-            <div class="doc miss" data-spk-doc="ktpStnk"><b>KTP atas name STNK</b><p class="meta">Wajib jika name berbeda</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktpStnk">Upload</button></div>
-            <div class="doc miss" data-spk-doc="kkStnk"><b>KK atas name STNK</b><p class="meta">Boleh pakai again KK buyer</p><span class="tag mute">Opsional</span><button type="button" class="btn ghost" style="width:100%;margin-top:10px" data-spk-up="kkStnk">Pakai again KK</button></div>
-            <div class="doc miss" data-spk-doc="alamatStnk"><b>Address proof STNK</b><p class="meta">Wajib · kota harus same dengan data STNK</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="alamatStnk">Upload</button></div>
-            <div class="doc miss" data-spk-doc="pernyataan" data-spk-need-diff><b>Pernyataan name STNK</b><p class="meta">Wajib jika name ≠ buyer · received Approval Engine</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="pernyataan">Upload</button></div>
+            <div class="doc miss" data-spk-doc="ktpStnk"><b>KTP under STNK name</b><p class="meta">Required if the name differs</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="ktpStnk">Upload</button></div>
+            <div class="doc miss" data-spk-doc="kkStnk"><b>KK under STNK name</b><p class="meta">May reuse the buyer's KK</p><span class="tag mute">Optional</span><button type="button" class="btn ghost" style="width:100%;margin-top:10px" data-spk-up="kkStnk">Reuse KK</button></div>
+            <div class="doc miss" data-spk-doc="alamatStnk"><b>Address proof STNK</b><p class="meta">Required · city must match the STNK data</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="alamatStnk">Upload</button></div>
+            <div class="doc miss" data-spk-doc="pernyataan" data-spk-need-diff><b>STNK name statement</b><p class="meta">Required if name ≠ buyer · goes to Approval Engine</p><span class="tag stop">Not yet</span><button type="button" class="btn" style="width:100%;margin-top:10px" data-spk-up="pernyataan">Upload</button></div>
           </div>
           <div class="formfoot">
-            <span class="hint" data-spk-save-hint>Lengkapi keempat langkah. Surat kuasa dan BSTKB bukan di sini — menyusul delivery / GI.</span>
-            <button type="button" class="btn" data-spk-save disabled>Simpan SPK</button>
+            <span class="hint" data-spk-save-hint>Complete all four steps. Power of attorney and BSTKB are not here — they follow delivery / GI.</span>
+            <button type="button" class="btn" data-spk-save disabled>Save SPK</button>
           </div>
         </div>
       </section>
@@ -146,22 +146,22 @@
       <section class="screen" id="spk">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">Sebelum pembayaran · SPK/26/CLD/00426</p>
-            <h2>Data SPK · Dewi Lestari</h2>
-            <p>New saved. Not yet ada receipt. Harga OTR mengikuti area PO dari kabupaten/kota di data STNK.</p>
+            <p class="eyebrow">Before payment · SPK/26/CLD/00426</p>
+            <h2>SPK data · Dewi Lestari</h2>
+            <p>Newly saved. No receipt yet. The OTR price follows the PO area from the regency/city in the STNK data.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-go="beranda">← List</button>
-            <button class="btn" data-go="quot">Lanjut quotation</button>
+            <button class="btn" data-go="quot">Continue to quotation</button>
           </div>
         </div>
         <nav class="proc" data-proc="spk" aria-label="Process transactions"></nav>
         <div class="cards">
-          <div class="card"><p class="k">Kabupaten/kota STNK</p><p class="v" style="font-size:18px">Kota Depok</p><p class="n">Entered by Frontman di address STNK</p></div>
-          <div class="card"><p class="k">Area PO</p><p class="v" style="font-size:18px">Depok</p><p class="n">System-generated dari kota STNK</p></div>
-          <div class="card"><p class="k">Harga OTR</p><p class="v" style="font-size:18px">Rp 296.800.000</p><p class="n">Mengikuti area PO Depok</p></div>
-          <div class="card alert" data-bf-hide-paid><p class="k">Payment</p><p class="v" style="font-size:18px">Not yet</p><p class="n">Booking fee Rp 3.000.000 menyusul</p></div>
-          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">4500091426</p><p class="n">SPK dikonversi setelah booking fee</p></div>
+          <div class="card"><p class="k">STNK regency/city</p><p class="v" style="font-size:18px">Kota Depok</p><p class="n">Entered by the Frontman in the STNK address</p></div>
+          <div class="card"><p class="k">Area PO</p><p class="v" style="font-size:18px">Depok</p><p class="n">System-generated from the STNK city</p></div>
+          <div class="card"><p class="k">OTR price</p><p class="v" style="font-size:18px">Rp 296.800.000</p><p class="n">Follows PO area Depok</p></div>
+          <div class="card alert" data-bf-hide-paid><p class="k">Payment</p><p class="v" style="font-size:18px">Not yet</p><p class="n">Booking fee Rp 3.000.000 to follow</p></div>
+          <div class="card" data-bf-show-paid hidden><p class="k">Sales Order</p><p class="v" style="font-size:18px">4500091426</p><p class="n">SPK converted after the booking fee</p></div>
         </div>
         <div class="split">
           <div>
@@ -175,96 +175,96 @@
               <div class="fields addr-fields" data-addr="dewi_pemesan" data-addr-src="Buyer SPK"></div>
             </div>
             <div class="box">
-              <h3>STNK / BPKB <span class="side">Dipakai AFI nanti, tidak ketik again</span></h3>
+              <h3>STNK / BPKB <span class="side">Used by AFI later, not typed again</span></h3>
               <div class="fields">
                 <div class="frow"><i class="own f">F</i><span class="lab">STNK Name</span><span class="val">Andi Pratama</span><span class="src">SPK</span></div>
               </div>
               <div class="fields addr-fields" data-addr="dewi_stnk" data-addr-src="SPK STNK"></div>
               <div class="fields">
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO</span><span class="val">Depok · PO-DPK</span><span class="src">Di-generate dari Kota Depok</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Area PO</span><span class="val">Depok · PO-DPK</span><span class="src">Generated from Depok City</span></div>
               </div>
-              <p class="hint" style="padding:0 16px 14px">Ganti kabupaten/kota STNK, area PO berganti, harga OTR ikut. Bukan diketik Frontman.</p>
+              <p class="hint" style="padding:0 16px 14px">Change the STNK regency/city, the PO area changes, the OTR price follows. Not typed by the Frontman.</p>
             </div>
             <div class="box" data-name-rel="dewi"></div>
             <p class="pad" style="padding-top:0"><button type="button" class="btn" data-go="exc_nama">Submit Approval Engine name</button></p>
             <div class="box">
-              <h3>License plate <span class="side">Per SO · dari SPK</span></h3>
+              <h3>License plate <span class="side">Per SO · from SPK</span></h3>
               <div class="fields" data-nopol="dewi.yaris"></div>
               <div class="fields" data-nopol="dewi.agya"></div>
             </div>
             <div class="box">
               <h3>Unit</h3>
               <div class="fields">
-                <div class="frow"><i class="own f">F</i><span class="lab">Tipe</span><span class="val">Yaris 1.5 G CVT</span><span class="src">Master kendaraan</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Warna</span><span class="val">Putih Metalik</span><span class="src">SPK</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Kode unit</span><span class="val">NSP-YRS-15G-CVT</span><span class="src">Master kendaraan</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Unit 2</span><span class="val">Agya 1.2 G CVT · Hitam</span><span class="src">Baris quotation ke-2</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Type</span><span class="val">Yaris 1.5 G CVT</span><span class="src">Vehicle master</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Color</span><span class="val">Metallic White</span><span class="src">SPK</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Unit code</span><span class="val">NSP-YRS-15G-CVT</span><span class="src">Vehicle master</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Unit 2</span><span class="val">Agya 1.2 G CVT · Black</span><span class="src">2nd quotation line</span></div>
               </div>
             </div>
             <div class="box">
-              <h3>Aksesoris</h3>
+              <h3>Accessories</h3>
               <div class="fields">
-                <div class="frow"><i class="own f">F</i><span class="lab">Kaca film full</span><span class="val">Rp 4.200.000</span><span class="src">Paket branch</span></div>
-                <div class="frow"><i class="own f">F</i><span class="lab">Karpet premium</span><span class="val">Rp 1.150.000</span><span class="src">Paket branch</span></div>
-                <div class="frow locked"><i class="own s">S</i><span class="lab">Total aksesoris</span><span class="val">Rp 5.350.000</span><span class="src">Jumlah baris SPK</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Full window film</span><span class="val">Rp 4.200.000</span><span class="src">Branch package</span></div>
+                <div class="frow"><i class="own f">F</i><span class="lab">Premium floor mats</span><span class="val">Rp 1.150.000</span><span class="src">Branch package</span></div>
+                <div class="frow locked"><i class="own s">S</i><span class="lab">Total accessories</span><span class="val">Rp 5.350.000</span><span class="src">Sum of SPK lines</span></div>
               </div>
             </div>
           </div>
           <div>
             <div class="box">
-              <h3>Harga &amp; tipe pembayaran</h3>
+              <h3>Price &amp; payment type</h3>
               <div class="money">
-                <div class="row"><span>Area PO</span><span>Depok · dari Kota Depok</span></div>
+                <div class="row"><span>Area PO</span><span>Depok · from Depok City</span></div>
                 <div class="row"><span>OTR Yaris 1.5 G CVT</span><span>Rp 296.800.000</span></div>
-                <div class="row"><span>Aksesoris</span><span>Rp 5.350.000</span></div>
-                <div class="row total"><span>Nilai SPK</span><span>Rp 302.150.000</span></div>
-                <div class="row"><span>Tipe pembayaran</span><span>Tunai</span></div>
+                <div class="row"><span>Accessories</span><span>Rp 5.350.000</span></div>
+                <div class="row total"><span>SPK value</span><span>Rp 302.150.000</span></div>
+                <div class="row"><span>Payment type</span><span>Cash</span></div>
                 <div class="row"><span>Minimum booking fee</span><span>Rp 3.000.000</span></div>
               </div>
-              <p class="hint" style="padding:0 16px 14px">OTR dari list harga area PO. Booking fee dari master unit Yaris — non-waivable untuk SO, ditagih setelah SPK ini.</p>
+              <p class="hint" style="padding:0 16px 14px">OTR from the PO area price list. Booking fee from the Yaris unit master — non-waivable for the SO, charged after this SPK.</p>
             </div>
             <div class="box">
-              <h3>Gate sebelum pay</h3>
+              <h3>Gate before payment</h3>
               <ul class="gates">
-                <li><span class="mark ok">✓</span><div>Data buyer<span class="why">Name + address 1–2, RT/RW, kelurahan, kecamatan, kota, provinsi</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark ok">✓</span><div>Data STNK<span class="why">Address terstruktur Kota Depok · area PO Depok</span></div><span class="tag ok">Lolos</span></li>
-                <li><span class="mark no">!</span><div>Buyer Name ≠ STNK<span class="why">Andi Pratama · supporting document di vault · Approval Engine</span></div><span class="tag hold">Waivable</span></li>
-                <li><span class="mark ok">✓</span><div>Documents entri &amp; STNK/BPKB<span class="why">Sudah diupload di SPK</span></div><span class="tag ok">Lolos</span></li>
-                <li data-bf-hide-paid><span class="mark idle">•</span><div>Booking fee<span class="why">Not yet ditagih · berikutnya di layar pay</span></div><span class="tag wait">Pending</span></li>
-                <li data-bf-hide-paid><span class="mark idle">•</span><div>Sales Order<span class="why">Tertahan sampai receipt booking fee</span></div><span class="tag mute">Tertahan</span></li>
-                <li data-bf-show-paid hidden><span class="mark ok">✓</span><div>Booking fee<span class="why">Rp 3.000.000 terverifikasi · KWT/26/CLD/009301</span></div><span class="tag ok">Meet</span></li>
-                <li data-bf-show-paid hidden><span class="mark ok">✓</span><div>Sales Order<span class="why">4500091426 · data SPK dibawa utuh</span></div><span class="tag ok">Terbuka</span></li>
+                <li><span class="mark ok">✓</span><div>Buyer data<span class="why">Name + address 1–2, RT/RW, sub-district, district, city, province</span></div><span class="tag ok">Passed</span></li>
+                <li><span class="mark ok">✓</span><div>STNK data<span class="why">Structured address Depok City · PO area Depok</span></div><span class="tag ok">Passed</span></li>
+                <li><span class="mark no">!</span><div>Buyer Name ≠ STNK<span class="why">Andi Pratama · supporting document in vault · Approval Engine</span></div><span class="tag hold">Waivable</span></li>
+                <li><span class="mark ok">✓</span><div>Entry &amp; STNK/BPKB documents<span class="why">Already uploaded in the SPK</span></div><span class="tag ok">Passed</span></li>
+                <li data-bf-hide-paid><span class="mark idle">•</span><div>Booking fee<span class="why">Not yet charged · next on the payment screen</span></div><span class="tag wait">Pending</span></li>
+                <li data-bf-hide-paid><span class="mark idle">•</span><div>Sales Order<span class="why">Held until the booking fee receipt</span></div><span class="tag mute">Held</span></li>
+                <li data-bf-show-paid hidden><span class="mark ok">✓</span><div>Booking fee<span class="why">Rp 3.000.000 verified · KWT/26/CLD/009301</span></div><span class="tag ok">Met</span></li>
+                <li data-bf-show-paid hidden><span class="mark ok">✓</span><div>Sales Order<span class="why">4500091426 · SPK data carried in full</span></div><span class="tag ok">Open</span></li>
               </ul>
             </div>
             <div class="box">
               <h3>Action</h3>
               <div class="pad" data-bf-hide-paid>
-                <p>Data sudah di sumber. Sistem membuat <b>satu quotation</b> dari SPK ini. Booking fee cashless ditagih per baris, lalu tiap baris jadi Sales Order.</p>
-                <button class="btn" style="width:100%" data-go="quot">Buka quotation</button>
+                <p>The data is already at the source. The system creates <b>one quotation</b> from this SPK. The cashless booking fee is charged per line, then each line becomes a Sales Order.</p>
+                <button class="btn" style="width:100%" data-go="quot">Open quotation</button>
               </div>
               <div class="pad" data-bf-show-paid hidden>
-                <p>Booking fee sudah meet. Data SPK ini sudah menjadi Sales Order 4500091426 — tanpa ketik again.</p>
-                <button class="btn" style="width:100%" data-go="so">Buka Sales Order</button>
+                <p>The booking fee has been met. This SPK data has become Sales Order 4500091426 — without typing again.</p>
+                <button class="btn" style="width:100%" data-go="so">Open Sales Order</button>
               </div>
             </div>
           </div>
         </div>
         <div class="box">
-          <h3>Documents entri SPK <span class="side">Untuk identitas buyer</span></h3>
+          <h3>SPK entry documents <span class="side">For buyer identity</span></h3>
           <div class="docs">
-            <div class="doc"><b>KTP buyer</b><p class="meta">Dewi Lestari · 2 Sep · 1,1 MB</p><span class="tag ok">Valid</span></div>
-            <div class="doc"><b>Family Card</b><p class="meta">2 Sep · 1,4 MB</p><span class="tag ok">Valid</span></div>
-            <div class="doc"><b>NPWP buyer</b><p class="meta">2 Sep · 0,7 MB</p><span class="tag ok">Valid</span></div>
-            <div class="doc"><b>Buyer address proof</b><p class="meta">Cilandak · 2 Sep · 0,9 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>KTP buyer</b><p class="meta">Dewi Lestari · 2 Sep · 1.1 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>Family Card</b><p class="meta">2 Sep · 1.4 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>NPWP buyer</b><p class="meta">2 Sep · 0.7 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>Buyer address proof</b><p class="meta">Cilandak · 2 Sep · 0.9 MB</p><span class="tag ok">Valid</span></div>
           </div>
         </div>
         <div class="box">
-          <h3>Documents pengajuan STNK / BPKB <span class="side">Diupload di SPK, dipakai AFI</span></h3>
+          <h3>STNK / BPKB submission documents <span class="side">Uploaded in SPK, used by AFI</span></h3>
           <div class="docs">
-            <div class="doc"><b>KTP atas name STNK</b><p class="meta">Andi Pratama · 2 Sep · 1,0 MB</p><span class="tag ok">Valid</span></div>
-            <div class="doc"><b>KK atas name STNK</b><p class="meta">Match dengan entri · dipakai again</p><span class="tag ok">Valid</span><span class="reuse">Dari vault SPK ini</span></div>
-            <div class="doc"><b>Address proof STNK</b><p class="meta">Kota Depok · 2 Sep · 1,2 MB</p><span class="tag ok">Valid</span></div>
-            <div class="doc"><b>Pernyataan name STNK</b><p class="meta">Berbeda dari buyer · 2 Sep</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>KTP under STNK name</b><p class="meta">Andi Pratama · 2 Sep · 1.0 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>KK under STNK name</b><p class="meta">Matches the entry · reused</p><span class="tag ok">Valid</span><span class="reuse">From this SPK's vault</span></div>
+            <div class="doc"><b>Address proof STNK</b><p class="meta">Depok City · 2 Sep · 1.2 MB</p><span class="tag ok">Valid</span></div>
+            <div class="doc"><b>STNK name statement</b><p class="meta">Different from buyer · 2 Sep</p><span class="tag ok">Valid</span></div>
           </div>
         </div>
       </section>

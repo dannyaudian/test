@@ -8,83 +8,83 @@
       </div>
 
       <h3>A. Strategic Context — Administration Is the New Competitive Battlefield</h3>
-      <p>Persaingan tidak berhenti setelah customer menandatangani SPK. Customer juga menilai dealer berdasarkan:</p>
+      <p>Competition does not stop after a customer signs the SPK. Customers also judge a dealer based on:</p>
       <ul>
-        <li>Kejelasan proses pembayaran.</li>
-        <li>Kecepatan pembentukan Sales Order.</li>
-        <li>Kecepatan billing.</li>
-        <li>Kepastian kesiapan unit.</li>
-        <li>Ketepatan delivery.</li>
-        <li>Kejelasan status STNK/BPKB.</li>
-        <li>Transparansi progress transactions.</li>
-        <li>Konsistensi informasi dari Frontman sampai Administration.</li>
-        <li>Kemudahan memperoleh dan mengdownload e-receipt.</li>
+        <li>Clarity of the payment process.</li>
+        <li>Speed of Sales Order creation.</li>
+        <li>Billing speed.</li>
+        <li>Certainty of unit readiness.</li>
+        <li>Delivery accuracy.</li>
+        <li>Clarity of STNK/BPKB status.</li>
+        <li>Transparency of transaction progress.</li>
+        <li>Consistency of information from Frontman through Administration.</li>
+        <li>Ease of obtaining and downloading the e-receipt.</li>
       </ul>
       <div class="callout">
         <span class="tag">Core Message</span>
-        <p>Customer tidak melihat Sales, Finance, Administration, Treasury, dan Logistic sebagai fungsi terpisah. Customer hanya melihat satu pengalaman dealer.</p>
+        <p>Customers do not see Sales, Finance, Administration, Treasury, and Logistics as separate functions. Customers only see one dealer experience.</p>
       </div>
-      <p>FAST harus memastikan pengalaman tersebut dibangun melalui satu proses terintegrasi, satu sumber data yang same, dan satu transaction lineage yang menghubungkan:</p>
-      <div class="chain"><span>Nomor SPK</span><i>→</i><span>Nomor Sales Order</span><i>→</i><span>AFI</span><i>→</i><span>Nomor Billing</span><i>→</i><span>Payment Reference</span><i>→</i><span>Nomor Receipt</span><i>→</i><span>Unit</span><i>→</i><span>Delivery</span><i>→</i><span>STNK/BPKB</span></div>
+      <p>FAST must ensure that experience is built through one integrated process, one and the same data source, and one transaction lineage that connects:</p>
+      <div class="chain"><span>SPK No.</span><i>→</i><span>Sales Order No.</span><i>→</i><span>AFI</span><i>→</i><span>Billing No.</span><i>→</i><span>Payment Reference</span><i>→</i><span>Receipt No.</span><i>→</i><span>Unit</span><i>→</i><span>Delivery</span><i>→</i><span>STNK/BPKB</span></div>
       <div class="see-row">
         <a class="see" href="mockup.html#transaksi"><span class="see-k">Lineage</span><b>Budi · SPK 00418 · SO 4500091238</b><span>Billing pending AFI</span><em>View summary →</em></a>
-        <a class="see" href="mockup.html#customer_detail"><span class="see-k">Customer</span><b>Orders Innova Zenix</b><span>AR Open same di kedua sisi</span><em>Lihat orders →</em></a>
+        <a class="see" href="mockup.html#customer_detail"><span class="see-k">Customer</span><b>Orders Innova Zenix</b><span>AR Open the same on both sides</span><em>View orders →</em></a>
       </div>
 
       <h3>B. Current Condition</h3>
       <p>From the outside, the customer journey looks simple:</p>
       <div class="chain"><span>SPK</span><i>→</i><span>Booking Fee/DP</span><i>→</i><span>Sales Order</span><i>→</i><span>Settlement</span><i>→</i><span>Billing</span><i>→</i><span>Unit Preparation</span><i>→</i><span>Delivery</span><i>→</i><span>Document Completion</span></div>
-      <p>Namun, proses di belakangnya melibatkan:</p>
+      <p>However, the process behind it involves:</p>
       <div class="grid g3">
         <div class="panel"><ul>
-          <li>Customer data validation.</li><li>Document checking.</li><li>Booking fee/DP request.</li><li>Booking fee/DP verification.</li><li>Sales Order generation.</li><li>Settlement satu kali atau bertahap.</li><li>Payment allocation per unit atau Sales Order.</li>
+          <li>Customer data validation.</li><li>Document checking.</li><li>Booking fee/DP request.</li><li>Booking fee/DP verification.</li><li>Sales Order generation.</li><li>One-time or staged settlement.</li><li>Payment allocation per unit or Sales Order.</li>
         </ul></div>
         <div class="panel"><ul>
-          <li>Penerbitan receipt.</li><li>Outstanding balance monitoring.</li><li>Compliance validation.</li><li>Compliance exception routing.</li><li>Billing readiness.</li><li>AFI/DO processing.</li><li>Account Receivable clearance.</li>
+          <li>Receipt issuance.</li><li>Outstanding balance monitoring.</li><li>Compliance validation.</li><li>Compliance exception routing.</li><li>Billing readiness.</li><li>AFI/DO processing.</li><li>Account Receivable clearance.</li>
         </ul></div>
         <div class="panel"><ul>
           <li>VIN and PDI validation.</li><li>Delivery authorization.</li><li>Good Issue.</li><li>STNK/BPKB monitoring.</li><li>Customer status notification.</li>
         </ul></div>
       </div>
-      <p>Saat ini, data yang same berpotensi diminta atau entered kembali oleh fungsi berbeda pada tahapan yang berbeda. Contohnya:</p>
+      <p>Currently, the same data can potentially be requested or re-entered by different functions at different stages. For example:</p>
       <ul>
         <li>Customer data is entered by Frontman, then entered again by Administration.</li>
         <li>STNK name and address are re-entered in the vehicle document process.</li>
         <li>Unit data is re-entered in Sales Order, billing, AFI, or DO.</li>
-        <li>Relationship nomor SPK, nomor Sales Order, dan nomor billing not yet selalu terlihat sebagai satu transaction lineage.</li>
-        <li>Data pembayaran diperiksa dan dialokasikan kembali secara manual.</li>
-        <li>Payment reference not yet selalu terhubung otomatis dengan nomor receipt dan documents transactions.</li>
+        <li>The relationship between the SPK number, Sales Order number, and billing number is not yet always visible as one transaction lineage.</li>
+        <li>Payment data is checked and re-allocated manually.</li>
+        <li>The payment reference is not yet always automatically connected to the receipt number and transaction documents.</li>
         <li>Receipts are not always available as e-receipts customers can download.</li>
-        <li>Outstanding unit not yet selalu memperhitungkan receipt aktif dan payment request yang masih berjalan secara real-time.</li>
-        <li>Hasil compliance checking dan proof pendukung disampaikan kembali ketika exception needs diajukan.</li>
-        <li>Data delivery dicocokkan kembali dengan data yang telah tersedia pada SPK atau Sales Order.</li>
-        <li>Customer not yet memiliki satu home untuk melihat status orders, invoice unlocked, payment request, e-receipt, blocker, dan next action.</li>
-        <li>Handover Proof unit not yet menjadi paket otentik yang same untuk branch dan customer (foto, VIN, geotag, timestamp, penerima, BSTKB). Yang tersisa sering hanya klaim staf atau rekaman CCTV dealer yang tidak bisa dipakai.</li>
+        <li>The unit outstanding does not yet always account for active receipts and in-progress payment requests in real time.</li>
+        <li>Compliance checking results and supporting proof are resubmitted when an exception needs to be raised.</li>
+        <li>Delivery data is re-matched against data already available on the SPK or Sales Order.</li>
+        <li>Customers do not yet have one home to view order status, unlocked invoices, payment requests, e-receipts, blockers, and next actions.</li>
+        <li>The unit handover proof is not yet an authentic pack that is the same for the branch and the customer (photo, VIN, geotag, timestamp, recipient, BSTKB). What is left is often only a staff claim or dealer CCTV footage that cannot be used.</li>
       </ul>
-      <h4>Kasus publik: sudah pay, unit tidak diserahkan</h4>
-      <p>Pola yang berulang di ruang publik: customer sudah membayar, unit tidak pernah diserahkan, staf dapat menyangkal, dan rekaman kamera dealer tidak menjadi proof yang bisa diandalkan. Customer lalu merekam sendiri atau membawa perkara ke jalur hukum. Example yang beredar: <a href="https://www.instagram.com/reel/Dc0jEwHxJeL/" rel="noopener noreferrer">uploadan inspeksi lanjutan atas pembelian mobil yang sudah paid tetapi tidak diserahkan</a> (pihak ketiga; bukan transactions FAST, bukan merek atau branch FAST). FAST tidak menyalin video itu. Yang diambil adalah pola risikonya.</p>
+      <h4>Public case: already paid, unit not handed over</h4>
+      <p>A recurring pattern in public spaces: the customer has already paid, the unit is never handed over, staff can deny it, and dealer camera footage does not serve as reliable proof. The customer then records it themselves or takes the matter to the legal route. A circulating example: <a href="https://www.instagram.com/reel/Dc0jEwHxJeL/" rel="noopener noreferrer">an upload of a follow-up inspection of a car purchase that was already paid for but not handed over</a> (third party; not a FAST transaction, not a FAST brand or branch). FAST does not copy that video. What is taken from it is the risk pattern.</p>
       <div class="callout">
         <span class="tag">Why FAST</span>
-        <p>Status unlocked dan paket proof digital menggantikan “percaya staf / cek CCTV”. Settlement cash tetap non-waivable. After unit benar-benar diserahkan, Good Issue mencatat proof yang customer dapat download — sehingga branch tidak bisa menyangkal serah terima, dan customer tidak harus merekam diam-diam.</p>
+        <p>Unlocked status and a digital proof pack replace “trusting the staff / checking the CCTV.” Cash settlement remains non-waivable. After the unit is actually handed over, Good Issue records proof the customer can download — so the branch cannot deny the handover, and the customer does not have to record it secretly.</p>
       </div>
-      <p>Kondisi tersebut menciptakan:</p>
+      <p>That condition creates:</p>
       <ul>
-        <li>Redundant input.</li><li>Perbedaan data antarproses.</li><li>Rechecking.</li><li>Rework.</li><li>Risiko salah input.</li><li>Risiko duplicate payment request.</li><li>Risiko overpayment.</li><li>Receipt dan pembayaran sulit ditelusuri.</li><li>Ketergantungan pada komunikasi manual.</li><li>Waktu proses yang lebih panjang.</li><li>Customer uncertainty.</li><li>Unit paid tetapi tidak diserahkan, tanpa paket proof yang customer dan branch lihat same.</li>
+        <li>Redundant input.</li><li>Data discrepancies between processes.</li><li>Rechecking.</li><li>Rework.</li><li>Risk of input errors.</li><li>Risk of duplicate payment requests.</li><li>Risk of overpayment.</li><li>Receipts and payments are hard to trace.</li><li>Dependence on manual communication.</li><li>Longer processing time.</li><li>Customer uncertainty.</li><li>Units paid for but not handed over, without a proof pack that the customer and branch see as the same.</li>
       </ul>
 
       <h3>C. Future Operating Principle</h3>
-      <p>Dalam kondisi yang dituju, setiap data hanya entered satu kali pada titik pertama yang paling relevan dan oleh pihak yang memiliki sumber informasi paling valid. Data tersebut kemudian:</p>
+      <p>In the target condition, each piece of data is entered only once, at the first most relevant point, by the party that holds the most valid source of information. That data is then:</p>
       <ol class="steps">
-        <li>Disimpan dalam satu sumber data yang terkontrol.</li>
-        <li>Divalidasi oleh sistem dan fungsi terkait.</li>
-        <li>Digunakan kembali pada seluruh proses berikutnya.</li>
-        <li>Dibawa dari proses depan sampai proses belakang.</li>
-        <li>Tidak diketik again oleh fungsi berikutnya.</li>
-        <li>Hanya dilengkapi apabila terdapat data new.</li>
-        <li>Hanya dikoreksi pada sumber data asal.</li>
-        <li>Memiliki audit trail apabila terjadi perubahan.</li>
+        <li>Stored in one controlled data source.</li>
+        <li>Validated by the system and the relevant functions.</li>
+        <li>Reused across all subsequent processes.</li>
+        <li>Carried from the front process to the back process.</li>
+        <li>Not re-typed by the next function.</li>
+        <li>Only completed when there is new data.</li>
+        <li>Only corrected at the original data source.</li>
+        <li>Given an audit trail whenever a change occurs.</li>
         <li>Connected to all transaction document numbers.</li>
-        <li>Dapat ditampilkan secara konsisten kepada Frontman, Administration, management, dan customer.</li>
+        <li>Able to be displayed consistently to the Frontman, Administration, management, and customer.</li>
       </ol>
       <h4>Target Data Flow</h4>
       <div class="chain"><span>Frontman Input</span><i>→</i><span>SPK No.</span><i>→</i><span>Payment + E-Receipt</span><i>→</i><span>SO No.</span><i>→</i><span>AFI</span><i>→</i><span>Billing No.</span><i>→</i><span>Delivery</span><i>→</i><span>Good Issue</span><i>→</i><span>STNK/BPKB</span></div>
@@ -94,57 +94,57 @@
       </div>
 
       <h3>D. Ideal Frontman-Driven Process</h3>
-      <p>Dalam kondisi ideal, Frontman dapat menggerakkan seluruh proses melalui satu working tool dengan cara:</p>
+      <p>In the ideal condition, the Frontman can drive the entire process through one working tool by:</p>
       <ol class="steps">
-        <li>Menginput data customer dan transactions.</li>
-        <li>Upload all initial documents.</li>
-        <li>Mengirimkan atau memonitor payment request booking fee yang otomatis ditagihkan setelah Saved SPK; nominal mengikuti unit.</li>
-        <li>Memonitor verification booking fee sebagai requirement pembentukan Sales Order.</li>
-        <li>Melihat e-receipt yang issued setelah pembayaran terverifikasi.</li>
-        <li>Submits Sales Order setelah minimum booking fee unit terverifikasi.</li>
-        <li>Mengirimkan payment request settlement.</li>
-        <li>Melihat AR Open per unit atau Sales Order.</li>
-        <li>Melihat payment request yang masih aktif.</li>
+        <li>Entering customer and transaction data.</li>
+        <li>Uploading all initial documents.</li>
+        <li>Sending or monitoring the booking fee payment request that is automatically billed after the SPK is saved; the amount follows the unit.</li>
+        <li>Monitoring booking fee verification as a requirement for Sales Order creation.</li>
+        <li>Viewing the e-receipt issued after the payment is verified.</li>
+        <li>Submitting the Sales Order after the unit's minimum booking fee is verified.</li>
+        <li>Sending the settlement payment request.</li>
+        <li>Viewing AR Open per unit or Sales Order.</li>
+        <li>Viewing payment requests that are still active.</li>
         <li>View Available Request Amount.</li>
-        <li>Memonitor pembayaran satu kali atau bertahap.</li>
-        <li>Melihat payment allocation dan outstanding balance.</li>
-        <li>Submits compliance exception apabila gate gagal dan rule dinyatakan waivable.</li>
-        <li>Submits AFI (name STNK, address STNK, pengajuan khusus) sebelum billing.</li>
+        <li>Monitoring one-time or staged payment.</li>
+        <li>Viewing payment allocation and outstanding balance.</li>
+        <li>Submitting a compliance exception when a gate fails and the rule is declared waivable.</li>
+        <li>Submitting the AFI (STNK name, STNK address, special requests) before billing.</li>
         <li>Submits billing-readiness request.</li>
         <li>Submits delivery request.</li>
-        <li>Melengkapi proof Good Issue.</li>
-        <li>Memonitor STNK/BPKB.</li>
-        <li>Melihat persyaratan yang not yet lengkap.</li>
-        <li>Melihat status compliance exception dan escalation.</li>
+        <li>Completing the Good Issue proof.</li>
+        <li>Monitoring STNK/BPKB.</li>
+        <li>Viewing requirements that are not yet complete.</li>
+        <li>Viewing compliance exception and escalation status.</li>
       </ol>
-      <p>Frontman tidak needs menginput kembali data yang sudah pernah direceivedkan.</p>
+      <p>The Frontman does not need to re-enter data that has already been received.</p>
       <div class="grid g2">
         <div class="panel">
-          <h4>Peran Administration</h4>
-          <p>Administration tidak menyalin kembali data Frontman. Administration berperan untuk:</p>
+          <h4>Administration Role</h4>
+          <p>Administration does not re-copy the Frontman's data. Administration's role is to:</p>
           <ul>
-            <li>Melihat list SPK, quotation, SO, DO, AFI, billing, receipt, dan pembayaran branch dari panel yang same.</li><li>Memverifikasi data.</li><li>Memeriksa kelengkapan.</li><li>Menambahkan data internal yang memang not yet tersedia.</li><li>Menangani unmatched payment.</li><li>Memastikan hubungan documents transactions konsisten.</li><li>Menangani document atau vehicle mismatch.</li><li>Memastikan compliance.</li><li>Memverifikasi evidence compliance exception.</li><li>Mengontrol kelanjutan proses.</li><li>Melakukan koreksi pada sumber data asal.</li>
+            <li>View the list of SPK, quotation, SO, DO, AFI, billing, receipt, and branch payments from the same panel.</li><li>Verify data.</li><li>Check completeness.</li><li>Add internal data that is genuinely not yet available.</li><li>Handle unmatched payments.</li><li>Ensure transaction document relationships stay consistent.</li><li>Handle document or vehicle mismatch.</li><li>Ensure compliance.</li><li>Verify compliance exception evidence.</li><li>Control process continuation.</li><li>Make corrections at the original data source.</li>
           </ul>
         </div>
         <div class="panel">
-          <h4>Peran sistem</h4>
+          <h4>System Role</h4>
           <ul>
-            <li>Membedakan data yang entered Frontman, Administration, sistem, dan Compliance Exception Approver.</li>
-            <li>Memvalidasi kelengkapan data.</li>
-            <li>Mencegah duplicate input.</li>
-            <li>Membawa data dari satu proses ke proses berikutnya.</li>
-            <li>Menghubungkan nomor SPK, Sales Order, dan billing.</li>
-            <li>Menghasilkan payment reference.</li>
-            <li>Menghasilkan satu nomor receipt untuk setiap pembayaran terverifikasi.</li>
-            <li>Mengalokasikan pembayaran secara otomatis.</li>
-            <li>Menghitung AR Open.</li>
+            <li>Distinguish data entered by the Frontman, Administration, the system, and the Compliance Exception Approver.</li>
+            <li>Validate data completeness.</li>
+            <li>Prevent duplicate input.</li>
+            <li>Carry data from one process to the next.</li>
+            <li>Connect the SPK, Sales Order, and billing numbers.</li>
+            <li>Generate the payment reference.</li>
+            <li>Generate one receipt number for every verified payment.</li>
+            <li>Allocate payments automatically.</li>
+            <li>Calculate AR Open.</li>
             <li>Calculate Available Request Amount.</li>
-            <li>Mengontrol agar payment request tidak melebihi outstanding yang tersedia.</li>
-            <li>Menyediakan e-receipt untuk customer.</li>
-            <li>Opening proses berikutnya apabila persyaratan lengkap.</li>
-            <li>Menahan proses apabila terdapat kekurangan.</li>
-            <li>Mengarahkan failed compliance rule yang waivable kepada pihak berwenang.</li>
-            <li>Mencatat seluruh perubahan dan keputusan dalam audit trail.</li>
+            <li>Control so that payment requests do not exceed the available outstanding.</li>
+            <li>Provide the e-receipt for the customer.</li>
+            <li>Open the next process when requirements are complete.</li>
+            <li>Hold the process when there is a shortfall.</li>
+            <li>Route a waivable failed compliance rule to the authorized party.</li>
+            <li>Record all changes and decisions in the audit trail.</li>
           </ul>
         </div>
       </div>
@@ -154,40 +154,40 @@
         <div class="problem">
           <span class="marker">Problem 1</span>
           <h4>Fragmented Process</h4>
-          <p>SPK, booking fee/DP, Sales Order, settlement, compliance checking, exception decision, billing, delivery, dan document tracking masih bergerak melalui banyak fungsi dan aplikasi.</p>
-          <p class="impact">Dampak</p>
+          <p>SPK, booking fee/DP, Sales Order, settlement, compliance checking, exception decision, billing, delivery, and document tracking still move through many functions and applications.</p>
+          <p class="impact">Impact</p>
           <ul>
-            <li>Banyak manual handoff.</li><li>Ownership proses tidak jelas.</li><li>Risiko proses terhenti di antara fungsi.</li><li>Kesalahan komunikasi.</li><li>Penyelesaian bergantung pada individu.</li><li>Frontman harus melakukan follow-up ke banyak pihak.</li><li>Status transactions tidak selalu terlihat secara real-time.</li>
+            <li>Many manual handoffs.</li><li>Process ownership is unclear.</li><li>Risk of the process stalling between functions.</li><li>Communication errors.</li><li>Resolution depends on individuals.</li><li>The Frontman must follow up with many parties.</li><li>Transaction status is not always visible in real time.</li>
           </ul>
         </div>
         <div class="problem">
           <span class="marker">Problem 2</span>
           <h4>Manual Control</h4>
-          <p>Validasi compliance dan keputusan exception masih banyak dilakukan melalui checking, confirmation, dan follow-up manual.</p>
-          <p class="impact">Dampak</p>
+          <p>Compliance validation and exception decisions are still largely done through manual checking, confirmation, and follow-up.</p>
+          <p class="impact">Impact</p>
           <ul>
-            <li>The process moves only after someone checks it.</li><li>There is no consistent request-to-next-process flow.</li><li>Payment allocation berisiko terlambat.</li><li>Receipt berisiko terlambat issued.</li><li>Receipt not yet selalu terhubung dengan payment reference dan documents transactions.</li><li>Outstanding balance sulit dimonitor.</li><li>Compliance exceptions and escalations are unstructured.</li><li>Audit trail tidak selalu terbentuk otomatis.</li><li>Risiko bypass dan ketidakkonsistenan meningkat.</li>
+            <li>The process moves only after someone checks it.</li><li>There is no consistent request-to-next-process flow.</li><li>Payment allocation risks being late.</li><li>Receipts risk being issued late.</li><li>Receipts are not yet always connected to the payment reference and transaction documents.</li><li>Outstanding balance is hard to monitor.</li><li>Compliance exceptions and escalations are unstructured.</li><li>The audit trail is not always formed automatically.</li><li>The risk of bypass and inconsistency increases.</li>
           </ul>
         </div>
         <div class="problem">
           <span class="marker">Problem 3</span>
           <h4>Redundant Input and Unclear Data Ownership</h4>
-          <p>Not yet terdapat mapping yang tegas mengenai:</p>
+          <p>There is not yet a firm mapping of:</p>
           <ul>
-            <li>Data yang entered Frontman.</li><li>Data yang diverifikasi Administration.</li><li>Data new yang boleh ditambahkan Administration.</li><li>Data yang dihasilkan otomatis oleh sistem.</li><li>Decision yang menjadi kewenangan Compliance Exception Approver.</li><li>Sistem yang menjadi source of truth.</li><li>Process downstream yang menggunakan data tersebut.</li><li>Relationship nomor SPK, Sales Order, billing, payment reference, dan receipt.</li>
+            <li>Data entered by the Frontman.</li><li>Data verified by Administration.</li><li>New data that Administration may add.</li><li>Data generated automatically by the system.</li><li>Decisions that fall under the Compliance Exception Approver's authority.</li><li>The system that serves as the source of truth.</li><li>The downstream processes that use that data.</li><li>The relationship between the SPK, Sales Order, billing, payment reference, and receipt numbers.</li>
           </ul>
-          <p class="impact">Dampak</p>
+          <p class="impact">Impact</p>
           <ul>
-            <li>Data yang same entered beberapa kali.</li><li>Perbedaan data antar aplikasi.</li><li>Administration melakukan re-entry.</li><li>Risiko typo dan mismatch.</li><li>Waktu proses menjadi lebih panjang.</li><li>Perubahan data tidak selalu mengalir ke proses berikutnya.</li><li>Sulit menentukan pihak yang bertanggung jawab atas kualitas data.</li>
+            <li>The same data is entered several times.</li><li>Data discrepancies between applications.</li><li>Administration performs re-entry.</li><li>Risk of typos and mismatch.</li><li>Processing time becomes longer.</li><li>Data changes do not always flow to the next process.</li><li>It is hard to determine who is responsible for data quality.</li>
           </ul>
         </div>
         <div class="problem">
           <span class="marker">Problem 4</span>
           <h4>Limited Visibility</h4>
-          <p>Frontman, branch, management, dan customer not yet memiliki satu tampilan transactions secara real-time.</p>
-          <p class="impact">Dampak</p>
+          <p>The Frontman, branch, management, and customer do not yet have one real-time transaction view.</p>
+          <p class="impact">Impact</p>
           <ul>
-            <li>Customer berulang kali menanyakan status.</li><li>Frontman mengejar Administration dan Finance.</li><li>Management terlambat mengetahui bottleneck.</li><li>Outstanding balance tidak selalu terlihat jelas.</li><li>Frontman tidak mengetahui alasan proses tertahan.</li><li>Status compliance exception tidak transparan.</li><li>Customer not yet dapat melihat seluruh invoice unit yang masih open.</li><li>Customer not yet dapat mengdownload seluruh e-receipt dari satu tempat.</li><li>Customer not yet memiliki journey orders yang lengkap.</li><li>Customer tidak melihat blocker delivery (misalnya not yet paid in full) dan tidak punya paket handover proof yang otentik.</li>
+            <li>Customers repeatedly ask about status.</li><li>The Frontman chases Administration and Finance.</li><li>Management learns of bottlenecks late.</li><li>Outstanding balance is not always clearly visible.</li><li>The Frontman does not know why the process is on hold.</li><li>Compliance exception status is not transparent.</li><li>Customers cannot yet see all unit invoices that are still open.</li><li>Customers cannot yet download all e-receipts from one place.</li><li>Customers do not yet have a complete order journey.</li><li>Customers do not see delivery blockers (for example, not yet paid in full) and do not have an authentic handover proof pack.</li>
           </ul>
         </div>
       </div>
@@ -198,7 +198,7 @@
           <li>Slow SPK-to-SO processing.</li><li>Delayed booking fee/DP verification.</li><li>Delayed payment allocation.</li><li>Delayed receipt issuance.</li><li>Delayed billing.</li><li>Delayed cash-in recognition.</li><li>Delayed delivery.</li><li>Data and document mismatch.</li><li>Repeated data entry.</li><li>Broken transaction references.</li>
         </ul></div>
         <div class="panel"><ul>
-          <li>Sulitnya monitoring Account Receivable.</li><li>Risiko duplicate payment request.</li><li>Risiko overpayment.</li><li>Banyaknya manual follow-up.</li><li>Decision compliance exception terlambat.</li><li>Sulitnya memonitor pembayaran bertahap.</li><li>Rendahnya kepastian informasi untuk customer.</li><li>Control dan customer experience sulit ditingkatkan secara bersamaan.</li>
+          <li>Difficulty monitoring Account Receivable.</li><li>Risk of duplicate payment requests.</li><li>Risk of overpayment.</li><li>A large amount of manual follow-up.</li><li>Late compliance exception decisions.</li><li>Difficulty monitoring staged payments.</li><li>Low information certainty for the customer.</li><li>Control and customer experience are hard to improve at the same time.</li>
         </ul></div>
       </div>
 
