@@ -476,7 +476,7 @@
           <div>
             <p class="eyebrow">SPK/26/CLD/00421 · B2B leasing</p>
             <h2>PT Danapura Utama · Hiace Premio</h2>
-            <p>Frontman: unduh kontrak leasing, unggah kontrak TTD, foto TTD, foto serah terima, dan BSTKB. Administrasi: penagihan paperless dan kuitansi ke leasing — hanya setelah paket Frontman lengkap dan full DP dari B2B sudah dibayar.</p>
+            <p>Frontman: unduh kontrak leasing, unggah kontrak TTD, foto TTD, foto serah terima, dan BSTKB. Administrasi: penagihan paperless setelah paket Frontman, full DP B2B, dan e-PO leasing (total DP, nilai dibiayai, tenor). Billing tanpa e-PO hanya lewat Operation Manager.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
@@ -503,8 +503,13 @@
             <p class="v" style="font-size:18px" data-b2b-paper-label>Kuitansi 0/3</p>
             <p class="n">Paperless ke leasing</p>
           </div>
+          <div class="card" data-b2b-card="epo">
+            <p class="k">E-PO leasing</p>
+            <p class="v" style="font-size:18px" data-b2b-epo-label>E-PO 0/3</p>
+            <p class="n">DP · nilai leasing · tenor</p>
+          </div>
         </div>
-        <p class="note" data-b2b-gate-note data-b2b-chrome>Approval Engine tidak membuka TTD atau full DP. Kekurangan dokumen = backflow operasional, bukan waiver.</p>
+        <p class="note" data-b2b-gate-note data-b2b-chrome>Approval Engine tidak membuka TTD atau full DP. Billing tanpa e-PO leasing = putusan Operation Manager. Kekurangan dokumen = backflow, bukan waiver.</p>
 
         <div data-b2b-panel="ringkas">
           <div class="box">
@@ -570,6 +575,8 @@
                   <div class="row"><span>Nilai transaksi akhir</span><span data-b2b-otr>Rp 348.400.000</span></div>
                   <div class="row"><span>DP wajib customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
                   <div class="row"><span>Sisa dibiayai leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
+                  <div class="row"><span>Tenor (e-PO)</span><span data-b2b-tenor>36 bulan</span></div>
+                  <div class="row"><span>E-PO leasing</span><span data-b2b-epo-no>Belum terbit</span></div>
                   <div class="row"><span>DP diterima</span><span data-b2b-dp-in>Rp 0</span></div>
                   <div class="row total"><span>Tagihan ke leasing setelah DP</span><span data-b2b-finance>Rp 278.720.000</span></div>
                   <div class="row"><span>Syarat billing leasing</span><span>Full DP diterima · B2B</span></div>
@@ -595,14 +602,15 @@
               <button type="button" class="btn" data-b2b-resubmit>Kirim ulang ke leasing</button>
             </div>
             <div class="formfoot" data-for="admin" hidden>
-              <span class="hint">Kontrak dan status DP datang dari B2B. Kekurangan dokumen = kembalikan ke Frontman.</span>
+              <span class="hint">Kontrak, DP, dan e-PO datang dari B2B. E-PO = persetujuan leasing atas total DP, nilai dibiayai, dan tenor. Kekurangan dokumen = kembalikan ke Frontman.</span>
               <button type="button" class="btn ghost" data-b2b-issue-contract>Terbitkan kontrak dari leasing</button>
               <button type="button" class="btn ghost" data-b2b-mark-dp>Tarik status DP dari B2B</button>
+              <button type="button" class="btn ghost" data-b2b-mark-epo>Tarik e-PO dari leasing</button>
               <button type="button" class="btn stop" data-b2b-return>Kembalikan — dokumen kurang</button>
             </div>
             <div class="formfoot" data-for="mgmt" hidden>
-              <span class="hint">Management melihat status ke gate. TTD dan DP tidak di-waive dari kursi keputusan.</span>
-              <button type="button" class="btn ghost" data-b2b-stay>Tetap di SPK ini</button>
+              <span class="hint">TTD dan DP tidak di-waive. Billing tanpa e-PO diputuskan Operation Manager.</span>
+              <button type="button" class="btn ghost" data-go="exc_epo">Buka gate e-PO</button>
             </div>
           </div>
         </div>
@@ -636,10 +644,13 @@
         <div data-b2b-panel="tagih" hidden>
           <div class="box">
             <h3>Syarat penagihan <span class="side">Administrasi · tidak mengunggah</span></h3>
-            <p class="pad" style="padding-bottom:0">Kuitansi dan penagihan ke leasing hanya setelah paket Frontman lengkap dan full DP dari B2B sudah dibayar.</p>
+            <p class="pad" style="padding-bottom:0">Kuitansi dan penagihan ke leasing hanya setelah paket Frontman, full DP B2B, dan e-PO leasing. E-PO memuat total DP customer, jumlah yang dibiayai leasing, dan tenor.</p>
             <div class="money">
               <div class="row"><span>DP wajib customer (B2B)</span><span data-b2b-dp-wajib>Rp 69.680.000</span></div>
               <div class="row"><span>Full DP sudah dibayar</span><span data-b2b-dp-in>Rp 0</span></div>
+              <div class="row"><span>Nilai dibiayai leasing</span><span data-b2b-finance>Rp 278.720.000</span></div>
+              <div class="row"><span>Tenor</span><span data-b2b-tenor>36 bulan</span></div>
+              <div class="row"><span>E-PO</span><span data-b2b-epo-no>Belum terbit</span></div>
               <div class="row"><span>Nilai unit (OTR)</span><span data-b2b-otr>Rp 348.400.000</span></div>
             </div>
             <ul class="gates" data-b2b-admin-checks style="padding:12px 16px 0">
@@ -649,17 +660,20 @@
               <li data-b2b-check="fotoSerah"><span class="mark no">4</span><div>Foto serah terima<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
               <li data-b2b-check="bstkb"><span class="mark no">5</span><div>Scan BSTKB<span class="why">Frontman</span></div><span class="tag wait">Belum</span></li>
               <li data-b2b-check="dp"><span class="mark no">6</span><div>Full DP sudah dibayar<span class="why">Status B2B · bukan diketik Admin</span></div><span class="tag wait">Belum</span></li>
+              <li data-b2b-check="epo"><span class="mark no">7</span><div>E-PO leasing<span class="why">Persetujuan leasing: total DP, nilai dibiayai, tenor. Tanpa ini → Operation Manager</span></div><span class="tag wait">Belum</span></li>
             </ul>
           </div>
           <div class="box" data-for="admin" hidden>
             <h3>Penagihan &amp; kuitansi ke leasing</h3>
             <p class="hint" style="padding:12px 16px 0" data-b2b-kwt-no>Kuitansi: belum terbit</p>
-            <p class="hint" style="padding:0 16px" data-b2b-admin-block>Belum bisa ditagih. Tunggu paket Frontman dan full DP B2B.</p>
+            <p class="hint" style="padding:0 16px" data-b2b-admin-block>Belum bisa ditagih. Tunggu paket Frontman, full DP B2B, dan e-PO leasing.</p>
+            <p class="hint" style="padding:0 16px" data-b2b-epo-exc-hint hidden>Paket dan DP lengkap, e-PO belum. Billing tanpa e-PO butuh Operation Manager.</p>
             <div class="formfoot" data-for="admin">
-              <span class="hint">Bukan cetak fisik. Frontman tidak menagih.</span>
+              <span class="hint">Bukan cetak fisik. Frontman tidak menagih. E-PO tidak melewati DP.</span>
               <button type="button" class="btn" data-b2b-paperless>Kirim penagihan paperless</button>
               <button type="button" class="btn ghost" data-b2b-kwt>Terbitkan kuitansi ke leasing</button>
               <button type="button" class="btn ghost" data-b2b-lunas>Catat pelunasan leasing</button>
+              <button type="button" class="btn ghost" data-go="exc_epo" data-b2b-epo-exc hidden>Ajukan billing tanpa e-PO</button>
             </div>
           </div>
           <div class="box" data-for="frontman">
@@ -2095,7 +2109,7 @@
             <p>Satu antrean untuk Frontman, Admin, dan Kepala Administrasi. Hanya gate compliance yang waivable yang punya tombol putusan.</p>
           </div>
         </div>
-        <p class="queue-line"><b>4 bisa diajukan</b> · 2 tertahan non-waivable · 1 eskalasi STNK</p>
+        <p class="queue-line"><b>5 bisa diajukan</b> · 2 tertahan non-waivable · 1 eskalasi STNK</p>
         <div class="order-filters" role="tablist" aria-label="Filter pengecualian">
           <button type="button" data-exc-filter="all" aria-pressed="true">Semua</button>
           <button type="button" data-exc-filter="decide" aria-pressed="false">Bisa diputuskan</button>
@@ -2103,7 +2117,20 @@
           <button type="button" data-exc-filter="esc" aria-pressed="false">Eskalasi STNK</button>
         </div>
         <div class="order-list" id="excList">
-          <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="nama" data-go="exc_nama" data-tx-dots="dewi">
+          <button type="button" class="order-card featured" data-exc-kind="decide" data-exc-case="epo" data-go="exc_epo" data-b2b-pick="1288" data-tx-dots="hiace">
+            <div class="thumb">E-PO</div>
+            <div class="meta">
+              <p class="oid">E-26-0421-P · SPK/26/CLD/00421 · SO 4500091288</p>
+              <strong class="oname">PT Danapura · billing tanpa e-PO leasing</strong>
+              <p class="spec" data-exc-epo-spec>Waivable · e-PO = total DP, nilai dibiayai, tenor · Operation Manager</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-epo-tag>Menunggu pengajuan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Buka Approval Engine →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-exc-kind="decide" data-exc-case="nama" data-go="exc_nama" data-tx-dots="dewi">
             <div class="thumb">NAMA</div>
             <div class="meta">
               <p class="oid">E-26-0426-N · SPK/26/CLD/00426</p>
@@ -2195,9 +2222,78 @@
             </div>
           </button>
         </div>
-        <p class="note">Gate komersial (booking fee, 30% cash / full DP leasing, pelunasan cash, TTD kontrak) tidak masuk Approval Engine. AFI dulu atau billing tanpa AFI adalah exception urutan, bukan waiver 30% atau lunas.</p>
+        <p class="note">Gate komersial (booking fee, 30% cash / full DP leasing, pelunasan cash, TTD kontrak) tidak masuk Approval Engine. Billing tanpa e-PO leasing diputuskan Operation Manager — bukan waiver DP atau TTD.</p>
       </section>
 
+      </section>
+
+      <section class="screen" id="exc_epo">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">SPK/26/CLD/00421 · Approval Engine</p>
+            <h2>Billing tanpa e-PO leasing</h2>
+            <p>SO <span data-b2b-so-no>4500091288</span> · PT Danapura. E-PO adalah persetujuan leasing atas total DP customer, jumlah yang dibiayai leasing, dan tenor. Bukan waiver full DP atau TTD.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-exc-back data-go="eskalasi">← Antrean</button></div>
+        </div>
+        <nav class="worktabs" aria-label="Isi B2B leasing">
+          <button type="button" data-go="tx_hiace">Workspace B2B</button>
+          <button type="button" data-go="exc_epo">Gate e-PO</button>
+        </nav>
+        <div class="exc-path" data-exc-epo-path>
+          <b data-step="draft" class="on">Admin ajukan</b>
+          <span>→</span>
+          <b data-step="submitted">Admin cek paket</b>
+          <span>→</span>
+          <b data-step="verified">Operation Manager</b>
+          <span>→</span>
+          <b data-step="approved">Paperless boleh</b>
+        </div>
+        <p class="exc-note warn" data-exc-epo-note>E-PO belum dari leasing. Setelah paket Frontman dan full DP, Administrasi dapat mengajukan billing tanpa e-PO. Putusan: Operation Manager. Pelunasan tetap butuh e-PO asli.</p>
+        <div class="cards">
+          <div class="card"><p class="k">Total DP customer</p><p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p><p class="n" data-b2b-dp-status>Dari struktur harga SO</p></div>
+          <div class="card"><p class="k">Dibiayai leasing</p><p class="v" style="font-size:18px" data-b2b-finance>Rp 278.720.000</p><p class="n">OTR − DP wajib</p></div>
+          <div class="card"><p class="k">Tenor</p><p class="v" style="font-size:18px" data-b2b-tenor>36 bulan</p><p class="n">Isi e-PO</p></div>
+          <div class="card" data-b2b-card="epo-gate"><p class="k">Nomor e-PO</p><p class="v" style="font-size:18px" data-b2b-epo-no>Belum terbit</p><p class="n">Dari B2B leasing</p></div>
+        </div>
+        <div class="box">
+          <h3>Apa yang tertahan</h3>
+          <ul class="gates">
+            <li><span class="mark ok">✓</span><div>Full DP customer<span class="why">Non-waivable · angka dari B2B</span></div><span class="tag ok">Wajib tetap</span></li>
+            <li><span class="mark no">!</span><div>E-PO leasing<span class="why">Total DP · nilai dibiayai · tenor belum disetujui leasing</span></div><span class="tag hold">Waivable · OM</span></li>
+            <li><span class="mark no">!</span><div>Pelunasan leasing<span class="why">Tetap butuh e-PO asli · putusan OM tidak mengganti e-PO</span></div><span class="tag stop">Non-waivable</span></li>
+            <li><span class="mark ok">✓</span><div>Kontrak TTD<span class="why">Delivery gate · jalur terpisah, tidak di-waive di sini</span></div><span class="tag stop">Non-waivable</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Pengajuan</h3>
+          <p class="pad" style="padding-bottom:0">Jalur normal: tarik e-PO di tab Alur B2B. Jalur ini hanya jika leasing belum menerbitkan e-PO sementara paket Frontman dan full DP sudah ada.</p>
+          <div class="formfoot" data-for="frontman">
+            <span class="hint">Frontman tidak menagih. Minta Administrasi mengajukan, atau tarik e-PO di workspace B2B.</span>
+            <button type="button" class="btn ghost" data-go="tx_hiace">← Workspace B2B</button>
+          </div>
+          <div class="formfoot" data-for="admin" hidden>
+            <span class="hint">Cek paket Frontman + full DP. Jangan setujui sendiri — Operation Manager yang memutuskan.</span>
+            <button type="button" class="btn" data-exc-submit="epo">Ajukan billing tanpa e-PO</button>
+            <button type="button" class="btn ghost" data-exc-verify="epo">Tandai sudah dicek</button>
+            <button type="button" class="btn ghost" data-go="tx_hiace">Workspace B2B</button>
+          </div>
+          <div data-for="mgmt" hidden data-mgmt-need="om">
+            <div class="form" style="padding-top:0">
+              <div class="field">
+                <label for="mgmtComment-epo">Komentar Operation Manager</label>
+                <textarea id="mgmtComment-epo" placeholder="Wajib untuk revisi atau tolak. Opsional saat setujui."></textarea>
+              </div>
+            </div>
+            <div class="decide-actions">
+              <button type="button" class="btn" data-mgmt-act="approve" data-mgmt-case="epo">Setujui paperless tanpa e-PO</button>
+              <button type="button" class="btn ghost" data-mgmt-act="revise" data-mgmt-case="epo">Revisi</button>
+              <button type="button" class="btn stop" data-mgmt-act="reject" data-mgmt-case="epo">Tolak</button>
+            </div>
+            <ul class="audit comments" data-mgmt-log="epo"></ul>
+            <p class="note">Setujui = Administrasi boleh kirim paperless. Bukan melewati full DP. Pelunasan leasing tetap menunggu e-PO asli dari leasing.</p>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="exc_nama">
@@ -2913,12 +3009,13 @@
           <h3>B2B leasing <span class="side">Status per SO · paperless · backflow</span></h3>
           <div class="scroll">
           <table>
-            <thead><tr><th>SO</th><th>Customer</th><th>DP wajib B2B</th><th>Status leasing</th><th>Tindakan Admin</th></tr></thead>
+            <thead><tr><th>SO</th><th>Customer</th><th>DP wajib B2B</th><th>E-PO</th><th>Status leasing</th><th>Tindakan Admin</th></tr></thead>
             <tbody>
               <tr data-go="tx_hiace" data-b2b-pick="1288">
                 <td><b>4500091288</b><span class="sub">unit 1/3</span></td>
                 <td>PT Danapura · Hiace</td>
                 <td data-b2b-book-dp="1288">Rp 69.680.000</td>
+                <td data-b2b-book-epo="1288">Belum</td>
                 <td data-b2b-book-status="1288">Kontrak dari leasing</td>
                 <td><span class="tag wait" data-b2b-book-tag="1288">Pantau TTD</span></td>
               </tr>
@@ -2926,6 +3023,7 @@
                 <td><b>4500091289</b><span class="sub">unit 2/3</span></td>
                 <td>PT Danapura · Hiace</td>
                 <td data-b2b-book-dp="1289">Rp 69.660.000</td>
+                <td data-b2b-book-epo="1289">Belum</td>
                 <td data-b2b-book-status="1289">Backflow NPWP</td>
                 <td><span class="tag stop" data-b2b-book-tag="1289">Tunggu Frontman</span></td>
               </tr>
@@ -2933,6 +3031,7 @@
                 <td><b>4500091290</b><span class="sub">unit 3/3</span></td>
                 <td>PT Danapura · Hiace</td>
                 <td data-b2b-book-dp="1290">Rp 69.660.000</td>
+                <td data-b2b-book-epo="1290">Belum</td>
                 <td data-b2b-book-status="1290">Dokumen diminta</td>
                 <td><span class="tag wait" data-b2b-book-tag="1290">Terbitkan kontrak</span></td>
               </tr>
@@ -3166,6 +3265,13 @@
                 <td><span class="tag stop">Cocokkan manual</span></td>
                 <td>1 hari</td>
               </tr>
+              <tr data-go="exc_epo" data-b2b-pick="1288" data-tx-dots="hiace">
+                <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091288</span></td>
+                <td>Penagihan leasing</td>
+                <td>E-PO belum dari leasing <span class="sub">Waivable · Operation Manager · bukan waiver DP</span></td>
+                <td><span class="tag hold" data-exc-epo-tag>Cek lalu teruskan</span></td>
+                <td>4 jam</td>
+              </tr>
               <tr data-go="tx_hiace" data-b2b-pick="1288" data-tx-dots="hiace">
                 <td><b>SPK/26/CLD/00421</b><span class="sub">PT Danapura · SO 4500091288</span></td>
                 <td>Penagihan leasing</td>
@@ -3200,7 +3306,7 @@
         <div class="screenhead">
           <div>
             <h2>Antrean · <span data-mgmt-title>Kepala Administrasi</span></h2>
-            <p data-mgmt-lead>Exception waivable: Kepala Administrasi. STNK aging: Kepala Cabang. Volume area: Area Business Head. Kirim/GI: Operation Manager. Bukan waiver 30% atau lunas.</p>
+            <p data-mgmt-lead>Exception waivable: Kepala Administrasi. Billing tanpa e-PO: Operation Manager. STNK aging: Kepala Cabang. Volume area: Area Business Head. Bukan waiver 30%, DP, TTD, atau lunas.</p>
           </div>
         </div>
         <nav class="worktabs" aria-label="Management">
@@ -3215,7 +3321,20 @@
           <button type="button" data-mgmt-filter="done" aria-pressed="false">Selesai</button>
         </div>
         <div class="order-list" id="mgmtList">
-          <button type="button" class="order-card featured" data-mgmt-case="nama" data-mgmt-owner="ka" data-go="exc_nama" data-tx-dots="dewi">
+          <button type="button" class="order-card featured" data-mgmt-case="epo" data-mgmt-owner="om" data-go="exc_epo" data-b2b-pick="1288" data-tx-dots="hiace">
+            <div class="thumb">E-PO</div>
+            <div class="meta">
+              <p class="oid">E-26-0421-P · SO 4500091288</p>
+              <strong class="oname">PT Danapura · billing tanpa e-PO</strong>
+              <p class="spec">Waivable. E-PO = total DP, nilai leasing, tenor. Paperless saja — pelunasan tetap butuh e-PO asli.</p>
+              <div class="row2">
+                <span class="tag hold" data-exc-epo-tag>Menunggu pengajuan</span>
+                <span class="amt">SLA 4 jam</span>
+              </div>
+              <p class="cta">Putuskan →</p>
+            </div>
+          </button>
+          <button type="button" class="order-card" data-mgmt-case="nama" data-mgmt-owner="ka" data-go="exc_nama" data-tx-dots="dewi">
             <div class="thumb">NAMA</div>
             <div class="meta">
               <p class="oid">E-26-0426-N · SPK/26/CLD/00426</p>
@@ -3307,7 +3426,7 @@
             </div>
           </button>
         </div>
-        <p class="note">Gate komersial (booking fee, 30% cash, pelunasan, TTD kontrak) tidak masuk antrean putusan. Operation Manager hanya memantau kirim/GI.</p>
+        <p class="note">Gate komersial (booking fee, 30% cash, pelunasan, TTD kontrak) tidak masuk antrean putusan. Operation Manager memutuskan billing tanpa e-PO dan memantau kirim/GI. DP dan TTD tidak di-waive.</p>
       </section>
       <section class="screen" id="dashboard">
         <div class="screenhead">
@@ -3355,6 +3474,7 @@
                 <li data-go="tx_hiace"><span class="mark no">5</span><div>Kontrak leasing belum TTD<span class="why">Delivery gate · B2B leasing · Hiace</span></div><span class="tag hold">22%</span></li>
                 <li data-go="exc_alamat"><span class="mark no">5</span><div>Dokumen kurang atau kedaluwarsa<span class="why">Document gate · waivable · antrean keputusan</span></div><span class="tag hold">22%</span></li>
                 <li data-go="spk"><span class="mark no">3</span><div>Booking fee unit belum masuk<span class="why">SO gate · Dewi Yaris · non-waivable</span></div><span class="tag hold">13%</span></li>
+                <li data-go="exc_epo" data-b2b-pick="1288"><span class="mark no">3</span><div>E-PO leasing belum terbit<span class="why">Billing leasing · waivable · Operation Manager</span></div><span class="tag hold">Gate baru</span></li>
                 <li data-go="bill_d"><span class="mark no">2</span><div>Cash belum 30% / DP leasing belum penuh<span class="why">Billing gate · non-waivable</span></div><span class="tag mute">9%</span></li>
               </ul>
             </div>
@@ -3373,6 +3493,7 @@
                 <p class="hint">Exception waivable dan eskalasi STNK diputus di antrean keputusan. Pelunasan cash tidak masuk antrean putusan.</p>
                 <div class="nextbar">
                   <button type="button" class="btn" data-go="mgmt_inbox">Buka antrean keputusan</button>
+                  <button type="button" class="btn ghost" data-go="exc_epo" data-b2b-pick="1288">Gate e-PO</button>
                   <button type="button" class="btn ghost" data-go="exc_alamat">Bukti alamat</button>
                   <button type="button" class="btn ghost" data-go="exc_stnk">Eskalasi STNK</button>
                 </div>
