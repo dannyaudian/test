@@ -89,7 +89,7 @@
       copy:function(now){
         if(now==='spk') return 'Isi & unggah dulu. Baru dapat nomor SPK. Booking fee menyusul.';
         if(now==='quot') return 'SPK tersimpan. Booking cashless baris Yaris — fee non-waivable.';
-        if(now==='afi') return 'SO Yaris terbuka. Klik SPK atau Billing di jejak atas — tampilan tahap itu tetap ada. AFI memakai nama/alamat STNK dari SPK.';
+        if(now==='afi') return 'SO Yaris terbuka. Tahap yang sudah dilewati (SPK, QT, SO) bisa dibuka — datanya tetap terisi. AFI memakai nama/alamat STNK dari SPK.';
         if(now==='do') return 'AFI terkirim. DO gudang menyusul. Kanal bayar tetap sama.';
         if(now==='bill') return 'DO ada. Billing cash ≥30% non-waivable. Bayar di Digiroom atau cabang.';
         if(now==='del') return 'Billing jalan. Kirim cash tunggu lunas — cashless di tahap ini.';
@@ -109,7 +109,7 @@
       go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'transaksi',do:'transaksi',bill:'transaksi',del:'transaksi',stnk:'transaksi'},
       now:budiNow,
       copy:function(now){
-        if(now==='afi') return 'SO 4500091238 ada. Klik SPK, SO, atau Billing di jejak ini. Billing + AFI berpasangan. Cashless pelunasan di tahap Billing.';
+        if(now==='afi') return 'SO 4500091238 ada. SPK, QT, dan SO sudah dilewati — klik untuk lihat data sumber. Billing + AFI berpasangan di tahap ini.';
         if(now==='bill') return 'Billing/AFI berjalan. Bayar sisa di cashless — kirim tertahan sampai lunas.';
         if(now==='del') return 'Lunas atau AFI sudah. Delivery cash tetap tunggu AR Open Rp 0.';
         return 'Jejak Budi · satu SO 4500091238 sampai STNK/BPKB.';
@@ -227,17 +227,40 @@
     });
     return map;
   }
+  function stageOpen(st, id){
+    if(!st||!id) return false;
+    if(st.allDone) return true;
+    if(id===st.now) return true;
+    return !!st.done[id];
+  }
+  function clampView(st, view){
+    if(stageOpen(st, view)) return view;
+    return st.now;
+  }
   function fillNav(nav, st, view, showFn){
     if(!nav||!st) return;
     nav.innerHTML='';
     var screen=nav.closest('.screen');
+    var payScreen=screen && (screen.id==='cashless'||screen.id==='digiroom'||screen.id==='booking');
+    if(!payScreen) view=clampView(st, view);
     STAGES.forEach(function(s){
       var b=document.createElement('button');
       b.type='button';
       b.textContent=s.label;
+      var open=stageOpen(st, s.id) || (payScreen && s.id===view);
       if(st.allDone || st.done[s.id]) b.className='done';
       if(s.id===st.now && !st.allDone) b.classList.add(st.hold===s.id?'hold':'now');
       if(s.id===view) b.classList.add('on');
+      if(!open){
+        b.classList.add('locked');
+        b.setAttribute('aria-disabled','true');
+        b.title=s.label+' belum dilewati';
+        b.addEventListener('click',function(){
+          if(window.FAST && FAST.toast) FAST.toast('Tahap '+s.label+' belum dilewati. Buka setelah tahap itu selesai — datanya tetap terisi di sumber.');
+        });
+        nav.appendChild(b);
+        return;
+      }
       b.addEventListener('click',function(){
         var panel=screen && screen.querySelector('[data-stage-panel="'+s.id+'"]');
         if(panel){
@@ -351,7 +374,7 @@
       var pack=ensureNav(screen, tx);
       if(!pack) return;
       var st=state(tx);
-      var view=screen.getAttribute('data-stage-view')||VIEW[sid]||st.now;
+      var view=clampView(st, screen.getAttribute('data-stage-view')||VIEW[sid]||st.now);
       if(view) showStagePanel(screen, view);
       fillNav(pack.nav, st, view, showFn);
       if(pack.note) pack.note.textContent=st.copy;
@@ -376,13 +399,14 @@
       var tx=screenTx(current, payJob)||(on&&on.querySelector('[data-tx-track]')&&on.querySelector('[data-tx-track]').getAttribute('data-tx-track'));
       if(on && tx){
         var st=state(tx);
-        var view=on.getAttribute('data-stage-view')||VIEW[current]||payView(current, payJob, tx)||st.now;
+        var view=clampView(st, on.getAttribute('data-stage-view')||VIEW[current]||payView(current, payJob, tx)||st.now);
         if(view) showStagePanel(on, view);
         var nav=on.querySelector('.proc');
         if(nav) fillNav(nav, st, view, showFn);
       }
     }
   }
+  FAST.stageOpen=stageOpen;
   FAST.TX_STAGES=STAGES;
   FAST.txState=state;
   FAST.screenTx=screenTx;
