@@ -1,4 +1,5 @@
 html{scroll-padding-top:88px}
+body.docs-page{font-size:17px;line-height:1.65}
 
 /* ---------- shell ---------- */
 .shell{display:grid;grid-template-columns:280px minmax(0,1fr);gap:0;max-width:1400px;margin:0 auto}
@@ -35,8 +36,10 @@ h1,h2,h3,h4,th,.chip,.marker,.node,.btn,.eyebrow{font-family:var(--sans)}
 .side .foot{font-size:12px;color:var(--ink-soft);line-height:1.5}
 
 main{padding:0 0 100px}
-.wrap{padding:0 clamp(20px,4vw,56px);max-width:1080px}
+.wrap{padding:0 clamp(20px,4vw,48px) 8px;max-width:920px}
 .body-measure{max-width:var(--measure)}
+.wrap .sec p,
+.wrap .sec li{hyphens:auto}
 
 /* ---------- hero ---------- */
 .hero{
@@ -151,7 +154,7 @@ main{padding:0 0 100px}
 .see em{grid-row:1 / span 3;grid-column:2;font-style:normal;font-size:13px;font-weight:800;color:var(--signal);align-self:center}
 
 /* ---------- sections ---------- */
-section.sec{padding:64px 0 8px;border-top:1px solid var(--rule)}
+section.sec{padding:56px 0 12px;border-top:1px solid var(--rule)}
 section.sec:first-of-type{border-top:0}
 .sec-head{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;margin-bottom:26px}
 .sec-head .num{
@@ -169,7 +172,7 @@ h3{
   font-size:21px;font-weight:650;letter-spacing:-.012em;margin:36px 0 14px;line-height:1.25;
 }
 h4{font-size:15px;font-weight:650;margin:22px 0 10px;color:var(--ink);letter-spacing:-.005em}
-p{margin:0 0 16px;max-width:var(--measure);line-height:1.65}
+p{margin:0 0 16px;max-width:var(--measure);line-height:1.7}
 ul{margin:0 0 18px;padding-left:0;list-style:none;max-width:var(--measure)}
 ul li{position:relative;padding-left:20px;margin-bottom:8px;line-height:1.55}
 ul li::before{content:"";position:absolute;left:2px;top:.72em;width:7px;height:1px;background:var(--signal)}
@@ -263,13 +266,11 @@ td:first-child{font-family:var(--sans);font-size:14px;font-weight:500;white-spac
 
 .gate-note{font-family:var(--sans);font-size:13px;color:var(--flow);font-weight:500}
 
+.map-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .map-grid .panel ul{
-  columns:2;column-gap:20px;max-width:none;font-size:14.5px;
+  columns:1;max-width:none;font-size:14.5px;
 }
-.map-grid .panel ul li{break-inside:avoid;margin-bottom:6px}
-@media (max-width:720px){
-  .map-grid .panel ul{columns:1}
-}
+.map-grid .panel ul li{margin-bottom:6px}
 ol.steps.rule-cols{
   columns:2;column-gap:28px;max-width:none;
 }
@@ -302,7 +303,7 @@ ol.steps.rule-cols li{break-inside:avoid}
 .d-card em{font-style:normal;font-size:13px;font-weight:800;color:var(--signal)}
 
 .feat-list{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:0 0 22px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;margin:0 0 22px;
 }
 .feat{
   background:#fff;border:1px solid var(--rule);border-radius:16px;padding:16px 18px;
@@ -310,6 +311,15 @@ ol.steps.rule-cols li{break-inside:avoid}
 }
 .feat h4{margin:0 0 8px;font-size:15.5px}
 .feat p{margin:0;max-width:none;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.feat-ex{
+  margin-top:12px !important;padding-top:10px;border-top:1px dashed var(--rule);
+  font-size:13.5px !important;color:var(--ink-soft) !important;line-height:1.5 !important;
+}
+.feat-ex b{color:var(--signal);font-size:11px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.how{
+  display:block;margin:6px 0 0;font-size:13.5px;color:var(--ink-soft);
+}
+ol.walk li b{display:block;margin-bottom:4px;font-size:14.5px}
 
 ol.walk{margin:0 0 22px;padding:0;list-style:none;max-width:none;counter-reset:walk}
 ol.walk li{
@@ -328,7 +338,7 @@ ol.walk a{font-weight:700}
   font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:-.01em;
   background:var(--flow-tint);padding:1px 6px;border-radius:6px;
 }
-.d-sec .note{
+.d-sec .note, .wrap > .sec .note, p.note{
   font-size:14.5px;color:var(--ink-soft);max-width:none;
   padding:12px 14px;background:var(--surface);border-radius:12px;border:1px dashed var(--rule);
 }

@@ -2,12 +2,13 @@
   var host = document.getElementById('docsHost');
   var parts = [
     'docs/sections/contoh.html',
-    'docs/sections/s1.html',
-    'docs/sections/s2.html',
     'docs/sections/d1.html',
     'docs/sections/d2.html',
     'docs/sections/d3.html',
     'docs/sections/d4.html',
+    'docs/sections/galeri.html',
+    'docs/sections/s1.html',
+    'docs/sections/s2.html',
     'docs/sections/s3.html',
     'docs/sections/s4.html',
     'docs/sections/s5.html',

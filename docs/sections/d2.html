@@ -17,26 +17,32 @@
         <article class="feat">
           <h4>Booking fee: request terkunci</h4>
           <p>Setelah SPK + document gate, sistem menagih nominal master unit. Customer tidak mengisi angka sendiri. EDC hanya di perangkat Frontman. Tanpa kuitansi fee, SO tidak terbuka.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Dewi Rp 3.000.000 di <a href="mockup.html#customer_booking">#customer_booking</a> dan <a href="mockup.html#customer_booking_qris">#customer_booking_qris</a>. Dua cara, satu request, satu kuitansi <span class="kwt">KWT/26/CLD/009301</span>.</p>
         </article>
         <article class="feat">
           <h4>Pelunasan: request Frontman atau setoran customer</h4>
-          <p><b>Proses 1</b> — Frontman membuat request dalam batas Available Request Amount; QRIS/VA terkunci. <b>Proses 2</b> — customer membuka tagihan unit dari beranda dan mengisi nominal; QRIS/VA terbit setelah angka.</p>
+          <p><b>Proses 1</b> — Frontman membuat request dalam batas Available Request Amount; QRIS/VA terkunci. <b>Proses 2</b> — customer membuka tagihan unit dari beranda dan mengisi nominal; QRIS/VA terbit setelah angka. Ini dua proses, dua kuitansi — jangan digabung.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Proses 1 Budi: <a href="mockup.html#cashless">#cashless</a> (Frontman) dan <a href="mockup.html#tagihan_customer">#tagihan_customer</a>. Proses 2: <a href="mockup.html#digiroom">#digiroom</a> — isi nominal dulu, baru QR/VA.</p>
         </article>
         <article class="feat">
           <h4>AR Open vs Available Request Amount</h4>
           <p>AR Open = nilai tagihan unit − total kuitansi aktif. Available Request Amount = AR Open − request aktif yang belum dibayar dan belum kedaluwarsa. Request menggantung tidak boleh menumpuk sampai overpayment.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Budi: kuitansi aktif <span class="kwt">008731</span> Rp 5 jt + <span class="kwt">009115</span> Rp 300 jt memotong AR. Sisa ilustratif Rp 181,75 jt. Request yang masih menggantung tidak memotong AR.</p>
         </article>
         <article class="feat">
           <h4>Satu bayar, satu kuitansi</h4>
           <p>Banking API memverifikasi → alokasi ke unit/SO → satu nomor KWT → e-kuitansi PDF. Nomor sama di HP customer dan buku cabang. Belum bayar = belum KWT.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Customer unduh di <a href="mockup.html#e_kuitansi">#e_kuitansi</a>. Cabang melihat nomor yang sama di <a href="mockup.html#admin_kwt">#admin_kwt</a>.</p>
         </article>
         <article class="feat">
           <h4>Status kuitansi dan koreksi</h4>
           <p>Issued / Active / Reversed / Cancelled / Reissued. Tidak ditimpa. Cancelled mengembalikan AR dan mengevaluasi ulang gate billing/kirim. Customer tetap melihat histori cancelled.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Filter status di buku cabang. Cancelled tetap baris histori, bukan dihapus. Gate 30%/lunas dievaluasi ulang setelah batal.</p>
         </article>
         <article class="feat">
           <h4>Open unit bill di beranda customer</h4>
-          <p>Customer melihat seluruh tagihan unit yang masih open, status request, dan unduh PDF. Frontman dan customer memakai angka AR yang sama.</p>
+          <p>Customer melihat seluruh tagihan unit yang masih open, status request, dan unduh PDF. Frontman dan customer memakai angka AR yang sama. Tidak ada EDC di toko customer.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Daftar pesanan <a href="mockup.html#customer">#customer</a> — Zenix masih open, Calya yang sudah diserahkan terpisah.</p>
         </article>
       </div>
 
@@ -46,18 +52,24 @@
 
       <h3>Contoh: Dewi · booking fee Yaris</h3>
       <ol class="walk">
-        <li>SPK 00426 tersimpan, dokumen cukup → Frontman membuka tagihan booking Rp 3.000.000. <a href="mockup.html#booking">Layar tagih</a></li>
-        <li>Customer di Digiroom hanya konfirmasi angka terkunci, lalu QRIS/VA. <a href="mockup.html#customer_booking">pay.fast.id</a></li>
-        <li>Atau scan barcode di layar salesman; HP hanya mengonfirmasi. <a href="mockup.html#customer_booking_qris">QRIS meja</a></li>
-        <li>Setelah lunas, kuitansi <span class="kwt">KWT/26/CLD/009301</span> tertaut SPK dulu; nomor SO 4500091426 ditambah ke lineage setelah fee meet.</li>
+        <li><b>Tagih dari Frontman</b> SPK 00426 tersimpan, dokumen cukup. Frontman membuka request booking Rp 3.000.000 — bukan form SO.
+          <span class="how">Yang terlihat: nominal master unit, dua cara customer membayar request yang sama. <a href="mockup.html#booking">Layar tagih</a></span></li>
+        <li><b>Customer Digiroom</b> HP hanya konfirmasi angka terkunci, lalu pilih VA (norek + salin) atau QRIS (gambar QR).
+          <span class="how">Yang terlihat: tidak ada kolom “isi sendiri”, tidak ada EDC. <a href="mockup.html#customer_booking">pay.fast.id</a></span></li>
+        <li><b>Atau scan QRIS meja</b> Barcode di layar salesman. HP mengonfirmasi request yang sama.
+          <span class="how">Yang terlihat: layar konfirmasi sempit, bukan kasir. <a href="mockup.html#customer_booking_qris">QRIS meja</a></span></li>
+        <li><b>Kuitansi lalu SO</b> Setelah Banking API, <span class="kwt">KWT/26/CLD/009301</span> tertaut SPK dulu. Nomor SO 4500091426 ditambah ke lineage setelah fee meet — kuitansi tidak diganti.</li>
       </ol>
 
       <h3>Contoh: Budi · Zenix dua proses bayar</h3>
       <ol class="walk">
-        <li><b>Penagihan Frontman</b> — request terkunci Rp 100.000.000. Customer tidak mengubah nominal. <a href="mockup.html#cashless">Frontman</a> · <a href="mockup.html#tagihan_customer">Customer</a></li>
-        <li><b>Pelunasan cashless</b> — tanpa request; customer isi nominal di Digiroom. <a href="mockup.html#digiroom">Isi nominal</a></li>
-        <li>Kuitansi aktif contoh: <span class="kwt">KWT/26/CLD/008731</span> tanda jadi Rp 5 jt dan <span class="kwt">KWT/26/CLD/009115</span> pelunasan 1 Rp 300 jt. Total kuitansi aktif memotong AR Open (sisa ilustratif Rp 181,75 jt).</li>
-        <li>Customer unduh PDF dengan nomor yang sama. Cabang melihat lineage di buku kuitansi. <a href="mockup.html#e_kuitansi">E-kuitansi</a> · <a href="mockup.html#admin_kwt">Buku cabang</a></li>
+        <li><b>Proses 1 — request Frontman</b> Nominal Rp 100.000.000 terkunci. Customer tidak mengubah angka. Ini bukan pelunasan isi sendiri.
+          <span class="how"><a href="mockup.html#cashless">Frontman</a> · <a href="mockup.html#tagihan_customer">HP customer</a></span></li>
+        <li><b>Proses 2 — setoran sendiri</b> Tanpa request. Customer isi nominal di Digiroom; QRIS tampil setelah angka, VA terbit setelah angka.
+          <span class="how"><a href="mockup.html#digiroom">Isi nominal</a> — kuitansi berbeda dari proses 1.</span></li>
+        <li><b>AR hanya turun oleh kuitansi aktif</b> Contoh: <span class="kwt">KWT/26/CLD/008731</span> tanda jadi Rp 5 jt dan <span class="kwt">KWT/26/CLD/009115</span> pelunasan 1 Rp 300 jt. Sisa ilustratif Rp 181,75 jt. Request menggantung tidak memotong AR.</li>
+        <li><b>Nomor sama di dua sisi</b> Customer unduh PDF; cabang membuka buku. Unmatched ditangani Administrasi, bukan diketik Frontman.
+          <span class="how"><a href="mockup.html#e_kuitansi">E-kuitansi</a> · <a href="mockup.html#admin_kwt">Buku cabang</a> · <a href="mockup.html#admin_pay">Pembayaran</a></span></li>
       </ol>
 
       <div class="see-row">

@@ -17,26 +17,32 @@
         <article class="feat">
           <h4>Document Vault</h4>
           <p>KTP, NPWP, KK, PO, NIB, akta, dokumen leasing, STNK, pajak, surat kuasa, BSTKB, OKK elektronik disimpan sekali. Pemakaian berikutnya membaca vault, bukan folder cabang terpisah.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Unggah di <a href="mockup.html#spk_baru">SPK Dewi</a>. Pakai ulang di <a href="mockup.html#dokumen">vault Budi</a> — KTP/NPWP dari Customer ID yang sama.</p>
         </article>
         <article class="feat">
           <h4>Kelengkapan dan masa berlaku</h4>
           <p>Sistem menandai missing/expired sebelum langkah keuangan atau AFI. Frontman melengkapi; Administrasi memverifikasi. Repeat order memakai dokumen yang masih valid.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Sarah NPWP kosong: <a href="mockup.html#tx_raize">#tx_raize</a> — lengkapi di SPK, fee belum ditagih. Alamat Budi kedaluwarsa: <a href="mockup.html#exc_alamat">#exc_alamat</a> (waivable, Admin tidak unggah ulang).</p>
         </article>
         <article class="feat">
           <h4>Data STNK ikut ke AFI</h4>
           <p>Nama STNK, alamat, dan nomor polisi cadangan/terbit ditarik dari SPK. Billing dan AFI diajukan berpasangan; pecah urutan adalah exception (D1/D4), bukan kebiasaan.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> AFI Budi <a href="mockup.html#afi">#afi</a> sudah terisi dari SPK. Pecah urutan hanya di <a href="mockup.html#exc_afi">#exc_afi</a>.</p>
         </article>
         <article class="feat">
           <h4>Tracking STNK/BPKB</h4>
           <p>Status, aging, dan eskalasi operasional (bukan waiver komersial) terlihat di workspace unit. Hari ke-n dan blocker tampil di jejak transaksi itu sendiri.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Maria Fortuner hari ke-19: <a href="mockup.html#tx_fortuner">#tx_fortuner</a> · eskalasi KC <a href="mockup.html#exc_stnk">#exc_stnk</a> — bukan tombol lunas.</p>
         </article>
         <article class="feat">
           <h4>Bukti serah terima digital</h4>
           <p>Foto unit, geotag, BSTKB, dan paket bukti masuk vault. Good Issue memakai evidence yang sama, bukan form kertas terpisah yang diketik ulang.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Fajar GI <a href="mockup.html#gi">#gi</a>. Customer Calya unduh paket yang sama di <a href="mockup.html#bukti_serah">#bukti_serah</a> — bukan CCTV dealer.</p>
         </article>
         <article class="feat">
           <h4>Pajak dan matching</h4>
           <p>Monitoring dokumen pajak dan matching kendaraan–dokumen di Administrasi. Mismatch menahan proses atau masuk exception jika policy waivable.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Matching terlihat di antrean Administrasi, bukan folder terpisah di menu Frontman.</p>
         </article>
       </div>
 
@@ -46,16 +52,22 @@
 
       <h3>Contoh: unggah dulu, baru fee (Dewi)</h3>
       <ol class="walk">
-        <li>Form SPK menahan tombol tagih fee sampai paket wajib ada. <a href="mockup.html#spk_baru">SPK baru</a></li>
-        <li>Workspace dokumen Budi menunjukkan pola yang sama: unggah sekali, status vault, bukan salin ke tiap tahap. <a href="mockup.html#dokumen">Vault Budi</a></li>
+        <li><b>Tahan dulu, baru fee</b> Form SPK menahan tombol tagih sampai paket wajib ada. Kekurangan identitas dilengkapi di sumber, bukan di SO.
+          <span class="how"><a href="mockup.html#spk_baru">SPK baru Dewi</a></span></li>
+        <li><b>Vault sekali</b> Workspace dokumen Budi: unggah sekali, status vault, bukan salin ke tiap tahap.
+          <span class="how"><a href="mockup.html#dokumen">Vault Budi</a></span></li>
       </ol>
 
       <h3>Contoh: data gate dan pakai ulang</h3>
       <ol class="walk">
-        <li><b>Sarah · Raize</b> — NPWP wajib di SPK. Tanpa itu langkah tertahan; ini data gate, bukan antrean discount. <a href="mockup.html#tx_raize">Workspace Raize</a></li>
-        <li><b>Maria · Fortuner</b> — tracking STNK hari ke-19, eskalasi Kepala Cabang (operasional, bukan Approval Engine komersial). <a href="mockup.html#tx_fortuner">Fortuner</a> · <a href="mockup.html#exc_stnk">Aging STNK</a></li>
-        <li><b>Fajar · Rush</b> — Good Issue memakai paket bukti serah yang sudah di vault SPK. <a href="mockup.html#gi">GI Fajar</a></li>
-        <li><b>Agus · Avanza</b> — request kirim memakai slot form + hub dokumen, bukan unggah ulang KTP. <a href="mockup.html#tx_avanza">Avanza</a></li>
+        <li><b>Sarah · Raize</b> NPWP wajib di SPK. Tanpa itu langkah tertahan; ini data gate, bukan antrean discount.
+          <span class="how">Yang terlihat: blocker di tracker 8 tahap milik Raize. <a href="mockup.html#tx_raize">Workspace Raize</a></span></li>
+        <li><b>Maria · Fortuner</b> Tracking STNK hari ke-19. Eskalasi Kepala Cabang — operasional, bukan Approval Engine komersial.
+          <span class="how"><a href="mockup.html#tx_fortuner">Fortuner</a> · <a href="mockup.html#exc_stnk">Aging STNK</a></span></li>
+        <li><b>Fajar · Rush</b> Good Issue memakai paket bukti serah yang sudah di vault SPK (foto, VIN, geotag, BSTKB).
+          <span class="how"><a href="mockup.html#gi">GI Fajar</a></span></li>
+        <li><b>Agus · Avanza</b> Request kirim memakai slot form + hub dokumen, bukan unggah ulang KTP.
+          <span class="how"><a href="mockup.html#tx_avanza">Avanza</a></span></li>
       </ol>
 
       <div class="see-row">

@@ -17,26 +17,32 @@
         <article class="feat">
           <h4>SPK digital, satu kali isi</h4>
           <p>Identitas, kontak, metode beli, struktur transaksi, unit, nama STNK, dan dokumen awal diisi Frontman sebagai pemilik data. Sistem menerbitkan Customer ID dan nomor SPK. Administrasi tidak mengetik ulang field yang sudah valid.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Dewi: form pemesan + unit Yaris (+Agya) + kota STNK. Simpan baru dapat <a href="mockup.html#spk_baru">SPK/26/CLD/00426</a>. Data yang sama tampil di <a href="mockup.html#spk">SPK tersimpan</a> — bukan form kedua.</p>
         </article>
         <article class="feat">
           <h4>Unggah dokumen sebelum booking fee</h4>
           <p>Document gate membuka <em>penagihan</em> booking fee, bukan langsung membuka Sales Order. Tanpa paket wajib, request fee tidak terbit. Lihat juga <a href="#d3">D3</a> dan <a href="#skema-dokumen">skema dokumen</a>.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Tombol tagih fee tertutup sampai KTP/KK/NPWP ada. Sarah tanpa NPWP tetap tertahan di <a href="mockup.html#tx_raize">Raize 00423</a> — bukan antrean discount.</p>
         </article>
         <article class="feat">
           <h4>Booking fee setelah SPK tersimpan</h4>
           <p>Nominal minimum mengikuti master kendaraan (contoh Yaris Rp 3.000.000). Request terkunci. Fee terverifikasi adalah syarat non-waivable pembentukan SO — bukan objek Approval Engine.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Meja Frontman <a href="mockup.html#booking">#booking</a>: Rp 3.000.000 tidak bisa diubah. Customer: tautan <a href="mockup.html#customer_booking">Digiroom</a> atau <a href="mockup.html#customer_booking_qris">scan QRIS</a>. EDC hanya di perangkat salesman.</p>
         </article>
         <article class="feat">
           <h4>Sales Order setelah fee meet</h4>
           <p>Sistem membawa data SPK ke SO, menyimpan nomor SPK pada setiap SO, lalu lineage yang sama ke billing. Satu SPK dapat punya beberapa unit/SO; tiap jejak tetap milik transaksi itu.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Setelah <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> di <a href="mockup.html#so">#so</a>. Pemesan, STNK, OTR area PO tidak diketik ulang.</p>
         </article>
         <article class="feat">
           <h4>Ajukan langkah berikutnya dari satu platform</h4>
           <p>Setelah syarat terpenuhi: pelunasan, billing, AFI/DO, delivery. Gate yang gagal menahan proses. Rule waivable bisa diajukan sebagai pengecualian; rule non-waivable harus dilengkapi, bukan di-override.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> Budi ajukan AFI dari workspace SPK <a href="mockup.html#afi">#afi</a>. Pecah urutan AFI/billing hanya lewat <a href="mockup.html#exc_afi">#exc_afi</a>. Nama ≠ STNK: <a href="mockup.html#exc_nama">#exc_nama</a> — bukan waiver fee.</p>
         </article>
         <article class="feat">
           <h4>Antrean Administrasi + audit</h4>
           <p>Pekerjaan masuk antrean dengan stempel waktu (volume dan aging/SLA). Setiap aksi punya aktor, waktu, dan alasan. Administrasi memverifikasi dan menambah data internal, bukan menyalin form Frontman.</p>
+          <p class="feat-ex"><b>Contoh di mockup</b> List di <a href="mockup.html#beranda">beranda FAST</a> dan antrean <a href="mockup.html#verifikasi">Perlu saya</a>. Bukan spreadsheet terpisah.</p>
         </article>
       </div>
 
@@ -46,11 +52,16 @@
       <h3>Contoh: Dewi · Yaris SPK/26/CLD/00426</h3>
       <p>Ini jejak D1 yang paling lengkap: dari form sampai SO, tanpa pindah ke SPK orang lain.</p>
       <ol class="walk">
-        <li><b>Form SPK</b> — Frontman mengisi pemesan, unit Yaris (+Agya bila ada), kota STNK (OTR mengikuti area PO). Simpan menghasilkan SPK 00426. <a href="mockup.html#spk_baru">Buka form</a> · <a href="mockup.html#spk">SPK tersimpan</a></li>
-        <li><b>Quotation</b> — 1 SPK = 1 QT, masih data yang sama. <a href="mockup.html#quot">Quotation Dewi</a></li>
-        <li><b>Booking fee</b> — Setelah dokumen cukup, Frontman menagih Rp 3 jt terkunci. Customer bayar lewat Digiroom atau scan QRIS di layar salesman. <a href="mockup.html#booking">Meja Frontman</a> · <a href="mockup.html#customer_booking">HP Digiroom</a> · <a href="mockup.html#customer_booking_qris">QRIS meja</a></li>
-        <li><b>Sales Order</b> — Setelah kuitansi fee <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> terbentuk. Nomor SPK tertinggal di SO. <a href="mockup.html#so">SO Dewi</a></li>
-        <li><b>Pengecualian nama</b> — Nama pemesan ≠ nama STNK. Ini gate data yang waivable ke Kepala Administrasi, bukan waiver fee. <a href="mockup.html#exc_nama">Exception nama</a></li>
+        <li><b>Isi SPK</b> Frontman mengisi pemesan Dewi, unit Yaris (+Agya bila ada), kota STNK. OTR mengikuti area PO, bukan diketik. Simpan menghasilkan SPK 00426.
+          <span class="how">Yang terlihat: form satu halaman, belum ada nomor SO. <a href="mockup.html#spk_baru">Form</a> · <a href="mockup.html#spk">SPK tersimpan</a></span></li>
+        <li><b>Quotation</b> 1 SPK = 1 QT. Harga dan unit sama dengan SPK.
+          <span class="how">Yang terlihat: nomor QT menempel ke 00426. <a href="mockup.html#quot">Quotation Dewi</a></span></li>
+        <li><b>Booking fee</b> Setelah dokumen cukup, Frontman menagih Rp 3.000.000 terkunci. Customer bayar lewat Digiroom atau scan QRIS di layar salesman — request yang sama, instrumen berbeda. EDC tidak tampil di HP.
+          <span class="how">Yang terlihat: nominal tidak bisa diubah. <a href="mockup.html#booking">Meja Frontman</a> · <a href="mockup.html#customer_booking">HP Digiroom</a> · <a href="mockup.html#customer_booking_qris">QRIS meja</a></span></li>
+        <li><b>Sales Order</b> Setelah kuitansi fee <span class="kwt">KWT/26/CLD/009301</span>, SO <b>4500091426</b> terbentuk. Nomor SPK tertinggal di SO.
+          <span class="how">Yang terlihat: pemesan/STNK/unit sudah terisi. <a href="mockup.html#so">SO Dewi</a></span></li>
+        <li><b>Pengecualian nama</b> Nama pemesan ≠ nama STNK (Andi Pratama). Gate data waivable ke Kepala Administrasi — bukan waiver fee Rp 3 jt.
+          <span class="how">Yang terlihat: tombol ajukan exception, bukan tombol “lanjut tanpa fee”. <a href="mockup.html#exc_nama">Exception nama</a></span></li>
       </ol>
 
       <h3>Contoh lain di mockup</h3>
