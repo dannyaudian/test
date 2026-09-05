@@ -253,16 +253,27 @@
         <div class="box" data-stage-panel="spk" hidden>
           <h3>SPK/26/CLD/00418</h3>
           <div class="fields">
-            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Dokumen asal · tetap bisa dibuka</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00418</span><span class="src">Dokumen asal</span></div>
             <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Budi Santoso</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own f">F</i><span class="lab">NIK</span><span class="val">3174••••••••0007</span><span class="src">SPK</span></div>
             <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Budi Santoso</span><span class="src">Diisi di SPK</span></div>
             <div class="frow locked"><i class="own f">F</i><span class="lab">Metode</span><span class="val">Tunai</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Innova Zenix 2.0 G HV · Putih Mutiara</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">VIN</span><span class="val">MHKA6GJ••••41827</span><span class="src">Alokasi</span></div>
           </div>
-          <p class="hint" style="padding:0 16px 14px">SO 4500091238 sudah ada. Data SPK tidak dikunci — klik jejak SPK kapan saja.</p>
+          <div class="fields addr-fields" data-addr="budi"></div>
+          <p class="hint" style="padding:0 16px 14px">Tahap SPK sudah dilewati. Data sumber tetap terisi — tidak diketik ulang di SO atau AFI.</p>
         </div>
-        <div class="box stage-lock" data-stage-panel="quot" hidden>
-          <h3>Quotation</h3>
-          <p>Harga OTR Innova Zenix sudah di quotation SPK ini. Perubahan QT mengikuti SO 4500091238.</p>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation · SPK/26/CLD/00418</h3>
+          <div class="money">
+            <div class="row"><span>OTR area PO</span><span>Rp 486.750.000</span></div>
+            <div class="row"><span>Program / diskon</span><span>Rp 0</span></div>
+            <div class="row"><span>Nilai akhir</span><span>Rp 486.750.000</span></div>
+            <div class="row"><span>Metode</span><span>Tunai · booking fee unit Rp 5.000.000</span></div>
+            <div class="row total"><span>Mengikuti SO</span><span>4500091238</span></div>
+          </div>
+          <p class="hint" style="padding:0 16px 14px">Quotation sudah dilewati. Harga ini yang dibawa ke SO — bukan diketik di billing.</p>
         </div>
         <div data-stage-panel="so">
         <div class="split">
@@ -375,8 +386,15 @@
         </div>
         </div>
         <div class="box" data-stage-panel="afi" hidden>
-          <h3>AFI</h3>
-          <p>Jalur normal: billing + AFI berpasangan. Data STNK dari SPK. Pecah urutan hanya Approval Engine.</p>
+          <h3>AFI · data dari SPK</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val" data-afi-name>Budi Santoso</span><span class="src">= pemesan</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">NIK</span><span class="val">3174••••••••0007</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">VIN</span><span class="val">MHKA6GJ••••41827</span><span class="src">Alokasi</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Billing</span><span class="val" data-afi-billing-no>Belum terbit</span><span class="src">Diajukan bersama AFI</span></div>
+          </div>
+          <div class="fields addr-fields" data-addr="budi"></div>
+          <p class="hint" style="padding:0 16px 8px">Nama dan alamat STNK sudah terisi di SPK. Jalur normal: billing + AFI berpasangan.</p>
           <div class="pad"><button class="btn" data-go="afi">Buka pengajuan AFI</button></div>
         </div>
         <div class="box stage-lock" data-stage-panel="do" hidden>
@@ -518,7 +536,7 @@
             <p class="n">DP · nilai leasing · tenor</p>
           </div>
         </div>
-        <p class="note" data-b2b-gate-note data-b2b-chrome>Klik SPK, SO, atau Billing di jejak atas — tahap yang sudah jadi tetap bisa dibuka. Approval Engine tidak membuka TTD atau full DP. Billing tanpa e-PO leasing = putusan Operation Manager.</p>
+        <p class="note" data-b2b-gate-note data-b2b-chrome>Tahap yang sudah dilewati (SPK, QT, SO, AFI, DO) bisa dibuka — datanya tetap terisi. Kirim dan STNK terkunci sampai tahap itu selesai. Approval Engine tidak membuka TTD atau full DP. Billing tanpa e-PO leasing = putusan Operation Manager.</p>
 
         <div data-stage-panel="spk">
         <div data-b2b-panel="ringkas">
@@ -564,8 +582,14 @@
         </div>
 
         <div class="box" data-stage-panel="quot" hidden>
-          <h3>Quotation · SPK/26/CLD/00421</h3>
-          <p>Satu quotation, tiga baris Hiace Premio. Harga OTR dan DP wajib per SO ikut quotation ini. Bukan diketik di billing.</p>
+          <h3>Quotation · tiga baris Hiace Premio</h3>
+          <div class="money">
+            <div class="row"><span>Unit 1 · SO 4500091288</span><span>OTR Rp 348.400.000 · DP Rp 69.680.000</span></div>
+            <div class="row"><span>Unit 2 · SO 4500091289</span><span>OTR Rp 348.300.000 · DP Rp 69.660.000</span></div>
+            <div class="row"><span>Unit 3 · SO 4500091290</span><span>OTR Rp 348.300.000 · DP Rp 69.660.000</span></div>
+            <div class="row total"><span>Mitra</span><span>PT Danapura Multifinance</span></div>
+          </div>
+          <p class="hint" style="padding:0 16px 14px">Quotation sudah dilewati. DP wajib per baris dibawa ke SO — bukan diketik di billing.</p>
         </div>
 
         <div data-b2b-panel="so" data-stage-panel="so" hidden>
@@ -642,8 +666,13 @@
         </div>
 
         <div class="box" data-stage-panel="do" hidden>
-          <h3>Delivery Order</h3>
-          <p>DO gudang mengikuti TTD kontrak per SO. Bukan pindah ke SPK tunai. Status di tab Alur.</p>
+          <h3>Delivery Order · per SO</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091288</span><span class="val">DO menunggu TTD kontrak</span><span class="src">Unit 1</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091289</span><span class="val">DO tertahan backflow NPWP</span><span class="src">Unit 2</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091290</span><span class="val">DO menunggu paket leasing</span><span class="src">Unit 3</span></div>
+          </div>
+          <p class="hint" style="padding:0 16px 14px">DO sudah pada jejak ini. Gudang mengikuti TTD per SO — bukan pindah ke SPK tunai.</p>
         </div>
 
         <div data-b2b-panel="dokumen" data-stage-panel="afi" hidden>
@@ -1663,8 +1692,12 @@
           </div>
         </div>
         <div class="box" data-stage-panel="quot" hidden>
-          <h3>Quotation</h3>
-          <p>Harga OTR sudah di quotation yang sama. Tidak diubah di delivery.</p>
+          <h3>Quotation · SPK/26/CLD/00425</h3>
+          <div class="money">
+            <div class="row"><span>OTR area PO</span><span>Rp 245.400.000</span></div>
+            <div class="row"><span>Booking fee unit</span><span>Rp 2.000.000</span></div>
+            <div class="row total"><span>Nilai akhir</span><span>Rp 245.400.000</span></div>
+          </div>
         </div>
         <div data-stage-panel="so" hidden>
           <div class="box">
@@ -1818,15 +1851,25 @@
         </div>
         <p class="exc-note" data-gi-note data-stage-kpis="del">Unggah foto serah terima, foto VIN, dan scan BSTKB. Geotag dan waktu tercatat di perangkat. Administrasi memeriksa, lalu menyetujui Good Issue. Tracking armada lengkap menyusul di Deliverable 3.</p>
         <div class="box" data-stage-panel="spk" hidden>
-          <p>Data pemesan Fajar Nugroho, STNK, dan unit Rush sudah di sumber. Tidak diketik di Good Issue.</p>
+          <h3>SPK/26/CLD/00424</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00424</span><span class="src">Dokumen asal</span></div>
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Fajar Nugroho</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Rush S GR Sport · VIN ••20424</span><span class="src">SPK</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="quot" hidden>
           <h3>Quotation</h3>
-          <p>Harga SO 4500091424 mengikuti quotation SPK ini.</p>
+          <div class="money">
+            <div class="row"><span>Mengikuti quotation SPK ini</span><span>SO 4500091424</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="so" hidden>
-          <h3>Sales Order</h3>
-          <p>SO 4500091424 · tunai · lunas. AR Open Rp 0 sebelum kirim.</p>
+          <h3>Sales Order 4500091424</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SO</span><span class="val">4500091424</span><span class="src">Tunai · lunas</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">AR Open</span><span class="val">Rp 0</span><span class="src">Sebelum kirim</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="afi" hidden>
           <h3>AFI</h3>
@@ -1905,32 +1948,55 @@
           <div class="card"><p class="k">SO</p><p class="v" style="font-size:18px">4500091409</p><p class="n">Satu jejak</p></div>
         </div>
         <div class="box" data-stage-panel="spk" hidden>
-          <h3>SPK</h3>
-          <p>Pemesan Maria Sitompul. Data STNK dari SPK dipakai AFI. Tidak diisi ulang.</p>
+          <h3>SPK/26/CLD/00409</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00409</span><span class="src">Dokumen asal</span></div>
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Maria Sitompul</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Nama STNK</span><span class="val">Maria Sitompul</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Metode</span><span class="val">Tunai</span><span class="src">SPK</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Unit</span><span class="val">Fortuner 2.8 VRZ</span><span class="src">SPK</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="quot" hidden>
           <h3>Quotation</h3>
-          <p>OTR Fortuner sudah di quotation SPK ini.</p>
+          <div class="money">
+            <div class="row"><span>OTR Fortuner</span><span>Mengikuti quotation SPK ini</span></div>
+            <div class="row total"><span>SO</span><span>4500091409 · tunai · lunas</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="so" hidden>
-          <h3>Sales Order</h3>
-          <p>SO 4500091409 · tunai · lunas. Nopol B 1409 B terbit. Struktur harga tanpa DP leasing.</p>
+          <h3>Sales Order 4500091409</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SO</span><span class="val">4500091409</span><span class="src">Dari SPK/26/CLD/00409</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">AR Open</span><span class="val">Rp 0</span><span class="src">Lunas sebelum kirim</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Nopol</span><span class="val">B 1409 B</span><span class="src">Cadangan → terbit</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="afi" hidden>
           <h3>AFI</h3>
-          <p>Nama BPKB dari SPK. Selesai sebelum kirim.</p>
+          <div class="fields">
+            <div class="frow locked"><i class="own f">F</i><span class="lab">Nama BPKB</span><span class="val">Maria Sitompul</span><span class="src">Dari SPK</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Status</span><span class="val">Selesai sebelum kirim</span><span class="src">Berpasangan billing</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="do" hidden>
-          <h3>DO</h3>
-          <p>DO dan VIN sudah. Unit delivered.</p>
+          <h3>Delivery Order</h3>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">DO</span><span class="val">Unit delivered</span><span class="src">VIN dari SO</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="bill" hidden>
           <h3>Billing</h3>
-          <p>Lunas. Delivery gate cash sudah lolos.</p>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">AR Open</span><span class="val">Rp 0</span><span class="src">Lunas</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Delivery gate</span><span class="val">Lolos</span><span class="src">Cash lunas</span></div>
+          </div>
         </div>
         <div class="box" data-stage-panel="del" hidden>
           <h3>Pengiriman</h3>
-          <p>Unit terkirim. Good Issue tercatat. Aging STNK di tahap berikutnya.</p>
+          <div class="fields">
+            <div class="frow locked"><i class="own s">S</i><span class="lab">Status</span><span class="val">Terkirim · GI tercatat</span><span class="src">SPK/26/CLD/00409</span></div>
+          </div>
         </div>
         <div data-stage-panel="stnk">
           <div class="box">

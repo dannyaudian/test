@@ -87,6 +87,8 @@
     clearTimeout(toastTimer);
     toastTimer=setTimeout(function(){ toastEl.classList.remove('show'); }, 2800);
   }
+  window.FAST=window.FAST||{};
+  FAST.toast=toast;
   var payJobId='booking';
   var dgVaBank='BCA';
   var dgQrisReady=false;
