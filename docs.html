@@ -101,7 +101,7 @@
           <div class="body">
             <p class="who">Dewi Lestari · proses utuh</p>
             <h3>SPK → QT → SO → AFI → DO → Billing → Delivery → STNK</h3>
-            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, dan Management. Customer melihat toko (katalog, pesanan, checkout) dengan nomor tagihan dan kuitansi yang sama.</p>
+            <p>Satu SPK, satu quotation, SO per unit. Jejak SPK→STNK yang sama di Frontman, Administrasi, dan Management. Customer melihat daftar pesanan, lacak progres, lalu dua proses bayar terpisah (penagihan Frontman vs pelunasan cashless) dengan nomor tagihan dan kuitansi yang sama.</p>
             <span class="go">Buka proses →</span>
           </div>
         </a>
@@ -168,13 +168,13 @@
             <span class="go">Buka billing &amp; AFI →</span>
           </div>
         </a>
-        <a class="case" href="mockup.html#shop_home">
-          <div class="thumb cust">HOME</div>
+        <a class="case" href="mockup.html#customer">
+          <div class="thumb cust">ORDER</div>
           <div class="body">
             <p class="who">Budi Santoso · Customer</p>
-            <h3>Toko &amp; sisa tagihan</h3>
-            <p>Tampilan e-commerce: katalog, kartu produk, checkout. AR Open Rp 181.750.000 sama dengan Frontman. Bukan layar SAM.</p>
-            <span class="go">Buka toko customer →</span>
+            <h3>Pesanan, lacak, dan bayar</h3>
+            <p>Daftar pesanan, klik masuk untuk lacak. Penagihan Frontman (nominal dikunci) dan pelunasan cashless (isi sendiri) adalah dua proses terpisah. AR Open sama dengan cabang.</p>
+            <span class="go">Buka pesanan customer →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#delivery">
@@ -1182,21 +1182,21 @@
         <a class="see" href="mockup.html#mgmt_inbox"><span class="see-k">KA / KC / OM</span><b>Antrean sesuai kursi</b><span>Exception, STNK, kirim/GI — bukan 30%/lunas</span><em>Lihat →</em></a>
       </div>
       <h3>D. Customer View</h3>
-      <p>Layar customer adalah toko daring (shop.fast.id), bukan workspace SAM. Jejak internal SPK→STNK tetap di Frontman/Administrasi. Customer melihat katalog, kartu produk, checkout, dan struk — dengan AR Open, kuitansi, dan paket serah terima yang sama.</p>
+      <p>Layar customer (shop.fast.id) adalah daftar pesanan, bukan katalog toko dan bukan workspace SAM. Jejak internal SPK→STNK tetap di Frontman/Administrasi. Customer klik pesanan untuk lacak progres, lalu memilih salah satu dari dua proses bayar yang terpisah — dengan AR Open, kuitansi, dan paket serah terima yang sama.</p>
       <div class="grid g3">
-        <div class="panel"><h4>Beranda toko</h4><ul><li>Banner checkout tertunda.</li><li>Kartu produk (bukan antrean SPK).</li><li>Cari unit / pesanan.</li><li>Tab Beranda · Pesanan · Bayar · Akun.</li></ul></div>
-        <div class="panel"><h4>Checkout &amp; tagihan</h4><ul><li>Sisa tagihan = AR Open cabang.</li><li>Permintaan salesman terkunci.</li><li>Isi nominal sendiri di QRIS/VA.</li><li>Bayar di outlet tanpa EDC customer.</li></ul></div>
-        <div class="panel"><h4>Bukti &amp; kirim</h4><ul><li>E-kuitansi sebagai struk, bukan tabel administrasi.</li><li>Status: Dipesan → Dibayar → Diproses → Dikirim → Selesai.</li><li>Paket bukti serah terima setelah unit diterima.</li></ul></div>
+        <div class="panel"><h4>Daftar &amp; lacak</h4><ul><li>List pesanan (Zenix berlangsung, Calya/aksesoris selesai).</li><li>Klik masuk untuk jejak: dipesan → DP → pelunasan → kirim → dokumen.</li><li>Tab Pesanan · Lacak · Bayar · Akun.</li><li>Calya FAST-01990 + aksesoris FAST-88102 hanya pelacakan.</li></ul></div>
+        <div class="panel"><h4>Dua proses bayar (kondisional)</h4><ul><li><b>Penagihan Frontman</b> — nominal dikunci (default Rp 100.000.000), QRIS/VA terkunci.</li><li><b>Pelunasan cashless</b> — customer isi sendiri; maks. sisa di luar request (Rp 81.750.000) atau penuh AR Open (Rp 181.750.000) jika tidak ada request.</li><li>Skenario: ada keduanya / hanya request / hanya cashless / lunas (AR 0, menu bayar hilang).</li><li>Bukan satu bar CTA. EDC tidak ada di customer.</li></ul></div>
+        <div class="panel"><h4>Bukti &amp; kirim</h4><ul><li>E-kuitansi sebagai struk, nomor sama dengan cabang.</li><li>Pengiriman terkunci sampai cash lunas.</li><li>Paket bukti serah terima setelah unit diterima.</li></ul></div>
       </div>
       <div class="panel" style="margin-top:16px">
-        <h4>Order Journey (bahasa toko)</h4>
+        <h4>Order Journey (bahasa pelanggan)</h4>
         <div class="journey">
-          <span class="done">Dipesan ✓</span><span class="done">Dibayar ✓</span><span>Diproses</span><span>Dikirim</span><span>Selesai</span>
+          <span class="done">Dipesan ✓</span><span class="done">DP ✓</span><span>Pelunasan</span><span>Dikirim</span><span>Dokumen</span>
         </div>
         <div class="see-row" style="margin-top:14px">
-          <a class="see" href="mockup.html#shop_home"><span class="see-k">Toko</span><b>Beranda</b><span>Katalog + checkout tertunda</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#customer"><span class="see-k">List</span><b>Pesanan saya</b><span>Kartu produk, bukan antrean SPK</span><em>Lihat →</em></a>
-          <a class="see" href="mockup.html#e_kuitansi"><span class="see-k">PDF</span><b>E-kuitansi KWT/26/CLD/009115</b><span>Unduh dari pesanan</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#customer"><span class="see-k">List</span><b>Pesanan saya</b><span>Klik kartu untuk lacak</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#customer_detail"><span class="see-k">Lacak</span><b>Zenix FAST-00418</b><span>Dua menu bayar terpisah</span><em>Lihat →</em></a>
+          <a class="see" href="mockup.html#tagihan_customer"><span class="see-k">Bayar</span><b>Penagihan vs cashless</b><span>Skenario kondisional</span><em>Lihat →</em></a>
           <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Bukti</span><b>Serah terima Calya</b><span>Bukan rekaman CCTV</span><em>Lihat →</em></a>
         </div>
       </div>

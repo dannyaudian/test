@@ -641,6 +641,19 @@
   border:1px solid var(--rule);border-radius:14px;padding:12px 14px;background:#fff;
 }
 #mockup .shop-checkout .money{background:#fff7ed;border-radius:14px}
+#mockup .pay-proc{
+  border:1px solid var(--rule);border-radius:16px;padding:16px 18px;margin:0 0 12px;background:#fff;
+}
+#mockup .pay-proc .k{
+  margin:0 0 4px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+}
+#mockup .pay-proc.request{border-color:#c2410c;background:#fff7ed}
+#mockup .pay-proc.cashless{border-color:#1d4ed8;background:#eff6ff}
+#mockup .pay-proc h3{margin:0 0 6px;font-size:16px}
+#mockup .pay-proc p{margin:0 0 8px;font-size:13px;color:var(--ink-soft)}
+#mockup .pay-proc .amt{font-size:20px;font-weight:800;color:var(--ink);margin:8px 0}
+#mockup .pay-proc .nextbar{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+#mockup .pay-proc[hidden], #mockup [data-cust-pay][hidden]{display:none !important}
 #mockup .cust-shop .own{display:none}
 #mockup .cust-shop .frow{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 16px;border-bottom:1px solid var(--rule-2);align-items:center}
 #mockup .cust-shop #digiroom > .screenhead .eyebrow{color:#c2410c}
