@@ -180,7 +180,7 @@
               <p class="cta">Lanjutkan →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-tx-dots="agus" data-go="delivery">
+          <button type="button" class="order-card" data-tx-status="ready" data-tx-action="1" data-tx-dots="agus" data-go="tx_avanza">
             <div class="thumb done">AVANZA</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00425 · lunas</p>
@@ -206,7 +206,7 @@
               <p class="cta">Lengkapi bukti →</p>
             </div>
           </button>
-          <button type="button" class="order-card" data-tx-status="exc" data-tx-dots="maria" data-go="exc_stnk">
+          <button type="button" class="order-card" data-tx-status="exc" data-tx-dots="maria" data-go="tx_fortuner">
             <div class="thumb">FORT</div>
             <div class="meta">
               <p class="oid">SPK/26/CLD/00409 · delivered</p>
@@ -436,7 +436,7 @@
         <p class="note">30% cash dan lunas delivery tetap non-waivable. Exception ini hanya memecah urutan AFI vs billing.</p>
       </section>
 
-      <section class="screen" id="tx_hiace">
+      <section class="screen" id="tx_hiace" data-stage-map="spk:ringkas,quot:ringkas,so:so,afi:ringkas,do:ringkas,bill:tagih,del:alur,stnk:ringkas">
         <div class="screenhead">
           <div>
             <p class="eyebrow">SPK/26/CLD/00421 · B2B leasing</p>
@@ -452,7 +452,7 @@
           <button type="button" data-b2b-tab="dokumen" data-b2b-tab-role="frontman">Kerja Frontman</button>
           <button type="button" data-b2b-tab="tagih" data-b2b-tab-role="admin">Penagihan Admin</button>
         </nav>
-        <div class="cards">
+        <div class="cards" data-b2b-chrome>
           <div class="card" data-b2b-card="bill">
             <p class="k">DP wajib customer · B2B</p>
             <p class="v" style="font-size:18px" data-b2b-dp-wajib>Rp 69.680.000</p>
@@ -469,7 +469,7 @@
             <p class="n">Paperless ke leasing</p>
           </div>
         </div>
-        <p class="note" data-b2b-gate-note>Approval Engine tidak membuka TTD atau full DP. Kekurangan dokumen = backflow operasional, bukan waiver.</p>
+        <p class="note" data-b2b-gate-note data-b2b-chrome>Approval Engine tidak membuka TTD atau full DP. Kekurangan dokumen = backflow operasional, bukan waiver.</p>
 
         <div data-b2b-panel="ringkas">
           <div class="box">
@@ -634,22 +634,53 @@
       <section class="screen" id="tx_raize">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">SPK/26/CLD/00423</p>
+            <p class="eyebrow">SPK/26/CLD/00423 · data gate</p>
             <h2>Sarah Wijaya · Raize 1.0 T GR Sport</h2>
-            <p>SPK tersimpan. SO tertahan karena NPWP belum di sumber data.</p>
+            <p>Satu jejak SPK→STNK. Tahap setelah SPK tertahan sampai NPWP ada di sumber — bukan Approval Engine.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
         <div class="cards">
-          <div class="card alert"><p class="k">Data gate</p><p class="v" style="font-size:18px">NPWP kosong</p><p class="n">Lengkapi di SPK, bukan di SO</p></div>
+          <div class="card alert"><p class="k">Data gate</p><p class="v" style="font-size:18px">NPWP kosong</p><p class="n">Lengkapi di SPK ini</p></div>
           <div class="card"><p class="k">Booking fee</p><p class="v" style="font-size:18px">Belum ditagih</p><p class="n">Setelah identitas valid</p></div>
+          <div class="card"><p class="k">Metode</p><p class="v" style="font-size:18px">Tunai</p><p class="n">Booking fee unit, bukan DP leasing</p></div>
         </div>
-        <div class="box">
-          <h3>Tindakan di SPK ini</h3>
-          <div class="pad">
-            <p>Unggah NPWP pada data customer SPK Sarah. Vault Budi tidak dibuka. Bukan jalur Approval Engine. Booking fee baru ditagih setelah identitas valid.</p>
-            <button type="button" class="drop" data-raize-npwp><b>NPWP Sarah Wijaya</b><span>Ketuk untuk pasang · tetap di SPK/26/CLD/00423</span></button>
+        <div data-stage-panel="spk">
+          <div class="box">
+            <h3>SPK · lengkapi identitas</h3>
+            <div class="pad">
+              <p>Unggah NPWP pada data customer SPK Sarah. Vault transaksi lain tidak dibuka.</p>
+              <button type="button" class="drop" data-raize-npwp><b>NPWP Sarah Wijaya</b><span>Ketuk untuk pasang · tetap di SPK/26/CLD/00423</span></button>
+            </div>
           </div>
+        </div>
+        <div class="box stage-lock" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>Tertahan data gate. Quotation memakai OTR area PO setelah NPWP valid. Bukan pindah ke SPK Dewi.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="so" hidden>
+          <h3>Sales Order</h3>
+          <p>SO belum terbentuk. Booking fee Raize dari master unit ditagih dulu — non-waivable. Struktur harga tunai, bukan DP B2B.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Nama dan alamat STNK sudah akan dipakai dari SPK ini setelah SO terbuka. Tidak diketik di AFI.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="do" hidden>
+          <h3>Delivery Order</h3>
+          <p>DO gudang menyusul AFI pada jejak yang sama.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Cash ≥30% setelah SO. Gate non-waivable. Belum relevan sampai identitas dan booking fee selesai.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="del" hidden>
+          <h3>Pengiriman</h3>
+          <p>Delivery cash menunggu lunas pada SO Raize ini — bukan transaksi Agus.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>Tracking dokumen Deliverable 3 memakai vault SPK/26/CLD/00423 setelah serah terima.</p>
         </div>
       </section>
 
@@ -1482,17 +1513,74 @@
       <section class="screen" id="tx_avanza">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">SPK/26/CLD/00425</p>
+            <p class="eyebrow">SPK/26/CLD/00425 · tunai · lunas</p>
             <h2>Agus Hermawan · Avanza 1.5 G CVT</h2>
-            <p>Cash lunas · delivery terbuka · janji 4 Sep 2026.</p>
+            <p>Jejak utuh sampai kirim. Cashless sudah selesai. Delivery membuka tahap Deliverable 3 tanpa pindah ke SPK lain.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
+        <nav class="worktabs" aria-label="Isi transaksi">
+          <button type="button" data-go="tx_avanza">Ringkasan</button>
+          <button type="button" data-go="delivery">Kirim</button>
+        </nav>
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Kuitansi pelunasan aktif</p></div>
-          <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px">Siap kirim</p><p class="n">Customer Home: siap kirim</p></div>
+          <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px">Siap kirim</p><p class="n">Gate cash lunas</p></div>
+          <div class="card"><p class="k">SO</p><p class="v" style="font-size:18px">4500091301</p><p class="n">Satu SO · SPK ini</p></div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>Gate delivery cash lolos (lunas). Ajukan pengiriman dari data SPK yang sama. Jadwal armada menyusul di Deliverable 3.</p><p><button class="btn" data-go="delivery">Ajukan pengiriman</button></p></div></div>
+        <div data-stage-panel="spk">
+          <div class="box">
+            <h3>SPK · sudah tersimpan</h3>
+            <div class="fields">
+              <div class="frow locked"><i class="own s">S</i><span class="lab">Nomor SPK</span><span class="val">SPK/26/CLD/00425</span><span class="src">Dokumen asal</span></div>
+              <div class="frow locked"><i class="own f">F</i><span class="lab">Pemesan</span><span class="val">Agus Hermawan</span><span class="src">SPK</span></div>
+              <div class="frow locked"><i class="own f">F</i><span class="lab">Metode</span><span class="val">Tunai</span><span class="src">SPK</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>Harga OTR sudah di quotation yang sama. Tidak diubah di delivery.</p>
+        </div>
+        <div data-stage-panel="so" hidden>
+          <div class="box">
+            <h3>Struktur harga SO <span class="side">Tunai · lunas</span></h3>
+            <div class="money">
+              <div class="row"><span>Nilai transaksi</span><span>Rp 245.400.000</span></div>
+              <div class="row"><span>Booking fee unit</span><span>Rp 2.000.000</span></div>
+              <div class="row"><span>Pelunasan</span><span>Rp 243.400.000</span></div>
+              <div class="row total"><span>AR Open</span><span>Rp 0</span></div>
+              <div class="row"><span>Syarat billing</span><span>≥30% · lolos</span></div>
+              <div class="row"><span>Syarat delivery</span><span>Lunas · lolos</span></div>
+            </div>
+            <p class="hint" style="padding:0 16px 14px">Tunai: bukan DP B2B. Kuitansi KWT/26/CLD/009280 tertaut SO 4500091301.</p>
+          </div>
+        </div>
+        <div class="box" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Nama STNK Agus Hermawan dari SPK. Billing + AFI sudah berpasangan. Jejak ini, bukan Budi.</p>
+        </div>
+        <div class="box" data-stage-panel="do" hidden>
+          <h3>Delivery Order</h3>
+          <p>DO gudang terbit dari SO 4500091301. VIN MHKA4FA••••20425.</p>
+        </div>
+        <div class="box" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Cash ≥30% dan pelunasan sudah. Nomor billing tertaut SPK–SO. Siap kirim.</p>
+        </div>
+        <div data-stage-panel="del">
+          <div class="box">
+            <h3>Pengiriman</h3>
+            <div class="pad">
+              <p>Gate delivery cash lolos (lunas). Ajukan pengiriman dari data SPK yang sama. Jadwal armada = Deliverable 3, tetap di SPK ini.</p>
+              <button class="btn" data-go="delivery">Ajukan pengiriman</button>
+            </div>
+          </div>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>Menyusul setelah serah terima. Tracking dokumen vault SPK/26/CLD/00425 — bukan eskalasi Maria.</p>
+        </div>
       </section>
 
       <section class="screen" id="delivery">
@@ -1511,8 +1599,33 @@
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Cash lunas · gate terbuka</p></div>
           <div class="card"><p class="k">PDI / VIN</p><p class="v" style="font-size:18px">Siap</p><p class="n">MHKA4FA••••20425</p></div>
-          <div class="card"><p class="k">Lanjut</p><p class="v" style="font-size:18px">D3</p><p class="n">Jadwal &amp; armada belum di sini</p></div>
+          <div class="card"><p class="k">Deliverable 3</p><p class="v" style="font-size:18px">Jadwal</p><p class="n">Armada di request ini</p></div>
         </div>
+        <div class="box" data-stage-panel="spk" hidden>
+          <h3>SPK</h3>
+          <p>Data penerima dan alamat dari SPK/26/CLD/00425. Tidak diketik ulang.</p>
+        </div>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>Harga sudah di SO. Request kirim tidak mengubah OTR.</p>
+        </div>
+        <div class="box" data-stage-panel="so" hidden>
+          <h3>Sales Order 4500091301</h3>
+          <p>AR Open Rp 0. Struktur harga tunai lunas di ringkasan SPK ini.</p>
+        </div>
+        <div class="box" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Sudah berpasangan dengan billing. STNK nama dari SPK.</p>
+        </div>
+        <div class="box" data-stage-panel="do" hidden>
+          <h3>DO</h3>
+          <p>Perintah gudang ada. Request kirim memakai DO yang sama.</p>
+        </div>
+        <div class="box" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Lunas. Gate delivery terbuka.</p>
+        </div>
+        <div data-stage-panel="del">
         <div class="box">
           <h3>Syarat delivery</h3>
           <ul class="gates">
@@ -1551,6 +1664,11 @@
           </div>
         </div>
         <p class="note">Cash yang belum lunas dan leasing tanpa TTD tidak bisa mengajukan delivery. Keduanya non-waivable.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>Setelah unit tiba dan GI di SPK ini. Bukan eskalasi Fortuner.</p>
+        </div>
       </section>
 
       <section class="screen" id="gi">
@@ -1568,6 +1686,30 @@
           <div class="card"><p class="k">GI</p><p class="v" style="font-size:18px" data-gi-status>Menunggu bukti</p><p class="n">Bukan waiver lunas</p></div>
         </div>
         <p class="exc-note" data-gi-note>Unggah foto serah terima, foto VIN, dan scan BSTKB. Geotag dan waktu tercatat di perangkat. Administrasi memeriksa, lalu menyetujui Good Issue. Tracking armada lengkap menyusul di Deliverable 3.</p>
+          <h3>SPK /26/CLD/00424</h3>
+          <p>Data pemesan Fajar Nugroho, STNK, dan unit Rush sudah di sumber. Tidak diketik di Good Issue.</p>
+        </div>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>Harga SO 4500091424 mengikuti quotation SPK ini.</p>
+        </div>
+        <div class="box" data-stage-panel="so" hidden>
+          <h3>Sales Order</h3>
+          <p>SO 4500091424 · tunai · lunas. AR Open Rp 0 sebelum kirim.</p>
+        </div>
+        <div class="box" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Nama STNK dari SPK. Billing berpasangan sudah lewat.</p>
+        </div>
+        <div class="box" data-stage-panel="do" hidden>
+          <h3>DO</h3>
+          <p>DO gudang terkirim 2 Sep. Unit keluar sesuai VIN ••20424.</p>
+        </div>
+        <div class="box" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Lunas. Bukan objek Approval Engine.</p>
+        </div>
+        <div data-stage-panel="del">
         <div class="box">
           <h3>Data dari SPK — tidak diketik ulang</h3>
           <div class="vault-grid">
@@ -1595,7 +1737,7 @@
           </div>
           <div class="formfoot" data-for="mgmt" hidden>
             <span class="hint">GI diputuskan Administrasi operasional, bukan Kepala Cabang.</span>
-            <button type="button" class="btn ghost" data-go="verifikasi">Antrean verifikasi</button>
+            <button type="button" class="btn ghost" data-gi-stay>Pantau GI di SPK ini</button>
           </div>
         </div>
         <div class="box" data-gi-vault hidden>
@@ -1605,22 +1747,68 @@
             <p class="hint">Paket Calya di akun customer adalah SPK lain — tidak dibuka dari sini.</p>
           </div>
         </div>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>Tracking dokumen setelah GI disetujui. Vault SPK/26/CLD/00424. Bukan aging Fortuner.</p>
+        </div>
       </section>
 
       <section class="screen" id="tx_fortuner">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">SPK/26/CLD/00409</p>
+            <p class="eyebrow">SPK/26/CLD/00409 · delivered</p>
             <h2>Maria Sitompul · Fortuner 2.8 VRZ</h2>
-            <p>Unit delivered. STNK hari ke-19 — tahap yang sama di Customer Home.</p>
+            <p>Jejak SPK→STNK selesai sampai kirim. Aging STNK hari ke-19 di tahap terakhir — Deliverable 3, bukan waiver lunas.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="beranda">← Transaksi saya</button></div>
         </div>
+        <nav class="worktabs" aria-label="Isi transaksi">
+          <button type="button" data-go="tx_fortuner">Ringkasan</button>
+          <button type="button" data-go="exc_stnk">Eskalasi STNK</button>
+        </nav>
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Lunas sebelum delivery</p></div>
-          <div class="card alert"><p class="k">STNK</p><p class="v" style="font-size:18px">Hari ke-19</p><p class="n">Pantau SLA cabang</p></div>
+          <div class="card alert"><p class="k">STNK</p><p class="v" style="font-size:18px">Hari ke-19</p><p class="n">Eskalasi Kepala Cabang</p></div>
+          <div class="card"><p class="k">SO</p><p class="v" style="font-size:18px">4500091409</p><p class="n">Satu jejak</p></div>
         </div>
-        <div class="box"><h3>Tindakan</h3><div class="pad"><p>STNK melewati 15 hari: eskalasi otomatis ke Kepala Cabang, bukan waiver delivery.</p><p><button class="btn" data-go="exc_stnk">Buka eskalasi</button></p></div></div>
+        <div class="box" data-stage-panel="spk" hidden>
+          <h3>SPK</h3>
+          <p>Pemesan Maria Sitompul. Data STNK dari SPK dipakai AFI. Tidak diisi ulang.</p>
+        </div>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>OTR Fortuner sudah di quotation SPK ini.</p>
+        </div>
+        <div class="box" data-stage-panel="so" hidden>
+          <h3>Sales Order</h3>
+          <p>SO 4500091409 · tunai · lunas. Struktur harga tanpa DP leasing.</p>
+        </div>
+        <div class="box" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Nama BPKB dari SPK. Selesai sebelum kirim.</p>
+        </div>
+        <div class="box" data-stage-panel="do" hidden>
+          <h3>DO</h3>
+          <p>DO dan VIN sudah. Unit delivered.</p>
+        </div>
+        <div class="box" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Lunas. Delivery gate cash sudah lolos.</p>
+        </div>
+        <div class="box" data-stage-panel="del" hidden>
+          <h3>Pengiriman</h3>
+          <p>Unit terkirim. Good Issue tercatat. Aging STNK di tahap berikutnya.</p>
+        </div>
+        <div data-stage-panel="stnk">
+          <div class="box">
+            <h3>STNK / BPKB · hari ke-19</h3>
+            <div class="pad">
+              <p>Melewati 15 hari: eskalasi otomatis ke Kepala Cabang. Bukan tombol untuk melewati pelunasan. Jejak tetap SPK/26/CLD/00409.</p>
+              <button class="btn" data-go="exc_stnk">Buka eskalasi</button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============ PEMBAYARAN ============ -->

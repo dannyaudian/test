@@ -489,7 +489,7 @@
     if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home') || b.hasAttribute('data-mgmt-seat')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
     if(b.hasAttribute('data-b2b-tab') || b.hasAttribute('data-b2b-so') || b.hasAttribute('data-b2b-doc') || b.hasAttribute('data-b2b-drop') || b.hasAttribute('data-b2b-bill') || b.hasAttribute('data-b2b-dl-contract') || b.hasAttribute('data-b2b-paperless') || b.hasAttribute('data-b2b-kwt') || b.hasAttribute('data-b2b-lunas') || b.hasAttribute('data-b2b-resubmit') || b.hasAttribute('data-b2b-issue-contract') || b.hasAttribute('data-b2b-mark-dp') || b.hasAttribute('data-b2b-return') || b.hasAttribute('data-b2b-stay') || b.hasAttribute('data-raize-npwp') || b.hasAttribute('data-budi-bf')) return;
-    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
+    if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-gi-stay') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
     var label=(b.textContent||'').replace(/\s+/g,' ').trim();
     if(/^Bayar Rp/.test(label)){
       b.addEventListener('click',function(){ toast('Pembayaran terverifikasi. E-kuitansi baru siap diunduh.'); });
@@ -1734,6 +1734,12 @@
     var tab=s.tab||'ringkas';
     if(currentRole==='frontman' && tab==='tagih') tab='dokumen';
     if(currentRole==='admin' && tab==='dokumen') tab='tagih';
+    document.querySelectorAll('[data-b2b-chrome]').forEach(function(el){ el.hidden = tab!=='ringkas'; });
+    var hiace=document.getElementById('tx_hiace');
+    if(hiace){
+      var viewTab={ringkas:'spk',so:'so',alur:'del',dokumen:'bill',tagih:'bill'};
+      if(viewTab[tab]) hiace.setAttribute('data-stage-view', viewTab[tab]);
+    }
     var billCard=document.querySelector('[data-b2b-card="bill"]');
     var delCard=document.querySelector('[data-b2b-card="del"]');
     var paperCard=document.querySelector('[data-b2b-card="paper"]');
@@ -1958,6 +1964,13 @@
     b.addEventListener('click',function(){
       patchB2b(function(s){ s.tab=b.getAttribute('data-b2b-tab'); });
     });
+  });
+  document.addEventListener('fast-stage-map', function(e){
+    var tab=(e.detail&&e.detail.tab)||'ringkas';
+    patchB2b(function(s){ s.tab=tab; });
+  });
+  document.querySelectorAll('[data-gi-stay]').forEach(function(b){
+    b.addEventListener('click',function(){ toast('Tetap di SPK/26/CLD/00424. Antrean cabang dibuka dari list, bukan dari dalam GI ini.'); });
   });
   document.querySelectorAll('[data-b2b-stay]').forEach(function(b){
     b.addEventListener('click',function(){ toast('Tetap di SPK/26/CLD/00421. Volume area dibuka dari daftar, bukan dari dalam transaksi ini.'); });

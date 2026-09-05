@@ -28,6 +28,7 @@
     afi_d:'afi',do:'do',bill_d:'bill',kirim_d:'del',stnk_d:'stnk',
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
     cashless:'bill',exc_alamat:'afi',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
+    tx_hiace:'bill',
     tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
     tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'
   };
@@ -96,7 +97,7 @@
         return g;
       },
       now:function(){ return 'quot'; },
-      copy:function(){ return 'SO 4500091428 tertahan booking fee baris Agya. Bukan jejak SO Yaris.'; }
+      copy:function(){ return 'SO 4500091428 tertahan booking fee baris Agya. Tetap SPK Dewi — bukan transaksi lain.'; }
     },
     budi:{
       go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'afi',do:'afi',bill:'cashless',del:'cashless',stnk:'transaksi'},
@@ -195,9 +196,29 @@
     lab.textContent=st.allDone?'STNK selesai':((cur?cur.label:'')+' · sekarang');
     el.appendChild(lab);
   }
+  function showStagePanel(screen, stage){
+    if(!screen||!stage) return;
+    var panels=screen.querySelectorAll('[data-stage-panel]');
+    if(!panels.length) return;
+    panels.forEach(function(p){
+      p.hidden = p.getAttribute('data-stage-panel')!==stage;
+    });
+    screen.setAttribute('data-stage-view', stage);
+  }
+  function parseStageMap(screen){
+    var raw=screen && screen.getAttribute('data-stage-map');
+    if(!raw) return null;
+    var map={};
+    raw.split(',').forEach(function(part){
+      var kv=part.split(':');
+      if(kv.length===2) map[kv[0].trim()]=kv[1].trim();
+    });
+    return map;
+  }
   function fillNav(nav, st, view, showFn){
     if(!nav||!st) return;
     nav.innerHTML='';
+    var screen=nav.closest('.screen');
     STAGES.forEach(function(s){
       var b=document.createElement('button');
       b.type='button';
@@ -206,6 +227,19 @@
       if(s.id===st.now && !st.allDone) b.classList.add(st.hold===s.id?'hold':'now');
       if(s.id===view) b.classList.add('on');
       b.addEventListener('click',function(){
+        var map=parseStageMap(screen);
+        if(map && map[s.id]){
+          screen.dispatchEvent(new CustomEvent('fast-stage-map',{bubbles:true,detail:{tab:map[s.id],stage:s.id}}));
+          showStagePanel(screen, s.id);
+          fillNav(nav, st, s.id, showFn);
+          return;
+        }
+        var panel=screen && screen.querySelector('[data-stage-panel="'+s.id+'"]');
+        if(panel){
+          showStagePanel(screen, s.id);
+          fillNav(nav, st, s.id, showFn);
+          return;
+        }
         var go=st.go[s.id];
         if(go && typeof showFn==='function') showFn(go);
       });
@@ -227,28 +261,32 @@
     return 'bill';
   }
   function ensureNav(screen, tx){
-    var nav=screen.querySelector(':scope > .proc, :scope > .worktabs + .proc');
-    if(!nav) nav=screen.querySelector('.proc');
-    var hook=screen.id==='spk_baru'
-      ? screen.querySelector('.screenhead')
-      : (screen.querySelector('.worktabs')||screen.querySelector('.screenhead'));
-    if(!nav && hook){
+    var head=screen.querySelector(':scope > .screenhead');
+    var nav=screen.querySelector(':scope > .proc');
+    if(!nav && head){
       nav=document.createElement('nav');
       nav.className='proc';
       nav.setAttribute('aria-label','Jejak SPK sampai STNK');
-      hook.after(nav);
     }
+    if(!nav) nav=screen.querySelector('.proc');
     if(!nav) return null;
     nav.setAttribute('data-tx-track', tx);
     var note=screen.querySelector(':scope > .tx-now');
     if(!note){
       note=document.createElement('p');
       note.className='tx-now';
-      nav.after(note);
     }
     note.setAttribute('data-tx-now', tx);
+    var tabs=screen.querySelector(':scope > .worktabs');
+    if(head){
+      if(nav.previousElementSibling!==head) head.after(nav);
+      if(note.previousElementSibling!==nav) nav.after(note);
+      if(tabs && note.nextElementSibling!==tabs) note.after(tabs);
+    }
     var path=screen.querySelector('ol.path');
     if(path) path.hidden=true;
+    var view=screen.getAttribute('data-stage-view')||VIEW[screen.id];
+    if(view) showStagePanel(screen, view);
     return {nav:nav, note:note};
   }
   function render(opts){
@@ -293,7 +331,7 @@
       var pack=ensureNav(screen, tx);
       if(!pack) return;
       var st=state(tx);
-      var view=VIEW[sid]||st.now;
+      var view=screen.getAttribute('data-stage-view')||VIEW[sid]||st.now;
       fillNav(pack.nav, st, view, showFn);
       if(pack.note) pack.note.textContent=st.copy;
     });
@@ -330,6 +368,7 @@
       agus:'tx_avanza', fajar:'gi', maria:'tx_fortuner', calya:'order_calya'
     })[tx]||null;
   };
+  FAST.showStagePanel=showStagePanel;
   FAST.lineageInit=function(fn){ showFn=fn; };
   FAST.renderLineage=render;
 })();
