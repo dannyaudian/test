@@ -1,0 +1,82 @@
+/* Customer shop chrome */
+/* customer shop — ecommerce chrome, not SAM workspace */
+#mockup .app.cust-shop .chrome{background:linear-gradient(90deg,#7c2d12,#b45309)}
+#mockup .app.cust-shop .urlbar{color:#ffedd5}
+#mockup .app.cust-shop .rail{display:none !important}
+#mockup .app.cust-shop .layout{grid-template-columns:1fr;position:relative}
+#mockup .app.cust-shop .layout > div{padding-bottom:72px}
+#mockup .app:not(.cust-shop) .shop-tabbar{display:none}
+#mockup .app.cust-shop{position:relative}
+#mockup .app.cust-shop .shop-tabbar{
+  position:absolute;left:0;right:0;bottom:0;z-index:8;display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-top:1px solid var(--rule);background:#fff;padding:6px 8px calc(8px + env(safe-area-inset-bottom));
+}
+#mockup .shop-tabbar button{
+  border:0;background:transparent;font:inherit;font-size:11px;font-weight:700;color:var(--ink-soft);
+  padding:8px 4px;border-radius:12px;
+}
+#mockup .shop-tabbar button[aria-current="true"]{color:var(--signal);background:var(--signal-tint)}
+#mockup .shop-tabbar .ico{display:block;font-size:16px;line-height:1;margin-bottom:2px}
+#mockup .cust-shop .screenhead h2{letter-spacing:-.03em}
+#mockup .shop-search{
+  display:flex;align-items:center;gap:8px;margin:0 0 16px;padding:10px 14px;
+  border:1px solid var(--rule);border-radius:999px;background:#fff;
+}
+#mockup .shop-search input{border:0;flex:1;font:inherit;outline:none;background:transparent}
+#mockup .cust-shop #orderList{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;
+  border:0;background:transparent;overflow:visible;
+}
+#mockup .cust-shop #orderList .order-card,
+#mockup .shop-order{
+  display:flex;flex-direction:column;align-items:stretch;gap:0;border:1px solid var(--rule);
+  border-radius:18px;overflow:hidden;padding:0;background:#fff;
+  box-shadow:0 8px 20px rgba(15,23,42,.04);
+}
+#mockup .cust-shop #orderList .order-card:hover{background:#fff;transform:translateY(-2px)}
+#mockup .cust-shop #orderList .order-card.featured{box-shadow:0 0 0 2px #c2410c, 0 8px 20px rgba(194,65,12,.12);background:#fff}
+#mockup .cust-shop #orderList .thumb{
+  width:100%;height:92px;border-radius:0;font-size:15px;letter-spacing:.1em;
+}
+#mockup .cust-shop #orderList .meta{padding:12px 14px 14px}
+#mockup .cust-shop #orderList .spec{white-space:normal}
+#mockup .shop-pdp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;margin:0 0 16px}
+#mockup .shop-gallery{
+  border-radius:20px;min-height:220px;display:grid;place-items:center;color:#fff;
+  font-size:28px;font-weight:800;letter-spacing:.12em;
+  background:linear-gradient(165deg,#0f172a,#c2410c 80%);
+}
+#mockup .shop-buy .price{margin:0 0 6px;font-size:28px;font-weight:800;letter-spacing:-.03em}
+#mockup .shop-buy .lead{margin:0 0 14px;color:var(--ink-soft);font-size:13px}
+#mockup .shop-steps{display:flex;gap:0;overflow-x:auto;margin:0 0 16px;padding:0;list-style:none}
+#mockup .shop-steps li{
+  flex:1;min-width:72px;text-align:center;font-size:11px;font-weight:700;color:var(--ink-soft);
+  padding:8px 4px;border-bottom:3px solid var(--rule);
+}
+#mockup .shop-steps li.done{color:var(--flow);border-color:var(--flow)}
+#mockup .shop-steps li.now{color:#c2410c;border-color:#c2410c}
+#mockup .shop-receipts{display:grid;gap:10px;padding:14px}
+#mockup .shop-receipt{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;
+  border:1px solid var(--rule);border-radius:14px;padding:12px 14px;background:#fff;
+}
+#mockup .pay-proc{
+  border:1px solid var(--rule);border-radius:16px;padding:16px 18px;margin:0 0 12px;background:#fff;
+}
+#mockup .pay-proc .k{
+  margin:0 0 4px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+}
+#mockup .pay-proc.request{border-color:#c2410c;background:#fff7ed}
+#mockup .pay-proc.cashless{border-color:#1d4ed8;background:#eff6ff}
+#mockup .pay-proc h3{margin:0 0 6px;font-size:16px}
+#mockup .pay-proc p{margin:0 0 8px;font-size:13px;color:var(--ink-soft)}
+#mockup .pay-proc .amt{font-size:20px;font-weight:800;color:var(--ink);margin:8px 0}
+#mockup .pay-proc .nextbar{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+#mockup .pay-proc[hidden], #mockup [data-cust-pay][hidden]{display:none !important}
+#mockup .cust-shop .own{display:none}
+#mockup .cust-shop .frow{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 16px;border-bottom:1px solid var(--rule-2);align-items:center}
+#mockup .cust-shop #digiroom > .screenhead .eyebrow{color:#c2410c}
+#mockup .cust-shop #cashless .worktabs{display:none !important}
+@media (max-width:800px){
+  #mockup .shop-pdp{grid-template-columns:1fr}
+}
