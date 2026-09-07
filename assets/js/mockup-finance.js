@@ -127,9 +127,9 @@
     setText('[data-ho-kpi="aging-rp"]', hoIdr(sumA)+' di atas 14 hari');
     setText('[data-ho-n="unbilled"]', String(unbilled.length));
     setText('[data-ho-n="billed"]', String(billed.length));
-    setText('[data-ho-ready-n"]', String(ready.length));
-    setText('[data-ho-hold-n"]', String(hold.length));
-    setText('[data-ho-open-n"]', String(billed.length));
+    setText('[data-ho-ready-n]', String(ready.length));
+    setText('[data-ho-hold-n]', String(hold.length));
+    setText('[data-ho-open-n]', String(billed.length));
     var bands=[0,0,0,0];
     billed.concat(lunas).forEach(function(r){
       var b=hoBand(hoAgingDays(r));
