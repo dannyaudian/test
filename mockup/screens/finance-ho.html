@@ -1,10 +1,10 @@
       <section class="screen" id="finance_ho">
         <div class="ho-desk">
-          <header class="ho-head">
+          <header class="ho-head" data-ho-book-only>
             <div>
-              <p class="ho-kicker">Finance HO · Jakarta area</p>
+              <p class="ho-kicker">Finance HO · B2B leasing</p>
               <h2>B2B leasing book</h2>
-              <p>Head Office portal — not the branch SAM workspace, not the Administration ledger, not Management cards. Partner <b>PT Danapura Multifinance</b>. Cilandak Hiace units appear here as figures only.</p>
+              <p>Partner settlement only — unbilled, billed unpaid, partner paid / AR still open, and lead time. Not the Approvals desk. Partner <b>PT Danapura Multifinance</b>. FAST is not the lessor.</p>
             </div>
             <div class="ho-mitra">
               <span>Partner</span>
@@ -12,8 +12,20 @@
               <em>FAST is not the lessor</em>
             </div>
           </header>
+          <header class="ho-head" data-ho-appr-only hidden>
+            <div>
+              <p class="ho-kicker">Finance HO · last-seat posting</p>
+              <h2>Approvals</h2>
+              <p>Separate from the B2B leasing book. Branch filings for <b>price adjustment</b> (karoseri, open off-the-road) and <b>cancel billing</b> after Head of Administration, Branch Head, ABH, and Operation Manager. Finance HO is last. Not the Approval Engine. Not a DP or signature waiver.</p>
+            </div>
+            <div class="ho-mitra">
+              <span>Queue</span>
+              <b>Price adjustment · Cancel billing</b>
+              <em>Not the leasing settlement book</em>
+            </div>
+          </header>
 
-          <nav class="ho-switch" aria-label="HO leasing book" data-ho-tabs>
+          <nav class="ho-switch" aria-label="B2B leasing book" data-ho-tabs data-ho-book-only>
             <button type="button" data-ho-view="all" aria-current="true">All SOs</button>
             <button type="button" data-ho-view="unbilled">Unbilled <span data-ho-n="unbilled">0</span></button>
             <button type="button" data-ho-view="billed">Billed, unpaid <span data-ho-n="billed">0</span></button>
@@ -21,7 +33,7 @@
             <button type="button" data-ho-view="lead">Settlement lead time</button>
           </nav>
 
-          <div class="ho-metrics">
+          <div class="ho-metrics" data-ho-book-only>
             <button type="button" data-ho-view="unbilled">
               <span>Unbilled</span>
               <strong data-ho-kpi="unbilled-n">—</strong>
@@ -44,7 +56,7 @@
             </button>
           </div>
 
-          <div class="ho-body" data-ho-panel="board">
+          <div class="ho-body" data-ho-panel="board" data-ho-book-only>
             <div class="ho-ledger-wrap">
               <div class="ho-ledger-bar">
                 <h3>Billing ledger</h3>
@@ -74,7 +86,7 @@
             </aside>
           </div>
 
-          <div class="ho-body ho-lead-body" data-ho-panel="lead" hidden>
+          <div class="ho-body ho-lead-body" data-ho-panel="lead" data-ho-book-only hidden>
             <div class="ho-lead-card">
               <h3>Lead-time spread</h3>
               <p>Days after paperless. Open aging is counted through 7 Sep 2026. Partner-paid rows with AR still open are not settled. This is not a DP or signature waiver.</p>
@@ -111,6 +123,34 @@
                 </table>
               </div>
             </div>
+          </div>
+          <div class="ho-body ho-appr-body" data-ho-panel="appr" data-ho-appr-only hidden>
+            <div class="ho-ledger-wrap">
+              <div class="ho-ledger-bar">
+                <h3>Last-seat queue</h3>
+                <span>Not B2B leasing. Price adjustment and cancel billing after KA · KC · ABH · OM</span>
+              </div>
+              <div class="ho-scroll">
+                <table class="ho-ledger">
+                  <thead>
+                    <tr>
+                      <th>Request</th>
+                      <th>SO / branch</th>
+                      <th>Amount</th>
+                      <th>Prior seats</th>
+                      <th>HO</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ho-appr-list></tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="ho-dossier" data-ho-appr-detail>
+              <h3>Filing dossier</h3>
+              <div data-ho-appr-copy>
+                <p>Select a filing. This desk is not the B2B leasing book and not the Management Approval Engine.</p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>

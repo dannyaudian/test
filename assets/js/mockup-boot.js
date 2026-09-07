@@ -50,8 +50,10 @@
     'assets/js/mockup-cust.js',
     'assets/js/mockup-pay.js'
   ];
+  var bust = 'v=ho-appr-main36';
   function get(url) {
-    return fetch(url).then(function (r) {
+    var sep = url.indexOf('?') >= 0 ? '&' : '?';
+    return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {
       if (!r.ok) throw new Error(url + ' ' + r.status);
       return r.text();
     });

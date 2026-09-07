@@ -47,6 +47,10 @@
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   padding:20px 22px 16px;background:#0b3b3a;color:#e7f6f3;
 }
+#finance_ho .ho-head[hidden],
+#finance_ho .ho-switch[hidden],
+#finance_ho .ho-metrics[hidden],
+#finance_ho .ho-body[hidden]{display:none !important}
 #finance_ho .ho-kicker{
   margin:0 0 4px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5eead4;
 }
@@ -75,7 +79,7 @@
 #finance_ho .ho-switch button[aria-current="true"] span{background:#a7f3d0;color:#064e3b}
 
 #finance_ho .ho-metrics{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:14px 14px 4px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:14px 14px 4px;
 }
 #finance_ho .ho-metrics button{
   text-align:left;border:1px solid #c5d4dc;background:#fff;border-radius:14px;padding:12px 14px;
@@ -123,6 +127,27 @@
 #finance_ho .ho-pos.late{background:#fff1f2;color:#be123c}
 #finance_ho .ho-pos.lunas{background:#ecfdf5;color:#047857}
 #finance_ho .ho-pos.uncleared{background:#fef3c7;color:#92400e}
+#finance_ho .ho-chain{list-style:none;margin:12px 0 0;padding:0}
+#finance_ho .ho-chain li{
+  display:flex;justify-content:space-between;gap:8px;align-items:baseline;
+  font-size:12.5px;padding:8px 10px;margin:0 0 6px;border-radius:10px;
+  background:#f3f8f8;border:1px solid #d7e2e6;
+}
+#finance_ho .ho-chain li span{color:#5b6b73}
+#finance_ho .ho-chain li.on{background:#ecfdf5;border-color:#99f6e4}
+#finance_ho .ho-chain li.now{background:#fffbeb;border-color:#f59e0b;font-weight:700}
+#finance_ho .ho-appr-note{display:block;margin:12px 0 8px;font-size:12px;color:#5b6b73}
+#finance_ho .ho-appr-note textarea{
+  display:block;width:100%;margin-top:6px;min-height:64px;border:1px solid #c5d4dc;border-radius:10px;
+  padding:8px 10px;font:inherit;resize:vertical;
+}
+#finance_ho .ho-appr-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+#finance_ho .ho-act{
+  border:0;background:#0f766e;color:#fff;font:inherit;font-size:13px;font-weight:700;
+  padding:8px 12px;border-radius:10px;cursor:pointer;
+}
+#finance_ho .ho-act.ghost{background:#fff;color:#134e4a;border:1px solid #c5d4dc}
+#finance_ho .ho-act.stop{background:#9f1239;color:#fff}
 #finance_ho .ho-causes{list-style:none;margin:12px 0 0;padding:0}
 #finance_ho .ho-causes li{
   font-size:12.5px;line-height:1.45;padding:8px 10px;margin:0 0 6px;border-radius:10px;

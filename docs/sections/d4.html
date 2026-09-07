@@ -40,9 +40,14 @@
           <p class="feat-ex"><b>Example in the mockup</b> Paperless exception: <a href="mockup.html#exc_epo">#exc_epo</a>. Missing documents go back to Frontman as a backflow, not a DP/signature waiver.</p>
         </article>
         <article class="feat">
-          <h4>Finance HO · B2B leasing dashboard</h4>
-          <p>Head Office has its own portal (teal chrome, ho.fast.id): area ledger, SO dossier, settlement lead time, and <b>partner paid but AR not cleared</b>. Clearing can fail for several reasons — customer underpayment is one of them. Finance monitors; Administration bills. Not a DP or signature waiver.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> The <a href="mockup.html#finance_ho">Finance HO</a> tab — HO leasing portal. Partner PT Danapura Multifinance. A row click stays in the dossier; it does not open #tx_hiace.</p>
+          <h4>Finance HO · B2B leasing book</h4>
+          <p>Head Office has its own portal (teal chrome, ho.fast.id). The <b>B2B leasing</b> tab is the partner settlement book only: area ledger, SO dossier, unbilled, billed unpaid, partner paid / AR still open, and lead time. Clearing can fail for several reasons — customer underpayment is one of them. Partner PT Danapura Multifinance. FAST is not the lessor. HO does not bill and does not waive DP or signature.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Left rail <a href="mockup.html#finance_ho">B2B leasing</a>. A row click stays in the dossier; it does not open #tx_hiace or the Approvals desk.</p>
+        </article>
+        <article class="feat">
+          <h4>Finance HO · last-seat Approvals</h4>
+          <p>A separate HO desk from the leasing book. <b>Price adjustment</b> (karoseri, open off-the-road / chassis price) and <b>cancel billing</b> reach Finance HO only after Head of Administration, Branch Head, ABH, and Operation Manager. HO posts last. Not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver. Cash or leasing SOs can appear here — the desk is not “leasing settlement.”</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Left rail <a href="mockup.html#ho_appr">Approvals</a> · <a href="mockup.html#ho_karoseri">karoseri</a> · <a href="mockup.html#ho_otr">open off-the-road</a> · <a href="mockup.html#ho_cancel">cancel billing</a>.</p>
         </article>
         <article class="feat">
           <h4>Exception routing</h4>
@@ -61,10 +66,20 @@
           <span class="how"><a href="mockup.html#tx_hiace">Hiace 00421</a></span></li>
         <li><b>Administration</b> Status per SO through to settlement. Missing documents go back to Frontman — not a gate waiver.
           <span class="how"><a href="mockup.html#admin_leasing">Leasing list</a></span></li>
-        <li><b>Finance HO</b> Own portal: unbilled, billed unpaid, partner paid / AR still open, lead time. Dossier lists likely clearing holds (including customer underpay).
-          <span class="how"><a href="mockup.html#finance_ho">Finance HO portal</a></span></li>
+        <li><b>Finance HO · leasing</b> B2B leasing book: unbilled, billed unpaid, partner paid / AR still open, lead time. Not the Approvals desk.
+          <span class="how"><a href="mockup.html#finance_ho">B2B leasing</a></span></li>
         <li><b>Paperless without e-PO</b> Only if the Operation Manager approves. Frontman does not type a waiver. Full DP and signature remain non-waivable. Settlement still requires the original e-PO.
           <span class="how"><a href="mockup.html#exc_epo">Exception e-PO</a></span></li>
+      </ol>
+
+      <h3>Example: Finance HO last-seat filings (not B2B leasing)</h3>
+      <ol class="walk">
+        <li><b>Karoseri</b> Cilandak Hiace Premio, cash OTR lift for a box body. KA · KC · ABH · OM already approved. Finance HO posts the adjustment on the Approvals desk.
+          <span class="how"><a href="mockup.html#ho_karoseri">Price adjustment · karoseri</a></span></li>
+        <li><b>Open off-the-road</b> Pondok Indah Rush, cash chassis price for body-shop accessories. Same chain; HO is last. Not the leasing book. Not a DP waiver.
+          <span class="how"><a href="mockup.html#ho_otr">Price adjustment · open OTR</a></span></li>
+        <li><b>Cancel billing</b> Kelapa Gading Innova. Duplicate paperless. HO cancels the second bill and reopens AR. Last-seat posting, not the settlement dashboard.
+          <span class="how"><a href="mockup.html#ho_cancel">Cancel billing · duplicate</a></span></li>
       </ol>
 
       <h3>Example: what the engine accepts and what it does not</h3>
@@ -78,7 +93,10 @@
       </ol>
 
       <div class="see-row">
-        <a class="see" href="mockup.html#finance_ho"><span class="see-k">HO</span><b>Leasing dashboard</b><span>Unbilled · billed unpaid · paid / AR open</span><em>View →</em></a>
+        <a class="see" href="mockup.html#finance_ho"><span class="see-k">HO</span><b>B2B leasing</b><span>Settlement book · paid / AR open</span><em>View →</em></a>
+        <a class="see" href="mockup.html#ho_appr"><span class="see-k">HO</span><b>Approvals desk</b><span>Not the leasing book · last-seat posting</span><em>View →</em></a>
+        <a class="see" href="mockup.html#ho_karoseri"><span class="see-k">Use case</span><b>Karoseri adjustment</b><span>Hiace · HO last after KA · KC · ABH · OM</span><em>View →</em></a>
+        <a class="see" href="mockup.html#ho_otr"><span class="see-k">Use case</span><b>Open off-the-road</b><span>Rush chassis price · not a DP waiver</span><em>View →</em></a>
         <a class="see" href="#skema-approval"><span class="see-k">Flow</span><b>Waivable vs not</b><span>All relevant mockup screens</span><em>View →</em></a>
         <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Finance</span><b>Receipt ledger</b><span>Lineage payment → receipt → AR</span><em>View →</em></a>
       </div>
