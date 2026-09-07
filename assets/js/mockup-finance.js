@@ -157,18 +157,18 @@
     {id:'om', label:'Operation Manager'}
   ];
   var HO_APPR=[
-    { id:'st-bsd', type:'sales', kind:'Change sales type', fromPay:'Leasing', toPay:'Cash', pay:'Leasing → Cash',
-      so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', partner:'PT Danapura Multifinance',
-      reason:'Customer cancelled the leasing application. Branch requests cash. KA · KC · ABH · OM already approved. Finance HO posts the method. Cash 30% and paid-in-full remain non-waivable.',
+    { id:'st-bsd', live:true, type:'sales', kind:'Change sales type', fromPay:'Leasing', toPay:'Cash', pay:'Leasing → Cash',
+      so:'4500091888', spk:'SPK/26/BSD/00188', cabang:'BSD', unit:'Fortuner 2.8', buyer:'Andi Wijaya', partner:'PT Danapura Multifinance',
+      reason:'Customer cancelled the leasing application. Branch requests cash. File on this SO: Frontman → Administration → KA · KC · ABH · OM → Finance HO. Cash 30% and paid-in-full remain non-waivable.',
       chain:{ka:'5 Sep 09:04',kc:'5 Sep 11:30',abh:'6 Sep 08:18',om:'6 Sep 14:40'} },
-    { id:'st-bks', type:'sales', kind:'Change sales type', fromPay:'Cash', toPay:'Leasing', pay:'Cash → Leasing',
-      so:'4500091620', cabang:'Bekasi', unit:'Avanza 1.5', partner:'PT Danapura Multifinance',
-      reason:'Customer switched to leasing after a cash booking. Branch files the method change. Full DP, contract signature, and e-PO still required after HO posts — not waived.',
+    { id:'st-bks', live:true, type:'sales', kind:'Change sales type', fromPay:'Cash', toPay:'Leasing', pay:'Cash → Leasing',
+      so:'4500091620', spk:'SPK/26/BKS/00162', cabang:'Bekasi', unit:'Avanza 1.5', buyer:'Sinta Lestari', partner:'PT Danapura Multifinance',
+      reason:'Customer switched to leasing after a cash booking. Same SO trail to Finance HO. Full DP, contract signature, and e-PO still required after HO posts — not waived.',
       chain:{ka:'4 Sep 13:22',kc:'4 Sep 16:05',abh:'5 Sep 09:41',om:'5 Sep 15:12'} },
-    { id:'lp-tng', type:'partner', kind:'Change leasing company', pay:'Leasing',
-      so:'4500092166', cabang:'Tangerang', unit:'Innova Zenix',
+    { id:'lp-tng', live:true, type:'partner', kind:'Change leasing company', pay:'Leasing',
+      so:'4500092166', spk:'SPK/26/TNG/00216', cabang:'Tangerang', unit:'Innova Zenix', buyer:'Yoga Mahendra',
       fromPartner:'PT Danapura Multifinance', toPartner:'PT Sentosa Auto Finance',
-      reason:'Customer moved the facility to another lessor. Branch files the partner change. A new e-PO from the incoming company is still required. HO does not waive DP or signature.',
+      reason:'Customer moved the facility to another lessor. Same SO trail. A new e-PO from the incoming company is still required. HO does not waive DP or signature.',
       chain:{ka:'6 Sep 08:50',kc:'6 Sep 10:33',abh:'6 Sep 13:20',om:'6 Sep 16:08'} },
     { id:'pa-cld', type:'price', kind:'Price adjustment', topic:'Karoseri', pay:'Cash', so:'4500090421', cabang:'Cilandak', unit:'Hiace Premio',
       fromOtr:548000000, toOtr:566500000, delta:18500000,
@@ -197,6 +197,7 @@
       reason:'Customer asked to unwind a premature paperless before partner settlement. Chain already approved; HO records the cancel.',
       chain:{ka:'3 Sep 11:20',kc:'3 Sep 15:01',abh:'4 Sep 09:33',om:'4 Sep 16:10'}, done:'approved' }
   ];
+  FAST.HO_APPR=HO_APPR;
   FAST.HO_APPR_KEY='fast.ho.appr';
   var hoApprPick=null;
   function hoApprStore(){
@@ -206,13 +207,33 @@
     var st=(hoApprStore().states||{})[row.id];
     return st||row.done||'open';
   }
-  function hoApprOpen(){
-    return HO_APPR.filter(function(r){ return hoApprHo(r)==='open'; });
+  FAST.hoApprDecision=function(id){
+    var row=HO_APPR.filter(function(r){ return r.id===id; })[0];
+    return row?hoApprHo(row):'open';
+  };
+  function hoLiveStep(row){
+    if(!row || !row.live || !FAST.hoFileStep) return null;
+    return FAST.hoFileStep(row.id);
   }
-  function hoApprPos(st){
+  function hoApprOpen(){
+    return HO_APPR.filter(function(r){
+      if(hoApprHo(r)!=='open') return false;
+      var live=hoLiveStep(r);
+      if(live) return live==='ho';
+      return true;
+    });
+  }
+  function hoApprPos(row){
+    var st=hoApprHo(row);
     if(st==='approved') return {cls:'lunas', text:'HO approved'};
     if(st==='returned') return {cls:'hold', text:'Returned'};
     if(st==='rejected') return {cls:'late', text:'HO rejected'};
+    var live=hoLiveStep(row);
+    if(live==='rejected') return {cls:'late', text:'Rejected on chain'};
+    if(live && live!=='ho'){
+      var labels={draft:'Frontman',submitted:'Administration',ka:'KA',kc:'KC',abh:'ABH',om:'OM'};
+      return {cls:'hold', text:'On chain · '+(labels[live]||live)};
+    }
     return {cls:'uncleared', text:'Awaiting HO'};
   }
   function hoApprIsPrice(row){ return row && row.type==='price'; }
@@ -259,34 +280,59 @@
   }
   function hoApprRowHtml(row){
     var st=hoApprHo(row);
-    var pos=hoApprPos(st);
+    var pos=hoApprPos(row);
+    var live=hoLiveStep(row);
     var sub=hoApprIsPrice(row)?(row.topic||'OTR change'):hoApprIsSales(row)?((row.fromPay||'')+' → '+(row.toPay||'')):hoApprIsPartner(row)?'Partner change':(row.kwt||'Receipt');
+    var prior=row.live?'Frontman → Admin → KA · KC · ABH · OM':'KA · KC · ABH · OM';
+    if(row.live && live && live!=='ho' && st==='open') prior='Now · '+(pos.text.replace('On chain · ','')||'branch');
     return '<tr data-ho-appr-row="'+row.id+'">'+
       '<td><b>'+row.kind+'</b><span class="sub">'+sub+'</span></td>'+
       '<td><b>'+row.so+'</b><span class="sub">'+row.cabang+' · '+row.unit+'</span></td>'+
       '<td>'+hoApprAmtHtml(row)+'</td>'+
-      '<td>KA · KC · ABH · OM</td>'+
+      '<td>'+prior+'</td>'+
       '<td><span class="ho-pos '+pos.cls+'">'+pos.text+'</span></td>'+
       '</tr>';
   }
   function hoApprDossier(row){
     if(!row){
-      return '<p>Select a filing. Price adjustment, cancel billing, sales-type change (leasing ↔ cash), and leasing-company change reach Finance HO after KA · KC · ABH · OM. This desk is not the B2B leasing book and not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver.</p>';
+      return '<p>Select a filing. Live sales-type and partner changes start with Frontman on the same SO, then Administration, KA · KC · ABH · OM, then this desk. Price adjustment and cancel billing arrive after the branch chain. Not the B2B leasing book and not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver.</p>';
     }
     var st=hoApprHo(row);
-    var pos=hoApprPos(st);
+    var pos=hoApprPos(row);
+    var live=hoLiveStep(row);
+    var atHo=!row.live || live==='ho';
     var copy=hoApprCopy(row);
-    var chain=HO_APPR_SEATS.map(function(s){
-      return '<li class="on"><span>'+s.label+'</span><b>Approved · '+(row.chain[s.id]||'—')+'</b></li>';
-    }).join('')+'<li class="'+(st==='open'?'now':'on')+'"><span>Finance HO</span><b>'+pos.text+'</b></li>';
-    var actions=st==='open'
-      ? '<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="'+copy.ph+'"></textarea></label>'+
+    var chain='';
+    if(row.live && FAST.hoFileState){
+      var fs=FAST.hoFileState(row.id);
+      var times=fs.times||{};
+      var order=[{id:'draft',label:'Frontman'},{id:'submitted',label:'Administration'}].concat(HO_APPR_SEATS).concat([{id:'ho',label:'Finance HO'}]);
+      chain=order.map(function(s){
+        var on=live===s.id && st==='open';
+        var done=!!times[s.id] || (s.id==='ho' && st!=='open') || (!on && order.findIndex(function(x){ return x.id===s.id; }) < order.findIndex(function(x){ return x.id===live; }));
+        var cls=on?'now':(done?'on':'');
+        var val=on?pos.text:(times[s.id]||(s.id==='ho'&&st!=='open'?pos.text:(done?'Done':'Pending')));
+        if(s.id!=='ho' && s.id!=='draft' && s.id!=='submitted' && row.chain[s.id] && done && !times[s.id]) val='Approved · '+row.chain[s.id];
+        return '<li class="'+cls+'"><span>'+s.label+'</span><b>'+val+'</b></li>';
+      }).join('');
+    } else {
+      chain=HO_APPR_SEATS.map(function(s){
+        return '<li class="on"><span>'+s.label+'</span><b>Approved · '+(row.chain[s.id]||'—')+'</b></li>';
+      }).join('')+'<li class="'+(st==='open'?'now':'on')+'"><span>Finance HO</span><b>'+pos.text+'</b></li>';
+    }
+    var actions='';
+    if(st==='open' && atHo){
+      actions='<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="'+copy.ph+'"></textarea></label>'+
         '<div class="ho-appr-acts">'+
         '<button type="button" class="ho-act" data-ho-appr-act="approve" data-ho-appr-id="'+row.id+'">'+copy.lab+'</button>'+
         '<button type="button" class="ho-act ghost" data-ho-appr-act="return" data-ho-appr-id="'+row.id+'">Return to chain</button>'+
         '<button type="button" class="ho-act stop" data-ho-appr-act="reject" data-ho-appr-id="'+row.id+'">Reject</button>'+
-        '</div>'
-      : '<p class="ho-note">HO decision already recorded. '+copy.done+' not a commercial gate waiver.</p>';
+        '</div>';
+    } else if(st==='open'){
+      actions='<p class="ho-note">Still on the branch chain ('+pos.text+'). Same SO as Frontman — HO posts only after OM.</p>';
+    } else {
+      actions='<p class="ho-note">HO decision already recorded. '+copy.done+' not a commercial gate waiver.</p>';
+    }
     var extra='';
     if(hoApprIsPrice(row)){
       extra='<p class="ho-line"><span>Topic</span><b>'+(row.topic||'OTR change')+'</b></p>'+
@@ -336,6 +382,10 @@
   function hoDecideAppr(id, act){
     var row=HO_APPR.filter(function(r){ return r.id===id; })[0];
     if(!row || hoApprHo(row)!=='open') return;
+    if(row.live && hoLiveStep(row) && hoLiveStep(row)!=='ho'){
+      if(typeof toast==='function') toast('Still on the branch chain. HO posts after OM on the same SO.');
+      return;
+    }
     var box=document.querySelector('[data-ho-appr-comment]');
     var comment=((box&&box.value)||'').trim();
     if((act==='return'||act==='reject') && !comment){
@@ -348,13 +398,24 @@
     var states=store.states||{};
     states[id]=next;
     if(window.FAST && FAST.save) FAST.save({states:states}, FAST.HO_APPR_KEY);
+    if(row.live && FAST.HO_FILE_KEY && FAST.save){
+      var fsStore=FAST.load(FAST.HO_FILE_KEY)||{};
+      var fs=fsStore.states||{};
+      var cur=fs[id]||{step:'ho',times:{}};
+      cur.times=cur.times||{};
+      if(act==='return') cur.step='om';
+      else if(act==='approve'){ cur.times.ho=new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); cur.step='ho'; }
+      fs[id]=cur;
+      FAST.save({states:fs}, FAST.HO_FILE_KEY);
+    }
     if(typeof toast==='function'){
       var copy=hoApprCopy(row);
       toast(act==='approve' ? copy.ok : act==='return'
-        ? 'Returned to the KA · KC · ABH · OM chain with comment.'
+        ? 'Returned to Operation Manager on the same SO trail.'
         : copy.no);
     }
     applyFinanceHo();
+    if(typeof applyHoFile==='function') applyHoFile();
   }
 
   function applyFinanceHo(){
