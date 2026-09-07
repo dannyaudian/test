@@ -262,7 +262,7 @@
       if(!id || !document.getElementById(id)) return;
       e.preventDefault();
       if(id==='customer'||id==='customer_detail'||id==='digiroom'||id==='bukti_serah'||id==='order_calya'||id==='shop_home'||id==='shop_akun'||id==='tagihan_customer'||id==='e_kuitansi'||id==='customer_booking'||id==='customer_booking_qris') applyRole('cust');
-      else if(currentRole==='finance' && (id==='beranda'||id==='cashless')) id='finance_ho';
+      else if(currentRole==='finance') id='finance_ho';
       else if(currentRole==='mgmt' && id==='beranda') id='dashboard';
       else if(currentRole==='admin' && id==='beranda') id='admin_spk';
       else if(currentRole==='admin' && id==='cashless') id='admin_pay';

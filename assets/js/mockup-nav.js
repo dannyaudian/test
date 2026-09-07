@@ -87,6 +87,7 @@
     id=stayTarget(id, from, opts.explicit);
     if(id==='shop_home') id='customer';
     if(id==='admin_tx') id='admin_spk';
+    if(currentRole==='finance') id='finance_ho';
     if(currentRole==='mgmt' && id==='eskalasi') id='mgmt_inbox';
     var bookKey=ADMIN_BOOK[id];
     var screenId=bookKey?'admin_book':id;
@@ -146,8 +147,7 @@
       var on=(hid==='beranda'&&(id==='beranda'||id==='admin_book'||ADMIN_BOOK[id]||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='spk_baru'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='admin_kwt'||id==='digiroom'))
-        ||((hid==='customer'||hid==='shop_home')&&(id==='shop_home'||id==='shop_akun'||id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id==='customer_booking'||id==='customer_booking_qris'||id.indexOf('order_')===0))
-        ||(hid==='beranda'&&id==='finance_ho');
+        ||((hid==='customer'||hid==='shop_home')&&(id==='shop_home'||id==='shop_akun'||id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id==='customer_booking'||id==='customer_booking_qris'||id.indexOf('order_')===0));
       a.classList.toggle('on', on);
       a.classList.toggle('pay', hid==='cashless');
     });
@@ -164,7 +164,7 @@
         else if(id==='customer_booking'||id==='customer_booking_qris') bar.textContent='shop.fast.id/pesanan/FAST-00426';
         else bar.textContent='shop.fast.id/pesanan/'+id;
       } else if(currentRole==='finance'){
-        bar.textContent=id==='tx_hiace'?'ho.fast.id/finance/leasing/00421':'ho.fast.id/finance/leasing';
+        bar.textContent=hoViewUrl();
       } else {
         bar.textContent=(id==='digiroom'?'digiroom.fast.id/beranda':'sam.fast.id/fast/'+id);
       }
@@ -201,10 +201,6 @@
         b.textContent='← Queue';
       }
     });
-    var finStrip=document.getElementById('financeStrip');
-    if(finStrip){
-      finStrip.hidden=currentRole!=='finance' || id==='finance_ho';
-    }
     var strip=document.getElementById('adminStrip');
     if(strip){
       var adminHome=!!bookKey||id==='verifikasi'||id==='eskalasi'||id==='admin_book';
@@ -400,11 +396,31 @@
     document.querySelectorAll('[data-fm-only]').forEach(function(el){
       el.hidden = currentRole!=='frontman';
     });
+    var root=document.getElementById('mockup');
+    if(root) root.classList.toggle('finance-portal', currentRole==='finance');
     var app=document.querySelector('#mockup .app');
     if(app){
       app.classList.toggle('cust-shop', currentRole==='cust');
       app.classList.toggle('finance-ho', currentRole==='finance');
     }
+    var brandB=document.querySelector('#mockup .rail .brand b');
+    var brandS=document.querySelector('#mockup .rail .brand span');
+    if(brandB && brandS){
+      if(currentRole==='finance'){
+        brandB.textContent='HO';
+        brandS.textContent='Finance · Area Jakarta';
+      } else {
+        brandB.textContent='FAST';
+        brandS.textContent='SAM · Cilandak';
+      }
+    }
+  }
+  function hoViewUrl(){
+    var v=(window.FAST && FAST.hoView)||'all';
+    if(v==='unbilled') return 'ho.fast.id/leasing/belum-tagih';
+    if(v==='billed') return 'ho.fast.id/leasing/tagih-belum-bayar';
+    if(v==='lead') return 'ho.fast.id/leasing/leadtime';
+    return 'ho.fast.id/leasing';
   }
   function isDewiCustScreen(id){
     return id==='customer_booking'||id==='customer_booking_qris'||(id==='digiroom'&&payJobId==='booking');

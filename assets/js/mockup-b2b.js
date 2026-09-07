@@ -131,14 +131,14 @@
     if(lunasOnly) lunasOnly.disabled=!u.kwtIssued || currentRole==='finance';
     document.querySelectorAll('[data-b2b-tab-role]').forEach(function(b){
       var need=b.getAttribute('data-b2b-tab-role');
-      if(need==='admin') b.hidden = !(currentRole==='admin' || currentRole==='mgmt' || currentRole==='finance');
+      if(need==='admin') b.hidden = !(currentRole==='admin' || currentRole==='mgmt');
       else if(need==='frontman') b.hidden = !(currentRole==='frontman' || currentRole==='mgmt');
       else b.hidden = !(currentRole===need || currentRole==='mgmt');
     });
     var tab=s.tab||'ringkas';
     if(currentRole==='frontman' && tab==='tagih') tab='dokumen';
     if(currentRole==='admin' && tab==='dokumen') tab='tagih';
-    if(currentRole==='finance' && tab==='dokumen') tab='tagih';
+    if(currentRole==='finance') tab='ringkas';
     document.querySelectorAll('[data-b2b-chrome]').forEach(function(el){ el.hidden = tab!=='ringkas'; });
     var hiace=document.getElementById('tx_hiace');
     if(hiace){

@@ -66,7 +66,7 @@
         id:meta.id, live:true, cabang:'Cilandak', unit:meta.unit, debitur:'PT Danapura Utama',
         so:meta.so, spk:'SPK/26/CLD/00421', finance:finance, dpLabel:meta.dpLabel, kwt:meta.kwt,
         bucket:bucket, ready:ready, hold:hold, note:note, flow:flow,
-        paperlessAt:paper, kwtAt:kwt, lunasAt:lun, go:'tx_hiace', pick:meta.id
+        paperlessAt:paper, kwtAt:kwt, lunasAt:lun
       };
     });
   }
@@ -103,7 +103,7 @@
   }
   function hoDossier(row){
     if(!row){
-      return '<p>Pilih baris ledger. Detail, blocker, dan jejak kuitansi tampil di panel ini — tidak pindah ke layar Frontman atau Administrasi.</p>';
+      return '<p>Pilih baris ledger. Dossier tetap di portal HO — tidak membuka halaman Frontman, Administrasi, atau Management.</p>';
     }
     var age=hoAgingDays(row);
     var pos=hoPos(row);
@@ -204,6 +204,14 @@
     var row=all.filter(function(r){ return r.id===hoPick; })[0];
     var copy=document.querySelector('[data-ho-detail-copy]');
     if(copy) copy.innerHTML=hoDossier(row);
+    var bar=document.querySelector('#mockup .urlbar');
+    var root=document.getElementById('mockup');
+    if(bar && root && root.classList.contains('finance-portal')){
+      if(hoView==='unbilled') bar.textContent='ho.fast.id/leasing/belum-tagih';
+      else if(hoView==='billed') bar.textContent='ho.fast.id/leasing/tagih-belum-bayar';
+      else if(hoView==='lead') bar.textContent='ho.fast.id/leasing/leadtime';
+      else bar.textContent='ho.fast.id/leasing';
+    }
   }
   function bindFinanceHo(){
     document.querySelectorAll('[data-ho-view]').forEach(function(b){
