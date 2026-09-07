@@ -55,13 +55,16 @@
           <a class="see" href="mockup.html#mgmt_inbox"><span class="see-k">Mgmt</span><b>Four queue seats</b><span>Head of Administration document waivers · Operation Manager e-PO paperless · Branch Head STNK · Area Business Head volume.</span><em>Open →</em></a>
         </div>
         <h4>Finance HO last-seat desk — not B2B leasing, not the Approval Engine</h4>
-        <p class="deck">A separate HO queue from the partner leasing book. Branch filings for OTR and billing correction. Head of Administration, Branch Head, ABH, and Operation Manager have already approved. Finance HO posts last. Not a DP, signature, 30%, or paid-in-full waiver. Does not open the Management inbox.</p>
+        <p class="deck">A separate HO queue from the partner leasing book. Branch filings for OTR, billing correction, sales type (leasing ↔ cash), and leasing company. Head of Administration, Branch Head, ABH, and Operation Manager have already approved. Finance HO posts last. Not a DP, signature, 30%, or paid-in-full waiver. Does not open the Management inbox.</p>
         <div class="see-row">
           <a class="see" href="mockup.html#ho_karoseri"><span class="see-k">HO</span><b>Cilandak · Hiace karoseri</b><span>Price adjustment +Rp 18.500.000 after box-body add-on. Chain already approved.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#ho_otr"><span class="see-k">HO</span><b>Pondok Indah · open off-the-road</b><span>Chassis price unbundled so accessories can be fitted. OTR pack opened.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#ho_cancel"><span class="see-k">HO</span><b>Kelapa Gading · cancel billing</b><span>Duplicate paperless. HO cancels the second bill and reopens AR.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#ho_sales_lease"><span class="see-k">HO</span><b>BSD · leasing → cash</b><span>Fortuner method change. Cash 30% and paid-in-full stay non-waivable.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#ho_sales_cash"><span class="see-k">HO</span><b>Bekasi · cash → leasing</b><span>Avanza method change. Full DP, signature, and e-PO still required.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#ho_partner"><span class="see-k">HO</span><b>Tangerang · leasing company</b><span>Danapura → PT Sentosa Auto Finance. New e-PO still required.</span><em>Open →</em></a>
         </div>
-        <p class="deck" style="margin:0">Decision: approve with requirements, reject, or return for completion. Expired/failed requirement → the process locks again. Audit trail required. HO price adjustment and cancel billing use the same three outcomes after the branch chain.</p>
+        <p class="deck" style="margin:0">Decision: approve with requirements, reject, or return for completion. Expired/failed requirement → the process locks again. Audit trail required. HO last-seat filings use the same three outcomes after the branch chain.</p>
       </div>
 
       <div class="scheme" id="skema-documents">
@@ -294,6 +297,33 @@
             <h3>Cancel billing · duplicate paperless</h3>
             <p>Innova Zenix billed twice after a retry. Cancel the second paperless and reopen AR. Same KA · KC · ABH · OM chain, then Finance HO. Not a commercial gate waiver.</p>
             <span class="go">Open cancel billing →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#ho_sales_lease">
+          <div class="thumb hiace">L→C</div>
+          <div class="body">
+            <p class="who">Use case · Finance HO Approvals · not B2B leasing</p>
+            <h3>Change sales type · leasing → cash</h3>
+            <p>BSD Fortuner. Customer cancelled the leasing application. HO posts cash. Cash 30% and paid-in-full remain non-waivable after the method change.</p>
+            <span class="go">Open leasing → cash →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#ho_sales_cash">
+          <div class="thumb hiace">C→L</div>
+          <div class="body">
+            <p class="who">Use case · Finance HO Approvals · not B2B leasing</p>
+            <h3>Change sales type · cash → leasing</h3>
+            <p>Bekasi Avanza. Customer switched to leasing after a cash booking. Full DP, contract signature, and e-PO still required after HO posts.</p>
+            <span class="go">Open cash → leasing →</span>
+          </div>
+        </a>
+        <a class="case" href="mockup.html#ho_partner">
+          <div class="thumb hiace">LSR</div>
+          <div class="body">
+            <p class="who">Use case · Finance HO Approvals · not B2B leasing</p>
+            <h3>Change leasing company</h3>
+            <p>Tangerang Innova. Facility moves from PT Danapura Multifinance to PT Sentosa Auto Finance. A new e-PO from the incoming lessor is still required. Not a DP waiver.</p>
+            <span class="go">Open leasing-company change →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#tx_hiace">

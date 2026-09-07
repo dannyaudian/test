@@ -157,6 +157,19 @@
     {id:'om', label:'Operation Manager'}
   ];
   var HO_APPR=[
+    { id:'st-bsd', type:'sales', kind:'Change sales type', fromPay:'Leasing', toPay:'Cash', pay:'Leasing → Cash',
+      so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', partner:'PT Danapura Multifinance',
+      reason:'Customer cancelled the leasing application. Branch requests cash. KA · KC · ABH · OM already approved. Finance HO posts the method. Cash 30% and paid-in-full remain non-waivable.',
+      chain:{ka:'5 Sep 09:04',kc:'5 Sep 11:30',abh:'6 Sep 08:18',om:'6 Sep 14:40'} },
+    { id:'st-bks', type:'sales', kind:'Change sales type', fromPay:'Cash', toPay:'Leasing', pay:'Cash → Leasing',
+      so:'4500091620', cabang:'Bekasi', unit:'Avanza 1.5', partner:'PT Danapura Multifinance',
+      reason:'Customer switched to leasing after a cash booking. Branch files the method change. Full DP, contract signature, and e-PO still required after HO posts — not waived.',
+      chain:{ka:'4 Sep 13:22',kc:'4 Sep 16:05',abh:'5 Sep 09:41',om:'5 Sep 15:12'} },
+    { id:'lp-tng', type:'partner', kind:'Change leasing company', pay:'Leasing',
+      so:'4500092166', cabang:'Tangerang', unit:'Innova Zenix',
+      fromPartner:'PT Danapura Multifinance', toPartner:'PT Sentosa Auto Finance',
+      reason:'Customer moved the facility to another lessor. Branch files the partner change. A new e-PO from the incoming company is still required. HO does not waive DP or signature.',
+      chain:{ka:'6 Sep 08:50',kc:'6 Sep 10:33',abh:'6 Sep 13:20',om:'6 Sep 16:08'} },
     { id:'pa-cld', type:'price', kind:'Price adjustment', topic:'Karoseri', pay:'Cash', so:'4500090421', cabang:'Cilandak', unit:'Hiace Premio',
       fromOtr:548000000, toOtr:566500000, delta:18500000,
       reason:'Branch filed a karoseri box-body add-on after the SO was priced at stock OTR. Customer ordered a cargo body. This is an OTR posting, not a B2B leasing settlement. Head of Administration, Branch Head, ABH, and OM already approved.',
@@ -175,6 +188,11 @@
       fromOtr:412000000, toOtr:419800000, delta:7800000,
       reason:'Rear spoiler and side-step karoseri package after booking. Chain already approved; HO recorded the OTR lift.',
       chain:{ka:'28 Aug 09:40',kc:'28 Aug 13:12',abh:'29 Aug 08:55',om:'29 Aug 16:04'}, done:'approved' },
+    { id:'lp-srp', type:'partner', kind:'Change leasing company', pay:'Leasing',
+      so:'4500092033', cabang:'Serpong', unit:'Alphard',
+      fromPartner:'PT Sentosa Auto Finance', toPartner:'PT Danapura Multifinance',
+      reason:'Incoming lessor switched to PT Danapura Multifinance. Chain already approved; HO recorded the partner change. Original e-PO of the new partner still required for settlement.',
+      chain:{ka:'1 Sep 09:00',kc:'1 Sep 11:20',abh:'2 Sep 08:44',om:'2 Sep 13:15'}, done:'approved' },
     { id:'cb-srp', type:'cancel', kind:'Cancel billing', pay:'Leasing', so:'4500092033', cabang:'Serpong', unit:'Alphard', billed:891000000, kwt:'KWT/26/SRP/008033',
       reason:'Customer asked to unwind a premature paperless before partner settlement. Chain already approved; HO records the cancel.',
       chain:{ka:'3 Sep 11:20',kc:'3 Sep 15:01',abh:'4 Sep 09:33',om:'4 Sep 16:10'}, done:'approved' }
@@ -198,6 +216,34 @@
     return {cls:'uncleared', text:'Awaiting HO'};
   }
   function hoApprIsPrice(row){ return row && row.type==='price'; }
+  function hoApprIsSales(row){ return row && row.type==='sales'; }
+  function hoApprIsPartner(row){ return row && row.type==='partner'; }
+  function hoApprCopy(row){
+    if(hoApprIsPrice(row)) return {
+      lab:'Approve adjustment', ph:'Why approve, return, or reject the price adjustment',
+      done:'Price adjustment is a finance posting on OTR —',
+      ok:'Price adjustment approved. OTR posting may proceed. Not a DP, signature, or 30% waiver.',
+      no:'Price adjustment rejected. Existing OTR stands.'
+    };
+    if(hoApprIsSales(row)) return {
+      lab:'Approve sales type', ph:'Why approve, return, or reject the sales-type change',
+      done:'Sales-type change is a finance posting —',
+      ok:'Sales type approved. Cash 30% / paid-in-full and leasing DP / signature stay non-waivable.',
+      no:'Sales-type change rejected. Existing method stands.'
+    };
+    if(hoApprIsPartner(row)) return {
+      lab:'Approve partner change', ph:'Why approve, return, or reject the leasing-company change',
+      done:'Leasing-company change is a finance posting —',
+      ok:'Leasing company approved. New e-PO still required. Not a DP or signature waiver.',
+      no:'Partner change rejected. Existing lessor stands.'
+    };
+    return {
+      lab:'Approve cancel', ph:'Why cancel, return, or reject',
+      done:'Billing cancel is a finance posting —',
+      ok:'Cancel billing approved. AR reopened. Not a DP, signature, or 30% waiver.',
+      no:'Cancel billing rejected. Existing billing stands.'
+    };
+  }
   function hoIdrFine(n){
     return 'Rp '+Math.round(n||0).toLocaleString('id-ID');
   }
@@ -207,12 +253,14 @@
   }
   function hoApprAmtHtml(row){
     if(hoApprIsPrice(row)) return hoSignedIdr(row.delta)+'<span class="sub">'+(row.topic||'OTR change')+'</span>';
+    if(hoApprIsSales(row)) return (row.fromPay||'')+' → '+(row.toPay||'')+'<span class="sub">Sales type</span>';
+    if(hoApprIsPartner(row)) return (row.toPartner||'Incoming lessor')+'<span class="sub">from '+(row.fromPartner||'current')+'</span>';
     return hoIdr(row.billed)+'<span class="sub">Billed</span>';
   }
   function hoApprRowHtml(row){
     var st=hoApprHo(row);
     var pos=hoApprPos(st);
-    var sub=hoApprIsPrice(row)?(row.topic||'OTR change'):(row.kwt||'Receipt');
+    var sub=hoApprIsPrice(row)?(row.topic||'OTR change'):hoApprIsSales(row)?((row.fromPay||'')+' → '+(row.toPay||'')):hoApprIsPartner(row)?'Partner change':(row.kwt||'Receipt');
     return '<tr data-ho-appr-row="'+row.id+'">'+
       '<td><b>'+row.kind+'</b><span class="sub">'+sub+'</span></td>'+
       '<td><b>'+row.so+'</b><span class="sub">'+row.cabang+' · '+row.unit+'</span></td>'+
@@ -223,36 +271,45 @@
   }
   function hoApprDossier(row){
     if(!row){
-      return '<p>Select a filing. Price adjustment (karoseri, open off-the-road) and cancel billing are last-seat Finance HO postings after KA · KC · ABH · OM. This desk is not the B2B leasing book and not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver.</p>';
+      return '<p>Select a filing. Price adjustment, cancel billing, sales-type change (leasing ↔ cash), and leasing-company change reach Finance HO after KA · KC · ABH · OM. This desk is not the B2B leasing book and not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver.</p>';
     }
     var st=hoApprHo(row);
     var pos=hoApprPos(st);
-    var price=hoApprIsPrice(row);
+    var copy=hoApprCopy(row);
     var chain=HO_APPR_SEATS.map(function(s){
       return '<li class="on"><span>'+s.label+'</span><b>Approved · '+(row.chain[s.id]||'—')+'</b></li>';
     }).join('')+'<li class="'+(st==='open'?'now':'on')+'"><span>Finance HO</span><b>'+pos.text+'</b></li>';
-    var ph=price?'Why approve, return, or reject the price adjustment':'Why cancel, return, or reject';
-    var approveLab=price?'Approve adjustment':'Approve cancel';
     var actions=st==='open'
-      ? '<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="'+ph+'"></textarea></label>'+
+      ? '<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="'+copy.ph+'"></textarea></label>'+
         '<div class="ho-appr-acts">'+
-        '<button type="button" class="ho-act" data-ho-appr-act="approve" data-ho-appr-id="'+row.id+'">'+approveLab+'</button>'+
+        '<button type="button" class="ho-act" data-ho-appr-act="approve" data-ho-appr-id="'+row.id+'">'+copy.lab+'</button>'+
         '<button type="button" class="ho-act ghost" data-ho-appr-act="return" data-ho-appr-id="'+row.id+'">Return to chain</button>'+
         '<button type="button" class="ho-act stop" data-ho-appr-act="reject" data-ho-appr-id="'+row.id+'">Reject</button>'+
         '</div>'
-      : '<p class="ho-note">HO decision already recorded. '+(price?'Price adjustment is a finance posting on OTR —':'Billing cancel is a finance posting —')+' not a commercial gate waiver.</p>';
-    var extra=price
-      ? '<p class="ho-line"><span>Topic</span><b>'+(row.topic||'OTR change')+'</b></p>'+
+      : '<p class="ho-note">HO decision already recorded. '+copy.done+' not a commercial gate waiver.</p>';
+    var extra='';
+    if(hoApprIsPrice(row)){
+      extra='<p class="ho-line"><span>Topic</span><b>'+(row.topic||'OTR change')+'</b></p>'+
         '<p class="ho-line"><span>From OTR</span><b>'+hoIdrFine(row.fromOtr)+'</b></p>'+
         '<p class="ho-line"><span>To OTR</span><b>'+hoIdrFine(row.toOtr)+'</b></p>'+
-        '<p class="ho-line"><span>Delta</span><b>'+hoSignedIdr(row.delta)+'</b></p>'
-      : '<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
+        '<p class="ho-line"><span>Delta</span><b>'+hoSignedIdr(row.delta)+'</b></p>';
+    } else if(hoApprIsSales(row)){
+      extra='<p class="ho-line"><span>From</span><b>'+row.fromPay+'</b></p>'+
+        '<p class="ho-line"><span>To</span><b>'+row.toPay+'</b></p>'+
+        (row.partner?'<p class="ho-line"><span>Current / incoming lessor</span><b>'+row.partner+'</b></p>':'');
+    } else if(hoApprIsPartner(row)){
+      extra='<p class="ho-line"><span>From lessor</span><b>'+row.fromPartner+'</b></p>'+
+        '<p class="ho-line"><span>To lessor</span><b>'+row.toPartner+'</b></p>';
+    } else {
+      extra='<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
         '<p class="ho-line"><span>Receipt</span><b>'+row.kwt+'</b></p>';
+    }
+    var payLine=hoApprIsSales(row)?'':(row.pay?'<p class="ho-line"><span>Purchase method</span><b>'+row.pay+'</b></p>':'');
     return '<p class="ho-line"><span>Type</span><b>'+row.kind+'</b></p>'+
       '<p class="ho-line"><span>Desk</span><b>Last-seat posting · not B2B leasing</b></p>'+
       '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
       '<p class="ho-line"><span>Branch · unit</span><b>'+row.cabang+' · '+row.unit+'</b></p>'+
-      (row.pay?'<p class="ho-line"><span>Purchase method</span><b>'+row.pay+'</b></p>':'')+
+      payLine+
       extra+
       '<p class="ho-line"><span>HO status</span><b>'+pos.text+'</b></p>'+
       '<p class="ho-note">'+row.reason+'</p>'+
@@ -292,16 +349,10 @@
     states[id]=next;
     if(window.FAST && FAST.save) FAST.save({states:states}, FAST.HO_APPR_KEY);
     if(typeof toast==='function'){
-      var price=hoApprIsPrice(row);
-      toast(act==='approve'
-        ? (price
-          ? 'Price adjustment approved. OTR posting may proceed. Not a DP, signature, or 30% waiver.'
-          : 'Cancel billing approved. AR reopened. Not a DP, signature, or 30% waiver.')
-        : act==='return'
-          ? 'Returned to the KA · KC · ABH · OM chain with comment.'
-          : (price
-            ? 'Price adjustment rejected. Existing OTR stands.'
-            : 'Cancel billing rejected. Existing billing stands.'));
+      var copy=hoApprCopy(row);
+      toast(act==='approve' ? copy.ok : act==='return'
+        ? 'Returned to the KA · KC · ABH · OM chain with comment.'
+        : copy.no);
     }
     applyFinanceHo();
   }
@@ -445,6 +496,9 @@
     ho_appr:{view:'appr'},
     ho_karoseri:{view:'appr', pick:'pa-cld'},
     ho_otr:{view:'appr', pick:'pa-pdi'},
-    ho_cancel:{view:'appr', pick:'cb-kld'}
+    ho_cancel:{view:'appr', pick:'cb-kld'},
+    ho_sales_lease:{view:'appr', pick:'st-bsd'},
+    ho_sales_cash:{view:'appr', pick:'st-bks'},
+    ho_partner:{view:'appr', pick:'lp-tng'}
   };
   Object.defineProperty(FAST,'hoView',{ get:function(){ return hoView; } });
