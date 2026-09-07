@@ -273,19 +273,32 @@
   });
   function isHoCase(h){ return !!(window.FAST && FAST.HO_CASE && FAST.HO_CASE[h]); }
   function isHoFileCase(h){ return !!(window.FAST && FAST.HO_FILE_CASE && FAST.HO_FILE_CASE[h]); }
+  function applyHashRole(h){
+    if(h==='finance_ho'){ applyRole('finance'); return; }
+    if(isHoCase(h)){
+      var c=FAST.HO_CASE[h];
+      if(c && c.pick && FAST.hoTrailOnBranch && FAST.hoTrailOnBranch(c.pick)){
+        var meta=(FAST.hoFileStepMeta && FAST.hoFileStepMeta(FAST.hoFileStep(c.pick)))||{role:'frontman'};
+        applyRole(meta.role||'frontman');
+        if(meta.seat) mgmtSeat=meta.seat;
+        return;
+      }
+      applyRole('finance');
+      return;
+    }
+    if(screenRole[h]) applyRole(screenRole[h]);
+  }
   var hash=(location.hash||'').replace('#','');
   if(hash==='admin_tx') hash='admin_spk';
   if(hash==='finance_ho' || isHoCase(hash) || isHoFileCase(hash) || (hash && (document.getElementById(hash) || ADMIN_BOOK[hash]))){
-    if(hash==='finance_ho' || isHoCase(hash)) applyRole('finance');
-    else if(screenRole[hash]) applyRole(screenRole[hash]);
+    applyHashRole(hash);
     show(hash, {explicit:true});
   }
   window.addEventListener('hashchange', function(){
     var h=(location.hash||'').replace('#','');
     if(h==='admin_tx') h='admin_spk';
     if(h==='finance_ho' || isHoCase(h) || isHoFileCase(h) || (h && (document.getElementById(h) || ADMIN_BOOK[h]))){
-      if(h==='finance_ho' || isHoCase(h)) applyRole('finance');
-      else if(screenRole[h]) applyRole(screenRole[h]);
+      applyHashRole(h);
       show(h, {explicit:true});
     }
   });

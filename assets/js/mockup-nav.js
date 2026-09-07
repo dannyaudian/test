@@ -95,8 +95,17 @@
       id=fileCase.view==='chain'?'ho_chain':'ho_file';
     }
     if(hoCase){
-      applyRole('finance');
-      if(FAST.hoOpen) FAST.hoOpen(hoCase);
+      var pick=hoCase.pick;
+      if(pick && FAST.hoFileOpen) FAST.hoFileOpen(pick);
+      if(pick && FAST.hoTrailOnBranch && FAST.hoTrailOnBranch(pick)){
+        var meta=(FAST.hoFileStepMeta && FAST.hoFileStepMeta(FAST.hoFileStep(pick)))||{role:'frontman'};
+        applyRole(meta.role||'frontman');
+        if(meta.seat) mgmtSeat=meta.seat;
+        id='ho_file';
+      } else {
+        applyRole('finance');
+        if(FAST.hoOpen) FAST.hoOpen(hoCase);
+      }
     }
     if(id==='finance_ho' && currentRole!=='finance') applyRole('finance');
     if(currentRole==='finance') id='finance_ho';
@@ -320,7 +329,7 @@
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || b.closest('.proc') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
-    if(b.hasAttribute('data-ho-file-act') || b.hasAttribute('data-ho-file-pick') || b.hasAttribute('data-ho-file-to-ho')) return;
+    if(b.hasAttribute('data-ho-file-act') || b.hasAttribute('data-ho-file-pick') || b.hasAttribute('data-ho-file-to-ho') || b.hasAttribute('data-ho-file-from-ho')) return;
     if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home') || b.hasAttribute('data-mgmt-seat') || b.hasAttribute('data-ho-view') || b.hasAttribute('data-ho-jump') || b.hasAttribute('data-ho-open-tx') || b.hasAttribute('data-ho-row') || b.hasAttribute('data-ho-appr-row') || b.hasAttribute('data-ho-appr-act')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
     if(b.hasAttribute('data-b2b-tab') || b.hasAttribute('data-b2b-so') || b.hasAttribute('data-b2b-doc') || b.hasAttribute('data-b2b-drop') || b.hasAttribute('data-b2b-bill') || b.hasAttribute('data-b2b-dl-contract') || b.hasAttribute('data-b2b-paperless') || b.hasAttribute('data-b2b-kwt') || b.hasAttribute('data-b2b-lunas') || b.hasAttribute('data-b2b-resubmit') || b.hasAttribute('data-b2b-issue-contract') || b.hasAttribute('data-b2b-mark-dp') || b.hasAttribute('data-b2b-mark-epo') || b.hasAttribute('data-b2b-return') || b.hasAttribute('data-b2b-stay') || b.hasAttribute('data-raize-npwp') || b.hasAttribute('data-budi-bf')) return;

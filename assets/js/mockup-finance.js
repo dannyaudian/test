@@ -329,7 +329,8 @@
         '<button type="button" class="ho-act stop" data-ho-appr-act="reject" data-ho-appr-id="'+row.id+'">Reject</button>'+
         '</div>';
     } else if(st==='open'){
-      actions='<p class="ho-note">Still on the branch chain ('+pos.text+'). Same SO as Frontman — HO posts only after OM.</p>';
+      actions='<p class="ho-note">Still on the branch chain ('+pos.text+'). Continue on this Sales Order — Finance HO posts only after OM.</p>'+
+        '<div class="ho-appr-acts"><button type="button" class="ho-act" data-ho-file-from-ho="'+row.id+'">Continue on this SO →</button></div>';
     } else {
       actions='<p class="ho-note">HO decision already recorded. '+copy.done+' not a commercial gate waiver.</p>';
     }
@@ -527,6 +528,16 @@
     });
     var host=document.getElementById('finance_ho');
     if(host) host.addEventListener('click',function(e){
+      var jump=e.target.closest('[data-ho-file-from-ho]');
+      if(jump){
+        var jid=jump.getAttribute('data-ho-file-from-ho');
+        if(FAST.hoFileOpen) FAST.hoFileOpen(jid);
+        var meta=(FAST.hoFileStepMeta && FAST.hoFileStepMeta(FAST.hoFileStep(jid)))||{role:'frontman'};
+        applyRole(meta.role||'frontman');
+        if(meta.seat) mgmtSeat=meta.seat;
+        show('ho_file');
+        return;
+      }
       var act=e.target.closest('[data-ho-appr-act]');
       if(act){
         hoDecideAppr(act.getAttribute('data-ho-appr-id'), act.getAttribute('data-ho-appr-act'));
