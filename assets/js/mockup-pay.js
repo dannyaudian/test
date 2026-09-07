@@ -273,15 +273,17 @@
   });
   var hash=(location.hash||'').replace('#','');
   if(hash==='admin_tx') hash='admin_spk';
-  if(hash && (document.getElementById(hash) || ADMIN_BOOK[hash])){
-    if(screenRole[hash]) applyRole(screenRole[hash]);
+  if(hash==='finance_ho' || (hash && (document.getElementById(hash) || ADMIN_BOOK[hash]))){
+    if(hash==='finance_ho') applyRole('finance');
+    else if(screenRole[hash]) applyRole(screenRole[hash]);
     show(hash, {explicit:true});
   }
   window.addEventListener('hashchange', function(){
     var h=(location.hash||'').replace('#','');
     if(h==='admin_tx') h='admin_spk';
-    if(h && (document.getElementById(h) || ADMIN_BOOK[h])){
-      if(screenRole[h]) applyRole(screenRole[h]);
+    if(h==='finance_ho' || (h && (document.getElementById(h) || ADMIN_BOOK[h]))){
+      if(h==='finance_ho') applyRole('finance');
+      else if(screenRole[h]) applyRole(screenRole[h]);
       show(h, {explicit:true});
     }
   });

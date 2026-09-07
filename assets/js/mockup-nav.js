@@ -13,6 +13,7 @@
   }
   window.FAST=window.FAST||{};
   FAST.toast=toast;
+  var currentRole='frontman';
   var activeTx=null;
   try { activeTx=sessionStorage.getItem('fast.mock.tx')||null; } catch(e) {}
   var LIST_SCREENS={
@@ -87,12 +88,14 @@
     id=stayTarget(id, from, opts.explicit);
     if(id==='shop_home') id='customer';
     if(id==='admin_tx') id='admin_spk';
+    if(id==='finance_ho' && currentRole!=='finance') applyRole('finance');
     if(currentRole==='finance') id='finance_ho';
     if(currentRole==='mgmt' && id==='eskalasi') id='mgmt_inbox';
-    var bookKey=ADMIN_BOOK[id];
+    var bookKey=(typeof ADMIN_BOOK!=='undefined' && ADMIN_BOOK[id]) ? ADMIN_BOOK[id] : null;
     var screenId=bookKey?'admin_book':id;
-    screens.forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
+    document.querySelectorAll('#mockup .screen').forEach(function(s){ s.classList.toggle('on', s.id===screenId); });
     var landed=document.getElementById(screenId);
+    if(landed) landed.classList.add('on');
     var sameFam=from && landed && familyOf(txOf(from)) && familyOf(txOf(from))===familyOf(txOf(screenId));
     if(landed && opts.stage){
       landed.setAttribute('data-stage-view', opts.stage);
@@ -117,7 +120,7 @@
       else if(id==='eskalasi'){ railId='eskalasi'; adminReturn='eskalasi'; }
       else if(id.indexOf('exc_')===0) railId='eskalasi';
       else railId='admin_spk';
-      if(ADMIN_BOOK[id]) adminReturn=id;
+      if(bookKey) adminReturn=id;
     }
     if(currentRole==='mgmt'){
       if(id==='dashboard') railId='dashboard';
@@ -125,10 +128,10 @@
       else railId='dashboard';
     }
     if(currentRole==='finance') railId='finance_ho';
-    navBtns.forEach(function(b){
+    document.querySelectorAll('#mockup .rail button[data-go]').forEach(function(b){
       var rail=b.closest('[data-rail]');
       if(!rail || rail.hidden===true){ b.removeAttribute('aria-current'); return; }
-      if(currentRole==='finance' && b.dataset.go==='finance_ho'){
+      if(screenId==='finance_ho' && b.dataset.go==='finance_ho'){
         var j=b.getAttribute('data-ho-jump')||'all';
         var hv=(window.FAST && FAST.hoView)||'all';
         b.setAttribute('aria-current', j===hv ? 'true' : 'false');
@@ -321,7 +324,6 @@
   }); }); }
 
   var payJobSticky=false;
-  var currentRole='frontman';
   var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer',finance:'finance_ho'};
   var mgmtSeat='ka';
   var MGMT_SEATS={
