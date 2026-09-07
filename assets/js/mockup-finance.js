@@ -176,9 +176,12 @@
     return {cls:'uncleared', text:'Awaiting HO'};
   }
   function hoApprIsPrice(row){ return row && row.type==='price'; }
+  function hoIdrFine(n){
+    return 'Rp '+Math.round(n||0).toLocaleString('id-ID');
+  }
   function hoSignedIdr(n){
     n=Math.round(n||0);
-    return (n<0?'−':'+')+hoIdr(Math.abs(n));
+    return (n<0?'−':'+')+hoIdrFine(Math.abs(n));
   }
   function hoApprAmtHtml(row){
     if(hoApprIsPrice(row)) return hoSignedIdr(row.delta)+'<span class="sub">'+(row.topic||'OTR change')+'</span>';
@@ -218,8 +221,8 @@
       : '<p class="ho-note">HO decision already recorded. '+(price?'Price adjustment is a finance posting on OTR —':'Billing cancel is a finance posting —')+' not a commercial gate waiver.</p>';
     var extra=price
       ? '<p class="ho-line"><span>Topic</span><b>'+(row.topic||'OTR change')+'</b></p>'+
-        '<p class="ho-line"><span>From OTR</span><b>'+hoIdr(row.fromOtr)+'</b></p>'+
-        '<p class="ho-line"><span>To OTR</span><b>'+hoIdr(row.toOtr)+'</b></p>'+
+        '<p class="ho-line"><span>From OTR</span><b>'+hoIdrFine(row.fromOtr)+'</b></p>'+
+        '<p class="ho-line"><span>To OTR</span><b>'+hoIdrFine(row.toOtr)+'</b></p>'+
         '<p class="ho-line"><span>Delta</span><b>'+hoSignedIdr(row.delta)+'</b></p>'
       : '<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
         '<p class="ho-line"><span>Receipt</span><b>'+row.kwt+'</b></p>';
