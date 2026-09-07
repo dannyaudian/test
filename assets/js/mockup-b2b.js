@@ -123,7 +123,7 @@
     var paperBtn=document.querySelector('[data-b2b-paperless]');
     if(paperBtn){
       paperBtn.disabled=(!canBill && !onlyEpo) || !!u.paperlessSent || currentRole==='finance';
-      if(currentRole==='finance') paperBtn.title='Finance HO memantau. Penagihan di Administrasi cabang.';
+      if(currentRole==='finance') paperBtn.title='Finance HO monitors. Branch Administration sends the bill.';
     }
     var kwtOnly=document.querySelector('[data-b2b-kwt]');
     if(kwtOnly) kwtOnly.disabled=!u.paperlessSent || !!u.kwtIssued || currentRole==='finance';

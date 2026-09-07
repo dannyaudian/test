@@ -3,8 +3,8 @@
   var DAY=86400000;
   function hoIdr(n){
     n=Math.round(n||0);
-    if(n>=1e9) return 'Rp '+(n/1e9).toFixed(1).replace('.',',')+' M';
-    if(n>=1e6) return 'Rp '+Math.round(n/1e6).toLocaleString('id-ID')+' jt';
+    if(n>=1e9) return 'Rp '+(n/1e9).toFixed(1)+'bn';
+    if(n>=1e6) return 'Rp '+Math.round(n/1e6).toLocaleString('en-US')+'m';
     return 'Rp '+n.toLocaleString('id-ID');
   }
   function hoDays(from, to){
@@ -25,13 +25,13 @@
     return a.length%2?a[m]:Math.round((a[m-1]+a[m])/2);
   }
   var HO_BOOK=[
-    { id:'2101', live:false, cabang:'Kelapa Gading', unit:'Innova Zenix', debitur:'PT Danapura Logistik', so:'4500092101', spk:'SPK/26/KLD/00210', finance:329600000, dpLabel:'Rp 82.400.000', kwt:'KWT/26/KLD/008201', bucket:'billed', paperlessAt:HO_NOW-18*DAY, kwtAt:HO_NOW-17*DAY, note:'Paperless 21 Agu · kuitansi aktif · mitra belum settle' },
-    { id:'1888', live:false, cabang:'BSD', unit:'Fortuner 2.8', debitur:'PT Danapura Armada', so:'4500091888', spk:'SPK/26/BSD/00188', finance:412500000, dpLabel:'Rp 103.125.000', kwt:'KWT/26/BSD/007188', bucket:'billed', paperlessAt:HO_NOW-41*DAY, kwtAt:HO_NOW-40*DAY, note:'Aging 41 hari · di atas SLA 14 hari' },
-    { id:'2033', live:false, cabang:'Serpong', unit:'Alphard', debitur:'PT Danapura Utama', so:'4500092033', spk:'SPK/26/SRP/00203', finance:891000000, dpLabel:'Rp 222.750.000', kwt:'KWT/26/SRP/008033', bucket:'billed', paperlessAt:HO_NOW-6*DAY, kwtAt:HO_NOW-6*DAY, note:'Baru ditagih · masih dalam SLA' },
-    { id:'1750', live:false, cabang:'Pondok Indah', unit:'Rush GR Sport', debitur:'CV Danapura Niaga', so:'4500091750', spk:'SPK/26/PDI/00175', finance:221400000, dpLabel:'Rp 55.350.000', kwt:'KWT/26/PDI/006750', bucket:'lunas', paperlessAt:HO_NOW-31*DAY, kwtAt:HO_NOW-30*DAY, lunasAt:HO_NOW-19*DAY, note:'Lunas 19 hari setelah paperless' },
-    { id:'1620', live:false, cabang:'Bekasi', unit:'Avanza 1.5', debitur:'PT Danapura Retail', so:'4500091620', spk:'SPK/26/BKS/00162', finance:168800000, dpLabel:'Rp 42.200.000', kwt:'KWT/26/BKS/006162', bucket:'lunas', paperlessAt:HO_NOW-52*DAY, kwtAt:HO_NOW-51*DAY, lunasAt:HO_NOW-25*DAY, note:'Lunas 27 hari · di luar SLA' },
-    { id:'1944', live:false, cabang:'Cilandak', unit:'Camry HV', debitur:'PT Danapura Utama', so:'4500091944', spk:'SPK/26/CLD/00194', finance:445000000, dpLabel:'Rp 111.250.000', kwt:'', bucket:'unbilled', ready:true, note:'Paket + DP + e-PO lengkap · Admin belum kirim paperless' },
-    { id:'1812', live:false, cabang:'Depok', unit:'Raize 1.0', debitur:'PT Danapura Armada', so:'4500091812', spk:'SPK/26/DPK/00181', finance:198700000, dpLabel:'Rp 49.675.000', kwt:'', bucket:'unbilled', ready:false, hold:'E-PO leasing belum terbit', note:'Full DP ada · paperless tertahan e-PO (bukan waiver DP)' }
+    { id:'2101', live:false, cabang:'Kelapa Gading', unit:'Innova Zenix', debitur:'PT Danapura Logistik', so:'4500092101', spk:'SPK/26/KLD/00210', finance:329600000, dpLabel:'Rp 82.400.000', kwt:'KWT/26/KLD/008201', bucket:'billed', paperlessAt:HO_NOW-18*DAY, kwtAt:HO_NOW-17*DAY, note:'Paperless 21 Aug · receipt live · partner has not settled' },
+    { id:'1888', live:false, cabang:'BSD', unit:'Fortuner 2.8', debitur:'PT Danapura Armada', so:'4500091888', spk:'SPK/26/BSD/00188', finance:412500000, dpLabel:'Rp 103.125.000', kwt:'KWT/26/BSD/007188', bucket:'billed', paperlessAt:HO_NOW-41*DAY, kwtAt:HO_NOW-40*DAY, note:'Aging 41 days · above the 14-day SLA' },
+    { id:'2033', live:false, cabang:'Serpong', unit:'Alphard', debitur:'PT Danapura Utama', so:'4500092033', spk:'SPK/26/SRP/00203', finance:891000000, dpLabel:'Rp 222.750.000', kwt:'KWT/26/SRP/008033', bucket:'billed', paperlessAt:HO_NOW-6*DAY, kwtAt:HO_NOW-6*DAY, note:'Newly billed · still inside SLA' },
+    { id:'1750', live:false, cabang:'Pondok Indah', unit:'Rush GR Sport', debitur:'CV Danapura Niaga', so:'4500091750', spk:'SPK/26/PDI/00175', finance:221400000, dpLabel:'Rp 55.350.000', kwt:'KWT/26/PDI/006750', bucket:'lunas', paperlessAt:HO_NOW-31*DAY, kwtAt:HO_NOW-30*DAY, lunasAt:HO_NOW-19*DAY, note:'Settled 19 days after paperless' },
+    { id:'1620', live:false, cabang:'Bekasi', unit:'Avanza 1.5', debitur:'PT Danapura Retail', so:'4500091620', spk:'SPK/26/BKS/00162', finance:168800000, dpLabel:'Rp 42.200.000', kwt:'KWT/26/BKS/006162', bucket:'lunas', paperlessAt:HO_NOW-52*DAY, kwtAt:HO_NOW-51*DAY, lunasAt:HO_NOW-25*DAY, note:'Settled in 27 days · outside SLA' },
+    { id:'1944', live:false, cabang:'Cilandak', unit:'Camry HV', debitur:'PT Danapura Utama', so:'4500091944', spk:'SPK/26/CLD/00194', finance:445000000, dpLabel:'Rp 111.250.000', kwt:'', bucket:'unbilled', ready:true, note:'Pack + DP + e-PO complete · Administration has not sent paperless' },
+    { id:'1812', live:false, cabang:'Depok', unit:'Raize 1.0', debitur:'PT Danapura Armada', so:'4500091812', spk:'SPK/26/DPK/00181', finance:198700000, dpLabel:'Rp 49.675.000', kwt:'', bucket:'unbilled', ready:false, hold:'Leasing e-PO not issued', note:'Full DP in · paperless held on e-PO (not a DP waiver)' }
   ];
   function hoParseAmt(label){
     var row=(FAST.B2B_SO||[]).filter(function(x){ return x.id===label || x.so===label; })[0];
@@ -55,13 +55,13 @@
       var bucket=lunas?'lunas':(billed?'billed':'unbilled');
       var hold='';
       if(bucket==='unbilled' && !ready){
-        if(u.backflow) hold='Backflow dokumen';
-        else if(!u.signedContract) hold='Kontrak belum TTD';
-        else if(!u.dpReceived) hold='Full DP belum masuk';
-        else if(!FAST.b2bEpoOk(u)) hold='E-PO / putusan OM';
-        else hold='Paket penagihan Frontman';
+        if(u.backflow) hold='Document backflow';
+        else if(!u.signedContract) hold='Contract not signed';
+        else if(!u.dpReceived) hold='Full DP not received';
+        else if(!FAST.b2bEpoOk(u)) hold='E-PO / OM decision';
+        else hold='Frontman billing pack';
       }
-      var note=lunas?'Pelunasan tercatat di SO ini':(billed?(u.kwtIssued?('Kuitansi '+meta.kwt+' · menunggu settle mitra'):'Paperless terkirim · kuitansi belum terbit'):(ready?'Siap ditagih Administrasi':hold));
+      var note=lunas?'Settlement recorded on this SO':(billed?(u.kwtIssued?('Receipt '+meta.kwt+' · waiting for partner settlement'):'Paperless sent · receipt not issued'):(ready?'Ready for Administration to bill':hold));
       return {
         id:meta.id, live:true, cabang:'Cilandak', unit:meta.unit, debitur:'PT Danapura Utama',
         so:meta.so, spk:'SPK/26/CLD/00421', finance:finance, dpLabel:meta.dpLabel, kwt:meta.kwt,
@@ -82,16 +82,16 @@
   var hoPick=null;
   function hoPos(row){
     var age=hoAgingDays(row);
-    if(row.bucket==='lunas') return {cls:'lunas', text:'Lunas'};
-    if(row.bucket==='billed') return {cls:age>14?'late':'billed', text:age>14?'Tagih · SLA':'Tagih belum bayar'};
-    if(row.ready) return {cls:'ready', text:'Siap ditagih'};
-    return {cls:'hold', text:row.hold||'Belum tagih'};
+    if(row.bucket==='lunas') return {cls:'lunas', text:'Settled'};
+    if(row.bucket==='billed') return {cls:age>14?'late':'billed', text:age>14?'Billed · SLA':'Billed, unpaid'};
+    if(row.ready) return {cls:'ready', text:'Ready to bill'};
+    return {cls:'hold', text:row.hold||'Unbilled'};
   }
   function hoRowHtml(row){
     var age=hoAgingDays(row);
     var pos=hoPos(row);
-    var ageTxt=age==null?'—':age+' hari';
-    var kwt=row.bucket==='unbilled'?'—':(row.kwt||'Menunggu terbit');
+    var ageTxt=age==null?'—':age+' days';
+    var kwt=row.bucket==='unbilled'?'—':(row.kwt||'Awaiting issue');
     return '<tr data-ho-row="'+row.id+'">'+
       '<td><b>'+row.so+'</b><span class="sub">'+row.cabang+' · '+row.spk+(row.live?' · live':'')+'</span></td>'+
       '<td>'+row.debitur+'<span class="sub">'+row.unit+'</span></td>'+
@@ -103,7 +103,7 @@
   }
   function hoDossier(row){
     if(!row){
-      return '<p>Pilih baris ledger. Dossier tetap di portal HO — tidak membuka halaman Frontman, Administrasi, atau Management.</p>';
+      return '<p>Select a ledger row. The dossier stays in the HO portal — it does not open Frontman, Administration, or Management screens.</p>';
     }
     var age=hoAgingDays(row);
     var pos=hoPos(row);
@@ -111,21 +111,21 @@
       ['SPK', true],
       ['SO', true],
       ['Paperless', row.bucket!=='unbilled' || !!row.paperlessAt],
-      ['Kuitansi', !!(row.kwt && row.bucket!=='unbilled')],
-      ['Lunas', row.bucket==='lunas']
+      ['Receipt', !!(row.kwt && row.bucket!=='unbilled')],
+      ['Settled', row.bucket==='lunas']
     ];
     var stepHtml=steps.map(function(s){ return '<i class="'+(s[1]?'on':'')+'">'+s[0]+'</i>'; }).join('');
     return '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
       '<p class="ho-line"><span>SPK</span><b>'+row.spk+'</b></p>'+
-      '<p class="ho-line"><span>Cabang</span><b>'+row.cabang+(row.live?' · sinkron Cilandak':'')+'</b></p>'+
-      '<p class="ho-line"><span>Debitur</span><b>'+row.debitur+'</b></p>'+
+      '<p class="ho-line"><span>Branch</span><b>'+row.cabang+(row.live?' · live from Cilandak':'')+'</b></p>'+
+      '<p class="ho-line"><span>Debtor</span><b>'+row.debitur+'</b></p>'+
       '<p class="ho-line"><span>Unit</span><b>'+row.unit+'</b></p>'+
-      '<p class="ho-line"><span>Dibiayai</span><b>'+hoIdr(row.finance)+'</b></p>'+
-      '<p class="ho-line"><span>DP wajib B2B</span><b>'+(row.dpLabel||'—')+'</b></p>'+
-      '<p class="ho-line"><span>Posisi</span><b>'+pos.text+(age!=null?' · '+age+' hari':'')+'</b></p>'+
-      '<p class="ho-line"><span>Kuitansi</span><b>'+(row.kwt||'Belum terbit')+'</b></p>'+
+      '<p class="ho-line"><span>Financed</span><b>'+hoIdr(row.finance)+'</b></p>'+
+      '<p class="ho-line"><span>Required B2B DP</span><b>'+(row.dpLabel||'—')+'</b></p>'+
+      '<p class="ho-line"><span>Status</span><b>'+pos.text+(age!=null?' · '+age+' days':'')+'</b></p>'+
+      '<p class="ho-line"><span>Receipt</span><b>'+(row.kwt||'Not issued')+'</b></p>'+
       '<div class="ho-steps">'+stepHtml+'</div>'+
-      '<p class="ho-note">'+row.note+'. Finance HO tidak menagih dan tidak me-waiver DP/TTD — Administrasi cabang yang menjalankan paperless.</p>';
+      '<p class="ho-note">'+row.note+'. Finance HO does not bill and does not waive DP or signature — branch Administration runs paperless.</p>';
   }
 
   function applyFinanceHo(){
@@ -148,15 +148,15 @@
       document.querySelectorAll(sel).forEach(function(el){ el.textContent=val; });
     }
     setText('[data-ho-kpi="unbilled-n"]', String(unbilled.length));
-    setText('[data-ho-kpi="unbilled-rp"]', hoIdr(sumU)+' dibiayai · belum paperless');
+    setText('[data-ho-kpi="unbilled-rp"]', hoIdr(sumU)+' financed · paperless not sent');
     setText('[data-ho-kpi="billed-n"]', String(billed.length));
-    setText('[data-ho-kpi="billed-rp"]', hoIdr(sumB)+' menunggu pelunasan mitra');
+    setText('[data-ho-kpi="billed-rp"]', hoIdr(sumB)+' waiting for partner settlement');
     setText('[data-ho-kpi="lead-days"]', med==null?'—':String(med));
-    setText('[data-ho-kpi="lead-days-2"]', med==null?'—':med+' hari');
-    setText('[data-ho-kpi="lead-avg"]', avg==null?'—':avg+' hari');
+    setText('[data-ho-kpi="lead-days-2"]', med==null?'—':med+' days');
+    setText('[data-ho-kpi="lead-avg"]', avg==null?'—':avg+' days');
     setText('[data-ho-kpi="aging-n"]', String(aging.length));
-    setText('[data-ho-kpi="aging-n-2"]', aging.length+' SO · '+hoIdr(sumA));
-    setText('[data-ho-kpi="aging-rp"]', hoIdr(sumA)+' di atas 14 hari');
+    setText('[data-ho-kpi="aging-n-2"]', aging.length+' SOs · '+hoIdr(sumA));
+    setText('[data-ho-kpi="aging-rp"]', hoIdr(sumA)+' over 14 days');
     setText('[data-ho-n="unbilled"]', String(unbilled.length));
     setText('[data-ho-n="billed"]', String(billed.length));
     setText('[data-ho-ready-n]', String(ready.length));
@@ -176,7 +176,7 @@
     if(hoView==='lead'){
       listFilter=listFilter.slice().sort(function(a,b){ return (hoAgingDays(b)||0)-(hoAgingDays(a)||0); });
     }
-    var labels={all:'Semua SO leasing',unbilled:'Belum tagih ke leasing',billed:'Sudah tagih, belum bayar',lead:'Leadtime & aging'};
+    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',lead:'Lead time & aging'};
     var lab=document.querySelector('[data-ho-filter-label]');
     if(lab) lab.textContent=labels[hoView]||labels.all;
     document.querySelectorAll('[data-rail="finance"] button[data-go="finance_ho"]').forEach(function(b){
@@ -192,11 +192,11 @@
     document.querySelectorAll('[data-ho-panel="board"]').forEach(function(el){ el.hidden=hoView==='lead'; });
     document.querySelectorAll('[data-ho-panel="lead"]').forEach(function(el){ el.hidden=hoView!=='lead'; });
     var list=document.querySelector('[data-ho-list]');
-    if(list) list.innerHTML=listFilter.map(hoRowHtml).join('')||'<tr><td colspan="6">Tidak ada SO di filter ini.</td></tr>';
+    if(list) list.innerHTML=listFilter.map(hoRowHtml).join('')||'<tr><td colspan="6">No SOs in this filter.</td></tr>';
     var ageList=document.querySelector('[data-ho-aging-list]');
     if(ageList){
       var open=billed.slice().sort(function(a,b){ return (hoAgingDays(b)||0)-(hoAgingDays(a)||0); });
-      ageList.innerHTML=open.map(hoRowHtml).join('')||'<tr><td colspan="6">Tidak ada tagihan terbuka.</td></tr>';
+      ageList.innerHTML=open.map(hoRowHtml).join('')||'<tr><td colspan="6">No open bills.</td></tr>';
     }
     document.querySelectorAll('[data-ho-row]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-ho-row')===hoPick?'true':'false');
@@ -207,8 +207,8 @@
     var bar=document.querySelector('#mockup .urlbar');
     var root=document.getElementById('mockup');
     if(bar && root && root.classList.contains('finance-portal')){
-      if(hoView==='unbilled') bar.textContent='ho.fast.id/leasing/belum-tagih';
-      else if(hoView==='billed') bar.textContent='ho.fast.id/leasing/tagih-belum-bayar';
+      if(hoView==='unbilled') bar.textContent='ho.fast.id/leasing/unbilled';
+      else if(hoView==='billed') bar.textContent='ho.fast.id/leasing/billed-unpaid';
       else if(hoView==='lead') bar.textContent='ho.fast.id/leasing/leadtime';
       else bar.textContent='ho.fast.id/leasing';
     }

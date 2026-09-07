@@ -195,7 +195,7 @@
         b.textContent=to==='verifikasi'?'← Needs My Action':'← Exceptions';
       } else if(currentRole==='finance'){
         b.setAttribute('data-go','finance_ho');
-        b.textContent='← Dashboard leasing';
+        b.textContent='← Leasing dashboard';
       } else {
         b.setAttribute('data-go','eskalasi');
         b.textContent='← Queue';
@@ -408,7 +408,7 @@
     if(brandB && brandS){
       if(currentRole==='finance'){
         brandB.textContent='HO';
-        brandS.textContent='Finance · Area Jakarta';
+        brandS.textContent='Finance · Jakarta area';
       } else {
         brandB.textContent='FAST';
         brandS.textContent='SAM · Cilandak';
@@ -417,8 +417,8 @@
   }
   function hoViewUrl(){
     var v=(window.FAST && FAST.hoView)||'all';
-    if(v==='unbilled') return 'ho.fast.id/leasing/belum-tagih';
-    if(v==='billed') return 'ho.fast.id/leasing/tagih-belum-bayar';
+    if(v==='unbilled') return 'ho.fast.id/leasing/unbilled';
+    if(v==='billed') return 'ho.fast.id/leasing/billed-unpaid';
     if(v==='lead') return 'ho.fast.id/leasing/leadtime';
     return 'ho.fast.id/leasing';
   }
@@ -461,6 +461,6 @@
       var dest=t.dataset.role==='admin'?'admin_spk':first[t.dataset.role];
       if(t.dataset.role==='mgmt') dest=(MGMT_SEATS[mgmtSeat]||MGMT_SEATS.ka).home;
       show(dest);
-      toast('Peran: '+(t.dataset.role==='mgmt'?(MGMT_SEATS[mgmtSeat]||MGMT_SEATS.ka).label:t.textContent.trim()));
+      toast('Role: '+(t.dataset.role==='mgmt'?(MGMT_SEATS[mgmtSeat]||MGMT_SEATS.ka).label:t.textContent.trim()));
     });
   });
