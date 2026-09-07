@@ -31,7 +31,10 @@
     { id:'1750', live:false, cabang:'Pondok Indah', unit:'Rush GR Sport', debitur:'CV Danapura Niaga', so:'4500091750', spk:'SPK/26/PDI/00175', finance:221400000, dpLabel:'Rp 55.350.000', kwt:'KWT/26/PDI/006750', bucket:'lunas', paperlessAt:HO_NOW-31*DAY, kwtAt:HO_NOW-30*DAY, lunasAt:HO_NOW-19*DAY, note:'Settled 19 days after paperless' },
     { id:'1620', live:false, cabang:'Bekasi', unit:'Avanza 1.5', debitur:'PT Danapura Retail', so:'4500091620', spk:'SPK/26/BKS/00162', finance:168800000, dpLabel:'Rp 42.200.000', kwt:'KWT/26/BKS/006162', bucket:'lunas', paperlessAt:HO_NOW-52*DAY, kwtAt:HO_NOW-51*DAY, lunasAt:HO_NOW-25*DAY, note:'Settled in 27 days · outside SLA' },
     { id:'1944', live:false, cabang:'Cilandak', unit:'Camry HV', debitur:'PT Danapura Utama', so:'4500091944', spk:'SPK/26/CLD/00194', finance:445000000, dpLabel:'Rp 111.250.000', kwt:'', bucket:'unbilled', ready:true, note:'Pack + DP + e-PO complete · Administration has not sent paperless' },
-    { id:'1812', live:false, cabang:'Depok', unit:'Raize 1.0', debitur:'PT Danapura Armada', so:'4500091812', spk:'SPK/26/DPK/00181', finance:198700000, dpLabel:'Rp 49.675.000', kwt:'', bucket:'unbilled', ready:false, hold:'Leasing e-PO not issued', note:'Full DP in · paperless held on e-PO (not a DP waiver)' }
+    { id:'1812', live:false, cabang:'Depok', unit:'Raize 1.0', debitur:'PT Danapura Armada', so:'4500091812', spk:'SPK/26/DPK/00181', finance:198700000, dpLabel:'Rp 49.675.000', kwt:'', bucket:'unbilled', ready:false, hold:'Leasing e-PO not issued', note:'Full DP in · paperless held on e-PO (not a DP waiver)' },
+    { id:'2204', live:false, cabang:'Karawaci', unit:'Fortuner 2.8', debitur:'PT Danapura Armada', so:'4500092204', spk:'SPK/26/KRW/00220', finance:412500000, paid:398100000, gap:14400000, dpLabel:'Rp 103.125.000', kwt:'KWT/26/KRW/008204', bucket:'uncleared', clearHold:'short', paperlessAt:HO_NOW-22*DAY, kwtAt:HO_NOW-21*DAY, paidAt:HO_NOW-4*DAY, note:'Partner remitted Rp 398.1m against financed Rp 412.5m. AR Open remains Rp 14.4m. Likely customer underpaid the residual / DP delta.' },
+    { id:'2166', live:false, cabang:'Tangerang', unit:'Innova Zenix', debitur:'PT Danapura Logistik', so:'4500092166', spk:'SPK/26/TNG/00216', finance:329600000, paid:329600000, gap:0, dpLabel:'Rp 82.400.000', kwt:'KWT/26/TNG/008166', bucket:'uncleared', clearHold:'unallocated', paperlessAt:HO_NOW-12*DAY, kwtAt:HO_NOW-11*DAY, paidAt:HO_NOW-2*DAY, note:'Bank credit matches the financed amount. AR Open is still open — credit not allocated to this SO yet.' },
+    { id:'2090', live:false, cabang:'Pondok Pinang', unit:'Avanza 1.5', debitur:'CV Danapura Niaga', so:'4500092090', spk:'SPK/26/PPG/00209', finance:168800000, paid:168800000, gap:0, dpLabel:'Rp 42.200.000', kwt:'KWT/26/PPG/008090', bucket:'uncleared', clearHold:'ref', paperlessAt:HO_NOW-16*DAY, kwtAt:HO_NOW-15*DAY, paidAt:HO_NOW-3*DAY, note:'Partner paid. VA / payment reference does not match SO 4500092090, so AR cannot clear automatically.' }
   ];
   function hoParseAmt(label){
     var row=(FAST.B2B_SO||[]).filter(function(x){ return x.id===label || x.so===label; })[0];
@@ -75,14 +78,23 @@
   }
   function hoAgingDays(row){
     if(row.bucket==='lunas') return hoDays(row.paperlessAt, row.lunasAt);
+    if(row.bucket==='uncleared') return hoDays(row.paidAt||row.paperlessAt, HO_NOW);
     if(row.bucket==='billed') return hoDays(row.paperlessAt, HO_NOW);
     return null;
   }
+  var HO_CAUSES=[
+    {id:'short', k:'Suspected', t:'Customer underpaid — residual, DP delta, or short remittance vs financed amount'},
+    {id:'unallocated', k:'Possible', t:'Bank credit received but not yet allocated to this SO AR Open'},
+    {id:'ref', k:'Possible', t:'Payment reference / VA does not match the Sales Order'},
+    {id:'mismatch', k:'Possible', t:'Partner paid amount ≠ financed amount on the e-PO / SO'},
+    {id:'timing', k:'Possible', t:'Posting lag between partner payment and AR clearing'}
+  ];
   var hoView='all';
   var hoPick=null;
   function hoPos(row){
     var age=hoAgingDays(row);
-    if(row.bucket==='lunas') return {cls:'lunas', text:'Settled'};
+    if(row.bucket==='lunas') return {cls:'lunas', text:'Settled · AR cleared'};
+    if(row.bucket==='uncleared') return {cls:'uncleared', text:'Paid · AR open'};
     if(row.bucket==='billed') return {cls:age>14?'late':'billed', text:age>14?'Billed · SLA':'Billed, unpaid'};
     if(row.ready) return {cls:'ready', text:'Ready to bill'};
     return {cls:'hold', text:row.hold||'Unbilled'};
@@ -112,9 +124,18 @@
       ['SO', true],
       ['Paperless', row.bucket!=='unbilled' || !!row.paperlessAt],
       ['Receipt', !!(row.kwt && row.bucket!=='unbilled')],
-      ['Settled', row.bucket==='lunas']
+      ['Partner paid', row.bucket==='uncleared' || row.bucket==='lunas'],
+      ['AR cleared', row.bucket==='lunas']
     ];
     var stepHtml=steps.map(function(s){ return '<i class="'+(s[1]?'on':'')+'">'+s[0]+'</i>'; }).join('');
+    var extra='';
+    if(row.bucket==='uncleared'){
+      extra='<p class="ho-line"><span>Partner paid</span><b>'+hoIdr(row.paid||0)+'</b></p>'+
+        '<p class="ho-line"><span>AR still open</span><b>'+hoIdr(row.gap||Math.max(0,(row.finance||0)-(row.paid||0)))+'</b></p>'+
+        '<ul class="ho-causes">'+HO_CAUSES.map(function(c){
+          return '<li class="'+(c.id===row.clearHold?'on':'')+'"><span>'+(c.id===row.clearHold?c.k:'Also possible')+'</span>'+c.t+'</li>';
+        }).join('')+'</ul>';
+    }
     return '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
       '<p class="ho-line"><span>SPK</span><b>'+row.spk+'</b></p>'+
       '<p class="ho-line"><span>Branch</span><b>'+row.cabang+(row.live?' · live from Cilandak':'')+'</b></p>'+
@@ -125,7 +146,8 @@
       '<p class="ho-line"><span>Status</span><b>'+pos.text+(age!=null?' · '+age+' days':'')+'</b></p>'+
       '<p class="ho-line"><span>Receipt</span><b>'+(row.kwt||'Not issued')+'</b></p>'+
       '<div class="ho-steps">'+stepHtml+'</div>'+
-      '<p class="ho-note">'+row.note+'. Finance HO does not bill and does not waive DP or signature — branch Administration runs paperless.</p>';
+      extra+
+      '<p class="ho-note">'+row.note+'. Finance HO does not bill and does not waive DP or signature — branch Administration runs paperless. Partner payment without AR clearing is not settled.</p>';
   }
 
   function applyFinanceHo(){
@@ -134,6 +156,7 @@
     var all=hoPortfolio();
     var unbilled=all.filter(function(r){ return r.bucket==='unbilled'; });
     var billed=all.filter(function(r){ return r.bucket==='billed'; });
+    var uncleared=all.filter(function(r){ return r.bucket==='uncleared'; });
     var lunas=all.filter(function(r){ return r.bucket==='lunas'; });
     var ready=unbilled.filter(function(r){ return r.ready; });
     var hold=unbilled.filter(function(r){ return !r.ready; });
@@ -141,6 +164,7 @@
     var leadVals=lunas.map(function(r){ return hoAgingDays(r); }).filter(function(d){ return d!=null; });
     var sumU=unbilled.reduce(function(a,r){ return a+r.finance; },0);
     var sumB=billed.reduce(function(a,r){ return a+r.finance; },0);
+    var sumC=uncleared.reduce(function(a,r){ return a+r.finance; },0);
     var sumA=aging.reduce(function(a,r){ return a+r.finance; },0);
     var med=hoMedian(leadVals);
     var avg=leadVals.length?Math.round(leadVals.reduce(function(a,b){ return a+b; },0)/leadVals.length):null;
@@ -151,6 +175,9 @@
     setText('[data-ho-kpi="unbilled-rp"]', hoIdr(sumU)+' financed · paperless not sent');
     setText('[data-ho-kpi="billed-n"]', String(billed.length));
     setText('[data-ho-kpi="billed-rp"]', hoIdr(sumB)+' waiting for partner settlement');
+    setText('[data-ho-kpi="uncleared-n"]', String(uncleared.length));
+    setText('[data-ho-kpi="uncleared-rp"]', hoIdr(sumC)+' partner paid · AR not cleared');
+    setText('[data-ho-n="uncleared"]', String(uncleared.length));
     setText('[data-ho-kpi="lead-days"]', med==null?'—':String(med));
     setText('[data-ho-kpi="lead-days-2"]', med==null?'—':med+' days');
     setText('[data-ho-kpi="lead-avg"]', avg==null?'—':avg+' days');
@@ -163,7 +190,7 @@
     setText('[data-ho-hold-n]', String(hold.length));
     setText('[data-ho-open-n]', String(billed.length));
     var bands=[0,0,0,0];
-    billed.concat(lunas).forEach(function(r){
+    billed.concat(uncleared).concat(lunas).forEach(function(r){
       var b=hoBand(hoAgingDays(r));
       if(b>=0) bands[b]++;
     });
@@ -172,11 +199,11 @@
       document.querySelectorAll('[data-ho-bar="'+i+'"]').forEach(function(el){ el.style.width=Math.round(n/max*100)+'%'; });
       setText('[data-ho-bar-n="'+i+'"]', String(n));
     });
-    var listFilter=hoView==='unbilled'?unbilled:hoView==='billed'?billed:hoView==='lead'?billed.concat(lunas):all;
+    var listFilter=hoView==='unbilled'?unbilled:hoView==='billed'?billed:hoView==='uncleared'?uncleared:hoView==='lead'?billed.concat(uncleared).concat(lunas):all;
     if(hoView==='lead'){
       listFilter=listFilter.slice().sort(function(a,b){ return (hoAgingDays(b)||0)-(hoAgingDays(a)||0); });
     }
-    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',lead:'Lead time & aging'};
+    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',uncleared:'Partner paid · AR not cleared',lead:'Lead time & aging'};
     var lab=document.querySelector('[data-ho-filter-label]');
     if(lab) lab.textContent=labels[hoView]||labels.all;
     document.querySelectorAll('[data-rail="finance"] button[data-go="finance_ho"]').forEach(function(b){
@@ -209,6 +236,7 @@
     if(bar && root && root.classList.contains('finance-portal')){
       if(hoView==='unbilled') bar.textContent='ho.fast.id/leasing/unbilled';
       else if(hoView==='billed') bar.textContent='ho.fast.id/leasing/billed-unpaid';
+      else if(hoView==='uncleared') bar.textContent='ho.fast.id/leasing/ar-open';
       else if(hoView==='lead') bar.textContent='ho.fast.id/leasing/leadtime';
       else bar.textContent='ho.fast.id/leasing';
     }
