@@ -52,7 +52,7 @@
     'assets/js/mockup-cust.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=ho-file-seamless';
+  var bust = 'v=ho-file-links';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {

@@ -317,6 +317,14 @@
   FAST.hoFileOpen=function(id){ if(id) hoFilePick=id; };
   FAST.hoFileStep=hoFileStep;
   FAST.hoFileState=hoFileState;
+  FAST.hoFileStepMeta=hoFileStepMeta;
+  FAST.hoTrailOnBranch=function(id){
+    var row=hoFileRow(id);
+    if(!row||!row.live) return false;
+    var dec=FAST.hoApprDecision?FAST.hoApprDecision(id):'open';
+    var step=hoFileStep(id);
+    return dec==='open' && step!=='ho' && step!=='rejected';
+  };
   FAST.applyHoFile=applyHoFile;
   FAST.HO_FILE_CASE={
     file_sales:{pick:'st-bsd'},
