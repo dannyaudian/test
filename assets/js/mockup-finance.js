@@ -135,13 +135,25 @@
     {id:'om', label:'Operation Manager'}
   ];
   var HO_APPR=[
-    { id:'cb-kld', kind:'Cancel billing', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix', billed:329600000, kwt:'KWT/26/KLD/008201',
+    { id:'pa-cld', type:'price', kind:'Price adjustment', topic:'Karoseri', so:'4500090421', cabang:'Cilandak', unit:'Hiace Premio',
+      fromOtr:548000000, toOtr:566500000, delta:18500000,
+      reason:'Branch filed a karoseri box-body add-on after the SO was priced at stock OTR. Customer ordered a cargo body. Head of Administration, Branch Head, ABH, and OM already approved the revised OTR.',
+      chain:{ka:'4 Sep 09:10',kc:'4 Sep 11:02',abh:'5 Sep 08:40',om:'5 Sep 15:18'} },
+    { id:'pa-pdi', type:'price', kind:'Price adjustment', topic:'Open off-the-road', so:'4500091750', cabang:'Pondok Indah', unit:'Rush GR Sport',
+      fromOtr:276750000, toOtr:268200000, delta:-8550000,
+      reason:'Open off-the-road / chassis price so accessories can be fitted at the body shop. OTR tax pack is unbundled. Prior seats already approved.',
+      chain:{ka:'5 Sep 08:22',kc:'5 Sep 10:45',abh:'5 Sep 14:11',om:'6 Sep 09:30'} },
+    { id:'cb-kld', type:'cancel', kind:'Cancel billing', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix', billed:329600000, kwt:'KWT/26/KLD/008201',
       reason:'Duplicate paperless. The same SO was billed twice after a retry. Cancel the second billing and return AR.',
       chain:{ka:'1 Sep 10:12',kc:'1 Sep 11:40',abh:'2 Sep 09:05',om:'2 Sep 14:22'} },
-    { id:'cb-bsd', kind:'Cancel billing', so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', billed:412500000, kwt:'KWT/26/BSD/007188',
+    { id:'cb-bsd', type:'cancel', kind:'Cancel billing', so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', billed:412500000, kwt:'KWT/26/BSD/007188',
       reason:'Paperless posted to the wrong SO. Partner has not paid. Cancel billing, restore AR Open on this SO, rebill the correct SO.',
       chain:{ka:'28 Aug 16:02',kc:'29 Aug 09:18',abh:'29 Aug 13:44',om:'1 Sep 08:50'} },
-    { id:'cb-srp', kind:'Cancel billing', so:'4500092033', cabang:'Serpong', unit:'Alphard', billed:891000000, kwt:'KWT/26/SRP/008033',
+    { id:'pa-gdg', type:'price', kind:'Price adjustment', topic:'Karoseri', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix',
+      fromOtr:412000000, toOtr:419800000, delta:7800000,
+      reason:'Rear spoiler and side-step karoseri package after booking. Chain already approved; HO recorded the OTR lift.',
+      chain:{ka:'28 Aug 09:40',kc:'28 Aug 13:12',abh:'29 Aug 08:55',om:'29 Aug 16:04'}, done:'approved' },
+    { id:'cb-srp', type:'cancel', kind:'Cancel billing', so:'4500092033', cabang:'Serpong', unit:'Alphard', billed:891000000, kwt:'KWT/26/SRP/008033',
       reason:'Customer asked to unwind a premature paperless before partner settlement. Chain already approved; HO records the cancel.',
       chain:{ka:'3 Sep 11:20',kc:'3 Sep 15:01',abh:'4 Sep 09:33',om:'4 Sep 16:10'}, done:'approved' }
   ];
@@ -163,39 +175,58 @@
     if(st==='rejected') return {cls:'late', text:'HO rejected'};
     return {cls:'uncleared', text:'Awaiting HO'};
   }
+  function hoApprIsPrice(row){ return row && row.type==='price'; }
+  function hoSignedIdr(n){
+    n=Math.round(n||0);
+    return (n<0?'−':'+')+hoIdr(Math.abs(n));
+  }
+  function hoApprAmtHtml(row){
+    if(hoApprIsPrice(row)) return hoSignedIdr(row.delta)+'<span class="sub">'+(row.topic||'OTR change')+'</span>';
+    return hoIdr(row.billed)+'<span class="sub">Billed</span>';
+  }
   function hoApprRowHtml(row){
     var st=hoApprHo(row);
     var pos=hoApprPos(st);
+    var sub=hoApprIsPrice(row)?(row.topic||'OTR change'):(row.kwt||'Receipt');
     return '<tr data-ho-appr-row="'+row.id+'">'+
-      '<td><b>'+row.kind+'</b><span class="sub">'+row.kwt+'</span></td>'+
+      '<td><b>'+row.kind+'</b><span class="sub">'+sub+'</span></td>'+
       '<td><b>'+row.so+'</b><span class="sub">'+row.cabang+' · '+row.unit+'</span></td>'+
-      '<td>'+hoIdr(row.billed)+'</td>'+
+      '<td>'+hoApprAmtHtml(row)+'</td>'+
       '<td>KA · KC · ABH · OM</td>'+
       '<td><span class="ho-pos '+pos.cls+'">'+pos.text+'</span></td>'+
       '</tr>';
   }
   function hoApprDossier(row){
     if(!row){
-      return '<p>Select a cancel-billing request. Prior seats are already approved. Finance HO is last. This is not a DP, signature, 30%, or paid-in-full waiver.</p>';
+      return '<p>Select a request. Cancel billing and price adjustment (karoseri, open off-the-road, and similar) reach Finance HO only after Head of Administration, Branch Head, ABH, and Operation Manager. HO is last. This is not a DP, signature, 30%, or paid-in-full waiver.</p>';
     }
     var st=hoApprHo(row);
     var pos=hoApprPos(st);
+    var price=hoApprIsPrice(row);
     var chain=HO_APPR_SEATS.map(function(s){
       return '<li class="on"><span>'+s.label+'</span><b>Approved · '+(row.chain[s.id]||'—')+'</b></li>';
     }).join('')+'<li class="'+(st==='open'?'now':'on')+'"><span>Finance HO</span><b>'+pos.text+'</b></li>';
+    var ph=price?'Why approve, return, or reject the price adjustment':'Why cancel, return, or reject';
+    var approveLab=price?'Approve adjustment':'Approve cancel';
     var actions=st==='open'
-      ? '<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="Why cancel, return, or reject"></textarea></label>'+
+      ? '<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="'+ph+'"></textarea></label>'+
         '<div class="ho-appr-acts">'+
-        '<button type="button" class="ho-act" data-ho-appr-act="approve" data-ho-appr-id="'+row.id+'">Approve cancel</button>'+
+        '<button type="button" class="ho-act" data-ho-appr-act="approve" data-ho-appr-id="'+row.id+'">'+approveLab+'</button>'+
         '<button type="button" class="ho-act ghost" data-ho-appr-act="return" data-ho-appr-id="'+row.id+'">Return to chain</button>'+
         '<button type="button" class="ho-act stop" data-ho-appr-act="reject" data-ho-appr-id="'+row.id+'">Reject</button>'+
         '</div>'
-      : '<p class="ho-note">HO decision already recorded. Billing cancel is a finance posting — not a commercial gate waiver.</p>';
+      : '<p class="ho-note">HO decision already recorded. '+(price?'Price adjustment is a finance posting on OTR —':'Billing cancel is a finance posting —')+' not a commercial gate waiver.</p>';
+    var extra=price
+      ? '<p class="ho-line"><span>Topic</span><b>'+(row.topic||'OTR change')+'</b></p>'+
+        '<p class="ho-line"><span>From OTR</span><b>'+hoIdr(row.fromOtr)+'</b></p>'+
+        '<p class="ho-line"><span>To OTR</span><b>'+hoIdr(row.toOtr)+'</b></p>'+
+        '<p class="ho-line"><span>Delta</span><b>'+hoSignedIdr(row.delta)+'</b></p>'
+      : '<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
+        '<p class="ho-line"><span>Receipt</span><b>'+row.kwt+'</b></p>';
     return '<p class="ho-line"><span>Type</span><b>'+row.kind+'</b></p>'+
       '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
       '<p class="ho-line"><span>Branch · unit</span><b>'+row.cabang+' · '+row.unit+'</b></p>'+
-      '<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
-      '<p class="ho-line"><span>Receipt</span><b>'+row.kwt+'</b></p>'+
+      extra+
       '<p class="ho-line"><span>HO status</span><b>'+pos.text+'</b></p>'+
       '<p class="ho-note">'+row.reason+'</p>'+
       '<ol class="ho-chain">'+chain+'</ol>'+actions;
@@ -234,11 +265,16 @@
     states[id]=next;
     if(window.FAST && FAST.save) FAST.save({states:states}, FAST.HO_APPR_KEY);
     if(typeof toast==='function'){
+      var price=hoApprIsPrice(row);
       toast(act==='approve'
-        ? 'Cancel billing approved. AR reopened. Not a DP, signature, or 30% waiver.'
+        ? (price
+          ? 'Price adjustment approved. OTR posting may proceed. Not a DP, signature, or 30% waiver.'
+          : 'Cancel billing approved. AR reopened. Not a DP, signature, or 30% waiver.')
         : act==='return'
           ? 'Returned to the KA · KC · ABH · OM chain with comment.'
-          : 'Cancel billing rejected. Existing billing stands.');
+          : (price
+            ? 'Price adjustment rejected. Existing OTR stands.'
+            : 'Cancel billing rejected. Existing billing stands.'));
     }
     applyFinanceHo();
   }
@@ -291,7 +327,7 @@
     if(hoView==='lead'){
       listFilter=listFilter.slice().sort(function(a,b){ return (hoAgingDays(b)||0)-(hoAgingDays(a)||0); });
     }
-    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',lead:'Lead time & aging',appr:'Cancel billing · awaiting Finance HO'};
+    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',lead:'Lead time & aging',appr:'Cancel billing & price adjustment · awaiting Finance HO'};
     var lab=document.querySelector('[data-ho-filter-label]');
     if(lab) lab.textContent=labels[hoView]||labels.all;
     document.querySelectorAll('[data-rail="finance"] button[data-go="finance_ho"]').forEach(function(b){
