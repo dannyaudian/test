@@ -148,6 +148,13 @@
 }
 #finance_ho .ho-act.ghost{background:#fff;color:#134e4a;border:1px solid #c5d4dc}
 #finance_ho .ho-act.stop{background:#9f1239;color:#fff}
+#finance_ho .ho-causes{list-style:none;margin:12px 0 0;padding:0}
+#finance_ho .ho-causes li{
+  font-size:12.5px;line-height:1.45;padding:8px 10px;margin:0 0 6px;border-radius:10px;
+  background:#f8fafc;color:#475569;border:1px solid #e2e8f0;
+}
+#finance_ho .ho-causes li.on{background:#fffbeb;border-color:#f59e0b;color:#78350f;font-weight:700}
+#finance_ho .ho-causes li span{display:block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#92400e;margin-bottom:2px}
 #finance_ho .ho-age.late{color:#be123c;font-weight:800}
 
 #finance_ho .ho-dossier{padding:14px 16px 16px}

@@ -429,6 +429,7 @@
     if(v==='unbilled') return 'ho.fast.id/leasing/unbilled';
     if(v==='billed') return 'ho.fast.id/leasing/billed-unpaid';
     if(v==='appr') return 'ho.fast.id/approvals';
+    if(v==='uncleared') return 'ho.fast.id/leasing/ar-open';
     if(v==='lead') return 'ho.fast.id/leasing/leadtime';
     return 'ho.fast.id/leasing';
   }

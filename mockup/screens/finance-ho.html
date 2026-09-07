@@ -4,7 +4,7 @@
             <div>
               <p class="ho-kicker">Finance HO · B2B leasing</p>
               <h2>B2B leasing book</h2>
-              <p>Partner settlement only — unbilled, billed unpaid, and lead time. Not the Approvals desk. Partner <b>PT Danapura Multifinance</b>. FAST is not the lessor.</p>
+              <p>Partner settlement only — unbilled, billed unpaid, partner paid / AR still open, and lead time. Not the Approvals desk. Partner <b>PT Danapura Multifinance</b>. FAST is not the lessor.</p>
             </div>
             <div class="ho-mitra">
               <span>Partner</span>
@@ -29,6 +29,7 @@
             <button type="button" data-ho-view="all" aria-current="true">All SOs</button>
             <button type="button" data-ho-view="unbilled">Unbilled <span data-ho-n="unbilled">0</span></button>
             <button type="button" data-ho-view="billed">Billed, unpaid <span data-ho-n="billed">0</span></button>
+            <button type="button" data-ho-view="uncleared">Paid, AR open <span data-ho-n="uncleared">0</span></button>
             <button type="button" data-ho-view="lead">Settlement lead time</button>
           </nav>
 
@@ -43,10 +44,10 @@
               <strong data-ho-kpi="billed-n">—</strong>
               <small data-ho-kpi="billed-rp">Waiting for partner settlement</small>
             </button>
-            <button type="button" data-ho-view="lead">
-              <span>Median settled</span>
-              <strong><em data-ho-kpi="lead-days">—</em> days</strong>
-              <small>Paperless → settled · 14-day SLA</small>
+            <button type="button" class="warn" data-ho-view="uncleared">
+              <span>Paid, AR open</span>
+              <strong data-ho-kpi="uncleared-n">—</strong>
+              <small data-ho-kpi="uncleared-rp">Partner paid · AR not cleared</small>
             </button>
             <button type="button" class="warn" data-ho-view="lead">
               <span>Aging &gt; SLA</span>
@@ -88,7 +89,7 @@
           <div class="ho-body ho-lead-body" data-ho-panel="lead" data-ho-book-only hidden>
             <div class="ho-lead-card">
               <h3>Lead-time spread</h3>
-              <p>Days after paperless. Open aging is counted through 7 Sep 2026. This is not a DP or signature waiver.</p>
+              <p>Days after paperless. Open aging is counted through 7 Sep 2026. Partner-paid rows with AR still open are not settled. This is not a DP or signature waiver.</p>
               <ol class="ho-bars">
                 <li><span>0–7 days</span><b><i data-ho-bar="0"></i></b><em data-ho-bar-n="0">0</em></li>
                 <li><span>8–14 · SLA</span><b><i data-ho-bar="1"></i></b><em data-ho-bar-n="1">0</em></li>

@@ -50,7 +50,7 @@
     'assets/js/mockup-cust.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=ho-appr-desk';
+  var bust = 'v=ho-appr-main36';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {
