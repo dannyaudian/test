@@ -18,6 +18,7 @@
     'mockup/screens/admin-book.html',
     'mockup/screens/admin-queue.html',
     'mockup/screens/mgmt.html',
+    'mockup/screens/finance-ho.html',
     'mockup/screens/customer.html',
     'mockup/screens/customer-booking.html',
     'mockup/screens/cashless.html'
@@ -45,6 +46,7 @@
     'assets/js/mockup-dewi-proc.js',
     'assets/js/mockup-afi.js',
     'assets/js/mockup-b2b.js',
+    'assets/js/mockup-finance.js',
     'assets/js/mockup-cust.js',
     'assets/js/mockup-pay.js'
   ];

@@ -1,0 +1,115 @@
+      <section class="screen" id="finance_ho">
+        <div class="ho-desk">
+          <header class="ho-head">
+            <div>
+              <p class="ho-kicker">Finance HO · Jakarta area</p>
+              <h2>B2B leasing book</h2>
+              <p>Head Office portal — not the branch SAM workspace, not the Administration ledger, not Management cards. Partner <b>PT Danapura Multifinance</b>. Cilandak Hiace units appear here as figures only.</p>
+            </div>
+            <div class="ho-mitra">
+              <span>Partner</span>
+              <b>PT Danapura Multifinance</b>
+              <em>FAST is not the lessor</em>
+            </div>
+          </header>
+
+          <nav class="ho-switch" aria-label="HO leasing book" data-ho-tabs>
+            <button type="button" data-ho-view="all" aria-current="true">All SOs</button>
+            <button type="button" data-ho-view="unbilled">Unbilled <span data-ho-n="unbilled">0</span></button>
+            <button type="button" data-ho-view="billed">Billed, unpaid <span data-ho-n="billed">0</span></button>
+            <button type="button" data-ho-view="lead">Settlement lead time</button>
+          </nav>
+
+          <div class="ho-metrics">
+            <button type="button" data-ho-view="unbilled">
+              <span>Unbilled</span>
+              <strong data-ho-kpi="unbilled-n">—</strong>
+              <small data-ho-kpi="unbilled-rp">Paperless not sent</small>
+            </button>
+            <button type="button" class="warn" data-ho-view="billed">
+              <span>Billed, unpaid</span>
+              <strong data-ho-kpi="billed-n">—</strong>
+              <small data-ho-kpi="billed-rp">Waiting for partner settlement</small>
+            </button>
+            <button type="button" data-ho-view="lead">
+              <span>Median settled</span>
+              <strong><em data-ho-kpi="lead-days">—</em> days</strong>
+              <small>Paperless → settled · 14-day SLA</small>
+            </button>
+            <button type="button" class="warn" data-ho-view="lead">
+              <span>Aging &gt; SLA</span>
+              <strong data-ho-kpi="aging-n">—</strong>
+              <small data-ho-kpi="aging-rp">Over 14 days</small>
+            </button>
+          </div>
+
+          <div class="ho-body" data-ho-panel="board">
+            <div class="ho-ledger-wrap">
+              <div class="ho-ledger-bar">
+                <h3>Billing ledger</h3>
+                <span data-ho-filter-label>All leasing SOs</span>
+              </div>
+              <div class="ho-scroll">
+                <table class="ho-ledger">
+                  <thead>
+                    <tr>
+                      <th>SO / branch</th>
+                      <th>Debtor · unit</th>
+                      <th>Financed</th>
+                      <th>Status</th>
+                      <th>Aging</th>
+                      <th>Receipt</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ho-list></tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="ho-dossier" data-ho-detail>
+              <h3>SO dossier</h3>
+              <div data-ho-detail-copy>
+                <p>Select a ledger row. The dossier, blockers, and receipt trail stay in the HO portal — they do not open Frontman, Administration, or Management screens.</p>
+              </div>
+            </aside>
+          </div>
+
+          <div class="ho-body ho-lead-body" data-ho-panel="lead" hidden>
+            <div class="ho-lead-card">
+              <h3>Lead-time spread</h3>
+              <p>Days after paperless. Open aging is counted through 7 Sep 2026. This is not a DP or signature waiver.</p>
+              <ol class="ho-bars">
+                <li><span>0–7 days</span><b><i data-ho-bar="0"></i></b><em data-ho-bar-n="0">0</em></li>
+                <li><span>8–14 · SLA</span><b><i data-ho-bar="1"></i></b><em data-ho-bar-n="1">0</em></li>
+                <li class="late"><span>15–30 days</span><b><i data-ho-bar="2"></i></b><em data-ho-bar-n="2">0</em></li>
+                <li class="late"><span>&gt;30 days</span><b><i data-ho-bar="3"></i></b><em data-ho-bar-n="3">0</em></li>
+              </ol>
+              <dl class="ho-stats">
+                <div><dt>Median settled</dt><dd data-ho-kpi="lead-days-2">—</dd></div>
+                <div><dt>Average settled</dt><dd data-ho-kpi="lead-avg">—</dd></div>
+                <div><dt>Open &gt; SLA</dt><dd data-ho-kpi="aging-n-2">—</dd></div>
+              </dl>
+            </div>
+            <div class="ho-ledger-wrap">
+              <div class="ho-ledger-bar">
+                <h3>Settlement queue</h3>
+                <span>Billed unpaid, longest aging first</span>
+              </div>
+              <div class="ho-scroll">
+                <table class="ho-ledger">
+                  <thead>
+                    <tr>
+                      <th>SO / branch</th>
+                      <th>Debtor · unit</th>
+                      <th>Financed</th>
+                      <th>Status</th>
+                      <th>Aging</th>
+                      <th>Receipt</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ho-aging-list></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>

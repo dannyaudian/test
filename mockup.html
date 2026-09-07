@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="assets/css/mockup.css">
 <link rel="stylesheet" href="assets/css/mockup-widgets.css">
 <link rel="stylesheet" href="assets/css/mockup-shop.css">
+<link rel="stylesheet" href="assets/css/mockup-finance.css">
 </head>
 <body>
 <a class="skip" href="#mockup">Skip to mockup</a>
@@ -58,6 +59,7 @@
       <button class="roletab" data-role="frontman" aria-pressed="true">Frontman</button>
       <button class="roletab" data-role="admin" aria-pressed="false">Administration</button>
       <button class="roletab" data-role="mgmt" aria-pressed="false">Management</button>
+      <button class="roletab" data-role="finance" aria-pressed="false">Finance HO</button>
       <button class="roletab" data-role="cust" aria-pressed="false">Customer</button>
     </div>
   </div>
@@ -90,6 +92,14 @@
         </div>
         <button data-go="mgmt_inbox" aria-current="true">Queue<span class="pill" data-mgmt-pill>4</span></button>
         <button data-go="dashboard">Branch / Area Volume</button>
+      </div>
+
+      <div data-rail="finance" hidden>
+        <p class="grouplabel">Finance HO · Jakarta area</p>
+        <button data-go="finance_ho" data-ho-jump="all" aria-current="true">Leasing dashboard</button>
+        <button data-go="finance_ho" data-ho-jump="unbilled">Unbilled</button>
+        <button data-go="finance_ho" data-ho-jump="billed">Billed, unpaid</button>
+        <button data-go="finance_ho" data-ho-jump="lead">Lead time</button>
       </div>
 
       <div data-rail="cust" hidden>
