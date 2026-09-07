@@ -128,6 +128,121 @@
       '<p class="ho-note">'+row.note+'. Finance HO does not bill and does not waive DP or signature — branch Administration runs paperless.</p>';
   }
 
+  var HO_APPR_SEATS=[
+    {id:'ka', label:'Head of Administration'},
+    {id:'kc', label:'Branch Head'},
+    {id:'abh', label:'Area Business Head'},
+    {id:'om', label:'Operation Manager'}
+  ];
+  var HO_APPR=[
+    { id:'cb-kld', kind:'Cancel billing', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix', billed:329600000, kwt:'KWT/26/KLD/008201',
+      reason:'Duplicate paperless. The same SO was billed twice after a retry. Cancel the second billing and return AR.',
+      chain:{ka:'1 Sep 10:12',kc:'1 Sep 11:40',abh:'2 Sep 09:05',om:'2 Sep 14:22'} },
+    { id:'cb-bsd', kind:'Cancel billing', so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', billed:412500000, kwt:'KWT/26/BSD/007188',
+      reason:'Paperless posted to the wrong SO. Partner has not paid. Cancel billing, restore AR Open on this SO, rebill the correct SO.',
+      chain:{ka:'28 Aug 16:02',kc:'29 Aug 09:18',abh:'29 Aug 13:44',om:'1 Sep 08:50'} },
+    { id:'cb-srp', kind:'Cancel billing', so:'4500092033', cabang:'Serpong', unit:'Alphard', billed:891000000, kwt:'KWT/26/SRP/008033',
+      reason:'Customer asked to unwind a premature paperless before partner settlement. Chain already approved; HO records the cancel.',
+      chain:{ka:'3 Sep 11:20',kc:'3 Sep 15:01',abh:'4 Sep 09:33',om:'4 Sep 16:10'}, done:'approved' }
+  ];
+  FAST.HO_APPR_KEY='fast.ho.appr';
+  var hoApprPick=null;
+  function hoApprStore(){
+    return (window.FAST && FAST.load && FAST.load(FAST.HO_APPR_KEY))||{};
+  }
+  function hoApprHo(row){
+    var st=(hoApprStore().states||{})[row.id];
+    return st||row.done||'open';
+  }
+  function hoApprOpen(){
+    return HO_APPR.filter(function(r){ return hoApprHo(r)==='open'; });
+  }
+  function hoApprPos(st){
+    if(st==='approved') return {cls:'lunas', text:'HO approved'};
+    if(st==='returned') return {cls:'hold', text:'Returned'};
+    if(st==='rejected') return {cls:'late', text:'HO rejected'};
+    return {cls:'uncleared', text:'Awaiting HO'};
+  }
+  function hoApprRowHtml(row){
+    var st=hoApprHo(row);
+    var pos=hoApprPos(st);
+    return '<tr data-ho-appr-row="'+row.id+'">'+
+      '<td><b>'+row.kind+'</b><span class="sub">'+row.kwt+'</span></td>'+
+      '<td><b>'+row.so+'</b><span class="sub">'+row.cabang+' · '+row.unit+'</span></td>'+
+      '<td>'+hoIdr(row.billed)+'</td>'+
+      '<td>KA · KC · ABH · OM</td>'+
+      '<td><span class="ho-pos '+pos.cls+'">'+pos.text+'</span></td>'+
+      '</tr>';
+  }
+  function hoApprDossier(row){
+    if(!row){
+      return '<p>Select a cancel-billing request. Prior seats are already approved. Finance HO is last. This is not a DP, signature, 30%, or paid-in-full waiver.</p>';
+    }
+    var st=hoApprHo(row);
+    var pos=hoApprPos(st);
+    var chain=HO_APPR_SEATS.map(function(s){
+      return '<li class="on"><span>'+s.label+'</span><b>Approved · '+(row.chain[s.id]||'—')+'</b></li>';
+    }).join('')+'<li class="'+(st==='open'?'now':'on')+'"><span>Finance HO</span><b>'+pos.text+'</b></li>';
+    var actions=st==='open'
+      ? '<label class="ho-appr-note">HO comment (required to return or reject)<textarea data-ho-appr-comment rows="2" placeholder="Why cancel, return, or reject"></textarea></label>'+
+        '<div class="ho-appr-acts">'+
+        '<button type="button" class="ho-act" data-ho-appr-act="approve" data-ho-appr-id="'+row.id+'">Approve cancel</button>'+
+        '<button type="button" class="ho-act ghost" data-ho-appr-act="return" data-ho-appr-id="'+row.id+'">Return to chain</button>'+
+        '<button type="button" class="ho-act stop" data-ho-appr-act="reject" data-ho-appr-id="'+row.id+'">Reject</button>'+
+        '</div>'
+      : '<p class="ho-note">HO decision already recorded. Billing cancel is a finance posting — not a commercial gate waiver.</p>';
+    return '<p class="ho-line"><span>Type</span><b>'+row.kind+'</b></p>'+
+      '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
+      '<p class="ho-line"><span>Branch · unit</span><b>'+row.cabang+' · '+row.unit+'</b></p>'+
+      '<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
+      '<p class="ho-line"><span>Receipt</span><b>'+row.kwt+'</b></p>'+
+      '<p class="ho-line"><span>HO status</span><b>'+pos.text+'</b></p>'+
+      '<p class="ho-note">'+row.reason+'</p>'+
+      '<ol class="ho-chain">'+chain+'</ol>'+actions;
+  }
+  function hoRenderAppr(){
+    var open=hoApprOpen();
+    if(!hoApprPick && HO_APPR.length) hoApprPick=(open[0]||HO_APPR[0]).id;
+    setTextSafe('[data-ho-kpi="appr-n"]', String(open.length));
+    setTextSafe('[data-ho-n="appr"]', String(open.length));
+    setTextSafe('[data-ho-appr-n]', String(open.length));
+    var list=document.querySelector('[data-ho-appr-list]');
+    if(list) list.innerHTML=HO_APPR.map(hoApprRowHtml).join('');
+    document.querySelectorAll('[data-ho-appr-row]').forEach(function(b){
+      b.setAttribute('aria-current', b.getAttribute('data-ho-appr-row')===hoApprPick?'true':'false');
+    });
+    var row=HO_APPR.filter(function(r){ return r.id===hoApprPick; })[0];
+    var copy=document.querySelector('[data-ho-appr-copy]');
+    if(copy) copy.innerHTML=hoApprDossier(row);
+  }
+  function setTextSafe(sel, val){
+    document.querySelectorAll(sel).forEach(function(el){ el.textContent=val; });
+  }
+  function hoDecideAppr(id, act){
+    var row=HO_APPR.filter(function(r){ return r.id===id; })[0];
+    if(!row || hoApprHo(row)!=='open') return;
+    var box=document.querySelector('[data-ho-appr-comment]');
+    var comment=((box&&box.value)||'').trim();
+    if((act==='return'||act==='reject') && !comment){
+      if(typeof toast==='function') toast('Add a comment to return or reject.');
+      if(box) box.focus();
+      return;
+    }
+    var next=act==='approve'?'approved':act==='return'?'returned':'rejected';
+    var store=hoApprStore();
+    var states=store.states||{};
+    states[id]=next;
+    if(window.FAST && FAST.save) FAST.save({states:states}, FAST.HO_APPR_KEY);
+    if(typeof toast==='function'){
+      toast(act==='approve'
+        ? 'Cancel billing approved. AR reopened. Not a DP, signature, or 30% waiver.'
+        : act==='return'
+          ? 'Returned to the KA · KC · ABH · OM chain with comment.'
+          : 'Cancel billing rejected. Existing billing stands.');
+    }
+    applyFinanceHo();
+  }
+
   function applyFinanceHo(){
     var host=document.getElementById('finance_ho');
     if(!host) return;
@@ -176,7 +291,7 @@
     if(hoView==='lead'){
       listFilter=listFilter.slice().sort(function(a,b){ return (hoAgingDays(b)||0)-(hoAgingDays(a)||0); });
     }
-    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',lead:'Lead time & aging'};
+    var labels={all:'All leasing SOs',unbilled:'Unbilled to leasing',billed:'Billed, unpaid',lead:'Lead time & aging',appr:'Cancel billing · awaiting Finance HO'};
     var lab=document.querySelector('[data-ho-filter-label]');
     if(lab) lab.textContent=labels[hoView]||labels.all;
     document.querySelectorAll('[data-rail="finance"] button[data-go="finance_ho"]').forEach(function(b){
@@ -189,8 +304,9 @@
     document.querySelectorAll('.ho-metrics [data-ho-view]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-ho-view')===hoView?'true':'false');
     });
-    document.querySelectorAll('[data-ho-panel="board"]').forEach(function(el){ el.hidden=hoView==='lead'; });
+    document.querySelectorAll('[data-ho-panel="board"]').forEach(function(el){ el.hidden=hoView==='lead'||hoView==='appr'; });
     document.querySelectorAll('[data-ho-panel="lead"]').forEach(function(el){ el.hidden=hoView!=='lead'; });
+    document.querySelectorAll('[data-ho-panel="appr"]').forEach(function(el){ el.hidden=hoView!=='appr'; });
     var list=document.querySelector('[data-ho-list]');
     if(list) list.innerHTML=listFilter.map(hoRowHtml).join('')||'<tr><td colspan="6">No SOs in this filter.</td></tr>';
     var ageList=document.querySelector('[data-ho-aging-list]');
@@ -204,11 +320,13 @@
     var row=all.filter(function(r){ return r.id===hoPick; })[0];
     var copy=document.querySelector('[data-ho-detail-copy]');
     if(copy) copy.innerHTML=hoDossier(row);
+    hoRenderAppr();
     var bar=document.querySelector('#mockup .urlbar');
     var root=document.getElementById('mockup');
     if(bar && root && root.classList.contains('finance-portal')){
       if(hoView==='unbilled') bar.textContent='ho.fast.id/leasing/unbilled';
       else if(hoView==='billed') bar.textContent='ho.fast.id/leasing/billed-unpaid';
+      else if(hoView==='appr') bar.textContent='ho.fast.id/leasing/approvals';
       else if(hoView==='lead') bar.textContent='ho.fast.id/leasing/leadtime';
       else bar.textContent='ho.fast.id/leasing';
     }
@@ -222,6 +340,17 @@
     });
     var host=document.getElementById('finance_ho');
     if(host) host.addEventListener('click',function(e){
+      var act=e.target.closest('[data-ho-appr-act]');
+      if(act){
+        hoDecideAppr(act.getAttribute('data-ho-appr-id'), act.getAttribute('data-ho-appr-act'));
+        return;
+      }
+      var ap=e.target.closest('[data-ho-appr-row]');
+      if(ap){
+        hoApprPick=ap.getAttribute('data-ho-appr-row');
+        applyFinanceHo();
+        return;
+      }
       var rowEl=e.target.closest('[data-ho-row]');
       if(!rowEl) return;
       hoPick=rowEl.getAttribute('data-ho-row');

@@ -17,6 +17,7 @@
             <button type="button" data-ho-view="all" aria-current="true">All SOs</button>
             <button type="button" data-ho-view="unbilled">Unbilled <span data-ho-n="unbilled">0</span></button>
             <button type="button" data-ho-view="billed">Billed, unpaid <span data-ho-n="billed">0</span></button>
+            <button type="button" data-ho-view="appr">Approvals <span data-ho-n="appr">0</span></button>
             <button type="button" data-ho-view="lead">Settlement lead time</button>
           </nav>
 
@@ -35,6 +36,11 @@
               <span>Median settled</span>
               <strong><em data-ho-kpi="lead-days">—</em> days</strong>
               <small>Paperless → settled · 14-day SLA</small>
+            </button>
+            <button type="button" class="warn" data-ho-view="appr">
+              <span>HO approvals</span>
+              <strong data-ho-kpi="appr-n">—</strong>
+              <small>Cancel billing after KA · KC · ABH · OM</small>
             </button>
             <button type="button" class="warn" data-ho-view="lead">
               <span>Aging &gt; SLA</span>
@@ -110,6 +116,34 @@
                 </table>
               </div>
             </div>
+          </div>
+          <div class="ho-body ho-appr-body" data-ho-panel="appr" hidden>
+            <div class="ho-ledger-wrap">
+              <div class="ho-ledger-bar">
+                <h3>Approvals for Finance HO</h3>
+                <span>Cancel billing only after Head of Administration, Branch Head, ABH, and Operation Manager</span>
+              </div>
+              <div class="ho-scroll">
+                <table class="ho-ledger">
+                  <thead>
+                    <tr>
+                      <th>Request</th>
+                      <th>SO / branch</th>
+                      <th>Billed</th>
+                      <th>Prior seats</th>
+                      <th>HO</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ho-appr-list></tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="ho-dossier" data-ho-appr-detail>
+              <h3>Cancel billing dossier</h3>
+              <div data-ho-appr-copy>
+                <p>Select a request. Finance HO is the last seat. This does not open the Management queue.</p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
