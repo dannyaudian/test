@@ -1,0 +1,25 @@
+#mockup .ho-kpis .card{
+  text-align:left;width:100%;cursor:pointer;font:inherit;color:inherit;
+}
+#mockup .ho-kpis .card[aria-current="true"]{
+  border-color:var(--signal);box-shadow:0 0 0 3px var(--signal-tint);
+}
+#mockup .ho-list .order-card{width:100%;}
+#mockup .ho-list .order-card[aria-current="true"]{
+  border-color:var(--signal);box-shadow:0 0 0 3px var(--signal-tint);
+}
+#mockup .ho-list .thumb.ho{
+  background:linear-gradient(135deg,#1e293b,#334155);font-size:11px;letter-spacing:.08em;
+}
+#mockup .ho-list .thumb.ho.live{background:linear-gradient(135deg,#0f766e,#14b8a6)}
+#mockup .ho-list .thumb.ho.age{background:linear-gradient(135deg,#9f1239,#fb7185)}
+#mockup .ho-list .thumb.ho.ok{background:linear-gradient(135deg,#047857,#34d399)}
+#mockup .ho-lead .track i{transition:width .25s var(--ease)}
+#mockup .finance-strip{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 16px;background:#0f172a;color:#e2e8f0;border-bottom:1px solid #1e293b;
+}
+#mockup .finance-strip p{margin:0;font-size:13px;max-width:none}
+#mockup .finance-strip b{color:#fff}
+#mockup .app.finance-ho .urlbar{color:#a5b4fc}
+#mockup [data-rail="finance"] .grouplabel{margin-top:0}

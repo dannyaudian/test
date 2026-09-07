@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="assets/css/mockup.css">
 <link rel="stylesheet" href="assets/css/mockup-widgets.css">
 <link rel="stylesheet" href="assets/css/mockup-shop.css">
+<link rel="stylesheet" href="assets/css/mockup-finance.css">
 </head>
 <body>
 <a class="skip" href="#mockup">Skip to mockup</a>
@@ -58,6 +59,7 @@
       <button class="roletab" data-role="frontman" aria-pressed="true">Frontman</button>
       <button class="roletab" data-role="admin" aria-pressed="false">Administration</button>
       <button class="roletab" data-role="mgmt" aria-pressed="false">Management</button>
+      <button class="roletab" data-role="finance" aria-pressed="false">Finance HO</button>
       <button class="roletab" data-role="cust" aria-pressed="false">Customer</button>
     </div>
   </div>
@@ -92,6 +94,14 @@
         <button data-go="dashboard">Branch / Area Volume</button>
       </div>
 
+      <div data-rail="finance" hidden>
+        <p class="grouplabel">Finance HO · Area Jakarta</p>
+        <button data-go="finance_ho" data-ho-jump="all" aria-current="true">Dashboard leasing</button>
+        <button data-go="finance_ho" data-ho-jump="unbilled">Belum tagih</button>
+        <button data-go="finance_ho" data-ho-jump="billed">Tagih belum bayar</button>
+        <button data-go="finance_ho" data-ho-jump="lead">Leadtime</button>
+      </div>
+
       <div data-rail="cust" hidden>
         <p class="grouplabel">Customer · Budi Santoso</p>
         <button data-go="customer" aria-current="true">My Orders</button>
@@ -102,6 +112,10 @@
     </aside>
 
     <div>
+      <div class="finance-strip" id="financeStrip" hidden>
+        <p><b>Finance HO.</b> Buku leasing area — data cabang yang sama. Finance tidak menagih dan tidak me-waiver DP/TTD.</p>
+        <div class="integ-links"><button type="button" class="btn ghost" data-go="finance_ho">← Dashboard leasing</button></div>
+      </div>
       <div class="integ" id="adminStrip" hidden>
         <p><b>Administration Mode.</b> This is the same Frontman data — verify or complete it, do not retype.</p>
         <div class="integ-links"><button type="button" class="btn ghost" data-go="admin_spk" data-admin-home>← Back to List</button></div>

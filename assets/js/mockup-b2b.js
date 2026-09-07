@@ -121,16 +121,24 @@
       block.textContent=miss.length?('Belum bisa ditagih. Kurang: '+miss.join(', ')+'.'):'';
     }
     var paperBtn=document.querySelector('[data-b2b-paperless]');
-    if(paperBtn) paperBtn.disabled=(!canBill && !onlyEpo) || !!u.paperlessSent;
+    if(paperBtn){
+      paperBtn.disabled=(!canBill && !onlyEpo) || !!u.paperlessSent || currentRole==='finance';
+      if(currentRole==='finance') paperBtn.title='Finance HO memantau. Penagihan di Administrasi cabang.';
+    }
     var kwtOnly=document.querySelector('[data-b2b-kwt]');
-    if(kwtOnly) kwtOnly.disabled=!u.paperlessSent || !!u.kwtIssued;
+    if(kwtOnly) kwtOnly.disabled=!u.paperlessSent || !!u.kwtIssued || currentRole==='finance';
+    var lunasOnly=document.querySelector('[data-b2b-lunas]');
+    if(lunasOnly) lunasOnly.disabled=!u.kwtIssued || currentRole==='finance';
     document.querySelectorAll('[data-b2b-tab-role]').forEach(function(b){
       var need=b.getAttribute('data-b2b-tab-role');
-      b.hidden = !(currentRole===need || currentRole==='mgmt');
+      if(need==='admin') b.hidden = !(currentRole==='admin' || currentRole==='mgmt' || currentRole==='finance');
+      else if(need==='frontman') b.hidden = !(currentRole==='frontman' || currentRole==='mgmt');
+      else b.hidden = !(currentRole===need || currentRole==='mgmt');
     });
     var tab=s.tab||'ringkas';
     if(currentRole==='frontman' && tab==='tagih') tab='dokumen';
     if(currentRole==='admin' && tab==='dokumen') tab='tagih';
+    if(currentRole==='finance' && tab==='dokumen') tab='tagih';
     document.querySelectorAll('[data-b2b-chrome]').forEach(function(el){ el.hidden = tab!=='ringkas'; });
     var hiace=document.getElementById('tx_hiace');
     if(hiace){

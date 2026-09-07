@@ -1,0 +1,93 @@
+      <section class="screen" id="finance_ho">
+        <div class="screenhead">
+          <div>
+            <h2>Finance HO · B2B leasing</h2>
+            <p>Satu buku area: mitra <b>PT Danapura Multifinance</b>. Angka SO Cilandak (Hiace 00421) hidup dari cabang yang sama. Finance memantau — Administrasi yang menagih.</p>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn ghost" data-go="admin_leasing" data-role="admin">Buku cabang</button>
+            <button type="button" class="btn ghost" data-go="tx_hiace" data-tx-dots="hiace" data-b2b-pick="1288">Buka Hiace</button>
+          </div>
+        </div>
+
+        <nav class="worktabs" aria-label="Buku leasing HO" data-ho-tabs>
+          <button type="button" data-ho-view="all" aria-current="true">Semua</button>
+          <button type="button" data-ho-view="unbilled">Belum tagih <span class="n" data-ho-n="unbilled">0</span></button>
+          <button type="button" data-ho-view="billed">Tagih belum bayar <span class="n" data-ho-n="billed">0</span></button>
+          <button type="button" data-ho-view="lead">Leadtime pelunasan</button>
+        </nav>
+
+        <div class="cards ho-kpis">
+          <button type="button" class="card kpi-btn" data-ho-view="unbilled">
+            <p class="k">Belum tagih ke leasing</p>
+            <p class="v" data-ho-kpi="unbilled-n">—</p>
+            <p class="n" data-ho-kpi="unbilled-rp">Paperless belum terkirim</p>
+          </button>
+          <button type="button" class="card kpi-btn alert" data-ho-view="billed">
+            <p class="k">Sudah tagih, belum bayar</p>
+            <p class="v" data-ho-kpi="billed-n">—</p>
+            <p class="n" data-ho-kpi="billed-rp">Menunggu pelunasan mitra</p>
+          </button>
+          <button type="button" class="card kpi-btn" data-ho-view="lead">
+            <p class="k">Leadtime pelunasan</p>
+            <p class="v"><span data-ho-kpi="lead-days">—</span><span style="font-size:14px;font-weight:500"> hari</span></p>
+            <p class="n">Median paperless → lunas · SLA 14 hari</p>
+          </button>
+          <button type="button" class="card kpi-btn" data-ho-view="lead">
+            <p class="k">Tertagih aging &gt;14 hari</p>
+            <p class="v" data-ho-kpi="aging-n">—</p>
+            <p class="n" data-ho-kpi="aging-rp">Di atas SLA pelunasan</p>
+          </button>
+        </div>
+
+        <div class="split" data-ho-panel="board">
+          <div class="box">
+            <h3>Buku tagihan <span class="side" data-ho-filter-label>Semua SO leasing</span></h3>
+            <p class="hint" style="padding:0 16px 8px">Klik baris: Hiace Cilandak membuka workspace SPK yang sama. SO cabang lain tetap di buku HO.</p>
+            <div class="order-list ho-list" data-ho-list style="padding:0 12px 12px"></div>
+          </div>
+          <div>
+            <div class="box">
+              <h3>Siap ditagih vs tertahan</h3>
+              <ul class="gates">
+                <li data-ho-view="unbilled"><span class="mark wait" data-ho-ready-n>—</span><div>Siap paperless<span class="why">Paket Frontman + full DP + e-PO (atau putusan OM)</span></div><span class="tag wait">Belum tagih</span></li>
+                <li data-ho-view="unbilled"><span class="mark no" data-ho-hold-n>—</span><div>Belum bisa ditagih<span class="why">TTD, DP, e-PO, atau backflow dokumen</span></div><span class="tag hold">Gate</span></li>
+                <li data-ho-view="billed"><span class="mark ok" data-ho-open-n>—</span><div>Paperless terkirim<span class="why">Kuitansi ke leasing sudah atau menunggu penerbitan</span></div><span class="tag ok">AR leasing</span></li>
+              </ul>
+            </div>
+            <div class="box" data-ho-detail>
+              <h3>Detail SO</h3>
+              <div class="pad">
+                <p class="hint" data-ho-detail-copy>Pilih baris di buku untuk melihat lineage, blocker, dan tautan cabang.</p>
+                <div class="nextbar" data-ho-detail-actions hidden>
+                  <button type="button" class="btn" data-ho-open-tx>Buka workspace</button>
+                  <button type="button" class="btn ghost" data-go="admin_leasing" data-role="admin">List leasing cabang</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split" data-ho-panel="lead" hidden>
+          <div class="box">
+            <h3>Sebaran leadtime · paperless ke lunas</h3>
+            <p class="hint" style="padding:0 16px 8px">Hari kalender setelah penagihan paperless. Aging terbuka memakai hari berjalan sampai hari ini (7 Sep 2026).</p>
+            <div class="funnel ho-lead">
+              <div class="frow2"><span>0–7 hari</span><span class="track"><i data-ho-bar="0"></i></span><span class="n" data-ho-bar-n="0">0</span></div>
+              <div class="frow2"><span>8–14 hari · SLA</span><span class="track"><i data-ho-bar="1"></i></span><span class="n" data-ho-bar-n="1">0</span></div>
+              <div class="frow2"><span>15–30 hari</span><span class="track"><i class="warn" data-ho-bar="2"></i></span><span class="n" data-ho-bar-n="2">0</span></div>
+              <div class="frow2"><span>&gt;30 hari</span><span class="track"><i class="warn" data-ho-bar="3"></i></span><span class="n" data-ho-bar-n="3">0</span></div>
+            </div>
+            <div class="money" style="border:0;box-shadow:none;padding:4px 16px 16px">
+              <div class="row"><span>Median (lunas)</span><span data-ho-kpi="lead-days-2">—</span></div>
+              <div class="row"><span>Rata-rata (lunas)</span><span data-ho-kpi="lead-avg">—</span></div>
+              <div class="row"><span>Terbuka di atas SLA</span><span data-ho-kpi="aging-n-2">—</span></div>
+            </div>
+          </div>
+          <div class="box">
+            <h3>Antrian pelunasan</h3>
+            <p class="hint" style="padding:0 16px 8px">Yang sudah ditagih, diurutkan aging terpanjang. Bukan waiver DP atau TTD.</p>
+            <div class="order-list ho-list" data-ho-aging-list style="padding:0 12px 12px"></div>
+          </div>
+        </div>
+      </section>

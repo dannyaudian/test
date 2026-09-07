@@ -299,6 +299,7 @@
   });
   var paper=document.querySelector('[data-b2b-paperless]');
   if(paper) paper.addEventListener('click',function(){
+    if(currentRole==='finance') return;
     var s=FAST.b2bLoad();
     var u=s.units[s.selected]||{};
     if(!FAST.b2bAdminCanBill(u)){
@@ -313,12 +314,14 @@
     }
     patchB2b(function(st){
       st.units[st.selected].paperlessSent=true;
+      st.units[st.selected].paperlessAt=Date.now();
       st.units[st.selected].status='paperless_sent';
     });
     toast('Penagihan paperless terkirim ke leasing. Tidak ada cetak fisik.');
   });
   var kwtBtn=document.querySelector('[data-b2b-kwt]');
   if(kwtBtn) kwtBtn.addEventListener('click',function(){
+    if(currentRole==='finance') return;
     var s=FAST.b2bLoad();
     var u=s.units[s.selected]||{};
     var meta=b2bSoMeta(s.selected);
@@ -326,12 +329,16 @@
       toast('Send the paperless billing request first. The leasing receipt is issued by Administration.');
       return;
     }
-    patchB2b(function(st){ st.units[st.selected].kwtIssued=true; });
+    patchB2b(function(st){
+      st.units[st.selected].kwtIssued=true;
+      st.units[st.selected].kwtAt=Date.now();
+    });
     if(meta.kwt) downloadReceipt(meta.kwt);
     toast('Leasing billing receipt issued: '+(meta.kwt||'KWT')+'.');
   });
   var lunasBtn=document.querySelector('[data-b2b-lunas]');
   if(lunasBtn) lunasBtn.addEventListener('click',function(){
+    if(currentRole==='finance') return;
     var s=FAST.b2bLoad();
     var u=s.units[s.selected]||{};
     if(!u.kwtIssued){
@@ -344,6 +351,7 @@
     }
     patchB2b(function(st){
       st.units[st.selected].lunas=true;
+      st.units[st.selected].lunasAt=Date.now();
       st.units[st.selected].status='lunas';
     });
     toast('Leasing settlement recorded on this SO.');

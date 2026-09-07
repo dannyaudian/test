@@ -18,7 +18,7 @@
   var LIST_SCREENS={
     beranda:1,admin_spk:1,admin_qt:1,admin_so:1,admin_do:1,admin_afi:1,admin_bill:1,
     admin_leasing:1,admin_kwt:1,admin_pay:1,admin_book:1,admin_tx:1,verifikasi:1,
-    eskalasi:1,dashboard:1,mgmt_inbox:1,customer:1,shop_home:1,shop_akun:1
+    eskalasi:1,dashboard:1,mgmt_inbox:1,finance_ho:1,customer:1,shop_home:1,shop_akun:1
   };
   function persistTx(tx){
     activeTx=tx||null;
@@ -33,7 +33,7 @@
   function hubOf(tx){ return (window.FAST && FAST.txHub && FAST.txHub(tx))||'beranda'; }
   function stayTarget(id, fromId, explicit){
     if(LIST_SCREENS[id]){
-      if(id==='beranda'||id==='admin_spk'||id==='customer'||id==='dashboard'||id==='mgmt_inbox'||id==='verifikasi'||id==='eskalasi') persistTx(null);
+      if(id==='beranda'||id==='admin_spk'||id==='customer'||id==='dashboard'||id==='mgmt_inbox'||id==='verifikasi'||id==='eskalasi'||id==='finance_ho') persistTx(null);
       return id;
     }
     if(id==='proses'){
@@ -123,9 +123,17 @@
       else if(id==='mgmt_inbox'||id==='eskalasi'||id.indexOf('exc_')===0) railId='mgmt_inbox';
       else railId='dashboard';
     }
+    if(currentRole==='finance') railId='finance_ho';
     navBtns.forEach(function(b){
       var rail=b.closest('[data-rail]');
-      if(b.dataset.go===railId && rail && rail.hidden!==true) b.setAttribute('aria-current','true');
+      if(!rail || rail.hidden===true){ b.removeAttribute('aria-current'); return; }
+      if(currentRole==='finance' && b.dataset.go==='finance_ho'){
+        var j=b.getAttribute('data-ho-jump')||'all';
+        var hv=(window.FAST && FAST.hoView)||'all';
+        b.setAttribute('aria-current', j===hv ? 'true' : 'false');
+        return;
+      }
+      if(b.dataset.go===railId) b.setAttribute('aria-current','true');
       else b.removeAttribute('aria-current');
     });
     document.querySelectorAll('.worktabs [data-go]').forEach(function(b){
@@ -138,7 +146,8 @@
       var on=(hid==='beranda'&&(id==='beranda'||id==='admin_book'||ADMIN_BOOK[id]||id==='verifikasi'||id==='transaksi'||id.indexOf('tx_')===0||id==='dokumen'||id==='request'||id==='eskalasi'||id==='spk'||id==='spk_baru'||id==='quot'||id==='so'||id==='so2'||id==='proses'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'||id==='delivery'||id==='gi'||id==='afi'||id.indexOf('exc_')===0))
         ||(hid==='proses'&&(id==='proses'||id==='spk'||id==='quot'||id==='so'||id==='so2'||id==='afi_d'||id==='do'||id==='bill_d'||id==='kirim_d'||id==='stnk_d'||id==='booking'))
         ||(hid==='cashless'&&(id==='cashless'||id==='bayar'||id==='admin_pay'||id==='admin_kwt'||id==='digiroom'))
-        ||((hid==='customer'||hid==='shop_home')&&(id==='shop_home'||id==='shop_akun'||id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id==='customer_booking'||id==='customer_booking_qris'||id.indexOf('order_')===0));
+        ||((hid==='customer'||hid==='shop_home')&&(id==='shop_home'||id==='shop_akun'||id==='customer'||id==='customer_detail'||id==='tagihan_customer'||id==='e_kuitansi'||id==='digiroom'||id==='bukti_serah'||id==='customer_booking'||id==='customer_booking_qris'||id.indexOf('order_')===0))
+        ||(hid==='beranda'&&id==='finance_ho');
       a.classList.toggle('on', on);
       a.classList.toggle('pay', hid==='cashless');
     });
@@ -154,6 +163,8 @@
         else if(id==='customer_detail') bar.textContent='shop.fast.id/pesanan/FAST-00418';
         else if(id==='customer_booking'||id==='customer_booking_qris') bar.textContent='shop.fast.id/pesanan/FAST-00426';
         else bar.textContent='shop.fast.id/pesanan/'+id;
+      } else if(currentRole==='finance'){
+        bar.textContent=id==='tx_hiace'?'ho.fast.id/finance/leasing/00421':'ho.fast.id/finance/leasing';
       } else {
         bar.textContent=(id==='digiroom'?'digiroom.fast.id/beranda':'sam.fast.id/fast/'+id);
       }
@@ -182,11 +193,18 @@
         var to=adminReturn==='verifikasi'?'verifikasi':'eskalasi';
         b.setAttribute('data-go', to);
         b.textContent=to==='verifikasi'?'← Needs My Action':'← Exceptions';
+      } else if(currentRole==='finance'){
+        b.setAttribute('data-go','finance_ho');
+        b.textContent='← Dashboard leasing';
       } else {
         b.setAttribute('data-go','eskalasi');
         b.textContent='← Queue';
       }
     });
+    var finStrip=document.getElementById('financeStrip');
+    if(finStrip){
+      finStrip.hidden=currentRole!=='finance' || id==='finance_ho';
+    }
     var strip=document.getElementById('adminStrip');
     if(strip){
       var adminHome=!!bookKey||id==='verifikasi'||id==='eskalasi'||id==='admin_book';
@@ -237,6 +255,7 @@
     applyDelivery();
     applyGi();
     applyB2b();
+    if(typeof applyFinanceHo==='function') applyFinanceHo();
     applyAfi();
     applyStnk();
     applyMgmtInbox();
@@ -262,6 +281,7 @@
       pick.selected=b.dataset.b2bPick;
       FAST.save({units:pick.units, selected:pick.selected, tab:pick.tab||'alur'}, FAST.B2B_KEY);
     }
+    if(b.dataset.hoJump && window.FAST && FAST.hoSetView) FAST.hoSetView(b.dataset.hoJump, true);
     show(b.dataset.go);
     if(b.dataset.scroll){
       var hold=document.getElementById(b.dataset.scroll);
@@ -279,7 +299,7 @@
     }
     if(b.hasAttribute('data-go') || b.classList.contains('roletab') || b.closest('.proc') || (b.closest('.seg') && b.closest('#jenisSeg'))) return;
     if(b.hasAttribute('data-bf') || b.hasAttribute('data-bf-pay') || b.hasAttribute('data-pay-link') || b.hasAttribute('data-dg') || b.hasAttribute('data-dg-pay') || b.hasAttribute('data-edc-device') || b.hasAttribute('data-cash') || b.hasAttribute('data-cash-amt') || b.hasAttribute('data-qris-show') || b.hasAttribute('data-va-issue')) return;
-    if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home') || b.hasAttribute('data-mgmt-seat')) return;
+    if(b.hasAttribute('data-mgmt-act') || b.hasAttribute('data-mgmt-filter') || b.hasAttribute('data-admin-pay-filter') || b.hasAttribute('data-admin-home') || b.hasAttribute('data-mgmt-seat') || b.hasAttribute('data-ho-view') || b.hasAttribute('data-ho-jump') || b.hasAttribute('data-ho-open-tx') || b.hasAttribute('data-ho-row')) return;
     if(b.hasAttribute('data-spk-fill') || b.hasAttribute('data-spk-up') || b.hasAttribute('data-spk-step') || b.hasAttribute('data-spk-save') || b.hasAttribute('data-spk-reset') || b.hasAttribute('data-spk-same') || b.hasAttribute('data-spk-pay')) return;
     if(b.hasAttribute('data-b2b-tab') || b.hasAttribute('data-b2b-so') || b.hasAttribute('data-b2b-doc') || b.hasAttribute('data-b2b-drop') || b.hasAttribute('data-b2b-bill') || b.hasAttribute('data-b2b-dl-contract') || b.hasAttribute('data-b2b-paperless') || b.hasAttribute('data-b2b-kwt') || b.hasAttribute('data-b2b-lunas') || b.hasAttribute('data-b2b-resubmit') || b.hasAttribute('data-b2b-issue-contract') || b.hasAttribute('data-b2b-mark-dp') || b.hasAttribute('data-b2b-mark-epo') || b.hasAttribute('data-b2b-return') || b.hasAttribute('data-b2b-stay') || b.hasAttribute('data-raize-npwp') || b.hasAttribute('data-budi-bf')) return;
     if(b.hasAttribute('data-del-submit') || b.hasAttribute('data-gi-submit') || b.hasAttribute('data-gi-approve') || b.hasAttribute('data-gi-return') || b.hasAttribute('data-gi-stay') || b.hasAttribute('data-drop') || b.hasAttribute('data-bukti-pdf') || b.hasAttribute('data-afi-submit') || b.hasAttribute('data-afi-kind') || b.hasAttribute('data-afi-bill') || b.hasAttribute('data-afi-pair') || b.hasAttribute('data-afi-exc') || b.hasAttribute('data-exc-afi-submit') || b.hasAttribute('data-exc-afi-verify') || b.hasAttribute('data-exc-afi-approve') || b.hasAttribute('data-exc-afi-reject')) return;
@@ -306,7 +326,7 @@
 
   var payJobSticky=false;
   var currentRole='frontman';
-  var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer'};
+  var first={frontman:'beranda',admin:'admin_spk',mgmt:'mgmt_inbox',cust:'customer',finance:'finance_ho'};
   var mgmtSeat='ka';
   var MGMT_SEATS={
     ka:{label:'Head of Administration',home:'mgmt_inbox'},
@@ -338,7 +358,7 @@
       el.hidden = currentRole!=='mgmt' || mgmtSeat!==need;
     });
   }
-  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_leasing:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',eskalasi:'frontman',exc_alamat:'frontman',exc_nama:'frontman',exc_epo:'frontman',exc_afi:'frontman',exc_stnk:'frontman',shop_home:'cust',shop_akun:'cust',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust',customer_booking:'cust',customer_booking_qris:'cust'};
+  var screenRole={beranda:'frontman',transaksi:'frontman',bayar:'frontman',request:'frontman',dokumen:'frontman',cashless:'frontman',tx_hiace:'frontman',tx_raize:'frontman',tx_avanza:'frontman',tx_fortuner:'frontman',spk:'frontman',spk_baru:'frontman',quot:'frontman',so:'frontman',so2:'frontman',proses:'frontman',afi_d:'frontman',do:'frontman',bill_d:'frontman',kirim_d:'frontman',stnk_d:'frontman',booking:'frontman',delivery:'frontman',afi:'frontman',gi:'frontman',digiroom:'cust',admin_book:'admin',admin_spk:'admin',admin_qt:'admin',admin_so:'admin',admin_do:'admin',admin_afi:'admin',admin_bill:'admin',admin_leasing:'admin',admin_kwt:'admin',admin_pay:'admin',admin_tx:'admin',verifikasi:'admin',dashboard:'mgmt',mgmt_inbox:'mgmt',finance_ho:'finance',eskalasi:'frontman',exc_alamat:'frontman',exc_nama:'frontman',exc_epo:'frontman',exc_afi:'frontman',exc_stnk:'frontman',shop_home:'cust',shop_akun:'cust',customer:'cust',customer_detail:'cust',order_aksesoris:'cust',order_calya:'cust',bukti_serah:'cust',tagihan_customer:'cust',e_kuitansi:'cust',customer_booking:'cust',customer_booking_qris:'cust'};
   document.querySelectorAll('[data-go="beranda"]').forEach(function(b){
     if(b.closest('[data-rail]') || b.hasAttribute('data-back')) return;
     b.setAttribute('data-home', b.closest('#bayar, #request') ? 'pay' : 'tx');
@@ -365,6 +385,8 @@
         if(/Daftar|My Transactions|Branch Ledger|queue|List|Branch/i.test(b.textContent||'')){
           b.textContent='← Cabang';
         }
+      } else if(currentRole==='finance'){
+        b.setAttribute('data-go','finance_ho');
       } else {
         b.setAttribute('data-go','beranda');
         if(/Buku/i.test(b.textContent||'')) b.textContent='← Daftar';
@@ -379,7 +401,10 @@
       el.hidden = currentRole!=='frontman';
     });
     var app=document.querySelector('#mockup .app');
-    if(app) app.classList.toggle('cust-shop', currentRole==='cust');
+    if(app){
+      app.classList.toggle('cust-shop', currentRole==='cust');
+      app.classList.toggle('finance-ho', currentRole==='finance');
+    }
   }
   function isDewiCustScreen(id){
     return id==='customer_booking'||id==='customer_booking_qris'||(id==='digiroom'&&payJobId==='booking');
