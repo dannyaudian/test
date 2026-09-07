@@ -135,25 +135,25 @@
     {id:'om', label:'Operation Manager'}
   ];
   var HO_APPR=[
-    { id:'pa-cld', type:'price', kind:'Price adjustment', topic:'Karoseri', so:'4500090421', cabang:'Cilandak', unit:'Hiace Premio',
+    { id:'pa-cld', type:'price', kind:'Price adjustment', topic:'Karoseri', pay:'Cash', so:'4500090421', cabang:'Cilandak', unit:'Hiace Premio',
       fromOtr:548000000, toOtr:566500000, delta:18500000,
-      reason:'Branch filed a karoseri box-body add-on after the SO was priced at stock OTR. Customer ordered a cargo body. Head of Administration, Branch Head, ABH, and OM already approved the revised OTR.',
+      reason:'Branch filed a karoseri box-body add-on after the SO was priced at stock OTR. Customer ordered a cargo body. This is an OTR posting, not a B2B leasing settlement. Head of Administration, Branch Head, ABH, and OM already approved.',
       chain:{ka:'4 Sep 09:10',kc:'4 Sep 11:02',abh:'5 Sep 08:40',om:'5 Sep 15:18'} },
-    { id:'pa-pdi', type:'price', kind:'Price adjustment', topic:'Open off-the-road', so:'4500091750', cabang:'Pondok Indah', unit:'Rush GR Sport',
+    { id:'pa-pdi', type:'price', kind:'Price adjustment', topic:'Open off-the-road', pay:'Cash', so:'4500091750', cabang:'Pondok Indah', unit:'Rush GR Sport',
       fromOtr:276750000, toOtr:268200000, delta:-8550000,
-      reason:'Open off-the-road / chassis price so accessories can be fitted at the body shop. OTR tax pack is unbundled. Prior seats already approved.',
+      reason:'Open off-the-road / chassis price so accessories can be fitted at the body shop. OTR tax pack is unbundled. Not the leasing book. Prior seats already approved.',
       chain:{ka:'5 Sep 08:22',kc:'5 Sep 10:45',abh:'5 Sep 14:11',om:'6 Sep 09:30'} },
-    { id:'cb-kld', type:'cancel', kind:'Cancel billing', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix', billed:329600000, kwt:'KWT/26/KLD/008201',
-      reason:'Duplicate paperless. The same SO was billed twice after a retry. Cancel the second billing and return AR.',
+    { id:'cb-kld', type:'cancel', kind:'Cancel billing', pay:'Leasing', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix', billed:329600000, kwt:'KWT/26/KLD/008201',
+      reason:'Duplicate paperless. The same SO was billed twice after a retry. Cancel the second billing and return AR. Last-seat posting — not the leasing settlement dashboard.',
       chain:{ka:'1 Sep 10:12',kc:'1 Sep 11:40',abh:'2 Sep 09:05',om:'2 Sep 14:22'} },
-    { id:'cb-bsd', type:'cancel', kind:'Cancel billing', so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', billed:412500000, kwt:'KWT/26/BSD/007188',
+    { id:'cb-bsd', type:'cancel', kind:'Cancel billing', pay:'Leasing', so:'4500091888', cabang:'BSD', unit:'Fortuner 2.8', billed:412500000, kwt:'KWT/26/BSD/007188',
       reason:'Paperless posted to the wrong SO. Partner has not paid. Cancel billing, restore AR Open on this SO, rebill the correct SO.',
       chain:{ka:'28 Aug 16:02',kc:'29 Aug 09:18',abh:'29 Aug 13:44',om:'1 Sep 08:50'} },
-    { id:'pa-gdg', type:'price', kind:'Price adjustment', topic:'Karoseri', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix',
+    { id:'pa-gdg', type:'price', kind:'Price adjustment', topic:'Karoseri', pay:'Cash', so:'4500092101', cabang:'Kelapa Gading', unit:'Innova Zenix',
       fromOtr:412000000, toOtr:419800000, delta:7800000,
       reason:'Rear spoiler and side-step karoseri package after booking. Chain already approved; HO recorded the OTR lift.',
       chain:{ka:'28 Aug 09:40',kc:'28 Aug 13:12',abh:'29 Aug 08:55',om:'29 Aug 16:04'}, done:'approved' },
-    { id:'cb-srp', type:'cancel', kind:'Cancel billing', so:'4500092033', cabang:'Serpong', unit:'Alphard', billed:891000000, kwt:'KWT/26/SRP/008033',
+    { id:'cb-srp', type:'cancel', kind:'Cancel billing', pay:'Leasing', so:'4500092033', cabang:'Serpong', unit:'Alphard', billed:891000000, kwt:'KWT/26/SRP/008033',
       reason:'Customer asked to unwind a premature paperless before partner settlement. Chain already approved; HO records the cancel.',
       chain:{ka:'3 Sep 11:20',kc:'3 Sep 15:01',abh:'4 Sep 09:33',om:'4 Sep 16:10'}, done:'approved' }
   ];
@@ -201,7 +201,7 @@
   }
   function hoApprDossier(row){
     if(!row){
-      return '<p>Select a request. Cancel billing and price adjustment (karoseri, open off-the-road, and similar) reach Finance HO only after Head of Administration, Branch Head, ABH, and Operation Manager. HO is last. This is not a DP, signature, 30%, or paid-in-full waiver.</p>';
+      return '<p>Select a filing. Price adjustment (karoseri, open off-the-road) and cancel billing are last-seat Finance HO postings after KA · KC · ABH · OM. This desk is not the B2B leasing book and not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver.</p>';
     }
     var st=hoApprHo(row);
     var pos=hoApprPos(st);
@@ -227,8 +227,10 @@
       : '<p class="ho-line"><span>Billed</span><b>'+hoIdr(row.billed)+'</b></p>'+
         '<p class="ho-line"><span>Receipt</span><b>'+row.kwt+'</b></p>';
     return '<p class="ho-line"><span>Type</span><b>'+row.kind+'</b></p>'+
+      '<p class="ho-line"><span>Desk</span><b>Last-seat posting · not B2B leasing</b></p>'+
       '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
       '<p class="ho-line"><span>Branch · unit</span><b>'+row.cabang+' · '+row.unit+'</b></p>'+
+      (row.pay?'<p class="ho-line"><span>Purchase method</span><b>'+row.pay+'</b></p>':'')+
       extra+
       '<p class="ho-line"><span>HO status</span><b>'+pos.text+'</b></p>'+
       '<p class="ho-note">'+row.reason+'</p>'+
@@ -285,6 +287,10 @@
   function applyFinanceHo(){
     var host=document.getElementById('finance_ho');
     if(!host) return;
+    var onAppr=hoView==='appr';
+    host.setAttribute('data-ho-mode', onAppr?'appr':'book');
+    document.querySelectorAll('[data-ho-book-only]').forEach(function(el){ el.hidden=onAppr; });
+    document.querySelectorAll('[data-ho-appr-only]').forEach(function(el){ el.hidden=!onAppr; });
     var all=hoPortfolio();
     var unbilled=all.filter(function(r){ return r.bucket==='unbilled'; });
     var billed=all.filter(function(r){ return r.bucket==='billed'; });
@@ -367,7 +373,7 @@
     if(bar && root && root.classList.contains('finance-portal')){
       if(hoView==='unbilled') bar.textContent='ho.fast.id/leasing/unbilled';
       else if(hoView==='billed') bar.textContent='ho.fast.id/leasing/billed-unpaid';
-      else if(hoView==='appr') bar.textContent='ho.fast.id/leasing/approvals';
+      else if(hoView==='appr') bar.textContent='ho.fast.id/approvals';
       else if(hoView==='lead') bar.textContent='ho.fast.id/leasing/leadtime';
       else bar.textContent='ho.fast.id/leasing';
     }
