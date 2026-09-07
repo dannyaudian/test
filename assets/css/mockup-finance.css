@@ -2,13 +2,19 @@
 #mockup.finance-portal .pagehead,
 #mockup.finance-portal .journey,
 #mockup.finance-portal .legend-fold,
-#mockup.finance-portal .live-sync{
+#mockup.finance-portal .live-sync,
+#mockup:has(#finance_ho.screen.on) .pagehead,
+#mockup:has(#finance_ho.screen.on) .journey,
+#mockup:has(#finance_ho.screen.on) .legend-fold,
+#mockup:has(#finance_ho.screen.on) .live-sync{
   display:none !important;
 }
-#mockup .app.finance-ho .chrome{
+#mockup .app.finance-ho .chrome,
+#mockup:has(#finance_ho.screen.on) .app .chrome{
   background:linear-gradient(90deg,#042f2e,#0f766e);
 }
-#mockup .app.finance-ho .urlbar{
+#mockup .app.finance-ho .urlbar,
+#mockup:has(#finance_ho.screen.on) .app .urlbar{
   background:rgba(255,255,255,.1);color:#99f6e4;
 }
 #mockup .app.finance-ho .roletab[aria-pressed="true"]{
@@ -30,12 +36,12 @@
 #finance_ho.screen{
   padding:0;background:#e8eef2;max-width:none;
 }
-#mockup .app.finance-ho #finance_ho.screen.on{
-  display:flex;flex-direction:column;min-height:620px;animation:none;
+#mockup #finance_ho.screen.on{
+  display:block !important;min-height:620px;animation:none;
 }
 #finance_ho .ho-desk{
-  margin:0;flex:1;display:flex;flex-direction:column;min-height:0;
-  background:#eef4f6;border:0;border-radius:0;overflow:hidden;
+  margin:0;min-height:620px;
+  background:#eef4f6;border:0;border-radius:0;overflow:visible;
 }
 #finance_ho .ho-head{
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
