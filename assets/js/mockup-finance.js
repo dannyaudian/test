@@ -400,4 +400,15 @@
   bindFinanceHo();
   applyFinanceHo();
   FAST.hoSetView=function(v){ hoView=v||'all'; applyFinanceHo(); };
+  FAST.hoOpen=function(opt){
+    opt=opt||{};
+    hoView=opt.view||'appr';
+    if(opt.pick) hoApprPick=opt.pick;
+  };
+  FAST.HO_CASE={
+    ho_appr:{view:'appr'},
+    ho_karoseri:{view:'appr', pick:'pa-cld'},
+    ho_otr:{view:'appr', pick:'pa-pdi'},
+    ho_cancel:{view:'appr', pick:'cb-kld'}
+  };
   Object.defineProperty(FAST,'hoView',{ get:function(){ return hoView; } });
