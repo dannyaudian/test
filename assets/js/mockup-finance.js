@@ -334,8 +334,7 @@
     var lab=document.querySelector('[data-ho-filter-label]');
     if(lab) lab.textContent=labels[hoView]||labels.all;
     document.querySelectorAll('[data-rail="finance"] button[data-go="finance_ho"]').forEach(function(b){
-      var j=b.getAttribute('data-ho-jump')||'all';
-      b.setAttribute('aria-current', j===hoView?'true':'false');
+      b.setAttribute('aria-current','true');
     });
     document.querySelectorAll('[data-ho-tabs] [data-ho-view]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-ho-view')===hoView?'true':'false');

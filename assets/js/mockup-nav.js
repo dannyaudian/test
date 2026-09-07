@@ -137,9 +137,7 @@
       var rail=b.closest('[data-rail]');
       if(!rail || rail.hidden===true){ b.removeAttribute('aria-current'); return; }
       if(screenId==='finance_ho' && b.dataset.go==='finance_ho'){
-        var j=b.getAttribute('data-ho-jump')||'all';
-        var hv=(window.FAST && FAST.hoView)||'all';
-        b.setAttribute('aria-current', j===hv ? 'true' : 'false');
+        b.setAttribute('aria-current','true');
         return;
       }
       if(b.dataset.go===railId) b.setAttribute('aria-current','true');
