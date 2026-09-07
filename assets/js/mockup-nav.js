@@ -137,7 +137,11 @@
       var rail=b.closest('[data-rail]');
       if(!rail || rail.hidden===true){ b.removeAttribute('aria-current'); return; }
       if(screenId==='finance_ho' && b.dataset.go==='finance_ho'){
-        b.setAttribute('aria-current','true');
+        var j=b.getAttribute('data-ho-jump')||'all';
+        var hv=(window.FAST && FAST.hoView)||'all';
+        var onAppr=hv==='appr';
+        var thisAppr=j==='appr';
+        b.setAttribute('aria-current', (thisAppr===onAppr) ? 'true' : 'false');
         return;
       }
       if(b.dataset.go===railId) b.setAttribute('aria-current','true');
