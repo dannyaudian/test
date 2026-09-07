@@ -18,6 +18,7 @@
     'mockup/screens/admin-book.html',
     'mockup/screens/admin-queue.html',
     'mockup/screens/mgmt.html',
+    'mockup/screens/ho-file.html',
     'mockup/screens/finance-ho.html',
     'mockup/screens/customer.html',
     'mockup/screens/customer-booking.html',
@@ -47,10 +48,11 @@
     'assets/js/mockup-afi.js',
     'assets/js/mockup-b2b.js',
     'assets/js/mockup-finance.js',
+    'assets/js/mockup-ho-file.js',
     'assets/js/mockup-cust.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=ho-sales-type';
+  var bust = 'v=ho-file-seamless';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {

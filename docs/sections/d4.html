@@ -46,8 +46,8 @@
         </article>
         <article class="feat">
           <h4>Finance HO · last-seat Approvals</h4>
-          <p>A separate HO desk from the leasing book. Filings reach Finance HO only after Head of Administration, Branch Head, ABH, and Operation Manager. HO posts last: <b>price adjustment</b> (karoseri, open off-the-road), <b>cancel billing</b>, <b>change of sales type</b> (leasing ↔ cash), and <b>change of leasing company</b>. Not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver. After a method change, cash 30% / paid in full and leasing DP / signature / e-PO stay non-waivable. Cash or leasing SOs can appear here — the desk is not “leasing settlement.”</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Left rail <a href="mockup.html#ho_appr">Approvals</a> · <a href="mockup.html#ho_sales_lease">leasing → cash</a> · <a href="mockup.html#ho_sales_cash">cash → leasing</a> · <a href="mockup.html#ho_partner">leasing company</a> · <a href="mockup.html#ho_karoseri">karoseri</a> · <a href="mockup.html#ho_cancel">cancel billing</a>.</p>
+          <p>A separate HO desk from the leasing book. <b>Sales type</b> and <b>leasing company</b> start with Frontman on the same Sales Order, then Administration pack-check, then Head of Administration, Branch Head, ABH, and Operation Manager. Finance HO posts last. Also <b>price adjustment</b> and <b>cancel billing</b> after that chain. Not the Approval Engine. Not a DP, signature, 30%, or paid-in-full waiver. After a method change, cash 30% / paid in full and leasing DP / signature / e-PO stay non-waivable.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Start on the SO: <a href="mockup.html#file_sales">leasing → cash</a> · <a href="mockup.html#file_sales_cash">cash → leasing</a> · <a href="mockup.html#file_partner">leasing company</a>. Last seat: <a href="mockup.html#ho_appr">Approvals</a>.</p>
         </article>
         <article class="feat">
           <h4>Exception routing</h4>
@@ -72,20 +72,18 @@
           <span class="how"><a href="mockup.html#exc_epo">Exception e-PO</a></span></li>
       </ol>
 
-      <h3>Example: Finance HO last-seat filings (not B2B leasing)</h3>
+      <h3>Example: Finance HO last-seat filings (same SO from Frontman)</h3>
       <ol class="walk">
-        <li><b>Karoseri</b> Cilandak Hiace Premio, cash OTR lift for a box body. KA · KC · ABH · OM already approved. Finance HO posts the adjustment on the Approvals desk.
-          <span class="how"><a href="mockup.html#ho_karoseri">Price adjustment · karoseri</a></span></li>
-        <li><b>Open off-the-road</b> Pondok Indah Rush, cash chassis price for body-shop accessories. Same chain; HO is last. Not the leasing book. Not a DP waiver.
-          <span class="how"><a href="mockup.html#ho_otr">Price adjustment · open OTR</a></span></li>
-        <li><b>Cancel billing</b> Kelapa Gading Innova. Duplicate paperless. HO cancels the second bill and reopens AR. Last-seat posting, not the settlement dashboard.
-          <span class="how"><a href="mockup.html#ho_cancel">Cancel billing · duplicate</a></span></li>
-        <li><b>Sales type · leasing → cash</b> BSD Fortuner. Customer cancelled the leasing application. HO posts cash. 30% and paid-in-full remain non-waivable.
-          <span class="how"><a href="mockup.html#ho_sales_lease">Leasing → cash</a></span></li>
-        <li><b>Sales type · cash → leasing</b> Bekasi Avanza. Customer switched to leasing after a cash booking. Full DP, signature, and e-PO still required after HO posts.
-          <span class="how"><a href="mockup.html#ho_sales_cash">Cash → leasing</a></span></li>
-        <li><b>Leasing company</b> Tangerang Innova. Facility moves from PT Danapura Multifinance to PT Sentosa Auto Finance. New e-PO still required. Not a DP waiver.
-          <span class="how"><a href="mockup.html#ho_partner">Change leasing company</a></span></li>
+        <li><b>Frontman</b> Opens the SO and submits leasing → cash, cash → leasing, or a leasing-company change. Not the Exceptions rail.
+          <span class="how"><a href="mockup.html#file_sales">BSD Fortuner filing</a></span></li>
+        <li><b>Administration</b> Checks the pack on the same SO. Does not post the method or partner.
+          <span class="how">Role tab Administration while still on the filing</span></li>
+        <li><b>KA · KC · ABH · OM</b> Management seat switcher stays on this SO. Not the Approval Engine queue.
+          <span class="how"><a href="mockup.html#ho_chain">Commercial filings</a></span></li>
+        <li><b>Finance HO</b> Same filing on the Approvals desk. Posts the method or partner. Does not waive commercial gates.
+          <span class="how"><a href="mockup.html#ho_appr">Approvals</a></span></li>
+        <li><b>Karoseri / open OTR / cancel billing</b> Still last-seat postings after the branch chain — not the leasing book.
+          <span class="how"><a href="mockup.html#ho_karoseri">Karoseri</a> · <a href="mockup.html#ho_otr">Open OTR</a> · <a href="mockup.html#ho_cancel">Cancel billing</a></span></li>
       </ol>
 
       <h3>Example: what the engine accepts and what it does not</h3>
@@ -103,9 +101,9 @@
         <a class="see" href="mockup.html#ho_appr"><span class="see-k">HO</span><b>Approvals desk</b><span>Not the leasing book · last-seat posting</span><em>View →</em></a>
         <a class="see" href="mockup.html#ho_karoseri"><span class="see-k">Use case</span><b>Karoseri adjustment</b><span>Hiace · HO last after KA · KC · ABH · OM</span><em>View →</em></a>
         <a class="see" href="mockup.html#ho_otr"><span class="see-k">Use case</span><b>Open off-the-road</b><span>Rush chassis price · not a DP waiver</span><em>View →</em></a>
-        <a class="see" href="mockup.html#ho_sales_lease"><span class="see-k">Use case</span><b>Leasing → cash</b><span>BSD Fortuner · 30% still required</span><em>View →</em></a>
-        <a class="see" href="mockup.html#ho_sales_cash"><span class="see-k">Use case</span><b>Cash → leasing</b><span>Bekasi Avanza · DP / signature / e-PO stay</span><em>View →</em></a>
-        <a class="see" href="mockup.html#ho_partner"><span class="see-k">Use case</span><b>Change leasing company</b><span>Danapura → Sentosa Auto Finance</span><em>View →</em></a>
+        <a class="see" href="mockup.html#file_sales"><span class="see-k">Use case</span><b>Leasing → cash trail</b><span>Frontman SO through Finance HO</span><em>View →</em></a>
+        <a class="see" href="mockup.html#file_sales_cash"><span class="see-k">Use case</span><b>Cash → leasing trail</b><span>Same SO · DP / signature stay</span><em>View →</em></a>
+        <a class="see" href="mockup.html#file_partner"><span class="see-k">Use case</span><b>Leasing company trail</b><span>Danapura → Sentosa · new e-PO</span><em>View →</em></a>
         <a class="see" href="#skema-approval"><span class="see-k">Flow</span><b>Waivable vs not</b><span>All relevant mockup screens</span><em>View →</em></a>
         <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Finance</span><b>Receipt ledger</b><span>Lineage payment → receipt → AR</span><em>View →</em></a>
       </div>

@@ -119,7 +119,9 @@
       mgmtSeat=seatBtn.getAttribute('data-mgmt-seat')||'ka';
       applyRole('mgmt');
       syncMgmtSeat();
-      show((MGMT_SEATS[mgmtSeat]||MGMT_SEATS.ka).home);
+      var on=(document.querySelector('.screen.on')||{}).id;
+      if(on==='ho_file'||on==='ho_chain') show(on);
+      else show((MGMT_SEATS[mgmtSeat]||MGMT_SEATS.ka).home);
       applyMgmtInbox();
       toast('Kursi: '+(MGMT_SEATS[mgmtSeat]||MGMT_SEATS.ka).label);
       return;
