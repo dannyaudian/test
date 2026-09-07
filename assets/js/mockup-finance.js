@@ -80,22 +80,54 @@
   }
   var hoView='all';
   var hoPick=null;
-  function hoCardHtml(row){
+  function hoPos(row){
     var age=hoAgingDays(row);
-    var tag=row.bucket==='lunas'?'ok':(row.bucket==='billed'?(age>14?'stop':'wait'):(row.ready?'wait':'hold'));
-    var tagText=row.bucket==='lunas'?('Lunas · '+(age!=null?age+' hari':'')):row.bucket==='billed'?('Tagih · aging '+(age!=null?age+'h':'—')):(row.ready?'Siap ditagih':'Belum tagih');
-    var thumb=row.live?'live':(row.bucket==='lunas'?'ok':(age>14?'age':'ho'));
-    var short=String(row.unit||'').split('·')[0].trim().slice(0,8).toUpperCase();
-    return '<button type="button" class="order-card" data-ho-row="'+row.id+'">'+
-      '<div class="thumb ho '+thumb+'">'+short+'</div>'+
-      '<div class="meta">'+
-        '<p class="oid">'+row.so+' · '+row.cabang+' · '+row.spk+'</p>'+
-        '<strong class="oname">'+row.debitur+' · '+row.unit+'</strong>'+
-        '<p class="spec">'+row.note+'</p>'+
-        '<div class="row2"><span class="tag '+tag+'">'+tagText+'</span><span class="amt">'+hoIdr(row.finance)+'</span></div>'+
-        '<p class="cta">'+(row.live?'Buka SPK Cilandak →':'Detail di buku HO')+'</p>'+
-      '</div></button>';
+    if(row.bucket==='lunas') return {cls:'lunas', text:'Lunas'};
+    if(row.bucket==='billed') return {cls:age>14?'late':'billed', text:age>14?'Tagih · SLA':'Tagih belum bayar'};
+    if(row.ready) return {cls:'ready', text:'Siap ditagih'};
+    return {cls:'hold', text:row.hold||'Belum tagih'};
   }
+  function hoRowHtml(row){
+    var age=hoAgingDays(row);
+    var pos=hoPos(row);
+    var ageTxt=age==null?'—':age+' hari';
+    var kwt=row.bucket==='unbilled'?'—':(row.kwt||'Menunggu terbit');
+    return '<tr data-ho-row="'+row.id+'">'+
+      '<td><b>'+row.so+'</b><span class="sub">'+row.cabang+' · '+row.spk+(row.live?' · live':'')+'</span></td>'+
+      '<td>'+row.debitur+'<span class="sub">'+row.unit+'</span></td>'+
+      '<td>'+hoIdr(row.finance)+'</td>'+
+      '<td><span class="ho-pos '+pos.cls+'">'+pos.text+'</span></td>'+
+      '<td class="'+(age>14?'ho-age late':'')+'">'+ageTxt+'</td>'+
+      '<td>'+kwt+'</td>'+
+      '</tr>';
+  }
+  function hoDossier(row){
+    if(!row){
+      return '<p>Pilih baris ledger. Detail, blocker, dan jejak kuitansi tampil di panel ini — tidak pindah ke layar Frontman atau Administrasi.</p>';
+    }
+    var age=hoAgingDays(row);
+    var pos=hoPos(row);
+    var steps=[
+      ['SPK', true],
+      ['SO', true],
+      ['Paperless', row.bucket!=='unbilled' || !!row.paperlessAt],
+      ['Kuitansi', !!(row.kwt && row.bucket!=='unbilled')],
+      ['Lunas', row.bucket==='lunas']
+    ];
+    var stepHtml=steps.map(function(s){ return '<i class="'+(s[1]?'on':'')+'">'+s[0]+'</i>'; }).join('');
+    return '<p class="ho-line"><span>Sales Order</span><b>'+row.so+'</b></p>'+
+      '<p class="ho-line"><span>SPK</span><b>'+row.spk+'</b></p>'+
+      '<p class="ho-line"><span>Cabang</span><b>'+row.cabang+(row.live?' · sinkron Cilandak':'')+'</b></p>'+
+      '<p class="ho-line"><span>Debitur</span><b>'+row.debitur+'</b></p>'+
+      '<p class="ho-line"><span>Unit</span><b>'+row.unit+'</b></p>'+
+      '<p class="ho-line"><span>Dibiayai</span><b>'+hoIdr(row.finance)+'</b></p>'+
+      '<p class="ho-line"><span>DP wajib B2B</span><b>'+(row.dpLabel||'—')+'</b></p>'+
+      '<p class="ho-line"><span>Posisi</span><b>'+pos.text+(age!=null?' · '+age+' hari':'')+'</b></p>'+
+      '<p class="ho-line"><span>Kuitansi</span><b>'+(row.kwt||'Belum terbit')+'</b></p>'+
+      '<div class="ho-steps">'+stepHtml+'</div>'+
+      '<p class="ho-note">'+row.note+'. Finance HO tidak menagih dan tidak me-waiver DP/TTD — Administrasi cabang yang menjalankan paperless.</p>';
+  }
+
   function applyFinanceHo(){
     var host=document.getElementById('finance_ho');
     if(!host) return;
@@ -154,42 +186,24 @@
     document.querySelectorAll('[data-ho-tabs] [data-ho-view]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-ho-view')===hoView?'true':'false');
     });
-    document.querySelectorAll('.ho-kpis [data-ho-view]').forEach(function(b){
+    document.querySelectorAll('.ho-metrics [data-ho-view]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-ho-view')===hoView?'true':'false');
     });
     document.querySelectorAll('[data-ho-panel="board"]').forEach(function(el){ el.hidden=hoView==='lead'; });
     document.querySelectorAll('[data-ho-panel="lead"]').forEach(function(el){ el.hidden=hoView!=='lead'; });
     var list=document.querySelector('[data-ho-list]');
-    if(list) list.innerHTML=listFilter.map(hoCardHtml).join('')||'<p class="hint">Tidak ada SO di filter ini.</p>';
+    if(list) list.innerHTML=listFilter.map(hoRowHtml).join('')||'<tr><td colspan="6">Tidak ada SO di filter ini.</td></tr>';
     var ageList=document.querySelector('[data-ho-aging-list]');
     if(ageList){
       var open=billed.slice().sort(function(a,b){ return (hoAgingDays(b)||0)-(hoAgingDays(a)||0); });
-      ageList.innerHTML=open.map(hoCardHtml).join('')||'<p class="hint">Tidak ada tagihan terbuka.</p>';
+      ageList.innerHTML=open.map(hoRowHtml).join('')||'<tr><td colspan="6">Tidak ada tagihan terbuka.</td></tr>';
     }
     document.querySelectorAll('[data-ho-row]').forEach(function(b){
       b.setAttribute('aria-current', b.getAttribute('data-ho-row')===hoPick?'true':'false');
     });
     var row=all.filter(function(r){ return r.id===hoPick; })[0];
     var copy=document.querySelector('[data-ho-detail-copy]');
-    var acts=document.querySelector('[data-ho-detail-actions]');
-    var openBtn=document.querySelector('[data-ho-open-tx]');
-    if(copy){
-      if(!row) copy.textContent='Pilih baris di buku untuk melihat lineage, blocker, dan tautan cabang.';
-      else copy.innerHTML='<b>'+row.so+'</b> · '+row.unit+' · '+row.cabang+'<br>'+row.debitur+' · dibiayai '+hoIdr(row.finance)+'<br>'+row.note+(row.dpLabel?' · DP wajib '+row.dpLabel:'')+(row.kwt?' · '+row.kwt:'');
-    }
-    if(acts) acts.hidden=!row;
-    if(openBtn && row){
-      if(row.live){
-        openBtn.setAttribute('data-go','tx_hiace');
-        openBtn.setAttribute('data-tx-dots','hiace');
-        openBtn.setAttribute('data-b2b-pick', row.pick||row.id);
-        openBtn.textContent='Buka workspace Hiace';
-      } else {
-        openBtn.removeAttribute('data-go');
-        openBtn.removeAttribute('data-b2b-pick');
-        openBtn.textContent='Pantau di buku HO';
-      }
-    }
+    if(copy) copy.innerHTML=hoDossier(row);
   }
   function bindFinanceHo(){
     document.querySelectorAll('[data-ho-view]').forEach(function(b){
@@ -204,27 +218,6 @@
       if(!rowEl) return;
       hoPick=rowEl.getAttribute('data-ho-row');
       applyFinanceHo();
-      var row=(hoPortfolio().filter(function(r){ return r.id===hoPick; })[0]);
-      if(row && row.live && typeof show==='function'){
-        if(window.FAST && FAST.b2bLoad){
-          var st=FAST.b2bLoad();
-          st.selected=row.pick||row.id;
-          st.tab='tagih';
-          FAST.save({units:st.units, selected:st.selected, tab:st.tab}, FAST.B2B_KEY);
-        }
-        if(typeof persistTx==='function') persistTx('hiace');
-        show('tx_hiace');
-      }
-    });
-    var openBtn=document.querySelector('[data-ho-open-tx]');
-    if(openBtn) openBtn.addEventListener('click',function(){
-      var row=(hoPortfolio().filter(function(r){ return r.id===hoPick; })[0]);
-      if(row && row.live && typeof show==='function'){
-        if(typeof persistTx==='function') persistTx('hiace');
-        show('tx_hiace');
-      } else {
-        toast('SO cabang ini dipantau di buku HO. Penagihan tetap di Administrasi cabang.');
-      }
     });
     window.addEventListener('fast-session', function(){ applyFinanceHo(); });
   }

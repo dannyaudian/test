@@ -1,93 +1,115 @@
       <section class="screen" id="finance_ho">
-        <div class="screenhead">
-          <div>
-            <h2>Finance HO · B2B leasing</h2>
-            <p>Satu buku area: mitra <b>PT Danapura Multifinance</b>. Angka SO Cilandak (Hiace 00421) hidup dari cabang yang sama. Finance memantau — Administrasi yang menagih.</p>
-          </div>
-          <div class="actions">
-            <button type="button" class="btn ghost" data-go="admin_leasing" data-role="admin">Buku cabang</button>
-            <button type="button" class="btn ghost" data-go="tx_hiace" data-tx-dots="hiace" data-b2b-pick="1288">Buka Hiace</button>
-          </div>
-        </div>
-
-        <nav class="worktabs" aria-label="Buku leasing HO" data-ho-tabs>
-          <button type="button" data-ho-view="all" aria-current="true">Semua</button>
-          <button type="button" data-ho-view="unbilled">Belum tagih <span class="n" data-ho-n="unbilled">0</span></button>
-          <button type="button" data-ho-view="billed">Tagih belum bayar <span class="n" data-ho-n="billed">0</span></button>
-          <button type="button" data-ho-view="lead">Leadtime pelunasan</button>
-        </nav>
-
-        <div class="cards ho-kpis">
-          <button type="button" class="card kpi-btn" data-ho-view="unbilled">
-            <p class="k">Belum tagih ke leasing</p>
-            <p class="v" data-ho-kpi="unbilled-n">—</p>
-            <p class="n" data-ho-kpi="unbilled-rp">Paperless belum terkirim</p>
-          </button>
-          <button type="button" class="card kpi-btn alert" data-ho-view="billed">
-            <p class="k">Sudah tagih, belum bayar</p>
-            <p class="v" data-ho-kpi="billed-n">—</p>
-            <p class="n" data-ho-kpi="billed-rp">Menunggu pelunasan mitra</p>
-          </button>
-          <button type="button" class="card kpi-btn" data-ho-view="lead">
-            <p class="k">Leadtime pelunasan</p>
-            <p class="v"><span data-ho-kpi="lead-days">—</span><span style="font-size:14px;font-weight:500"> hari</span></p>
-            <p class="n">Median paperless → lunas · SLA 14 hari</p>
-          </button>
-          <button type="button" class="card kpi-btn" data-ho-view="lead">
-            <p class="k">Tertagih aging &gt;14 hari</p>
-            <p class="v" data-ho-kpi="aging-n">—</p>
-            <p class="n" data-ho-kpi="aging-rp">Di atas SLA pelunasan</p>
-          </button>
-        </div>
-
-        <div class="split" data-ho-panel="board">
-          <div class="box">
-            <h3>Buku tagihan <span class="side" data-ho-filter-label>Semua SO leasing</span></h3>
-            <p class="hint" style="padding:0 16px 8px">Klik baris: Hiace Cilandak membuka workspace SPK yang sama. SO cabang lain tetap di buku HO.</p>
-            <div class="order-list ho-list" data-ho-list style="padding:0 12px 12px"></div>
-          </div>
-          <div>
-            <div class="box">
-              <h3>Siap ditagih vs tertahan</h3>
-              <ul class="gates">
-                <li data-ho-view="unbilled"><span class="mark wait" data-ho-ready-n>—</span><div>Siap paperless<span class="why">Paket Frontman + full DP + e-PO (atau putusan OM)</span></div><span class="tag wait">Belum tagih</span></li>
-                <li data-ho-view="unbilled"><span class="mark no" data-ho-hold-n>—</span><div>Belum bisa ditagih<span class="why">TTD, DP, e-PO, atau backflow dokumen</span></div><span class="tag hold">Gate</span></li>
-                <li data-ho-view="billed"><span class="mark ok" data-ho-open-n>—</span><div>Paperless terkirim<span class="why">Kuitansi ke leasing sudah atau menunggu penerbitan</span></div><span class="tag ok">AR leasing</span></li>
-              </ul>
+        <div class="ho-desk">
+          <header class="ho-head">
+            <div>
+              <p class="ho-kicker">Finance HO · Area Jakarta</p>
+              <h2>Buku leasing B2B</h2>
+              <p>Konsol Head Office — bukan workspace cabang. Mitra <b>PT Danapura Multifinance</b>. Hiace Cilandak tersinkron dari SPK/26/CLD/00421, tetap dibaca di sini.</p>
             </div>
-            <div class="box" data-ho-detail>
-              <h3>Detail SO</h3>
-              <div class="pad">
-                <p class="hint" data-ho-detail-copy>Pilih baris di buku untuk melihat lineage, blocker, dan tautan cabang.</p>
-                <div class="nextbar" data-ho-detail-actions hidden>
-                  <button type="button" class="btn" data-ho-open-tx>Buka workspace</button>
-                  <button type="button" class="btn ghost" data-go="admin_leasing" data-role="admin">List leasing cabang</button>
-                </div>
+            <div class="ho-mitra">
+              <span>Mitra</span>
+              <b>PT Danapura Multifinance</b>
+              <em>FAST bukan lessor</em>
+            </div>
+          </header>
+
+          <nav class="ho-switch" aria-label="Buku leasing HO" data-ho-tabs>
+            <button type="button" data-ho-view="all" aria-current="true">Semua SO</button>
+            <button type="button" data-ho-view="unbilled">Belum tagih <span data-ho-n="unbilled">0</span></button>
+            <button type="button" data-ho-view="billed">Tagih belum bayar <span data-ho-n="billed">0</span></button>
+            <button type="button" data-ho-view="lead">Leadtime pelunasan</button>
+          </nav>
+
+          <div class="ho-metrics">
+            <button type="button" data-ho-view="unbilled">
+              <span>Belum tagih</span>
+              <strong data-ho-kpi="unbilled-n">—</strong>
+              <small data-ho-kpi="unbilled-rp">Paperless belum terkirim</small>
+            </button>
+            <button type="button" class="warn" data-ho-view="billed">
+              <span>Tagih, belum bayar</span>
+              <strong data-ho-kpi="billed-n">—</strong>
+              <small data-ho-kpi="billed-rp">Menunggu pelunasan mitra</small>
+            </button>
+            <button type="button" data-ho-view="lead">
+              <span>Median lunas</span>
+              <strong><em data-ho-kpi="lead-days">—</em> hari</strong>
+              <small>Paperless → lunas · SLA 14 hari</small>
+            </button>
+            <button type="button" class="warn" data-ho-view="lead">
+              <span>Aging &gt; SLA</span>
+              <strong data-ho-kpi="aging-n">—</strong>
+              <small data-ho-kpi="aging-rp">Di atas 14 hari</small>
+            </button>
+          </div>
+
+          <div class="ho-body" data-ho-panel="board">
+            <div class="ho-ledger-wrap">
+              <div class="ho-ledger-bar">
+                <h3>Ledger tagihan</h3>
+                <span data-ho-filter-label>Semua SO leasing</span>
+              </div>
+              <div class="scroll">
+                <table class="ho-ledger">
+                  <thead>
+                    <tr>
+                      <th>SO / cabang</th>
+                      <th>Debitur · unit</th>
+                      <th>Dibiayai</th>
+                      <th>Posisi</th>
+                      <th>Aging</th>
+                      <th>Kuitansi</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ho-list></tbody>
+                </table>
               </div>
             </div>
+            <aside class="ho-dossier" data-ho-detail>
+              <h3>Dossier SO</h3>
+              <div data-ho-detail-copy>
+                <p>Pilih baris ledger. Detail, blocker, dan jejak kuitansi tampil di panel ini — tidak pindah ke layar Frontman atau Administrasi.</p>
+              </div>
+            </aside>
           </div>
-        </div>
 
-        <div class="split" data-ho-panel="lead" hidden>
-          <div class="box">
-            <h3>Sebaran leadtime · paperless ke lunas</h3>
-            <p class="hint" style="padding:0 16px 8px">Hari kalender setelah penagihan paperless. Aging terbuka memakai hari berjalan sampai hari ini (7 Sep 2026).</p>
-            <div class="funnel ho-lead">
-              <div class="frow2"><span>0–7 hari</span><span class="track"><i data-ho-bar="0"></i></span><span class="n" data-ho-bar-n="0">0</span></div>
-              <div class="frow2"><span>8–14 hari · SLA</span><span class="track"><i data-ho-bar="1"></i></span><span class="n" data-ho-bar-n="1">0</span></div>
-              <div class="frow2"><span>15–30 hari</span><span class="track"><i class="warn" data-ho-bar="2"></i></span><span class="n" data-ho-bar-n="2">0</span></div>
-              <div class="frow2"><span>&gt;30 hari</span><span class="track"><i class="warn" data-ho-bar="3"></i></span><span class="n" data-ho-bar-n="3">0</span></div>
+          <div class="ho-body ho-lead-body" data-ho-panel="lead" hidden>
+            <div class="ho-lead-card">
+              <h3>Sebaran leadtime</h3>
+              <p>Hari setelah paperless. Aging terbuka dihitung sampai 7 Sep 2026. Bukan waiver DP/TTD.</p>
+              <ol class="ho-bars">
+                <li><span>0–7 hari</span><b><i data-ho-bar="0"></i></b><em data-ho-bar-n="0">0</em></li>
+                <li><span>8–14 · SLA</span><b><i data-ho-bar="1"></i></b><em data-ho-bar-n="1">0</em></li>
+                <li class="late"><span>15–30 hari</span><b><i data-ho-bar="2"></i></b><em data-ho-bar-n="2">0</em></li>
+                <li class="late"><span>&gt;30 hari</span><b><i data-ho-bar="3"></i></b><em data-ho-bar-n="3">0</em></li>
+              </ol>
+              <dl class="ho-stats">
+                <div><dt>Median lunas</dt><dd data-ho-kpi="lead-days-2">—</dd></div>
+                <div><dt>Rata-rata lunas</dt><dd data-ho-kpi="lead-avg">—</dd></div>
+                <div><dt>Terbuka &gt; SLA</dt><dd data-ho-kpi="aging-n-2">—</dd></div>
+              </dl>
             </div>
-            <div class="money" style="border:0;box-shadow:none;padding:4px 16px 16px">
-              <div class="row"><span>Median (lunas)</span><span data-ho-kpi="lead-days-2">—</span></div>
-              <div class="row"><span>Rata-rata (lunas)</span><span data-ho-kpi="lead-avg">—</span></div>
-              <div class="row"><span>Terbuka di atas SLA</span><span data-ho-kpi="aging-n-2">—</span></div>
+            <div class="ho-ledger-wrap">
+              <div class="ho-ledger-bar">
+                <h3>Antrian pelunasan</h3>
+                <span>Tagih belum bayar, aging terpanjang dulu</span>
+              </div>
+              <div class="scroll">
+                <table class="ho-ledger">
+                  <thead>
+                    <tr>
+                      <th>SO / cabang</th>
+                      <th>Debitur · unit</th>
+                      <th>Dibiayai</th>
+                      <th>Posisi</th>
+                      <th>Aging</th>
+                      <th>Kuitansi</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ho-aging-list></tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div class="box">
-            <h3>Antrian pelunasan</h3>
-            <p class="hint" style="padding:0 16px 8px">Yang sudah ditagih, diurutkan aging terpanjang. Bukan waiver DP atau TTD.</p>
-            <div class="order-list ho-list" data-ho-aging-list style="padding:0 12px 12px"></div>
           </div>
         </div>
       </section>
