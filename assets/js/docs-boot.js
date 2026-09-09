@@ -18,7 +18,7 @@
     'docs/sections/s9.html'
   ];
   Promise.all(parts.map(function (p) {
-    return fetch(p).then(function (r) {
+    return fetch(p + '?v=qris-slices', { cache: 'no-store' }).then(function (r) {
       if (!r.ok) throw new Error(p + ' ' + r.status);
       return r.text();
     });

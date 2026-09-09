@@ -12,8 +12,8 @@
     afi:{title:'List AFI · Cilandak',lead:'Nama dan alamat STNK dari SPK. Jalur normal berpasangan dengan billing.',back:'← List AFI'},
     bill:{title:'List billing · Cilandak',lead:'Cash ≥30% in dan leasing full DP dari B2B. Non-waivable.',back:'← List billing'},
     leasing:{title:'List B2B leasing · Cilandak',lead:'DP wajib customer dari B2B. Frontman lengkapi data. Administrasi menagih paperless dan menerbitkan kuitansi ke leasing.',back:'← List leasing'},
-    kwt:{title:'List kuitansi · Cilandak',lead:'Satu nomor kuitansi per pembayaran terverifikasi, tertaut SPK/SO.',back:'← List kuitansi'},
-    pay:{title:'List pembayaran · Cilandak',lead:'Posted, request, pending, dan unmatched. Unmatched dicocokkan di Perlu saya.',back:'← List pembayaran'}
+    kwt:{title:'List kuitansi · Cilandak',lead:'Open KWT when company QRIS is generated. Active after Banking API. Administration can void an Open instrument.',back:'← List kuitansi'},
+    pay:{title:'List pembayaran · Cilandak',lead:'Posted, Open QRIS, request, pending, unmatched. Open already has a receipt number. Unmatched is matched in Needs My Action.',back:'← List pembayaran'}
   };
   var ADMIN_RAIL_FROM={
     spk:'admin_spk',spk_baru:'admin_spk',tx_raize:'admin_spk',

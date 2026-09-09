@@ -223,8 +223,8 @@
     if(note) note.hidden=!cust;
     var title=document.querySelector('[data-cash-title]');
     if(title) title.textContent=cust
-      ? 'Bayar di cabang: QRIS atau CDM'
-      : (currentRole==='admin' ? 'Lihat pembayaran transaksi yang sama' : 'Terima di cabang atau kirim tautan');
+      ? 'Pay at the branch: QRIS slices or VA'
+      : (currentRole==='admin' ? 'Same transaction payments' : 'Receive at branch or send a link');
     if(cust){
       var edcOn=document.querySelector('#cashSeg [data-cash="edc"][aria-pressed="true"]');
       if(edcOn) showCashPanel('qris');

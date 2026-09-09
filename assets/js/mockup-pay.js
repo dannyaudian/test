@@ -25,6 +25,7 @@
   }
   function settleBooking(channel){
     if(window.FAST && FAST.save) FAST.save({paid:true,spk:'SPK/26/CLD/00426',so:'4500091426',channel:channel,receipt:'KWT/26/CLD/009301'}, FAST.BF_KEY);
+    if(typeof activateOpenQris==='function') activateOpenQris(3000000);
     applyBooking();
     applySpkDraft();
     if(currentRole==='cust'){
@@ -78,6 +79,7 @@
       var n=currentDgAmount();
       if(!n){ toast('Enter payment amount first.'); return; }
       if(payJobId==='booking') settleBooking(ch);
+      else if(ch==='qris' && typeof settleQrisSlice==='function') runPayflow('qris', 10000000);
       else runPayflow(ch, n);
     });
   });
@@ -100,22 +102,30 @@
   document.querySelectorAll('[data-qris-show]').forEach(function(b){
     b.addEventListener('click',function(){
       if(b.getAttribute('data-qris-show')==='cash'){
-        var inp=document.getElementById('cashQrisAmt');
-        var n=parseRp(inp&&inp.value);
-        if(n>81750000) n=81750000;
-        if(!n){ toast('Enter QRIS amount first.'); return; }
-        var label=document.getElementById('cashQrisLabel');
-        var pay=document.getElementById('cashQrisPay');
-        var box=document.querySelector('[data-cash-qris-ready]');
-        if(label) label.textContent=formatRp(n);
-        if(pay) pay.setAttribute('data-amount', String(n));
-        if(box) box.hidden=false;
+        mintQrisSlice();
         return;
       }
       var n=currentDgAmount();
       if(!n){ toast('Enter payment amount first.'); return; }
+      if(payJobId==='booking'||payJobId==='agya'){
+        dgQrisReady=true;
+        refreshDgInstruments();
+        mintCompanyQris('booking', n);
+        return;
+      }
+      if(n>QRIS_MAX && typeof mintQrisSlice==='function'){
+        var st=sliceState();
+        if(!st.paid && st.target!==n && n>=QRIS_MAX){
+          if(window.FAST && FAST.save) FAST.save({target:n, paid:st.paid, receipts:st.receipts, status:st.status}, FAST.SLICE_KEY);
+        }
+        mintQrisSlice();
+        dgQrisReady=true;
+        refreshDgInstruments();
+        return;
+      }
       dgQrisReady=true;
       refreshDgInstruments();
+      mintCompanyQris('booking', n);
     });
   });
   document.querySelectorAll('[data-va-issue]').forEach(function(b){
@@ -149,7 +159,8 @@
   function applyLive(){
     if(!window.FAST || !FAST.load) return;
     var s=FAST.load();
-    if(!s || !s.paid) return;
+    if(!s) return;
+    if(!s.paid && typeof s.ar!=='number') return;
     var bar=document.getElementById('liveSync');
     var msg=document.getElementById('syncMsg');
     if(bar) bar.hidden=false;
@@ -200,14 +211,18 @@
     if(!n) return;
     var cash=document.getElementById('cashless');
     var book=document.getElementById('booking');
-    var order=['qris','cdm','link','edc'];
-    if(cash && cash.classList.contains('on') && n>=1 && n<=4){
+    var order=['qris','va','cdm','link','edc'];
+    if(cash && cash.classList.contains('on') && n>=1 && n<=5){
       if(currentRole==='cust' && order[n-1]==='edc') return;
       showCashPanel(order[n-1]);
     }
     if(book && book.classList.contains('on') && n>=1 && n<=4) showBfPanel(order[n-1]);
   });
   function settle(channel, amount){
+    if(channel==='qris' && payJobId!=='booking' && payJobId!=='agya' && typeof settleQrisSlice==='function'){
+      settleQrisSlice();
+      return;
+    }
     amount=Number(amount||0);
     var ar=Math.max(0, 181750000-amount);
     var label=formatRp(ar);

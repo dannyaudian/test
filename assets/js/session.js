@@ -7,6 +7,8 @@ FAST.DEL_KEY = 'fast.spk.00425';
 FAST.GI_KEY = 'fast.spk.00424';
 FAST.B2B_KEY = 'fast.spk.00421.b2b';
 FAST.CUST_PAY_KEY = 'fast.cust.00418.pay';
+FAST.QRIS_KEY = 'fast.spk.00418.qris';
+FAST.SLICE_KEY = 'fast.spk.00418.qris.slice';
 FAST.load = function (key) {
   try { return JSON.parse(localStorage.getItem(key || FAST.KEY) || 'null'); }
   catch (e) { return null; }
