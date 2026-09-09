@@ -263,11 +263,7 @@
       if(!payJobSticky) setPayJob('dewi');
     }
     if(id==='cashless'){
-      if(!payJobSticky){
-        var fam=familyOf(activeTx);
-        if(fam==='dewi') setPayJob(activeTx==='agya'?'agya':'dewi');
-        else setPayJob('lunas');
-      }
+      if(!payJobSticky) setPayJob('lunas');
       setCashQrisMode('request');
     }
     payJobSticky=false;
