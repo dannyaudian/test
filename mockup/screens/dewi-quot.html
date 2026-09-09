@@ -104,12 +104,16 @@
             </div>
             <div class="bf-panels">
               <div data-bf-panel="qris" class="on">
-                <p class="hint">Show the <b>company</b> QRIS. A Frontman personal account is not this instrument — Administration sees the Open receipt on the same NMID.</p>
-                <div class="qrbox lg" role="img" aria-label="Company QRIS booking fee Yaris Rp 3.000.000"></div>
-                <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 4px">Rp 3.000.000</p>
-                <p class="hint" style="text-align:center">QRIS-CLD-00426-1 · NMID ID1020020004128 · FAST Outlet Cilandak</p>
-                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="qris">Simulate scanned at the counter</button>
-                <button type="button" class="btn ghost" style="width:100%" data-go="customer_booking_qris" data-pay-job="booking" data-role="cust">View confirmation on the customer phone</button>
+                <p class="hint">Booking fee is within the QRIS cap of Rp 10.000.000. Generate the <b>company</b> QRIS — a personal account is not this instrument. Administration holds the Open receipt.</p>
+                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-gen="booking" data-qris-wait="booking">Generate company QRIS · Rp 3.000.000</button>
+                <div data-qris-ready="booking" hidden>
+                  <div class="qrbox lg" role="img" aria-label="Company QRIS booking fee Yaris Rp 3.000.000"></div>
+                  <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 4px">Rp 3.000.000</p>
+                  <p class="hint" style="text-align:center;margin:0 0 8px" data-qris-id>QRIS-CLD-00426-1 · NMID ID1020020004128 · FAST Outlet Cilandak</p>
+                  <p class="hint" style="text-align:center">Open receipt <b>KWT/26/CLD/009301</b> — SO stays held until Banking API matches this QRIS.</p>
+                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-bf-pay="qris">Simulate scanned at the counter</button>
+                  <button type="button" class="btn ghost" style="width:100%" data-go="customer_booking_qris" data-pay-job="booking" data-role="cust">View confirmation on the customer phone</button>
+                </div>
               </div>
               <div data-bf-panel="cdm">
                 <p class="hint">The customer deposits cash at the branch CDM. Enter this code in the machine — the amount is tied to the SPK, do not type it again.</p>

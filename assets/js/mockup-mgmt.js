@@ -206,7 +206,8 @@
     });
   }
   function showCashPanel(mode){
-    if(currentRole==='cust' && mode==='edc') mode='qris';
+    if(mode==='qris') mode='va';
+    if(currentRole==='cust' && mode==='edc') mode='va';
     document.querySelectorAll('#cashSeg [data-cash]').forEach(function(b){
       b.setAttribute('aria-pressed', b.getAttribute('data-cash')===mode?'true':'false');
     });
@@ -223,11 +224,11 @@
     if(note) note.hidden=!cust;
     var title=document.querySelector('[data-cash-title]');
     if(title) title.textContent=cust
-      ? 'Bayar di cabang: QRIS atau CDM'
-      : (currentRole==='admin' ? 'Lihat pembayaran transaksi yang sama' : 'Terima di cabang atau kirim tautan');
+      ? 'Pay at the branch: VA or CDM'
+      : (currentRole==='admin' ? 'Same transaction payments' : 'Receive at branch or send a link');
     if(cust){
       var edcOn=document.querySelector('#cashSeg [data-cash="edc"][aria-pressed="true"]');
-      if(edcOn) showCashPanel('qris');
+      if(edcOn) showCashPanel('va');
     }
   }
   document.querySelectorAll('#bfSeg [data-bf]').forEach(function(b){

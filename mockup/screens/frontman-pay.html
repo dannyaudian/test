@@ -27,7 +27,6 @@
                 <tbody>
                   <tr><td>28 Aug 2026</td><td>VA 8801 0418 0001<span class="sub">BCA</span></td><td>KWT/26/CLD/008731<span class="sub">Download PDF</span></td><td>Booking fee</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238 linked automatically</span></td><td class="num">Rp 5.000.000</td><td><span class="tag ok">Verified</span></td></tr>
                   <tr><td>1 Sep 2026</td><td>VA 8801 0418 0002<span class="sub">BCA</span></td><td>KWT/26/CLD/009115<span class="sub">Download PDF</span></td><td>Settlement stage 1</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 300.000.000</td><td><span class="tag ok">Allocated</span></td></tr>
-                  <tr data-qris-open-row hidden><td>Today</td><td>QRIS-CLD-00418-3<span class="sub">FAST Outlet Cilandak</span></td><td>KWT/26/CLD/009220<span class="sub">Open · awaiting Banking API</span></td><td>Settlement stage 2</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 100.000.000</td><td><span class="tag wait">Open</span></td></tr>
                   <tr><td>2 Sep 2026</td><td>VA 8801 0418 0003<span class="sub">Pending transfer</span></td><td>—<span class="sub">Not yet issued</span></td><td>Settlement stage 2</td><td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td><td class="num">Rp 100.000.000</td><td><span class="tag wait">Active request</span></td></tr>
                 </tbody>
               </table>
@@ -96,7 +95,7 @@
                   <button type="button" data-budi-bf aria-pressed="false">Booking fee</button>
                   <button type="button" aria-pressed="true">Settlement</button>
                 </div>
-                <p class="hint" style="margin:0">Single payment model: QRIS on Frontman screen, CDM code, Digiroom link. Debit EDC — Frontman selects the terminal. Innova Zenix: booking fee receipted; stage 2 settlement pending.</p>
+                <p class="hint" style="margin:0">Settlement: VA, CDM, Digiroom, or Frontman EDC. QRIS is only for booking fee (max Rp 10.000.000). Innova Zenix: booking fee already receipted; stage 2 settlement pending on VA.</p>
               </div>
             </div>
 
@@ -148,7 +147,7 @@
                 </div>
               </div>
               <div class="formfoot">
-                <span class="hint">A request locks the amount in QRIS and VA. Without a request, the customer enters the amount themselves, then QRIS is shown or a VA is issued.</span>
+                <span class="hint">A settlement request locks the amount in VA. QRIS is not offered above Rp 10.000.000. Booking fee uses company QRIS.</span>
                 <button class="btn ghost">Save draft</button>
                 <button class="btn" data-go="digiroom" data-pay-job="lunas" data-role="cust">Send Digiroom link</button>
               </div>

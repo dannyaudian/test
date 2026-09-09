@@ -19,7 +19,7 @@
       cdm:'0418 1000 03',brilink:'8810 0418 0003',
       va:{BCA:'8801 0418 0003',BRI:'0026 0418 0003',Mandiri:'8881 0418 0003'},
       back:'cashless',
-      lead:'Ada payment request salesman. Nominal QRIS dan VA terkunci Rp 100.000.000.'
+      lead:'There is a salesman payment request. Amount locked Rp 100.000.000. Pay by VA — QRIS is only for booking fee (max Rp 10.000.000).'
     },
     open:{
       name:'Budi Santoso',spk:'SPK/26/CLD/00418',unit:'Innova Zenix',kind:'Unit payment',amount:'Enter amount',
@@ -27,7 +27,7 @@
       cdm:'0418 OPEN 01',brilink:'8810 0418 OPEN',
       va:{BCA:'8801 0418 8100',BRI:'0026 0418 8100',Mandiri:'8881 0418 8100'},
       back:'customer_detail',
-      lead:'There is no request for this remainder. Enter the amount. QRIS shows a barcode; VA issues an account number.'
+      lead:'There is no request for this remainder. Enter the amount. QRIS is only for booking fee (max Rp 10.000.000). Settlement uses VA.'
     },
     dewi:{
       name:'Dewi Lestari',spk:'SPK/26/CLD/00426',unit:'Yaris 1.5 G',kind:'Yaris settlement',amount:'Enter amount',
@@ -47,7 +47,12 @@
       lead:'Booking fee baris Agya. QRIS dan VA terkunci Rp 2.000.000. Tidak menimpa SO Yaris.'
     }
   };
-  function formatRp(n){ return 'Rp '+Number(n||0).toLocaleString('id-ID'); }
+  var QRIS_MAX=10000000;
+  function qrisJobOk(){
+    var j=currentJob();
+    var n=j.locked?j.amountNum:currentDgAmount();
+    return (payJobId==='booking'||payJobId==='agya') && n>0 && n<=QRIS_MAX;
+  }
   function parseRp(s){ var d=String(s||'').replace(/\D/g,''); return d?parseInt(d,10):0; }
   function currentJob(){ return payJobs[payJobId]||payJobs.booking; }
   function currentDgAmount(){
@@ -89,8 +94,8 @@
     if(lead){
       lead.textContent=shop
         ? (payJobId==='booking'
-          ? 'Booking fee Yaris. Request salesman terkunci '+j.amount+'. QRIS dan VA langsung siap — Anda tidak mengetik angka.'
-          : (locked?'There is a payment request from the salesperson. The QRIS and VA amount is locked at '+j.amount+'.':'Enter the amount. QRIS shows a barcode; VA issues an account number.'))
+          ? 'Yaris booking fee. Salesman request locked at '+j.amount+'. Company QRIS (max Rp 10.000.000) or VA — you do not type the amount.'
+          : (locked?'There is a payment request from the salesperson. Amount locked at '+j.amount+'. QRIS is only for booking fee ≤ Rp 10.000.000 — use VA for this settlement.':'Enter the amount. QRIS is only for booking fee (max Rp 10.000.000). Settlement uses VA.'))
         : j.lead;
     }
     document.querySelectorAll('#digiroom [data-ch-hint]').forEach(function(el){
@@ -98,19 +103,20 @@
       var lock=el.getAttribute('data-ch-lock')||open;
       el.textContent=locked?lock:open;
     });
-    dgQrisReady=locked;
+    dgQrisReady=locked && qrisJobOk();
     dgVaReady=locked;
     syncPayAmount();
     refreshDgInstruments();
   }
   function refreshDgInstruments(){
     var n=currentDgAmount();
-    var qrisOn=dgQrisReady && n>0;
+    var qrisOn=dgQrisReady && n>0 && qrisJobOk();
     var vaOn=dgVaReady && n>0;
-    document.querySelectorAll('[data-qris-wait]').forEach(function(el){ el.hidden=qrisOn; });
-    document.querySelectorAll('[data-qris-ready]').forEach(function(el){ el.hidden=!qrisOn; });
-    document.querySelectorAll('[data-va-wait]').forEach(function(el){ el.hidden=vaOn; });
-    document.querySelectorAll('[data-va-ready]').forEach(function(el){ el.hidden=!vaOn; });
+    document.querySelectorAll('#digiroom [data-qris-wait]').forEach(function(el){ el.hidden=qrisOn; });
+    document.querySelectorAll('#digiroom [data-qris-ready]').forEach(function(el){ el.hidden=!qrisOn; });
+    document.querySelectorAll('#digiroom [data-va-wait]').forEach(function(el){ el.hidden=vaOn; });
+    document.querySelectorAll('#digiroom [data-va-ready]').forEach(function(el){ el.hidden=!vaOn; });
+    if(qrisOn && typeof mintCompanyQris==='function' && typeof qrisPaid==='function' && !qrisPaid()) mintCompanyQris('booking', n);
   }
   function setPayJob(id){
     payJobId=payJobs[id]?id:'booking';

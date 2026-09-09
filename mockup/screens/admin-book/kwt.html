@@ -2,10 +2,10 @@
           <h3>Receipt branch <span class="side">Open at QRIS generate · Active after Banking API</span></h3>
           <div class="pad" data-qris-admin hidden style="border-bottom:1px solid var(--rule)">
             <p class="hint" style="margin:0 0 8px"><b>Open QRIS instrument.</b> Bound to company NMID FAST Outlet Cilandak. Does not reduce AR. A personal or swapped QRIS will not settle this receipt — that money lands Unmatched.</p>
-            <p style="margin:0 0 12px;font-size:13px"><b>KWT/26/CLD/009220</b> · <span data-qris-id>QRIS-CLD-00418-3</span> · Budi Santoso · Rp 100.000.000</p>
+            <p style="margin:0 0 12px;font-size:13px"><b>KWT/26/CLD/009301</b> · <span data-qris-id>QRIS-CLD-00426-1</span> · Dewi Lestari · booking fee Rp 3.000.000</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <button type="button" class="btn" data-qris-void>Void company QRIS</button>
-              <button type="button" class="btn ghost" data-go="cashless" data-pay-job="lunas" data-role="frontman">Open Frontman Pay</button>
+              <button type="button" class="btn ghost" data-go="booking" data-pay-job="booking" data-role="frontman">Open Frontman booking</button>
               <button type="button" class="btn ghost" data-go="admin_pay">Payment book</button>
             </div>
           </div>
@@ -13,23 +13,23 @@
           <table>
             <thead><tr><th>Receipt</th><th>Type</th><th>Customer</th><th>SPK / SO</th><th class="num">Amount</th><th>Status</th></tr></thead>
             <tbody>
-              <tr data-go="cashless" data-pay-job="lunas" data-qris-open-row hidden>
-                <td><b>KWT/26/CLD/009220</b><span class="sub">QRIS-CLD-00418-3 · FAST Outlet Cilandak</span></td>
-                <td>Settlement stage 2</td>
-                <td>Budi Santoso · Zenix</td>
-                <td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td>
-                <td class="num">Rp 100.000.000</td>
+              <tr data-go="booking" data-pay-job="booking" data-qris-open-row hidden>
+                <td><b>KWT/26/CLD/009301</b><span class="sub">QRIS-CLD-00426-1 · FAST Outlet Cilandak</span></td>
+                <td>Booking fee</td>
+                <td>Dewi Lestari · Yaris</td>
+                <td>SPK/26/CLD/00426<span class="sub">SO held until Active</span></td>
+                <td class="num">Rp 3.000.000</td>
                 <td><span class="tag wait">Open</span></td>
               </tr>
-              <tr data-go="cashless" data-pay-job="lunas" data-qris-void-row hidden>
-                <td><b>KWT/26/CLD/009220</b><span class="sub">Voided · Frontman must regenerate company QRIS</span></td>
-                <td>Settlement stage 2</td>
-                <td>Budi Santoso · Zenix</td>
-                <td>SPK/26/CLD/00418<span class="sub">SO 4500091238</span></td>
-                <td class="num">Rp 100.000.000</td>
+              <tr data-go="booking" data-pay-job="booking" data-qris-void-row hidden>
+                <td><b>KWT/26/CLD/009301</b><span class="sub">Voided · Frontman must regenerate company QRIS</span></td>
+                <td>Booking fee</td>
+                <td>Dewi Lestari · Yaris</td>
+                <td>SPK/26/CLD/00426<span class="sub">SO still held</span></td>
+                <td class="num">Rp 3.000.000</td>
                 <td><span class="tag stop">Cancelled</span></td>
               </tr>
-              <tr data-go="so" data-tx-dots="dewi">
+              <tr data-go="so" data-tx-dots="dewi" data-bf-kwt-snapshot>
                 <td><b>KWT/26/CLD/009301</b><span class="sub">3 Sep · QRIS</span></td>
                 <td>Booking fee</td>
                 <td>Dewi Lestari · Yaris</td>

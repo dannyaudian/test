@@ -12,23 +12,23 @@
 
       <div class="scheme" id="skema-cashless">
         <h3>Scheme preview · cashless and receipt scenarios</h3>
-        <p class="deck">Channels (QRIS, VA, CDM, Digiroom link, Frontman EDC) are only payment methods. Company QRIS generate mints an Open receipt on the branch NMID. Open does not reduce AR. Active receipts after Banking API do.</p>
-        <div class="chain"><span>Generate company QRIS</span><i>→</i><span>Open KWT</span><i>→</i><span>Banking API on that NMID</span><i>→</i><span>Active</span><i>→</i><span>AR Open decreases</span></div>
+        <p class="deck">QRIS max Rp 10.000.000 — booking fee only. Company QRIS generate mints an Open receipt. Settlement uses VA / CDM / EDC. Open does not reduce AR. Active receipts after Banking API do.</p>
+        <div class="chain"><span>Booking fee QRIS</span><i>→</i><span>Open KWT</span><i>→</i><span>Banking API on that NMID</span><i>→</i><span>Active</span><i>→</i><span>SO unlocks</span></div>
         <div class="scheme-legend">
-          <span class="hold">Locked request</span>
-          <span>Enter amount yourself</span>
+          <span class="hold">Locked booking fee</span>
+          <span>Settlement · VA / CDM / EDC</span>
           <span class="ok">Active receipt</span>
-          <span class="stop">Open ≠ Active · personal QRIS unmatched</span>
+          <span class="stop">QRIS max Rp 10.000.000</span>
         </div>
         <div class="see-row">
-          <a class="see" href="mockup.html#booking"><span class="see-k">Locked fee</span><b>Dewi · booking fee Yaris</b><span>Request Rp 3.000.000. Company QRIS NMID FAST Outlet Cilandak. KWT/26/CLD/009301 → SO 4500091426.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#cashless"><span class="see-k">Request</span><b>Budi · Frontman billing request</b><span>Generate company QRIS. Open KWT/26/CLD/009220 in Administration. Active only after scan matches that QRIS.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#digiroom"><span class="see-k">Deposit</span><b>Budi · enter the amount yourself</b><span>Process 2: the customer enters the amount. Company QRIS after the amount. KWT 008731 and 009115 reduce AR.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#booking"><span class="see-k">Locked fee</span><b>Dewi · booking fee Yaris</b><span>Rp 3.000.000 company QRIS. Open KWT/26/CLD/009301 → Active → SO 4500091426.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#cashless"><span class="see-k">Request</span><b>Budi · Frontman settlement</b><span>Rp 100 million locked. VA / CDM / EDC — not QRIS. Active KWT after Banking API.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#digiroom"><span class="see-k">Deposit</span><b>Budi · enter the amount yourself</b><span>Process 2: VA after the amount. QRIS is not offered above Rp 10.000.000.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#booking"><span class="see-k">EDC</span><b>Debit at the Frontman desk</b><span>Cashier device. There is no EDC on the customer's phone. Still one Active receipt per verified payment.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Ledger</span><b>Administration · Open QRIS</b><span>Void the company instrument if the barcode was swapped. Unmatched money does not close Open KWT.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Ledger</span><b>Administration · Open QRIS</b><span>Void the booking-fee company instrument if the barcode was swapped.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#e_kuitansi"><span class="see-k">PDF</span><b>Customer e-receipt</b><span>Download the same number as the branch ledger after Active.</span><em>Open →</em></a>
         </div>
-        <p class="deck" style="margin:0">Rule: Open KWT is instrument control. No Banking API match on that NMID, no Active receipt, no AR movement. Receipts are not overwritten; corrections use reversal/reissue.</p>
+        <p class="deck" style="margin:0">Rule: QRIS is booking fee only. Open KWT is instrument control. No Banking API match on that NMID, no Active receipt, no SO unlock from the fee.</p>
       </div>
 
       <div class="scheme" id="skema-approval">
@@ -168,8 +168,8 @@
           <div class="thumb zenix">ZENIX</div>
           <div class="body">
             <p class="who">Budi Santoso · Frontman</p>
-            <h3>Settlement QRIS &amp; VA</h3>
-            <p>Salesman request of Rp 100,000,000 locked. Without a request, customer enters the amount themselves via QRIS or VA. Debit EDC is selected by Frontman at the counter, not from the customer's screen.</p>
+            <h3>Settlement VA &amp; CDM</h3>
+            <p>Salesman request of Rp 100,000,000 locked. Pay by VA, CDM, or EDC. QRIS is only for booking fee (max Rp 10.000.000).</p>
             <span class="go">Open payment screen →</span>
           </div>
         </a>
@@ -178,7 +178,7 @@
           <div class="body">
             <p class="who">Budi · Customer Digiroom</p>
             <h3>Enter the amount yourself</h3>
-            <p>Home pay.fast.id. QRIS appears after the amount is entered. VA issues an account number after the amount is entered.</p>
+            <p>Home pay.fast.id. Booking fee may use company QRIS. Settlement issues a VA after the amount. QRIS max Rp 10.000.000.</p>
             <span class="go">Open Digiroom →</span>
           </div>
         </a>
