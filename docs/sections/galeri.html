@@ -12,8 +12,8 @@
 
       <div class="scheme" id="skema-cashless">
         <h3>Scheme preview · cashless and receipt scenarios</h3>
-        <p class="deck">QRIS max Rp 10.000.000 — booking fee only. Company QRIS generate mints an Open receipt. Settlement uses VA / CDM / EDC. Open does not reduce AR. Active receipts after Banking API do.</p>
-        <div class="chain"><span>Booking fee QRIS</span><i>→</i><span>Open KWT</span><i>→</i><span>Banking API on that NMID</span><i>→</i><span>Active</span><i>→</i><span>SO unlocks</span></div>
+        <p class="deck">QRIS max Rp 10.000.000 per barcode. Rp 50.000.000 = 5 company QRIS and 5 Open receipts. VA still pays a request in one transfer. Administration can void an Open slice.</p>
+        <div class="chain"><span>Generate slice</span><i>→</i><span>Open KWT</span><i>→</i><span>Scan</span><i>→</i><span>Active</span><i>→</i><span>Next barcode until target</span></div>
         <div class="scheme-legend">
           <span class="hold">Locked booking fee</span>
           <span>Settlement · VA / CDM / EDC</span>
@@ -22,7 +22,7 @@
         </div>
         <div class="see-row">
           <a class="see" href="mockup.html#booking"><span class="see-k">Locked fee</span><b>Dewi · booking fee Yaris</b><span>Rp 3.000.000 company QRIS. Open KWT/26/CLD/009301 → Active → SO 4500091426.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#cashless"><span class="see-k">Request</span><b>Budi · Frontman settlement</b><span>Rp 100 million locked. VA / CDM / EDC — not QRIS. Active KWT after Banking API.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#cashless"><span class="see-k">Slices</span><b>Budi · Rp 50.000.000 in 5 QRIS</b><span>Each barcode Rp 10.000.000. Open KWT per slice. Or one VA for the full request.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#digiroom"><span class="see-k">Deposit</span><b>Budi · enter the amount yourself</b><span>Process 2: VA after the amount. QRIS is not offered above Rp 10.000.000.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#booking"><span class="see-k">EDC</span><b>Debit at the Frontman desk</b><span>Cashier device. There is no EDC on the customer's phone. Still one Active receipt per verified payment.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Ledger</span><b>Administration · Open QRIS</b><span>Void the booking-fee company instrument if the barcode was swapped.</span><em>Open →</em></a>
@@ -168,8 +168,8 @@
           <div class="thumb zenix">ZENIX</div>
           <div class="body">
             <p class="who">Budi Santoso · Frontman</p>
-            <h3>Settlement VA &amp; CDM</h3>
-            <p>Salesman request of Rp 100,000,000 locked. Pay by VA, CDM, or EDC. QRIS is only for booking fee (max Rp 10.000.000).</p>
+            <h3>Settlement QRIS slices &amp; VA</h3>
+            <p>Request Rp 100.000.000. VA once, or company QRIS Rp 10.000.000 at a time (Rp 50.000.000 = 5 scans).</p>
             <span class="go">Open payment screen →</span>
           </div>
         </a>

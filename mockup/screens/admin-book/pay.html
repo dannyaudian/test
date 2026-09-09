@@ -8,10 +8,17 @@
             <button type="button" data-admin-pay-filter="pending" aria-pressed="false">Pending</button>
             <button type="button" data-admin-pay-filter="unmatched" aria-pressed="false">Unmatched</button>
           </div>
+          <div class="pad" data-qris-slice-admin hidden style="border-bottom:1px solid var(--rule)">
+            <p class="hint" style="margin:0 0 8px"><b>Open QRIS slice.</b> Max Rp 10.000.000. Repeat until the target (e.g. Rp 50.000.000 = 5 scans) is Active.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <button type="button" class="btn" data-qris-void="slice">Void this slice</button>
+              <button type="button" class="btn ghost" data-go="admin_kwt">Receipt book</button>
+            </div>
+          </div>
           <div class="pad" data-qris-admin hidden style="border-bottom:1px solid var(--rule)">
             <p class="hint" style="margin:0 0 8px"><b>Open company QRIS.</b> Receipt already numbered. Banking API must confirm <em>this</em> NMID. Personal Frontman QRIS does not close it.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <button type="button" class="btn" data-qris-void>Void company QRIS</button>
+              <button type="button" class="btn" data-qris-void="booking">Void company QRIS</button>
               <button type="button" class="btn ghost" data-go="admin_kwt">Receipt book</button>
             </div>
           </div>
@@ -19,6 +26,15 @@
           <table id="adminPayTable">
             <thead><tr><th>Time</th><th>Reference</th><th>Receipt</th><th>Type</th><th>Transactions</th><th class="num">Amount</th><th>Status</th></tr></thead>
             <tbody id="adminPayList">
+              <tr data-go="admin_kwt" data-admin-pay-status="open" data-qris-slice-open-row hidden>
+                <td>Today<span class="sub">QRIS slice</span></td>
+                <td><span data-qris-slice-id>QRIS-CLD-00418-3</span><span class="sub">Max Rp 10.000.000</span></td>
+                <td><b data-qris-slice-kwt>KWT/26/CLD/009220</b></td>
+                <td>QRIS slice</td>
+                <td>Budi Santoso · Zenix<span class="sub">SPK/26/CLD/00418</span></td>
+                <td class="num">Rp 10.000.000</td>
+                <td><span class="tag wait">Open</span></td>
+              </tr>
               <tr data-go="admin_kwt" data-admin-pay-status="open" data-qris-open-row hidden>
                 <td>Today<span class="sub">Company QRIS</span></td>
                 <td>QRIS-CLD-00426-1<span class="sub">NMID ID1020020004128</span></td>

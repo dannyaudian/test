@@ -206,8 +206,7 @@
     });
   }
   function showCashPanel(mode){
-    if(mode==='qris') mode='va';
-    if(currentRole==='cust' && mode==='edc') mode='va';
+    if(currentRole==='cust' && mode==='edc') mode='qris';
     document.querySelectorAll('#cashSeg [data-cash]').forEach(function(b){
       b.setAttribute('aria-pressed', b.getAttribute('data-cash')===mode?'true':'false');
     });
@@ -224,11 +223,11 @@
     if(note) note.hidden=!cust;
     var title=document.querySelector('[data-cash-title]');
     if(title) title.textContent=cust
-      ? 'Pay at the branch: VA or CDM'
+      ? 'Pay at the branch: QRIS slices or VA'
       : (currentRole==='admin' ? 'Same transaction payments' : 'Receive at branch or send a link');
     if(cust){
       var edcOn=document.querySelector('#cashSeg [data-cash="edc"][aria-pressed="true"]');
-      if(edcOn) showCashPanel('va');
+      if(edcOn) showCashPanel('qris');
     }
   }
   document.querySelectorAll('#bfSeg [data-bf]').forEach(function(b){

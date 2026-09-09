@@ -2,7 +2,7 @@
         <div class="screenhead">
           <div>
             <h2>Pay · <span data-pay-unit>Innova Zenix</span></h2>
-            <p>Settlement uses VA, CDM, Digiroom, or EDC. QRIS is only for a booking fee (max Rp 10.000.000).</p>
+            <p>QRIS max Rp 10.000.000 <b>per barcode</b>. A larger amount is paid in several company QRIS — one Open receipt each. VA still pays the full request in one transfer.</p>
           </div>
           <div class="actions">
             <button class="btn ghost" data-back data-go="beranda">← List</button>
@@ -18,21 +18,39 @@
         </nav>
         <div class="cards">
           <div class="card alert"><p class="k">Remaining invoice</p><p class="v" data-live="ar-short">181,75<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">Matches on Frontman and customer</p></div>
-          <div class="card"><p class="k">Active request</p><p class="v">100<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">VA locked to this request · not QRIS</p></div>
+          <div class="card"><p class="k">Active request</p><p class="v">100<span style="font-size:14px;font-weight:500"> M</span></p><p class="n">VA in one shot, or QRIS × Rp 10 jt</p></div>
         </div>
         <div class="box">
           <h3 data-cash-title>Receive at branch or delivery link</h3>
           <div class="pad">
             <p class="hint" data-cash-cust-note hidden>Debit EDC is not on the customer screen. The Frontman picks the machine and pushes the amount host-to-host.</p>
             <div class="channels" id="cashSeg">
-              <button type="button" class="channel" data-cash="va" aria-pressed="true"><span class="n">1</span><b>VA</b><span>Virtual account · settlement</span></button>
-              <button type="button" class="channel" data-cash="cdm" aria-pressed="false"><span class="n">2</span><b>CDM</b><span>Payment code at the deposit machine</span></button>
-              <button type="button" class="channel" data-cash="link" aria-pressed="false"><span class="n">3</span><b>Payment link</b><span>Digiroom Home</span></button>
-              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">4</span><b>Debit EDC</b><span>Frontman picks the device</span></button>
+              <button type="button" class="channel" data-cash="qris" aria-pressed="true"><span class="n">1</span><b>QRIS</b><span>Max Rp 10 jt per barcode</span></button>
+              <button type="button" class="channel" data-cash="va" aria-pressed="false"><span class="n">2</span><b>VA</b><span>One transfer · full request</span></button>
+              <button type="button" class="channel" data-cash="cdm" aria-pressed="false"><span class="n">3</span><b>CDM</b><span>Payment code at the deposit machine</span></button>
+              <button type="button" class="channel" data-cash="link" aria-pressed="false"><span class="n">4</span><b>Payment link</b><span>Digiroom Home</span></button>
+              <button type="button" class="channel" data-cash="edc" aria-pressed="false"><span class="n">5</span><b>Debit EDC</b><span>Frontman picks the device</span></button>
             </div>
             <div class="bf-panels">
-              <div data-cash-panel="va" class="on">
-                <p class="hint">QRIS max is Rp 10.000.000 and is only used for a <b>booking fee</b>. This settlement is Rp 100.000.000 — transfer to the company VA.</p>
+              <div data-cash-panel="qris" class="on">
+                <p class="hint">One company QRIS = max Rp 10.000.000 and one Open KWT. To pay Rp 50.000.000 the customer scans <b>five</b> barcodes. A personal account is not this instrument.</p>
+                <div class="amtchips" role="group" aria-label="QRIS target">
+                  <button type="button" class="chip on" data-qris-target="50000000">Rp 50.000.000 · 5 barcodes</button>
+                  <button type="button" class="chip" data-qris-target="100000000">This request · 10 barcodes</button>
+                </div>
+                <p class="hint" style="margin:0 0 12px" data-qris-slice-progress>0 / 5 Active · remaining Rp 50.000.000</p>
+                <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-gen="slice" data-qris-slice-wait>Generate company QRIS · slice 1 of 5 · Rp 10.000.000</button>
+                <div data-qris-slice-ready hidden>
+                  <div class="qrbox lg" role="img" aria-label="Company QRIS settlement slice"></div>
+                  <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 4px" data-qris-slice-amt>Rp 10.000.000</p>
+                  <p class="hint" style="text-align:center;margin:0 0 8px" data-qris-slice-id>QRIS-CLD-00418-3 · NMID ID1020020004128 · FAST Outlet Cilandak</p>
+                  <p class="hint" style="text-align:center">Open <b data-qris-slice-kwt>KWT/26/CLD/009220</b> — AR moves only after Banking API matches <em>this</em> slice.</p>
+                  <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="10000000" data-qris-slice-scan>Simulate scanned</button>
+                </div>
+                <p class="hint" data-qris-slice-done hidden>All QRIS slices for this target are Active. Remaining request can still go by VA.</p>
+              </div>
+              <div data-cash-panel="va">
+                <p class="hint">One VA pays the locked request in a single transfer. Use this when you do not want to scan several QRIS.</p>
                 <div class="kiosk" style="max-width:360px">
                   <p style="margin:0;font-size:12px;opacity:.7">VA BCA · FAST Outlet Cilandak</p>
                   <p style="margin:8px 0 0;font-size:13px">Virtual account</p>
@@ -40,7 +58,6 @@
                   <p style="margin:8px 0 0;font-size:12px;opacity:.7">Settlement · Rp 100.000.000</p>
                 </div>
                 <button type="button" class="btn" style="width:100%;margin-top:12px" data-pay="va" data-amount="100000000">Simulate VA transfer</button>
-                <button type="button" class="btn ghost" style="width:100%;margin-top:8px" data-go="booking" data-pay-job="booking">Booking fee QRIS (max Rp 10.000.000)</button>
               </div>
               <div data-cash-panel="cdm">
                 <p class="hint">Deposit cash at the branch CDM. The code comes from the SPK — do not type the amount into the machine.</p>
@@ -53,10 +70,10 @@
                 <button type="button" class="btn" style="width:100%;margin-top:12px" data-pay="cdm" data-amount="100000000">Simulate CDM deposit</button>
               </div>
               <div data-cash-panel="link">
-                <p class="hint">In Digiroom the customer pays this settlement by VA (or CDM / bank app). QRIS is not offered — the amount is above Rp 10.000.000.</p>
+                <p class="hint">Digiroom: VA for the full request, or QRIS in slices of max Rp 10.000.000 (example Rp 50.000.000 = 5 scans).</p>
                 <div class="wa" style="border:1px solid var(--rule);margin-bottom:12px">
                   <p class="from">FAST · Digiroom link</p>
-                  <p>Hello Mr. Budi, there is a settlement request of Rp 100.000.000. Pay by virtual account. QRIS is only for booking fee.</p>
+                  <p>Hello Mr. Budi, settlement request Rp 100.000.000. Pay by VA once, or by company QRIS Rp 10.000.000 at a time.</p>
                   <div class="va"><span style="font-size:11.5px;color:var(--ink-soft)">Open</span><b>digiroom.fast.id/home</b></div>
                 </div>
                 <button type="button" class="btn" style="width:100%" data-go="digiroom" data-pay-job="lunas" data-role="cust">Send Digiroom link</button>
@@ -79,7 +96,8 @@
           <div class="docs">
             <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Settlement 1 · Rp 300.000.000</p><span class="tag ok">Active</span></div>
             <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking · Rp 5.000.000</p><span class="tag ok">Active</span></div>
-            <div class="doc miss" id="newReceiptSlot"><b>Next receipt</b><p class="meta">Issued after Banking API. Settlement is not QRIS.</p><span class="tag mute">Pending</span></div>
+            <div id="qrisSliceDocs"></div>
+            <div class="doc miss" id="newReceiptSlot"><b>Next QRIS slice</b><p class="meta">Max Rp 10.000.000 · Open when generated · Active after scan</p><span class="tag mute">Pending</span></div>
           </div>
           <div class="pad"><button class="btn ghost" data-go="bayar" style="width:100%">Allocation history</button></div>
         </div>
