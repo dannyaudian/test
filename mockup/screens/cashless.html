@@ -37,22 +37,29 @@
                   <button type="button" class="chip" data-cash-amt="open">Other amount</button>
                 </div>
                 <div data-cash-qris-request>
-                  <p class="hint">Salesman payment request. Show the barcode — the customer does not change the amount.</p>
-                  <div class="qrbox lg" role="img" aria-label="QRIS settlement Innova"></div>
-                  <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px">Rp 100.000.000</p>
-                  <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000">Simulate scanned</button>
+                  <p class="hint">Generate the <b>company</b> QRIS for this request. A personal or swapped account is not this instrument — Administration holds the Open receipt.</p>
+                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-gen="request" data-qris-wait="request">Generate company QRIS · Rp 100.000.000</button>
+                  <div data-qris-ready="request" hidden>
+                    <div class="qrbox lg" role="img" aria-label="Company QRIS settlement Innova"></div>
+                    <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 4px">Rp 100.000.000</p>
+                    <p class="hint" style="text-align:center;margin:0 0 8px" data-qris-id>QRIS-CLD-00418-3 · NMID ID1020020004128 · FAST Outlet Cilandak</p>
+                    <p class="hint" style="text-align:center">Open receipt <b>KWT/26/CLD/009220</b> — AR does not move until Banking API matches this QRIS.</p>
+                    <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="100000000" data-qris-scan>Simulate scanned</button>
+                  </div>
                 </div>
                 <div data-cash-qris-open hidden>
-                  <p class="hint">Not using a request. Enter the amount (max. Rp 81.750.000), then show the QRIS. Not a VA.</p>
+                  <p class="hint">Not using a request. Enter the amount (max. Rp 81.750.000), then generate company QRIS. Not a VA. Not a personal account.</p>
                   <label class="amtfield">
                     <span>QRIS amount</span>
                     <input id="cashQrisAmt" inputmode="numeric" autocomplete="off" placeholder="Example 25000000">
                   </label>
-                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-show="cash">Show QRIS</button>
+                  <button type="button" class="btn" style="width:100%;margin-bottom:8px" data-qris-show="cash">Generate company QRIS</button>
                   <div data-cash-qris-ready hidden>
-                    <div class="qrbox lg" role="img" aria-label="QRIS other amount"></div>
-                    <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 12px" id="cashQrisLabel">Rp 0</p>
-                    <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="0" id="cashQrisPay">Simulate scanned</button>
+                    <div class="qrbox lg" role="img" aria-label="Company QRIS other amount"></div>
+                    <p style="text-align:center;font-size:22px;font-weight:800;margin:0 0 4px" id="cashQrisLabel">Rp 0</p>
+                    <p class="hint" style="text-align:center;margin:0 0 8px" data-qris-id>QRIS-CLD-00418-3 · NMID ID1020020004128 · FAST Outlet Cilandak</p>
+                    <p class="hint" style="text-align:center">Open receipt <b>KWT/26/CLD/009220</b> — Administration can void this instrument.</p>
+                    <button type="button" class="btn" style="width:100%" data-pay="qris" data-amount="0" id="cashQrisPay" data-qris-scan>Simulate scanned</button>
                   </div>
                 </div>
               </div>
@@ -93,7 +100,7 @@
           <div class="docs">
             <div class="doc"><b>KWT/26/CLD/009115</b><p class="meta">Settlement 1 · Rp 300.000.000</p><span class="tag ok">Active</span></div>
             <div class="doc"><b>KWT/26/CLD/008731</b><p class="meta">Booking · Rp 5.000.000</p><span class="tag ok">Active</span></div>
-            <div class="doc miss" id="newReceiptSlot"><b>Next receipt</b><p class="meta">Issued after payment</p><span class="tag mute">Pending</span></div>
+            <div class="doc miss" id="newReceiptSlot"><b>Next receipt</b><p class="meta">Open KWT when company QRIS is generated. Active only after Banking API.</p><span class="tag mute">Pending</span></div>
           </div>
           <div class="pad"><button class="btn ghost" data-go="bayar" style="width:100%">Allocation history</button></div>
         </div>

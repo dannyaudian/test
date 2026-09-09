@@ -3,13 +3,13 @@
         <span class="num">D2</span>
         <div>
           <h2>Deliverable 2 — Cashless payments and e-receipts</h2>
-          <p class="deck">Channels (QRIS, VA, CDM, Digiroom, EDC) are only ways to pay. What binds the transaction is the payment request, Banking API verification, and one receipt number per fully paid payment.</p>
+          <p class="deck">Channels (QRIS, VA, CDM, Digiroom, EDC) are only ways to pay. Company QRIS is bound to the branch NMID. Generating it mints an Open receipt that Administration can control. Banking API on that instrument makes the receipt Active and then AR moves.</p>
         </div>
       </div>
 
       <div class="callout">
         <span class="tag">What changes</span>
-        <p>Payment confirmation, allocation, and receipts are not typed at the cashier. A request that is not yet paid does not issue a receipt and does not reduce AR Open. It is the active receipt that reduces AR.</p>
+        <p>Payment confirmation, allocation, and receipts are not typed at the cashier. Generating company QRIS mints an <b>Open</b> receipt bound to the branch NMID so Administration can control the instrument. Open does not reduce AR Open. Only an <b>Active</b> receipt after Banking API reduces AR.</p>
       </div>
 
       <h3>Features</h3>
@@ -21,7 +21,7 @@
         </article>
         <article class="feat">
           <h4>Settlement: Frontman request or customer deposit</h4>
-          <p><b>Process 1</b> — Frontman creates a request within the Available Request Amount limit; QRIS/VA locked. <b>Process 2</b> — the customer opens the unit invoice from home and enters the amount; QRIS/VA is issued after the amount. These are two processes, two receipts — do not merge them.</p>
+          <p><b>Process 1</b> — Frontman creates a request within the Available Request Amount limit, then generates <b>company</b> QRIS (Open KWT). QRIS/VA locked. <b>Process 2</b> — the customer opens the unit invoice from home and enters the amount; company QRIS/VA is issued after the amount. These are two processes, two receipts — do not merge them.</p>
           <p class="feat-ex"><b>Example in the mockup</b> Process 1 Budi: <a href="mockup.html#cashless">#cashless</a> (Frontman) and <a href="mockup.html#tagihan_customer">#tagihan_customer</a>. Process 2: <a href="mockup.html#digiroom">#digiroom</a> — enter the amount first, then a new QR/VA.</p>
         </article>
         <article class="feat">
@@ -31,13 +31,13 @@
         </article>
         <article class="feat">
           <h4>One payment, one receipt</h4>
-          <p>Banking API verifies → allocation to unit/SO → one KWT number → e-receipt PDF. The same number on the customer's phone and in the branch ledger. Not yet paid = no KWT yet.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> The customer downloads it at <a href="mockup.html#e_kuitansi">#e_kuitansi</a>. The branch sees the same number at <a href="mockup.html#admin_kwt">#admin_kwt</a>.</p>
+          <p>Company QRIS generate → Open KWT (same number, not yet Active). Banking API verifies <em>that</em> QRIS id → allocation → Active → e-receipt PDF. A personal or swapped Frontman QRIS does not match the Open instrument; that money is Unmatched. Administration can void Open QRIS; Frontman must regenerate the company barcode.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Budi: generate at <a href="mockup.html#cashless">#cashless</a> → Open <span class="kwt">KWT/26/CLD/009220</span> on <a href="mockup.html#admin_kwt">#admin_kwt</a> and <a href="mockup.html#admin_pay">#admin_pay</a> (Open QRIS filter). Customer PDF after Active at <a href="mockup.html#e_kuitansi">#e_kuitansi</a>.</p>
         </article>
         <article class="feat">
           <h4>Receipt status and corrections</h4>
-          <p>Issued / Active / Reversed / Cancelled / Reissued. Not overwritten. Cancelled returns AR and re-evaluates the billing/delivery gate. The customer still sees the cancelled history.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Status filter in the branch ledger. Cancelled stays as a history row, not deleted. The 30%/paid-in-full gate is re-evaluated after cancellation.</p>
+          <p>Open / Active / Reversed / Cancelled / Reissued. Open is the instrument after company QRIS generate. Not overwritten. Voiding Open does not return AR (AR never moved). Cancelling Active returns AR and re-evaluates the billing/delivery gate.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Administration voids Open QRIS from the receipt book. Cancelled stays as a history row. The 30%/paid-in-full gate is re-evaluated only after an Active cancellation.</p>
         </article>
         <article class="feat">
           <h4>Open unit bill on the customer home</h4>
@@ -47,7 +47,7 @@
       </div>
 
       <h3>Flow in the mockup</h3>
-      <div class="chain"><span>View AR / request</span><i>→</i><span>Payment channel</span><i>→</i><span>Banking API</span><i>→</i><span>1 KWT number</span><i>→</i><span>AR decreases</span><i>→</i><span>Gate evaluated</span></div>
+      <div class="chain"><span>View AR / request</span><i>→</i><span>Generate company QRIS</span><i>→</i><span>Open KWT</span><i>→</i><span>Banking API on that NMID</span><i>→</i><span>Active</span><i>→</i><span>AR decreases</span></div>
       <p>Full scenario table: <a href="#skema-cashless">cashless → receipt scheme</a>.</p>
 
       <h3>Example: Dewi · booking fee Yaris</h3>
@@ -63,8 +63,8 @@
 
       <h3>Example: Budi · Zenix two payment processes</h3>
       <ol class="walk">
-        <li><b>Process 1 — Frontman request</b> Amount Rp 100.000.000 locked. The customer does not change the amount. This is not a self-entered settlement.
-          <span class="how"><a href="mockup.html#cashless">Frontman</a> · <a href="mockup.html#tagihan_customer">Customer phone</a></span></li>
+        <li><b>Process 1 — Frontman request</b> Amount Rp 100.000.000 locked. Frontman generates <b>company</b> QRIS — Open <span class="kwt">KWT/26/CLD/009220</span> appears for Administration. The customer does not change the amount. This is not a self-entered settlement.
+          <span class="how"><a href="mockup.html#cashless">Frontman</a> · <a href="mockup.html#admin_kwt">Open receipt</a> · <a href="mockup.html#tagihan_customer">Customer phone</a></span></li>
         <li><b>Process 2 — self deposit</b> No request. The customer enters the amount in Digiroom; QRIS appears after the amount, VA is issued after the amount.
           <span class="how"><a href="mockup.html#digiroom">Enter amount</a> — a different receipt from process 1.</span></li>
         <li><b>AR only decreases from active receipts</b> Example: <span class="kwt">KWT/26/CLD/008731</span> deposit Rp 5 million and <span class="kwt">KWT/26/CLD/009115</span> settlement 1 Rp 300 million. Illustrative balance Rp 181.75 million. Pending requests do not reduce AR.</li>
@@ -78,6 +78,6 @@
       </div>
       <blockquote class="rule">
         <span class="tag">What does not change</span>
-        <p>No verified payment, no receipt. Cash: billing ≥30% of funds received; delivery only when paid in full. Leasing: billing after full DP + e-PO (a missing e-PO is waivable to the OM for paperless); delivery after the signed contract from B2B.</p>
+        <p>No verified payment, no Active receipt and no AR movement. Open KWT is instrument control, not a cashier-typed proof. Cash: billing ≥30% of funds received; delivery only when paid in full. Leasing: billing after full DP + e-PO (a missing e-PO is waivable to the OM for paperless); delivery after the signed contract from B2B.</p>
       </blockquote>
     </section>

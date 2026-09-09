@@ -12,23 +12,23 @@
 
       <div class="scheme" id="skema-cashless">
         <h3>Scheme preview · cashless and receipt scenarios</h3>
-        <p class="deck">Channels (QRIS, VA, CDM, Digiroom link, Frontman EDC) are only payment methods. What binds the transaction is the payment request + receipt. Requests that are not yet paid do not issue receipts and do not reduce AR Open.</p>
-        <div class="chain"><span>Verified payment</span><i>→</i><span>1 receipt number</span><i>→</i><span>E-receipt PDF</span><i>→</i><span>AR Open decreases</span><i>→</i><span>Billing / delivery gate evaluated</span></div>
+        <p class="deck">Channels (QRIS, VA, CDM, Digiroom link, Frontman EDC) are only payment methods. Company QRIS generate mints an Open receipt on the branch NMID. Open does not reduce AR. Active receipts after Banking API do.</p>
+        <div class="chain"><span>Generate company QRIS</span><i>→</i><span>Open KWT</span><i>→</i><span>Banking API on that NMID</span><i>→</i><span>Active</span><i>→</i><span>AR Open decreases</span></div>
         <div class="scheme-legend">
           <span class="hold">Locked request</span>
           <span>Enter amount yourself</span>
           <span class="ok">Active receipt</span>
-          <span class="stop">Not yet paid = no KWT yet</span>
+          <span class="stop">Open ≠ Active · personal QRIS unmatched</span>
         </div>
         <div class="see-row">
-          <a class="see" href="mockup.html#booking"><span class="see-k">Locked fee</span><b>Dewi · booking fee Yaris</b><span>Request Rp 3.000.000. Digiroom or scan table QRIS. KWT/26/CLD/009301 → SO 4500091426.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#cashless"><span class="see-k">Request</span><b>Budi · Frontman billing request</b><span>Process 1: amount Rp 100 million locked. Separate from cashless settlement. Not yet paid = no KWT yet.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#digiroom"><span class="see-k">Deposit</span><b>Budi · enter the amount yourself</b><span>Process 2: the customer enters the amount. QRIS/VA after the amount. KWT 008731 and 009115 reduce AR.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#booking"><span class="see-k">EDC</span><b>Debit at the Frontman desk</b><span>Cashier device. There is no EDC on the customer's phone. Still one receipt per verified payment.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Ledger</span><b>Administration · branch receipt</b><span>The same number as the customer PDF. Unmatched items are here. Cancelled returns AR.</span><em>Open →</em></a>
-          <a class="see" href="mockup.html#e_kuitansi"><span class="see-k">PDF</span><b>Customer e-receipt</b><span>Download the same number as the branch ledger. One payment, one KWT.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#booking"><span class="see-k">Locked fee</span><b>Dewi · booking fee Yaris</b><span>Request Rp 3.000.000. Company QRIS NMID FAST Outlet Cilandak. KWT/26/CLD/009301 → SO 4500091426.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#cashless"><span class="see-k">Request</span><b>Budi · Frontman billing request</b><span>Generate company QRIS. Open KWT/26/CLD/009220 in Administration. Active only after scan matches that QRIS.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#digiroom"><span class="see-k">Deposit</span><b>Budi · enter the amount yourself</b><span>Process 2: the customer enters the amount. Company QRIS after the amount. KWT 008731 and 009115 reduce AR.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#booking"><span class="see-k">EDC</span><b>Debit at the Frontman desk</b><span>Cashier device. There is no EDC on the customer's phone. Still one Active receipt per verified payment.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#admin_kwt"><span class="see-k">Ledger</span><b>Administration · Open QRIS</b><span>Void the company instrument if the barcode was swapped. Unmatched money does not close Open KWT.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#e_kuitansi"><span class="see-k">PDF</span><b>Customer e-receipt</b><span>Download the same number as the branch ledger after Active.</span><em>Open →</em></a>
         </div>
-        <p class="deck" style="margin:0">Rule: no verified payment, no receipt. Receipts are not overwritten; corrections use reversal/reissue. Customer and branch see the same number.</p>
+        <p class="deck" style="margin:0">Rule: Open KWT is instrument control. No Banking API match on that NMID, no Active receipt, no AR movement. Receipts are not overwritten; corrections use reversal/reissue.</p>
       </div>
 
       <div class="scheme" id="skema-approval">

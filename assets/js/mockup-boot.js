@@ -50,9 +50,10 @@
     'assets/js/mockup-finance.js',
     'assets/js/mockup-ho-file.js',
     'assets/js/mockup-cust.js',
+    'assets/js/mockup-qris.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=ho-file-links';
+  var bust = 'v=qris-open-kwt';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {

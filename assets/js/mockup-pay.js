@@ -110,12 +110,14 @@
         if(label) label.textContent=formatRp(n);
         if(pay) pay.setAttribute('data-amount', String(n));
         if(box) box.hidden=false;
+        mintCompanyQris('open', n);
         return;
       }
       var n=currentDgAmount();
       if(!n){ toast('Enter payment amount first.'); return; }
       dgQrisReady=true;
       refreshDgInstruments();
+      if(payJobId!=='booking') mintCompanyQris('open', n);
     });
   });
   document.querySelectorAll('[data-va-issue]').forEach(function(b){
@@ -221,6 +223,7 @@
     if(window.FAST && FAST.save){
       FAST.save({paid:true,ar:ar,arLabel:label,receipt:'KWT/26/CLD/009220',channel:(channelMeta[channel]||{}).title||channel});
     }
+    if(typeof activateOpenQris==='function') activateOpenQris(amount);
     toast(ar===0?'Paid in full. E-receipt issued. Cash delivery unlocked.':'Payment of '+formatRp(amount)+' received. Invoice updated on home.');
     show(currentRole==='cust'?'customer_detail':'cashless');
   }
