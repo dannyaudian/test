@@ -3,7 +3,7 @@
         <span class="num">D3</span>
         <div>
           <h2>Deliverable 3 — Documents, tax, and STNK/BPKB logistics</h2>
-          <p class="deck">Upload once to the Document Vault, validate, then reuse from SPK through AFI, handover, STNK, and BPKB. Administration reviews rather than re-uploading the same package.</p>
+          <p class="deck">Upload once to the Document Vault, validate, then reuse from SPK through AFI, OKK/OBB, handover, STNK, and BPKB. Administration reviews rather than re-uploading the same package.</p>
         </div>
       </div>
 
@@ -16,7 +16,7 @@
       <div class="feat-list">
         <article class="feat">
           <h4>Document Vault</h4>
-          <p>KTP, NPWP, KK, PO, NIB, deeds, leasing documents, STNK, tax, power of attorney, BSTKB, electronic OKK are stored once. Subsequent use reads the vault, not a separate branch folder.</p>
+          <p>KTP, NPWP, KK, PO, NIB, deeds, leasing documents, STNK, tax, power of attorney, BSTKB, electronic OKK, and OBB are stored once. Subsequent use reads the vault, not a separate branch folder.</p>
           <p class="feat-ex"><b>Example in the mockup</b> Upload in <a href="mockup.html#spk_baru">SPK Dewi</a>. Reuse in <a href="mockup.html#dokumen">Budi's vault</a> — KTP/NPWP from the same Customer ID.</p>
         </article>
         <article class="feat">
@@ -35,6 +35,16 @@
           <p class="feat-ex"><b>Example in the mockup</b> Maria Fortuner day 19: <a href="mockup.html#tx_fortuner">#tx_fortuner</a> · KC escalation <a href="mockup.html#exc_stnk">#exc_stnk</a> — not a paid-in-full button.</p>
         </article>
         <article class="feat">
+          <h4>OKK — Order Kirim Kendaraan</h4>
+          <p>Before delivery, Frontman requests an electronic OKK to the expedition vendor. Pickup, VIN, DO, and destination come from the SPK — not a new address form. The vendor is notified; Administration sees the same number. This is logistics, not a paid-in-full waiver.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Agus Avanza: <a href="mockup.html#okk">#okk</a> sends <b>OKK/26/CLD/00425</b> to PT Nusantara Ekspedisi Mandiri.</p>
+        </article>
+        <article class="feat">
+          <h4>OBB — Order Bahan Bakar</h4>
+          <p>Before the new car leaves, Frontman requests OBB to the fuel partner (volume and product for a new-unit fill). The order is tied to the VIN. Delivery stays closed until OKK and OBB are both requested.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Same SPK: <a href="mockup.html#obb">#obb</a> sends <b>OBB/26/CLD/00425</b> — 10 liters Pertamax at SPBU Mitra FAST Cilandak. Then <a href="mockup.html#delivery">submit delivery</a>.</p>
+        </article>
+        <article class="feat">
           <h4>Handover Proof digital</h4>
           <p>Unit photos, geotag, BSTKB, and the proof package go into the vault. Good Issue uses the same evidence, not a separate paper form that gets retyped.</p>
           <p class="feat-ex"><b>Example in the mockup</b> Fajar GI <a href="mockup.html#gi">#gi</a>. Customer Calya downloads the same package at <a href="mockup.html#bukti_serah">#bukti_serah</a> — not dealer CCTV.</p>
@@ -47,7 +57,7 @@
       </div>
 
       <h3>Flow in the mockup</h3>
-      <div class="chain"><span>Upload in SPK</span><i>→</i><span>Vault + validity check</span><i>→</i><span>Booking fee can be billed</span><i>→</i><span>Reuse AFI/DO</span><i>→</i><span>GI proof</span><i>→</i><span>STNK/BPKB</span></div>
+      <div class="chain"><span>Upload in SPK</span><i>→</i><span>Vault + validity check</span><i>→</i><span>Booking fee can be billed</span><i>→</i><span>Reuse AFI/DO</span><i>→</i><span>OKK + OBB</span><i>→</i><span>Delivery / GI proof</span><i>→</i><span>STNK/BPKB</span></div>
       <p>Scenario gallery: <a href="#skema-documents">document gate scheme</a>.</p>
 
       <h3>Example: upload first, then fee (Dewi)</h3>
@@ -64,13 +74,14 @@
           <span class="how">What you see: a blocker in Raize's own 8-stage tracker. <a href="mockup.html#tx_raize">Workspace Raize</a></span></li>
         <li><b>Maria · Fortuner</b> STNK tracking day 19. Branch Head escalation — operational, not a commercial Approval Engine.
           <span class="how"><a href="mockup.html#tx_fortuner">Fortuner</a> · <a href="mockup.html#exc_stnk">STNK aging</a></span></li>
-        <li><b>Fajar · Rush</b> Good Issue uses the handover proof package already in the SPK vault (photos, VIN, geotag, BSTKB).
+        <li><b>Agus · Avanza</b> Paid in full. Request OKK to the expedition vendor, then OBB to fuel the new car, then submit delivery from the same SPK.
+          <span class="how"><a href="mockup.html#okk">OKK Agus</a> · <a href="mockup.html#obb">OBB</a> · <a href="mockup.html#delivery">Delivery</a></span></li>
+        <li><b>Fajar · Rush</b> Good Issue uses the handover proof package already in the SPK vault (photos, VIN, geotag, BSTKB). OKK and OBB were issued before the unit left.
           <span class="how"><a href="mockup.html#gi">GI Fajar</a></span></li>
-        <li><b>Augs · Avanza</b> Delivery requests use the form slot + document hub, not a re-uploaded ID card.
-          <span class="how"><a href="mockup.html#tx_avanza">Avanza</a></span></li>
       </ol>
 
       <div class="see-row">
+        <a class="see" href="mockup.html#okk"><span class="see-k">D3</span><b>OKK + OBB before delivery</b><span>Expedition order then fuel fill, then GI</span><em>View →</em></a>
         <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>STNK data from SPK</b><span>Auto-pull; breaking the sequence = exception</span><em>View →</em></a>
         <a class="see" href="#skema-documents"><span class="see-k">Flow</span><b>Vault scenarios</b><span>Gagal/expired, GI, reuse, booking fee</span><em>View →</em></a>
       </div>

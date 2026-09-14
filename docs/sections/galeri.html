@@ -70,7 +70,7 @@
       <div class="scheme" id="skema-documents">
         <h3>Scheme preview · document gate scenarios</h3>
         <p class="deck">Documents are uploaded once in SPK, stored in the vault, checked for validity, and then verified by Administration — not retyped in SO, AFI, or billing. A passed gate opens the <b>booking fee invoice</b>. Missing identity data is completed at the source (SPK). Expired but waivable items go to Approval Engine; Admin does not re-upload.</p>
-        <div class="chain"><span>Upload in SPK</span><i>→</i><span>Vault + validity</span><i>→</i><span>Admin verification</span><i>→</i><span>Booking fee can be billed</span><i>→</i><span>Reuse AFI / GI / STNK / customer</span></div>
+        <div class="chain"><span>Upload in SPK</span><i>→</i><span>Vault + validity</span><i>→</i><span>Admin verification</span><i>→</i><span>Booking fee can be billed</span><i>→</i><span>Reuse AFI</span><i>→</i><span>OKK + OBB</span><i>→</i><span>GI / STNK</span></div>
         <div class="scheme-legend">
           <span class="ok">Gate passed · fee can be billed</span>
           <span class="stop">Held at source / not yet complete</span>
@@ -89,6 +89,12 @@
           <a class="see" href="mockup.html#exc_nama"><span class="see-k">Waivable</span><b>Dewi · supporting STNK name</b><span>STNK KTP, STNK address, statement already in the SPK vault before the engine.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#gi"><span class="see-k">GI</span><b>Fajar · handover package</b><span>Photos, VIN, geotag, timestamp, BSTKB. Approved by Administration. The customer downloads the same package.</span><em>Open →</em></a>
           <a class="see" href="mockup.html#bukti_serah"><span class="see-k">Customer</span><b>Calya · proof in the account</b><span>Not CCTV footage. The number and package are the same as the branch's.</span><em>Open →</em></a>
+        </div>
+        <h4>Before delivery</h4>
+        <div class="see-row">
+          <a class="see" href="mockup.html#okk"><span class="see-k">OKK</span><b>Agus · Order Kirim Kendaraan</b><span>Paid in full already. Send electronic OKK/26/CLD/00425 to PT Nusantara Ekspedisi Mandiri. Address and VIN from the SPK.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#obb"><span class="see-k">OBB</span><b>Agus · Order Bahan Bakar</b><span>After OKK. 10 liters Pertamax for the new Avanza at SPBU Mitra FAST Cilandak.</span><em>Open →</em></a>
+          <a class="see" href="mockup.html#delivery"><span class="see-k">Delivery</span><b>Agus · submit after OKK + OBB</b><span>The delivery form stays closed until both logistics orders are requested. Not a commercial waiver.</span><em>Open →</em></a>
         </div>
         <h4>Reuse into the next process</h4>
         <div class="see-row">
@@ -218,13 +224,13 @@
             <span class="go">Open customer orders →</span>
           </div>
         </a>
-        <a class="case" href="mockup.html#delivery">
+        <a class="case" href="mockup.html#okk">
           <div class="thumb avanza">AVANZA</div>
           <div class="body">
             <p class="who">Agus Hermawan · Frontman</p>
-            <h3>Submit delivery</h3>
-            <p>The SPK→STNK trail in Augs's workspace. Request delivery and a fleet slot (D3) without moving to Rush.</p>
-            <span class="go">Open delivery request →</span>
+            <h3>OKK, OBB, then delivery</h3>
+            <p>Paid in full already. Request OKK to the expedition vendor, OBB to fuel the new Avanza, then submit delivery — same SPK, not Rush.</p>
+            <span class="go">Open OKK →</span>
           </div>
         </a>
         <a class="case" href="mockup.html#gi">

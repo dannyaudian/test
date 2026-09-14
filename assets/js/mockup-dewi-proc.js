@@ -97,10 +97,43 @@
     });
   });
   function applyDelivery(){
-    var s=window.FAST && FAST.load ? FAST.load(FAST.DEL_KEY) : null;
-    var sent=!!(s && s.requested);
-    document.querySelectorAll('[data-del-open]').forEach(function(el){ el.hidden=sent; });
+    var s=(window.FAST && FAST.load ? FAST.load(FAST.DEL_KEY) : null) || {};
+    var okk=!!s.okk;
+    var obb=!!s.obb;
+    var ready=okk && obb;
+    var sent=!!s.requested;
+    document.querySelectorAll('[data-okk-open]').forEach(function(el){ el.hidden=okk; });
+    document.querySelectorAll('[data-okk-sent]').forEach(function(el){ el.hidden=!okk; });
+    document.querySelectorAll('[data-obb-need-okk]').forEach(function(el){ el.hidden=okk; });
+    document.querySelectorAll('[data-obb-open]').forEach(function(el){ el.hidden=!okk || obb; });
+    document.querySelectorAll('[data-obb-sent]').forEach(function(el){ el.hidden=!obb; });
+    document.querySelectorAll('[data-okk-gate-wait]').forEach(function(el){ el.hidden=okk; });
+    document.querySelectorAll('[data-okk-gate-ok]').forEach(function(el){ el.hidden=!okk; });
+    document.querySelectorAll('[data-obb-gate-wait]').forEach(function(el){ el.hidden=obb; });
+    document.querySelectorAll('[data-obb-gate-ok]').forEach(function(el){ el.hidden=!obb; });
+    document.querySelectorAll('[data-del-hold-prep]').forEach(function(el){ el.hidden=ready || sent; });
+    document.querySelectorAll('[data-del-open]').forEach(function(el){ el.hidden=!ready || sent; });
     document.querySelectorAll('[data-del-sent]').forEach(function(el){ el.hidden=!sent; });
-    document.querySelectorAll('[data-del-spec]').forEach(function(el){ el.textContent=sent?'Menunggu jadwal armada · Deliverable 3':'Tindakan: ajukan pengiriman'; });
-    document.querySelectorAll('[data-del-tag]').forEach(function(el){ el.textContent=sent?'Request terkirim':'Siap kirim'; el.className='tag '+(sent?'wait':'ok'); });
+    document.querySelectorAll('[data-okk-admin]').forEach(function(el){ el.hidden=!okk; });
+    document.querySelectorAll('[data-obb-admin]').forEach(function(el){ el.hidden=!obb; });
+    document.querySelectorAll('[data-okk-kpi]').forEach(function(el){ el.textContent=okk?'OKK/26/CLD/00425':'Not requested'; });
+    document.querySelectorAll('[data-obb-kpi]').forEach(function(el){ el.textContent=obb?'OBB/26/CLD/00425':'Not requested'; });
+    document.querySelectorAll('[data-del-kpi]').forEach(function(el){
+      el.textContent=sent?'Request sent':(ready?'Ready for delivery':'Prep OKK / OBB');
+    });
+    document.querySelectorAll('[data-del-d3]').forEach(function(el){
+      el.textContent=sent?'Dispatched':(ready?'OKK + OBB':'OKK · OBB');
+    });
+    var spec=sent?'OKK + OBB issued · waiting handover':(!okk?'Action: request OKK to expedition':(!obb?'Action: request OBB to fuel the unit':'Action: submit delivery'));
+    var tag=sent?'Request sent':(!ready?'Prep delivery':'Ready for delivery');
+    document.querySelectorAll('[data-del-spec]').forEach(function(el){ el.textContent=spec; });
+    document.querySelectorAll('[data-del-tag]').forEach(function(el){
+      el.textContent=tag;
+      el.className='tag '+(sent?'wait':(ready?'ok':'hold'));
+    });
+    var adminPill=document.querySelector('[data-admin-pill]');
+    if(adminPill){
+      var need=document.querySelectorAll('#verifikasi tbody tr:not([hidden])').length;
+      adminPill.textContent=String(need);
+    }
   }
