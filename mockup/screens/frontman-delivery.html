@@ -9,11 +9,13 @@
         </div>
         <nav class="worktabs" aria-label="Transaction Navigation">
           <button type="button" data-go="tx_avanza">Summary</button>
+          <button type="button" data-go="okk">OKK</button>
+          <button type="button" data-go="obb">OBB</button>
           <button type="button" data-go="delivery">Delivery</button>
         </nav>
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Active settlement receipt</p></div>
-          <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px">Ready for delivery</p><p class="n">Gate cash paid in full</p></div>
+          <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px" data-del-kpi>Prep OKK / OBB</p><p class="n">Gate cash paid in full</p></div>
           <div class="card"><p class="k">SO</p><p class="v" style="font-size:18px">4500091301</p><p class="n">One SO · this SPK</p></div>
         </div>
         <div data-stage-panel="spk" hidden>
@@ -63,10 +65,11 @@
         </div>
         <div data-stage-panel="del">
           <div class="box">
-            <h3>Delivery</h3>
+            <h3>Delivery · Deliverable 3 prep</h3>
             <div class="pad">
-              <p>Cash delivery gate passed (paid in full). Submit delivery from the same SPK data. Fleet schedule = Deliverable 3, stays in this SPK.</p>
-              <button class="btn" data-go="delivery">Submit delivery</button>
+              <p>Cash delivery gate passed (paid in full). Before the unit leaves, request <b>OKK</b> to the expedition vendor and <b>OBB</b> to fuel the new car. Then submit delivery. Same SPK — not a commercial waiver.</p>
+              <button class="btn" data-go="okk">Request OKK</button>
+              <button class="btn ghost" data-go="obb">Request OBB</button>
             </div>
           </div>
         </div>
@@ -76,23 +79,211 @@
         </div>
       </section>
 
-      <section class="screen" id="delivery">
+      <section class="screen" id="okk">
         <div class="screenhead">
           <div>
-            <p class="eyebrow">Delivery request · SPK/26/CLD/00425</p>
-            <h2>Submit delivery · Agus Hermawan</h2>
-            <p>Avanza 1.5 G CVT. Customer data, VIN, and address from the SPK. The Frontman does not re-type.</p>
+            <p class="eyebrow">OKK · Order Kirim Kendaraan · SPK/26/CLD/00425</p>
+            <h2>Request OKK · expedition vendor</h2>
+            <p>Avanza 1.5 G CVT. Pickup, VIN, and destination from the SPK and warehouse DO. Sent to the expedition vendor — not an Approval Engine object.</p>
           </div>
           <div class="actions"><button class="btn ghost" data-go="tx_avanza">← Summary SPK</button></div>
         </div>
         <nav class="worktabs" aria-label="Transaction Navigation">
           <button type="button" data-go="tx_avanza">Summary</button>
+          <button type="button" data-go="okk">OKK</button>
+          <button type="button" data-go="obb">OBB</button>
+          <button type="button" data-go="delivery">Delivery</button>
+        </nav>
+        <div class="cards">
+          <div class="card"><p class="k">Gate</p><p class="v" style="font-size:18px">Paid in full</p><p class="n">Cash · AR Open Rp 0</p></div>
+          <div class="card"><p class="k">Vendor</p><p class="v" style="font-size:18px">PT Nusantara Ekspedisi</p><p class="n">Jakarta home delivery</p></div>
+          <div class="card"><p class="k">OKK</p><p class="v" style="font-size:18px" data-okk-kpi>Not requested</p><p class="n">Electronic OKK in the vault</p></div>
+        </div>
+        <div class="box" data-stage-panel="spk" hidden>
+          <h3>SPK</h3>
+          <p>Recipient and address from SPK/26/CLD/00425. The OKK does not re-type them.</p>
+        </div>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>OKK does not change OTR. Logistics only.</p>
+        </div>
+        <div class="box" data-stage-panel="so" hidden>
+          <h3>Sales Order 4500091301</h3>
+          <p>AR Open Rp 0. Paid in full before this request.</p>
+        </div>
+        <div class="box" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>Already paired. License plate B 1301 F reserved.</p>
+        </div>
+        <div class="box" data-stage-panel="do" hidden>
+          <h3>DO/26/CLD/01425</h3>
+          <p>Warehouse DO is the pickup reference on the OKK.</p>
+        </div>
+        <div class="box" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Paid in Full. Not waived by requesting OKK.</p>
+        </div>
+        <div data-stage-panel="del">
+        <div class="box">
+          <h3>Data from the SPK — not re-typed</h3>
+          <div class="vault-grid">
+            <div class="vault-item"><p class="k">Recipient</p><p class="v">Agus Hermawan</p></div>
+            <div class="vault-item"><p class="k">Destination</p><p class="v">Jl. Cipete Raya No. 18, Cilandak</p></div>
+            <div class="vault-item"><p class="k">VIN</p><p class="v">MHKA4FA••••20425</p></div>
+            <div class="vault-item"><p class="k">Pickup</p><p class="v">FAST Outlet Cilandak warehouse</p></div>
+            <div class="vault-item"><p class="k">DO</p><p class="v">DO/26/CLD/01425</p></div>
+            <div class="vault-item"><p class="k">SO</p><p class="v">4500091301</p></div>
+          </div>
+        </div>
+        <div class="box" data-okk-open>
+          <h3>Request to expedition vendor</h3>
+          <div class="form">
+            <div class="fgrid">
+              <div class="field"><label>Vendor</label><input value="PT Nusantara Ekspedisi Mandiri" readonly></div>
+              <div class="field"><label>Service</label><input value="Home delivery · Jakarta Selatan" readonly></div>
+              <div class="field">
+                <label>Pickup slot</label>
+                <select>
+                  <option>4 Sep 2026 · 08:00–10:00 · warehouse</option>
+                  <option>4 Sep 2026 · 13:00–15:00 · warehouse</option>
+                  <option>5 Sep 2026 · 08:00–10:00 · warehouse</option>
+                </select>
+              </div>
+              <div class="field"><label>Note for the driver</label><textarea>Call the customer one hour before arrival. Unit is PDI-ready.</textarea></div>
+            </div>
+          </div>
+          <div class="formfoot">
+            <span class="hint">Issues electronic OKK/26/CLD/00425 to the vendor. Administration sees the same number. Not a paid-in-full waiver.</span>
+            <button type="button" class="btn" data-okk-submit>Send OKK to vendor</button>
+          </div>
+        </div>
+        <div class="box" data-okk-sent hidden>
+          <h3>OKK sent</h3>
+          <div class="pad">
+            <p>Electronic <b>OKK/26/CLD/00425</b> is in the vault and with PT Nusantara Ekspedisi Mandiri. Pickup from DO/26/CLD/01425.</p>
+            <p class="hint">Next: request OBB to fuel the new unit, then submit delivery.</p>
+            <button class="btn" data-go="obb">Request OBB</button>
+          </div>
+        </div>
+        <p class="note">OKK is operational logistics (D3). Cash that is not paid in full still cannot request OKK.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>Follows after handover in this SPK.</p>
+        </div>
+      </section>
+
+      <section class="screen" id="obb">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">OBB · Order Bahan Bakar · SPK/26/CLD/00425</p>
+            <h2>Request OBB · fuel the new car</h2>
+            <p>Fill Pertamax for the Avanza before it leaves the warehouse. VIN and SO from this SPK. Fuel partner — not a commercial gate.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="tx_avanza">← Summary SPK</button></div>
+        </div>
+        <nav class="worktabs" aria-label="Transaction Navigation">
+          <button type="button" data-go="tx_avanza">Summary</button>
+          <button type="button" data-go="okk">OKK</button>
+          <button type="button" data-go="obb">OBB</button>
+          <button type="button" data-go="delivery">Delivery</button>
+        </nav>
+        <div class="cards">
+          <div class="card"><p class="k">Unit</p><p class="v" style="font-size:18px">Avanza 1.5 G</p><p class="n">New car · PDI ready</p></div>
+          <div class="card"><p class="k">Fuel partner</p><p class="v" style="font-size:18px">SPBU Mitra FAST</p><p class="n">Cilandak · depot fill</p></div>
+          <div class="card"><p class="k">OBB</p><p class="v" style="font-size:18px" data-obb-kpi>Not requested</p><p class="n">10 liters Pertamax</p></div>
+        </div>
+        <div class="box" data-stage-panel="spk" hidden>
+          <h3>SPK</h3>
+          <p>Unit type from SPK/26/CLD/00425. OBB does not re-type the model.</p>
+        </div>
+        <div class="box" data-stage-panel="quot" hidden>
+          <h3>Quotation</h3>
+          <p>Fuel is operational cost tracking, not an OTR change.</p>
+        </div>
+        <div class="box" data-stage-panel="so" hidden>
+          <h3>Sales Order 4500091301</h3>
+          <p>Same SO as OKK and delivery.</p>
+        </div>
+        <div class="box" data-stage-panel="afi" hidden>
+          <h3>AFI</h3>
+          <p>License plate reserved. Fuel fill uses VIN, not the plate.</p>
+        </div>
+        <div class="box" data-stage-panel="do" hidden>
+          <h3>DO</h3>
+          <p>Warehouse holds the unit until OBB is requested and delivery is submitted.</p>
+        </div>
+        <div class="box" data-stage-panel="bill" hidden>
+          <h3>Billing</h3>
+          <p>Paid in Full already. OBB does not reopen AR.</p>
+        </div>
+        <div data-stage-panel="del">
+        <div class="box">
+          <h3>Fill for a new unit</h3>
+          <div class="vault-grid">
+            <div class="vault-item"><p class="k">VIN</p><p class="v">MHKA4FA••••20425</p></div>
+            <div class="vault-item"><p class="k">Fuel</p><p class="v">Pertamax</p></div>
+            <div class="vault-item"><p class="k">Volume</p><p class="v">10 liters</p></div>
+            <div class="vault-item"><p class="k">Station</p><p class="v">SPBU Mitra FAST Cilandak</p></div>
+          </div>
+        </div>
+        <div class="box" data-obb-need-okk>
+          <h3>OKK first</h3>
+          <div class="pad">
+            <p>Request the expedition OKK before the fuel order so the vendor slot and the fill are on the same dispatch day.</p>
+            <button class="btn" data-go="okk">Open OKK</button>
+          </div>
+        </div>
+        <div class="box" data-obb-open hidden>
+          <h3>Request to the fuel partner</h3>
+          <div class="form">
+            <div class="fgrid">
+              <div class="field"><label>Partner</label><input value="SPBU Mitra FAST Cilandak" readonly></div>
+              <div class="field"><label>Product</label><input value="Pertamax · 10 liters · new-car fill" readonly></div>
+              <div class="field"><label>When</label><input value="Same morning as OKK pickup" readonly></div>
+              <div class="field"><label>Note</label><textarea>Fill at the warehouse pump before the carrier loads the unit. Keep the nozzle receipt with OBB/26/CLD/00425.</textarea></div>
+            </div>
+          </div>
+          <div class="formfoot">
+            <span class="hint">Issues OBB/26/CLD/00425. The customer does not pay this at the counter. Not a billing document.</span>
+            <button type="button" class="btn" data-obb-submit>Send OBB to fuel partner</button>
+          </div>
+        </div>
+        <div class="box" data-obb-sent hidden>
+          <h3>OBB sent</h3>
+          <div class="pad">
+            <p><b>OBB/26/CLD/00425</b> is with SPBU Mitra FAST Cilandak. 10 liters Pertamax on VIN ••20425.</p>
+            <p class="hint">OKK and OBB are both issued. Submit the delivery request next.</p>
+            <button class="btn" data-go="delivery">Submit delivery</button>
+          </div>
+        </div>
+        <p class="note">OBB fuels a new car before handover. It does not replace paid-in-full or the leasing signature.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB</h3>
+          <p>After GI in this SPK.</p>
+        </div>
+      </section>
+
+      <section class="screen" id="delivery">
+        <div class="screenhead">
+          <div>
+            <p class="eyebrow">Delivery request · SPK/26/CLD/00425</p>
+            <h2>Submit delivery · Agus Hermawan</h2>
+            <p>Avanza 1.5 G CVT. Customer data, VIN, and address from the SPK. OKK and OBB must already be requested.</p>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="tx_avanza">← Summary SPK</button></div>
+        </div>
+        <nav class="worktabs" aria-label="Transaction Navigation">
+          <button type="button" data-go="tx_avanza">Summary</button>
+          <button type="button" data-go="okk">OKK</button>
+          <button type="button" data-go="obb">OBB</button>
           <button type="button" data-go="delivery">Delivery</button>
         </nav>
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Cash paid in full · gate unlocked</p></div>
           <div class="card"><p class="k">PDI / VIN</p><p class="v" style="font-size:18px">Ready</p><p class="n">MHKA4FA••••20425</p></div>
-          <div class="card"><p class="k">Deliverable 3</p><p class="v" style="font-size:18px">Schedule</p><p class="n">Fleet in this request</p></div>
+          <div class="card"><p class="k">Deliverable 3</p><p class="v" style="font-size:18px" data-del-d3>OKK · OBB</p><p class="n">Then fleet slot</p></div>
         </div>
         <div class="box" data-stage-panel="spk" hidden>
           <h3>SPK</h3>
@@ -124,10 +315,21 @@
           <ul class="gates">
             <li><span class="mark ok">✓</span><div>Delivery gate · cash<span class="why">Paid in Full · AR Open Rp 0 · non-waivable</span></div><span class="tag ok">Pass</span></li>
             <li><span class="mark ok">✓</span><div>PDI &amp; VIN<span class="why">From unit allocation, not re-typed</span></div><span class="tag ok">Pass</span></li>
-            <li><span class="mark idle">•</span><div>Deliverable 3<span class="why">Fleet slot, tracking, and arrival confirmation not yet defined in this mockup</span></div><span class="tag mute">To follow</span></li>
+            <li data-okk-gate-wait><span class="mark idle">•</span><div>OKK · Order Kirim Kendaraan<span class="why">Request to PT Nusantara Ekspedisi Mandiri</span></div><span class="tag mute">Required</span></li>
+            <li data-okk-gate-ok hidden><span class="mark ok">✓</span><div>OKK · Order Kirim Kendaraan<span class="why">OKK/26/CLD/00425 sent to the vendor</span></div><span class="tag ok">Issued</span></li>
+            <li data-obb-gate-wait><span class="mark idle">•</span><div>OBB · Order Bahan Bakar<span class="why">Fuel the new Avanza before it leaves</span></div><span class="tag mute">Required</span></li>
+            <li data-obb-gate-ok hidden><span class="mark ok">✓</span><div>OBB · Order Bahan Bakar<span class="why">OBB/26/CLD/00425 · 10 L Pertamax</span></div><span class="tag ok">Issued</span></li>
           </ul>
         </div>
-        <div class="box" data-del-open>
+        <div class="box" data-del-hold-prep>
+          <h3>OKK and OBB first</h3>
+          <div class="pad">
+            <p>The delivery form stays closed until both logistics orders are requested. Paid in full is already passed — this is Deliverable 3, not a commercial hold.</p>
+            <button class="btn" data-go="okk">Request OKK</button>
+            <button class="btn ghost" data-go="obb">Request OBB</button>
+          </div>
+        </div>
+        <div class="box" data-del-open hidden>
           <h3>Frontman submission</h3>
           <div class="form">
             <div class="fgrid">
@@ -158,7 +360,7 @@
         <div class="box" data-del-sent hidden>
           <h3>Request sent</h3>
           <div class="pad">
-            <p>Submission received. Fleet scheduling, tracking, and arrival status continue in <b>Deliverable 3</b> — not yet defined here.</p>
+            <p>Submission received. Carrier works from <b>OKK/26/CLD/00425</b>. Fuel fill is on <b>OBB/26/CLD/00425</b>. Arrival and GI stay on this SPK.</p>
             <p class="hint">After the unit is actually delivered, the Frontman uploads the handover photo and BSTKB scan for the Good Issue <b>SPK/26/CLD/00425</b> — not switching to the Rush transaction.</p>
           </div>
         </div>
@@ -184,7 +386,7 @@
           <div class="card"><p class="k">VIN</p><p class="v" style="font-size:18px">••20424</p><p class="n">Matches the SO</p></div>
           <div class="card"><p class="k">GI</p><p class="v" style="font-size:18px" data-gi-status>Pending proof</p><p class="n">Not a waiver paid in full</p></div>
         </div>
-        <p class="exc-note" data-gi-note data-stage-kpis="del">Upload the handover photo, VIN photo, and BSTKB scan. Geotag and time are recorded on the device. Administration reviews, then approves the Good Issue. Full fleet tracking follows in Deliverable 3.</p>
+        <p class="exc-note" data-gi-note data-stage-kpis="del">OKK and OBB were already issued before this unit left. Upload the handover photo, VIN photo, and BSTKB scan. Administration reviews, then approves the Good Issue.</p>
         <div class="box" data-stage-panel="spk" hidden>
           <h3>SPK/26/CLD/00424</h3>
           <div class="fields">
@@ -227,6 +429,8 @@
             <div class="vault-item"><p class="k">VIN</p><p class="v">••20424</p></div>
             <div class="vault-item"><p class="k">SO</p><p class="v">4500091424</p></div>
             <div class="vault-item"><p class="k">License plate</p><p class="v">B 1424 F</p></div>
+            <div class="vault-item"><p class="k">OKK</p><p class="v">OKK/26/CLD/00424 · issued before delivery</p></div>
+            <div class="vault-item"><p class="k">OBB</p><p class="v">OBB/26/CLD/00424 · 10 L Pertamax</p></div>
           </div>
         </div>
         <div class="box">

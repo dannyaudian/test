@@ -126,12 +126,17 @@
         <div class="stage">
           <div class="stage-head"><span class="marker">Stage 6</span><h3>Delivery</h3></div>
           <div class="grid g2">
-            <div class="facet"><h4>Frontman inputs</h4><ul><li>Delivery request.</li><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient information.</li><li>Customer confirmation.</li></ul></div>
-            <div class="facet"><h4>Administration role</h4><ul><li>Verify operational readiness.</li><li>Handle delivery exception.</li><li>Does not re-enter financial status.</li></ul></div>
-            <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>Unit and VIN.</li><li>Billing status.</li><li>AFI/DO status.</li><li>Purchase method.</li><li>Payment history.</li><li>Outstanding balance / paid in full status for cash.</li><li>Leasing contract signed status from B2B leasing.</li><li>AR status.</li><li>PDI status.</li><li>Delivery authorization.</li></ul></div>
-            <div class="facet sys"><h4>System generates</h4><ul><li>Eligible for Delivery.</li><li>Locked for Delivery.</li><li>Hold reason.</li><li>Required action.</li></ul></div>
+            <div class="facet"><h4>Frontman inputs</h4><ul><li>OKK request to the expedition vendor.</li><li>OBB request to fuel the new car.</li><li>Delivery request.</li><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient information.</li><li>Customer confirmation.</li></ul></div>
+            <div class="facet"><h4>Administration role</h4><ul><li>Verify operational readiness.</li><li>See the same OKK and OBB numbers sent to vendors.</li><li>Handle delivery exception.</li><li>Does not re-enter financial status.</li></ul></div>
+            <div class="facet sys"><h4>System pulls automatically</h4><ul><li>Customer data.</li><li>Unit and VIN.</li><li>Billing status.</li><li>AFI/DO status.</li><li>Purchase method.</li><li>Payment history.</li><li>Outstanding balance / paid in full status for cash.</li><li>Leasing contract signed status from B2B leasing.</li><li>AR status.</li><li>PDI status.</li><li>Delivery authorization.</li><li>Electronic OKK and OBB when issued.</li></ul></div>
+            <div class="facet sys"><h4>System generates</h4><ul><li>Eligible for Delivery.</li><li>Locked for Delivery.</li><li>Hold reason.</li><li>Required action.</li><li>OKK number when the expedition request is sent.</li><li>OBB number when the fuel request is sent.</li></ul></div>
           </div>
-          <blockquote class="rule"><span class="tag">Business rule</span><p>Delivery eligibility uses the same upstream data. For cash, delivery only unlocks after the transaction is paid in full. For leasing, delivery only unlocks after the contract has been signed by the customer; the signed status is pulled from B2B leasing. This delivery requirement is non-waivable.</p></blockquote>
+          <blockquote class="rule"><span class="tag">Business rule</span><p>Delivery eligibility uses the same upstream data. For cash, delivery only unlocks after the transaction is paid in full. For leasing, delivery only unlocks after the contract has been signed by the customer; the signed status is pulled from B2B leasing. This delivery requirement is non-waivable. After that gate, Frontman requests OKK to the expedition vendor and OBB to fuel the new car before submitting delivery. OKK/OBB are operational (D3), not commercial waivers.</p></blockquote>
+          <div class="see-row">
+            <a class="see" href="mockup.html#okk"><span class="see-k">OKK</span><b>Agus · expedition order</b><span>OKK/26/CLD/00425 to PT Nusantara Ekspedisi</span><em>View →</em></a>
+            <a class="see" href="mockup.html#obb"><span class="see-k">OBB</span><b>Agus · new-car fuel</b><span>OBB/26/CLD/00425 · 10 L Pertamax</span><em>View →</em></a>
+            <a class="see" href="mockup.html#delivery"><span class="see-k">Delivery</span><b>Submit after OKK + OBB</b><span>Same SPK · paid in full already passed</span><em>View →</em></a>
+          </div>
         </div>
 
         <div class="stage">

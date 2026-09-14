@@ -26,7 +26,7 @@
     customer_booking:'dewi',customer_booking_qris:'dewi',
     tx_hiace:'hiace',
     tx_raize:'raize',
-    tx_avanza:'agus',delivery:'agus',
+    tx_avanza:'agus',okk:'agus',obb:'agus',delivery:'agus',
     gi:'fajar',
     tx_fortuner:'maria',exc_stnk:'maria',
     order_calya:'calya',bukti_serah:'calya'
@@ -37,7 +37,7 @@
     transaksi:'so',afi:'afi',dokumen:'spk',request:'bill',bayar:'bill',
     cashless:'bill',exc_alamat:'afi',exc_nama:'spk',exc_epo:'bill',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
     tx_hiace:'bill',
-    tx_raize:'spk',tx_avanza:'del',delivery:'del',gi:'del',
+    tx_raize:'spk',tx_avanza:'del',okk:'del',obb:'del',delivery:'del',gi:'del',
     tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'
   };
   function load(k){ return (FAST.load?FAST.load(k):null)||{}; }
@@ -135,10 +135,19 @@
       copy:function(){ return 'SPK tertahan NPWP. Booking cashless belum ditagih. Data gate, bukan Approval Engine.'; }
     },
     agus:{
-      go:{spk:'tx_avanza',quot:'tx_avanza',so:'tx_avanza',afi:'tx_avanza',do:'tx_avanza',bill:'tx_avanza',del:'tx_avanza',stnk:'tx_avanza'},
+      go:function(){
+        var s=load(FAST.DEL_KEY);
+        var del=!s.okk?'okk':(!s.obb?'obb':'delivery');
+        return {spk:'tx_avanza',quot:'tx_avanza',so:'tx_avanza',afi:'tx_avanza',do:'tx_avanza',bill:'tx_avanza',del:del,stnk:'tx_avanza'};
+      },
       now:agusNow,
       copy:function(now){
-        return now==='stnk'?'Delivery submitted. STNK/BPKB follows the same SPK data.':'Paid in full. One SO · request delivery. Cashless is complete.';
+        var s=load(FAST.DEL_KEY);
+        if(now==='stnk') return 'Delivery submitted. STNK/BPKB follows the same SPK. OKK and OBB already issued.';
+        if(!s.okk) return 'Paid in full. Request OKK to the expedition vendor before delivery.';
+        if(!s.obb) return 'OKK issued. Request OBB to fuel the new unit before delivery.';
+        if(!s.requested) return 'OKK and OBB issued. Submit the delivery request.';
+        return 'Paid in full. One SO · request delivery. Cashless is complete.';
       }
     },
     fajar:{

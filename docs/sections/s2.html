@@ -46,9 +46,9 @@
         <div class="panel"><h4>3. Vehicle Data</h4><ul><li>Model.</li><li>Type.</li><li>Color.</li><li>VIN.</li><li>Engine number.</li><li>License plate per SPK/SO (AFI reserved or issued).</li><li>Allocation status.</li><li>PDI status.</li><li>AFI status.</li><li>DO status.</li></ul></div>
         <div class="panel"><h4>4. Transaction Value Data</h4><ul><li>Price.</li><li>Discount.</li><li>Program.</li><li>Cashback.</li><li>Subsidy.</li><li>OPO/OPK.</li><li>Final transaction value.</li><li>Leasing information.</li><li>Required customer DP on the Sales Order pricing structure when purchase method is credit/leasing (from B2B, read-only).</li><li>Amount financed by leasing (final value − required DP).</li><li>Leasing e-PO: approval of customer total DP, financed amount, and tenor (from B2B, read-only).</li><li>Source-system reference.</li></ul><p>This data is carried from the source system / B2B as part of the transaction and is read-only in FAST. It is not subject to the Compliance Exception Approval Engine, except for an e-PO failure on leasing billing, which is waivable by the Operation Manager. For cash, the SO pricing structure uses the unit booking fee, not the leasing DP.</p></div>
         <div class="panel"><h4>5. Payment and E-Receipt Data</h4><ul><li>Vehicle-specific booking fee requirement.</li><li>Booking fee billed after SPK.</li><li>Payment request.</li><li>Virtual Account.</li><li>Payment reference.</li><li>Payment amount.</li><li>Payment date.</li><li>Payment method.</li><li>Payment stage.</li><li>Payment allocation.</li><li>E-receipt number.</li><li>E-receipt issue date.</li><li>E-receipt status.</li><li>Linked SPK.</li><li>Linked Sales Order.</li><li>Linked billing document.</li><li>Verification code or QR.</li><li>PDF document reference.</li><li>Customer download history.</li><li>Accumulated payment.</li><li>AR Open.</li><li>Active payment request amount.</li><li>Available Request Amount.</li><li>Settlement status.</li><li>Funds-in percentage for cash billing (≥30%).</li><li>Full DP amount from B2B leasing.</li><li>Leasing DP received versus required.</li><li>Leasing contract signed status from B2B leasing.</li><li>Leasing e-PO number, tenor, and financed amount from B2B.</li></ul></div>
-        <div class="panel"><h4>6. Administrative Documents</h4><ul><li>KTP.</li><li>NPWP.</li><li>KK.</li><li>PO.</li><li>NIB.</li><li>Deed.</li><li>Leasing documents.</li><li>STNK documents.</li><li>Tax documents.</li><li>Power of Attorney.</li><li>BSTKB.</li><li>Electronic OKK.</li></ul></div>
+        <div class="panel"><h4>6. Administrative Documents</h4><ul><li>KTP.</li><li>NPWP.</li><li>KK.</li><li>PO.</li><li>NIB.</li><li>Deed.</li><li>Leasing documents.</li><li>STNK documents.</li><li>Tax documents.</li><li>Power of Attorney.</li><li>BSTKB.</li><li>Electronic OKK (Order Kirim Kendaraan).</li><li>OBB (Order Bahan Bakar) for a new-car fill.</li></ul></div>
         <div class="panel"><h4>7. Compliance Exception Data</h4><ul><li>Failed compliance gate.</li><li>Failed rule.</li><li>Waivable or non-waivable classification.</li><li>Exception category.</li><li>Applicant.</li><li>Evidence.</li><li>Risk impact.</li><li>Authorized decision owner.</li><li>Decision.</li><li>Decision reason.</li><li>Conditions.</li><li>Validity period.</li><li>Scope of release.</li><li>Compliance-gate result.</li></ul></div>
-        <div class="panel"><h4>8. Delivery and Post-Delivery Data</h4><ul><li>Purchase-method delivery rule (cash paid in full or signed leasing contract).</li><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient.</li><li>BSTKB.</li><li>Timestamp.</li><li>Geotag.</li><li>Vehicle receipt photo.</li><li>Good Issue.</li><li>STNK status.</li><li>BPKB status.</li></ul></div>
+        <div class="panel"><h4>8. Delivery and Post-Delivery Data</h4><ul><li>Purchase-method delivery rule (cash paid in full or signed leasing contract).</li><li>OKK number, expedition vendor, pickup slot, and destination from the SPK.</li><li>OBB number, fuel partner, product, and volume for the new-car fill.</li><li>Delivery schedule.</li><li>Delivery location.</li><li>Recipient.</li><li>BSTKB.</li><li>Timestamp.</li><li>Geotag.</li><li>Vehicle receipt photo.</li><li>Good Issue.</li><li>STNK status.</li><li>BPKB status.</li></ul></div>
       </div>
 
       <h4>Data ownership principle</h4>
@@ -56,7 +56,7 @@
         <div class="panel">
           <h4>Frontman inputs</h4>
           <p>The Frontman enters data obtained directly from the customer and initial transaction information, including:</p>
-          <ul><li>Customer identity.</li><li>Customer contact.</li><li>Purchase method.</li><li>Transaction structure.</li><li>Unit request.</li><li>STNK name.</li><li>Customer documents.</li><li>Payment request.</li><li>Delivery preference.</li><li>Compliance exception request when eligible.</li></ul>
+          <ul><li>Customer identity.</li><li>Customer contact.</li><li>Purchase method.</li><li>Transaction structure.</li><li>Unit request.</li><li>STNK name.</li><li>Customer documents.</li><li>Payment request.</li><li>OKK request to the expedition vendor.</li><li>OBB request to fuel the new car.</li><li>Delivery preference.</li><li>Compliance exception request when eligible.</li></ul>
         </div>
         <div class="panel">
           <h4>Administration verifies and enriches</h4>
@@ -134,7 +134,7 @@
         <a class="d-card" href="#d3">
           <span class="marker">D3</span>
           <h4>Documents &amp; STNK</h4>
-          <p>Vault, document gate before the fee, reuse into AFI/GI, STNK/BPKB tracking.</p>
+          <p>Vault, document gate before the fee, reuse into AFI/GI, OKK/OBB before delivery, STNK/BPKB tracking.</p>
           <em>Features &amp; Example →</em>
         </a>
         <a class="d-card" href="#d4">
