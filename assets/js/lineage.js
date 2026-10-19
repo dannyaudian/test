@@ -246,16 +246,26 @@
     if(id===st.now) return true;
     return !!st.done[id];
   }
-  function clampView(st, view){
+  function familyOf(tx){ return tx==='agya'?'dewi':tx; }
+  function clampView(st, view, screen){
     if(stageOpen(st, view)) return view;
+    if(screen && view && screen.querySelector('[data-stage-panel="'+view+'"]')) return view;
+    if(screen && VIEW[screen.id]===view) return view;
     return st.now;
+  }
+  function canPeekStage(st, stageId, screen){
+    if(!st||!stageId) return false;
+    if(screen && screen.querySelector('[data-stage-panel="'+stageId+'"]')) return true;
+    var go=st.go && st.go[stageId];
+    var destTx=go && SCREEN_TX[go];
+    return !!(go && destTx && familyOf(destTx)===familyOf(st.id));
   }
   function fillNav(nav, st, view, showFn){
     if(!nav||!st) return;
     nav.innerHTML='';
     var screen=nav.closest('.screen');
     var payScreen=screen && (screen.id==='cashless'||screen.id==='digiroom'||screen.id==='booking');
-    if(!payScreen) view=clampView(st, view);
+    if(!payScreen) view=clampView(st, view, screen);
     STAGES.forEach(function(s){
       var b=document.createElement('button');
       b.type='button';
@@ -265,6 +275,26 @@
       if(s.id===st.now && !st.allDone) b.classList.add(st.hold===s.id?'hold':'now');
       if(s.id===view) b.classList.add('on');
       if(!open){
+        if(canPeekStage(st, s.id, screen)){
+          b.classList.add('later');
+          b.title=s.label+' later on this order — same SPK, not another unit';
+          b.addEventListener('click',function(){
+            var panel=screen && screen.querySelector('[data-stage-panel="'+s.id+'"]');
+            if(panel){
+              showStagePanel(screen, s.id);
+              fillNav(nav, st, s.id, showFn);
+              var map=parseStageMap(screen);
+              if(map && map[s.id]){
+                screen.dispatchEvent(new CustomEvent('fast-stage-map',{bubbles:true,detail:{tab:map[s.id],stage:s.id}}));
+              }
+              return;
+            }
+            var go=st.go[s.id];
+            if(go && typeof showFn==='function') showFn(go, {explicit:true, stage:s.id});
+          });
+          nav.appendChild(b);
+          return;
+        }
         b.classList.add('locked');
         b.setAttribute('aria-disabled','true');
         b.title=s.label+' belum dilewati';
@@ -387,7 +417,7 @@
       var pack=ensureNav(screen, tx);
       if(!pack) return;
       var st=state(tx);
-      var view=clampView(st, screen.getAttribute('data-stage-view')||VIEW[sid]||st.now);
+      var view=clampView(st, screen.getAttribute('data-stage-view')||VIEW[sid]||st.now, screen);
       if(view) showStagePanel(screen, view);
       fillNav(pack.nav, st, view, showFn);
       if(pack.note) pack.note.textContent=st.copy;
@@ -412,7 +442,7 @@
       var tx=screenTx(current, payJob)||(on&&on.querySelector('[data-tx-track]')&&on.querySelector('[data-tx-track]').getAttribute('data-tx-track'));
       if(on && tx){
         var st=state(tx);
-        var view=clampView(st, on.getAttribute('data-stage-view')||VIEW[current]||payView(current, payJob, tx)||st.now);
+        var view=clampView(st, on.getAttribute('data-stage-view')||VIEW[current]||payView(current, payJob, tx)||st.now, on);
         if(view) showStagePanel(on, view);
         var nav=on.querySelector('.proc');
         if(nav) fillNav(nav, st, view, showFn);
@@ -423,7 +453,7 @@
   FAST.TX_STAGES=STAGES;
   FAST.txState=state;
   FAST.screenTx=screenTx;
-  FAST.txFamily=function(tx){ return tx==='agya'?'dewi':tx; };
+  FAST.txFamily=familyOf;
   FAST.txHub=function(tx){
     tx=FAST.txFamily(tx);
     return ({

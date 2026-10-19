@@ -53,7 +53,7 @@
     'assets/js/mockup-qris.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=own-journey';
+  var bust = 'v=own-trail';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {
