@@ -13,6 +13,11 @@
           <button type="button" data-go="obb">OBB</button>
           <button type="button" data-go="delivery">Delivery</button>
         </nav>
+        <ol class="d3path" data-d3-path aria-label="Before delivery">
+          <li data-d3-step="okk" class="now">1 · OKK</li>
+          <li data-d3-step="obb">2 · OBB</li>
+          <li data-d3-step="del">3 · Delivery</li>
+        </ol>
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Active settlement receipt</p></div>
           <div class="card"><p class="k">Delivery</p><p class="v" style="font-size:18px" data-del-kpi>Prep OKK / OBB</p><p class="n">Gate cash paid in full</p></div>
@@ -64,12 +69,26 @@
           <p>Cash ≥30% and settlement done. Billing number linked to SPK–SO. Ready for delivery.</p>
         </div>
         <div data-stage-panel="del">
-          <div class="box">
-            <h3>Delivery · Deliverable 3 prep</h3>
+          <div class="box" data-del-sum-prep>
+            <h3>Next · request OKK then OBB</h3>
             <div class="pad">
-              <p>Cash delivery gate passed (paid in full). Before the unit leaves, request <b>OKK</b> to the expedition vendor and <b>OBB</b> to fuel the new car. Then submit delivery. Same SPK — not a commercial waiver.</p>
-              <button class="btn" data-go="okk">Request OKK</button>
-              <button class="btn ghost" data-go="obb">Request OBB</button>
+              <p>Cash delivery gate passed (paid in full). The unit does not leave until the expedition OKK and the new-car fuel OBB are requested. Same SPK — not a commercial waiver.</p>
+              <button class="btn" data-go="okk" data-del-need-okk>Request OKK</button>
+              <button class="btn" data-go="obb" data-del-need-obb hidden>Request OBB</button>
+            </div>
+          </div>
+          <div class="box" data-del-sum-ready hidden>
+            <h3>OKK and OBB issued</h3>
+            <div class="pad">
+              <p><b>OKK/26/CLD/00425</b> is with the expedition vendor. <b>OBB/26/CLD/00425</b> is with the fuel partner. Submit delivery from this SPK.</p>
+              <button class="btn" data-go="delivery">Submit delivery</button>
+            </div>
+          </div>
+          <div class="box" data-del-sum-done hidden>
+            <h3>Delivery requested</h3>
+            <div class="pad">
+              <p>Carrier uses the OKK. Fuel fill is on the OBB. Handover proof and GI stay on this SPK after the unit arrives.</p>
+              <button class="btn ghost" data-go="delivery">Open delivery</button>
             </div>
           </div>
         </div>
@@ -94,9 +113,14 @@
           <button type="button" data-go="obb">OBB</button>
           <button type="button" data-go="delivery">Delivery</button>
         </nav>
+        <ol class="d3path" data-d3-path aria-label="Before delivery">
+          <li data-d3-step="okk" class="now">1 · OKK</li>
+          <li data-d3-step="obb">2 · OBB</li>
+          <li data-d3-step="del">3 · Delivery</li>
+        </ol>
         <div class="cards">
           <div class="card"><p class="k">Gate</p><p class="v" style="font-size:18px">Paid in full</p><p class="n">Cash · AR Open Rp 0</p></div>
-          <div class="card"><p class="k">Vendor</p><p class="v" style="font-size:18px">PT Nusantara Ekspedisi</p><p class="n">Jakarta home delivery</p></div>
+          <div class="card"><p class="k">Vendor</p><p class="v" style="font-size:18px">Nusantara Ekspedisi</p><p class="n">PT · Jakarta home delivery</p></div>
           <div class="card"><p class="k">OKK</p><p class="v" style="font-size:18px" data-okk-kpi>Not requested</p><p class="n">Electronic OKK in the vault</p></div>
         </div>
         <div class="box" data-stage-panel="spk" hidden>
@@ -161,8 +185,10 @@
           <h3>OKK sent</h3>
           <div class="pad">
             <p>Electronic <b>OKK/26/CLD/00425</b> is in the vault and with PT Nusantara Ekspedisi Mandiri. Pickup from DO/26/CLD/01425.</p>
-            <p class="hint">Next: request OBB to fuel the new unit, then submit delivery.</p>
-            <button class="btn" data-go="obb">Request OBB</button>
+            <p class="hint" data-okk-next-obb>Next: request OBB to fuel the new unit, then submit delivery.</p>
+            <button class="btn" data-go="obb" data-okk-next-obb>Request OBB</button>
+            <button class="btn" data-go="delivery" data-okk-next-del hidden>Submit delivery</button>
+            <p class="hint" data-okk-next-done hidden>Delivery already submitted. Carrier works from this OKK.</p>
           </div>
         </div>
         <p class="note">OKK is operational logistics (D3). Cash that is not paid in full still cannot request OKK.</p>
@@ -188,6 +214,11 @@
           <button type="button" data-go="obb">OBB</button>
           <button type="button" data-go="delivery">Delivery</button>
         </nav>
+        <ol class="d3path" data-d3-path aria-label="Before delivery">
+          <li data-d3-step="okk" class="now">1 · OKK</li>
+          <li data-d3-step="obb">2 · OBB</li>
+          <li data-d3-step="del">3 · Delivery</li>
+        </ol>
         <div class="cards">
           <div class="card"><p class="k">Unit</p><p class="v" style="font-size:18px">Avanza 1.5 G</p><p class="n">New car · PDI ready</p></div>
           <div class="card"><p class="k">Fuel partner</p><p class="v" style="font-size:18px">SPBU Mitra FAST</p><p class="n">Cilandak · depot fill</p></div>
@@ -253,8 +284,9 @@
           <h3>OBB sent</h3>
           <div class="pad">
             <p><b>OBB/26/CLD/00425</b> is with SPBU Mitra FAST Cilandak. 10 liters Pertamax on VIN ••20425.</p>
-            <p class="hint">OKK and OBB are both issued. Submit the delivery request next.</p>
-            <button class="btn" data-go="delivery">Submit delivery</button>
+            <p class="hint" data-obb-next-del>OKK and OBB are both issued. Submit the delivery request next.</p>
+            <button class="btn" data-go="delivery" data-obb-next-del>Submit delivery</button>
+            <p class="hint" data-obb-next-done hidden>Delivery already submitted. Fuel fill stays on this OBB.</p>
           </div>
         </div>
         <p class="note">OBB fuels a new car before handover. It does not replace paid-in-full or the leasing signature.</p>
@@ -280,6 +312,11 @@
           <button type="button" data-go="obb">OBB</button>
           <button type="button" data-go="delivery">Delivery</button>
         </nav>
+        <ol class="d3path" data-d3-path aria-label="Before delivery">
+          <li data-d3-step="okk" class="now">1 · OKK</li>
+          <li data-d3-step="obb">2 · OBB</li>
+          <li data-d3-step="del">3 · Delivery</li>
+        </ol>
         <div class="cards">
           <div class="card"><p class="k">AR Open</p><p class="v">Rp 0</p><p class="n">Cash paid in full · gate unlocked</p></div>
           <div class="card"><p class="k">PDI / VIN</p><p class="v" style="font-size:18px">Ready</p><p class="n">MHKA4FA••••20425</p></div>
@@ -325,8 +362,8 @@
           <h3>OKK and OBB first</h3>
           <div class="pad">
             <p>The delivery form stays closed until both logistics orders are requested. Paid in full is already passed — this is Deliverable 3, not a commercial hold.</p>
-            <button class="btn" data-go="okk">Request OKK</button>
-            <button class="btn ghost" data-go="obb">Request OBB</button>
+            <button class="btn" data-go="okk" data-del-need-okk>Request OKK</button>
+            <button class="btn" data-go="obb" data-del-need-obb hidden>Request OBB</button>
           </div>
         </div>
         <div class="box" data-del-open hidden>
@@ -386,7 +423,12 @@
           <div class="card"><p class="k">VIN</p><p class="v" style="font-size:18px">••20424</p><p class="n">Matches the SO</p></div>
           <div class="card"><p class="k">GI</p><p class="v" style="font-size:18px" data-gi-status>Pending proof</p><p class="n">Not a waiver paid in full</p></div>
         </div>
-        <p class="exc-note" data-gi-note data-stage-kpis="del">OKK and OBB were already issued before this unit left. Upload the handover photo, VIN photo, and BSTKB scan. Administration reviews, then approves the Good Issue.</p>
+        <ol class="d3path" data-stage-kpis="del" aria-label="This Rush logistics">
+          <li class="done">1 · OKK/26/CLD/00424</li>
+          <li class="done">2 · OBB/26/CLD/00424</li>
+          <li class="done">3 · Delivered</li>
+        </ol>
+        <p class="exc-note" data-gi-note data-stage-kpis="del">This Rush already has its own OKK and OBB. Upload the handover photo, VIN photo, and BSTKB scan on this SPK. Administration reviews, then approves the Good Issue.</p>
         <div class="box" data-stage-panel="spk" hidden>
           <h3>SPK/26/CLD/00424</h3>
           <div class="fields">
@@ -532,9 +574,16 @@
           </div>
         </div>
         <div class="box" data-stage-panel="del" hidden>
-          <h3>Delivery</h3>
+          <h3>Delivery · this Fortuner</h3>
+          <ol class="d3path" aria-label="This Fortuner logistics">
+            <li class="done">1 · OKK/26/CLD/00409</li>
+            <li class="done">2 · OBB/26/CLD/00409</li>
+            <li class="done">3 · Delivered</li>
+          </ol>
           <div class="fields">
             <div class="frow locked"><i class="own s">S</i><span class="lab">Status</span><span class="val">Delivered · GI recorded</span><span class="src">SPK/26/CLD/00409</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">OKK</span><span class="val">OKK/26/CLD/00409 · PT Nusantara Ekspedisi Mandiri</span><span class="src">Before handover</span></div>
+            <div class="frow locked"><i class="own s">S</i><span class="lab">OBB</span><span class="val">OBB/26/CLD/00409 · 10 L Pertamax</span><span class="src">This VIN</span></div>
           </div>
         </div>
         <div data-stage-panel="stnk">

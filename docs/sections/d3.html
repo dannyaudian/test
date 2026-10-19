@@ -36,13 +36,13 @@
         </article>
         <article class="feat">
           <h4>OKK — Order Kirim Kendaraan</h4>
-          <p>Before delivery, Frontman requests an electronic OKK to the expedition vendor. Pickup, VIN, DO, and destination come from the SPK — not a new address form. The vendor is notified; Administration sees the same number. This is logistics, not a paid-in-full waiver.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Agus Avanza: <a href="mockup.html#okk">#okk</a> sends <b>OKK/26/CLD/00425</b> to PT Nusantara Ekspedisi Mandiri.</p>
+          <p>Before delivery, Frontman requests an electronic OKK to the expedition vendor. Pickup, VIN, DO, and destination come from <em>that</em> SPK — not a new address form and not another unit's order. Each SO keeps its own OKK number. The vendor is notified; Administration sees the same number. This is logistics, not a paid-in-full waiver.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Interactive request: Agus <a href="mockup.html#okk">#okk</a> · <b>OKK/26/CLD/00425</b>. Same chapter, own numbers: Budi Zenix 00418 (held), Dewi Yaris 00426-1 vs Agya 00426-2, Hiace per SO, Fajar 00424 already issued.</p>
         </article>
         <article class="feat">
           <h4>OBB — Order Bahan Bakar</h4>
-          <p>Before the new car leaves, Frontman requests OBB to the fuel partner (volume and product for a new-unit fill). The order is tied to the VIN. Delivery stays closed until OKK and OBB are both requested.</p>
-          <p class="feat-ex"><b>Example in the mockup</b> Same SPK: <a href="mockup.html#obb">#obb</a> sends <b>OBB/26/CLD/00425</b> — 10 liters Pertamax at SPBU Mitra FAST Cilandak. Then <a href="mockup.html#delivery">submit delivery</a>.</p>
+          <p>Before the new car leaves, Frontman requests OBB to the fuel partner (volume and product for a new-unit fill). The order is tied to <em>that</em> VIN. Delivery on that SO stays closed until that SO's OKK and OBB are both requested.</p>
+          <p class="feat-ex"><b>Example in the mockup</b> Agus <a href="mockup.html#obb">#obb</a> · <b>OBB/26/CLD/00425</b>. Fajar's Rush already shows <b>OBB/26/CLD/00424</b> on <a href="mockup.html#gi">#gi</a>. Maria's Fortuner keeps 00409. They do not share numbers.</p>
         </article>
         <article class="feat">
           <h4>Handover Proof digital</h4>
@@ -85,5 +85,5 @@
         <a class="see" href="mockup.html#afi"><span class="see-k">AFI</span><b>STNK data from SPK</b><span>Auto-pull; breaking the sequence = exception</span><em>View →</em></a>
         <a class="see" href="#skema-documents"><span class="see-k">Flow</span><b>Vault scenarios</b><span>Gagal/expired, GI, reuse, booking fee</span><em>View →</em></a>
       </div>
-      <p class="note">Document Gate ≠ Sales Order. The SO stays pending the booking fee receipt (D1/D2). Missing leasing documents go back to Frontman as a backflow, not a financial gate waiver.</p>
+      <p class="note">Document Gate ≠ Sales Order. The SO stays pending the booking fee receipt (D1/D2). Missing leasing documents go back to Frontman as a backflow, not a financial gate waiver. Each SPK (and each SO on a multi-unit SPK) keeps its own OKK, OBB, GI, and STNK trail. The SPK→STNK tracker lets you preview later chapters on <em>this</em> order — tapping Kirim never opens another customer's delivery or issues a waiver.</p>
     </section>

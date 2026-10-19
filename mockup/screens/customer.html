@@ -101,8 +101,8 @@
             <li class="done"><span class="m">✓</span><div>Order processed<div class="t">SO 4500091238 issued 29 Aug</div></div></li>
             <li class="now" data-cust-track-pay><span class="m">•</span><div>Settlement<div class="t">Remaining invoice is still open — unit not yet delivered</div></div></li>
             <li data-cust-track-doc><span class="m">•</span><div>Vehicle Documents<div class="t">STNK &amp; BPKB after settlement and branch submission</div></div></li>
-            <li data-cust-track-ship><span class="m">•</span><div>Delivery<div class="t">Held until paid in full · not a black box</div></div></li>
-            <li><span class="m">•</span><div>Completed<div class="t">Unit + handover proof package</div></div></li>
+            <li data-cust-track-ship><span class="m">•</span><div>Delivery<div class="t">This Zenix: paid in full, then this order's OKK and fuel fill, then handover</div></div></li>
+            <li><span class="m">•</span><div>Completed<div class="t">This unit + this order's handover proof package</div></div></li>
           </ul>
         </div>
         <div class="pay-proc request" data-cust-pay="request">
@@ -129,12 +129,17 @@
           <div class="pad"><p>Paid in full. Track delivery and documents in the trail above.</p></div>
         </div>
         <div class="box">
-          <h3>Delivery</h3>
+          <h3>Delivery · this Zenix · FAST-00418</h3>
+          <ol class="d3path" aria-label="This order's logistics">
+            <li>1 · OKK</li>
+            <li>2 · OBB</li>
+            <li>3 · Delivery</li>
+          </ol>
           <div class="pad" data-ho-lock>
-            <p class="exc-note warn" style="margin:0">The unit has not been delivered. Cash settlement must still be paid in full. After full payment, the proof package (photo, VIN, BSTKB) will appear here.</p>
+            <p class="exc-note warn" style="margin:0">This unit has not been delivered. Cash settlement on this order must still be paid in full. After that the branch requests this order's OKK and fuel fill, then the proof package appears here — not another unit's trail.</p>
           </div>
           <div class="pad" data-ho-ready hidden>
-            <p class="exc-note ok" style="margin:0">Paid in full. Delivery schedule to follow. The proof package appears after the branch uploads and approves handover.</p>
+            <p class="exc-note ok" style="margin:0">Paid in full on this Zenix. The branch will request OKK/26/CLD/00418 and OBB/26/CLD/00418, then the proof package for this VIN appears here.</p>
           </div>
         </div>
         <div class="box">
@@ -196,6 +201,12 @@
               <li class="done">Delivered</li>
               <li class="done">Completed</li>
             </ol>
+            <ol class="d3path" aria-label="This Calya logistics">
+              <li class="done">1 · OKK</li>
+              <li class="done">2 · OBB</li>
+              <li class="done">3 · Delivered</li>
+            </ol>
+            <p class="lead">This Calya used its own expedition and fuel orders before handover. The Zenix order is a different trail.</p>
             <button type="button" class="btn" data-go="bukti_serah" data-role="cust">Open handover proof</button>
           </div>
         </div>
@@ -229,6 +240,8 @@
             <div class="vault-item"><p class="k">VIN</p><p class="v">• 01990</p></div>
             <div class="vault-item"><p class="k">Unit</p><p class="v">Calya G AT · white</p></div>
             <div class="vault-item"><p class="k">BSTKB</p><p class="v">Scan matches VIN</p></div>
+            <div class="vault-item"><p class="k">OKK</p><p class="v">OKK for FAST-01990 · this Calya</p></div>
+            <div class="vault-item"><p class="k">OBB</p><p class="v">Fuel fill for this Calya VIN</p></div>
           </div>
           <div class="pad">
             <div class="docs">
