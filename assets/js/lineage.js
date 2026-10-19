@@ -333,7 +333,7 @@
       if(note.previousElementSibling!==nav) nav.after(note);
       if(tabs && note.nextElementSibling!==tabs) note.after(tabs);
     }
-    var path=screen.querySelector('ol.path');
+    var path=screen.querySelector('ol.path:not([data-d3-path])');
     if(path) path.hidden=true;
     var view=screen.getAttribute('data-stage-view')||VIEW[screen.id];
     if(view) showStagePanel(screen, view);
