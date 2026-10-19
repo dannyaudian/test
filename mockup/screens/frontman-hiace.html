@@ -163,6 +163,20 @@
               <button type="button" class="btn ghost" data-go="exc_epo">Open e-PO Gate</button>
             </div>
           </div>
+          <div class="box">
+            <h3>OKK / OBB · each SO on this SPK</h3>
+            <ol class="d3path" aria-label="Logistics after signature">
+              <li>1 · OKK</li>
+              <li>2 · OBB</li>
+              <li>3 · Delivery</li>
+            </ol>
+            <div class="fields">
+              <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091288</span><span class="val">OKK/26/CLD/00421-1 · OBB/26/CLD/00421-1</span><span class="src">After this unit's signed contract</span></div>
+              <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091289</span><span class="val">OKK/26/CLD/00421-2 · OBB/26/CLD/00421-2</span><span class="src">After this unit's signed contract</span></div>
+              <div class="frow locked"><i class="own s">S</i><span class="lab">SO 4500091290</span><span class="val">OKK/26/CLD/00421-3 · OBB/26/CLD/00421-3</span><span class="src">After this unit's signed contract</span></div>
+            </div>
+            <p class="hint" style="padding:0 16px 14px">Three Hiace units, three logistics pairs. A signed contract on unit 1 does not issue OKK for unit 2. This SPK does not open a cash delivery trail.</p>
+          </div>
         </div>
 
         <div class="box" data-stage-panel="do" hidden>
@@ -243,7 +257,7 @@
         </div>
         <div class="box" data-stage-panel="stnk" hidden>
           <h3>STNK / BPKB</h3>
-          <p>STNK name and address from this SPK. Tracking starts after handover. Does not waive signature or DP.</p>
+          <p>STNK name and address from this SPK. Tracking starts after each unit's own OKK, OBB, and handover. Does not waive signature or DP.</p>
         </div>
       </section>
 

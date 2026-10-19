@@ -74,6 +74,7 @@
 #mockup .pay-proc .amt{font-size:20px;font-weight:800;color:var(--ink);margin:8px 0}
 #mockup .pay-proc .nextbar{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
 #mockup .pay-proc[hidden], #mockup [data-cust-pay][hidden]{display:none !important}
+#mockup .shop-buy .d3path{margin:12px 0 4px}
 #mockup .cust-shop .own{display:none}
 #mockup .cust-shop .frow{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 16px;border-bottom:1px solid var(--rule-2);align-items:center}
 #mockup .cust-shop #digiroom > .screenhead .eyebrow{color:#c2410c}

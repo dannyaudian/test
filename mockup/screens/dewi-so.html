@@ -159,6 +159,19 @@
           </div>
           <p class="hint" style="padding:0 16px 14px">One SPK for Dewi, two SOs. Agya does not open Budi's or Hiace's transactions. Mandatory B2B DP only if the payment type is leasing.</p>
         </div>
+        <div class="box stage-lock" data-stage-panel="del" hidden>
+          <h3>This Agya SO's later journey</h3>
+          <ol class="d3path" aria-label="Agya logistics on this SPK">
+            <li>1 · OKK</li>
+            <li>2 · OBB</li>
+            <li>3 · Delivery</li>
+          </ol>
+          <p>After this line's booking fee, AFI, DO, billing, and paid in full stay on <b>SO 4500091428</b>. Then <b>OKK/26/CLD/00426-2</b> and <b>OBB/26/CLD/00426-2</b> fuel and dispatch this Agya — not the Yaris OKK on line 1.</p>
+        </div>
+        <div class="box stage-lock" data-stage-panel="stnk" hidden>
+          <h3>STNK / BPKB · this Agya SO</h3>
+          <p>After this Agya's own handover. The plate and BPKB follow SO 4500091428 inside SPK/26/CLD/00426 — not the Yaris line.</p>
+        </div>
       </section>
 
       <section class="screen" id="proses">
@@ -184,7 +197,7 @@
             <li><span class="mark idle">5</span><div>AFI<span class="why">STNK name/address from SPK. After SO.</span></div><button class="btn ghost" data-go="afi_d">Open</button></li>
             <li><span class="mark idle">6</span><div>DO<span class="why">Warehouse Delivery Order. After AFI.</span></div><button class="btn ghost" data-go="do">Open</button></li>
             <li><span class="mark idle">7</span><div>Billing<span class="why">After DO. Cash ≥30% non-waivable.</span></div><button class="btn ghost" data-go="bill_d">Open</button></li>
-            <li><span class="mark idle">8</span><div>Delivery<span class="why">After billing. Cash paid in full non-waivable.</span></div><button class="btn ghost" data-go="kirim_d">Open</button></li>
+            <li><span class="mark idle">8</span><div>Delivery<span class="why">This Yaris SO: paid in full, then OKK/OBB 00426-1, then handover. Agya is a separate SO.</span></div><button class="btn ghost" data-go="kirim_d">Open</button></li>
             <li><span class="mark idle">9</span><div>STNK / BPKB<span class="why">Tracking after handover. Aging is not a paid-in-full waiver.</span></div><button class="btn ghost" data-go="stnk_d">Open</button></li>
           </ul>
         </div>

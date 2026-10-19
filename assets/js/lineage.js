@@ -94,18 +94,20 @@
         if(now==='afi') return 'SO Yaris terbuka. Tahap yang sudah dilewati (SPK, QT, SO) bisa dibuka — datanya tetap terisi. AFI memakai nama/alamat STNK dari SPK.';
         if(now==='do') return 'AFI terkirim. DO gudang menyusul. Kanal bayar tetap sama.';
         if(now==='bill') return 'DO ada. Billing cash ≥30% non-waivable. Bayar di Digiroom atau cabang.';
-        if(now==='del') return 'Billing jalan. Kirim cash tunggu lunas — cashless di tahap ini.';
-        return 'Jejak Dewi · SO Yaris 4500091426 sampai STNK/BPKB.';
+        if(now==='del') return 'This Yaris SO: paid in full, then OKK/OBB 00426-1, then handover. Agya is a separate SO on the same SPK.';
+        return 'Dewi trail · Yaris SO 4500091426 through STNK/BPKB. Agya has its own SO.';
       }
     },
     agya:{
       go:function(){
         var g=dewiGo();
         g.so='so2';
+        g.del='so2';
+        g.stnk='so2';
         return g;
       },
       now:function(){ return 'quot'; },
-      copy:function(){ return 'SO 4500091428 tertahan booking fee baris Agya. Tetap SPK Dewi — bukan transaksi lain.'; }
+      copy:function(){ return 'SO 4500091428 held on this Agya booking fee. Same Dewi SPK. Later OKK/OBB 00426-2 belong to this line, not the Yaris.'; }
     },
     budi:{
       go:{spk:'transaksi',quot:'transaksi',so:'transaksi',afi:'transaksi',do:'transaksi',bill:'transaksi',del:'transaksi',stnk:'transaksi'},
@@ -113,8 +115,8 @@
       copy:function(now){
         if(now==='afi') return 'SO 4500091238 ada. SPK, QT, dan SO sudah dilewati — klik untuk lihat data sumber. Billing + AFI berpasangan di tahap ini.';
         if(now==='bill') return 'Billing/AFI berjalan. Bayar sisa di cashless — kirim tertahan sampai lunas.';
-        if(now==='del') return 'Paid in full or AFI already completed. Cash delivery still waits for AR Open Rp 0.';
-        return 'Jejak Budi · satu SO 4500091238 sampai STNK/BPKB.';
+        if(now==='del') return 'This Zenix: paid in full first, then OKK/26/CLD/00418 and OBB on this VIN. Not another unit.';
+        return 'Budi trail · one SO 4500091238 through STNK/BPKB.';
       }
     },
     hiace:{
@@ -125,14 +127,14 @@
         if(x.lunas===3) return 'Three SOs. Leasing settlement recorded. STNK/BPKB uses the same SPK data.';
         if(x.back) return 'Backflow B2B: ada dokumen kurang. Frontman lengkapi, kirim ulang — bukan waiver TTD/DP.';
         if(now==='bill') return 'Tiga SO. Billing tertahan sampai full DP B2B dan e-PO leasing (total DP, nilai dibiayai, tenor). Tanpa e-PO → Operation Manager.';
-        if(now==='del') return 'DP '+x.dp+'/3 · e-PO '+x.epo+'/3. Delivery held by signed contract '+x.ttd+'/3. Leasing receipts are issued by Administration.';
-        return 'Three SOs. Required DP + e-PO from B2B. Frontman completes the data; Administration handles paperless flow + receipts.';
+        if(now==='del') return 'DP '+x.dp+'/3 · e-PO '+x.epo+'/3. Each signed unit then gets its own OKK/OBB on this SPK. Delivery held by signed contract '+x.ttd+'/3.';
+        return 'Three SOs on this Hiace SPK. Each unit keeps its own DP, e-PO, OKK, and OBB.';
       }
     },
     raize:{
       go:{spk:'tx_raize',quot:'tx_raize',so:'tx_raize',afi:'tx_raize',do:'tx_raize',bill:'tx_raize',del:'tx_raize',stnk:'tx_raize'},
       now:function(){ return 'spk'; },
-      copy:function(){ return 'SPK tertahan NPWP. Booking cashless belum ditagih. Data gate, bukan Approval Engine.'; }
+      copy:function(){ return 'This Raize SPK is held on NPWP. Fee, SO, then this unit\'s own OKK/OBB after paid in full. Not another transaction.'; }
     },
     agus:{
       go:function(){
@@ -154,18 +156,18 @@
       go:{spk:'gi',quot:'gi',so:'gi',afi:'gi',do:'gi',bill:'gi',del:'gi',stnk:'gi'},
       now:fajarNow,
       copy:function(now){
-        return now==='stnk'?'Good Issue tercatat. Paket bukti sama di akun pelanggan.':'Terkirim. Unggah bukti otentik dulu — bukan CCTV dealer.';
+        return now==='stnk'?'Good Issue recorded on this Rush. Same proof package in the customer account.':'This Rush already has OKK/26/CLD/00424 and OBB. Upload authentic GI proof here.';
       }
     },
     maria:{
       go:{spk:'tx_fortuner',quot:'tx_fortuner',so:'tx_fortuner',afi:'tx_fortuner',do:'tx_fortuner',bill:'tx_fortuner',del:'tx_fortuner',stnk:'tx_fortuner'},
       now:function(){ return 'stnk'; },
-      copy:function(){ return 'Delivered & lunas. STNK hari ke-19 — eskalasi Kepala Cabang, bukan waiver lunas.'; }
+      copy:function(){ return 'This Fortuner delivered with its own OKK/OBB. STNK day 19 — Branch Head escalation, not a paid-in-full waiver.'; }
     },
     calya:{
       go:{spk:'order_calya',quot:'order_calya',so:'order_calya',afi:'order_calya',do:'order_calya',bill:'order_calya',del:'order_calya',stnk:'order_calya'},
       now:function(){ return 'done'; },
-      copy:function(){ return 'Selesai. Paket bukti serah terima bisa diunduh — bukan rekaman CCTV.'; }
+      copy:function(){ return 'This Calya is complete. Its own handover pack can be downloaded — not dealer CCTV, not the Zenix order.'; }
     }
   };
   function state(id){
