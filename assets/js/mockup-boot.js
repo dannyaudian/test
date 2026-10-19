@@ -53,7 +53,7 @@
     'assets/js/mockup-qris.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=okk-obb';
+  var bust = 'v=okk-obb-e2e';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {

@@ -98,7 +98,8 @@
     b.addEventListener('click',function(){
       if(window.FAST && FAST.save) FAST.save({okk:true,spk:'SPK/26/CLD/00425'}, FAST.DEL_KEY);
       applyDelivery();
-      toast('OKK/26/CLD/00425 sent to PT Nusantara Ekspedisi Mandiri. Electronic OKK is in the vault.');
+      toast('OKK/26/CLD/00425 sent to PT Nusantara Ekspedisi Mandiri. Next: OBB to fuel the new car.');
+      if(typeof show==='function') show('obb');
     });
   });
   document.querySelectorAll('[data-obb-submit]').forEach(function(b){
@@ -106,11 +107,13 @@
       var s=window.FAST && FAST.load ? FAST.load(FAST.DEL_KEY)||{} : {};
       if(!s.okk){
         toast('Request OKK to the expedition vendor first.');
+        if(typeof show==='function') show('okk');
         return;
       }
       if(window.FAST && FAST.save) FAST.save({obb:true,spk:'SPK/26/CLD/00425'}, FAST.DEL_KEY);
       applyDelivery();
-      toast('OBB/26/CLD/00425 sent to SPBU Mitra FAST Cilandak. 10 liters Pertamax on this VIN.');
+      toast('OBB/26/CLD/00425 sent to SPBU Mitra FAST Cilandak. Next: submit delivery.');
+      if(typeof show==='function') show('delivery');
     });
   });
   var delBtn=document.querySelector('[data-del-submit]');

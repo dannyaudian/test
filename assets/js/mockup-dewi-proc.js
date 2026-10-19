@@ -102,6 +102,15 @@
     var obb=!!s.obb;
     var ready=okk && obb;
     var sent=!!s.requested;
+    var dest=sent?'delivery':(!okk?'okk':(!obb?'obb':'delivery'));
+    var step=sent?'done':dest;
+    var order=['okk','obb','del'];
+    var idx=step==='done'?3:(dest==='delivery'?2:order.indexOf(dest));
+    document.querySelectorAll('[data-d3-path] [data-d3-step]').forEach(function(li){
+      var i=order.indexOf(li.getAttribute('data-d3-step'));
+      li.classList.toggle('done', i<idx || step==='done');
+      li.classList.toggle('now', step!=='done' && i===idx);
+    });
     document.querySelectorAll('[data-okk-open]').forEach(function(el){ el.hidden=okk; });
     document.querySelectorAll('[data-okk-sent]').forEach(function(el){ el.hidden=!okk; });
     document.querySelectorAll('[data-obb-need-okk]').forEach(function(el){ el.hidden=okk; });
@@ -114,22 +123,44 @@
     document.querySelectorAll('[data-del-hold-prep]').forEach(function(el){ el.hidden=ready || sent; });
     document.querySelectorAll('[data-del-open]').forEach(function(el){ el.hidden=!ready || sent; });
     document.querySelectorAll('[data-del-sent]').forEach(function(el){ el.hidden=!sent; });
+    document.querySelectorAll('[data-del-sum-prep]').forEach(function(el){ el.hidden=ready || sent; });
+    document.querySelectorAll('[data-del-sum-ready]').forEach(function(el){ el.hidden=!ready || sent; });
+    document.querySelectorAll('[data-del-sum-done]').forEach(function(el){ el.hidden=!sent; });
+    document.querySelectorAll('[data-del-need-okk]').forEach(function(el){ el.hidden=okk; });
+    document.querySelectorAll('[data-del-need-obb]').forEach(function(el){ el.hidden=!okk || obb; });
+    document.querySelectorAll('[data-okk-next-obb]').forEach(function(el){ el.hidden=!okk || obb; });
+    document.querySelectorAll('[data-okk-next-del]').forEach(function(el){ el.hidden=!ready || sent; });
+    document.querySelectorAll('[data-okk-next-done]').forEach(function(el){ el.hidden=!sent; });
+    document.querySelectorAll('[data-obb-next-del]').forEach(function(el){ el.hidden=!ready || sent; });
+    document.querySelectorAll('[data-obb-next-done]').forEach(function(el){ el.hidden=!sent; });
     document.querySelectorAll('[data-okk-admin]').forEach(function(el){ el.hidden=!okk; });
     document.querySelectorAll('[data-obb-admin]').forEach(function(el){ el.hidden=!obb; });
     document.querySelectorAll('[data-okk-kpi]').forEach(function(el){ el.textContent=okk?'OKK/26/CLD/00425':'Not requested'; });
     document.querySelectorAll('[data-obb-kpi]').forEach(function(el){ el.textContent=obb?'OBB/26/CLD/00425':'Not requested'; });
     document.querySelectorAll('[data-del-kpi]').forEach(function(el){
-      el.textContent=sent?'Request sent':(ready?'Ready for delivery':'Prep OKK / OBB');
+      el.textContent=sent?'Request sent':(ready?'Ready for delivery':(!okk?'Prep OKK':'Prep OBB'));
     });
     document.querySelectorAll('[data-del-d3]').forEach(function(el){
-      el.textContent=sent?'Dispatched':(ready?'OKK + OBB':'OKK · OBB');
+      el.textContent=sent?'Dispatched':(ready?'OKK + OBB':(!okk?'1 of 3 · OKK':'2 of 3 · OBB'));
     });
     var spec=sent?'OKK + OBB issued · waiting handover':(!okk?'Action: request OKK to expedition':(!obb?'Action: request OBB to fuel the unit':'Action: submit delivery'));
     var tag=sent?'Request sent':(!ready?'Prep delivery':'Ready for delivery');
+    var cta=sent?'Open delivery →':(!okk?'Request OKK →':(!obb?'Request OBB →':'Submit delivery →'));
     document.querySelectorAll('[data-del-spec]').forEach(function(el){ el.textContent=spec; });
+    document.querySelectorAll('[data-del-cta]').forEach(function(el){ el.textContent=cta; });
+    document.querySelectorAll('[data-del-mgmt-cta]').forEach(function(el){
+      el.textContent=dest==='okk'?'Open OKK →':(dest==='obb'?'Open OBB →':'Open delivery →');
+    });
+    document.querySelectorAll('[data-del-home]').forEach(function(el){
+      if(el.hasAttribute('data-tx-action')) el.setAttribute('data-tx-action', sent?'0':'1');
+    });
+    if(typeof filterTx==='function') filterTx();
     document.querySelectorAll('[data-del-tag]').forEach(function(el){
       el.textContent=tag;
       el.className='tag '+(sent?'wait':(ready?'ok':'hold'));
+    });
+    document.querySelectorAll('[data-del-home], [data-agus-jump]').forEach(function(el){
+      el.setAttribute('data-go', dest);
     });
     var adminPill=document.querySelector('[data-admin-pill]');
     if(adminPill){
