@@ -314,7 +314,6 @@
       hoFileAct(act.getAttribute('data-ho-file-act'));
     }
   });
-  FAST.hoFileOpen=function(id){ if(id) hoFilePick=id; };
   FAST.hoFileStep=hoFileStep;
   FAST.hoFileState=hoFileState;
   FAST.hoFileStepMeta=hoFileStepMeta;
@@ -325,7 +324,14 @@
     var step=hoFileStep(id);
     return dec==='open' && step!=='ho' && step!=='rejected';
   };
+  var _applyHoFile=applyHoFile;
+  applyHoFile=function(){
+    _applyHoFile();
+    if(FAST.renderStepForms) FAST.renderStepForms();
+    if(FAST.renderLineage) FAST.renderLineage({screen:'ho_file'});
+  };
   FAST.applyHoFile=applyHoFile;
+  FAST.hoFileOpen=function(id){ if(id) hoFilePick=id; applyHoFile(); };
   FAST.HO_FILE_CASE={
     file_sales:{pick:'st-bsd'},
     file_sales_cash:{pick:'st-bks'},

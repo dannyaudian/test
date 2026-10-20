@@ -194,7 +194,8 @@
   syncRoleChrome();
   syncMgmtSeat();
   if(window.FAST && FAST.renderMaster) FAST.renderMaster();
-  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyExcNama(); applyExcEpo(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyB2b(); applyAfi(); applyDewiProc(); applyHandoverCust(); applyCustPayScene(); applyMgmtInbox(); if(window.FAST && FAST.renderMaster) FAST.renderMaster(); });
+  if(window.FAST && FAST.renderStepForms) FAST.renderStepForms();
+  window.addEventListener('fast-session', function(){ applyLive(); applyExcAlamat(); applyExcNama(); applyExcEpo(); applyBooking(); applySpkDraft(); applyDelivery(); applyGi(); applyB2b(); applyAfi(); applyDewiProc(); applyHandoverCust(); applyCustPayScene(); applyMgmtInbox(); if(window.FAST && FAST.renderMaster) FAST.renderMaster(); if(window.FAST && FAST.renderStepForms) FAST.renderStepForms(); });
 
   var channelMeta={
     qris:{title:'QRIS'},

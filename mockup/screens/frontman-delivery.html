@@ -1,4 +1,4 @@
-      <section class="screen" id="tx_avanza">
+      <section class="screen" id="tx_avanza" data-form-tx="agus" data-form-fill>
         <div class="screenhead">
           <div>
             <p class="eyebrow">SPK/26/CLD/00425 · cash · paid in full</p>
@@ -68,7 +68,7 @@
           <h3>Billing</h3>
           <p>Cash ≥30% and settlement done. Billing number linked to SPK–SO. Ready for delivery.</p>
         </div>
-        <div data-stage-panel="del">
+        <div data-stage-panel="del" data-step-keep>
           <div class="box" data-del-sum-prep>
             <h3>Next · request OKK then OBB</h3>
             <div class="pad">
@@ -98,7 +98,7 @@
         </div>
       </section>
 
-      <section class="screen" id="okk">
+      <section class="screen" id="okk" data-form-tx="agus" data-form-fill>
         <div class="screenhead">
           <div>
             <p class="eyebrow">OKK · Order Kirim Kendaraan · SPK/26/CLD/00425</p>
@@ -199,7 +199,7 @@
         </div>
       </section>
 
-      <section class="screen" id="obb">
+      <section class="screen" id="obb" data-form-tx="agus" data-form-fill>
         <div class="screenhead">
           <div>
             <p class="eyebrow">OBB · Order Bahan Bakar · SPK/26/CLD/00425</p>
@@ -297,7 +297,7 @@
         </div>
       </section>
 
-      <section class="screen" id="delivery">
+      <section class="screen" id="delivery" data-form-tx="agus" data-form-fill>
         <div class="screenhead">
           <div>
             <p class="eyebrow">Delivery request · SPK/26/CLD/00425</p>
@@ -409,7 +409,7 @@
         </div>
       </section>
 
-      <section class="screen" id="gi">
+      <section class="screen" id="gi" data-form-tx="fajar" data-form-fill>
         <div class="screenhead">
           <div>
             <p class="eyebrow">Good Issue · SPK/26/CLD/00424</p>
@@ -462,7 +462,7 @@
           <h3>Billing</h3>
           <p>Paid in Full. Not an Approval Engine object.</p>
         </div>
-        <div data-stage-panel="del">
+        <div data-stage-panel="del" data-step-keep>
         <div class="box">
           <h3>Data from the SPK — not re-typed</h3>
           <div class="vault-grid">
@@ -510,7 +510,7 @@
         </div>
       </section>
 
-      <section class="screen" id="tx_fortuner">
+      <section class="screen" id="tx_fortuner" data-form-tx="maria" data-form-fill>
         <div class="screenhead">
           <div>
             <p class="eyebrow">SPK/26/CLD/00409 · delivered</p>
@@ -587,7 +587,8 @@
           </div>
         </div>
         <div data-stage-panel="stnk">
-          <div class="box">
+          <div data-step-form="stnk"></div>
+          <div class="box" data-step-work>
             <h3>STNK / BPKB · day 19</h3>
             <div class="pad">
               <p>Past 15 days: automatic escalation to the Branch Head. Not a button to bypass settlement. The lineage stays SPK/26/CLD/00409.</p>

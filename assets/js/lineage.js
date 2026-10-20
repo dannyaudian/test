@@ -29,7 +29,8 @@
     tx_avanza:'agus',okk:'agus',obb:'agus',delivery:'agus',
     gi:'fajar',
     tx_fortuner:'maria',exc_stnk:'maria',
-    order_calya:'calya',bukti_serah:'calya'
+    order_calya:'calya',bukti_serah:'calya',
+    ho_file:'andi'
   };
   var VIEW={
     spk:'spk',spk_baru:'spk',quot:'quot',booking:'quot',so:'so',so2:'so',proses:'spk',
@@ -38,7 +39,8 @@
     cashless:'bill',exc_alamat:'afi',exc_nama:'spk',exc_epo:'bill',exc_afi:'afi',customer_detail:'bill',tagihan_customer:'bill',
     tx_hiace:'bill',
     tx_raize:'spk',tx_avanza:'del',okk:'del',obb:'del',delivery:'del',gi:'del',
-    tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk'
+    tx_fortuner:'stnk',exc_stnk:'stnk',order_calya:'stnk',bukti_serah:'stnk',
+    ho_file:'so'
   };
   function load(k){ return (FAST.load?FAST.load(k):null)||{}; }
   function idx(id){ return STAGES.findIndex(function(s){ return s.id===id; }); }
@@ -168,6 +170,21 @@
       go:{spk:'order_calya',quot:'order_calya',so:'order_calya',afi:'order_calya',do:'order_calya',bill:'order_calya',del:'order_calya',stnk:'order_calya'},
       now:function(){ return 'done'; },
       copy:function(){ return 'This Calya is complete. Its own handover pack can be downloaded — not dealer CCTV, not the Zenix order.'; }
+    },
+    andi:{
+      go:{spk:'ho_file',quot:'ho_file',so:'ho_file',afi:'ho_file',do:'ho_file',bill:'ho_file',del:'ho_file',stnk:'ho_file'},
+      now:function(){ return 'so'; },
+      copy:function(){ return 'Andi Fortuner · SPK/26/BSD/00188. Filing stays on this SO. Later OKK/OBB 00188 belong here — same form as every other order.'; }
+    },
+    sinta:{
+      go:{spk:'ho_file',quot:'ho_file',so:'ho_file',afi:'ho_file',do:'ho_file',bill:'ho_file',del:'ho_file',stnk:'ho_file'},
+      now:function(){ return 'so'; },
+      copy:function(){ return 'Sinta Avanza · SPK/26/BKS/00162. Filing stays on this SO. Later OKK/OBB 00162 belong here.'; }
+    },
+    yoga:{
+      go:{spk:'ho_file',quot:'ho_file',so:'ho_file',afi:'ho_file',do:'ho_file',bill:'ho_file',del:'ho_file',stnk:'ho_file'},
+      now:function(){ return 'so'; },
+      copy:function(){ return 'Yoga Zenix · SPK/26/TNG/00216. Partner filing stays on this SO. Later OKK/OBB 00216 belong here.'; }
     }
   };
   function state(id){
@@ -182,6 +199,7 @@
       else done={spk:1,quot:1,so:1,afi:1,do:1,bill:1};
     }
     if(id==='raize'){ done={}; }
+    if(id==='andi'||id==='sinta'||id==='yoga'){ done={spk:1,quot:1}; }
     if(id==='agya'){ done={spk:1}; }
     if(id==='fajar' && now==='del'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
     if(id==='agus' && now==='del'){ done={spk:1,quot:1,so:1,afi:1,do:1,bill:1}; }
@@ -195,6 +213,7 @@
     if(id==='raize') hold='spk';
     if(id==='hiace') hold=(now==='stnk')?null:now;
     if(id==='agya') hold='quot';
+    if(id==='andi'||id==='sinta'||id==='yoga') hold='so';
     if(id==='maria') hold='stnk';
     return {id:id, now:allDone?'stnk':now, done:done, hold:hold, allDone:allDone, go:typeof c.go==='function'?c.go():c.go, copy:c.copy(allDone?'stnk':now)};
   }
@@ -335,6 +354,10 @@
       if(payJob==='booking'||payJob==='dewi') return 'dewi';
       return 'budi';
     }
+    if(id==='ho_file'){
+      var p=FAST.hoFilePick||'st-bsd';
+      return p==='st-bks'?'sinta':(p==='lp-tng'?'yoga':'andi');
+    }
     return SCREEN_TX[id]||null;
   }
   function payView(sid, payJob, tx){
@@ -437,6 +460,7 @@
       fillNav(pack.nav, st, view, showFn);
       if(pack.note) pack.note.textContent=st.copy;
     });
+    if(FAST.renderStepForms) FAST.renderStepForms();
     if(current){
       var on=document.getElementById(current);
       var tx=screenTx(current, payJob)||(on&&on.querySelector('[data-tx-track]')&&on.querySelector('[data-tx-track]').getAttribute('data-tx-track'));
@@ -458,7 +482,8 @@
     tx=FAST.txFamily(tx);
     return ({
       dewi:'spk', budi:'transaksi', hiace:'tx_hiace', raize:'tx_raize',
-      agus:'tx_avanza', fajar:'gi', maria:'tx_fortuner', calya:'order_calya'
+      agus:'tx_avanza', fajar:'gi', maria:'tx_fortuner', calya:'order_calya',
+      andi:'ho_file', sinta:'ho_file', yoga:'ho_file'
     })[tx]||null;
   };
   FAST.showStagePanel=showStagePanel;

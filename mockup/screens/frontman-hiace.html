@@ -1,4 +1,4 @@
-      <section class="screen" id="tx_hiace" data-stage-map="spk:ringkas,quot:ringkas,so:so,afi:documents,do:alur,bill:tagih,del:alur,stnk:ringkas">
+      <section class="screen" id="tx_hiace" data-form-tx="hiace" data-form-fill data-stage-map="spk:ringkas,quot:ringkas,so:so,afi:documents,do:alur,bill:tagih,del:alur,stnk:ringkas">
         <div class="screenhead">
           <div>
             <p class="eyebrow">SPK/26/CLD/00421 · B2B leasing</p>
@@ -92,7 +92,7 @@
           <p class="hint" style="padding:0 16px 14px">Quotation completed. Required DP per line carried to SO — not typed in billing.</p>
         </div>
 
-        <div data-b2b-panel="so" data-stage-panel="so" hidden>
+        <div data-b2b-panel="so" data-stage-panel="so" hidden data-step-keep>
           <div class="cards">
             <div class="card"><p class="k">SO Number</p><p class="v" style="font-size:18px" data-b2b-so-no>4500091288</p><p class="n">From quotation SPK/26/CLD/00421</p></div>
             <div class="card"><p class="k">Method</p><p class="v" style="font-size:18px">Leasing</p><p class="n">PT Danapura Multifinance</p></div>
@@ -139,7 +139,7 @@
           </div>
         </div>
 
-        <div data-b2b-panel="alur" data-stage-panel="del" hidden>
+        <div data-b2b-panel="alur" data-stage-panel="del" hidden data-step-keep>
           <div class="box">
             <h3>Status <span data-b2b-so-title>SO 4500091288</span> <span class="side">Submit → settlement</span></h3>
             <p class="exc-note" data-b2b-backflow hidden></p>
@@ -178,6 +178,7 @@
             </div>
             <p class="hint" style="padding:0 16px 14px">Three Hiace units, three logistics pairs. A signed contract on unit 1 does not issue OKK for unit 2. This SPK does not open a cash delivery trail.</p>
           </div>
+          <div data-step-form="del"></div>
         </div>
 
         <div class="box" data-stage-panel="do" hidden>
@@ -190,7 +191,7 @@
           <p class="hint" style="padding:0 16px 14px">DO is on this trail. Warehouse follows signature per SO — not transferred to cash SPK.</p>
         </div>
 
-        <div data-b2b-panel="documents" data-stage-panel="afi" hidden>
+        <div data-b2b-panel="documents" data-stage-panel="afi" hidden data-step-keep>
           <div class="box">
             <h3>Leasing Contract <span class="side" data-b2b-so-title>SO 4500091288</span></h3>
             <p class="pad" style="padding-bottom:0">Frontman only. Download the contract from leasing, then re-upload after customer signs.</p>
@@ -216,7 +217,7 @@
           </div>
         </div>
 
-        <div data-b2b-panel="tagih" data-stage-panel="bill" hidden>
+        <div data-b2b-panel="tagih" data-stage-panel="bill" hidden data-step-keep>
           <div class="box">
             <h3>Billing Request Requirements <span class="side">Administration · does not upload</span></h3>
             <p class="pad" style="padding-bottom:0">Receipt and billing request to leasing only after Frontman package, full B2B DP, and leasing e-PO. E-PO contains total customer DP, amount financed by leasing, and tenor.</p>

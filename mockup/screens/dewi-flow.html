@@ -1,4 +1,4 @@
-      <section class="screen" id="afi_d">
+      <section class="screen" id="afi_d" data-form-tx="dewi">
         <div class="screenhead">
           <div>
             <p class="eyebrow">AFI · SO 4500091426</p>
@@ -11,6 +11,7 @@
           </div>
         </div>
         <nav class="proc" data-proc="afi_d" aria-label="Process transactions"></nav>
+        <div data-step-form="afi"></div>
         <div class="paystrip">
           <b>Cashless Yaris</b>
           <span class="hint" style="margin:0">Billing requires ≥30%. Pay here, the SO trail stays 4500091426.</span>
@@ -44,7 +45,7 @@
         </div>
       </section>
 
-      <section class="screen" id="do">
+      <section class="screen" id="do" data-form-tx="dewi">
         <div class="screenhead">
           <div>
             <p class="eyebrow">Delivery Order · SO 4500091426</p>
@@ -54,6 +55,7 @@
           <div class="actions"><button class="btn ghost" data-go="afi_d">← AFI</button></div>
         </div>
         <nav class="proc" data-proc="do" aria-label="Process transactions"></nav>
+        <div data-step-form="do"></div>
         <div class="paystrip">
           <b>Cashless Yaris</b>
           <span class="hint" style="margin:0">The DO does not change the payment channel. Settlement stays VA / CDM / link / EDC. QRIS is booking fee only.</span>
@@ -83,7 +85,7 @@
         </div>
       </section>
 
-      <section class="screen" id="bill_d">
+      <section class="screen" id="bill_d" data-form-tx="dewi">
         <div class="screenhead">
           <div>
             <p class="eyebrow">Billing · after DO</p>
@@ -93,6 +95,7 @@
           <div class="actions"><button class="btn ghost" data-go="do">← DO</button></div>
         </div>
         <nav class="proc" data-proc="bill_d" aria-label="Process transactions"></nav>
+        <div data-step-form="bill"></div>
         <div class="cards">
           <div class="card"><p class="k">Funds received</p><p class="v" style="font-size:18px">0,99%</p><p class="n">Booking Rp 3.000.000</p></div>
           <div class="card alert"><p class="k">Requirement</p><p class="v" style="font-size:18px">≥30%</p><p class="n">Not yet · not an exception</p></div>
@@ -115,7 +118,7 @@
         </div>
       </section>
 
-      <section class="screen" id="kirim_d">
+      <section class="screen" id="kirim_d" data-form-tx="dewi">
         <div class="screenhead">
           <div>
             <p class="eyebrow">Delivery · after billing</p>
@@ -125,19 +128,8 @@
           <div class="actions"><button class="btn ghost" data-go="bill_d">← Billing</button></div>
         </div>
         <nav class="proc" data-proc="kirim_d" aria-label="Process transactions"></nav>
-        <div class="box">
-          <h3>This Yaris SO · 4500091426</h3>
-          <ol class="d3path" aria-label="Yaris logistics on this SPK">
-            <li>1 · OKK</li>
-            <li>2 · OBB</li>
-            <li>3 · Delivery</li>
-          </ol>
-          <ul class="gates">
-            <li><span class="mark no">!</span><div>Billing<span class="why">Not yet issued on this Yaris SO</span></div><span class="tag stop">Held</span></li>
-            <li><span class="mark no">!</span><div>Cash paid in full<span class="why">AR Open Rp 299.150.000 · this Yaris line · non-waivable</span></div><span class="tag stop">Held</span></li>
-            <li><span class="mark idle">•</span><div>OKK/26/CLD/00426-1<span class="why">Expedition for this Yaris after paid in full</span></div><span class="tag mute">This SO</span></li>
-            <li><span class="mark idle">•</span><div>OBB/26/CLD/00426-1<span class="why">New-car fuel for this Yaris VIN after OKK</span></div><span class="tag mute">This SO</span></li>
-          </ul>
+        <div data-step-form="del"></div>
+        <div class="box" data-step-work>
           <p class="hint" style="padding:12px 16px 0">Agya is SO 4500091428 on the same SPK. That line has its own OKK/OBB after its own booking fee and paid in full.</p>
           <div class="pad"><button class="btn ghost" data-go="so2">Open Agya SO journey</button></div>
           <div class="paystrip">
@@ -147,7 +139,7 @@
         </div>
       </section>
 
-      <section class="screen" id="stnk_d">
+      <section class="screen" id="stnk_d" data-form-tx="dewi">
         <div class="screenhead">
           <div>
             <p class="eyebrow">STNK / BPKB tracking</p>
@@ -157,7 +149,8 @@
           <div class="actions"><button class="btn ghost" data-go="kirim_d">← Delivery</button></div>
         </div>
         <nav class="proc" data-proc="stnk_d" aria-label="Process transactions"></nav>
-        <ul class="milestones">
+        <div data-step-form="stnk"></div>
+        <ul class="milestones" hidden>
           <li class="done"><span class="m">✓</span><div>STNK data in the SPK<div class="t">Andi Pratama · Depok City</div></div></li>
           <li data-stnk-afi><span class="m">2</span><div>AFI<div class="t">Pending SO / submission</div></div></li>
           <li><span class="m">3</span><div>Samsat process<div class="t">After AFI received</div></div></li>
