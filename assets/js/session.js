@@ -172,7 +172,10 @@ FAST.ADDR = {
   fajar: { line1: 'Jl. TB Simatupang No. 8', line2: 'Cluster Cilandak Town Square', rtrw: '011/002', kelurahan: 'Cilandak Barat', kecamatan: 'Cilandak', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
   maria: { line1: 'Jl. Ampera Raya No. 20', line2: 'Komplek Ampera Elok', rtrw: '004/001', kelurahan: 'Ragunan', kecamatan: 'Pasar Minggu', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
   hiace: { line1: 'Jl. Raya Pasar Minggu No. 10', line2: 'Gedung Danapura Lt. 5', rtrw: '006/002', kelurahan: 'Pejaten Barat', kecamatan: 'Pasar Minggu', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
-  calya: { line1: 'Jl. Kemang Selatan VIII No. 12', line2: 'Ruko Kemang Square Lt. 1', rtrw: '005/007', kelurahan: 'Bangka', kecamatan: 'Mampang Prapatan', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' }
+  calya: { line1: 'Jl. Kemang Selatan VIII No. 12', line2: 'Ruko Kemang Square Lt. 1', rtrw: '005/007', kelurahan: 'Bangka', kecamatan: 'Mampang Prapatan', kota: 'Kota Jakarta Selatan', provinsi: 'DKI Jakarta' },
+  andi: { line1: 'Jl. Raya Serpong No. 21', line2: 'BSD Cluster Foresta', rtrw: '002/003', kelurahan: 'Lengkong Gudang', kecamatan: 'Serpong', kota: 'Kota Tangerang Selatan', provinsi: 'Banten' },
+  sinta: { line1: 'Jl. Ahmad Yani No. 90', line2: '', rtrw: '004/001', kelurahan: 'Bekasi Jaya', kecamatan: 'Bekasi Timur', kota: 'Kota Bekasi', provinsi: 'Jawa Barat' },
+  yoga: { line1: 'Jl. Daan Mogot No. 45', line2: 'Ruko Metro Tangerang', rtrw: '007/002', kelurahan: 'Sukarasa', kecamatan: 'Tangerang', kota: 'Kota Tangerang', provinsi: 'Banten' }
 };
 FAST.NOPOL = {
   'dewi.yaris': { spk: 'SPK/26/CLD/00426', so: '4500091426', nopol: 'B 1426 DPK', status: 'cadangan', note: 'Cadangan AFI · belum terbit STNK' },
@@ -185,7 +188,10 @@ FAST.NOPOL = {
   'agus': { spk: 'SPK/26/CLD/00425', so: '4500091301', nopol: 'B 1301 F', status: 'cadangan', note: 'Lunas · nopol cadangan sebelum GI' },
   'fajar': { spk: 'SPK/26/CLD/00424', so: '4500091424', nopol: 'B 1424 F', status: 'terbit', note: 'Terbit bersama GI · Rush' },
   'maria': { spk: 'SPK/26/CLD/00409', so: '4500091409', nopol: 'B 1409 B', status: 'terbit', note: 'STNK terbit · aging plat' },
-  'calya': { spk: 'SPK/24/CLD/01990', so: '4500081990', nopol: 'B 1990 T', status: 'terbit', note: 'Delivered 2024' }
+  'calya': { spk: 'SPK/24/CLD/01990', so: '4500081990', nopol: 'B 1990 T', status: 'terbit', note: 'Delivered 2024' },
+  'andi': { spk: 'SPK/26/BSD/00188', so: '4500091888', nopol: 'B 1888 F', status: 'cadangan', note: 'Filing sales type · this SO' },
+  'sinta': { spk: 'SPK/26/BKS/00162', so: '4500091620', nopol: 'B 1620 T', status: 'cadangan', note: 'Filing sales type · this SO' },
+  'yoga': { spk: 'SPK/26/TNG/00216', so: '4500092166', nopol: 'B 2166 U', status: 'cadangan', note: 'Filing partner change · this SO' }
 };
 FAST.NAME_REL = {
   dewi: { pemesan: 'Dewi Lestari', stnk: 'Andi Pratama', same: false, rel: 'Pasangan', docs: 'KTP atas nama STNK, bukti alamat STNK, pernyataan', gate: 'approval', spk: 'SPK/26/CLD/00426' },

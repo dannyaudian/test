@@ -49,11 +49,12 @@
     'assets/js/mockup-b2b.js',
     'assets/js/mockup-finance.js',
     'assets/js/mockup-ho-file.js',
+    'assets/js/step-forms.js',
     'assets/js/mockup-cust.js',
     'assets/js/mockup-qris.js',
     'assets/js/mockup-pay.js'
   ];
-  var bust = 'v=own-trail';
+  var bust = 'v=step-form';
   function get(url) {
     var sep = url.indexOf('?') >= 0 ? '&' : '?';
     return fetch(url + sep + bust, { cache: 'no-store' }).then(function (r) {

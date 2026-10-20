@@ -1,4 +1,4 @@
-      <section class="screen" id="transaksi">
+      <section class="screen" id="transaksi" data-form-tx="budi" data-form-fill>
         <div class="screenhead">
           <div>
             <h2>Budi Santoso · Innova Zenix</h2>
@@ -22,7 +22,7 @@
           <button class="btn" data-go="cashless" data-fm-only data-pay-job="lunas">Pay at branch</button>
           <button class="btn ghost" data-go="digiroom" data-pay-job="lunas" data-role="cust">Digiroom</button>
         </div>
-        <div class="box" data-stage-panel="spk" hidden>
+        <div class="box" data-stage-panel="spk" hidden data-step-form="spk">
           <h3>SPK/26/CLD/00418</h3>
           <div class="fields">
             <div class="frow locked"><i class="own s">S</i><span class="lab">SPK Number</span><span class="val">SPK/26/CLD/00418</span><span class="src">Source documents</span></div>
@@ -36,7 +36,7 @@
           <div class="fields addr-fields" data-addr="budi"></div>
           <p class="hint" style="padding:0 16px 14px">SPK stage completed. Source data remains filled — not re-entered in SO or AFI.</p>
         </div>
-        <div class="box" data-stage-panel="quot" hidden>
+        <div class="box" data-stage-panel="quot" hidden data-step-form="quot">
           <h3>Quotation · SPK/26/CLD/00418</h3>
           <div class="money">
             <div class="row"><span>OTR area PO</span><span>Rp 486.750.000</span></div>
@@ -47,7 +47,7 @@
           </div>
           <p class="hint" style="padding:0 16px 14px">Quotation completed. This price is carried to SO — not typed in billing.</p>
         </div>
-        <div data-stage-panel="so">
+        <div data-stage-panel="so" data-step-keep>
         <div class="split">
           <div>
             <div class="box">
@@ -158,7 +158,7 @@
           </div>
         </div>
         </div>
-        <div class="box" data-stage-panel="afi" hidden>
+        <div class="box" data-stage-panel="afi" hidden data-step-keep>
           <h3>AFI · data from the SPK</h3>
           <div class="fields">
             <div class="frow locked"><i class="own f">F</i><span class="lab">STNK Name</span><span class="val" data-afi-name>Budi Santoso</span><span class="src">= buyer</span></div>
@@ -174,12 +174,10 @@
           <h3>Delivery Order</h3>
           <p>Warehouse DO after AFI on SO 4500091238. Not the Yaris DO.</p>
         </div>
-        <div class="box" data-stage-panel="bill" hidden>
-          <h3>Billing</h3>
-          <p>Cash ≥30% already met (62.7%). The remaining settlement is in this SPK's cashless flow — non-waivable for delivery.</p>
-          <div class="pad"><button class="btn" data-go="cashless" data-fm-only data-pay-job="lunas">Pay at branch</button></div>
+        <div class="box" data-stage-panel="bill" hidden data-step-form="bill">
+          <div data-step-work class="pad"><button class="btn" data-go="cashless" data-fm-only data-pay-job="lunas">Pay at branch</button></div>
         </div>
-        <div class="box stage-lock" data-stage-panel="del" hidden>
+        <div class="box stage-lock" data-stage-panel="del" hidden data-step-form="del">
           <h3>Delivery · SPK/26/CLD/00418 · Zenix</h3>
           <ol class="d3path" aria-label="This order's logistics">
             <li>1 · OKK</li>
@@ -191,7 +189,7 @@
             <li><span class="mark idle">•</span><div>OKK/26/CLD/00418<span class="why">Expedition order for this Zenix after AR Open Rp 0</span></div><span class="tag mute">This SPK</span></li>
             <li><span class="mark idle">•</span><div>OBB/26/CLD/00418<span class="why">New-car fuel for VIN MHKA6GJ••••41827</span></div><span class="tag mute">This SPK</span></li>
           </ul>
-          <div class="pad">
+          <div class="pad" data-step-work>
             <p>Settle on this SPK's cashless. OKK and OBB will be requested here — this trail does not open another unit.</p>
             <button class="btn" data-go="cashless" data-pay-job="lunas">Pay remainder on this SO</button>
           </div>

@@ -276,6 +276,7 @@
       if(epoCell) epoCell.textContent=uu.epoReceived?(rowMeta.epoNo||'Ada'):(uu.excEpo==='approved'?'Pengecualian OM':'Belum');
       document.querySelectorAll('[data-b2b-kwt-row="'+id+'"]').forEach(function(row){ row.hidden=!uu.kwtIssued; });
     });
+    if(window.FAST && FAST.renderStepForms) FAST.renderStepForms();
     if(window.FAST && FAST.renderLineage) FAST.renderLineage();
     if(window.FAST && FAST.renderMaster) FAST.renderMaster();
   }
